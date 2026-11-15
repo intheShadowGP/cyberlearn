@@ -1,0 +1,362 @@
+import { useId, useMemo, useRef, useState } from 'react';
+import type { Answer, Correction, Question } from '../content/types';
+import { emptyAnswer, gradeQuestion, isAnswered, scoreQuiz, shuffle, type QuestionResult, type QuizScore, PASS_THRESHOLD } from '../lib/quiz';
+import { Inline } from './Inline';
+
+export interface QuizProps {
+  /** Identifiant stable de la session de questions (change à chaque nouveau tirage). */
+  sessionKey: string;
+  questions: Question[];
+  /** Chargé uniquement au moment de la validation : les réponses ne sont pas présentes avant. */
+  loadCorrections: () => Promise<Record<string, Correction>>;
+  skillLabels: Record<string, string>;
+  onFinished: (score: QuizScore, durationSec: number) => Promise<void> | void;
+  onRetry?: () => void;
+  recommendation?: (score: QuizScore) => string;
+}
+
+type Phase = 'answering' | 'loading' | 'review' | 'saved';
+
+const VERDICT_LABEL: Record<string, string> = {
+  correct: 'Bonne réponse',
+  partial: 'Réponse partielle',
+  incorrect: 'Réponse incorrecte',
+  ungraded: 'À auto-évaluer',
+};
+
+export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFinished, onRetry, recommendation }: QuizProps) {
+  const [answers, setAnswers] = useState<Record<string, Answer>>(() =>
+    Object.fromEntries(questions.map((q) => [q.id, emptyAnswer(q)])),
+  );
+  const [phase, setPhase] = useState<Phase>('answering');
+  const [corrections, setCorrections] = useState<Record<string, Correction> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [final, setFinal] = useState<QuizScore | null>(null);
+  const started = useRef(Date.now());
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  // Ordre des options mélangé une fois par session.
+  const optionOrder = useMemo(
+    () =>
+      Object.fromEntries(
+        questions.map((q) => [q.id, q.type === 'single' || q.type === 'multi' ? shuffle(q.options) : []]),
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sessionKey],
+  );
+
+  const unanswered = questions.filter((q) => q.type !== 'open' && !isAnswered(answers[q.id] as Answer)).length;
+
+  const results: QuestionResult[] | null = useMemo(() => {
+    if (!corrections) return null;
+    return questions.map((q) => {
+      const c = corrections[q.id];
+      if (!c) return { questionId: q.id, verdict: 'ungraded', points: 0, graded: false, skills: q.skills };
+      return gradeQuestion(q, answers[q.id] as Answer, c);
+    });
+  }, [corrections, answers, questions]);
+
+  const set = (id: string, a: Answer) => setAnswers((prev) => ({ ...prev, [id]: a }));
+
+  async function validate() {
+    setPhase('loading');
+    setError(null);
+    try {
+      const c = await loadCorrections();
+      setCorrections(c);
+      setPhase('review');
+      requestAnimationFrame(() => resultsRef.current?.focus());
+    } catch {
+      setError('Impossible de charger les corrections. Vérifiez votre connexion ou réessayez.');
+      setPhase('answering');
+    }
+  }
+
+  async function finish() {
+    if (!results) return;
+    const score = scoreQuiz(results);
+    const duration = Math.round((Date.now() - started.current) / 1000);
+    try {
+      await onFinished(score, duration);
+      setFinal(score);
+      setPhase('saved');
+      requestAnimationFrame(() => resultsRef.current?.focus());
+    } catch {
+      setError("Le résultat n'a pas pu être enregistré localement.");
+    }
+  }
+
+  const reviewing = phase === 'review' || phase === 'saved';
+  const openPending = reviewing && questions.some((q) => q.type === 'open' && (answers[q.id] as Answer & { selfGrade?: boolean }).selfGrade === undefined && (answers[q.id] as Answer).type === 'open');
+  const live = results ? scoreQuiz(results) : null;
+
+  return (
+    <div className="quiz">
+      <ol className="quiz-list">
+        {questions.map((q, idx) => (
+          <QuestionCard
+            key={q.id}
+            index={idx + 1}
+            question={q}
+            options={optionOrder[q.id] ?? []}
+            answer={answers[q.id] as Answer}
+            onChange={(a) => set(q.id, a)}
+            locked={phase !== 'answering'}
+            correction={reviewing ? corrections?.[q.id] : undefined}
+            result={results?.find((r) => r.questionId === q.id)}
+            canSelfGrade={phase === 'review'}
+          />
+        ))}
+      </ol>
+
+      {error && (
+        <p role="alert" className="error">
+          {error}
+        </p>
+      )}
+
+      {phase === 'answering' || phase === 'loading' ? (
+        <div className="quiz-actions">
+          <button type="button" className="btn btn-primary" onClick={validate} disabled={phase === 'loading'}>
+            {phase === 'loading' ? 'Correction en cours…' : 'Valider mes réponses'}
+          </button>
+          {unanswered > 0 && (
+            <span className="muted">
+              {unanswered} question{unanswered > 1 ? 's' : ''} sans réponse (comptée{unanswered > 1 ? 's' : ''} fausse{unanswered > 1 ? 's' : ''})
+            </span>
+          )}
+        </div>
+      ) : null}
+
+      {phase === 'review' && live && (
+        <div className="quiz-actions" ref={resultsRef} tabIndex={-1}>
+          <p>
+            Score provisoire : <strong>{live.percent} %</strong>.
+            {openPending && ' Auto-évaluez les questions ouvertes pour les inclure dans la note, ou terminez sans elles.'}
+          </p>
+          <button type="button" className="btn btn-primary" onClick={finish}>
+            Enregistrer mon évaluation
+          </button>
+        </div>
+      )}
+
+      {phase === 'saved' && final && (
+        <div ref={resultsRef} tabIndex={-1}>
+          <Evaluation score={final} skillLabels={skillLabels} recommendation={recommendation?.(final)} onRetry={onRetry} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function QuestionCard(props: {
+  index: number;
+  question: Question;
+  options: { id: string; text: string }[];
+  answer: Answer;
+  onChange: (a: Answer) => void;
+  locked: boolean;
+  correction?: Correction | undefined;
+  result?: QuestionResult | undefined;
+  canSelfGrade: boolean;
+}) {
+  const { index, question: q, options, answer, onChange, locked, correction: c, result } = props;
+  const name = useId();
+  const typeLabel = { single: 'Choix unique', multi: 'Plusieurs réponses possibles', truefalse: 'Vrai ou faux', short: 'Réponse courte', open: 'Question ouverte' }[q.type];
+  const verdict = result?.verdict;
+
+  return (
+    <li className={`question ${verdict ? `q-${verdict}` : ''}`}>
+      <fieldset disabled={locked && !(q.type === 'open' && props.canSelfGrade)}>
+        <legend>
+          <span className="q-index">Question {index}</span>
+          <span className="q-type">{typeLabel}</span>
+          <span className="q-prompt">
+            <Inline text={q.prompt} />
+          </span>
+        </legend>
+        {q.context && (
+          <pre className="q-context" tabIndex={0}>
+            <code data-lang={q.context.lang}>{q.context.code}</code>
+          </pre>
+        )}
+
+        {(q.type === 'single' || q.type === 'multi') && (
+          <div className="options">
+            {options.map((o) => {
+              const checked = answer.type === 'single' ? answer.value === o.id : answer.type === 'multi' && answer.value.includes(o.id);
+              const isGood = c && (c.type === 'single' ? c.correct === o.id : c.type === 'multi' && c.correct.includes(o.id));
+              return (
+                <label key={o.id} className={`option ${c ? (isGood ? 'opt-good' : checked ? 'opt-bad' : '') : ''}`}>
+                  <input
+                    type={q.type === 'single' ? 'radio' : 'checkbox'}
+                    name={name}
+                    checked={checked}
+                    disabled={locked}
+                    onChange={(e) => {
+                      if (q.type === 'single') onChange({ type: 'single', value: o.id });
+                      else if (answer.type === 'multi') {
+                        const v = e.target.checked ? [...answer.value, o.id] : answer.value.filter((x) => x !== o.id);
+                        onChange({ type: 'multi', value: v });
+                      }
+                    }}
+                  />
+                  <span>
+                    <Inline text={o.text} />
+                  </span>
+                  {c && isGood && <span className="opt-flag">Bonne réponse</span>}
+                  {c && c.whyWrong?.[o.id] && checked && !isGood && (
+                    <span className="opt-why">
+                      <Inline text={c.whyWrong[o.id] as string} />
+                    </span>
+                  )}
+                </label>
+              );
+            })}
+          </div>
+        )}
+
+        {q.type === 'truefalse' && answer.type === 'truefalse' && (
+          <div className="options options-inline">
+            {[true, false].map((v) => (
+              <label key={String(v)} className={`option ${c && c.type === 'truefalse' ? (c.correct === v ? 'opt-good' : answer.value === v ? 'opt-bad' : '') : ''}`}>
+                <input type="radio" name={name} checked={answer.value === v} disabled={locked} onChange={() => onChange({ type: 'truefalse', value: v })} />
+                <span>{v ? 'Vrai' : 'Faux'}</span>
+              </label>
+            ))}
+          </div>
+        )}
+
+        {q.type === 'short' && answer.type === 'short' && (
+          <input
+            className="input"
+            aria-label={`Réponse à la question ${index}`}
+            value={answer.value}
+            placeholder={q.placeholder}
+            maxLength={120}
+            autoComplete="off"
+            spellCheck={false}
+            disabled={locked}
+            onChange={(e) => onChange({ type: 'short', value: e.target.value })}
+          />
+        )}
+
+        {q.type === 'open' && answer.type === 'open' && (
+          <>
+            <textarea
+              className="input"
+              aria-label={`Réponse à la question ${index}`}
+              value={answer.value}
+              rows={5}
+              maxLength={4000}
+              disabled={locked}
+              onChange={(e) => onChange({ type: 'open', value: e.target.value })}
+            />
+            {c && c.type === 'open' && (
+              <div className="open-review">
+                <p className="callout-title">Réponse modèle</p>
+                <p>
+                  <Inline text={c.model} />
+                </p>
+                <p className="callout-title">Critères d’auto-évaluation</p>
+                <ul>
+                  {c.criteria.map((cr) => (
+                    <li key={cr}>
+                      <Inline text={cr} />
+                    </li>
+                  ))}
+                </ul>
+                {props.canSelfGrade && (
+                  <div className="options options-inline" role="group" aria-label="Auto-évaluation">
+                    <button type="button" className={`btn ${answer.selfGrade === true ? 'btn-primary' : ''}`} aria-pressed={answer.selfGrade === true} onClick={() => onChange({ ...answer, selfGrade: true })}>
+                      Ma réponse remplit les critères
+                    </button>
+                    <button type="button" className={`btn ${answer.selfGrade === false ? 'btn-primary' : ''}`} aria-pressed={answer.selfGrade === false} onClick={() => onChange({ ...answer, selfGrade: false })}>
+                      Ma réponse est incomplète
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </fieldset>
+
+      {c && (
+        <div className="correction" role="status">
+          <p className={`verdict v-${verdict}`}>{VERDICT_LABEL[verdict ?? 'ungraded']}</p>
+          {c.type === 'short' && (
+            <p>
+              Réponse attendue : <code>{c.accepted[0]}</code>
+            </p>
+          )}
+          {c.type === 'truefalse' && <p>Réponse attendue : <strong>{c.correct ? 'Vrai' : 'Faux'}</strong></p>}
+          <p>
+            <Inline text={c.explanation} />
+          </p>
+          {c.refs && c.refs.length > 0 && <p className="muted">Pour aller plus loin : {c.refs.join(' · ')}</p>}
+        </div>
+      )}
+    </li>
+  );
+}
+
+export function Evaluation({ score, skillLabels, recommendation, onRetry }: { score: QuizScore; skillLabels: Record<string, string>; recommendation?: string | undefined; onRetry?: (() => void) | undefined }) {
+  const skills = Object.entries(score.bySkill).map(([id, v]) => ({ id, label: skillLabels[id] ?? id, ratio: v.total ? v.points / v.total : 0 }));
+  const ok = skills.filter((s) => s.ratio >= 0.8);
+  const ko = skills.filter((s) => s.ratio < 0.8).sort((a, b) => a.ratio - b.ratio);
+  const passed = score.percent >= PASS_THRESHOLD;
+  return (
+    <section className="evaluation panel" aria-labelledby="eval-title">
+      <h3 id="eval-title">Évaluation</h3>
+      <div className="eval-score">
+        <div className={`score-ring ${passed ? 'pass' : 'fail'}`} aria-hidden="true">
+          {score.percent} %
+        </div>
+        <div>
+          <p>
+            Note : <strong>{score.score.toLocaleString('fr-FR')} / {score.max}</strong> — {score.percent} % de réussite.
+          </p>
+          <p>{passed ? `Seuil de validation (${PASS_THRESHOLD} %) atteint.` : `Seuil de validation : ${PASS_THRESHOLD} %. Relisez les points à retravailler puis réessayez.`}</p>
+        </div>
+      </div>
+      <div className="eval-grid">
+        <div>
+          <h4>Compétences démontrées</h4>
+          {ok.length ? (
+            <ul>
+              {ok.map((s) => (
+                <li key={s.id}>{s.label} ({Math.round(s.ratio * 100)} %)</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="muted">Aucune compétence démontrée à 80 % sur ce questionnaire.</p>
+          )}
+        </div>
+        <div>
+          <h4>Points à retravailler</h4>
+          {ko.length ? (
+            <ul>
+              {ko.map((s) => (
+                <li key={s.id}>{s.label} ({Math.round(s.ratio * 100)} %)</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="muted">Rien à signaler.</p>
+          )}
+        </div>
+      </div>
+      {recommendation && (
+        <p className="callout callout-tip">
+          <strong>Recommandation : </strong>
+          {recommendation}
+        </p>
+      )}
+      {onRetry && (
+        <button type="button" className="btn" onClick={onRetry}>
+          Nouveau tirage de questions
+        </button>
+      )}
+    </section>
+  );
+}

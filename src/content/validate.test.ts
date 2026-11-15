@@ -1,0 +1,79 @@
+import { describe, expect, it } from 'vitest';
+import { validateContent, findForbiddenFields, type ContentSet } from './validate';
+import type { CourseBody, CourseCorrections, CourseMeta, CourseSolutions, LabBody, LabCorrections, LabMeta } from './types';
+import { MODULES } from './catalog';
+import { DIAGRAMS } from '../components/diagrams';
+
+const metas = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { eager: true });
+const bodies = import.meta.glob<{ body: CourseBody }>('./courses/*/body.ts', { eager: true });
+const corrs = import.meta.glob<{ corrections: CourseCorrections }>('./courses/*/corrections.ts', { eager: true });
+const sols = import.meta.glob<{ solutions: CourseSolutions }>('./courses/*/solutions.ts', { eager: true });
+const labMetas = import.meta.glob<{ meta: LabMeta }>('../labs/*/meta.ts', { eager: true });
+const labBodies = import.meta.glob<{ body: LabBody }>('../labs/*/body.ts', { eager: true });
+const labCorrs = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.ts', { eager: true });
+const labComponents = import.meta.glob('../labs/*/Lab.tsx');
+
+const dir = (p: string) => p.split('/').at(-2) ?? '';
+
+function buildSet(): ContentSet {
+  const courses = Object.entries(metas).map(([p, m]) => {
+    const d = dir(p);
+    const body = bodies[`./courses/${d}/body.ts`]?.body;
+    const corrections = corrs[`./courses/${d}/corrections.ts`]?.corrections;
+    const solutions = sols[`./courses/${d}/solutions.ts`]?.solutions;
+    if (!body || !corrections || !solutions) throw new Error(`Cours ${d} incomplet (body.ts / corrections.ts / solutions.ts)`);
+    return { dir: d, meta: m.meta, body, corrections, solutions };
+  });
+  const labs = Object.entries(labMetas).map(([p, m]) => {
+    const d = dir(p);
+    const body = labBodies[`../labs/${d}/body.ts`]?.body;
+    const corrections = labCorrs[`../labs/${d}/corrections.ts`]?.corrections;
+    if (!body || !corrections) throw new Error(`Labo ${d} incomplet`);
+    return { dir: d, meta: m.meta, body, corrections, hasComponent: `../labs/${d}/Lab.tsx` in labComponents };
+  });
+  return { courses, labs, diagramIds: new Set(Object.keys(DIAGRAMS)) };
+}
+
+describe('contenu pédagogique', () => {
+  const set = buildSet();
+
+  it('contient au moins un cours et un laboratoire', () => {
+    expect(set.courses.length).toBeGreaterThan(0);
+    expect(set.labs.length).toBeGreaterThan(0);
+  });
+
+  it('respecte la structure pédagogique obligatoire et la séparation des réponses', () => {
+    const errors = validateContent(set);
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
+  it('chaque fichier de cours a ses trois parties', () => {
+    for (const p of Object.keys(bodies)) expect(metas[p.replace('body.ts', 'meta.ts')]).toBeDefined();
+    for (const p of Object.keys(corrs)) expect(metas[p.replace('corrections.ts', 'meta.ts')]).toBeDefined();
+  });
+
+  it('les sujets de la cartographie ont des identifiants uniques', () => {
+    const ids = MODULES.flatMap((m) => m.topics.map((t) => t.id));
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('affiche la couverture actuelle', () => {
+    const covered = new Set(set.courses.flatMap((c) => c.meta.topics));
+    const total = MODULES.reduce((n, m) => n + m.topics.length, 0);
+    const questions = set.courses.reduce((n, c) => n + c.body.questions.length, 0);
+    console.info(
+      `Couverture : ${set.courses.length} cours, ${set.labs.length} laboratoires, ${questions} questions, ` +
+        `${covered.size}/${total} sujets de la cartographie couverts.`,
+    );
+    expect(covered.size).toBeGreaterThan(0);
+  });
+});
+
+describe('findForbiddenFields', () => {
+  it('détecte un champ de réponse imbriqué', () => {
+    expect(findForbiddenFields({ a: [{ b: { correct: 'x' } }] })).toEqual(['$.a[0].b.correct']);
+  });
+  it('accepte un objet propre', () => {
+    expect(findForbiddenFields({ id: 'q', options: [{ id: 'a', text: 'b' }] })).toEqual([]);
+  });
+});
