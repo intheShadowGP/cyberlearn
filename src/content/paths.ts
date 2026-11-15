@@ -110,7 +110,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Décrire une architecture OT (modèle de Purdue)', 'Analyser des trames Modbus', 'Concevoir une segmentation en zones et conduits', 'Évaluer la sécurité d’un objet connecté et de son firmware', 'Situer IEC 62443 et le Cyber Resilience Act'],
     prerequisites: ['Notions de réseau', 'Connaissance d’un environnement industriel (souhaitable)'],
     coreModules: ['N', 'B'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('n-ics-modbus'), l('modbus-lab'), c('n-iot-firmware'), c('c-linux-permissions'), l('linux-audit-lab'), c('m-risques-conformite')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('n-ics-modbus'), l('modbus-lab'), c('n-iot-firmware'), c('n-automobile-profinet'), c('c-linux-permissions'), l('linux-audit-lab'), c('m-risques-conformite')],
   },
   {
     id: 'expert',

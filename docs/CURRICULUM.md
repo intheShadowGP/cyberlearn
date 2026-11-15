@@ -10,9 +10,9 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 350 |
-| Cours complets | 39 |
-| Questions de cours (avec correction) | 625 |
+| Sujets abordés dans au moins un cours (déclaratif) | 355 |
+| Cours complets | 40 |
+| Questions de cours (avec correction) | 641 |
 | Laboratoires | 12 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 30 |
@@ -34,7 +34,7 @@
 | K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
 | L. Sécurité Cloud | 4 | 2, 3 | 23 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
-| N. Sécurité industrielle et IoT | 2 | 2, 3 | 16 / 21 |
+| N. Sécurité industrielle et IoT | 3 | 2, 3 | 21 / 21 |
 | O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
 | P. Sécurité avancée et recherche | 1 | 4 | 6 / 18 |
 | Q. Intelligence artificielle et cybersécurité | 2 | 3 | 16 / 16 |
@@ -77,6 +77,7 @@
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 85 min | 3 | 16 | 2 | 4 |
+| Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 85 min | 5 | 16 | 2 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 4 |
@@ -114,7 +115,7 @@
 | Sécurité cloud | 9 | 1 |
 | Gouvernance, risques et conformité (GRC) | 12 | 1 |
 | DevSecOps | 14 | 3 |
-| Sécurité industrielle et IoT | 7 | 3 |
+| Sécurité industrielle et IoT | 8 | 3 |
 | Expert en sécurité | 11 | 3 |
 
 ## Sujets non couverts (« à venir »)
@@ -123,5 +124,4 @@
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
-- **N. Sécurité industrielle et IoT** : Profinet, Automobile, ISO/SAE 21434, UNECE R155, UNECE R156
 - **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing

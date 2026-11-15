@@ -52,6 +52,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'm-gouvernance-operationnelle': sheet(['CIS Controls v8.1', 'Guide d’hygiène informatique ANSSI (42 mesures)', 'NIST SP 800-53 Rév. 5', 'Catalogue KEV (CISA)', 'RGPD art. 28', 'Directive NIS2 (UE) 2022/2555'], ['Version des CIS Controls', 'Exigences NIS2 sur la chaîne d’approvisionnement selon les transpositions']),
   'n-ics-modbus': sheet(['IEC 62443', 'NIST SP 800-82 Rév. 3', 'MITRE ATT&CK for ICS', 'Spécification Modbus'], []),
   'n-iot-firmware': sheet(['ETSI EN 303 645', 'Règlement (UE) 2024/2847 (CRA, échéance 2027 vérifiée le ' + D + ')', 'NIST IR 8259'], ['Calendrier et normes harmonisées du Cyber Resilience Act']),
+  'n-automobile-profinet': sheet(['ISO/SAE 21434:2021', 'UNECE R155 (CSMS)', 'UNECE R156 (SUMS)', 'NIST SP 800-82 Rév. 3', 'PROFINET (PI)'], ['Calendrier d’homologation UNECE R155/R156 selon les marchés', 'Éditions des normes automobiles']),
   'o-identite-mfa-oauth': sheet(['RFC 9700 (OAuth 2.0 BCP)', 'NIST SP 800-207', 'Recommandations ANSSI authentification'], ['Adoption des passkeys et recommandations MFA']),
   'o-comptes-privileges-pam': sheet(['Recommandations ANSSI administration sécurisée', 'Microsoft Learn (accès privilégié, gMSA)', 'OWASP Secrets Management Cheat Sheet'], ['Fonctionnalités des solutions PAM et d’accès juste-à-temps', 'Identités de charge de travail des fournisseurs cloud']),
   'p-fuzzing-recherche': sheet(['libFuzzer (LLVM)', 'AFL++', 'RFC 9116 (security.txt)'], []),
