@@ -51,30 +51,15 @@
 | Navigateur | Local (Windows) | CI (Ubuntu, GitHub Actions) |
 | --- | --- | --- |
 | Chromium | 31/31 e2e réussis (suite complète) | Réussi |
-| WebKit | Tests  de app.spec.ts réussis ; ceux de features.spec.ts (glossaire, recherche) exécutés seulement en CI | Réussi |
+| WebKit | Tests `@cross` de app.spec.ts réussis ; ceux de features.spec.ts (glossaire, recherche) exécutés seulement en CI | Réussi |
 | Firefox | **Non exécutable sur le poste de développement** (binaire Playwright refusé : erreur Windows de configuration côte-à-côte) | Réussi |
 
-« Réussi » en CI signifie que l’étape , qui exécute les trois projets Playwright, s’est terminée avec succès ; les journaux détaillés de la CI n’ont pas été examinés au-delà du statut des étapes.
+« Réussi » en CI signifie que l’étape `npm run test:e2e`, qui exécute les trois projets Playwright, s’est terminée avec succès ; les journaux détaillés de la CI n’ont pas été examinés au-delà du statut des étapes.
 
 ## Déploiement : résultats réels
 
-- Exécutions du workflow sur  : les cinq exécutions les plus récentes (dont la dernière, avec actions épinglées par SHA) sont terminées avec succès ; chaque étape (audit, lint, tests unitaires, build, e2e trois navigateurs, déploiement) est en succès.
-- OK  redirection HTTP vers HTTPS — statut 301
-OK  accueil
-OK  CSP présente
-OK  identifiant de build — Version 2026-11-15
-OK  route #/cours/d-ad-authentification
-OK  route #/laboratoires/sqli-lab
-OK  route #/parcours/devsecops
-OK  route #/glossaire
-OK  route #/evaluations
-OK  laboratoire interactif
-OK  hors ligne (cours non visité)
-requêtes échouées pendant la phase hors ligne (servies ensuite par le cache) : 6 https://intheshadowgp.github.io/cyberlearn/assets/CoursePage-BWqF7Ce0.js (net::ERR_ABORTED) | https://intheshadowgp.github.io/cyberlearn/assets/Blocks-C1yGsVqv.js (net::ERR_ABORTED) | https://intheshadowgp.github.io/cyberlearn/assets/Inline-Dr5FFcBI.js (net::ERR_ABORTED)
-OK  aucune erreur console
-OK  aucune ressource en échec en ligne
-
-13/13 vérifications réussies sur https://intheshadowgp.github.io/cyberlearn/ sur https://intheshadowgp.github.io/cyberlearn/ : **13/13 vérifications réussies** — redirection HTTP → HTTPS (301), accueil, CSP, identifiant de build, 5 routes, laboratoire interactif, service worker et cours jamais visité accessible hors ligne, aucune erreur console, aucune ressource en échec en ligne. Pendant la phase hors ligne, 6 requêtes de modules sont interrompues () par le rechargement immédiat du script ; le cours s’affiche ensuite depuis le cache.
+- Exécutions du workflow sur `main` : les cinq exécutions les plus récentes (dont la dernière, avec actions épinglées par SHA) sont terminées avec succès ; chaque étape (audit, lint, tests unitaires, build, e2e trois navigateurs, déploiement) est en succès.
+- `node scripts/live-smoke.mjs` sur https://intheshadowgp.github.io/cyberlearn/ (exécuté deux fois) : **13/13 vérifications réussies** — redirection HTTP → HTTPS (301), accueil, CSP, identifiant de build, 5 routes, laboratoire interactif, service worker et cours jamais visité accessible hors ligne, aucune erreur console, aucune ressource en échec en ligne. Pendant la phase hors ligne, 6 requêtes de modules sont interrompues (`net::ERR_ABORTED`) par le rechargement immédiat du script ; le cours s’affiche ensuite depuis le cache.
 
 ## Performances (build de production)
 
