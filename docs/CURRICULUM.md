@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 373 |
-| Cours complets | 43 |
-| Questions de cours (avec correction) | 689 |
+| Sujets abordés dans au moins un cours (déclaratif) | 381 |
+| Cours complets | 44 |
+| Questions de cours (avec correction) | 705 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 32 |
+| Évaluations transversales, examens blancs et finaux | 33 |
 
 ## Par discipline
 
@@ -31,7 +31,7 @@
 | H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
 | J. Forensique numérique | 3 | 2, 3 | 17 / 17 |
-| K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
+| K. Malware et reverse engineering | 2 | 2, 3 | 22 / 22 |
 | L. Sécurité Cloud | 4 | 2, 3 | 23 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 3 | 2, 3 | 21 / 21 |
@@ -71,6 +71,7 @@
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
+| Rétro-ingénierie défensive : binaires, désassemblage, débogage et outils (`k-retro-ingenierie-defensive`) | K | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 90 min | 3 | 16 | 2 | 4 |
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
@@ -114,7 +115,7 @@
 | Analyste SOC | 9 | 4 |
 | Pentesteur | 9 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
-| Investigation numérique (forensic) | 9 | 4 |
+| Investigation numérique (forensic) | 10 | 4 |
 | Sécurité cloud | 9 | 1 |
 | Gouvernance, risques et conformité (GRC) | 12 | 1 |
 | DevSecOps | 14 | 3 |
@@ -124,4 +125,3 @@
 ## Sujets non couverts (« à venir »)
 
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
-- **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
