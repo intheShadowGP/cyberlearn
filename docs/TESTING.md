@@ -58,7 +58,7 @@
 
 ## Déploiement : résultats réels
 
-- Exécutions du workflow sur `main` : les cinq exécutions les plus récentes (dont la dernière, avec actions épinglées par SHA) sont terminées avec succès ; chaque étape (audit, lint, tests unitaires, build, e2e trois navigateurs, déploiement) est en succès.
+- Exécutions du workflow sur `main` : jusqu’au commit f6246e7 (actions épinglées par SHA), les exécutions sont terminées avec succès, chaque étape (audit, lint, tests unitaires, build, e2e trois navigateurs, déploiement) en succès. Les exécutions de c5ed531 et f702bb3 ont **échoué à l’étape lint** (`caches` non déclaré dans `scripts/live-smoke.mjs`, ajouté sans relancer le lint localement) ; corrigé dans 73c59ed, dont l’exécution (n° 43760936133) est en succès à toutes les étapes, déploiement compris ; vérification du site publié refaite ensuite : 13/13.
 - `node scripts/live-smoke.mjs` sur https://intheshadowgp.github.io/cyberlearn/ (exécuté deux fois) : **13/13 vérifications réussies** — redirection HTTP → HTTPS (301), accueil, CSP, identifiant de build, 5 routes, laboratoire interactif, service worker et cours jamais visité accessible hors ligne, aucune erreur console, aucune ressource en échec en ligne. Pendant la phase hors ligne, 6 requêtes de modules sont interrompues (`net::ERR_ABORTED`) par le rechargement immédiat du script ; le cours s’affiche ensuite depuis le cache.
 
 ## Performances (build de production)
