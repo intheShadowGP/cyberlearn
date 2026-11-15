@@ -66,6 +66,36 @@ export function openDb(): Promise<IDBDatabase> {
   return dbPromise;
 }
 
+/**
+ * Exécute `fn` dans UNE transaction readwrite couvrant `names`.
+ * Toutes les lectures-modifications-écritures d'une opération métier passent par
+ * ici : deux écritures concurrentes (autre onglet, minuterie) ne peuvent plus
+ * écraser un état plus récent. `fn` ne doit attendre que des requêtes IDB.
+ */
+export async function withTx<T>(names: StoreName[], fn: (tx: IDBTransaction) => Promise<T>): Promise<T> {
+  const db = await openDb();
+  const tx = db.transaction(names, 'readwrite');
+  const completion = done(tx);
+  let result: T;
+  try {
+    result = await fn(tx);
+  } catch (e) {
+    try {
+      tx.abort();
+    } catch {
+      /* déjà terminée */
+    }
+    await completion.catch(() => undefined);
+    throw e;
+  }
+  await completion;
+  return result;
+}
+
+export function req<T>(r: IDBRequest<T>): Promise<T> {
+  return wrap(r);
+}
+
 function wrap<T>(req: IDBRequest<T>): Promise<T> {
   return new Promise((resolve, reject) => {
     req.onsuccess = () => resolve(req.result);

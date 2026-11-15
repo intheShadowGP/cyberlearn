@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense, type ReactNode } from 'react';
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -23,7 +23,7 @@ export function App() {
   return (
     <HashRouter>
       <Layout>
-        <ErrorBoundary>
+        <RoutedBoundary>
           <Suspense fallback={<p className="loading" role="status">Chargement…</p>}>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -42,8 +42,14 @@ export function App() {
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
-        </ErrorBoundary>
+        </RoutedBoundary>
       </Layout>
     </HashRouter>
   );
+}
+
+/** La frontière d'erreur est réinitialisée à chaque changement de page. */
+function RoutedBoundary({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
+  return <ErrorBoundary key={pathname}>{children}</ErrorBoundary>;
 }

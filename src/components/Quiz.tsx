@@ -15,7 +15,15 @@ export interface QuizProps {
   recommendation?: (score: QuizScore) => string;
 }
 
-type Phase = 'answering' | 'loading' | 'review' | 'saved';
+type Phase = 'answering' | 'loading' | 'review' | 'saving' | 'saved';
+
+function gradeAll(questions: Question[], answers: Record<string, Answer>, corrections: Record<string, Correction>): QuestionResult[] {
+  return questions.map((q) => {
+    const c = corrections[q.id];
+    if (!c) return { questionId: q.id, verdict: 'ungraded', points: 0, graded: false, skills: q.skills };
+    return gradeQuestion(q, answers[q.id] as Answer, c);
+  });
+}
 
 const VERDICT_LABEL: Record<string, string> = {
   correct: 'Bonne réponse',
@@ -41,40 +49,23 @@ export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFi
       Object.fromEntries(
         questions.map((q) => [q.id, q.type === 'single' || q.type === 'multi' ? shuffle(q.options) : []]),
       ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [sessionKey],
   );
 
   const unanswered = questions.filter((q) => q.type !== 'open' && !isAnswered(answers[q.id] as Answer)).length;
 
-  const results: QuestionResult[] | null = useMemo(() => {
-    if (!corrections) return null;
-    return questions.map((q) => {
-      const c = corrections[q.id];
-      if (!c) return { questionId: q.id, verdict: 'ungraded', points: 0, graded: false, skills: q.skills };
-      return gradeQuestion(q, answers[q.id] as Answer, c);
-    });
-  }, [corrections, answers, questions]);
+  const results: QuestionResult[] | null = useMemo(
+    () => (corrections ? gradeAll(questions, answers, corrections) : null),
+    [corrections, answers, questions],
+  );
 
   const set = (id: string, a: Answer) => setAnswers((prev) => ({ ...prev, [id]: a }));
+  const saving = useRef(false);
 
-  async function validate() {
-    setPhase('loading');
-    setError(null);
-    try {
-      const c = await loadCorrections();
-      setCorrections(c);
-      setPhase('review');
-      requestAnimationFrame(() => resultsRef.current?.focus());
-    } catch {
-      setError('Impossible de charger les corrections. Vérifiez votre connexion ou réessayez.');
-      setPhase('answering');
-    }
-  }
-
-  async function finish() {
-    if (!results) return;
-    const score = scoreQuiz(results);
+  async function save(res: QuestionResult[]) {
+    if (saving.current) return; // empêche un double enregistrement (double clic)
+    saving.current = true;
+    const score = scoreQuiz(res);
     const duration = Math.round((Date.now() - started.current) / 1000);
     try {
       await onFinished(score, duration);
@@ -82,12 +73,45 @@ export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFi
       setPhase('saved');
       requestAnimationFrame(() => resultsRef.current?.focus());
     } catch {
-      setError("Le résultat n'a pas pu être enregistré localement.");
+      saving.current = false;
+      setPhase('review');
+      setError("Le résultat n'a pas pu être enregistré localement. Réessayez.");
     }
   }
 
-  const reviewing = phase === 'review' || phase === 'saved';
-  const openPending = reviewing && questions.some((q) => q.type === 'open' && (answers[q.id] as Answer & { selfGrade?: boolean }).selfGrade === undefined && (answers[q.id] as Answer).type === 'open');
+  async function validate() {
+    setPhase('loading');
+    setError(null);
+    let c: Record<string, Correction>;
+    try {
+      c = await loadCorrections();
+    } catch {
+      setError('Impossible de charger les corrections. Vérifiez votre connexion ou réessayez.');
+      setPhase('answering');
+      return;
+    }
+    setCorrections(c);
+    // Enregistrement immédiat, sauf si une réponse ouverte attend l'auto-évaluation.
+    const awaitingSelfGrade = questions.some((q) => {
+      const a = answers[q.id] as Answer;
+      return q.type === 'open' && a.type === 'open' && isAnswered(a);
+    });
+    if (awaitingSelfGrade) {
+      setPhase('review');
+      requestAnimationFrame(() => resultsRef.current?.focus());
+    } else {
+      setPhase('saving');
+      await save(gradeAll(questions, answers, c));
+    }
+  }
+
+  const reviewing = phase === 'review' || phase === 'saving' || phase === 'saved';
+  const openPending =
+    phase === 'review' &&
+    questions.some((q) => {
+      const a = answers[q.id] as Answer;
+      return a.type === 'open' && isAnswered(a) && a.selfGrade === undefined;
+    });
   const live = results ? scoreQuiz(results) : null;
 
   return (
@@ -128,17 +152,25 @@ export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFi
         </div>
       ) : null}
 
-      {phase === 'review' && live && (
+      {phase === 'review' && live && results && (
         <div className="quiz-actions" ref={resultsRef} tabIndex={-1}>
           <p>
             Score provisoire : <strong>{live.percent} %</strong>.
-            {openPending && ' Auto-évaluez les questions ouvertes pour les inclure dans la note, ou terminez sans elles.'}
+            {openPending && ' Auto-évaluez vos réponses ouvertes à l’aide de la réponse modèle pour les inclure dans la note.'}
           </p>
-          <button type="button" className="btn btn-primary" onClick={finish}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => {
+              setPhase('saving');
+              void save(results);
+            }}
+          >
             Enregistrer mon évaluation
           </button>
         </div>
       )}
+      {phase === 'saving' && <p role="status">Enregistrement…</p>}
 
       {phase === 'saved' && final && (
         <div ref={resultsRef} tabIndex={-1}>

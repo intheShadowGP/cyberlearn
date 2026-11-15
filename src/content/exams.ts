@@ -1,5 +1,5 @@
 import { MODULES } from './catalog';
-import { COURSES } from './registry';
+import { COURSE_BY_ID, COURSES } from './registry';
 import type { ModuleId } from './types';
 
 export interface ExamDef {
@@ -82,7 +82,20 @@ const mocks: ExamDef[] = [
   },
 ];
 
-/** Seuls les examens disposant de contenu publié sont proposés. */
-export const EXAMS: ExamDef[] = [...moduleExams, ...transversal, ...mocks].filter((e) => e.courseIds.length > 0);
+/** Nombre minimal de cours distincts pour qu'une évaluation ait du sens. */
+export const MIN_COURSES: Record<ExamDef['kind'], number> = { module: 2, transversal: 3, mock: 5 };
+
+/** Questions notées automatiquement disponibles (les questions ouvertes sont exclues des examens). */
+export function examPoolSize(e: ExamDef): number {
+  return e.courseIds.reduce((n, id) => n + (COURSE_BY_ID.get(id)?.questionCount ?? 0), 0);
+}
+
+/**
+ * Seuls les examens disposant d'assez de contenu publié sont proposés :
+ * nombre minimal de cours et banque au moins deux fois plus grande que le sujet.
+ */
+export const EXAMS: ExamDef[] = [...moduleExams, ...transversal, ...mocks].filter(
+  (e) => e.courseIds.length >= MIN_COURSES[e.kind] && examPoolSize(e) >= e.size * 2,
+);
 
 export const EXAM_BY_ID = new Map(EXAMS.map((e) => [e.id, e]));

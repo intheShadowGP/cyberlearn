@@ -1,4 +1,4 @@
-import { add, get, getAll, put, del } from './db';
+import { getAll, req, withTx, type StoreName } from './db';
 import { PASS_THRESHOLD, type QuizScore } from './quiz';
 
 export interface CourseProgress {
@@ -72,19 +72,16 @@ export function notify(): void {
   for (const l of listeners) l();
 }
 
-const SKILL_HISTORY = 6;
+export const SKILL_HISTORY = 6;
 
-/* ---------- Cours ---------- */
-
-export async function getCourseProgress(courseId: string): Promise<CourseProgress | undefined> {
-  return get<CourseProgress>('progress', courseId);
+function store(tx: IDBTransaction, name: StoreName): IDBObjectStore {
+  return tx.objectStore(name);
 }
 
-export async function touchCourse(courseId: string): Promise<CourseProgress> {
-  const now = Date.now();
-  const p = (await getCourseProgress(courseId)) ?? {
+function newCourseProgress(courseId: string, now: number): CourseProgress {
+  return {
     courseId,
-    status: 'started' as const,
+    status: 'started',
     sectionsRead: [],
     practiceDone: [],
     bestPercent: null,
@@ -94,49 +91,89 @@ export async function touchCourse(courseId: string): Promise<CourseProgress> {
     validatedAt: null,
     timeSpentSec: 0,
   };
+}
+
+/** Lecture-modification-écriture atomique de la progression d'un cours. */
+async function updateCourse(
+  tx: IDBTransaction,
+  courseId: string,
+  mutate: (p: CourseProgress) => void,
+): Promise<CourseProgress> {
+  const s = store(tx, 'progress');
+  const now = Date.now();
+  const p = ((await req(s.get(courseId))) as CourseProgress | undefined) ?? newCourseProgress(courseId, now);
   p.lastVisit = now;
-  await put('progress', p);
-  await put<MetaRecord>('meta', { key: 'lastCourse', value: courseId });
-  notify();
+  mutate(p);
+  s.put(p);
   return p;
 }
 
+/* ---------- Cours ---------- */
+
+export async function getCourseProgress(courseId: string): Promise<CourseProgress | undefined> {
+  return withTx(['progress'], async (tx) => (await req(store(tx, 'progress').get(courseId))) as CourseProgress | undefined);
+}
+
+export async function touchCourse(courseId: string): Promise<void> {
+  await withTx(['progress', 'meta'], async (tx) => {
+    await updateCourse(tx, courseId, () => undefined);
+    store(tx, 'meta').put({ key: 'lastCourse', value: courseId } satisfies MetaRecord);
+  });
+  notify();
+}
+
+function toggle(list: string[], id: string, on: boolean): string[] {
+  const set = new Set(list);
+  if (on) set.add(id);
+  else set.delete(id);
+  return [...set];
+}
+
 export async function markSection(courseId: string, sectionId: string, read: boolean): Promise<void> {
-  const p = await touchCourse(courseId);
-  const set = new Set(p.sectionsRead);
-  if (read) set.add(sectionId);
-  else set.delete(sectionId);
-  p.sectionsRead = [...set];
-  await put('progress', p);
+  await withTx(['progress'], (tx) => updateCourse(tx, courseId, (p) => (p.sectionsRead = toggle(p.sectionsRead, sectionId, read))));
   notify();
 }
 
 export async function markPractice(courseId: string, practiceId: string, isDone: boolean): Promise<void> {
-  const p = await touchCourse(courseId);
-  const set = new Set(p.practiceDone);
-  if (isDone) set.add(practiceId);
-  else set.delete(practiceId);
-  p.practiceDone = [...set];
-  await put('progress', p);
+  await withTx(['progress'], (tx) => updateCourse(tx, courseId, (p) => (p.practiceDone = toggle(p.practiceDone, practiceId, isDone))));
   notify();
 }
 
+/** Ajoute du temps d'étude ; ignore les valeurs aberrantes. */
 export async function addTime(courseId: string, seconds: number): Promise<void> {
-  if (seconds <= 0 || seconds > 3600) return;
-  const p = await getCourseProgress(courseId);
-  if (!p) return;
-  p.timeSpentSec += Math.round(seconds);
-  await put('progress', p);
+  if (!(seconds > 0) || seconds > 3600) return;
+  await withTx(['progress'], async (tx) => {
+    const s = store(tx, 'progress');
+    const p = (await req(s.get(courseId))) as CourseProgress | undefined;
+    if (!p) return;
+    p.timeSpentSec += Math.round(seconds);
+    s.put(p);
+  });
 }
 
-async function recordSkills(bySkill: QuizScore['bySkill'], date: number): Promise<void> {
+async function recordSkills(tx: IDBTransaction, bySkill: QuizScore['bySkill'], date: number): Promise<void> {
+  const s = store(tx, 'skills');
   for (const [skillId, { points, total }] of Object.entries(bySkill)) {
     if (total === 0) continue;
-    const rec = (await get<SkillRecord>('skills', skillId)) ?? { skillId, history: [] };
+    const rec = ((await req(s.get(skillId))) as SkillRecord | undefined) ?? { skillId, history: [] };
     rec.history.push({ ratio: points / total, weight: total, date });
     rec.history = rec.history.slice(-SKILL_HISTORY);
-    await put('skills', rec);
+    s.put(rec);
   }
+}
+
+function attemptOf(kind: AttemptKind, refId: string, score: QuizScore, durationSec: number, date: number): Attempt {
+  return {
+    kind,
+    refId,
+    date,
+    percent: score.percent,
+    score: score.score,
+    max: score.max,
+    bySkill: score.bySkill,
+    durationSec,
+    questionIds: score.results.map((r) => r.questionId),
+  };
 }
 
 export async function recordCourseAttempt(
@@ -145,28 +182,20 @@ export async function recordCourseAttempt(
   durationSec: number,
 ): Promise<{ validated: boolean; firstValidation: boolean }> {
   const date = Date.now();
-  await add<Attempt>('attempts', {
-    kind: 'course',
-    refId: courseId,
-    date,
-    percent: score.percent,
-    score: score.score,
-    max: score.max,
-    bySkill: score.bySkill,
-    durationSec,
-    questionIds: score.results.map((r) => r.questionId),
+  let firstValidation = false;
+  const p = await withTx(['attempts', 'skills', 'progress'], async (tx) => {
+    store(tx, 'attempts').add(attemptOf('course', courseId, score, durationSec, date));
+    await recordSkills(tx, score.bySkill, date);
+    return updateCourse(tx, courseId, (p) => {
+      p.attempts += 1;
+      p.bestPercent = Math.max(p.bestPercent ?? 0, score.percent);
+      if (score.percent >= PASS_THRESHOLD && p.status !== 'validated') {
+        p.status = 'validated';
+        p.validatedAt = date;
+        firstValidation = true;
+      }
+    });
   });
-  await recordSkills(score.bySkill, date);
-  const p = await touchCourse(courseId);
-  p.attempts += 1;
-  p.bestPercent = Math.max(p.bestPercent ?? 0, score.percent);
-  const validated = score.percent >= PASS_THRESHOLD;
-  const firstValidation = validated && p.status !== 'validated';
-  if (firstValidation) {
-    p.status = 'validated';
-    p.validatedAt = date;
-  }
-  await put('progress', p);
   notify();
   return { validated: p.status === 'validated', firstValidation };
 }
@@ -175,34 +204,27 @@ export async function recordCourseAttempt(
 
 export async function recordLabAttempt(labId: string, score: QuizScore, durationSec: number): Promise<void> {
   const date = Date.now();
-  await add<Attempt>('attempts', {
-    kind: 'lab',
-    refId: labId,
-    date,
-    percent: score.percent,
-    score: score.score,
-    max: score.max,
-    bySkill: score.bySkill,
-    durationSec,
-    questionIds: score.results.map((r) => r.questionId),
+  await withTx(['attempts', 'skills', 'labProgress'], async (tx) => {
+    store(tx, 'attempts').add(attemptOf('lab', labId, score, durationSec, date));
+    await recordSkills(tx, score.bySkill, date);
+    const s = store(tx, 'labProgress');
+    const p = ((await req(s.get(labId))) as LabProgress | undefined) ?? {
+      labId,
+      status: 'started' as const,
+      bestPercent: null,
+      attempts: 0,
+      lastVisit: date,
+      completedAt: null,
+    };
+    p.attempts += 1;
+    p.lastVisit = date;
+    p.bestPercent = Math.max(p.bestPercent ?? 0, score.percent);
+    if (score.percent >= PASS_THRESHOLD && p.status !== 'completed') {
+      p.status = 'completed';
+      p.completedAt = date;
+    }
+    s.put(p);
   });
-  await recordSkills(score.bySkill, date);
-  const p = (await get<LabProgress>('labProgress', labId)) ?? {
-    labId,
-    status: 'started' as const,
-    bestPercent: null,
-    attempts: 0,
-    lastVisit: date,
-    completedAt: null,
-  };
-  p.attempts += 1;
-  p.lastVisit = date;
-  p.bestPercent = Math.max(p.bestPercent ?? 0, score.percent);
-  if (score.percent >= PASS_THRESHOLD && p.status !== 'completed') {
-    p.status = 'completed';
-    p.completedAt = date;
-  }
-  await put('labProgress', p);
   notify();
 }
 
@@ -210,29 +232,21 @@ export async function recordLabAttempt(labId: string, score: QuizScore, duration
 
 export async function recordExamAttempt(examId: string, score: QuizScore, durationSec: number): Promise<void> {
   const date = Date.now();
-  await add<Attempt>('attempts', {
-    kind: 'exam',
-    refId: examId,
-    date,
-    percent: score.percent,
-    score: score.score,
-    max: score.max,
-    bySkill: score.bySkill,
-    durationSec,
-    questionIds: score.results.map((r) => r.questionId),
+  await withTx(['attempts', 'skills'], async (tx) => {
+    store(tx, 'attempts').add(attemptOf('exam', examId, score, durationSec, date));
+    await recordSkills(tx, score.bySkill, date);
   });
-  await recordSkills(score.bySkill, date);
   notify();
 }
 
 /* ---------- Objectifs ---------- */
 
 export async function saveGoal(goal: Goal): Promise<void> {
-  await put('goals', goal);
+  await withTx(['goals'], async (tx) => void store(tx, 'goals').put(goal));
   notify();
 }
 export async function deleteGoal(id: string): Promise<void> {
-  await del('goals', id);
+  await withTx(['goals'], async (tx) => void store(tx, 'goals').delete(id));
   notify();
 }
 

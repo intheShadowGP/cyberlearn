@@ -24,6 +24,6 @@ export const meta: CourseMeta = {
     { id: 'b-ipv4-calc', label: 'Calcul de sous-réseaux et VLSM', level: 2 },
     { id: 'b-ipv4-secu', label: 'Adressage et segmentation de sécurité', level: 2 },
   ],
-  questionCount: 16,
-  quizSize: 10,
+  questionCount: 17,
+  quizSize: 8,
 };

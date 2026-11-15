@@ -14,15 +14,15 @@ export const corrections: CourseCorrections = {
       whyWrong: { b: '224 correspond à 3 bits à 1 dans le troisième octet, donc à /19.', d: '255.255.255.240 correspond à /28.' },
     },
     'ipv4-q3': {
-      type: 'short', accepted: ['30'],
+      type: 'short', accepted: ['30', '30 hotes', '30 hôtes', 'trente'],
       explanation: 'Un /27 laisse 32 − 27 = 5 bits d’hôte : 2⁵ = 32 adresses, moins l’adresse réseau et la diffusion, soit 30 hôtes utilisables.',
     },
     'ipv4-q4': {
-      type: 'short', accepted: ['172.16.40.0'],
+      type: 'short', accepted: ['172.16.40.0', '172.16.40.0/21'],
       explanation: '/21 coupe dans le 3ᵉ octet avec un masque 248, donc une taille de bloc de 8. Les réseaux commencent en 0, 8, 16, 24, 32, 40, 48… 45 se situe entre 40 et 47 : le réseau est 172.16.40.0/21 (diffusion 172.16.47.255).',
     },
     'ipv4-q5': {
-      type: 'short', accepted: ['192.168.10.127'],
+      type: 'short', accepted: ['192.168.10.127', '192.168.10.127/26'],
       explanation: '/26 → taille de bloc 64 dans le 4ᵉ octet. 77 appartient au bloc 64–127. La diffusion est la dernière adresse du bloc : 192.168.10.127.',
     },
     'ipv4-q6': {
@@ -74,7 +74,7 @@ export const corrections: CourseCorrections = {
       whyWrong: { c: '255.255.252.0 est le masque, pas le wildcard : l’utiliser dans une ACL Cisco inverserait la correspondance.', b: '0.0.1.255 correspond à un /23.', d: '0.0.7.255 correspond à un /21.' },
     },
     'ipv4-q14': {
-      type: 'short', accepted: ['4', 'quatre'],
+      type: 'short', accepted: ['4', 'quatre', '4 sous-reseaux', '4 sous-réseaux'],
       explanation: 'Passer de /24 à /26 emprunte 2 bits : 2² = 4 sous-réseaux (.0, .64, .128, .192), chacun de 64 adresses.',
     },
     'ipv4-q15': {
@@ -85,6 +85,17 @@ export const corrections: CourseCorrections = {
     'ipv4-q16': {
       type: 'truefalse', correct: true,
       explanation: '0.0.0.0/0 a un préfixe de longueur 0 : aucun bit n’est fixé, toutes les adresses IPv4 correspondent. C’est la route par défaut ou « any » dans une règle. Une règle « autoriser 0.0.0.0/0 » mérite toujours une justification.',
+    },
+    'ipv4-q17': {
+      type: 'open',
+      model: '`10.0.0.0/8` couvre 16 777 214 adresses : tout le plan interne, y compris le Wi-Fi invité, les équipements IoT et les postes utilisateurs, peut joindre la console des sauvegardes. Or ces sauvegardes sont la dernière ligne de défense contre un rançongiciel. Règle corrigée : autoriser uniquement le sous-réseau d’administration (par exemple `10.30.250.0/28`) ou mieux l’adresse du bastion (`10.30.250.5/32`) vers `10.30.5.10` TCP/443, puis une règle explicite de refus journalisée pour le reste.',
+      criteria: [
+        'Le nombre d’adresses couvertes par /8 et l’étendue réelle du périmètre sont identifiés.',
+        'Le lien avec la protection des sauvegardes (rançongiciel, mouvement latéral) est expliqué.',
+        'La source corrigée est un sous-réseau d’administration restreint ou un bastion en /32.',
+        'Le refus par défaut et la journalisation sont mentionnés.',
+      ],
+      explanation: 'Une règle trop large est l’une des erreurs les plus fréquentes relevées en audit. Le préfixe d’une source doit correspondre exactement à la population qui a besoin de l’accès, conformément au principe du moindre privilège.',
     },
   },
 };

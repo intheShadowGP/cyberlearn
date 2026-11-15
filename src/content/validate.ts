@@ -34,6 +34,9 @@ export const RULES = {
   minQuestionsPerSkill: 3,
   minExplanation: 60,
   minLabQuestions: 4,
+  /** La banque doit contenir au moins BANK_FACTOR × quizSize questions (tirages variés). */
+  bankFactor: 2,
+  minPerTypeUsed: 2,
 } as const;
 
 /** Champs qui ne doivent JAMAIS apparaître dans un chunk de cours ou de laboratoire. */
@@ -170,7 +173,13 @@ export function validateContent(set: ContentSet): string[] {
     // Questions.
     if (body.questions.length !== meta.questionCount) errors.push(`${w} : questionCount (${meta.questionCount}) ≠ ${body.questions.length}`);
     if (body.questions.length < RULES.minQuestions) errors.push(`${w} : au moins ${RULES.minQuestions} questions`);
-    if (meta.quizSize < RULES.minQuizSize || meta.quizSize > body.questions.length) errors.push(`${w} : quizSize invalide`);
+    if (meta.quizSize < RULES.minQuizSize || meta.quizSize * RULES.bankFactor > body.questions.length) {
+      errors.push(`${w} : quizSize (${meta.quizSize}) invalide : la banque doit contenir au moins ${RULES.bankFactor}× plus de questions`);
+    }
+    const perType = new Map<string, number>();
+    for (const q of body.questions) perType.set(q.type, (perType.get(q.type) ?? 0) + 1);
+    for (const [t, n] of perType) if (n < RULES.minPerTypeUsed) errors.push(`${w} : type ${t} utilisé par une seule question (minimum ${RULES.minPerTypeUsed})`);
+    for (const r of body.resources) if (r.url && !/^https:\/\/[^\s]+$/.test(r.url)) errors.push(`${w} : ressource non HTTPS ${r.url}`);
     for (const s of meta.skills) {
       const n = body.questions.filter((q) => q.skills.includes(s.id)).length;
       if (n < RULES.minQuestionsPerSkill) errors.push(`${w} : la compétence ${s.id} n'est évaluée que par ${n} question(s)`);

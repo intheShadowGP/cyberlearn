@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MODULE_BY_ID } from '../content/catalog';
 import { COURSE_BY_ID, COURSES, LAB_BY_ID, loadCourseBody, loadCourseCorrections, loadCourseSolutions } from '../content/registry';
@@ -94,7 +94,6 @@ function CourseView({ meta }: { meta: CourseMeta }) {
   const [quizStarted, setQuizStarted] = useState(false);
   const drawn = useMemo(
     () => (body ? drawQuestions(body.questions, meta.quizSize) : []),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [body, quizRound],
   );
   const [validationMsg, setValidationMsg] = useState<string | null>(null);
@@ -342,7 +341,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
 }
 
 /** Défilement vers une ancre sans toucher au hash (réservé au routeur). */
-function jump(e: React.MouseEvent<HTMLAnchorElement>) {
+function jump(e: MouseEvent<HTMLAnchorElement>) {
   const id = e.currentTarget.getAttribute('href')?.slice(1);
   if (!id) return;
   const el = document.getElementById(id);

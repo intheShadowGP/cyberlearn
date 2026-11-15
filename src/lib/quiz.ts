@@ -154,24 +154,31 @@ export function cryptoRandom(): number {
  * la variété des types quand la banque le permet.
  */
 export function drawQuestions(bank: readonly Question[], n: number, rand: () => number = cryptoRandom): Question[] {
-  if (n >= bank.length) return shuffle(bank, rand);
   const pool = shuffle(bank, rand);
   const picked: Question[] = [];
   const types = new Set<string>();
-  // 1er passage : un représentant par type.
+  let open = 0;
+  const canTake = (q: Question) => !picked.includes(q) && (q.type !== 'open' || open < MAX_OPEN_PER_DRAW);
+  const take = (q: Question) => {
+    picked.push(q);
+    if (q.type === 'open') open++;
+  };
+  // 1er passage : un représentant par type noté automatiquement.
   for (const q of pool) {
     if (picked.length >= n) break;
-    if (!types.has(q.type)) {
+    if (q.type !== 'open' && !types.has(q.type)) {
       types.add(q.type);
-      picked.push(q);
+      take(q);
     }
   }
   for (const q of pool) {
     if (picked.length >= n) break;
-    if (!picked.includes(q)) picked.push(q);
+    if (canTake(q)) take(q);
   }
   // Ordre de présentation : difficulté croissante.
   return picked.sort((x, y) => x.difficulty - y.difficulty);
 }
 
 export const PASS_THRESHOLD = 70;
+/** Les questions ouvertes (auto-évaluées) sont limitées à une par tirage. */
+export const MAX_OPEN_PER_DRAW = 1;

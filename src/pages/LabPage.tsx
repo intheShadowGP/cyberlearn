@@ -23,6 +23,7 @@ function LabView({ meta }: { meta: LabMeta }) {
   const [body, setBody] = useState<LabBody | null>(null);
   const [debrief, setDebrief] = useState<Block[] | null>(null);
   const [round, setRound] = useState(0);
+  const [loadError, setLoadError] = useState(false);
   const skillLabels = useMemo(
     () =>
       Object.fromEntries(
@@ -32,7 +33,13 @@ function LabView({ meta }: { meta: LabMeta }) {
   );
 
   useEffect(() => {
-    void loadLabBody(meta.id).then(setBody);
+    let alive = true;
+    loadLabBody(meta.id)
+      .then((b) => alive && (b ? setBody(b) : setLoadError(true)))
+      .catch(() => alive && setLoadError(true));
+    return () => {
+      alive = false;
+    };
   }, [meta.id]);
 
   return (
@@ -97,6 +104,8 @@ function LabView({ meta }: { meta: LabMeta }) {
               setRound((r) => r + 1);
             }}
           />
+        ) : loadError ? (
+          <p role="alert" className="error">Les questions n’ont pas pu être chargées. Si vous êtes hors ligne, reconnectez-vous une fois pour les mettre en cache.</p>
         ) : (
           <p role="status">Chargement…</p>
         )}

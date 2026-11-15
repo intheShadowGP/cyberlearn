@@ -204,6 +204,7 @@ export const body: CourseBody = {
     { id: 'ipv4-q14', type: 'short', difficulty: 1, skills: ['b-ipv4-cidr'], prompt: 'Combien de sous-réseaux `/26` peut-on créer dans un `/24` ? (nombre)' },
     { id: 'ipv4-q15', type: 'single', difficulty: 3, skills: ['b-ipv4-calc', 'b-ipv4-secu'], prompt: 'Une règle de pare-feu autorise la source `10.10.0.0/22` vers le serveur de paie. Laquelle de ces adresses est autorisée ?', options: [{ id: 'a', text: '`10.10.3.200`' }, { id: 'b', text: '`10.10.4.1`' }, { id: 'c', text: '`10.11.0.1`' }, { id: 'd', text: '`10.10.8.10`' }] },
     { id: 'ipv4-q16', type: 'truefalse', difficulty: 1, skills: ['b-ipv4-secu', 'b-ipv4-struct'], prompt: 'Dans une règle de pare-feu, la destination `0.0.0.0/0` désigne n’importe quelle adresse IPv4.' },
+    { id: 'ipv4-q17', type: 'open', difficulty: 3, skills: ['b-ipv4-secu', 'b-ipv4-cidr'], prompt: 'Lors d’un audit, vous trouvez la règle « autoriser `10.0.0.0/8` vers `10.30.5.10` (console d’administration des sauvegardes) sur TCP/443 ». Expliquez le risque en termes d’adressage et proposez une règle corrigée.' },
   ],
   resources: [
     { title: 'RFC 4632 — Classless Inter-domain Routing (CIDR)', source: 'IETF', url: 'https://www.rfc-editor.org/rfc/rfc4632' },

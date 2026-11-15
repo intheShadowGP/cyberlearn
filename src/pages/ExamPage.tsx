@@ -41,16 +41,20 @@ function ExamView({ exam }: { exam: ExamDef }) {
   const [data, setData] = useState<{ questions: Question[]; owner: Map<string, string> } | null>(null);
   const [deadline, setDeadline] = useState<number | null>(null);
   const [now, setNow] = useState(Date.now());
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     if (!started) return;
     let alive = true;
     setData(null);
-    void drawExam(exam).then((d) => {
-      if (!alive) return;
-      setData(d);
-      if (exam.timeLimitMin) setDeadline(Date.now() + exam.timeLimitMin * 60_000);
-    });
+    setLoadError(false);
+    drawExam(exam)
+      .then((d) => {
+        if (!alive) return;
+        setData(d);
+        if (exam.timeLimitMin) setDeadline(Date.now() + exam.timeLimitMin * 60_000);
+      })
+      .catch(() => alive && setLoadError(true));
     return () => {
       alive = false;
     };
@@ -93,6 +97,8 @@ function ExamView({ exam }: { exam: ExamDef }) {
             Démarrer
           </button>
         </div>
+      ) : loadError ? (
+        <p role="alert" className="error panel">Le sujet n’a pas pu être préparé : certains cours ne sont pas disponibles hors ligne. Reconnectez-vous puis réessayez.</p>
       ) : !data ? (
         <p role="status">Préparation du sujet…</p>
       ) : (

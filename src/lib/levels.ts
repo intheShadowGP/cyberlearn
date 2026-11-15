@@ -63,7 +63,8 @@ export function moduleLevel(
   let reached: 0 | Level = 0;
   for (const L of [1, 2, 3, 4] as Level[]) {
     const atLevel = statuses.filter((s) => s.skill.level === L);
-    if (atLevel.length === 0) break; // on ne valide jamais un niveau sans contenu publié
+    // Niveau sans contenu publié : ignoré (ni validé, ni bloquant pour les niveaux supérieurs).
+    if (atLevel.length === 0) continue;
     const upTo = statuses.filter((s) => s.skill.level <= L);
     const acquired = upTo.filter((s) => s.state === 'acquired').length;
     if (acquired / upTo.length >= LEVEL_COVERAGE) reached = L;
