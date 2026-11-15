@@ -62,3 +62,36 @@ Ce journal consigne **uniquement** les constats effectivement formulés par l’
 | « Sept artefacts » au lieu de huit | Corrigé | Revue |
 | Ligne de compilation combinant ASan et _FORTIFY_SOURCE | Deux compilations distinctes (tests avec sanitizers, production durcie) | Revue |
 | Divulgations demandées : tests de discipline limités au module B ; Firefox et CI non exécutés ; liens 403 | Indiqué dans README, AUDIT et rapport final | — |
+
+## Audit 5 — audit final en cinq axes (après intégration du cahier des charges complet)
+
+Audit indépendant réalisé par Fable 5.2 via `/advisor` (une première tentative a expiré ; la seconde a abouti). Aucun constat critique ; deux constats de gravité élevée (preuves), sept moyens, sept faibles.
+
+| # | Axe | Gravité | Constat | Correction | Vérification |
+| --- | --- | --- | --- | --- | --- |
+| 1 | A | Moyen | XP et badges acceptaient des références inventées (examens, badges) | `knownSnapshot` filtre progression, labos, tentatives et compétences sur le contenu publié | `gamification.test.ts` (examens fantômes) |
+| 2 | A | Moyen | Actions GitHub épinglées par étiquette | Épinglage par SHA obtenu via l’API GitHub | Workflow ; exécution CI |
+| 3 | B | Moyen | Défis et badge de révision comptaient des entrées répétées | Références distinctes (par jour pour les révisions) | `gamification.test.ts` |
+| 4 | B | Moyen | Questions de laboratoire en révision sans leurs données | Exclues des révisions ; filtrage des cartes existantes | e2e « un laboratoire raté n’ajoute pas de carte » |
+| 5 | B | Faible | Texte de suppression inexact (rechargement, cache) | Texte corrigé | Revue |
+| 6 | B | Faible | Série fausse au changement d’heure | Pas calendaire | Test du 29 mars 2026 |
+| 7 | C | Moyen | Faits sensibles non vérifiés | 9 faits supplémentaires vérifiés sur les sources (EUR-Lex, Microsoft Learn, Kubernetes, NIST, FIRST, gcr.io) | docs/FACT-CHECK.md |
+| 8 | C | Faible | Rang atteignable en cochant des cases | Sections et exercices ne rapportent de l’XP qu’après une tentative d’évaluation | `gamification.test.ts`, e2e profil |
+| 9 | C | Faible | `dso-q10` ambiguë, `iot-q5` proche de `mw-q5` | Reformulées ; test d’unicité des énoncés | `validate.test.ts` |
+| 10 | D | Moyen | Nouveaux écrans jamais regardés ; en-tête sur deux lignes | Captures à 1280, 1024 et 375 px ; menu replié sous 1280 px ; axe sur Recherche, Confidentialité, Documentation (deux thèmes) | Captures ; e2e axe |
+| 11 | D | Faible | Focus non déplacé dans les dialogues de confirmation | Focus sur « Annuler » (action la moins destructive) | e2e clavier |
+| 12 | E | Élevé | TESTING.md annonçait des résultats non encore obtenus | Document mis à jour après exécution réelle des workflows | docs/TESTING.md |
+| 13 | E | Élevé | Site publié vérifié seulement par `curl` | `scripts/live-smoke.mjs` : HTTPS, routes, CSP, laboratoire, service worker, hors ligne, erreurs console, ressources | Exécution sur le site publié (résultat consigné dans TESTING.md) |
+| 14 | E | Faible | Ouverture bloquée laissant le stockage inutilisable | Promesse non mise en cache en cas de blocage | Revue de code |
+| 15 | E | Faible | Journal d’activité non borné | Compactage à 5 000 entrées au démarrage | `storage-v2.test.ts` |
+| 16 | E | Faible | État du projet obsolète, performances non mesurées | PROJECT_STATUS.md réécrit ; tailles mesurées (voir TESTING.md) | — |
+
+### Risques résiduels
+
+- Couverture : 15 disciplines sur 18 avec un seul cours ; un seul cours de niveau expert ; 194 sujets « à venir ».
+- Fichiers de corrections téléchargeables ; CSP en balise meta (pas de `frame-ancestors`).
+- Aucune relecture du contenu par un expert tiers ; quelques faits encore non revérifiés (FACT-CHECK.md).
+
+### Non vérifié par l’auditeur
+
+Rendu visuel (les captures ont été examinées par l’équipe de développement, pas par l’auditeur), journaux détaillés de la CI au-delà du statut des étapes, exactitude du contenu au-delà des faits confrontés aux sources.
