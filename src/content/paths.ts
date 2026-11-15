@@ -80,7 +80,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Appliquer le modèle de responsabilité partagée', 'Évaluer et réduire des politiques IAM', 'Durcir conteneurs et clusters Kubernetes', 'Sécuriser le pipeline de déploiement', 'Mettre en place l’authentification forte et la fédération'],
     prerequisites: ['Linux de base', 'Notions de réseau'],
     coreModules: ['L', 'O'],
-    steps: [c('a-systemes-fondamentaux'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('o-comptes-privileges-pam')],
+    steps: [c('a-systemes-fondamentaux'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('l-multicloud-serverless-hybride'), c('l-devsecops-pipeline'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('o-comptes-privileges-pam')],
   },
   {
     id: 'grc',

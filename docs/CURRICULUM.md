@@ -10,9 +10,9 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 345 |
-| Cours complets | 38 |
-| Questions de cours (avec correction) | 609 |
+| Sujets abordés dans au moins un cours (déclaratif) | 350 |
+| Cours complets | 39 |
+| Questions de cours (avec correction) | 625 |
 | Laboratoires | 12 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 30 |
@@ -32,7 +32,7 @@
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
 | J. Forensique numérique | 2 | 2, 3 | 16 / 17 |
 | K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
-| L. Sécurité Cloud | 3 | 2, 3 | 18 / 23 |
+| L. Sécurité Cloud | 4 | 2, 3 | 23 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 2 | 2, 3 | 16 / 21 |
 | O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
@@ -72,6 +72,7 @@
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 90 min | 3 | 16 | 2 | 4 |
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
+| Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
@@ -110,7 +111,7 @@
 | Pentesteur | 9 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
 | Investigation numérique (forensic) | 8 | 4 |
-| Sécurité cloud | 8 | 1 |
+| Sécurité cloud | 9 | 1 |
 | Gouvernance, risques et conformité (GRC) | 12 | 1 |
 | DevSecOps | 14 | 3 |
 | Sécurité industrielle et IoT | 7 | 3 |
@@ -122,6 +123,5 @@
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
-- **L. Sécurité Cloud** : Azure, Google Cloud Platform, Sécurité réseau Cloud, Sécurité serverless, Sécurité des environnements hybrides
 - **N. Sécurité industrielle et IoT** : Profinet, Automobile, ISO/SAE 21434, UNECE R155, UNECE R156
 - **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing

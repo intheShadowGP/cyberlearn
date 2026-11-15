@@ -45,6 +45,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'j-memoire-artefacts-linux': sheet(['Volatility 3', 'The Sleuth Kit et Autopsy', 'NIST SP 800-86', 'MITRE ATT&CK (T1070.006)', 'plaso'], ['Noms et options des plugins Volatility 3', 'Emplacements des journaux selon les distributions']),
   'k-malware-analyse': sheet(['YARA', 'MITRE ATT&CK — Software'], ['Familles de malwares et tendances (CERT-FR)']),
   'l-cloud-iam': sheet(['Logique d’évaluation IAM AWS', 'SecNumCloud', 'CIS Foundations Benchmarks'], ['Services et noms de produits des fournisseurs cloud']),
+  'l-multicloud-serverless-hybride': sheet(['Microsoft Cloud Security Benchmark', 'Google Cloud security best practices', 'CIS Benchmarks (AWS, Azure, GCP)', 'OWASP Serverless Top 10', 'SecNumCloud (ANSSI)'], ['Noms de services et de rôles des fournisseurs cloud', 'Fonctionnalités de fédération et de posture multi-cloud']),
   'l-devsecops-pipeline': sheet(['SLSA (OpenSSF)', 'OWASP Top 10 CI/CD', 'NIST SP 800-218 (SSDF)'], ['Fonctionnalités de sécurité de GitHub Actions']),
   'l-conteneurs-kubernetes': sheet(['Pod Security Standards (Kubernetes)', 'CIS Kubernetes Benchmark', 'Guide NSA/CISA Kubernetes 1.2'], ['API et profils de sécurité de Kubernetes selon les versions']),
   'm-risques-conformite': sheet(['ISO/IEC 27001:2022', 'NIST CSF 2.0', 'Guide EBIOS Risk Manager', 'Directive NIS2 (UE) 2022/2555', 'RGPD art. 33'], ['Transpositions nationales de NIS2', 'Actes délégués de DORA et du CRA']),

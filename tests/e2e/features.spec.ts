@@ -183,9 +183,9 @@ test('filtres du catalogue et des laboratoires', async ({ page }) => {
   await expect(page.locator('.card-grid > li').first()).toBeVisible();
   const all = await page.locator('.card-grid > li').count();
   await page.getByLabel('Discipline', { exact: true }).selectOption('L');
-  await expect(page.locator('.card-grid > li')).toHaveCount(3);
+  await expect(page.locator('.card-grid > li')).toHaveCount(4);
   await page.getByLabel('Niveau').selectOption('3');
-  await expect(page.locator('.card-grid > li')).toHaveCount(2);
+  await expect(page.locator('.card-grid > li')).toHaveCount(3);
   await page.goto('./#/catalogue?q=kubernetes');
   await expect(page.locator('.card-grid > li')).toHaveCount(1);
   expect(all).toBeGreaterThanOrEqual(22);
