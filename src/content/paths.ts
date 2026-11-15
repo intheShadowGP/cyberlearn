@@ -70,7 +70,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Collecter selon l’ordre de volatilité et préserver la chaîne de conservation', 'Exploiter les artefacts Windows et les journaux', 'Normaliser et croiser les horodatages', 'Analyser un malware en environnement isolé', 'Produire une chronologie défendable'],
     prerequisites: ['Systèmes Windows et Linux', 'Notion de hachage'],
     coreModules: ['J', 'K', 'I'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('j-forensique-principes'), l('timeline-lab'), c('j-memoire-artefacts-linux'), c('k-malware-analyse'), l('windows-persistence-lab'), c('i-soc-detection'), l('log-hunt-lab'), c('i-threat-hunting'), c('d-ad-authentification'), l('ad-events-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('j-forensique-principes'), l('timeline-lab'), c('j-memoire-artefacts-linux'), c('j-analyse-maliciels-investigation'), c('k-malware-analyse'), l('windows-persistence-lab'), c('i-soc-detection'), l('log-hunt-lab'), c('i-threat-hunting'), c('d-ad-authentification'), l('ad-events-lab')],
   },
   {
     id: 'cloud-security',

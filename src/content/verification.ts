@@ -43,6 +43,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'i-threat-hunting': sheet(['TLP 2.0 (FIRST)', 'Pyramid of Pain (D. Bianco, 2013)', 'MITRE ATT&CK (T1053.005, T1136.001)', 'STIX 2.1', 'Zeek et Suricata'], ['Fonctionnalités des plateformes XDR, NDR et SOAR', 'Empreintes TLS (JA3, JA4)']),
   'j-forensique-principes': sheet(['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], ['Artefacts Windows selon les versions du système']),
   'j-memoire-artefacts-linux': sheet(['Volatility 3', 'The Sleuth Kit et Autopsy', 'NIST SP 800-86', 'MITRE ATT&CK (T1070.006)', 'plaso'], ['Noms et options des plugins Volatility 3', 'Emplacements des journaux selon les distributions']),
+  'j-analyse-maliciels-investigation': sheet(['NIST SP 800-83 Rév. 1', 'YARA', 'MITRE ATT&CK', 'TLP 2.0 (FIRST)'], ['Techniques d’évasion d’analyse des maliciels', 'Services de réputation et bacs à sable']),
   'k-malware-analyse': sheet(['YARA', 'MITRE ATT&CK — Software'], ['Familles de malwares et tendances (CERT-FR)']),
   'l-cloud-iam': sheet(['Logique d’évaluation IAM AWS', 'SecNumCloud', 'CIS Foundations Benchmarks'], ['Services et noms de produits des fournisseurs cloud']),
   'l-multicloud-serverless-hybride': sheet(['Microsoft Cloud Security Benchmark', 'Google Cloud security best practices', 'CIS Benchmarks (AWS, Azure, GCP)', 'OWASP Serverless Top 10', 'SecNumCloud (ANSSI)'], ['Noms de services et de rôles des fournisseurs cloud', 'Fonctionnalités de fédération et de posture multi-cloud']),

@@ -10,9 +10,9 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 355 |
-| Cours complets | 40 |
-| Questions de cours (avec correction) | 641 |
+| Sujets abordés dans au moins un cours (déclaratif) | 356 |
+| Cours complets | 41 |
+| Questions de cours (avec correction) | 657 |
 | Laboratoires | 12 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 30 |
@@ -30,7 +30,7 @@
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
 | H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
-| J. Forensique numérique | 2 | 2, 3 | 16 / 17 |
+| J. Forensique numérique | 3 | 2, 3 | 17 / 17 |
 | K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
 | L. Sécurité Cloud | 4 | 2, 3 | 23 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
@@ -67,6 +67,7 @@
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
+| Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
@@ -111,7 +112,7 @@
 | Analyste SOC | 9 | 4 |
 | Pentesteur | 9 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
-| Investigation numérique (forensic) | 8 | 4 |
+| Investigation numérique (forensic) | 9 | 4 |
 | Sécurité cloud | 9 | 1 |
 | Gouvernance, risques et conformité (GRC) | 12 | 1 |
 | DevSecOps | 14 | 3 |
@@ -122,6 +123,5 @@
 
 - **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
-- **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
 - **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing
