@@ -128,7 +128,7 @@ function KerberosFlow(): ReactElement {
       <Box x={500} y={175} w={160} h={60} title="Serveur" sub="SPN du service" kind="warn" />
       <Arrow x1={160} y1={105} x2={498} y2={40} label="1. AS-REQ → TGT (clé krbtgt)" ly={58} />
       <Arrow x1={160} y1={125} x2={498} y2={72} label="2. TGT → ticket de service" ly={118} />
-      <Arrow x1={160} y1={145} x2={498} y2={205} label="3. AP-REQ : ticket de service" ly={196} />
+      <Arrow x1={160} y1={145} x2={498} y2={205} label="3. AP-REQ : ticket de service" ly={160} />
       <text x={340} y={252} textAnchor="middle" className="d-muted">Le serveur déchiffre le ticket avec sa propre clé : le DC n’intervient pas à l’étape 3</text>
     </svg>
   );
