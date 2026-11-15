@@ -1,0 +1,33 @@
+import type { CourseCorrections } from '../../types';
+
+export const corrections: CourseCorrections = {
+  courseId: 'n-iot-firmware',
+  questions: {
+    'iot-q1': { type: 'single', correct: 'a', explanation: 'Mirai balayait Internet à la recherche de services Telnet et SSH et testait une courte liste d’identifiants par défaut de caméras et d’enregistreurs. Les appareils compromis ont servi à des attaques par déni de service distribué record en 2016.' },
+    'iot-q2': { type: 'multi', correct: ['a', 'b', 'd'], explanation: 'Débogage actif, secrets partagés par toute la flotte et services inutiles exposés sont des constats fréquents d’audit d’objets connectés.', whyWrong: { c: 'Des mises à jour signées avec anti-retour sont une bonne pratique, pas une faiblesse.' } },
+    'iot-q3': { type: 'truefalse', correct: true, explanation: 'La première disposition de l’EN 303 645 interdit les mots de passe universels par défaut : chaque appareil doit avoir un mot de passe unique ou imposer sa définition par l’utilisateur.' },
+    'iot-q4': { type: 'short', accepted: ['binwalk'], explanation: 'binwalk recherche des signatures connues (en-têtes de noyau, systèmes de fichiers, archives) et sait les extraire ; son analyse d’entropie aide à repérer les zones chiffrées.' },
+    'iot-q5': { type: 'single', correct: 'b', explanation: 'Une entropie proche du maximum indique des données d’apparence aléatoire : compression ou chiffrement. Un firmware chiffré doit être déchiffré (clé trouvée dans le chargeur, ou dump mémoire) avant analyse.' },
+    'iot-q6': { type: 'truefalse', correct: true, explanation: 'La clé privée authentifie l’appareil. Partagée par toute la flotte, elle permet à quiconque l’a extraite d’un seul firmware d’usurper tous les appareils ou de déchiffrer leurs échanges selon le protocole.' },
+    'iot-q7': { type: 'multi', correct: ['a', 'b', 'c'], explanation: 'Comptes et empreintes, services lancés au démarrage et matériel cryptographique révèlent les accès et les secrets exploitables.', whyWrong: { d: 'L’apparence de l’interface n’a pas d’intérêt de sécurité.' } },
+    'iot-q8': { type: 'single', correct: 'b', explanation: 'Le code de démarrage en ROM, immuable, vérifie la signature du chargeur avec une clé publique gravée dans le matériel ; le chargeur vérifie ensuite le noyau, et ainsi de suite.' },
+    'iot-q9': { type: 'short', accepted: ['anti-retour', 'antiretour', 'anti retour', 'anti-rollback', 'anti rollback', 'antirollback'], explanation: 'L’anti-retour (anti-rollback), souvent fondé sur un compteur de version monotone stocké en matériel, empêche un attaquant de réinstaller une ancienne version signée mais vulnérable.' },
+    'iot-q10': { type: 'truefalse', correct: true, explanation: 'La nouvelle version s’installe sur la partition inactive. Si l’appareil ne démarre pas correctement (validation par un chien de garde ou un indicateur de succès), le chargeur revient à la partition précédente.' },
+    'iot-q11': { type: 'multi', correct: ['a', 'b', 'd'], explanation: 'Unicité, stockage matériel protégé et verrouillage des accès de débogage empêchent l’extraction et limitent l’impact d’une extraction réussie à un seul appareil.', whyWrong: { c: 'Un secret codé en dur se retrouve dans chaque firmware et dans le dépôt de code.' } },
+    'iot-q12': { type: 'single', correct: 'a', explanation: 'Le Cyber Resilience Act (règlement (UE) 2024/2847) impose des exigences essentielles de cybersécurité aux produits comportant des éléments numériques, dont la fourniture de mises à jour de sécurité pendant la période de support.' },
+    'iot-q13': { type: 'short', accepted: ['uart'], explanation: 'L’UART est une liaison série souvent laissée sur les cartes (quelques broches). Elle donne fréquemment accès aux messages de démarrage et à une console, parfois root sans mot de passe.' },
+    'iot-q14': {
+      type: 'open',
+      model: 'Gravité : critique pour la mise à jour par wget en HTTP sans vérification (un attaquant en position d’intercepteur, ou contrôlant le DNS, installe un firmware arbitraire et persistant sur toute la flotte) ; critique pour la clé privée identique (usurpation de tous les appareils) ; élevée pour BusyBox 2012 (vulnérabilités publiques) ; moyenne pour MD5-crypt (empreinte rapide à casser, compte root). Correctifs : mises à jour signées et vérifiées par l’appareil avant installation (HTTPS en plus), anti-retour, partitions A/B ; clés uniques par appareil générées en production et stockées dans un élément sécurisé ; mise à jour des composants avec SBOM et veille ; empreintes modernes (sha512-crypt ou mieux) et, surtout, pas de compte root utilisable à distance ; politique de divulgation et correctif pour la flotte existante.',
+      criteria: ['La mise à jour non vérifiée est identifiée comme critique avec un scénario.', 'La clé partagée est identifiée comme critique.', 'Les composants obsolètes et l’empreinte faible sont relevés.', 'Des corrections précises (signature, clés uniques, mise à jour des composants) sont proposées.'],
+      explanation: 'Une mise à jour non authentifiée transforme le mécanisme censé corriger les failles en vecteur de compromission de toute la flotte.',
+    },
+    'iot-q15': {
+      type: 'open',
+      model: 'Format : image signée par le fabricant (signature asymétrique, clé privée dans un HSM), avec numéro de version et compteur monotone ; transport HTTPS avec authentification mutuelle de l’appareil. Sur l’appareil : téléchargement dans la partition inactive (B), vérification de la signature et de la version (anti-retour), basculement au redémarrage ; validation par un auto-test et un chien de garde ; à défaut de validation, retour automatique sur A. Reprise par morceaux pour le réseau cellulaire. Côté fabricant : clés de signature dans un HSM, séparation des rôles, procédure de rotation et de révocation (clés de secours prévues dans l’appareil), journal des versions publiées, déploiement progressif par vagues avec surveillance du taux d’échec.',
+      criteria: ['La signature et sa vérification sur l’appareil sont décrites.', 'Un mécanisme A/B avec retour automatique est présent.', 'L’anti-retour est prévu.', 'La gestion des clés côté fabricant (HSM, rotation) est traitée.'],
+      explanation: 'Sur 10 ans, la capacité à faire évoluer les clés de signature et à déployer prudemment compte autant que la cryptographie elle-même.',
+    },
+    'iot-q16': { type: 'single', correct: 'b', explanation: 'HTTPS protège le transport et authentifie le serveur ; si le serveur de distribution est compromis, il sert une image malveillante via HTTPS valide. La signature du fabricant, vérifiée par l’appareil, garantit l’origine de l’image elle-même.' },
+  },
+};
