@@ -10,6 +10,11 @@ const NAV = [
   { to: '/laboratoires', label: 'Laboratoires' },
   { to: '/evaluations', label: 'Évaluations' },
   { to: '/parcours', label: 'Parcours' },
+  { to: '/revisions', label: 'Révisions' },
+  { to: '/glossaire', label: 'Glossaire' },
+  { to: '/competences', label: 'Compétences' },
+  { to: '/profil', label: 'Profil' },
+  { to: '/recherche', label: 'Rechercher' },
 ];
 
 function useOnline(): boolean {
@@ -118,7 +123,7 @@ export function Layout({ children }: { children: ReactNode }) {
             sans autorisation est une infraction pénale (articles 323-1 et suivants du Code pénal).
           </p>
           <nav aria-label="Liens secondaires">
-            <Link to="/a-propos">À propos, éthique et confidentialité</Link> · <Link to="/parametres">Données et paramètres</Link>
+            <Link to="/documentation">Documentation</Link> · <Link to="/confidentialite">Confidentialité</Link> · <Link to="/a-propos">À propos et éthique</Link> · <Link to="/parametres">Données et paramètres</Link>
           </nav>
           <p className="muted" data-testid="build-id">Version {__BUILD_ID__}</p>
         </div>

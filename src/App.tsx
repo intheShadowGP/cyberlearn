@@ -18,6 +18,13 @@ const PathsPage = lazy(() => import('./pages/PathsPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const GlossaryPage = lazy(() => import('./pages/GlossaryPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
+const ReviewPage = lazy(() => import('./pages/ReviewPage'));
+const SkillsPage = lazy(() => import('./pages/SkillsPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const DocumentationPage = lazy(() => import('./pages/DocumentationPage'));
 
 export function App() {
   return (
@@ -39,6 +46,13 @@ export function App() {
               <Route path="/parcours/:id" element={<PathsPage />} />
               <Route path="/parametres" element={<SettingsPage />} />
               <Route path="/a-propos" element={<AboutPage />} />
+              <Route path="/glossaire" element={<GlossaryPage />} />
+              <Route path="/recherche" element={<SearchPage />} />
+              <Route path="/revisions" element={<ReviewPage />} />
+              <Route path="/competences" element={<SkillsPage />} />
+              <Route path="/profil" element={<ProfilePage />} />
+              <Route path="/confidentialite" element={<PrivacyPage />} />
+              <Route path="/documentation" element={<DocumentationPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

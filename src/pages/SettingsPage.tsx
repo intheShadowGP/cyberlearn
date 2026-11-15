@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { applyBackup, exportBackup, ImportError, parseBackupFile } from '../lib/backup';
 import { clearAll, requestPersistence } from '../lib/db';
+import { DataControls } from '../components/DataControls';
 import { notify, type Snapshot } from '../lib/progress';
 import { resetPrefs, setPrefs, usePrefs, type Prefs } from '../lib/prefs';
 import { usePageTitle } from '../lib/usePageTitle';
@@ -141,7 +142,9 @@ export default function SettingsPage() {
           </div>
         )}
 
-        <h3 className="h4">Réinitialisation</h3>
+        <DataControls />
+
+        <h3 className="h4">Réinitialisation de la progression</h3>
         {!confirmReset ? (
           <button type="button" className="btn btn-danger" onClick={() => setConfirmReset(true)}>Effacer toute ma progression…</button>
         ) : (

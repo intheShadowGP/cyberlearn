@@ -112,8 +112,12 @@ export const LEITNER_DAYS: Record<ReviewItem['box'], number> = { 1: 1, 2: 3, 3: 
 type ReviewBase = Omit<ReviewItem, 'box' | 'due' | 'lapses' | 'updatedAt'>;
 
 /** Nouvel état d'un élément de révision après une réponse. Fonction pure, testée. */
-export function scheduleReview(prev: ReviewItem | undefined, base: ReviewBase, ok: boolean, now: number): ReviewItem {
-  if (!ok) return { ...base, box: 1, due: now + LEITNER_DAYS[1] * DAY, lapses: (prev?.lapses ?? 0) + 1, updatedAt: now };
+/**
+ * Nouvel état d'un élément de révision. Une erreur commise lors d'une évaluation
+ * (immediate) rend la carte révisable tout de suite ; une erreur en révision la replace au lendemain.
+ */
+export function scheduleReview(prev: ReviewItem | undefined, base: ReviewBase, ok: boolean, now: number, immediate = false): ReviewItem {
+  if (!ok) return { ...base, box: 1, due: immediate ? now : now + LEITNER_DAYS[1] * DAY, lapses: (prev?.lapses ?? 0) + 1, updatedAt: now };
   const box = (prev ? Math.min(5, prev.box + 1) : 2) as ReviewItem['box'];
   return { ...base, box, due: now + LEITNER_DAYS[box] * DAY, lapses: prev?.lapses ?? 0, updatedAt: now };
 }
@@ -139,7 +143,7 @@ async function updateReviews(tx: IDBTransaction, score: QuizScore, ownerOf: Owne
     const prev = (await req(s.get(itemId))) as ReviewItem | undefined;
     const ok = r.verdict === 'correct';
     if (ok && !prev) continue; // rien à réviser
-    s.put(scheduleReview(prev, { itemId, kind: 'question', ...o }, ok, now));
+    s.put(scheduleReview(prev, { itemId, kind: 'question', ...o }, ok, now, true));
   }
 }
 

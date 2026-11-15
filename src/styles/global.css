@@ -570,3 +570,13 @@ td .progress-bar { max-width: 140px; }
 /* Champ fichier masqué visuellement : le focus clavier est reporté sur son libellé-bouton. */
 .file-input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }
 .card-prereq { font-size: 0.85rem; color: var(--text-muted); border-left: 2px solid var(--border-strong); padding-left: 0.5rem; }
+
+/* ---------- Glossaire, badges, révisions ---------- */
+.glossary { margin: 1rem 0; }
+.glossary .definition.focused { outline: 3px solid var(--focus); }
+.badge-grid { list-style: none; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.badge-card { display: flex; flex-direction: column; gap: 0.2rem; border: 1px dashed var(--border-strong); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; font-size: 0.9rem; }
+.badge-card.earned { border-style: solid; border-color: var(--accent); background: var(--accent-soft); }
+.flashcard { max-width: 820px; }
+#main-nav a { white-space: nowrap; }
+@media (min-width: 901px) and (max-width: 1250px) { #main-nav a { padding: 0.4rem 0.45rem; font-size: 0.86rem; } }
