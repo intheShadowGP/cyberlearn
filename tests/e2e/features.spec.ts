@@ -94,6 +94,10 @@ test('profil, XP issue d’activités réelles, parcours suivis (plusieurs), com
   await page.locator('.read-toggle input').first().click();
   await expect(page.locator('.read-toggle input').first()).toBeChecked();
   await page.goto('./#/profil');
+  // Case cochée seule : aucune XP tant que l'évaluation du cours n'a pas été tentée.
+  await expect(page.getByText('0 XP', { exact: true })).toBeVisible();
+  await failCourseQuiz(page, 'b-osi-tcpip');
+  await page.goto('./#/profil');
   await expect(page.getByText('10 XP', { exact: true })).toBeVisible();
   await expect(page.locator('.badge-card.earned')).toContainText('Premiers pas');
 
@@ -226,4 +230,32 @@ test('persistance après fermeture et réouverture du navigateur', async () => {
   await page.goto('http://localhost:4173/cyberacademie/#/profil');
   await expect(page.getByLabel('Pseudonyme')).toHaveValue('Persistant');
   await ctx.close();
+});
+
+test('révisions : un laboratoire raté n’ajoute pas de carte sans contexte', async ({ page }) => {
+  await page.goto('./#/laboratoires/code-review-lab');
+  await page.getByRole('button', { name: 'Valider mes réponses' }).click();
+  await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
+  await page.goto('./#/revisions');
+  await expect(page.getByText(/Aucune carte en attente/)).toBeVisible();
+});
+
+test('confirmations : le focus va sur « Annuler » dans les dialogues destructifs', async ({ page }) => {
+  await page.goto('./#/parametres');
+  await page.getByRole('button', { name: /Supprimer complètement le profil local/ }).click();
+  await expect(page.getByRole('alertdialog').getByRole('button', { name: 'Annuler' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('alertdialog')).toHaveCount(0);
+});
+
+test('accessibilité : recherche, confidentialité, documentation (deux thèmes)', async ({ page }) => {
+  for (const theme of ['dark', 'light']) {
+    await page.addInitScript((t) => localStorage.setItem('cyberacademie.prefs.v1', JSON.stringify({ theme: t, freeMode: false, fontScale: 1, reduceMotion: true })), theme);
+    for (const route of ['./#/recherche?q=kerberos', './#/confidentialite', './#/documentation', './#/glossaire']) {
+      await page.goto(route);
+      await expect(page.locator('main h1').first()).toBeVisible();
+      if (route.includes('recherche')) await expect(page.getByRole('heading', { name: 'Cours', exact: true })).toBeVisible();
+      await axe(page, `${theme} ${route}`);
+    }
+  }
 });

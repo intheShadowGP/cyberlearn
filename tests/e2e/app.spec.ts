@@ -31,6 +31,9 @@ test('accueil sous un sous-chemin, sans erreur ni violation CSP', async ({ page 
   await page.goto('./');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('cybersécurité');
   await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveCount(1);
+  // Sous 1280 px, la navigation est repliée derrière le bouton Menu.
+  const toggle = page.getByRole('button', { name: 'Menu' });
+  if (await toggle.isVisible()) await toggle.click();
   await page.getByRole('navigation', { name: 'Navigation principale' }).getByRole('link', { name: 'Formations' }).click();
   await expect(page).toHaveURL(/#\/catalogue/);
   await expect(page.getByRole('heading', { level: 1, name: 'Formations' })).toBeVisible();

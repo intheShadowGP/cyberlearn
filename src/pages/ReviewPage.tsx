@@ -138,7 +138,8 @@ export default function ReviewPage() {
     void loadGlossary().then(setGlossary).catch(() => setGlossary([]));
   }, []);
 
-  const due = useMemo(() => data.reviews.filter((r) => r.due <= nowTs).sort((a, b) => a.due - b.due), [data.reviews, nowTs]);
+  // Cartes de questions de cours et de glossaire uniquement (les questions de laboratoire exigent les données du labo).
+  const due = useMemo(() => data.reviews.filter((r) => r.due <= nowTs && r.ownerKind === 'course').sort((a, b) => a.due - b.due), [data.reviews, nowTs]);
   const toCard = (r: ReviewItem): Card | null => {
     if (r.kind === 'question') return { kind: 'question', itemId: r.itemId, owner: r.owner, ownerKind: r.ownerKind, questionId: r.itemId.slice(2) };
     const entry = glossary?.find((g) => `g:${g.id}` === r.itemId);
@@ -177,8 +178,9 @@ export default function ReviewPage() {
     <div>
       <h1>Révisions</h1>
       <p className="lead">
-        Répétition espacée (système de Leitner à 5 boîtes) : une question ratée revient le lendemain ; chaque réussite allonge
-        l’intervalle (1, 3, 7, 14 puis 30 jours).
+        Répétition espacée (système de Leitner à 5 boîtes) : une question de cours ratée lors d’une évaluation est à réviser
+        immédiatement ; une erreur en révision la fait revenir le lendemain ; chaque réussite allonge l’intervalle (3, 7, 14 puis
+        30 jours).
       </p>
       {result && (
         <p className="panel validation" role="status">

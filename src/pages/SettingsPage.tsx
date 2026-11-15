@@ -137,7 +137,7 @@ export default function SettingsPage() {
               >
                 Remplacer ma progression
               </button>
-              <button type="button" className="btn" onClick={() => setPending(null)}>Annuler</button>
+              <button type="button" className="btn" autoFocus onClick={() => setPending(null)}>Annuler</button>
             </div>
           </div>
         )}
@@ -165,7 +165,7 @@ export default function SettingsPage() {
               >
                 Tout effacer
               </button>
-              <button type="button" className="btn" onClick={() => setConfirmReset(false)}>Annuler</button>
+              <button type="button" className="btn" autoFocus onClick={() => setConfirmReset(false)}>Annuler</button>
             </div>
           </div>
         )}

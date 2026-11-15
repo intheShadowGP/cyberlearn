@@ -91,6 +91,13 @@ describe('contenu pédagogique', () => {
     }
   });
 
+  it('aucune question n’est répétée à l’identique entre cours et laboratoires', () => {
+    const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, ' ').trim();
+    const prompts = [...set.courses.flatMap((c) => c.body.questions), ...set.labs.flatMap((l) => l.body.questions)].map((q) => norm(q.prompt));
+    const dup = prompts.filter((p, i) => prompts.indexOf(p) !== i);
+    expect(dup).toEqual([]);
+  });
+
   it('chaque cours a une fiche de vérification', () => {
     for (const c of set.courses) {
       const v = VERIFICATION[c.meta.id];

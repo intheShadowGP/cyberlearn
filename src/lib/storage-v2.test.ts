@@ -135,3 +135,17 @@ describe('sauvegarde format 2', () => {
     expect(() => validateBackup(safeParse(JSON.stringify(bad)))).toThrow(ImportError);
   });
 });
+
+describe('compactage du journal d’activité', () => {
+  it('conserve les entrées les plus récentes', async () => {
+    __resetDbForTests();
+    await openDb();
+    await clearAll();
+    const { compactActivity } = await import('./progress');
+    for (let i = 0; i < 12; i++) await markSection('c', `s${i}`, true);
+    expect(await compactActivity(5)).toBe(7);
+    const s = await loadSnapshot();
+    expect(s.activity.map((a) => a.ref)).toEqual(['c#s7', 'c#s8', 'c#s9', 'c#s10', 'c#s11']);
+    expect(await compactActivity(5)).toBe(0);
+  });
+});

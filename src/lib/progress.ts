@@ -288,7 +288,7 @@ export async function recordLabAttempt(labId: string, score: QuizScore, duration
   await withTx(['attempts', 'skills', 'labProgress', 'activity', 'reviews'], async (tx) => {
     store(tx, 'attempts').add(attemptOf('lab', labId, score, durationSec, date));
     await recordSkills(tx, score.bySkill, date);
-    await updateReviews(tx, score, () => ({ owner: labId, ownerKind: 'lab' }), date);
+    // Les questions de laboratoire dépendent des données du labo : elles ne vont pas en révision isolée.
     logActivity(tx, { type: 'lab-attempt', ref: labId, date, ok: score.percent >= PASS_THRESHOLD });
     const s = store(tx, 'labProgress');
     const p = ((await req(s.get(labId))) as LabProgress | undefined) ?? {
@@ -331,6 +331,33 @@ export async function recordExamAttempt(
     logActivity(tx, { type: 'exam-attempt', ref: examId, date, ok: score.percent >= PASS_THRESHOLD });
   });
   notify();
+}
+
+/* ---------- Compactage du journal ---------- */
+
+/** Taille maximale du journal d'activité : au-delà, les entrées les plus anciennes sont supprimées. */
+export const MAX_ACTIVITY = 5000;
+
+export async function compactActivity(max = MAX_ACTIVITY): Promise<number> {
+  return withTx(['activity'], async (tx) => {
+    const s = store(tx, 'activity');
+    const total = await req(s.count());
+    let toDelete = total - max;
+    if (toDelete <= 0) return 0;
+    const removed = toDelete;
+    await new Promise<void>((resolve, reject) => {
+      const cur = s.openCursor();
+      cur.onsuccess = () => {
+        const c = cur.result;
+        if (!c || toDelete <= 0) return resolve();
+        c.delete();
+        toDelete--;
+        c.continue();
+      };
+      cur.onerror = () => reject(cur.error);
+    });
+    return removed;
+  });
 }
 
 /* ---------- Révisions ---------- */

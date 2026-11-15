@@ -70,7 +70,11 @@ export function openDb(): Promise<IDBDatabase> {
       dbPromise = null;
       reject(req.error ?? new Error('Ouverture IndexedDB impossible'));
     };
-    req.onblocked = () => reject(new Error('Base de données bloquée par un autre onglet.'));
+    req.onblocked = () => {
+      // Ne pas garder en cache une promesse rejetée : une nouvelle tentative pourra réussir.
+      dbPromise = null;
+      reject(new Error('Base de données bloquée par un autre onglet : fermez les autres onglets de CyberAcadémie.'));
+    };
   });
   return dbPromise;
 }

@@ -47,7 +47,7 @@ export function DataControls() {
       </p>
 
       <h3 className="h4">Suppression complète du profil local</h3>
-      <p>Détruit la base IndexedDB et les préférences : progression, résultats, révisions, profil, objectifs. La page est ensuite rechargée sur un profil vierge.</p>
+      <p>Détruit la base IndexedDB et les préférences : progression, résultats, révisions, profil, objectifs. Le cache des fichiers du site (sans aucune donnée personnelle) est conservé pour le fonctionnement hors ligne.</p>
       {!confirm ? (
         <button type="button" className="btn btn-danger" onClick={() => setConfirm(true)}>Supprimer complètement le profil local…</button>
       ) : (
@@ -77,7 +77,7 @@ export function DataControls() {
             >
               Tout supprimer définitivement
             </button>
-            <button type="button" className="btn" onClick={() => setConfirm(false)}>Annuler</button>
+            <button type="button" className="btn" autoFocus onClick={() => setConfirm(false)}>Annuler</button>
           </div>
         </div>
       )}

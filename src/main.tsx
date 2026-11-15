@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { applyPrefs, getPrefs } from './lib/prefs';
 import { registerServiceWorker } from './sw/register';
+import { compactActivity } from './lib/progress';
 import './styles/global.css';
 
 applyPrefs(getPrefs());
@@ -16,3 +17,5 @@ createRoot(root).render(
 );
 
 if (import.meta.env.PROD) registerServiceWorker();
+// Borne la taille du journal d'activité (exports toujours sous le plafond d'import).
+void compactActivity().catch(() => undefined);

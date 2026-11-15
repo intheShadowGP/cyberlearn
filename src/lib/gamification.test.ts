@@ -31,7 +31,7 @@ describe('états d’un cours', () => {
 describe('expérience', () => {
   it('dérivée de l’état : cocher plusieurs fois la même section ne rapporte rien de plus', () => {
     const s = emptySnapshot();
-    s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'couches', 'x', 'y', 'z', 'w', 'v'] })];
+    s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'couches', 'x', 'y', 'z', 'w', 'v'], attempts: 1 })];
     // dédoublonnage puis plafond au nombre réel de sections (4)
     expect(computeXp(s).total).toBe(4 * XP_RULES.section);
   });
@@ -43,7 +43,7 @@ describe('expérience', () => {
   });
   it('les révisions sont plafonnées', () => {
     const s = emptySnapshot();
-    s.activity = Array.from({ length: 1000 }, (_, i) => ({ type: 'review' as const, ref: 'q:x', date: i, ok: true }));
+    s.activity = Array.from({ length: 1000 }, (_, i) => ({ type: 'review' as const, ref: `q:${i}`, date: i, ok: true }));
     expect(computeXp(s).total).toBe(XP_RULES.reviewCap);
   });
   it('rangs', () => {
@@ -93,5 +93,37 @@ describe('séries, défis, badges, parcours', () => {
     expect(pathStatus(p, s)).toMatchObject({ completed: false, finalPassed: false });
     s.attempts = [{ kind: 'exam', refId: 'parcours-debutant', date: 1, percent: 75, score: 15, max: 20, bySkill: {}, durationSec: 60, questionIds: [] }];
     expect(pathStatus(p, s).completed).toBe(true);
+  });
+});
+
+describe('corrections de l’audit Fable (gamification)', () => {
+  it('les examens et badges ignorent les références inventées', () => {
+    const s = emptySnapshot();
+    s.attempts = Array.from({ length: 30 }, (_, i) => ({ kind: 'exam' as const, refId: `faux-${i}`, date: 1, percent: 100, score: 10, max: 10, bySkill: {}, durationSec: 1, questionIds: [] }));
+    expect(computeXp(s).total).toBe(0);
+    expect(badges(s).find((b) => b.id === 'perfection')?.earned).toBe(false);
+  });
+  it('les cases cochées ne rapportent de l’XP qu’après une tentative d’évaluation', () => {
+    const s = emptySnapshot();
+    s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'encapsulation'], attempts: 0 })];
+    expect(computeXp(s).total).toBe(0);
+    s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'encapsulation'], attempts: 1 })];
+    expect(computeXp(s).total).toBe(2 * XP_RULES.section);
+  });
+  it('défis : une même section ou carte répétée ne compte qu’une fois', () => {
+    const now = new Date(2026, 10, 15, 12).getTime();
+    const s = emptySnapshot();
+    s.activity = [
+      ...Array.from({ length: 10 }, () => ({ type: 'section' as const, ref: 'b-osi-tcpip#couches', date: now })),
+      ...Array.from({ length: 20 }, () => ({ type: 'review' as const, ref: 'q:x', date: now, ok: true })),
+    ];
+    for (const c of weeklyChallenges(s, now)) expect(c.value).toBeLessThanOrEqual(1);
+    expect(badges(s).find((b) => b.id === 'revision-50')?.progress).toBe('1/50');
+  });
+  it('séries correctes au passage à l’heure d’été (29 mars 2026)', () => {
+    const s = emptySnapshot();
+    const at = (d: number) => new Date(2026, 2, d, 23, 30).getTime();
+    s.activity = [27, 28, 29, 30].map((d) => ({ type: 'section' as const, ref: 'c#s', date: at(d) }));
+    expect(streaks(s, at(30))).toMatchObject({ current: 4, longest: 4 });
   });
 });
