@@ -16,7 +16,7 @@ export const meta: CourseMeta = {
     'Concevoir un plan d’adressage VLSM sans chevauchement.',
     "Relier le plan d'adressage aux règles de filtrage et à la détection d'anomalies.",
   ],
-  prerequisites: [],
+  prerequisites: ['b-osi-tcpip'],
   prerequisiteKnowledge: ['Notions de binaire (puissances de 2)', 'Rôle d’une adresse IP dans le modèle TCP/IP'],
   skills: [
     { id: 'b-ipv4-struct', label: 'Structure et catégories d’adresses IPv4', level: 1 },

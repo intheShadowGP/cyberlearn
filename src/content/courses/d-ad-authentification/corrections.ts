@@ -1,0 +1,33 @@
+import type { CourseCorrections } from '../../types';
+
+export const corrections: CourseCorrections = {
+  courseId: 'd-ad-authentification',
+  questions: {
+    'ad-q1': { type: 'single', correct: 'b', explanation: 'Le contrôleur de domaine héberge NTDS.dit, joue le rôle de KDC Kerberos et valide les authentifications NTLM. C’est l’actif le plus critique du système d’information (tier 0).' },
+    'ad-q2': { type: 'truefalse', correct: true, explanation: 'Une GPO peut déployer des scripts de démarrage, des tâches planifiées ou des logiciels. Les droits de modification sur les GPO (et sur les OU auxquelles elles sont liées) font partie des chemins d’attaque à auditer.' },
+    'ad-q3': { type: 'short', accepted: ['ntds.dit', 'ntds'], explanation: 'NTDS.dit contient les objets de l’annuaire et les empreintes des mots de passe. Son extraction (copie d’ombre, DCSync) équivaut à la compromission totale du domaine.' },
+    'ad-q4': { type: 'single', correct: 'b', explanation: 'Le TGT est chiffré avec la clé du compte krbtgt, connue uniquement des KDC. Le client ne peut pas le lire ; il le présente au KDC pour obtenir des tickets de service.', whyWrong: { a: 'La clé de l’utilisateur sert à la pré-authentification et à chiffrer la clé de session renvoyée, pas le TGT lui-même.' } },
+    'ad-q5': { type: 'single', correct: 'b', explanation: 'Le ticket de service est chiffré avec la clé du compte associé au SPN. C’est ce qui rend le Kerberoasting possible : l’attaquant obtient légitimement le ticket, puis tente de retrouver hors ligne le mot de passe du compte de service.' },
+    'ad-q6': { type: 'truefalse', correct: true, explanation: 'La réponse NTLM est calculée à partir de l’empreinte NT, pas du mot de passe. Posséder l’empreinte suffit : c’est le pass-the-hash. Protected Users, Credential Guard et la réduction de NTLM limitent ce risque.' },
+    'ad-q7': { type: 'short', accepted: ['4769'], explanation: '4768 : demande de TGT (AS). 4769 : demande de ticket de service (TGS). 4771 : échec de pré-authentification Kerberos.' },
+    'ad-q8': { type: 'single', correct: 'b', explanation: 'Beaucoup de comptes différents, un essai chacun : c’est la signature de la pulvérisation, qui évite le verrouillage. Le 4624 final indique qu’un compte a cédé ; il faut le réinitialiser et analyser son activité.', whyWrong: { a: 'La force brute cible un même compte avec de nombreux mots de passe.' } },
+    'ad-q9': { type: 'multi', correct: ['a', 'b', 'd'], explanation: 'Le ticket est cassable hors ligne : plus le mot de passe est faible et ancien, plus l’attaque réussit. RC4 est plus rapide à casser qu’AES.', whyWrong: { c: 'Les gMSA utilisent des mots de passe aléatoires de 240 octets renouvelés automatiquement : le Kerberoasting devient inopérant.' } },
+    'ad-q10': { type: 'single', correct: 'a', explanation: 'Avec l’empreinte de krbtgt, un attaquant peut forger un TGT pour n’importe quel compte, avec n’importe quels groupes et une durée arbitraire. Seul le renouvellement (double) du mot de passe de krbtgt invalide ces tickets.' },
+    'ad-q11': { type: 'multi', correct: ['a', 'b', 'd'], explanation: 'LAPS empêche la réutilisation d’un mot de passe local, le cloisonnement des tiers empêche l’exposition des comptes privilégiés, et le filtrage SMB entre postes supprime le principal canal latéral.', whyWrong: { c: 'Un mot de passe local identique partout permet de rebondir sur tous les postes dès qu’un seul est compromis.' } },
+    'ad-q12': { type: 'truefalse', correct: false, explanation: 'Le KDC accepte encore les tickets chiffrés avec le mot de passe précédent de krbtgt. Il faut le renouveler deux fois, en respectant un délai suffisant pour la réplication et l’expiration des tickets légitimes.' },
+    'ad-q13': { type: 'short', accepted: ['4740'], explanation: 'L’événement 4740 est journalisé sur le DC émulateur PDC lorsqu’un compte est verrouillé. Des verrouillages en série signalent souvent une force brute ou un ancien mot de passe en cache.' },
+    'ad-q14': {
+      type: 'open',
+      model: 'Chaîne : 1) un poste est compromis (hameçonnage) ; 2) l’attaquant élève ses privilèges localement et extrait les secrets de LSASS ; 3) grâce au mot de passe d’administrateur local identique partout, il rebondit sur d’autres postes (pass-the-hash) ; 4) sur l’un d’eux, un Admin du domaine s’est connecté pour du support : ses secrets sont récupérés ; 5) avec ces droits, l’attaquant extrait NTDS.dit (DCSync) et contrôle le domaine. Mesures : modèle en tiers (aucun compte tier 0 sur un poste), Windows LAPS, et Protected Users ou Credential Guard pour protéger les secrets ; filtrer SMB entre postes en complément.',
+      criteria: ['La chaîne poste → identifiants → rebond → compte privilégié → DC est décrite.', 'Le rôle des secrets en mémoire (LSASS) est mentionné.', 'Le modèle en tiers et LAPS figurent parmi les mesures.', 'Une troisième mesure pertinente est proposée.'],
+      explanation: 'Cette chaîne est décrite dans la quasi-totalité des rapports d’incidents par rançongiciel. Chaque mesure en casse un maillon.',
+    },
+    'ad-q15': {
+      type: 'open',
+      model: 'Le TGT est une « carte d’identité » délivrée une fois par le KDC après l’ouverture de session ; il sert uniquement à demander d’autres tickets au KDC. Le ticket de service est un « billet d’entrée » pour un service précis, délivré en échange du TGT. Le ticket de service est chiffré avec la clé du compte du service : le serveur peut donc le déchiffrer et vérifier lui-même son authenticité et l’identité de l’utilisateur, sans contacter le DC.',
+      criteria: ['Le TGT est présenté comme servant à obtenir d’autres tickets auprès du KDC.', 'Le ticket de service est associé à un service précis.', 'Le chiffrement par la clé du service explique l’absence d’appel au DC.'],
+      explanation: 'Cette autonomie du serveur explique aussi les « silver tickets » : avec la clé d’un compte de service, on forge des tickets acceptés par ce service sans aucune trace sur le DC.',
+    },
+    'ad-q16': { type: 'single', correct: 'b', explanation: 'Les membres de Protected Users ne peuvent utiliser ni NTLM, ni DES, ni RC4, ni la délégation ; leurs TGT ont une durée de vie réduite. Il est recommandé pour tous les comptes d’administration humains.' },
+  },
+};

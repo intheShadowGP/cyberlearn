@@ -12,6 +12,7 @@ import { DIAGRAMS } from '../components/diagrams';
 /** Jeu de contenu valide de référence, cloné pour chaque mutation. */
 function fixture(): ContentSet {
   const c = structuredClone({ meta, body, corrections, solutions });
+  c.meta.prerequisites = []; // fixture isolée : le cours prérequis n'est pas inclus
   const l = structuredClone({ meta: labMeta, body: labBody, corrections: labCorr });
   return {
     courses: [{ dir: c.meta.id, ...c }],
