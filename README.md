@@ -101,4 +101,4 @@ Le cahier des charges reçu était **tronqué** au milieu de la section 7 (« Pa
 
 ## Licence
 
-À définir par le propriétaire du dépôt.
+Code sous licence MIT ; contenus pédagogiques sous CC BY-SA 4.0. Voir [LICENSE](LICENSE).
