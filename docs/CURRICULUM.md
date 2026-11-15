@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 209 |
-| Cours complets | 22 |
-| Questions de cours (avec correction) | 353 |
+| Sujets abordés dans au moins un cours (déclaratif) | 248 |
+| Cours complets | 26 |
+| Questions de cours (avec correction) | 417 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 20 |
+| Évaluations transversales, examens blancs et finaux | 24 |
 
 ## Par discipline
 
@@ -23,14 +23,14 @@
 | --- | --- | --- | --- |
 | A. Fondamentaux de l'informatique | 1 | 1 | 11 / 16 |
 | B. Réseaux informatiques | 2 | 1, 2 | 9 / 36 |
-| C. Linux | 1 | 2 | 7 / 22 |
-| D. Windows et Windows Server | 1 | 3 | 10 / 25 |
+| C. Linux | 2 | 2, 3 | 16 / 22 |
+| D. Windows et Windows Server | 2 | 2, 3 | 20 / 25 |
 | E. Cryptographie | 1 | 2 | 9 / 22 |
 | F. Sécurité Web | 1 | 2 | 7 / 27 |
 | G. Programmation et sécurité du code | 1 | 3 | 16 / 23 |
 | H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
-| I. Défense et SOC | 1 | 2 | 14 / 26 |
-| J. Forensique numérique | 1 | 2 | 8 / 17 |
+| I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
+| J. Forensique numérique | 2 | 2, 3 | 16 / 17 |
 | K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
 | L. Sécurité Cloud | 3 | 2, 3 | 18 / 23 |
 | M. Gouvernance et conformité | 1 | 2 | 15 / 24 |
@@ -48,13 +48,17 @@
 | Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 60 min | 4 | 16 | 2 | 4 |
 | Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 75 min | 6 | 17 | 3 | 4 |
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 80 min | 5 | 16 | 2 | 4 |
+| Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
+| Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
+| Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 90 min | 3 | 16 | 2 | 4 |
@@ -89,11 +93,11 @@
 | Parcours | Cours | Laboratoires |
 | --- | --- | --- |
 | Parcours débutant | 6 | 3 |
-| Administrateur systèmes et réseaux sécurité | 6 | 5 |
-| Analyste SOC | 6 | 4 |
+| Administrateur systèmes et réseaux sécurité | 8 | 5 |
+| Analyste SOC | 9 | 4 |
 | Pentesteur | 7 | 5 |
 | Ingénieur cybersécurité | 10 | 3 |
-| Investigation numérique (forensic) | 6 | 4 |
+| Investigation numérique (forensic) | 8 | 4 |
 | Sécurité cloud | 7 | 1 |
 | Gouvernance, risques et conformité (GRC) | 11 | 1 |
 | DevSecOps | 10 | 3 |
@@ -104,14 +108,13 @@
 
 - **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
 - **B. Réseaux informatiques** : Adressage IPv6, VLAN, Routage, Switching, DNS, DHCP, NAT, PAT, VPN, Proxy, Reverse proxy, Pare-feu, IDS, IPS, Wi-Fi, WPA2, WPA3, 802.1X, RADIUS, TACACS+, BGP, OSPF, MPLS, SD-WAN, Analyse de paquets, Wireshark, Architecture réseau sécurisée
-- **C. Linux** : Architecture Linux, Distributions, Bash, Processus, Services, systemd, Gestion des paquets, Journaux, Audit système, AppArmor, SELinux, iptables, nftables, Analyse système, Automatisation
-- **D. Windows et Windows Server** : Architecture Windows, DNS Windows, DHCP Windows, PowerShell, NTFS, Permissions, Windows Defender, Windows Firewall, Sysmon, BitLocker, PKI, Certificats, Sécurisation de Windows Server, Hardening, Sécurité des postes de travail
+- **C. Linux** : Architecture Linux, Distributions, Bash, Gestion des paquets, iptables, Automatisation
+- **D. Windows et Windows Server** : DNS Windows, DHCP Windows, PKI, Certificats, Sécurisation de Windows Server
 - **E. Cryptographie** : Chiffrement symétrique, Chiffrement asymétrique, AES, RSA, ECC, Signatures numériques, Certificats, PKI, TLS, Échange de clés, Perfect Forward Secrecy, Gestion des secrets, Cryptographie post-quantique
 - **F. Sécurité Web** : HTTPS, Cookies, Sessions, CORS, SameSite, CSRF, SSRF, XXE, Path Traversal, LFI, RFI, IDOR, Broken Access Control, Authentication flaws, Session fixation, Clickjacking, Race conditions, Sécurisation des API, OWASP ASVS, OWASP Testing Guide
 - **G. Programmation et sécurité du code** : Python, JavaScript, TypeScript, Java, Bash, PowerShell, Structures de données
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
-- **I. Défense et SOC** : SOAR, XDR, NDR, IDS/IPS, Threat Intelligence, Threat Hunting, Alerting, Analyse réseau, Investigation, YARA, Analyse comportementale, Détection d'anomalies
-- **J. Forensique numérique** : Analyse système de fichiers, Analyse réseau, Artefacts Linux, Analyse de journaux, Analyse de malware, Volatility, Autopsy, Sleuth Kit, FTK Imager
+- **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
 - **L. Sécurité Cloud** : Azure, Google Cloud Platform, Sécurité réseau Cloud, Sécurité serverless, Sécurité des environnements hybrides
 - **M. Gouvernance et conformité** : NIST SP 800, CIS Controls, ANSSI, Gestion des audits, Classification des données, Gestion des fournisseurs, Sensibilisation, Gestion des vulnérabilités, Gestion des actifs

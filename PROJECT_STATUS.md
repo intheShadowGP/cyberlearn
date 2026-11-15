@@ -8,7 +8,7 @@ Document de reprise (section 18 du cahier des charges).
 | --- | --- |
 | 1 — Conception (architecture, modèle de menace, organisation pédagogique) | Terminée |
 | 2 — Socle technique (routing, stockage, PWA, tests) | Terminée |
-| 3 — Plateforme pédagogique (22 cours, évaluations, progression) | Terminée |
+| 3 — Plateforme pédagogique (26 cours, évaluations, progression) | Terminée |
 | 4 — Fonctionnalités avancées (12 labos, 11 parcours, glossaire, recherche, révisions, examens, statistiques, gamification, profil) | Terminée |
 | 5 — Sécurisation (lint de sécurité, dépendances, CSP, imports, flux de données, actions épinglées) | Terminée |
 | 6 — Audit Fable 5.2 (5 axes) | Audit réalisé, constats corrigés ; voir docs/AUDIT.md (audit 5) |
@@ -20,8 +20,8 @@ Voir docs/TESTING.md (traçabilité des 20 contrôles fonctionnels) et docs/CURR
 
 ## Anomalies connues et risques résiduels
 
-- Contenu : 15 disciplines sur 18 n’ont qu’un cours ; un seul cours de niveau expert (fuzzing). 194 sujets sur 403 restent « à venir ».
-- Faits sensibles aux versions non encore revérifiés : quelques lignes de docs/FACT-CHECK.md (ISO 27001 annexe A, ETSI EN 303 645, événements 4728/7045/1102).
+- Contenu : 11 disciplines sur 18 n’ont qu’un cours ; un seul cours de niveau expert (fuzzing). 155 sujets sur 403 restent « à venir ».
+- Faits non vérifiés à la source primaire : ISO 27001 annexe A (sources secondaires seulement), événement 7045, plugins Volatility et commandes The Sleuth Kit (voir docs/FACT-CHECK.md).
 - Aucune relecture du contenu par un expert tiers.
 - Firefox non exécutable sur le poste de développement (exécuté en CI).
 - Fichiers de corrections téléchargeables (séparation pédagogique, pas un secret) ; CSP en balise meta (limites de GitHub Pages).
@@ -37,6 +37,6 @@ Voir docs/TESTING.md (traçabilité des 20 contrôles fonctionnels) et docs/CURR
 
 ## Prochaines étapes suggérées
 
-1. Ajouter un deuxième cours dans les disciplines à cours unique, en commençant par C, D, I, J.
-2. Revérifier les faits restants de docs/FACT-CHECK.md.
+1. Ajouter un deuxième cours dans les disciplines à cours unique restantes (A, E, F, G, H, K, M, O, P, Q, R), en commençant par E, F et H.
+2. Confronter à leur documentation les faits restants de docs/FACT-CHECK.md (Volatility, The Sleuth Kit, événement 7045).
 3. Faire relire les cours par des praticiens et consigner la relecture dans les fiches de vérification.

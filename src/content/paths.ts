@@ -30,7 +30,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Segmenter un réseau et auditer des règles de filtrage', 'Durcir un serveur Linux et SSH', 'Protéger Active Directory (tiers, LAPS, Kerberos)', 'Détecter une persistance sur un poste Windows', 'Appliquer le moindre privilège dans le cloud'],
     prerequisites: ['Utilisation courante de Windows et de la ligne de commande'],
     coreModules: ['B', 'C', 'D'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('c-linux-permissions'), l('linux-audit-lab'), c('d-ad-authentification'), l('ad-events-lab'), l('windows-persistence-lab'), c('l-cloud-iam'), l('iam-policy-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('c-linux-permissions'), l('linux-audit-lab'), c('c-systemd-journaux-confinement'), c('d-windows-poste-durcissement'), c('d-ad-authentification'), l('ad-events-lab'), l('windows-persistence-lab'), c('l-cloud-iam'), l('iam-policy-lab')],
   },
   {
     id: 'analyste-soc',
@@ -40,7 +40,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Qualifier une alerte et la documenter', 'Détecter pulvérisation, force brute et Kerberoasting dans les journaux', 'Reconstituer une chronologie fiable', 'Identifier persistance et commande-et-contrôle', 'Conduire les premières étapes de la réponse à incident'],
     prerequisites: ['Notions de réseau et de systèmes (le parcours débutant suffit)'],
     coreModules: ['I', 'J', 'K'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('i-soc-detection'), l('log-hunt-lab'), c('d-ad-authentification'), l('ad-events-lab'), l('windows-persistence-lab'), c('j-forensique-principes'), l('timeline-lab'), c('k-malware-analyse')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('i-soc-detection'), l('log-hunt-lab'), c('i-threat-hunting'), c('d-windows-poste-durcissement'), c('d-ad-authentification'), l('ad-events-lab'), l('windows-persistence-lab'), c('j-forensique-principes'), l('timeline-lab'), c('j-memoire-artefacts-linux'), c('k-malware-analyse')],
   },
   {
     id: 'pentesteur',
@@ -70,7 +70,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Collecter selon l’ordre de volatilité et préserver la chaîne de conservation', 'Exploiter les artefacts Windows et les journaux', 'Normaliser et croiser les horodatages', 'Analyser un malware en environnement isolé', 'Produire une chronologie défendable'],
     prerequisites: ['Systèmes Windows et Linux', 'Notion de hachage'],
     coreModules: ['J', 'K', 'I'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('j-forensique-principes'), l('timeline-lab'), c('k-malware-analyse'), l('windows-persistence-lab'), c('i-soc-detection'), l('log-hunt-lab'), c('d-ad-authentification'), l('ad-events-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('j-forensique-principes'), l('timeline-lab'), c('j-memoire-artefacts-linux'), c('k-malware-analyse'), l('windows-persistence-lab'), c('i-soc-detection'), l('log-hunt-lab'), c('i-threat-hunting'), c('d-ad-authentification'), l('ad-events-lab')],
   },
   {
     id: 'cloud-security',

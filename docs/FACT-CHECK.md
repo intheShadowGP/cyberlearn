@@ -9,17 +9,23 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | bcrypt : facteur de coût ≥ 10, limite de 72 octets (E) | idem | Vérifié le 2026-11-15 |
 | CISSP : 5 ans d’expérience (R) | ISC2 | Vérifié le 2026-11-15 |
 | Cyber Resilience Act : règlement (UE) 2024/2847, application jusqu’en 2027 (M, N) | EUR-Lex | Vérifié le 2026-11-15 (numéro et échéance 2027) |
-| Liens des ressources (85) | `node scripts/linkcheck.mjs` (statut HTTP + titre de page) | Vérifiés le 2026-11-15 : 83 valides ; uefi.org et modbus.org renvoient 403 aux clients automatisés (page de protection anti-robot pour uefi.org), non vérifiables automatiquement |
+| Liens des ressources (102) | `node scripts/linkcheck.mjs` (statut HTTP + titre de page) | Vérifiés le 2026-11-15 : 100 valides ; uefi.org et modbus.org renvoient 403 aux clients automatisés (page de protection anti-robot pour uefi.org), non vérifiables automatiquement |
 | RGPD art. 33 : notification sous 72 h (I, M) | EUR-Lex, règlement (UE) 2016/679 | Vérifié le 2026-11-15 |
 | NIS2 : alerte précoce sous 24 h (M) | EUR-Lex, directive (UE) 2022/2555 | Vérifié le 2026-11-15 ; seuils d’assujettissement et transpositions nationales non revérifiés |
 | DORA applicable depuis le 17 janvier 2025 (M) | EUR-Lex, règlement (UE) 2022/2554 | Vérifié le 2026-11-15 |
 | NIST CSF 2.0 ajoute la gouvernance (fonction « Govern ») (M) | Communiqué NIST de février 2024 | Vérifié le 2026-11-15 |
-| ISO/IEC 27001:2022, annexe A de 93 mesures (M) | ISO | Non revérifié |
+| ISO/IEC 27001:2022, annexe A de 93 mesures (M) | Sources secondaires concordantes (cabinets et éditeurs) ; la page iso.org renvoie 403 aux clients automatisés | Non vérifié à la source primaire (norme payante, page ISO inaccessible) ; 93 mesures en 4 thèmes confirmé par plusieurs sources secondaires le 2026-11-15 |
 | CVSS 4.0 version la plus récente (H) | FIRST | Vérifié le 2026-11-15 |
 | Pod Security Standards : privileged / baseline / restricted (L) | Documentation Kubernetes | Vérifié le 2026-11-15 |
 | Événements Windows 4624, 4625, 4732, 4740, 4768, 4769, 4771, 4698 (D, I, J, labos) | Microsoft Learn (titres des pages d’événements) | Vérifié le 2026-11-15 |
-| Événements Windows 4728, 7045, 1102 | Microsoft Learn | Non revérifié (page 4728 introuvable à l’adresse attendue) |
+| Événements Windows 4728, 1102, 4697, 4720 (D, I, J) | Microsoft Learn : page « Audit Security Group Management » (4728), pages d’événements 1102, 4697, 4720 | Vérifié le 2026-11-15 |
+| Événement Windows 7045 (installation de service, journal Système) (I, J) | Microsoft Learn | Non vérifié (pas de page de référence Microsoft trouvée) |
 | Image distroless nodejs24-debian12 du Dockerfile (L) | Registre gcr.io | Vérifié le 2026-11-15 (dépôt existant) |
-| Exigence ETSI EN 303 645 « pas de mot de passe universel par défaut » (N) | ETSI | Non revérifié |
+| Exigence ETSI EN 303 645 « pas de mot de passe universel par défaut » (N) | ETSI EN 303 645 V3.1.3, disposition 5.1-1 (PDF officiel etsi.org) | Vérifié le 2026-11-15 |
+| Identifiants d’événements Sysmon 1, 3, 7, 8, 10, 11, 13, 22 (D) | Page Sysmon de Microsoft Sysinternals | Vérifié le 2026-11-15 |
+| Stratégie d’exécution PowerShell : « pas une frontière de sécurité » (D) | Microsoft Learn, about_Execution_Policies | Vérifié le 2026-11-15 |
+| TLP 2.0 : définitions de TLP:AMBER et TLP:AMBER+STRICT (I) | FIRST | Vérifié le 2026-11-15 |
+| UAC non considérée comme une frontière de sécurité (D) | MSRC, Windows Security Servicing Criteria (UAC classée « defense-in-depth ») | Vérifié le 2026-11-15 |
+| Plugins Volatility 3 et commandes The Sleuth Kit (J) | Documentations des projets | Non vérifié lors de cette révision (rédigé d’après la pratique) |
 
 Toute contribution qui vérifie une ligne « non vérifié » doit indiquer la source consultée et la date.
