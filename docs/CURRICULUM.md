@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 285 |
-| Cours complets | 29 |
-| Questions de cours (avec correction) | 465 |
+| Sujets abordés dans au moins un cours (déclaratif) | 302 |
+| Cours complets | 32 |
+| Questions de cours (avec correction) | 513 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 27 |
+| Évaluations transversales, examens blancs et finaux | 30 |
 
 ## Par discipline
 
@@ -27,7 +27,7 @@
 | D. Windows et Windows Server | 2 | 2, 3 | 20 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
 | F. Sécurité Web | 2 | 2, 3 | 22 / 27 |
-| G. Programmation et sécurité du code | 1 | 3 | 16 / 23 |
+| G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
 | H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
 | J. Forensique numérique | 2 | 2, 3 | 16 / 17 |
@@ -35,9 +35,9 @@
 | L. Sécurité Cloud | 3 | 2, 3 | 18 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 2 | 2, 3 | 16 / 21 |
-| O. Identité et contrôle d’accès | 1 | 3 | 13 / 16 |
+| O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
 | P. Sécurité avancée et recherche | 1 | 4 | 6 / 18 |
-| Q. Intelligence artificielle et cybersécurité | 1 | 3 | 9 / 16 |
+| Q. Intelligence artificielle et cybersécurité | 2 | 3 | 16 / 16 |
 | R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
 
 ## Cours
@@ -55,6 +55,7 @@
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 100 min | 5 | 16 | 2 | 6 |
+| Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
@@ -69,8 +70,10 @@
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 85 min | 3 | 16 | 2 | 4 |
+| Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 85 min | 5 | 16 | 2 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 4 |
+| Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 85 min | 4 | 16 | 2 | 4 |
 | Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 50 min | 3 | 16 | 2 | 4 |
 
@@ -99,13 +102,13 @@
 | Administrateur systèmes et réseaux sécurité | 8 | 5 |
 | Analyste SOC | 9 | 4 |
 | Pentesteur | 8 | 5 |
-| Ingénieur cybersécurité | 11 | 3 |
+| Ingénieur cybersécurité | 12 | 3 |
 | Investigation numérique (forensic) | 8 | 4 |
-| Sécurité cloud | 7 | 1 |
+| Sécurité cloud | 8 | 1 |
 | Gouvernance, risques et conformité (GRC) | 12 | 1 |
-| DevSecOps | 12 | 3 |
+| DevSecOps | 14 | 3 |
 | Sécurité industrielle et IoT | 7 | 3 |
-| Expert en sécurité | 10 | 3 |
+| Expert en sécurité | 11 | 3 |
 
 ## Sujets non couverts (« à venir »)
 
@@ -114,12 +117,9 @@
 - **C. Linux** : Architecture Linux, Distributions, Bash, Gestion des paquets, iptables, Automatisation
 - **D. Windows et Windows Server** : DNS Windows, DHCP Windows, PKI, Certificats, Sécurisation de Windows Server
 - **F. Sécurité Web** : XXE, RFI, Clickjacking, Race conditions, OWASP Testing Guide
-- **G. Programmation et sécurité du code** : Python, JavaScript, TypeScript, Java, Bash, PowerShell, Structures de données
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
 - **L. Sécurité Cloud** : Azure, Google Cloud Platform, Sécurité réseau Cloud, Sécurité serverless, Sécurité des environnements hybrides
 - **N. Sécurité industrielle et IoT** : Profinet, Automobile, ISO/SAE 21434, UNECE R155, UNECE R156
-- **O. Identité et contrôle d’accès** : PAM, Secrets management, Gestion des comptes à privilèges
 - **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing
-- **Q. Intelligence artificielle et cybersécurité** : Fondamentaux de l'IA, Machine Learning, Deep Learning, Model inversion, Adversarial Machine Learning, Détection assistée par IA, Automatisation défensive

@@ -9,7 +9,7 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | bcrypt : facteur de coût ≥ 10, limite de 72 octets (E) | idem | Vérifié le 2026-11-15 |
 | CISSP : 5 ans d’expérience (R) | ISC2 | Vérifié le 2026-11-15 |
 | Cyber Resilience Act : règlement (UE) 2024/2847, application jusqu’en 2027 (M, N) | EUR-Lex | Vérifié le 2026-11-15 (numéro et échéance 2027) |
-| Liens des ressources (116) | `node scripts/linkcheck.mjs` (statut HTTP + titre de page) | Vérifiés le 2026-11-15 : 114 valides ; uefi.org et modbus.org renvoient 403 aux clients automatisés (page de protection anti-robot pour uefi.org), non vérifiables automatiquement |
+| Liens des ressources (126) | `node scripts/linkcheck.mjs` (statut HTTP + titre de page) | Vérifiés le 2026-11-15 : 124 valides ; uefi.org et modbus.org renvoient 403 aux clients automatisés (page de protection anti-robot pour uefi.org), non vérifiables automatiquement |
 | RGPD art. 33 : notification sous 72 h (I, M) | EUR-Lex, règlement (UE) 2016/679 | Vérifié le 2026-11-15 |
 | NIS2 : alerte précoce sous 24 h (M) | EUR-Lex, directive (UE) 2022/2555 | Vérifié le 2026-11-15 ; seuils d’assujettissement et transpositions nationales non revérifiés |
 | DORA applicable depuis le 17 janvier 2025 (M) | EUR-Lex, règlement (UE) 2022/2554 | Vérifié le 2026-11-15 |
@@ -33,6 +33,7 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | OWASP API Security Top 10 2023 : API1 = Broken Object Level Authorization (F) | OWASP | Vérifié le 2026-11-15 |
 | Guide d’hygiène informatique de l’ANSSI : 42 mesures (M) | cyber.gouv.fr (guide « 42 mesures ») | Vérifié le 2026-11-15 |
 | CIS Controls : version 8.1 en vigueur (M) | cisecurity.org | Vérifié le 2026-11-15 ; contenu des mesures 1 et 2 (inventaires) et groupes IG1 à IG3 non revérifiés |
+| Cours G (code sûr), O (comptes à privilèges) et Q (IA pour la défense) : comportements des langages, fonctions PAM, typologie des attaques contre les modèles | Documentations citées en ressources (liens vérifiés) | Rédigés d’après la pratique ; aucun fait daté ou chiffré n’a été confronté individuellement à sa source |
 | Plugins Volatility 3 et commandes The Sleuth Kit (J) | Documentations des projets | Non vérifié lors de cette révision (rédigé d’après la pratique) |
 
 Toute contribution qui vérifie une ligne « non vérifié » doit indiquer la source consultée et la date.

@@ -60,7 +60,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Concevoir une architecture segmentée et filtrée', 'Choisir les bons mécanismes cryptographiques et d’authentification', 'Sécuriser cloud et conteneurs', 'Concevoir la détection', 'Justifier ses choix par l’analyse de risques'],
     prerequisites: ['Expérience technique en systèmes, réseaux ou développement'],
     coreModules: ['B', 'E', 'O', 'L'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('e-chiffrement-tls-pki'), c('o-identite-mfa-oauth'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('i-soc-detection'), c('m-risques-conformite')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('e-chiffrement-tls-pki'), c('o-identite-mfa-oauth'), c('o-comptes-privileges-pam'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('i-soc-detection'), c('m-risques-conformite')],
   },
   {
     id: 'forensic',
@@ -80,7 +80,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Appliquer le modèle de responsabilité partagée', 'Évaluer et réduire des politiques IAM', 'Durcir conteneurs et clusters Kubernetes', 'Sécuriser le pipeline de déploiement', 'Mettre en place l’authentification forte et la fédération'],
     prerequisites: ['Linux de base', 'Notions de réseau'],
     coreModules: ['L', 'O'],
-    steps: [c('a-systemes-fondamentaux'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth')],
+    steps: [c('a-systemes-fondamentaux'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('o-comptes-privileges-pam')],
   },
   {
     id: 'grc',
@@ -100,7 +100,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Corriger injections et vulnérabilités mémoire', 'Stocker correctement mots de passe et secrets', 'Intégrer SAST, SCA, IaC et secrets au pipeline', 'Durcir conteneurs et Kubernetes', 'Sécuriser les applications d’IA'],
     prerequisites: ['Pratique d’un langage de programmation et de Git'],
     coreModules: ['F', 'G', 'L'],
-    steps: [c('a-systemes-fondamentaux'), c('f-injections-xss'), l('sqli-lab'), c('f-acces-sessions-ssrf'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('e-chiffrement-tls-pki'), c('o-identite-mfa-oauth'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('c-linux-permissions'), c('l-cloud-iam'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('q-securite-llm')],
+    steps: [c('a-systemes-fondamentaux'), c('f-injections-xss'), l('sqli-lab'), c('f-acces-sessions-ssrf'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('e-chiffrement-tls-pki'), c('o-identite-mfa-oauth'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('g-code-sur-langages'), c('c-linux-permissions'), c('l-cloud-iam'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('q-securite-llm'), c('q-ia-defense-ml')],
   },
   {
     id: 'securite-industrielle',
@@ -120,7 +120,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Analyser des chaînes d’attaque Active Directory', 'Comprendre et prévenir les vulnérabilités mémoire', 'Rechercher des vulnérabilités par fuzzing et en conduire la divulgation', 'Auditer une intégration OAuth/OIDC', 'Évaluer la sécurité d’agents IA'],
     prerequisites: ['Avoir validé un parcours intermédiaire (administrateur, SOC, pentesteur ou DevSecOps)'],
     coreModules: ['D', 'G', 'P', 'Q'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('p-fuzzing-recherche'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('f-injections-xss'), c('q-securite-llm'), c('h-pentest-methodologie'), l('osint-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('p-fuzzing-recherche'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('f-injections-xss'), c('q-securite-llm'), c('q-ia-defense-ml'), c('h-pentest-methodologie'), l('osint-lab')],
   },
 ];
 

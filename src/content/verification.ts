@@ -31,6 +31,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'f-injections-xss': sheet(['OWASP Top 10', 'OWASP Cheat Sheets', 'CSP niveau 3 (MDN)'], ['Édition en vigueur de l’OWASP Top 10']),
   'f-acces-sessions-ssrf': sheet(['OWASP Top 10 (2021)', 'OWASP API Security Top 10 (2023)', 'OWASP ASVS', 'Cheat Sheets OWASP SSRF et CSRF', 'MDN Set-Cookie'], ['Comportement par défaut de SameSite selon les navigateurs', 'Édition en vigueur de l’OWASP Top 10 et de l’ASVS']),
   'g-vulnerabilites-memoire': sheet(['SEI CERT C', 'The Case for Memory Safe Roadmaps (CISA, NSA, FBI et partenaires)', 'Règles ANSSI pour le langage C'], ['Niveaux de FORTIFY_SOURCE et protections des compilateurs']),
+  'g-code-sur-langages': sheet(['OWASP Cheat Sheets (validation, désérialisation, injection de commandes)', 'Documentation Python (pickle, secrets)', 'MDN (pollution de prototype)', 'OWASP ReDoS'], ['API et options des bibliothèques de validation', 'Règles des outils d’analyse statique']),
   'h-pentest-methodologie': sheet(['Référentiel PASSI (ANSSI)', 'OWASP WSTG', 'NIST SP 800-115', 'CVSS v4.0'], ['Version de CVSS', 'Catalogue CISA KEV']),
   'i-soc-detection': sheet(['MITRE ATT&CK', 'Sigma', 'NIST SP 800-61 Rév. 3'], ['Techniques ATT&CK (identifiants révisés à chaque version)']),
   'i-threat-hunting': sheet(['TLP 2.0 (FIRST)', 'Pyramid of Pain (D. Bianco, 2013)', 'MITRE ATT&CK (T1053.005, T1136.001)', 'STIX 2.1', 'Zeek et Suricata'], ['Fonctionnalités des plateformes XDR, NDR et SOAR', 'Empreintes TLS (JA3, JA4)']),
@@ -45,7 +46,9 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'n-ics-modbus': sheet(['IEC 62443', 'NIST SP 800-82 Rév. 3', 'MITRE ATT&CK for ICS', 'Spécification Modbus'], []),
   'n-iot-firmware': sheet(['ETSI EN 303 645', 'Règlement (UE) 2024/2847 (CRA, échéance 2027 vérifiée le ' + D + ')', 'NIST IR 8259'], ['Calendrier et normes harmonisées du Cyber Resilience Act']),
   'o-identite-mfa-oauth': sheet(['RFC 9700 (OAuth 2.0 BCP)', 'NIST SP 800-207', 'Recommandations ANSSI authentification'], ['Adoption des passkeys et recommandations MFA']),
+  'o-comptes-privileges-pam': sheet(['Recommandations ANSSI administration sécurisée', 'Microsoft Learn (accès privilégié, gMSA)', 'OWASP Secrets Management Cheat Sheet'], ['Fonctionnalités des solutions PAM et d’accès juste-à-temps', 'Identités de charge de travail des fournisseurs cloud']),
   'p-fuzzing-recherche': sheet(['libFuzzer (LLVM)', 'AFL++', 'RFC 9116 (security.txt)'], []),
   'q-securite-llm': sheet(['OWASP Top 10 for LLM Applications', 'MITRE ATLAS', 'Recommandations ANSSI IA générative'], ['Domaine en évolution rapide : techniques d’attaque et de défense, AI Act']),
+  'q-ia-defense-ml': sheet(['MITRE ATLAS', 'NIST AI RMF 1.0', 'NIST AI 100-2', 'Recommandations ANSSI IA générative', 'Règlement (UE) 2024/1689 (AI Act)'], ['Taxonomie des attaques contre l’IA (NIST AI 100-2)', 'Calendrier d’application de l’AI Act']),
   'r-certifications-preparation': sheet(['Sites officiels ISC2 (exigence CISSP de 5 ans vérifiée le ' + D + '), CompTIA, OffSec'], ['Contenu et modalités des examens de certification']),
 };
