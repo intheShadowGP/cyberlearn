@@ -5,6 +5,7 @@ import { MODULES } from './catalog';
 import { DIAGRAMS } from '../components/diagrams';
 import { PATHS } from './paths';
 import { EXAM_BY_ID } from './exams';
+import { VERIFICATION } from './verification';
 
 const metas = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { eager: true });
 const bodies = import.meta.glob<{ body: CourseBody }>('./courses/*/body.ts', { eager: true });
@@ -87,6 +88,15 @@ describe('contenu pédagogique', () => {
       const graded = courseIds.reduce((n, id) => n + set.courses.find((c) => c.meta.id === id)!.body.questions.filter((q) => q.type !== 'open').length, 0);
       expect(graded, `${p.id} : banque de l’examen final ≥ 2 × taille`).toBeGreaterThanOrEqual(exam!.size * 2);
       expect(new Set(p.steps.map((s) => s.id)).size, `${p.id} : étapes uniques`).toBe(p.steps.length);
+    }
+  });
+
+  it('chaque cours a une fiche de vérification', () => {
+    for (const c of set.courses) {
+      const v = VERIFICATION[c.meta.id];
+      expect(v, c.meta.id).toBeDefined();
+      expect(v!.versions.length, c.meta.id).toBeGreaterThan(0);
+      expect(v!.revisedOn).toMatch(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/);
     }
   });
 

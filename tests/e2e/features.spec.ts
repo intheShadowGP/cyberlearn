@@ -45,7 +45,7 @@ test('glossaire : notions extraites des leçons, recherche, sigles, lien vers le
 test('recherche interne : cours, notions, laboratoires, parcours @cross', async ({ page }) => {
   await page.goto('./#/recherche');
   await page.getByLabel(/Cours, notions/).fill('kerberos');
-  await expect(page.getByRole('heading', { name: 'Cours' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Cours', exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: /Active Directory : Kerberos/ })).toBeVisible();
   await page.getByLabel(/Cours, notions/).fill('modbus');
   await expect(page.getByRole('heading', { name: 'Laboratoires' })).toBeVisible();
@@ -68,7 +68,7 @@ test('révisions : questions ratées, répétition espacée, discipline, flashca
   await page.getByRole('button', { name: 'Je savais' }).click();
   await page.getByRole('button', { name: 'Arrêter la session' }).click();
   // La carte réussie quitte la liste du jour (boîte 2, dans 3 jours).
-  await page.getByLabel('Discipline').selectOption('B');
+  await page.getByLabel('Discipline', { exact: true }).selectOption('B');
   await page.getByRole('button', { name: '10 questions' }).click();
   for (let i = 0; i < 10; i++) {
     await page.getByRole('button', { name: 'Afficher la réponse' }).click();
@@ -83,7 +83,7 @@ test('révisions : questions ratées, répétition espacée, discipline, flashca
 
 test('profil, XP issue d’activités réelles, parcours suivis (plusieurs), compétences', async ({ page }) => {
   await page.goto('./#/profil');
-  await expect(page.getByText('0 XP')).toBeVisible();
+  await expect(page.getByText('0 XP', { exact: true })).toBeVisible();
   await page.getByLabel('Pseudonyme').fill('Ada <b>');
   await page.getByRole('button', { name: 'Enregistrer' }).click();
   await expect(page.getByText('Pseudonyme enregistré localement.')).toBeVisible();
@@ -91,9 +91,10 @@ test('profil, XP issue d’activités réelles, parcours suivis (plusieurs), com
   await expect(page.getByLabel('Pseudonyme')).toHaveValue('Ada b');
 
   await page.goto('./#/cours/b-osi-tcpip');
-  await page.locator('.read-toggle input').first().check();
+  await page.locator('.read-toggle input').first().click();
+  await expect(page.locator('.read-toggle input').first()).toBeChecked();
   await page.goto('./#/profil');
-  await expect(page.getByText('10 XP')).toBeVisible();
+  await expect(page.getByText('10 XP', { exact: true })).toBeVisible();
   await expect(page.locator('.badge-card.earned')).toContainText('Premiers pas');
 
   for (const p of ['analyste-soc', 'cloud-security']) {
@@ -175,8 +176,9 @@ test('responsive : aucune page ne déborde horizontalement sur mobile', async ({
 
 test('filtres du catalogue et des laboratoires', async ({ page }) => {
   await page.goto('./#/catalogue');
+  await expect(page.locator('.card-grid > li').first()).toBeVisible();
   const all = await page.locator('.card-grid > li').count();
-  await page.getByLabel('Discipline').selectOption('L');
+  await page.getByLabel('Discipline', { exact: true }).selectOption('L');
   await expect(page.locator('.card-grid > li')).toHaveCount(3);
   await page.getByLabel('Niveau').selectOption('3');
   await expect(page.locator('.card-grid > li')).toHaveCount(2);

@@ -93,8 +93,8 @@ export default function GlossaryPage() {
               const first = i === 0 || normalizeShort(list[i - 1]?.term ?? '').charAt(0).toUpperCase() !== letter;
               return (
                 <div key={e.id} id={`terme-${e.id}`} className={`definition ${focus === e.id ? 'focused' : ''}`}>
-                  {first && <span id={`lettre-${letter}`} className="sr-only">{letter}</span>}
                   <dt>
+                    {first && <span id={`lettre-${letter}`} className="sr-only">{letter} </span>}
                     {e.term} {e.acronym && <span className="badge">sigle</span>}{' '}
                     <span className="muted">— {MODULE_BY_ID[e.module].short}</span>
                   </dt>

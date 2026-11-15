@@ -1,0 +1,44 @@
+/**
+ * Fiche de vérification de chaque cours (section 11 du cahier des charges).
+ * Le libellé décrit exactement ce qui a été fait : la rédaction et la vérification
+ * automatique des liens ; certains faits sensibles aux versions ont été confrontés à
+ * leur source (liste dans docs/FACT-CHECK.md). Aucune relecture par un tiers n'est revendiquée.
+ */
+export interface VerificationSheet {
+  /** Date de rédaction ou de dernière révision du contenu. */
+  revisedOn: string;
+  /** Date de la dernière vérification automatique des liens de ressources. */
+  linksCheckedOn: string;
+  /** Versions des référentiels utilisés. */
+  versions: string[];
+  /** Notions susceptibles d'évoluer, à revérifier régulièrement. */
+  evolving: string[];
+}
+
+const D = '2026-11-15';
+const sheet = (versions: string[], evolving: string[]): VerificationSheet => ({ revisedOn: D, linksCheckedOn: D, versions, evolving });
+
+export const VERIFICATION: Record<string, VerificationSheet> = {
+  'a-systemes-fondamentaux': sheet(['Spécification UEFI (UEFI Forum)', 'NIST SP 800-147'], ['Mécanismes de démarrage sécurisé des constructeurs']),
+  'b-osi-tcpip': sheet(['RFC 9293 (TCP)', 'RFC 768 (UDP)', 'RFC 826 (ARP)'], []),
+  'b-ipv4-subnetting': sheet(['RFC 4632 (CIDR)', 'RFC 1918', 'RFC 3021', 'RFC 6598', 'RFC 5737'], []),
+  'c-linux-permissions': sheet(['Guide ANSSI GNU/Linux', 'Recommandations ANSSI OpenSSH', 'CIS Benchmarks Linux'], ['Options par défaut d’OpenSSH selon les distributions']),
+  'd-ad-authentification': sheet(['Recommandations ANSSI Active Directory', 'MITRE ATT&CK (T1558.003)', 'Windows LAPS'], ['Dépréciation progressive de NTLM et de RC4 par Microsoft']),
+  'e-hachage-mots-de-passe': sheet(['OWASP Password Storage Cheat Sheet (paramètres vérifiés le ' + D + ')', 'RFC 9106 (Argon2)', 'RFC 2104 (HMAC)'], ['Paramètres recommandés d’Argon2id et nombre d’itérations PBKDF2']),
+  'f-injections-xss': sheet(['OWASP Top 10', 'OWASP Cheat Sheets', 'CSP niveau 3 (MDN)'], ['Édition en vigueur de l’OWASP Top 10']),
+  'g-vulnerabilites-memoire': sheet(['SEI CERT C', 'The Case for Memory Safe Roadmaps (CISA, NSA, FBI et partenaires)', 'Règles ANSSI pour le langage C'], ['Niveaux de FORTIFY_SOURCE et protections des compilateurs']),
+  'h-pentest-methodologie': sheet(['Référentiel PASSI (ANSSI)', 'OWASP WSTG', 'NIST SP 800-115', 'CVSS v4.0'], ['Version de CVSS', 'Catalogue CISA KEV']),
+  'i-soc-detection': sheet(['MITRE ATT&CK', 'Sigma', 'NIST SP 800-61 Rév. 3'], ['Techniques ATT&CK (identifiants révisés à chaque version)']),
+  'j-forensique-principes': sheet(['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], ['Artefacts Windows selon les versions du système']),
+  'k-malware-analyse': sheet(['YARA', 'MITRE ATT&CK — Software'], ['Familles de malwares et tendances (CERT-FR)']),
+  'l-cloud-iam': sheet(['Logique d’évaluation IAM AWS', 'SecNumCloud', 'CIS Foundations Benchmarks'], ['Services et noms de produits des fournisseurs cloud']),
+  'l-devsecops-pipeline': sheet(['SLSA (OpenSSF)', 'OWASP Top 10 CI/CD', 'NIST SP 800-218 (SSDF)'], ['Fonctionnalités de sécurité de GitHub Actions']),
+  'l-conteneurs-kubernetes': sheet(['Pod Security Standards (Kubernetes)', 'CIS Kubernetes Benchmark', 'Guide NSA/CISA Kubernetes 1.2'], ['API et profils de sécurité de Kubernetes selon les versions']),
+  'm-risques-conformite': sheet(['ISO/IEC 27001:2022', 'NIST CSF 2.0', 'Guide EBIOS Risk Manager', 'Directive NIS2 (UE) 2022/2555', 'RGPD art. 33'], ['Transpositions nationales de NIS2', 'Actes délégués de DORA et du CRA']),
+  'n-ics-modbus': sheet(['IEC 62443', 'NIST SP 800-82 Rév. 3', 'MITRE ATT&CK for ICS', 'Spécification Modbus'], []),
+  'n-iot-firmware': sheet(['ETSI EN 303 645', 'Règlement (UE) 2024/2847 (CRA, échéance 2027 vérifiée le ' + D + ')', 'NIST IR 8259'], ['Calendrier et normes harmonisées du Cyber Resilience Act']),
+  'o-identite-mfa-oauth': sheet(['RFC 9700 (OAuth 2.0 BCP)', 'NIST SP 800-207', 'Recommandations ANSSI authentification'], ['Adoption des passkeys et recommandations MFA']),
+  'p-fuzzing-recherche': sheet(['libFuzzer (LLVM)', 'AFL++', 'RFC 9116 (security.txt)'], []),
+  'q-securite-llm': sheet(['OWASP Top 10 for LLM Applications', 'MITRE ATLAS', 'Recommandations ANSSI IA générative'], ['Domaine en évolution rapide : techniques d’attaque et de défense, AI Act']),
+  'r-certifications-preparation': sheet(['Sites officiels ISC2 (exigence CISSP de 5 ans vérifiée le ' + D + '), CompTIA, OffSec'], ['Contenu et modalités des examens de certification']),
+};

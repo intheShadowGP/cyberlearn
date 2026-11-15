@@ -1,0 +1,121 @@
+# Inventaire du curriculum
+
+> Fichier généré par `npm run inventory` à partir du contenu ; un test vérifie qu’il est à jour.
+> Une discipline **cartographiée** n’est pas une discipline **enseignée en profondeur** : voir le nombre de cours par discipline.
+
+## Synthèse
+
+| Élément | Nombre |
+| --- | --- |
+| Disciplines cartographiées | 18 |
+| Disciplines avec au moins un cours | 18 |
+| Sujets cartographiés | 403 |
+| Sujets abordés dans au moins un cours (déclaratif) | 209 |
+| Cours complets | 22 |
+| Questions de cours (avec correction) | 353 |
+| Laboratoires | 12 |
+| Parcours | 11 |
+| Évaluations transversales, examens blancs et finaux | 20 |
+
+## Par discipline
+
+| Discipline | Cours | Niveaux | Sujets abordés / cartographiés |
+| --- | --- | --- | --- |
+| A. Fondamentaux de l'informatique | 1 | 1 | 11 / 16 |
+| B. Réseaux informatiques | 2 | 1, 2 | 9 / 36 |
+| C. Linux | 1 | 2 | 7 / 22 |
+| D. Windows et Windows Server | 1 | 3 | 10 / 25 |
+| E. Cryptographie | 1 | 2 | 9 / 22 |
+| F. Sécurité Web | 1 | 2 | 7 / 27 |
+| G. Programmation et sécurité du code | 1 | 3 | 16 / 23 |
+| H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
+| I. Défense et SOC | 1 | 2 | 14 / 26 |
+| J. Forensique numérique | 1 | 2 | 8 / 17 |
+| K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
+| L. Sécurité Cloud | 3 | 2, 3 | 18 / 23 |
+| M. Gouvernance et conformité | 1 | 2 | 15 / 24 |
+| N. Sécurité industrielle et IoT | 2 | 2, 3 | 16 / 21 |
+| O. Identité et contrôle d’accès | 1 | 3 | 13 / 16 |
+| P. Sécurité avancée et recherche | 1 | 4 | 6 / 18 |
+| Q. Intelligence artificielle et cybersécurité | 1 | 3 | 9 / 16 |
+| R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
+
+## Cours
+
+| Cours | Discipline | Niveau | Durée | Sections | Questions | Exercices | Références |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 70 min | 4 | 16 | 2 | 3 |
+| Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 60 min | 4 | 16 | 2 | 4 |
+| Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 75 min | 6 | 17 | 3 | 4 |
+| Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 80 min | 5 | 16 | 2 | 4 |
+| Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
+| Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
+| Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
+| Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
+| SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
+| Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
+| Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
+| Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 90 min | 3 | 16 | 2 | 4 |
+| DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
+| Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
+| Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 85 min | 3 | 16 | 2 | 4 |
+| Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
+| Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 4 |
+| Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 85 min | 4 | 16 | 2 | 4 |
+| Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 50 min | 3 | 16 | 2 | 4 |
+
+## Laboratoires
+
+| Laboratoire | Catégorie | Niveau | Cours liés |
+| --- | --- | --- | --- |
+| Atelier empreintes, HMAC et dérivation de clés (`hash-lab`) | crypto | 2 | e-hachage-mots-de-passe |
+| Atelier sous-réseaux (`subnet-lab`) | reseau | 2 | b-ipv4-subnetting |
+| Audit d’un serveur Linux compromis (`linux-audit-lab`) | linux | 2 | c-linux-permissions |
+| Chasse à la persistance sur un poste Windows (Sysmon) (`windows-persistence-lab`) | windows | 2 | a-systemes-fondamentaux, k-malware-analyse |
+| Chasse dans auth.log : force brute SSH (`log-hunt-lab`) | soc | 2 | i-soc-detection |
+| Chronologie multi-sources d’une infection (`timeline-lab`) | forensic | 2 | j-forensique-principes |
+| Évaluateur de politiques IAM (`iam-policy-lab`) | cloud | 2 | l-cloud-iam |
+| Injection SQL sur une page de connexion (simulation) (`sqli-lab`) | web | 2 | f-injections-xss |
+| Reconnaissance OSINT d’une entreprise fictive (`osint-lab`) | osint | 2 | h-pentest-methodologie |
+| Trames Modbus suspectes dans une station de pompage (`modbus-lab`) | ics | 2 | n-ics-modbus |
+| Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
+| Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
+
+## Parcours
+
+| Parcours | Cours | Laboratoires |
+| --- | --- | --- |
+| Parcours débutant | 6 | 3 |
+| Administrateur systèmes et réseaux sécurité | 6 | 5 |
+| Analyste SOC | 6 | 4 |
+| Pentesteur | 7 | 5 |
+| Ingénieur cybersécurité | 10 | 3 |
+| Investigation numérique (forensic) | 6 | 4 |
+| Sécurité cloud | 7 | 1 |
+| Gouvernance, risques et conformité (GRC) | 11 | 1 |
+| DevSecOps | 10 | 3 |
+| Sécurité industrielle et IoT | 7 | 3 |
+| Expert en sécurité | 10 | 3 |
+
+## Sujets non couverts (« à venir »)
+
+- **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
+- **B. Réseaux informatiques** : Adressage IPv6, VLAN, Routage, Switching, DNS, DHCP, NAT, PAT, VPN, Proxy, Reverse proxy, Pare-feu, IDS, IPS, Wi-Fi, WPA2, WPA3, 802.1X, RADIUS, TACACS+, BGP, OSPF, MPLS, SD-WAN, Analyse de paquets, Wireshark, Architecture réseau sécurisée
+- **C. Linux** : Architecture Linux, Distributions, Bash, Processus, Services, systemd, Gestion des paquets, Journaux, Audit système, AppArmor, SELinux, iptables, nftables, Analyse système, Automatisation
+- **D. Windows et Windows Server** : Architecture Windows, DNS Windows, DHCP Windows, PowerShell, NTFS, Permissions, Windows Defender, Windows Firewall, Sysmon, BitLocker, PKI, Certificats, Sécurisation de Windows Server, Hardening, Sécurité des postes de travail
+- **E. Cryptographie** : Chiffrement symétrique, Chiffrement asymétrique, AES, RSA, ECC, Signatures numériques, Certificats, PKI, TLS, Échange de clés, Perfect Forward Secrecy, Gestion des secrets, Cryptographie post-quantique
+- **F. Sécurité Web** : HTTPS, Cookies, Sessions, CORS, SameSite, CSRF, SSRF, XXE, Path Traversal, LFI, RFI, IDOR, Broken Access Control, Authentication flaws, Session fixation, Clickjacking, Race conditions, Sécurisation des API, OWASP ASVS, OWASP Testing Guide
+- **G. Programmation et sécurité du code** : Python, JavaScript, TypeScript, Java, Bash, PowerShell, Structures de données
+- **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
+- **I. Défense et SOC** : SOAR, XDR, NDR, IDS/IPS, Threat Intelligence, Threat Hunting, Alerting, Analyse réseau, Investigation, YARA, Analyse comportementale, Détection d'anomalies
+- **J. Forensique numérique** : Analyse système de fichiers, Analyse réseau, Artefacts Linux, Analyse de journaux, Analyse de malware, Volatility, Autopsy, Sleuth Kit, FTK Imager
+- **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
+- **L. Sécurité Cloud** : Azure, Google Cloud Platform, Sécurité réseau Cloud, Sécurité serverless, Sécurité des environnements hybrides
+- **M. Gouvernance et conformité** : NIST SP 800, CIS Controls, ANSSI, Gestion des audits, Classification des données, Gestion des fournisseurs, Sensibilisation, Gestion des vulnérabilités, Gestion des actifs
+- **N. Sécurité industrielle et IoT** : Profinet, Automobile, ISO/SAE 21434, UNECE R155, UNECE R156
+- **O. Identité et contrôle d’accès** : PAM, Secrets management, Gestion des comptes à privilèges
+- **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing
+- **Q. Intelligence artificielle et cybersécurité** : Fondamentaux de l'IA, Machine Learning, Deep Learning, Model inversion, Adversarial Machine Learning, Détection assistée par IA, Automatisation défensive

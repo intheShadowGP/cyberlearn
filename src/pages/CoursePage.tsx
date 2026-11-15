@@ -13,6 +13,7 @@ import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
 import { isUnlocked, missingPrerequisites, progressMap } from '../lib/unlock';
 import { usePageTitle } from '../lib/usePageTitle';
+import { VERIFICATION } from '../content/verification';
 import NotFoundPage from './NotFoundPage';
 
 export default function CoursePage() {
@@ -316,6 +317,18 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                 </>
               )}
             </section>
+
+            {VERIFICATION[meta.id] && (
+              <section aria-labelledby="verif-h" className="panel">
+                <h2 id="verif-h" className="h3">Fiche de vérification</h2>
+                <ul>
+                  <li>Contenu rédigé ou révisé le {VERIFICATION[meta.id]!.revisedOn} ; liens des ressources vérifiés automatiquement le {VERIFICATION[meta.id]!.linksCheckedOn}.</li>
+                  <li>Référentiels : {VERIFICATION[meta.id]!.versions.join(' · ')}.</li>
+                  {VERIFICATION[meta.id]!.evolving.length > 0 && <li>Notions susceptibles d’évoluer : {VERIFICATION[meta.id]!.evolving.join(' · ')}.</li>}
+                </ul>
+                <p className="muted">Aucune relecture par un expert tiers n’est revendiquée. Signalez toute erreur via le dépôt du projet.</p>
+              </section>
+            )}
 
             <section aria-labelledby="res-h" className="resources">
               <h2 id="res-h">Ressources complémentaires</h2>
