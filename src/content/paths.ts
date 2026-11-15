@@ -30,7 +30,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Segmenter un réseau et auditer des règles de filtrage', 'Durcir un serveur Linux et SSH', 'Protéger Active Directory (tiers, LAPS, Kerberos)', 'Détecter une persistance sur un poste Windows', 'Appliquer le moindre privilège dans le cloud'],
     prerequisites: ['Utilisation courante de Windows et de la ligne de commande'],
     coreModules: ['B', 'C', 'D'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('b-commutation-vlan-ipv6'), c('b-routage-dns-dhcp-nat'), c('c-linux-permissions'), l('linux-audit-lab'), c('c-systemd-journaux-confinement'), c('d-windows-poste-durcissement'), c('d-ad-authentification'), l('ad-events-lab'), l('windows-persistence-lab'), c('l-cloud-iam'), l('iam-policy-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('b-commutation-vlan-ipv6'), c('b-routage-dns-dhcp-nat'), c('b-perimetre-vpn-wifi'), c('c-linux-permissions'), l('linux-audit-lab'), c('c-systemd-journaux-confinement'), c('d-windows-poste-durcissement'), c('d-ad-authentification'), l('ad-events-lab'), l('windows-persistence-lab'), c('l-cloud-iam'), l('iam-policy-lab')],
   },
   {
     id: 'analyste-soc',

@@ -1,0 +1,33 @@
+import type { CourseCorrections } from '../../types';
+
+export const corrections: CourseCorrections = {
+  courseId: 'b-perimetre-vpn-wifi',
+  questions: {
+    'pvw-q1': { type: 'single', correct: 'a', explanation: 'Le pare-feu à états tient une table des connexions : une règle autorisant une connexion sortante laisse automatiquement revenir ses réponses, sans ouvrir de règle entrante. Sans état, il faudrait autoriser explicitement le trafic de retour, bien plus risqué.' },
+    'pvw-q2': { type: 'single', correct: 'a', explanation: 'Le reverse proxy se place devant les serveurs publiés : il reçoit les requêtes entrantes, termine le TLS, répartit la charge et héberge souvent un WAF. Le proxy direct, lui, filtre le trafic sortant des clients internes.' },
+    'pvw-q3': { type: 'truefalse', correct: false, explanation: 'Le WAF bloque des attaques connues et apporte une défense en profondeur, mais il se contourne et ne corrige pas la cause. Le code doit rester sécurisé : validation des entrées, contrôle d’accès, requêtes paramétrées.' },
+    'pvw-q4': { type: 'multi', correct: ['a', 'b', 'c'], explanation: 'Refus par défaut, filtrage du sortant et journalisation forment la base d’un filtrage sérieux.', whyWrong: { d: 'Autoriser tout le sortant ouvre la voie à l’exfiltration et au rappel vers un serveur de commande.' } },
+    'pvw-q5': { type: 'single', correct: 'a', explanation: 'L’IDS observe une copie du trafic et alerte, sans pouvoir l’arrêter ; l’IPS est sur le chemin et peut bloquer, au prix d’un risque de faux positif qui coupe du trafic légitime.' },
+    'pvw-q6': { type: 'truefalse', correct: true, explanation: 'Étant en coupure, l’IPS applique ses décisions au trafic réel : une signature trop large peut bloquer une application légitime. D’où la mise au point progressive et le suivi des faux positifs.' },
+    'pvw-q7': { type: 'short', accepted: ['ip.addr == 203.0.113.7', 'ip.addr==203.0.113.7', 'ip.addr eq 203.0.113.7'], explanation: '`ip.addr == 203.0.113.7` conserve les paquets dont l’adresse source **ou** destination est cette adresse. Pour une direction précise, on utilise `ip.src` ou `ip.dst`.' },
+    'pvw-q8': {
+      type: 'open',
+      model: 'Le contenu est chiffré, mais la capture révèle les métadonnées : adresses et ports source et destination, volume et horodatage de chaque échange, durée et régularité des connexions, nom de serveur annoncé dans le handshake TLS (SNI), certificat présenté et empreinte de la négociation (JA3/JA4). On exploite ces éléments en cherchant la régularité (balise), les destinations récentes ou peu réputées, les volumes anormaux pour l’hôte, et en recoupant avec les journaux DNS et proxy. On peut aussi, dans un cadre maîtrisé et déclaré, déchiffrer le trafic via un proxy d’inspection TLS d’entreprise pour voir le contenu.',
+      criteria: ['Les métadonnées observables malgré le chiffrement sont citées (adresses, volumes, régularité, SNI/certificat).', 'Une méthode d’exploitation est donnée (régularité, réputation, recoupement avec d’autres journaux).', 'Au moins une limite ou une alternative (inspection TLS maîtrisée) est mentionnée.'],
+      explanation: 'Le chiffrement protège le contenu, pas le comportement : la forme des flux suffit souvent à détecter une activité malveillante.',
+    },
+    'pvw-q9': { type: 'single', correct: 'a', explanation: 'En tunnel complet, tout le trafic du poste traverse le VPN (l’entreprise filtre tout) ; en tunnel scindé, seul le trafic vers l’entreprise l’emprunte, le reste sort directement, ce qui expose davantage le poste.' },
+    'pvw-q10': { type: 'truefalse', correct: true, explanation: 'Les passerelles VPN sont des cibles de choix : plusieurs intrusions majeures ont exploité une faille non corrigée sur ce type d’équipement. Mises à jour prioritaires, MFA et surveillance des accès sont indispensables.' },
+    'pvw-q11': { type: 'single', correct: 'a', explanation: 'WPA3-Personnel remplace l’échange de WPA2 par SAE, qui empêche les attaques par dictionnaire menées hors ligne à partir d’une capture, et impose la protection des trames de gestion.' },
+    'pvw-q12': { type: 'multi', correct: ['a', 'b', 'c'], explanation: '802.1X authentifie chaque utilisateur avant d’ouvrir le port, RADIUS vérifie l’identité et peut renvoyer le VLAN, et le mode entreprise supprime le secret partagé unique.', whyWrong: { d: 'TACACS+ sert à l’authentification, l’autorisation et la traçabilité (souvent pour l’administration des équipements), pas à chiffrer des fichiers.' } },
+    'pvw-q13': { type: 'single', correct: 'a', explanation: 'La DMZ héberge les services accessibles depuis Internet dans une zone tampon isolée : un serveur public compromis n’atteint pas librement le cœur du réseau.' },
+    'pvw-q14': { type: 'short', accepted: ['SD-WAN', 'sd-wan', 'SDWAN'], explanation: 'Le SD-WAN (réseau étendu piloté par logiciel) relie des sites via plusieurs liens, choisit le chemin par application et chiffre les liaisons ; son plan de pilotage doit lui-même être sécurisé.' },
+    'pvw-q15': { type: 'truefalse', correct: false, explanation: 'C’est l’inverse : Zero Trust ne fait **pas** confiance par défaut, même à l’intérieur. Chaque accès est authentifié et autorisé, et la micro-segmentation limite les déplacements latéraux.' },
+    'pvw-q16': {
+      type: 'open',
+      model: 'Risque : le serveur web étant exposé à Internet, sa compromission (faille applicative, service vulnérable) donne un pied dans le même réseau que les postes et les serveurs internes, donc un accès direct pour se déplacer latéralement et atteindre des données sensibles. Architecture : placer le serveur web dans une DMZ, séparée d’Internet et du réseau interne par un pare-feu ; n’autoriser depuis Internet que les ports du service (443) vers la DMZ ; n’autoriser de la DMZ vers l’interne que les flux strictement nécessaires (par exemple vers une base précise, sur un port précis), et rien d’autre ; interdire tout accès direct Internet → interne. Compléter par un reverse proxy avec WAF devant le serveur, la journalisation des flux inter-zones, et une logique de micro-segmentation côté interne.',
+      criteria: ['Le risque de déplacement latéral depuis le serveur exposé est expliqué.', 'Une DMZ isolée par pare-feu est proposée.', 'Les flux autorisés sont restreints au strict nécessaire entre les zones.', 'Une mesure complémentaire (WAF, journalisation, micro-segmentation) est ajoutée.'],
+      explanation: 'La segmentation ne supprime pas la vulnérabilité du serveur, mais elle contient l’impact d’une compromission : c’est l’objectif d’une architecture en zones.',
+    },
+  },
+};

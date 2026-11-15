@@ -24,6 +24,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'b-ipv4-subnetting': sheet(['RFC 4632 (CIDR)', 'RFC 1918', 'RFC 3021', 'RFC 6598', 'RFC 5737'], []),
   'b-commutation-vlan-ipv6': sheet(['IEEE 802.1Q', 'RFC 4861 (NDP)', 'RFC 4862 (SLAAC)', 'NIST SP 800-119 (déploiement IPv6)'], ['Noms commerciaux des protections de couche 2 selon les constructeurs', 'Mécanismes de transition IPv6 encore actifs']),
   'b-routage-dns-dhcp-nat': sheet(['RFC 2131 (DHCP)', 'RFC 4033 (DNSSEC)', 'RPKI (RIPE NCC)', 'NIST SP 800-189 (BGP)'], ['Déploiement de RPKI et de DNSSEC', 'Adoption de DoH et DoT']),
+  'b-perimetre-vpn-wifi': sheet(['NIST SP 800-94 (IDS/IPS)', 'NIST SP 800-207 (Zero Trust)', 'WPA3 (Wi-Fi Alliance)', 'Documentation Wireshark'], ['Vulnérabilités des passerelles VPN (à suivre en continu)', 'Déploiement de WPA3 et de l’inspection TLS']),
   'c-linux-permissions': sheet(['Guide ANSSI GNU/Linux', 'Recommandations ANSSI OpenSSH', 'CIS Benchmarks Linux'], ['Options par défaut d’OpenSSH selon les distributions']),
   'c-systemd-journaux-confinement': sheet(['Guide ANSSI GNU/Linux', 'Manuel systemd.exec', 'nftables (netfilter)', 'Documentation SELinux RHEL 9', 'MITRE ATT&CK (T1098.004)'], ['Directives de confinement systemd selon les versions', 'Outils de pare-feu par défaut des distributions']),
   'd-ad-authentification': sheet(['Recommandations ANSSI Active Directory', 'MITRE ATT&CK (T1558.003)', 'Windows LAPS'], ['Dépréciation progressive de NTLM et de RC4 par Microsoft']),
