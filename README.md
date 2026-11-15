@@ -10,9 +10,9 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | --- | --- |
 | Disciplines cartographiées (modules A à R) | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 276 |
-| Cours complets (structure obligatoire 4.2 vérifiée au build) | 28, au moins un par discipline, niveaux 1 à 4 |
-| Questions de cours (avec correction et explication) | 449 |
+| Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 285 |
+| Cours complets (structure obligatoire 4.2 vérifiée au build) | 29, au moins un par discipline, niveaux 1 à 4 |
+| Questions de cours (avec correction et explication) | 465 |
 | Laboratoires interactifs | 12, un par catégorie de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel) |
 | Parcours métiers (avec examen final) | 11 |
 
@@ -27,7 +27,7 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 - **Formations** : recherche, filtres (discipline, niveau, statut), cartographie complète.
 - **Cours** : présentation, leçon (définitions, schémas, exemples, cas d’usage, erreurs fréquentes, bonnes pratiques, points clés), mise en pratique avec corrigés, questions tirées au hasard (5 types), correction détaillée, évaluation par compétence, validation et déblocage.
 - **Laboratoires** : terminal simulé, analyse de journaux, moteur SQL simulé, calculs Web Crypto réels, décodeur Modbus, évaluateur IAM, revue de code, OSINT, chronologie forensique.
-- **Évaluations** : évaluations transversales (4), examens blancs à temps limité facultatif (2), examens finaux des 11 parcours, tests par discipline lorsque la discipline compte au moins deux cours publiés (modules B, C, D, E, F, I, J, L et N).
+- **Évaluations** : évaluations transversales (4), examens blancs à temps limité facultatif (2), examens finaux des 11 parcours, tests par discipline lorsque la discipline compte au moins deux cours publiés (modules B, C, D, E, F, I, J, L, M et N).
 - **Parcours** : objectifs, prérequis, compétences visées, progression ordonnée, laboratoires, examen final, bilan des compétences ; suivi de plusieurs parcours à la fois.
 - **Profil local** : pseudonyme facultatif, XP et rang (sans effet sur le déverrouillage), niveaux, quatre états par cours (consulté, leçon terminée, évaluation réussie, maîtrisé), badges, séries, défis hebdomadaires, historique, résultats.
 - **Révisions** : questions ratées (révisables immédiatement), répétition espacée de Leitner, révision par discipline, flashcards du glossaire, recommandations selon les difficultés.

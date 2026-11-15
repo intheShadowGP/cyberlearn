@@ -90,7 +90,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Conduire une analyse de risques (EBIOS RM)', 'Piloter un SMSI ISO 27001', 'Situer RGPD, NIS2, DORA et CRA', 'Comprendre les enjeux techniques pour arbitrer', 'Construire un plan de montée en compétences'],
     prerequisites: ['Culture générale de l’entreprise'],
     coreModules: ['M', 'O'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('m-risques-conformite'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('l-cloud-iam'), c('i-soc-detection'), c('n-ics-modbus'), l('modbus-lab'), c('f-injections-xss'), c('q-securite-llm'), c('r-certifications-preparation')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('m-risques-conformite'), c('m-gouvernance-operationnelle'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('l-cloud-iam'), c('i-soc-detection'), c('n-ics-modbus'), l('modbus-lab'), c('f-injections-xss'), c('q-securite-llm'), c('r-certifications-preparation')],
   },
   {
     id: 'devsecops',

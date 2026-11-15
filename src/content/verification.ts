@@ -41,6 +41,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'l-devsecops-pipeline': sheet(['SLSA (OpenSSF)', 'OWASP Top 10 CI/CD', 'NIST SP 800-218 (SSDF)'], ['Fonctionnalités de sécurité de GitHub Actions']),
   'l-conteneurs-kubernetes': sheet(['Pod Security Standards (Kubernetes)', 'CIS Kubernetes Benchmark', 'Guide NSA/CISA Kubernetes 1.2'], ['API et profils de sécurité de Kubernetes selon les versions']),
   'm-risques-conformite': sheet(['ISO/IEC 27001:2022', 'NIST CSF 2.0', 'Guide EBIOS Risk Manager', 'Directive NIS2 (UE) 2022/2555', 'RGPD art. 33'], ['Transpositions nationales de NIS2', 'Actes délégués de DORA et du CRA']),
+  'm-gouvernance-operationnelle': sheet(['CIS Controls v8.1', 'Guide d’hygiène informatique ANSSI (42 mesures)', 'NIST SP 800-53 Rév. 5', 'Catalogue KEV (CISA)', 'RGPD art. 28', 'Directive NIS2 (UE) 2022/2555'], ['Version des CIS Controls', 'Exigences NIS2 sur la chaîne d’approvisionnement selon les transpositions']),
   'n-ics-modbus': sheet(['IEC 62443', 'NIST SP 800-82 Rév. 3', 'MITRE ATT&CK for ICS', 'Spécification Modbus'], []),
   'n-iot-firmware': sheet(['ETSI EN 303 645', 'Règlement (UE) 2024/2847 (CRA, échéance 2027 vérifiée le ' + D + ')', 'NIST IR 8259'], ['Calendrier et normes harmonisées du Cyber Resilience Act']),
   'o-identite-mfa-oauth': sheet(['RFC 9700 (OAuth 2.0 BCP)', 'NIST SP 800-207', 'Recommandations ANSSI authentification'], ['Adoption des passkeys et recommandations MFA']),

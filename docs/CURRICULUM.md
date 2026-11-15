@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 276 |
-| Cours complets | 28 |
-| Questions de cours (avec correction) | 449 |
+| Sujets abordés dans au moins un cours (déclaratif) | 285 |
+| Cours complets | 29 |
+| Questions de cours (avec correction) | 465 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 26 |
+| Évaluations transversales, examens blancs et finaux | 27 |
 
 ## Par discipline
 
@@ -33,7 +33,7 @@
 | J. Forensique numérique | 2 | 2, 3 | 16 / 17 |
 | K. Malware et reverse engineering | 1 | 2 | 14 / 22 |
 | L. Sécurité Cloud | 3 | 2, 3 | 18 / 23 |
-| M. Gouvernance et conformité | 1 | 2 | 15 / 24 |
+| M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 2 | 2, 3 | 16 / 21 |
 | O. Identité et contrôle d’accès | 1 | 3 | 13 / 16 |
 | P. Sécurité avancée et recherche | 1 | 4 | 6 / 18 |
@@ -66,6 +66,7 @@
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 90 min | 3 | 16 | 2 | 4 |
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
 | Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 85 min | 3 | 16 | 2 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
@@ -101,7 +102,7 @@
 | Ingénieur cybersécurité | 11 | 3 |
 | Investigation numérique (forensic) | 8 | 4 |
 | Sécurité cloud | 7 | 1 |
-| Gouvernance, risques et conformité (GRC) | 11 | 1 |
+| Gouvernance, risques et conformité (GRC) | 12 | 1 |
 | DevSecOps | 12 | 3 |
 | Sécurité industrielle et IoT | 7 | 3 |
 | Expert en sécurité | 10 | 3 |
@@ -118,7 +119,6 @@
 - **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
 - **L. Sécurité Cloud** : Azure, Google Cloud Platform, Sécurité réseau Cloud, Sécurité serverless, Sécurité des environnements hybrides
-- **M. Gouvernance et conformité** : NIST SP 800, CIS Controls, ANSSI, Gestion des audits, Classification des données, Gestion des fournisseurs, Sensibilisation, Gestion des vulnérabilités, Gestion des actifs
 - **N. Sécurité industrielle et IoT** : Profinet, Automobile, ISO/SAE 21434, UNECE R155, UNECE R156
 - **O. Identité et contrôle d’accès** : PAM, Secrets management, Gestion des comptes à privilèges
 - **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing
