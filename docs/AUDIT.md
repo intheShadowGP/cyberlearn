@@ -95,3 +95,14 @@ Audit indépendant réalisé par Fable 5.2 via `/advisor` (une première tentati
 ### Non vérifié par l’auditeur
 
 Rendu visuel (les captures ont été examinées par l’équipe de développement, pas par l’auditeur), journaux détaillés de la CI au-delà du statut des étapes, exactitude du contenu au-delà des faits confrontés aux sources.
+
+## Audit 6 — revérification Fable 5.2 (preuves CI et cohérence documentaire)
+
+Portée : revue des preuves d’exécution CI et de déploiement, et de la cohérence de la documentation. **Ce n’est pas un nouvel audit 5 axes : aucun code applicatif n’a été réexaminé.**
+
+| # | Axe | Gravité | Constat | Correction | Preuve |
+| --- | --- | --- | --- | --- | --- |
+| 1 | E (technique, processus) | Moyen | `scripts/live-smoke.mjs` commité sans lint local : CI en échec à l’étape lint pour deux poussées (c5ed531, f702bb3), alors que le commit fautif affirmait dans TESTING.md que les exécutions étaient en succès | `globalThis.caches` (73c59ed) ; TESTING.md corrigé pour citer chaque exécution par commit et numéro | Exécution 43760936133 (73c59ed) en succès à toutes les étapes, déploiement compris |
+| 2 | E | Faible | Le contrôle « identifiant de build » de live-smoke passe toujours sans second argument ; l’identifiant est la date du build (`BUILD_ID` non défini en CI) | Limite consignée : l’identifiant est affiché, pas comparé à un commit | TESTING.md |
+
+Remède durable : exécuter `npm run build` (validateur, types, lint) avant chaque poussée, et vérifier l’exécution CI du commit final avant d’en consigner le résultat.
