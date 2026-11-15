@@ -13,7 +13,7 @@ import NotFoundPage from './NotFoundPage';
 
 export default function ModulePage() {
   const { id = '' } = useParams();
-  const m = MODULE_BY_ID[id as ModuleId];
+  const m = Object.hasOwn(MODULE_BY_ID, id) ? MODULE_BY_ID[id as ModuleId] : undefined;
   usePageTitle(m ? m.title : 'Discipline introuvable');
   const { data } = useSnapshot();
   const prefs = usePrefs();

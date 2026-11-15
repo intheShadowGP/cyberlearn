@@ -38,6 +38,21 @@ describe('Quiz', () => {
     await waitFor(() => expect(screen.getByRole('heading', { name: 'Évaluation' })).toBeTruthy());
   });
 
+  it('autoValidate (fin du temps d’examen) valide et enregistre sans clic', async () => {
+    const load = vi.fn(async () => corrections);
+    const onFinished = vi.fn(async () => undefined);
+    const { rerender } = render(<Quiz sessionKey="t3" questions={questions} loadCorrections={load} skillLabels={{}} onFinished={onFinished} />);
+    fireEvent.click(screen.getByLabelText('Option B'));
+    expect(load).not.toHaveBeenCalled();
+    rerender(<Quiz sessionKey="t3" questions={questions} loadCorrections={load} skillLabels={{}} onFinished={onFinished} autoValidate />);
+    await waitFor(() => expect(onFinished).toHaveBeenCalledTimes(1));
+    const [score] = onFinished.mock.calls[0] as unknown as [{ percent: number; max: number }];
+    expect(score.max).toBe(2);
+    expect(score.percent).toBe(50); // q1 juste, q2 sans réponse
+    rerender(<Quiz sessionKey="t3" questions={questions} loadCorrections={load} skillLabels={{}} onFinished={onFinished} autoValidate />);
+    expect(load).toHaveBeenCalledTimes(1);
+  });
+
   it('erreur de chargement : message et retour à la saisie', async () => {
     const load = vi.fn(async () => {
       throw new Error('hors ligne');

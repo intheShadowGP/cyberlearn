@@ -4,6 +4,7 @@ import { MODULES } from '../content/catalog';
 import { COURSES } from '../content/registry';
 import { LEVEL_LABELS, type Level, type ModuleId } from '../content/types';
 import { CourseCard } from '../components/CourseCard';
+import { ProgressBar } from '../components/Badges';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
 import { isUnlocked, progressMap } from '../lib/unlock';
@@ -123,6 +124,9 @@ export default function CatalogPage() {
             </p>
             {MODULES.filter((m) => !moduleF || m.id === moduleF).map((m) => {
               const n = m.topics.filter((t) => covered.has(t.id)).length;
+              const mc = COURSES.filter((c) => c.module === m.id);
+              const done = mc.filter((c) => progress.get(c.id)?.status === 'validated').length;
+              const pct = mc.length ? Math.round((done / mc.length) * 100) : 0;
               return (
                 <section key={m.id} className="map-module" aria-labelledby={`map-${m.id}`}>
                   <h3 id={`map-${m.id}`}>
@@ -130,9 +134,10 @@ export default function CatalogPage() {
                       {m.id}. {m.title}
                     </Link>{' '}
                     <span className="muted">
-                      ({n}/{m.topics.length} sujets abordés)
+                      ({n}/{m.topics.length} sujets abordés · {done}/{mc.length} cours validés, {pct} %)
                     </span>
                   </h3>
+                  <ProgressBar value={done} max={mc.length} label={`Progression en ${m.title}`} />
                   <ul className="topic-list">
                     {m.topics.map((t) => {
                       const cid = covered.get(t.id);

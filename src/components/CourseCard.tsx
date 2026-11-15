@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { CourseMeta } from '../content/types';
 import type { CourseProgress } from '../lib/progress';
 import { CourseStatus, LevelBadge } from './Badges';
+import { COURSE_BY_ID } from '../content/registry';
 
 export function CourseCard({ course, progress, locked }: { course: CourseMeta; progress?: CourseProgress | undefined; locked: boolean }) {
   const status = progress?.status === 'validated' ? 'validated' : locked ? 'locked' : progress ? 'started' : 'none';
@@ -14,6 +15,11 @@ export function CourseCard({ course, progress, locked }: { course: CourseMeta; p
         </Link>
       </h3>
       <p className="muted">{course.summary}</p>
+      {course.prerequisites.length > 0 && (
+        <p className="card-prereq">
+          Prérequis : {course.prerequisites.map((p) => COURSE_BY_ID.get(p)?.title ?? p).join(' · ')}
+        </p>
+      )}
       <div className="card-foot">
         <LevelBadge level={course.level} />
         <span className="muted">{course.durationMin} min</span>

@@ -569,3 +569,4 @@ td .progress-bar { max-width: 140px; }
 
 /* Champ fichier masqué visuellement : le focus clavier est reporté sur son libellé-bouton. */
 .file-input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }
+.card-prereq { font-size: 0.85rem; color: var(--text-muted); border-left: 2px solid var(--border-strong); padding-left: 0.5rem; }

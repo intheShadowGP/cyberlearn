@@ -116,7 +116,7 @@ export const body: CourseBody = {
       id: 'labo-timeline',
       kind: 'simulation',
       title: 'Laboratoire : reconstituer une chronologie multi-sources',
-      context: [{ t: 'p', text: 'Sept artefacts issus de sources aux formats de date différents. Un convertisseur vous aide à tout ramener en UTC.' }],
+      context: [{ t: 'p', text: 'Huit artefacts issus de sources aux formats de date différents. Un convertisseur vous aide à tout ramener en UTC.' }],
       steps: ['Convertir chaque horodatage en UTC.', 'Ordonner les événements.', 'Repérer l’artefact dont les dates sont incohérentes.'],
       labId: 'timeline-lab',
     },

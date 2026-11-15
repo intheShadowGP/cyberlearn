@@ -90,7 +90,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
       {!started ? (
         <div className="panel">
           <p>
-            {exam.size} questions{exam.timeLimitMin ? `, ${exam.timeLimitMin} minutes conseillées` : ''}. Les corrections détaillées
+            {exam.size} questions{exam.timeLimitMin ? `, temps limité à ${exam.timeLimitMin} minutes (validation automatique à l’échéance)` : ''}. Les corrections détaillées
             s’affichent après validation.
           </p>
           <button type="button" className="btn btn-primary" onClick={() => setStarted(true)}>

@@ -258,3 +258,62 @@ test('utilisation au clavier seul d’un questionnaire', async ({ page }) => {
   }
   await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
 });
+
+test('pages secondaires : rendu, absence d’erreur, accessibilité, 404', async ({ page }) => {
+  const errors = watchErrors(page);
+  const routes: [string, RegExp][] = [
+    ['./#/evaluations', /Évaluations/],
+    ['./#/evaluations/transversal-infra', /Infrastructures/],
+    ['./#/module/B', /Réseaux informatiques/],
+    ['./#/parcours', /Parcours pédagogiques/],
+    ['./#/a-propos', /À propos/],
+    ['./#/page-inexistante', /n’existe pas/],
+    ['./#/module/constructor', /n’existe pas/],
+    ['./#/cours/inexistant', /n’existe pas/],
+    ['./#/laboratoires/inexistant', /n’existe pas/],
+  ];
+  for (const [route, h1] of routes) {
+    await page.goto(route);
+    await expect(page.locator('main h1').first()).toHaveText(h1);
+    const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    expect(r.violations.map((v) => `${route} ${v.id}`)).toEqual([]);
+  }
+  expect(errors).toEqual([]);
+});
+
+test('examen transversal : tirage, validation, corrections et tableau de bord', async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto('./#/evaluations/transversal-infra');
+  await page.getByRole('button', { name: 'Démarrer' }).click();
+  await expect(page.locator('.question')).toHaveCount(20);
+  await expect(page.getByRole('timer')).toHaveCount(0); // pas de minuteur pour une évaluation transversale
+  await answerAll(page);
+  await page.getByRole('button', { name: 'Valider mes réponses' }).click();
+  await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
+  await expect(page.locator('.correction')).toHaveCount(20);
+  await page.goto('./#/tableau-de-bord');
+  await expect(page.locator('.score-list')).toContainText('Évaluation transversale — Infrastructures');
+  expect(errors).toEqual([]);
+});
+
+test('déverrouillage par validation du prérequis (sauvegarde importée)', async ({ page }) => {
+  await page.goto('./#/cours/b-ipv4-subnetting');
+  await expect(page.locator('#evaluation')).toContainText('Évaluation verrouillée');
+  const dir = mkdtempSync(join(tmpdir(), 'cyber-'));
+  const file = join(dir, 'osi-valide.json');
+  writeFileSync(file, JSON.stringify({
+    app: 'cyberacademie', format: 1, exportedAt: '2026-01-01T00:00:00.000Z',
+    data: {
+      progress: [{ courseId: 'b-osi-tcpip', status: 'validated', sectionsRead: [], practiceDone: [], bestPercent: 88, attempts: 1, firstVisit: 1, lastVisit: 1, validatedAt: 1, timeSpentSec: 60 }],
+      labProgress: [], attempts: [], skills: [], goals: [], meta: [],
+    },
+  }));
+  await page.goto('./#/parametres');
+  await page.locator('input[type="file"]').setInputFiles(file);
+  await page.getByRole('button', { name: 'Remplacer ma progression' }).click();
+  await expect(page.getByText('Sauvegarde importée.')).toBeVisible();
+  await page.goto('./#/cours/b-ipv4-subnetting');
+  await expect(page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' })).toBeVisible();
+  await page.goto('./#/catalogue?module=B');
+  await expect(page.locator('#map-B')).toContainText('1/2 cours validés, 50 %');
+});

@@ -25,7 +25,7 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 - **Formations** : recherche, filtres (discipline, niveau, statut), cartographie complète.
 - **Cours** : présentation, leçon (définitions, schémas, exemples, cas d’usage, erreurs fréquentes, bonnes pratiques, points clés), mise en pratique avec corrigés, questions tirées au hasard (5 types), correction détaillée, évaluation par compétence, validation et déblocage.
 - **Laboratoires** : terminal simulé, analyse de journaux, moteur SQL simulé, calculs Web Crypto réels, décodeur Modbus, évaluateur IAM, revue de code, OSINT, chronologie forensique.
-- **Évaluations** : tests par discipline, évaluations transversales, examens blancs chronométrés.
+- **Évaluations** : évaluations transversales (4), examens blancs à temps limité avec validation automatique (2), tests par discipline lorsque la discipline compte au moins deux cours publiés (actuellement le module B uniquement).
 - **Niveaux par compétences** : une compétence est acquise à 80 % de réussite sur au moins 3 questions ; un niveau de discipline exige 80 % des compétences publiées de ce niveau et des niveaux inférieurs.
 - **Paramètres** : thème, taille du texte, réduction des animations, mode libre, export/import JSON, effacement.
 
@@ -67,8 +67,14 @@ npm run build
 ```
 
 ```bash
+npx playwright install chromium firefox webkit
+```
+
+```bash
 npm run test:e2e
 ```
+
+Pour un seul navigateur : `npx playwright test --project=chromium`. Les tests marqués @cross s’exécutent aussi sous Firefox et WebKit. Sur le poste de développement, Firefox (binaire Playwright) n’a pas pu démarrer (erreur Windows de configuration côte-à-côte) : il n’a pas été vérifié localement.
 
 `npm run build` exécute d’abord le validateur de contenu et la vérification de types : un cours incomplet ou une réponse présente dans un chunk de leçon fait échouer le build.
 

@@ -40,8 +40,8 @@ Ce journal consigne **uniquement** les constats effectivement formulés par l’
 | Aucun laboratoire Windows (seule catégorie de la section 6 non couverte) | Laboratoire « Chasse à la persistance sur un poste Windows (Sysmon) » | E2E « tous les laboratoires » + axe |
 | Ponctuation typographique des claviers mobiles (’ —) faisant échouer réponses courtes et charges SQLi | `normalizeTypography` appliquée aux réponses courtes et au moteur SQL simulé | `quiz.test.ts`, `labs.test.ts` |
 | `sqlab-q2` refusait des charges valides (liste exacte) | Question à choix multiples dont chaque option est vérifiée par le simulateur | `labs.test.ts` |
-| Liens externes jamais vérifiés ; attribution ANSSI douteuse sur la feuille de route « memory safe » | 73 liens vérifiés (71 OK, redirections contrôlées sans page d’erreur ; 2 en 403 anti-robots : modbus.org, uefi.org, pages existantes) ; attribution corrigée (CISA, NSA, FBI et partenaires) | Script de vérification |
-| Un seul navigateur testé | Projets Firefox et WebKit (tests @cross) ; CI installe les trois navigateurs | WebKit : 3/3 OK localement. Firefox : non exécutable sur ce poste (erreur Windows de configuration côte-à-côte du binaire Playwright) — **non vérifié localement**, exécuté en CI |
+| Liens externes jamais vérifiés ; attribution ANSSI douteuse sur la feuille de route « memory safe » | 73 liens vérifiés (71 OK, redirections contrôlées sans page d’erreur ; 2 renvoient 403 à un client automatisé : modbus.org/specs.php et uefi.org/specifications, non vérifiées automatiquement) ; attribution corrigée (CISA, NSA, FBI et partenaires) | Script de vérification |
+| Un seul navigateur testé | Projets Firefox et WebKit (tests @cross) ; CI installe les trois navigateurs | WebKit : 3/3 OK localement. Firefox : non exécutable sur ce poste (erreur Windows de configuration côte-à-côte du binaire Playwright) — **non vérifié** : prévu en CI, mais la CI n’a jamais été exécutée |
 | Mise à jour du service worker jamais testée | Deux builds v1/v2 servis par un serveur commutable ; test : bannière, mise à jour, version v2 affichée, objectif local conservé | E2E Chromium |
 | Installabilité PWA non vérifiée | `Page.getInstallabilityErrors` (CDP) | E2E Chromium : aucune erreur |
 | Workflow de déploiement jamais exécuté, branche `master` alors que le workflow cible `main` | Branche renommée `main`, Node 24 en CI | **Workflow non exécuté** (aucun dépôt distant) |
@@ -49,3 +49,16 @@ Ce journal consigne **uniquement** les constats effectivement formulés par l’
 | SECURITY.md affirmait qu’aucun chunk de corrections n’est demandé, alors que le SW les précache | Formulation corrigée : « non chargé dans la page » | Revue |
 | Minuteur d’examen sans effet à l’échéance | Validation automatique à zéro (`autoValidate`) | Revue de code |
 | Prompt tronqué non résolu | Signalé dans le README et le rapport final | — |
+
+## Audit 4 — vérification finale
+
+| Constat | Correction | Vérification |
+| --- | --- | --- |
+| Moteur d’examen et pages Évaluations, Discipline, Parcours (liste), À propos et 404 jamais rendus en test | Test de fumée de 9 routes (erreurs console + axe) ; test d’examen transversal complet (20 questions, corrections, tableau de bord) | E2E Chromium et WebKit |
+|  sans test ; libellé « minutes conseillées » obsolète | Test unitaire ; libellé « temps limité … validation automatique » |  |
+| Déverrouillage par validation d’un prérequis jamais exécuté ;  sans test | Test unitaire ; E2E par import d’une sauvegarde où le prérequis est validé | , E2E |
+| Catalogue sans prérequis ni pourcentage de progression | Prérequis sur chaque carte de cours ; cours validés et pourcentage par discipline | E2E (« 1/2 cours validés, 50 % ») |
+|  affichait l’erreur au lieu de la 404 |  | E2E 404 |
+| « Sept artefacts » au lieu de huit | Corrigé | Revue |
+| Ligne de compilation combinant ASan et _FORTIFY_SOURCE | Deux compilations distinctes (tests avec sanitizers, production durcie) | Revue |
+| Divulgations demandées : tests de discipline limités au module B ; Firefox et CI non exécutés ; liens 403 | Indiqué dans README, AUDIT et rapport final | — |
