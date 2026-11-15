@@ -7,6 +7,7 @@ import { ProgressBar } from '../components/Badges';
 import { GoalsPanel } from '../components/GoalsPanel';
 import { moduleLevel, skillStatuses, weakSkills } from '../lib/levels';
 import { useSnapshot } from '../lib/useSnapshot';
+import { EXAM_BY_ID } from '../content/exams';
 import { usePageTitle } from '../lib/usePageTitle';
 
 function fmtDuration(sec: number): string {
@@ -133,7 +134,7 @@ export default function DashboardPage() {
               {recent.map((a) => (
                 <li key={a.id}>
                   <span className={`badge ${a.percent >= 70 ? 'badge-ok' : 'badge-warn'}`}>{a.percent} %</span>{' '}
-                  {a.kind === 'course' ? COURSE_BY_ID.get(a.refId)?.title : a.kind === 'lab' ? `Labo : ${LABS.find((l) => l.id === a.refId)?.title ?? a.refId}` : `Évaluation : ${a.refId}`}
+                  {a.kind === 'course' ? COURSE_BY_ID.get(a.refId)?.title : a.kind === 'lab' ? `Labo : ${LABS.find((l) => l.id === a.refId)?.title ?? a.refId}` : `Évaluation : ${EXAM_BY_ID.get(a.refId)?.title ?? a.refId}`}
                   <span className="muted"> — {new Date(a.date).toLocaleDateString('fr-FR')}</span>
                 </li>
               ))}

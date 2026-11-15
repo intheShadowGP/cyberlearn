@@ -42,8 +42,8 @@
   --border-strong: #b5c2d0;
   --text: #121a23;
   --text-muted: #4f5d6d;
-  --accent: #0f8a58;
-  --accent-strong: #0a6b44;
+  --accent: #0a6e45;
+  --accent-strong: #075234;
   --accent-soft: rgba(15, 138, 88, 0.1);
   --accent-ink: #ffffff;
   --alt: #2f5bd3;
@@ -52,7 +52,7 @@
   --warn-soft: rgba(197, 128, 0, 0.12);
   --danger: #c42b2b;
   --danger-soft: rgba(196, 43, 43, 0.08);
-  --ok: #0f8a58;
+  --ok: #0a6e45;
   --legal: #7b3fb0;
   --legal-soft: rgba(123, 63, 176, 0.08);
   --focus: #b35c00;
@@ -69,8 +69,8 @@
     --border-strong: #b5c2d0;
     --text: #121a23;
     --text-muted: #4f5d6d;
-    --accent: #0f8a58;
-    --accent-strong: #0a6b44;
+    --accent: #0a6e45;
+    --accent-strong: #075234;
     --accent-soft: rgba(15, 138, 88, 0.1);
     --accent-ink: #ffffff;
     --alt: #2f5bd3;
@@ -79,7 +79,7 @@
     --warn-soft: rgba(197, 128, 0, 0.12);
     --danger: #c42b2b;
     --danger-soft: rgba(196, 43, 43, 0.08);
-    --ok: #0f8a58;
+    --ok: #0a6e45;
     --legal: #7b3fb0;
     --legal-soft: rgba(123, 63, 176, 0.08);
     --focus: #b35c00;
@@ -429,7 +429,7 @@ td .progress-bar { max-width: 140px; }
 .topic { font-size: 0.85rem; border-radius: 999px; padding: 0.15rem 0.65rem; border: 1px solid var(--border); margin: 0; }
 .topic.covered { border-color: color-mix(in srgb, var(--accent) 55%, transparent); background: var(--accent-soft); }
 .topic.covered a { color: var(--text); text-decoration: none; }
-.topic.upcoming { color: var(--text-muted); opacity: 0.75; border-style: dashed; }
+.topic.upcoming { color: var(--text-muted); border-style: dashed; }
 .link-list li { margin: 0.4rem 0; }
 
 /* ---------- Cours ---------- */

@@ -1,0 +1,98 @@
+# CyberAcadémie
+
+Plateforme d’apprentissage de la cybersécurité, du niveau débutant au niveau expert : cours structurés, laboratoires interactifs exécutés dans le navigateur, évaluations corrigées et expliquées, parcours métiers. Site **statique** (GitHub Pages), **hors ligne** (PWA), **sans compte ni traçage** : la progression reste dans le navigateur.
+
+> CyberAcadémie ne délivre aucune certification officielle. Les contenus offensifs sont destinés exclusivement à des environnements autorisés.
+
+## État du contenu (honnête)
+
+| Élément | Quantité |
+| --- | --- |
+| Disciplines cartographiées (modules A à R) | 18 |
+| Sujets cartographiés | 403 |
+| Sujets couverts par au moins un cours publié | 188 |
+| Cours complets (structure obligatoire 4.2 vérifiée au build) | 19, au moins un par discipline, niveaux 1 à 4 |
+| Questions de cours (avec correction et explication) | 305 |
+| Laboratoires interactifs | 11 (réseau, Linux, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel) |
+| Parcours métiers | 6 |
+
+Les sujets non couverts apparaissent dans la cartographie comme « à venir », sans lien : aucun cours vide n’est publié. Catégorie de laboratoire non encore couverte : Windows (hors Active Directory). Le chiffre de couverture est recalculé par `npm test`.
+
+## Fonctionnalités
+
+- **Accueil** : reprise du dernier cours, progression, recommandations, objectifs, disciplines.
+- **Tableau de bord** : progression par discipline, cours en cours et terminés, scores, temps d’étude mesuré et estimé, compétences acquises, points faibles, objectifs.
+- **Formations** : recherche, filtres (discipline, niveau, statut), cartographie complète.
+- **Cours** : présentation, leçon (définitions, schémas, exemples, cas d’usage, erreurs fréquentes, bonnes pratiques, points clés), mise en pratique avec corrigés, questions tirées au hasard (5 types), correction détaillée, évaluation par compétence, validation et déblocage.
+- **Laboratoires** : terminal simulé, analyse de journaux, moteur SQL simulé, calculs Web Crypto réels, décodeur Modbus, évaluateur IAM, revue de code, OSINT, chronologie forensique.
+- **Évaluations** : tests par discipline, évaluations transversales, examens blancs chronométrés.
+- **Niveaux par compétences** : une compétence est acquise à 80 % de réussite sur au moins 3 questions ; un niveau de discipline exige 80 % des compétences publiées de ce niveau et des niveaux inférieurs.
+- **Paramètres** : thème, taille du texte, réduction des animations, mode libre, export/import JSON, effacement.
+
+## Architecture
+
+```
+src/
+  content/            Modèle de contenu, cartographie, registre, validateur, examens, parcours
+    courses/<id>/     meta.ts (catalogue) · body.ts (leçon, questions SANS réponses)
+                      corrections.ts (chargé à la validation) · solutions.ts (corrigés d'exercices)
+  labs/<id>/          meta.ts · body.ts · corrections.ts · Lab.tsx (+ logique pure testée)
+  lib/                quiz, niveaux, IndexedDB (transactions, migrations), sauvegarde, préférences
+  components/         Rendu sûr des blocs, Quiz, schémas SVG, tableaux de journaux
+  pages/              Pages chargées à la demande
+  sw/                 Modèle du service worker et enregistrement
+```
+
+- **React 19, TypeScript 7, Vite 8, React Router 7 (HashRouter)**, sans autre dépendance d’exécution.
+- `base: './'` + HashRouter : fonctionne à la racine comme sous `https://<utilisateur>.github.io/<depot>/`, sans réécriture serveur.
+- Le service worker est généré au build avec la liste de **tous** les fichiers (cours, corrections, laboratoires) : un cours jamais ouvert reste disponible hors ligne.
+- Détails de sécurité : [docs/SECURITY.md](docs/SECURITY.md). Journal d’audit : [docs/AUDIT.md](docs/AUDIT.md).
+
+## Commandes
+
+```bash
+npm ci
+```
+
+```bash
+npm run dev
+```
+
+```bash
+npm test
+```
+
+```bash
+npm run build
+```
+
+```bash
+npm run test:e2e
+```
+
+`npm run build` exécute d’abord le validateur de contenu et la vérification de types : un cours incomplet ou une réponse présente dans un chunk de leçon fait échouer le build.
+
+## Déploiement sur GitHub Pages
+
+1. Pousser le dépôt sur GitHub (branche `main`).
+2. Dans *Settings → Pages*, choisir la source **GitHub Actions** et activer *Enforce HTTPS*.
+3. Le workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml) exécute audit des dépendances, tests unitaires, build, tests end-to-end, puis publie `dist/`.
+
+## Ajouter un cours
+
+1. Créer `src/content/courses/<id>/` avec `meta.ts`, `body.ts`, `corrections.ts`, `solutions.ts` (s’inspirer d’un cours existant).
+2. Référencer les sujets de la cartographie (`src/content/catalog.ts`) couverts.
+3. `npm test` : le validateur indique précisément chaque manquement (sections, exemples, définitions, banque de questions, corrections, compétences évaluées, liens HTTPS…).
+
+## Cahier des charges : éléments déduits
+
+Le cahier des charges reçu était **tronqué** au milieu de la section 7 (« Parcours analy… »). Les éléments suivants ont été déduits et sont à valider :
+
+- parcours complémentaires (administrateur, analyste SOC, pentesteur, développeur, RSSI) ;
+- page Paramètres (export/import, effacement, préférences) et page À propos (éthique, confidentialité, limites) ;
+- exigences d’accessibilité (WCAG 2.1 AA vérifié par axe), de sécurité (CSP, import non fiable), de tests et de documentation ;
+- toute exigence des sections manquantes (au-delà de 7) n’a pas pu être prise en compte.
+
+## Licence
+
+À définir par le propriétaire du dépôt.

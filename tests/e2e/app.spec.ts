@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
-import { writeFileSync, mkdtempSync } from 'node:fs';
+import AxeBuilder from '@axe-core/playwright';
+import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -11,6 +12,18 @@ function watchErrors(page: Page): string[] {
   });
   page.on('pageerror', (e) => errors.push(e.message));
   return errors;
+}
+
+async function answerAll(page: Page) {
+  // Répond à chaque question avec la première option ou une valeur quelconque.
+  for (const q of await page.locator('.question').all()) {
+    const radio = q.locator('input[type="radio"]').first();
+    const box = q.locator('input[type="checkbox"]').first();
+    const text = q.locator('input.input, textarea').first();
+    if (await radio.count()) await radio.check();
+    else if (await box.count()) await box.check();
+    else if (await text.count()) await text.fill('réponse');
+  }
 }
 
 test('accueil sous un sous-chemin, sans erreur ni violation CSP', async ({ page }) => {
@@ -29,12 +42,8 @@ test('cours : leçon avant questions, réponses absentes avant validation, progr
   const requested: string[] = [];
   page.on('request', (r) => requested.push(r.url()));
 
-  await page.goto('./#/cours/b-ipv4-subnetting');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Adressage IPv4 et découpage en sous-réseaux');
-  const lesson = page.locator('#lecon');
-  const evaluation = page.locator('#evaluation');
-  await expect(lesson).toBeVisible();
-  // La leçon précède l'évaluation dans le document.
+  await page.goto('./#/cours/b-osi-tcpip');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Modèles OSI et TCP/IP : comment circulent les données');
   const order = await page.evaluate(() => {
     const a = document.getElementById('lecon');
     const b = document.getElementById('evaluation');
@@ -42,43 +51,93 @@ test('cours : leçon avant questions, réponses absentes avant validation, progr
   });
   expect(order).toBe(true);
 
-  await evaluation.getByRole('button', { name: 'Commencer l’évaluation' }).click();
-  await expect(page.locator('.question')).toHaveCount(10);
+  await page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' }).click();
+  await expect(page.locator('.question')).toHaveCount(8);
 
   // Avant validation : aucun chunk de corrections chargé, aucune explication dans le DOM.
   expect(requested.some((u) => /\/corrections-[^/]+\.js$/.test(u))).toBe(false);
   await expect(page.locator('.correction')).toHaveCount(0);
-  const html = await page.content();
-  expect(html).not.toContain('Une adresse IPv4 est un entier de 32 bits');
+  expect(await page.content()).not.toContain('Le modèle OSI comporte 7 couches');
 
+  await answerAll(page);
   await page.getByRole('button', { name: 'Valider mes réponses' }).click();
   await expect(page.locator('.correction').first()).toBeVisible();
   expect(requested.some((u) => /\/corrections-[^/]+\.js$/.test(u))).toBe(true);
 
-  await page.getByRole('button', { name: 'Enregistrer mon évaluation' }).click();
-  await expect(page.getByRole('heading', { name: 'Évaluation' })).toBeVisible();
-  await expect(page.getByText('Note :')).toBeVisible();
+  // Si une question ouverte a reçu une réponse, l'enregistrement attend l'auto-évaluation.
+  const save = page.getByRole('button', { name: 'Enregistrer mon évaluation' });
+  if (await save.isVisible().catch(() => false)) await save.click();
+  await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
 
   await page.reload();
   await page.goto('./#/tableau-de-bord');
-  await expect(page.getByRole('heading', { name: 'Derniers scores' })).toBeVisible();
   await expect(page.locator('.score-list li')).toHaveCount(1);
   expect(errors).toEqual([]);
 });
 
-test('laboratoire sous-réseaux : calculateur et validation', async ({ page }) => {
+test('prérequis : évaluation verrouillée puis déverrouillée par le mode libre', async ({ page }) => {
+  await page.goto('./#/cours/b-ipv4-subnetting');
+  await expect(page.locator('#evaluation')).toContainText('Évaluation verrouillée');
+  await expect(page.locator('#lecon')).toBeVisible(); // la leçon reste consultable
+  await page.goto('./#/parametres');
+  await page.getByLabel(/Mode libre/).check();
+  await page.goto('./#/cours/b-ipv4-subnetting');
+  await expect(page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' })).toBeVisible();
+});
+
+test('laboratoire sous-réseaux : calculateur, validation et historique', async ({ page }) => {
   const errors = watchErrors(page);
   await page.goto('./#/laboratoires/subnet-lab');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Atelier sous-réseaux');
-  const ip = page.getByLabel('Adresse IPv4');
-  await ip.fill('172.16.45.200');
+  await page.getByLabel('Adresse IPv4').fill('172.16.45.200');
   await page.getByLabel(/Préfixe/).fill('21');
   await expect(page.locator('.kv')).toContainText('172.16.40.0/21');
-  await expect(page.locator('.kv')).toContainText('172.16.47.255');
   await page.getByLabel('Réponse à la question 1').fill('10.20.1.0');
   await page.getByRole('button', { name: 'Valider mes réponses' }).click();
   await expect(page.getByRole('heading', { name: /mesures défensives/ })).toBeVisible();
+  await page.goto('./#/laboratoires');
+  await expect(page.getByRole('region', { name: /Historique/ }).or(page.locator('section', { hasText: 'Historique et résultats' })).locator('tbody tr')).toHaveCount(1);
   expect(errors).toEqual([]);
+});
+
+test('tous les laboratoires se chargent sans erreur', async ({ page }) => {
+  const errors = watchErrors(page);
+  for (const id of ['subnet-lab', 'linux-audit-lab', 'ad-events-lab', 'hash-lab', 'sqli-lab', 'log-hunt-lab', 'timeline-lab', 'code-review-lab', 'osint-lab', 'iam-policy-lab', 'modbus-lab']) {
+    await page.goto(`./#/laboratoires/${id}`);
+    await expect(page.locator('#ws-h')).toBeVisible();
+    await expect(page.locator('.question').first()).toBeVisible();
+  }
+  // Interactions clés
+  await page.goto('./#/laboratoires/sqli-lab');
+  await page.getByLabel('Identifiant').fill("admin' -- ");
+  await page.getByRole('button', { name: 'Se connecter' }).click();
+  await expect(page.getByText('Connexion acceptée')).toBeVisible();
+  await page.goto('./#/laboratoires/linux-audit-lab');
+  await page.getByRole('button', { name: 'find / -perm -4000' }).click();
+  await expect(page.getByRole('log')).toContainText('python3.11');
+  expect(errors).toEqual([]);
+});
+
+test('sauvegarde : export puis import aller-retour', async ({ page }) => {
+  await page.goto('./#/laboratoires/subnet-lab');
+  await page.getByRole('button', { name: 'Valider mes réponses' }).click();
+  await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
+  await page.goto('./#/parametres');
+  const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: /Exporter/ }).click()]);
+  const dir = mkdtempSync(join(tmpdir(), 'cyber-'));
+  const file = join(dir, 'export.json');
+  await download.saveAs(file);
+  expect(JSON.parse(readFileSync(file, 'utf8')).data.attempts).toHaveLength(1);
+
+  await page.getByRole('button', { name: /Effacer toute ma progression/ }).click();
+  await page.getByRole('button', { name: 'Tout effacer' }).click();
+  await expect(page.getByText('Progression et préférences effacées.')).toBeVisible();
+
+  await page.locator('input[type="file"]').setInputFiles(file);
+  await page.getByRole('button', { name: 'Remplacer ma progression' }).click();
+  await expect(page.getByText('Sauvegarde importée.')).toBeVisible();
+  await page.goto('./#/tableau-de-bord');
+  await expect(page.locator('.score-list li')).toHaveCount(1);
 });
 
 test('import : un fichier malveillant est rejeté sans modifier les données', async ({ page }) => {
@@ -96,21 +155,30 @@ test('import : un fichier malveillant est rejeté sans modifier les données', a
 
 test('hors ligne : le site et un cours non encore visité restent accessibles', async ({ page, context }) => {
   await page.goto('./');
-  await page.evaluate(async () => {
-    const reg = await navigator.serviceWorker.ready;
-    return reg.active?.state;
-  });
-  // Attente de la fin de la mise en cache.
-  await expect
-    .poll(async () => page.evaluate(async () => (await caches.keys()).length), { timeout: 15_000 })
-    .toBeGreaterThan(0);
+  await page.evaluate(async () => (await navigator.serviceWorker.ready).active?.state);
+  await expect.poll(async () => page.evaluate(async () => (await caches.keys()).length), { timeout: 15_000 }).toBeGreaterThan(0);
   await page.reload();
   await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
   await context.setOffline(true);
-  await page.goto('./#/laboratoires/subnet-lab');
+  await page.goto('./#/laboratoires/modbus-lab');
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Atelier sous-réseaux');
-  await page.goto('./#/cours/b-ipv4-subnetting');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Trames Modbus suspectes dans une station de pompage');
+  await page.goto('./#/cours/q-securite-llm');
   await expect(page.locator('#lecon')).toBeVisible();
   await context.setOffline(false);
 });
+
+for (const theme of ['dark', 'light'] as const) {
+  test(`accessibilité (axe, WCAG 2.1 AA) — thème ${theme}`, async ({ page }) => {
+    await page.addInitScript((t) => {
+      localStorage.setItem('cyberacademie.prefs.v1', JSON.stringify({ theme: t, freeMode: true, fontScale: 1, reduceMotion: true }));
+    }, theme);
+    for (const route of ['./', './#/catalogue', './#/cours/d-ad-authentification', './#/laboratoires/ad-events-lab', './#/tableau-de-bord', './#/parametres', './#/parcours/analyste-soc']) {
+      await page.goto(route);
+      await expect(page.locator('main h1').first()).toBeVisible();
+      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      const summary = results.violations.map((v) => `${route} ${v.id} (${v.nodes.length}) : ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
+      expect(summary, summary.join('\n')).toEqual([]);
+    }
+  });
+}

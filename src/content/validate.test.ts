@@ -3,6 +3,7 @@ import { validateContent, findForbiddenFields, type ContentSet } from './validat
 import type { CourseBody, CourseCorrections, CourseMeta, CourseSolutions, LabBody, LabCorrections, LabMeta } from './types';
 import { MODULES } from './catalog';
 import { DIAGRAMS } from '../components/diagrams';
+import { PATHS } from './paths';
 
 const metas = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { eager: true });
 const bodies = import.meta.glob<{ body: CourseBody }>('./courses/*/body.ts', { eager: true });
@@ -50,6 +51,15 @@ describe('contenu pédagogique', () => {
   it('chaque fichier de cours a ses trois parties', () => {
     for (const p of Object.keys(bodies)) expect(metas[p.replace('body.ts', 'meta.ts')]).toBeDefined();
     for (const p of Object.keys(corrs)) expect(metas[p.replace('corrections.ts', 'meta.ts')]).toBeDefined();
+  });
+
+  it('les parcours et examens ne référencent que du contenu publié', () => {
+    const courseIds = new Set(set.courses.map((c) => c.meta.id));
+    const labIds = new Set(set.labs.map((l) => l.meta.id));
+    for (const p of PATHS) {
+      expect(p.steps.length).toBeGreaterThan(2);
+      for (const s of p.steps) expect(s.kind === 'course' ? courseIds.has(s.id) : labIds.has(s.id), `${p.id} → ${s.id}`).toBe(true);
+    }
   });
 
   it('les sujets de la cartographie ont des identifiants uniques', () => {
