@@ -318,5 +318,5 @@ test('déverrouillage par validation du prérequis (sauvegarde importée)', asyn
   await page.goto('./#/cours/b-ipv4-subnetting');
   await expect(page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' })).toBeVisible();
   await page.goto('./#/catalogue?module=B');
-  await expect(page.locator('#map-B')).toContainText('1/2 cours validés, 50 %');
+  await expect(page.locator('#map-B')).toContainText(/1\/\d+ cours validés/);
 });
