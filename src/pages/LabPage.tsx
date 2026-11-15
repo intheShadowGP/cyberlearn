@@ -2,7 +2,7 @@ import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { COURSE_BY_ID, LAB_BY_ID, loadLabBody, loadLabCorrections } from '../content/registry';
 import type { Block, LabBody, LabMeta } from '../content/types';
-import { CATEGORY_LABELS, labComponent } from '../labs';
+import { CATEGORY_LABELS, LAB_COMPONENTS } from '../labs';
 import { LevelBadge } from '../components/Badges';
 import { Blocks } from '../components/Blocks';
 import { Quiz } from '../components/Quiz';
@@ -19,7 +19,7 @@ export default function LabPage() {
 
 function LabView({ meta }: { meta: LabMeta }) {
   usePageTitle(meta.title);
-  const Component = labComponent(meta.id);
+  const Component = Object.hasOwn(LAB_COMPONENTS, meta.id) ? LAB_COMPONENTS[meta.id] : undefined;
   const [body, setBody] = useState<LabBody | null>(null);
   const [debrief, setDebrief] = useState<Block[] | null>(null);
   const [round, setRound] = useState(0);

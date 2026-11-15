@@ -10,7 +10,7 @@ export function normalizeTypography(s: string): string {
     .replace(/[“”«»]/g, '"')
     .replace(/—/g, '--')
     .replace(/[–−]/g, '-')
-    .replace(/[  ]/g, ' ');
+    .replace(/[\u00A0\u202F]/g, ' ');
 }
 
 /** Normalise une réponse courte : typographie, casse, accents, espaces superflus. */

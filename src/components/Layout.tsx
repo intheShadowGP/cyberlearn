@@ -39,7 +39,6 @@ export function Layout({ children }: { children: ReactNode }) {
 
   // Accessibilité : à chaque changement de page, le focus va au contenu principal.
   useEffect(() => {
-    setMenuOpen(false);
     if (first.current) {
       first.current = false;
       return;
@@ -75,13 +74,13 @@ export function Layout({ children }: { children: ReactNode }) {
             <ul>
               {NAV.map((n) => (
                 <li key={n.to}>
-                  <NavLink to={n.to} end={n.end ?? false}>
+                  <NavLink to={n.to} end={n.end ?? false} onClick={() => setMenuOpen(false)}>
                     {n.label}
                   </NavLink>
                 </li>
               ))}
               <li>
-                <NavLink to="/parametres" className="nav-settings">
+                <NavLink to="/parametres" className="nav-settings" onClick={() => setMenuOpen(false)}>
                   Paramètres
                 </NavLink>
               </li>

@@ -38,23 +38,24 @@ function ExamView({ exam }: { exam: ExamDef }) {
   usePageTitle(exam.title);
   const [round, setRound] = useState(0);
   const [started, setStarted] = useState(false);
-  const [data, setData] = useState<{ questions: Question[]; owner: Map<string, string> } | null>(null);
+  // Sujet tiré pour un passage donné (round) : un tirage d’un passage précédent est ignoré.
+  const [drawn, setDrawn] = useState<{ round: number; questions: Question[]; owner: Map<string, string> } | null>(null);
+  const [failedRound, setFailedRound] = useState<number | null>(null);
+  const data = drawn?.round === round ? drawn : null;
+  const loadError = failedRound === round;
   const [deadline, setDeadline] = useState<number | null>(null);
-  const [now, setNow] = useState(Date.now());
-  const [loadError, setLoadError] = useState(false);
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
     if (!started) return;
     let alive = true;
-    setData(null);
-    setLoadError(false);
     drawExam(exam)
       .then((d) => {
         if (!alive) return;
-        setData(d);
+        setDrawn({ round, ...d });
         if (exam.timeLimitMin) setDeadline(Date.now() + exam.timeLimitMin * 60_000);
       })
-      .catch(() => alive && setLoadError(true));
+      .catch(() => alive && setFailedRound(round));
     return () => {
       alive = false;
     };

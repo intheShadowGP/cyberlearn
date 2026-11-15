@@ -3,20 +3,10 @@ import type { LabCategory } from '../content/types';
 
 const components = import.meta.glob<{ default: ComponentType }>('./*/Lab.tsx');
 
-const cache = new Map<string, LazyExoticComponent<ComponentType>>();
-
-/** Composant interactif d'un laboratoire, chargé à la demande. */
-export function labComponent(id: string): LazyExoticComponent<ComponentType> | null {
-  if (!/^[a-z0-9-]{1,64}$/.test(id)) return null;
-  const loader = components[`./${id}/Lab.tsx`];
-  if (!loader) return null;
-  let c = cache.get(id);
-  if (!c) {
-    c = lazy(loader);
-    cache.set(id, c);
-  }
-  return c;
-}
+/** Composants paresseux créés une seule fois, au chargement du module. */
+export const LAB_COMPONENTS: Readonly<Record<string, LazyExoticComponent<ComponentType>>> = Object.fromEntries(
+  Object.entries(components).map(([path, loader]) => [path.split('/')[1] as string, lazy(loader)]),
+);
 
 export const CATEGORY_LABELS: Record<LabCategory, string> = {
   reseau: 'Réseau',

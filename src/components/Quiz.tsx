@@ -34,7 +34,7 @@ const VERDICT_LABEL: Record<string, string> = {
   ungraded: 'À auto-évaluer',
 };
 
-export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFinished, onRetry, recommendation, autoValidate }: QuizProps) {
+export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRetry, recommendation, autoValidate }: QuizProps) {
   const [answers, setAnswers] = useState<Record<string, Answer>>(() =>
     Object.fromEntries(questions.map((q) => [q.id, emptyAnswer(q)])),
   );
@@ -42,16 +42,13 @@ export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFi
   const [corrections, setCorrections] = useState<Record<string, Correction> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [final, setFinal] = useState<QuizScore | null>(null);
-  const started = useRef(Date.now());
+  const [startedAt] = useState(() => Date.now());
   const resultsRef = useRef<HTMLDivElement>(null);
 
   // Ordre des options mélangé une fois par session.
-  const optionOrder = useMemo(
-    () =>
-      Object.fromEntries(
-        questions.map((q) => [q.id, q.type === 'single' || q.type === 'multi' ? shuffle(q.options) : []]),
-      ),
-    [sessionKey],
+  // Ordre des options mélangé une fois par session (le composant est recréé à chaque tirage).
+  const [optionOrder] = useState(() =>
+    Object.fromEntries(questions.map((q) => [q.id, q.type === 'single' || q.type === 'multi' ? shuffle(q.options) : []])),
   );
 
   const unanswered = questions.filter((q) => q.type !== 'open' && !isAnswered(answers[q.id] as Answer)).length;
@@ -68,7 +65,7 @@ export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFi
     if (saving.current) return; // empêche un double enregistrement (double clic)
     saving.current = true;
     const score = scoreQuiz(res);
-    const duration = Math.round((Date.now() - started.current) / 1000);
+    const duration = Math.round((Date.now() - startedAt) / 1000);
     try {
       await onFinished(score, duration);
       setFinal(score);

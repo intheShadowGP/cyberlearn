@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } fr
 import { Link, useParams } from 'react-router-dom';
 import { MODULE_BY_ID } from '../content/catalog';
 import { COURSE_BY_ID, COURSES, LAB_BY_ID, loadCourseBody, loadCourseCorrections, loadCourseSolutions } from '../content/registry';
-import { LEVEL_LABELS, type CourseBody, type CourseMeta, type PracticeSolution } from '../content/types';
+import { LEVEL_LABELS, type CourseBody, type CourseMeta, type PracticeSolution, type Question } from '../content/types';
 import { Blocks } from '../components/Blocks';
 import { Inline } from '../components/Inline';
 import { Quiz } from '../components/Quiz';
@@ -92,10 +92,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
 
   const [quizRound, setQuizRound] = useState(0);
   const [quizStarted, setQuizStarted] = useState(false);
-  const drawn = useMemo(
-    () => (body ? drawQuestions(body.questions, meta.quizSize) : []),
-    [body, quizRound],
-  );
+  const [drawn, setDrawn] = useState<Question[]>([]);
   const [validationMsg, setValidationMsg] = useState<string | null>(null);
 
   const onFinished = useCallback(
@@ -284,7 +281,10 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                       Conseil : vous avez marqué {readCount} section{readCount > 1 ? 's' : ''} sur {totalSections} comme lue{readCount > 1 ? 's' : ''}.
                     </p>
                   )}
-                  <button type="button" className="btn btn-primary" onClick={() => setQuizStarted(true)}>
+                  <button type="button" className="btn btn-primary" onClick={() => {
+                      if (body) setDrawn(drawQuestions(body.questions, meta.quizSize));
+                      setQuizStarted(true);
+                    }}>
                     Commencer l’évaluation
                   </button>
                 </div>
@@ -303,6 +303,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                     onFinished={onFinished}
                     onRetry={() => {
                       setValidationMsg(null);
+                      if (body) setDrawn(drawQuestions(body.questions, meta.quizSize));
                       setQuizRound((r) => r + 1);
                     }}
                     recommendation={(s) => recommendationFor(meta, s)}

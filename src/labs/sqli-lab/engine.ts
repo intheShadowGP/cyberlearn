@@ -185,7 +185,7 @@ export function runVulnerable(rawLogin: string, rawPassword: string): QueryResul
     const u = where.findIndex((t) => t.k === 'kw' && t.v === 'UNION');
     const union = u >= 0;
     if (union) where = where.slice(0, u);
-    const rows = USERS.filter((r) => evalWhere(where, r)).map(({ password: _p, ...rest }) => rest);
+    const rows = USERS.filter((r) => evalWhere(where, r)).map((r) => ({ id: r.id, login: r.login, role: r.role }));
     return { sql, rows, error: null, comment, union };
   } catch (e) {
     return { sql, rows: [], error: e instanceof SqlError ? e.message : 'erreur', comment: null, union: false };
@@ -197,6 +197,6 @@ export function runParameterized(rawLogin: string, rawPassword: string): QueryRe
   const login = normalizeTypography(rawLogin);
   const password = normalizeTypography(rawPassword);
   const sql = "SELECT id, login, role FROM users WHERE login = $1 AND password = $2";
-  const rows = USERS.filter((r) => r.login === login && r.password === password).map(({ password: _p, ...rest }) => rest);
+  const rows = USERS.filter((r) => r.login === login && r.password === password).map((r) => ({ id: r.id, login: r.login, role: r.role }));
   return { sql: `${sql}    -- $1 = ${JSON.stringify(login)}, $2 = ${JSON.stringify(password)}`, rows, error: null, comment: null, union: false };
 }
