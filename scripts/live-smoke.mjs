@@ -53,7 +53,7 @@ check('laboratoire interactif', await page.getByText('Connexion acceptée').isVi
 // Service worker et hors ligne
 await page.goto(BASE);
 await page.evaluate(async () => (await navigator.serviceWorker.ready).active?.state);
-await page.waitForFunction(async () => (await caches.keys()).length > 0, null, { timeout: 30_000 });
+await page.waitForFunction(async () => (await globalThis.caches.keys()).length > 0, null, { timeout: 30_000 });
 await page.reload();
 await page.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 30_000 });
 await ctx.setOffline(true);
