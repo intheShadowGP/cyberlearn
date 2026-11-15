@@ -22,6 +22,7 @@ export const meta: CourseMeta = {
     { id: 'n-modbus', label: 'Protocoles industriels et Modbus', level: 2 },
     { id: 'n-segment', label: 'Segmentation IT/OT et IEC 62443', level: 2 },
   ],
+  sectionCount: 3,
   questionCount: 16,
   quizSize: 8,
 };

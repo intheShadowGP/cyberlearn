@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'c-users-sudo', label: 'Utilisateurs, groupes et sudo', level: 2 },
     { id: 'c-hardening', label: 'Durcissement SSH et serveur', level: 2 },
   ],
+  sectionCount: 5,
   questionCount: 16,
   quizSize: 8,
 };

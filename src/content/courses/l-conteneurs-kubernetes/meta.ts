@@ -22,6 +22,7 @@ export const meta: CourseMeta = {
     { id: 'l-k8s-images', label: 'Images de conteneurs sûres', level: 2 },
     { id: 'l-k8s-cluster', label: 'Durcissement d’un cluster Kubernetes', level: 3 },
   ],
+  sectionCount: 3,
   questionCount: 16,
   quizSize: 8,
 };

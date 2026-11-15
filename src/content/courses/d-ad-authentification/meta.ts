@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'd-ad-attacks', label: 'Attaques sur l’authentification AD', level: 3 },
     { id: 'd-ad-detect', label: 'Détection et durcissement AD', level: 3 },
   ],
+  sectionCount: 5,
   questionCount: 16,
   quizSize: 8,
 };

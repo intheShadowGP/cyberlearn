@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'p-formal', label: 'Exécution symbolique et vérification formelle', level: 4 },
     { id: 'p-disclosure', label: 'Divulgation coordonnée', level: 3 },
   ],
+  sectionCount: 5,
   questionCount: 16,
   quizSize: 8,
 };

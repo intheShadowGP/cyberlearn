@@ -38,6 +38,8 @@ function ExamView({ exam }: { exam: ExamDef }) {
   usePageTitle(exam.title);
   const [round, setRound] = useState(0);
   const [started, setStarted] = useState(false);
+  /** Minuteur facultatif : activé par défaut pour les examens blancs, désactivable avant de commencer. */
+  const [timed, setTimed] = useState(true);
   // Sujet tiré pour un passage donné (round) : un tirage d’un passage précédent est ignoré.
   const [drawn, setDrawn] = useState<{ round: number; questions: Question[]; owner: Map<string, string> } | null>(null);
   const [failedRound, setFailedRound] = useState<number | null>(null);
@@ -53,13 +55,13 @@ function ExamView({ exam }: { exam: ExamDef }) {
       .then((d) => {
         if (!alive) return;
         setDrawn({ round, ...d });
-        if (exam.timeLimitMin) setDeadline(Date.now() + exam.timeLimitMin * 60_000);
+        if (exam.timeLimitMin && timed) setDeadline(Date.now() + exam.timeLimitMin * 60_000);
       })
       .catch(() => alive && setFailedRound(round));
     return () => {
       alive = false;
     };
-  }, [exam, round, started]);
+  }, [exam, round, started, timed]);
 
   useEffect(() => {
     if (!deadline) return;
@@ -91,9 +93,15 @@ function ExamView({ exam }: { exam: ExamDef }) {
       {!started ? (
         <div className="panel">
           <p>
-            {exam.size} questions{exam.timeLimitMin ? `, temps limité à ${exam.timeLimitMin} minutes (validation automatique à l’échéance)` : ''}. Les corrections détaillées
+            {exam.size} questions{exam.timeLimitMin ? `, temps limité facultatif de ${exam.timeLimitMin} minutes (validation automatique à l’échéance)` : ''}. Les corrections détaillées
             s’affichent après validation.
           </p>
+          {exam.timeLimitMin && (
+            <label className="check">
+              <input type="checkbox" checked={timed} onChange={(e) => setTimed(e.target.checked)} />
+              Activer le minuteur ({exam.timeLimitMin} minutes)
+            </label>
+          )}
           <button type="button" className="btn btn-primary" onClick={() => setStarted(true)}>
             Démarrer
           </button>
@@ -124,7 +132,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
               setDeadline(null);
               return merged;
             }}
-            onFinished={(score, d) => recordExamAttempt(exam.id, score, d)}
+            onFinished={(score, d) => recordExamAttempt(exam.id, score, d, data.owner)}
             onRetry={() => setRound((r) => r + 1)}
             autoValidate={remaining === 0}
           />

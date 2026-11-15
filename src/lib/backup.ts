@@ -1,5 +1,9 @@
 import { replaceAll } from './db';
-import { loadSnapshot, notify, type Attempt, type CourseProgress, type Goal, type LabProgress, type MetaRecord, type SkillRecord, type Snapshot } from './progress';
+import {
+  loadSnapshot, notify, sanitizePseudonym,
+  type Activity, type Attempt, type CourseProgress, type Goal, type LabProgress, type MetaRecord,
+  type Profile, type ReviewItem, type SkillRecord, type Snapshot,
+} from './progress';
 
 /**
  * Export / import de la progression.
@@ -8,7 +12,9 @@ import { loadSnapshot, notify, type Attempt, type CourseProgress, type Goal, typ
  * et reconstruction d'objets neufs ne contenant que les champs attendus.
  */
 
-export const BACKUP_FORMAT = 1;
+/** Format courant. Le format 1 (sans profil, activité ni révisions) reste accepté à l'import. */
+export const BACKUP_FORMAT = 2;
+export const SUPPORTED_FORMATS = [1, 2] as const;
 export const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
 const MAX_RECORDS = 20_000;
 const MAX_STR = 2_000;
@@ -16,10 +22,23 @@ const ID_RE = /^[A-Za-z0-9._:-]{1,128}$/;
 
 export class ImportError extends Error {}
 
+/**
+ * Empreinte SHA-256 (hexadécimal) de la sérialisation canonique des données.
+ * Elle détecte une altération ACCIDENTELLE (fichier tronqué, édition maladroite) ;
+ * n'étant pas signée, elle ne prouve pas l'origine du fichier : quiconque modifie
+ * les données peut recalculer l'empreinte. La validation du schéma reste le contrôle de sécurité.
+ */
+export async function integrityOf(data: unknown): Promise<string> {
+  const bytes = new TextEncoder().encode(JSON.stringify(data));
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 export async function exportBackup(): Promise<string> {
   const data = await loadSnapshot();
+  const integrity = await integrityOf(data);
   return JSON.stringify(
-    { app: 'cyberacademie', format: BACKUP_FORMAT, exportedAt: new Date().toISOString(), data },
+    { app: 'cyberacademie', format: BACKUP_FORMAT, exportedAt: new Date().toISOString(), integrity: { alg: 'SHA-256', value: integrity }, data },
     null,
     2,
   );
@@ -158,13 +177,63 @@ function vMeta(v: unknown): MetaRecord | null {
   return { key, value: num(value, 'dailyGoalMin', 0, 1440) };
 }
 
+function vProfile(v: unknown): Profile {
+  if (!isObj(v)) throw new ImportError('profil invalide');
+  if (v.key !== 'profile') throw new ImportError('profil invalide');
+  return {
+    key: 'profile',
+    pseudonym: sanitizePseudonym(str(v.pseudonym, 'pseudonym', 200)),
+    followedPaths: arr(v.followedPaths, 'followedPaths', 50).map((x) => id(x, 'followedPaths')),
+    createdAt: num(v.createdAt, 'createdAt'),
+  };
+}
+
+const ACTIVITY_TYPES = ['section', 'practice', 'course-attempt', 'lab-attempt', 'exam-attempt', 'review'] as const;
+function vActivity(v: unknown): Activity {
+  if (!isObj(v)) throw new ImportError('activité invalide');
+  const a: Activity = {
+    type: oneOf(v.type, 'type', ACTIVITY_TYPES),
+    ref: str(v.ref, 'ref', 200),
+    date: num(v.date, 'date'),
+  };
+  if (!/^[A-Za-z0-9._:#-]{1,200}$/.test(a.ref)) throw new ImportError('Référence d’activité invalide');
+  if (v.ok !== undefined) a.ok = bool(v.ok, 'ok');
+  if (v.id !== undefined) a.id = num(v.id, 'id', 1);
+  return a;
+}
+
+function vReview(v: unknown): ReviewItem {
+  if (!isObj(v)) throw new ImportError('révision invalide');
+  const box = num(v.box, 'box', 1, 5);
+  if (!Number.isInteger(box)) throw new ImportError('Boîte de révision invalide');
+  const itemId = str(v.itemId, 'itemId', 200);
+  if (!/^[qg]:[A-Za-z0-9._:-]{1,190}$/.test(itemId)) throw new ImportError('Identifiant de révision invalide');
+  return {
+    itemId,
+    kind: oneOf(v.kind, 'kind', ['question', 'glossary'] as const),
+    owner: id(v.owner, 'owner'),
+    ownerKind: oneOf(v.ownerKind, 'ownerKind', ['course', 'lab'] as const),
+    box: box as ReviewItem['box'],
+    due: num(v.due, 'due'),
+    lapses: num(v.lapses, 'lapses', 0, 100_000),
+    updatedAt: num(v.updatedAt, 'updatedAt'),
+  };
+}
+
 export function validateBackup(raw: unknown): Snapshot {
   if (!isObj(raw)) throw new ImportError('Fichier de sauvegarde invalide.');
   if (raw.app !== 'cyberacademie') throw new ImportError('Ce fichier ne provient pas de CyberAcadémie.');
-  if (raw.format !== BACKUP_FORMAT) throw new ImportError('Version de format non prise en charge.');
+  if (!(SUPPORTED_FORMATS as readonly unknown[]).includes(raw.format)) {
+    throw new ImportError('Version de format non prise en charge (formats acceptés : ' + SUPPORTED_FORMATS.join(', ') + ').');
+  }
   const d = raw.data;
   if (!isObj(d)) throw new ImportError('Données absentes.');
+  const v2 = raw.format === 2;
+  const profile = v2 ? arr(d.profile, 'profile', 1).map(vProfile) : [];
   return {
+    profile,
+    activity: v2 ? arr(d.activity, 'activity', 100_000).map(vActivity) : [],
+    reviews: v2 ? arr(d.reviews, 'reviews').map(vReview) : [],
     progress: arr(d.progress, 'progress').map(vProgress),
     labProgress: arr(d.labProgress, 'labProgress').map(vLab),
     attempts: arr(d.attempts, 'attempts').map(vAttempt),
@@ -185,7 +254,17 @@ export async function parseBackupFile(file: File): Promise<Snapshot> {
   } catch {
     throw new ImportError('Le fichier n’est pas un JSON valide.');
   }
-  return validateBackup(raw);
+  const snapshot = validateBackup(raw);
+  // Contrôle d'intégrité (format 2) : détection d'une altération accidentelle.
+  if (isObj(raw) && raw.format === 2) {
+    const integ = raw.integrity;
+    if (!isObj(integ) || integ.alg !== 'SHA-256' || typeof integ.value !== 'string') {
+      throw new ImportError('Empreinte d’intégrité absente ou invalide.');
+    }
+    const expected = await integrityOf(raw.data);
+    if (expected !== integ.value) throw new ImportError('Contrôle d’intégrité échoué : le fichier a été modifié ou est corrompu.');
+  }
+  return snapshot;
 }
 
 export async function applyBackup(snapshot: Snapshot): Promise<void> {

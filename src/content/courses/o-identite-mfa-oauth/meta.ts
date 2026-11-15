@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'o-oauth', label: 'OAuth 2.0, OpenID Connect et fédération', level: 3 },
     { id: 'o-authz', label: 'Autorisation, RBAC, ABAC et Zero Trust', level: 3 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

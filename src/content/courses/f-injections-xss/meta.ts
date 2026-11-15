@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'f-xss', label: 'XSS : types, impact et correction', level: 2 },
     { id: 'f-csp', label: 'CSP et en-têtes de sécurité', level: 2 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

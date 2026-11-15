@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'e-pwd-storage', label: 'Stockage des mots de passe (sel, Argon2, PBKDF2)', level: 2 },
     { id: 'e-crypto-errors', label: 'Erreurs d’implémentation cryptographique', level: 2 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

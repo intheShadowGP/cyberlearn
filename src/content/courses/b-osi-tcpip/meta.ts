@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'b-osi-transport', label: 'TCP, UDP et ports', level: 1 },
     { id: 'b-osi-secu', label: 'Attaques et défenses par couche', level: 1 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

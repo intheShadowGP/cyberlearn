@@ -1,10 +1,11 @@
 import { MODULES } from './catalog';
 import { COURSE_BY_ID, COURSES } from './registry';
 import type { ModuleId } from './types';
+import { PATHS, pathCourseIds, pathExamId } from './paths';
 
 export interface ExamDef {
   id: string;
-  kind: 'module' | 'transversal' | 'mock';
+  kind: 'module' | 'transversal' | 'mock' | 'path';
   title: string;
   description: string;
   courseIds: string[];
@@ -61,6 +62,20 @@ const transversal: ExamDef[] = [
   },
 ];
 
+/** Examen final de chaque parcours : questions tirées de tous les cours du parcours. */
+const pathFinals: ExamDef[] = PATHS.map((p) => {
+  const ids = pathCourseIds(p);
+  const pool = ids.reduce((n, id) => n + (COURSE_BY_ID.get(id)?.questionCount ?? 0), 0);
+  return {
+    id: pathExamId(p.id),
+    kind: 'path',
+    title: `Examen final — ${p.title}`,
+    description: `Questions tirées des ${ids.length} cours du parcours. Réussite requise (70 %) pour terminer le parcours.`,
+    courseIds: ids,
+    size: Math.min(20, Math.floor((pool * 0.8) / 2)),
+  };
+});
+
 const mocks: ExamDef[] = [
   {
     id: 'blanc-general',
@@ -83,7 +98,7 @@ const mocks: ExamDef[] = [
 ];
 
 /** Nombre minimal de cours distincts pour qu'une évaluation ait du sens. */
-export const MIN_COURSES: Record<ExamDef['kind'], number> = { module: 2, transversal: 3, mock: 5 };
+export const MIN_COURSES: Record<ExamDef['kind'], number> = { module: 2, transversal: 3, mock: 5, path: 4 };
 
 /** Questions notées automatiquement disponibles (les questions ouvertes sont exclues des examens). */
 export function examPoolSize(e: ExamDef): number {
@@ -94,7 +109,7 @@ export function examPoolSize(e: ExamDef): number {
  * Seuls les examens disposant d'assez de contenu publié sont proposés :
  * nombre minimal de cours et banque au moins deux fois plus grande que le sujet.
  */
-export const EXAMS: ExamDef[] = [...moduleExams, ...transversal, ...mocks].filter(
+export const EXAMS: ExamDef[] = [...moduleExams, ...transversal, ...mocks, ...pathFinals].filter(
   (e) => e.courseIds.length >= MIN_COURSES[e.kind] && examPoolSize(e) >= e.size * 2,
 );
 

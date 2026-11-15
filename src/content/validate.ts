@@ -150,6 +150,7 @@ export function validateContent(set: ContentSet): string[] {
     if (body.courseId !== meta.id) errors.push(`${w} : body.courseId incohérent`);
     const L = body.lesson;
     if (L.intro.trim().length < 80) errors.push(`${w} : introduction trop courte`);
+    if (L.sections.length !== meta.sectionCount) errors.push(`${w} : sectionCount (${meta.sectionCount}) ≠ ${L.sections.length} sections`);
     if (L.sections.length < RULES.minSections) errors.push(`${w} : au moins ${RULES.minSections} sections de leçon`);
     for (const s of L.sections) if (s.blocks.length < RULES.minBlocksPerSection) errors.push(`${w} : section ${s.id} trop courte`);
     const allBlocks = L.sections.flatMap((s) => s.blocks);

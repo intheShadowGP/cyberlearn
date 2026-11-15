@@ -8,6 +8,7 @@ const KIND_TITLE: Record<ExamDef['kind'], string> = {
   module: 'Tests par discipline',
   transversal: 'Évaluations transversales',
   mock: 'Examens blancs',
+  path: 'Examens finaux des parcours',
 };
 
 export default function AssessmentsPage() {
@@ -22,7 +23,7 @@ export default function AssessmentsPage() {
         Questions tirées aléatoirement dans les banques de tous les cours concernés : chaque passage est différent. Les résultats
         détaillés alimentent votre profil de compétences.
       </p>
-      {(['module', 'transversal', 'mock'] as const).map((kind) => {
+      {(['module', 'transversal', 'mock', 'path'] as const).map((kind) => {
         const list = EXAMS.filter((e) => e.kind === kind);
         if (!list.length) return null;
         return (

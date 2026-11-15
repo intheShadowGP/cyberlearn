@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'l-storage', label: 'Sécurité du stockage et des secrets', level: 2 },
     { id: 'l-posture', label: 'Posture et détection des mauvaises configurations', level: 2 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'n-iot-firmware', label: 'Analyse de firmware', level: 3 },
     { id: 'n-iot-design', label: 'Conception sécurisée (secure boot, mises à jour)', level: 3 },
   ],
+  sectionCount: 3,
   questionCount: 16,
   quizSize: 8,
 };

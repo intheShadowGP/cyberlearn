@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'm-ebios', label: 'EBIOS Risk Manager et continuité', level: 2 },
     { id: 'm-regl', label: 'Réglementations européennes', level: 2 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

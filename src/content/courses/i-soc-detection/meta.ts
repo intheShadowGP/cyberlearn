@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'i-attack', label: 'IOC, TTP, MITRE ATT&CK et Sigma', level: 2 },
     { id: 'i-ir', label: 'Réponse à incident', level: 2 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

@@ -4,6 +4,7 @@ import type { CourseBody, CourseCorrections, CourseMeta, CourseSolutions, LabBod
 import { MODULES } from './catalog';
 import { DIAGRAMS } from '../components/diagrams';
 import { PATHS } from './paths';
+import { EXAM_BY_ID } from './exams';
 
 const metas = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { eager: true });
 const bodies = import.meta.glob<{ body: CourseBody }>('./courses/*/body.ts', { eager: true });
@@ -67,6 +68,25 @@ describe('contenu pédagogique', () => {
           seen.add(s.id);
         }
       }
+    }
+  });
+
+  it('parcours : contenu suffisant, laboratoires, disciplines centrales, examen final', () => {
+    expect(PATHS.length).toBeGreaterThanOrEqual(11);
+    for (const p of PATHS) {
+      const courseIds = p.steps.filter((s) => s.kind === 'course').map((s) => s.id);
+      const metas = courseIds.map((id) => set.courses.find((c) => c.meta.id === id)!.meta);
+      expect(courseIds.length, `${p.id} : au moins 4 cours`).toBeGreaterThanOrEqual(4);
+      expect(p.steps.some((s) => s.kind === 'lab'), `${p.id} : au moins un laboratoire`).toBe(true);
+      expect(p.objectives.length, `${p.id} : objectifs`).toBeGreaterThanOrEqual(3);
+      expect(p.prerequisites.length, `${p.id} : prérequis`).toBeGreaterThanOrEqual(1);
+      const core = metas.filter((m) => p.coreModules.includes(m.module)).length;
+      expect(core, `${p.id} : au moins 2 cours dans les disciplines centrales`).toBeGreaterThanOrEqual(2);
+      const exam = EXAM_BY_ID.get(`parcours-${p.id}`);
+      expect(exam, `${p.id} : examen final`).toBeDefined();
+      const graded = courseIds.reduce((n, id) => n + set.courses.find((c) => c.meta.id === id)!.body.questions.filter((q) => q.type !== 'open').length, 0);
+      expect(graded, `${p.id} : banque de l’examen final ≥ 2 × taille`).toBeGreaterThanOrEqual(exam!.size * 2);
+      expect(new Set(p.steps.map((s) => s.id)).size, `${p.id} : étapes uniques`).toBe(p.steps.length);
     }
   });
 

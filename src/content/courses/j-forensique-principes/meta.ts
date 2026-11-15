@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'j-artefacts', label: 'Artefacts Windows et Linux', level: 2 },
     { id: 'j-timeline', label: 'Construction de chronologie', level: 2 },
   ],
+  sectionCount: 5,
   questionCount: 16,
   quizSize: 8,
 };

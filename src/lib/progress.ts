@@ -55,6 +55,38 @@ export interface Goal {
   target?: string;
 }
 
+/** Journal d'activité : sert uniquement à dater les actions (séries, défis, historique). */
+export type ActivityType = 'section' | 'practice' | 'course-attempt' | 'lab-attempt' | 'exam-attempt' | 'review';
+export interface Activity {
+  id?: number;
+  type: ActivityType;
+  ref: string;
+  date: number;
+  ok?: boolean;
+}
+
+/** Élément de révision (système de Leitner à 5 boîtes). */
+export interface ReviewItem {
+  /** "q:<questionId>" pour une question, "g:<terme>" pour une carte de glossaire. */
+  itemId: string;
+  kind: 'question' | 'glossary';
+  /** Cours ou laboratoire propriétaire de la question ; cours de la définition pour le glossaire. */
+  owner: string;
+  ownerKind: 'course' | 'lab';
+  box: 1 | 2 | 3 | 4 | 5;
+  due: number;
+  lapses: number;
+  updatedAt: number;
+}
+
+export interface Profile {
+  key: 'profile';
+  /** Pseudonyme facultatif, jamais transmis. */
+  pseudonym: string;
+  followedPaths: string[];
+  createdAt: number;
+}
+
 export interface MetaRecord {
   key: string;
   value: unknown;
@@ -73,6 +105,43 @@ export function notify(): void {
 }
 
 export const SKILL_HISTORY = 6;
+const DAY = 86_400_000;
+/** Intervalle avant la prochaine révision, par boîte (jours). */
+export const LEITNER_DAYS: Record<ReviewItem['box'], number> = { 1: 1, 2: 3, 3: 7, 4: 14, 5: 30 };
+
+type ReviewBase = Omit<ReviewItem, 'box' | 'due' | 'lapses' | 'updatedAt'>;
+
+/** Nouvel état d'un élément de révision après une réponse. Fonction pure, testée. */
+export function scheduleReview(prev: ReviewItem | undefined, base: ReviewBase, ok: boolean, now: number): ReviewItem {
+  if (!ok) return { ...base, box: 1, due: now + LEITNER_DAYS[1] * DAY, lapses: (prev?.lapses ?? 0) + 1, updatedAt: now };
+  const box = (prev ? Math.min(5, prev.box + 1) : 2) as ReviewItem['box'];
+  return { ...base, box, due: now + LEITNER_DAYS[box] * DAY, lapses: prev?.lapses ?? 0, updatedAt: now };
+}
+
+function logActivity(tx: IDBTransaction, a: Activity): void {
+  store(tx, 'activity').add(a);
+}
+
+type OwnerOf = (qid: string) => { owner: string; ownerKind: 'course' | 'lab' } | undefined;
+
+/**
+ * Met à jour le programme de révision après une évaluation : une question ratée
+ * (ou partiellement réussie) entre en boîte 1 ; une question déjà suivie et réussie progresse.
+ * Les questions ouvertes non auto-évaluées sont ignorées.
+ */
+async function updateReviews(tx: IDBTransaction, score: QuizScore, ownerOf: OwnerOf, now: number): Promise<void> {
+  const s = store(tx, 'reviews');
+  for (const r of score.results) {
+    if (!r.graded) continue;
+    const o = ownerOf(r.questionId);
+    if (!o) continue;
+    const itemId = 'q:' + r.questionId;
+    const prev = (await req(s.get(itemId))) as ReviewItem | undefined;
+    const ok = r.verdict === 'correct';
+    if (ok && !prev) continue; // rien à réviser
+    s.put(scheduleReview(prev, { itemId, kind: 'question', ...o }, ok, now));
+  }
+}
 
 function store(tx: IDBTransaction, name: StoreName): IDBObjectStore {
   return tx.objectStore(name);
@@ -130,12 +199,18 @@ function toggle(list: string[], id: string, on: boolean): string[] {
 }
 
 export async function markSection(courseId: string, sectionId: string, read: boolean): Promise<void> {
-  await withTx(['progress'], (tx) => updateCourse(tx, courseId, (p) => (p.sectionsRead = toggle(p.sectionsRead, sectionId, read))));
+  await withTx(['progress', 'activity'], async (tx) => {
+    const p = await updateCourse(tx, courseId, (p) => (p.sectionsRead = toggle(p.sectionsRead, sectionId, read)));
+    if (read) logActivity(tx, { type: 'section', ref: courseId + '#' + sectionId, date: p.lastVisit });
+  });
   notify();
 }
 
 export async function markPractice(courseId: string, practiceId: string, isDone: boolean): Promise<void> {
-  await withTx(['progress'], (tx) => updateCourse(tx, courseId, (p) => (p.practiceDone = toggle(p.practiceDone, practiceId, isDone))));
+  await withTx(['progress', 'activity'], async (tx) => {
+    const p = await updateCourse(tx, courseId, (p) => (p.practiceDone = toggle(p.practiceDone, practiceId, isDone)));
+    if (isDone) logActivity(tx, { type: 'practice', ref: courseId + '#' + practiceId, date: p.lastVisit });
+  });
   notify();
 }
 
@@ -183,9 +258,11 @@ export async function recordCourseAttempt(
 ): Promise<{ validated: boolean; firstValidation: boolean }> {
   const date = Date.now();
   let firstValidation = false;
-  const p = await withTx(['attempts', 'skills', 'progress'], async (tx) => {
+  const p = await withTx(['attempts', 'skills', 'progress', 'activity', 'reviews'], async (tx) => {
     store(tx, 'attempts').add(attemptOf('course', courseId, score, durationSec, date));
     await recordSkills(tx, score.bySkill, date);
+    await updateReviews(tx, score, () => ({ owner: courseId, ownerKind: 'course' }), date);
+    logActivity(tx, { type: 'course-attempt', ref: courseId, date, ok: score.percent >= PASS_THRESHOLD });
     return updateCourse(tx, courseId, (p) => {
       p.attempts += 1;
       p.bestPercent = Math.max(p.bestPercent ?? 0, score.percent);
@@ -204,9 +281,11 @@ export async function recordCourseAttempt(
 
 export async function recordLabAttempt(labId: string, score: QuizScore, durationSec: number): Promise<void> {
   const date = Date.now();
-  await withTx(['attempts', 'skills', 'labProgress'], async (tx) => {
+  await withTx(['attempts', 'skills', 'labProgress', 'activity', 'reviews'], async (tx) => {
     store(tx, 'attempts').add(attemptOf('lab', labId, score, durationSec, date));
     await recordSkills(tx, score.bySkill, date);
+    await updateReviews(tx, score, () => ({ owner: labId, ownerKind: 'lab' }), date);
+    logActivity(tx, { type: 'lab-attempt', ref: labId, date, ok: score.percent >= PASS_THRESHOLD });
     const s = store(tx, 'labProgress');
     const p = ((await req(s.get(labId))) as LabProgress | undefined) ?? {
       labId,
@@ -230,11 +309,61 @@ export async function recordLabAttempt(labId: string, score: QuizScore, duration
 
 /* ---------- Examens ---------- */
 
-export async function recordExamAttempt(examId: string, score: QuizScore, durationSec: number): Promise<void> {
+export async function recordExamAttempt(
+  examId: string,
+  score: QuizScore,
+  durationSec: number,
+  owners: ReadonlyMap<string, string> = new Map(),
+): Promise<void> {
   const date = Date.now();
-  await withTx(['attempts', 'skills'], async (tx) => {
+  await withTx(['attempts', 'skills', 'activity', 'reviews'], async (tx) => {
     store(tx, 'attempts').add(attemptOf('exam', examId, score, durationSec, date));
     await recordSkills(tx, score.bySkill, date);
+    const ownerOf: OwnerOf = (qid) => {
+      const o = owners.get(qid);
+      return o ? { owner: o, ownerKind: 'course' } : undefined;
+    };
+    await updateReviews(tx, score, ownerOf, date);
+    logActivity(tx, { type: 'exam-attempt', ref: examId, date, ok: score.percent >= PASS_THRESHOLD });
+  });
+  notify();
+}
+
+/* ---------- Révisions ---------- */
+
+/** Enregistre la réponse à une carte de révision (question ou glossaire). */
+export async function answerReview(base: ReviewBase, ok: boolean): Promise<void> {
+  const now = Date.now();
+  await withTx(['reviews', 'activity'], async (tx) => {
+    const s = store(tx, 'reviews');
+    const prev = (await req(s.get(base.itemId))) as ReviewItem | undefined;
+    s.put(scheduleReview(prev, base, ok, now));
+    logActivity(tx, { type: 'review', ref: base.itemId, date: now, ok });
+  });
+  notify();
+}
+
+/* ---------- Profil local ---------- */
+
+export const PSEUDONYM_MAX = 40;
+/** Lettres, chiffres, espaces et ponctuation simple : aucun caractère de contrôle ni balise. */
+export function sanitizePseudonym(raw: string): string {
+  return raw.replace(/[^\p{L}\p{N} ._'-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, PSEUDONYM_MAX);
+}
+
+export async function saveProfile(patch: Partial<Pick<Profile, 'pseudonym' | 'followedPaths'>>): Promise<void> {
+  await withTx(['profile'], async (tx) => {
+    const s = store(tx, 'profile');
+    const cur = ((await req(s.get('profile'))) as Profile | undefined) ?? {
+      key: 'profile' as const,
+      pseudonym: '',
+      followedPaths: [],
+      createdAt: Date.now(),
+    };
+    const next: Profile = { ...cur };
+    if (patch.pseudonym !== undefined) next.pseudonym = sanitizePseudonym(patch.pseudonym);
+    if (patch.followedPaths !== undefined) next.followedPaths = [...new Set(patch.followedPaths)].slice(0, 50);
+    s.put(next);
   });
   notify();
 }
@@ -259,20 +388,26 @@ export interface Snapshot {
   skills: SkillRecord[];
   goals: Goal[];
   meta: MetaRecord[];
+  profile: Profile[];
+  activity: Activity[];
+  reviews: ReviewItem[];
 }
 
 export async function loadSnapshot(): Promise<Snapshot> {
-  const [progress, labProgress, attempts, skills, goals, meta] = await Promise.all([
+  const [progress, labProgress, attempts, skills, goals, meta, profile, activity, reviews] = await Promise.all([
     getAll<CourseProgress>('progress'),
     getAll<LabProgress>('labProgress'),
     getAll<Attempt>('attempts'),
     getAll<SkillRecord>('skills'),
     getAll<Goal>('goals'),
     getAll<MetaRecord>('meta'),
+    getAll<Profile>('profile'),
+    getAll<Activity>('activity'),
+    getAll<ReviewItem>('reviews'),
   ]);
-  return { progress, labProgress, attempts, skills, goals, meta };
+  return { progress, labProgress, attempts, skills, goals, meta, profile, activity, reviews };
 }
 
 export function emptySnapshot(): Snapshot {
-  return { progress: [], labProgress: [], attempts: [], skills: [], goals: [], meta: [] };
+  return { progress: [], labProgress: [], attempts: [], skills: [], goals: [], meta: [], profile: [], activity: [], reviews: [] };
 }

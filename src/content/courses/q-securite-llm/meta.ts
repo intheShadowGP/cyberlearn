@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'q-injection', label: 'Injection de prompt directe et indirecte', level: 3 },
     { id: 'q-agents', label: 'Sécurité des agents et des outils', level: 3 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

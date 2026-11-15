@@ -147,6 +147,8 @@ export interface CourseMeta {
   /** Connaissances supposées acquises (texte libre). */
   prerequisiteKnowledge: string[];
   skills: Skill[];
+  /** Nombre de sections de la leçon (vérifié par le validateur) : sert à distinguer « consulté » et « leçon terminée ». */
+  sectionCount: number;
   /** Nombre total de questions de la banque (vérifié par le validateur). */
   questionCount: number;
   /** Nombre de questions tirées aléatoirement pour une évaluation. */
@@ -227,5 +229,12 @@ export interface PathDef {
   title: string;
   audience: string;
   description: string;
+  /** Objectifs pédagogiques du parcours. */
+  objectives: string[];
+  /** Connaissances supposées acquises avant de commencer. */
+  prerequisites: string[];
+  /** Disciplines au cœur du parcours (le validateur exige des cours dans ces disciplines). */
+  coreModules: ModuleId[];
+  /** Progression ordonnée : chaque cours n'arrive qu'après ses prérequis. */
   steps: { kind: 'course' | 'lab'; id: string }[];
 }

@@ -24,6 +24,7 @@ export const meta: CourseMeta = {
     { id: 'g-mem-protect', label: 'Protections système (canari, NX, ASLR)', level: 3 },
     { id: 'g-secure-code', label: 'Code sûr, revue et outillage', level: 3 },
   ],
+  sectionCount: 5,
   questionCount: 16,
   quizSize: 8,
 };

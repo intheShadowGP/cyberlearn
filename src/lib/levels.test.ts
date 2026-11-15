@@ -4,7 +4,7 @@ import { moduleLevel, skillState, weakSkills, skillStatuses } from './levels';
 import type { SkillRecord } from './progress';
 
 function course(id: string, level: Level, skills: Skill[]): CourseMeta {
-  return { id, module: 'B', topics: [], title: id, level, durationMin: 30, summary: '', objectives: [], prerequisites: [], prerequisiteKnowledge: [], skills, questionCount: 0, quizSize: 0 };
+  return { id, module: 'B', topics: [], title: id, level, durationMin: 30, summary: '', objectives: [], prerequisites: [], prerequisiteKnowledge: [], skills, sectionCount: 3, questionCount: 0, quizSize: 0 };
 }
 const rec = (skillId: string, ratio: number, weight = 3): SkillRecord => ({ skillId, history: [{ ratio, weight, date: 1 }] });
 

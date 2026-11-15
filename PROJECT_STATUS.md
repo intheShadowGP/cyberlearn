@@ -34,3 +34,20 @@ Légende : ✅ réalisé et testé · 🟡 partiel · ❌ manquant
 - Phases 1 à 3 : terminées (voir docs/AUDIT.md, audits 1 à 4).
 - Phase 4 (fonctionnalités avancées) : en cours.
 - Phases 5 à 7 : à faire.
+
+## Point d'arrêt (limite d'usage atteinte)
+
+**Fait depuis la reprise :**
+- Dépôt poussé sur GitHub ; première exécution CI réussie (lint, tests unitaires, build, e2e Chromium + Firefox + WebKit, déploiement). Site : https://intheshadowgp.github.io/cyberlearn/
+- TypeScript 5.9 + ESLint (règles de sécurité), 0 vulnérabilité.
+- 3 nouveaux cours : DevSecOps, conteneurs/Kubernetes, IoT/firmware (22 cours).
+- Stockage v2 (profil, activité, révisions Leitner), migration v1→v2 testée, suppression complète, export format 2 avec empreinte SHA-256.
+- Moteur de progression dérivé (XP, rangs, badges, séries, défis, 4 états de cours) testé ; 11 parcours avec examen final, validés par tests.
+
+**Reste à faire (logique prête, interface absente) :**
+1. Pages : Profil, Compétences, Révisions (questions ratées, flashcards, par discipline), Glossaire, Recherche, Confidentialité, Documentation ; refonte de la page Parcours (objectifs, prérequis, compétences, examen final, bilan, suivi multiple).
+2. Paramètres : bouton « Supprimer complètement le profil local » (deleteDatabase existe) et visualiseur des données conservées (countAll existe).
+3. Fiche de vérification par cours (date, versions des référentiels, notions évolutives) et vérification des faits sensibles aux versions.
+4. Docs : ARCHITECTURE, PRIVACY, CURRICULUM (généré + test), TESTING (traçabilité des 20 contrôles), DEPLOYMENT.
+5. Tests e2e des nouvelles pages, responsive, filtres, recherche, crawl des liens internes, persistance au redémarrage.
+6. Audit Fable final en 5 axes, corrections, AUDIT.md.

@@ -23,6 +23,7 @@ export const meta: CourseMeta = {
     { id: 'l-dso-supply', label: 'Chaîne d’approvisionnement logicielle', level: 3 },
     { id: 'l-dso-ci', label: 'Durcissement CI/CD et secrets', level: 3 },
   ],
+  sectionCount: 4,
   questionCount: 16,
   quizSize: 8,
 };

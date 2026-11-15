@@ -22,6 +22,7 @@ export const meta: CourseMeta = {
     { id: 'r-choix', label: 'Choix selon le parcours professionnel', level: 1 },
     { id: 'r-prepa', label: 'Méthode de préparation', level: 1 },
   ],
+  sectionCount: 3,
   questionCount: 16,
   quizSize: 8,
 };

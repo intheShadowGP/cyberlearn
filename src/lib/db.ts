@@ -5,33 +5,42 @@
  */
 
 export const DB_NAME = 'cyberacademie';
-export const DB_VERSION = 1;
+export const DB_VERSION = 2;
 
-export type StoreName = 'progress' | 'labProgress' | 'attempts' | 'skills' | 'goals' | 'meta';
+export type StoreName =
+  | 'progress' | 'labProgress' | 'attempts' | 'skills' | 'goals' | 'meta'
+  | 'profile' | 'activity' | 'reviews';
 
-export const STORES: Record<StoreName, { keyPath: string; autoIncrement?: boolean; indexes?: string[] }> = {
+type StoreDef = { keyPath: string; autoIncrement?: boolean; indexes?: string[] };
+
+export const STORES: Record<StoreName, StoreDef> = {
   progress: { keyPath: 'courseId' },
   labProgress: { keyPath: 'labId' },
   attempts: { keyPath: 'id', autoIncrement: true, indexes: ['refId', 'kind', 'date'] },
   skills: { keyPath: 'skillId' },
   goals: { keyPath: 'id' },
   meta: { keyPath: 'key' },
+  // Version 2
+  profile: { keyPath: 'key' },
+  activity: { keyPath: 'id', autoIncrement: true, indexes: ['date', 'type'] },
+  reviews: { keyPath: 'itemId', indexes: ['due'] },
 };
 
 type Migration = (db: IDBDatabase, tx: IDBTransaction) => void;
 
-/** migrations[n] fait passer le schéma de la version n à n+1. */
+function createStores(db: IDBDatabase, names: StoreName[]): void {
+  for (const name of names) {
+    if (db.objectStoreNames.contains(name)) continue;
+    const def = STORES[name];
+    const store = db.createObjectStore(name, { keyPath: def.keyPath, autoIncrement: def.autoIncrement ?? false });
+    for (const idx of def.indexes ?? []) store.createIndex(idx, idx, { unique: false });
+  }
+}
+
+/** migrations[n] fait passer le schéma de la version n à n+1. Les données existantes sont conservées. */
 const MIGRATIONS: Migration[] = [
-  (db) => {
-    for (const [name, def] of Object.entries(STORES)) {
-      if (db.objectStoreNames.contains(name)) continue;
-      const store = db.createObjectStore(name, {
-        keyPath: def.keyPath,
-        autoIncrement: def.autoIncrement ?? false,
-      });
-      for (const idx of def.indexes ?? []) store.createIndex(idx, idx, { unique: false });
-    }
-  },
+  (db) => createStores(db, ['progress', 'labProgress', 'attempts', 'skills', 'goals', 'meta']),
+  (db) => createStores(db, ['profile', 'activity', 'reviews']),
 ];
 
 let dbPromise: Promise<IDBDatabase> | null = null;
@@ -158,6 +167,36 @@ export async function replaceAll(data: Partial<Record<StoreName, unknown[]>>): P
 
 export async function clearAll(): Promise<void> {
   await replaceAll({});
+}
+
+/**
+ * Suppression complète du profil local : la base IndexedDB elle-même est détruite
+ * (pas seulement vidée). Elle sera recréée vide à la prochaine ouverture.
+ */
+export async function deleteDatabase(): Promise<void> {
+  if (dbPromise) {
+    try {
+      (await dbPromise).close();
+    } catch {
+      /* ouverture échouée : rien à fermer */
+    }
+  }
+  dbPromise = null;
+  await new Promise<void>((resolve, reject) => {
+    const req = indexedDB.deleteDatabase(DB_NAME);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error ?? new Error('Suppression impossible'));
+    req.onblocked = () => reject(new Error('Suppression bloquée : fermez les autres onglets de CyberAcadémie.'));
+  });
+}
+
+/** Comptage des enregistrements par magasin (page « Données conservées »). */
+export async function countAll(): Promise<Record<StoreName, number>> {
+  const db = await openDb();
+  const names = Object.keys(STORES) as StoreName[];
+  const tx = db.transaction(names, 'readonly');
+  const counts = await Promise.all(names.map((n) => wrap(tx.objectStore(n).count())));
+  return Object.fromEntries(names.map((n, i) => [n, counts[i] ?? 0])) as Record<StoreName, number>;
 }
 
 /** Demande au navigateur de ne pas évincer les données (best effort). */
