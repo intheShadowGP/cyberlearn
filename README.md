@@ -10,13 +10,13 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | --- | --- |
 | Disciplines cartographiées (modules A à R) | 18 |
 | Sujets cartographiés | 403 |
-| Sujets couverts par au moins un cours publié | 188 |
+| Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section ou un seul tableau) | 188 |
 | Cours complets (structure obligatoire 4.2 vérifiée au build) | 19, au moins un par discipline, niveaux 1 à 4 |
 | Questions de cours (avec correction et explication) | 305 |
-| Laboratoires interactifs | 11 (réseau, Linux, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel) |
+| Laboratoires interactifs | 12, un par catégorie de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel) |
 | Parcours métiers | 6 |
 
-Les sujets non couverts apparaissent dans la cartographie comme « à venir », sans lien : aucun cours vide n’est publié. Catégorie de laboratoire non encore couverte : Windows (hors Active Directory). Le chiffre de couverture est recalculé par `npm test`.
+Les sujets non couverts apparaissent dans la cartographie comme « à venir », sans lien : aucun cours vide n’est publié. Le chiffre de couverture est recalculé par `npm test`.
 
 ## Fonctionnalités
 

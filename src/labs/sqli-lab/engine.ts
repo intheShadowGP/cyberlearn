@@ -5,6 +5,8 @@
  * et s'exécute sur une table fictive en mémoire. Aucune base réelle n'existe.
  */
 
+import { normalizeTypography } from '../../lib/quiz';
+
 export interface UserRow {
   id: number;
   login: string;
@@ -171,7 +173,10 @@ export function buildVulnerableQuery(login: string, password: string): string {
 }
 
 /** Exécute la requête construite par concaténation (mode vulnérable). */
-export function runVulnerable(login: string, password: string): QueryResult {
+export function runVulnerable(rawLogin: string, rawPassword: string): QueryResult {
+  // Les claviers mobiles remplacent ' par ’ et -- par — : on rétablit l'ASCII, comme le ferait un attaquant.
+  const login = normalizeTypography(rawLogin);
+  const password = normalizeTypography(rawPassword);
   const sql = buildVulnerableQuery(login, password);
   try {
     const { tokens, comment } = tokenize(sql);
@@ -188,7 +193,9 @@ export function runVulnerable(login: string, password: string): QueryResult {
 }
 
 /** Requête paramétrée : les valeurs ne sont jamais interprétées. */
-export function runParameterized(login: string, password: string): QueryResult {
+export function runParameterized(rawLogin: string, rawPassword: string): QueryResult {
+  const login = normalizeTypography(rawLogin);
+  const password = normalizeTypography(rawPassword);
   const sql = "SELECT id, login, role FROM users WHERE login = $1 AND password = $2";
   const rows = USERS.filter((r) => r.login === login && r.password === password).map(({ password: _p, ...rest }) => rest);
   return { sql: `${sql}    -- $1 = ${JSON.stringify(login)}, $2 = ${JSON.stringify(password)}`, rows, error: null, comment: null, union: false };

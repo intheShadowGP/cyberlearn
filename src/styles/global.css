@@ -566,3 +566,6 @@ td .progress-bar { max-width: 140px; }
   body { background: #fff; color: #000; }
   .panel, .question { box-shadow: none; border-color: #999; }
 }
+
+/* Champ fichier masqué visuellement : le focus clavier est reporté sur son libellé-bouton. */
+.file-input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }

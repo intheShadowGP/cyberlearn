@@ -37,13 +37,14 @@ test('accueil sous un sous-chemin, sans erreur ni violation CSP', async ({ page 
   expect(errors).toEqual([]);
 });
 
-test('cours : leçon avant questions, réponses absentes avant validation, progression persistée', async ({ page }) => {
+test('cours : leçon avant questions, réponses absentes avant validation, progression persistée @cross', async ({ page }) => {
   const errors = watchErrors(page);
   const requested: string[] = [];
   page.on('request', (r) => requested.push(r.url()));
 
   await page.goto('./#/cours/b-osi-tcpip');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Modèles OSI et TCP/IP : comment circulent les données');
+  await expect(page.locator('#evaluation')).toBeVisible(); // leçon chargée (chunk asynchrone)
   const order = await page.evaluate(() => {
     const a = document.getElementById('lecon');
     const b = document.getElementById('evaluation');
@@ -102,7 +103,7 @@ test('laboratoire sous-réseaux : calculateur, validation et historique', async 
 
 test('tous les laboratoires se chargent sans erreur', async ({ page }) => {
   const errors = watchErrors(page);
-  for (const id of ['subnet-lab', 'linux-audit-lab', 'ad-events-lab', 'hash-lab', 'sqli-lab', 'log-hunt-lab', 'timeline-lab', 'code-review-lab', 'osint-lab', 'iam-policy-lab', 'modbus-lab']) {
+  for (const id of ['windows-persistence-lab', 'subnet-lab', 'linux-audit-lab', 'ad-events-lab', 'hash-lab', 'sqli-lab', 'log-hunt-lab', 'timeline-lab', 'code-review-lab', 'osint-lab', 'iam-policy-lab', 'modbus-lab']) {
     await page.goto(`./#/laboratoires/${id}`);
     await expect(page.locator('#ws-h')).toBeVisible();
     await expect(page.locator('.question').first()).toBeVisible();
@@ -118,7 +119,7 @@ test('tous les laboratoires se chargent sans erreur', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test('sauvegarde : export puis import aller-retour', async ({ page }) => {
+test('sauvegarde : export puis import aller-retour @cross', async ({ page }) => {
   await page.goto('./#/laboratoires/subnet-lab');
   await page.getByRole('button', { name: 'Valider mes réponses' }).click();
   await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
@@ -153,7 +154,7 @@ test('import : un fichier malveillant est rejeté sans modifier les données', a
   expect(await page.evaluate(() => ({}) as Record<string, unknown>)).not.toHaveProperty('polluted');
 });
 
-test('hors ligne : le site et un cours non encore visité restent accessibles', async ({ page, context }) => {
+test('hors ligne : le site et un cours non encore visité restent accessibles @cross', async ({ page, context }) => {
   await page.goto('./');
   await page.evaluate(async () => (await navigator.serviceWorker.ready).active?.state);
   await expect.poll(async () => page.evaluate(async () => (await caches.keys()).length), { timeout: 15_000 }).toBeGreaterThan(0);
@@ -182,3 +183,78 @@ for (const theme of ['dark', 'light'] as const) {
     }
   });
 }
+
+test('mise à jour du service worker : bannière, nouvelle version, progression conservée', async ({ page, request }) => {
+  const BASE = 'http://localhost:4174/cyberacademie/';
+  await request.get('http://localhost:4174/__switch?to=v1');
+  await page.goto(BASE);
+  await expect(page.getByTestId('build-id')).toHaveText('Version test-v1');
+  await page.evaluate(async () => (await navigator.serviceWorker.ready).active?.state);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+  // Donnée locale à préserver
+  await page.getByLabel('Nouvel objectif').fill('Objectif avant mise à jour');
+  await page.getByRole('button', { name: 'Ajouter' }).click();
+  await expect(page.getByText('Objectif avant mise à jour')).toBeVisible();
+
+  await request.get('http://localhost:4174/__switch?to=v2');
+  await page.reload(); // déclenche la vérification de sw.js
+  await expect(page.getByText('Une nouvelle version est disponible.')).toBeVisible({ timeout: 20_000 });
+  await Promise.all([page.waitForEvent('load'), page.getByRole('button', { name: 'Mettre à jour' }).click()]);
+  await expect(page.getByTestId('build-id')).toHaveText('Version test-v2');
+  await expect(page.getByText('Objectif avant mise à jour')).toBeVisible();
+});
+
+test('PWA installable (Chromium)', async ({ page }) => {
+  await page.goto('./');
+  await page.evaluate(async () => (await navigator.serviceWorker.ready).active?.state);
+  const client = await page.context().newCDPSession(page);
+  const { installabilityErrors } = (await client.send('Page.getInstallabilityErrors')) as { installabilityErrors: { errorId: string }[] };
+  expect(installabilityErrors.map((e) => e.errorId)).toEqual([]);
+});
+
+test('accessibilité : questionnaire corrigé et tous les laboratoires', async ({ page }) => {
+  const labs = ['subnet-lab', 'linux-audit-lab', 'ad-events-lab', 'windows-persistence-lab', 'hash-lab', 'sqli-lab', 'log-hunt-lab', 'timeline-lab', 'code-review-lab', 'osint-lab', 'iam-policy-lab', 'modbus-lab'];
+  for (const theme of ['dark', 'light']) {
+    await page.addInitScript((t) => {
+      localStorage.setItem('cyberacademie.prefs.v1', JSON.stringify({ theme: t, freeMode: true, fontScale: 1, reduceMotion: true }));
+    }, theme);
+    for (const id of labs) {
+      await page.goto(`./#/laboratoires/${id}`);
+      await expect(page.locator('.question').first()).toBeVisible();
+      if (id === 'subnet-lab' || id === 'sqli-lab') {
+        await page.getByRole('button', { name: 'Valider mes réponses' }).click();
+        await expect(page.locator('.correction').first()).toBeVisible();
+      }
+      const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      const summary = r.violations.map((v) => `${theme} ${id} ${v.id} : ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
+      expect(summary, summary.join('\n')).toEqual([]);
+    }
+  }
+});
+
+test('utilisation au clavier seul d’un questionnaire', async ({ page }) => {
+  await page.goto('./#/cours/a-systemes-fondamentaux');
+  const start = page.getByRole('button', { name: 'Commencer l’évaluation' });
+  await start.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.question')).toHaveCount(8);
+  for (const q of await page.locator('.question').all()) {
+    const input = q.locator('input, textarea').first();
+    await input.focus();
+    const type = await input.getAttribute('type');
+    if (type === 'radio' || type === 'checkbox') await page.keyboard.press('Space');
+    else await page.keyboard.type('réponse');
+  }
+  await page.getByRole('button', { name: 'Valider mes réponses' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.correction').first()).toBeVisible();
+  // Le focus est déplacé vers la zone de résultat pour les lecteurs d’écran.
+  await expect.poll(() => page.evaluate(() => document.activeElement?.closest('.quiz') !== null)).toBe(true);
+  const save = page.getByRole('button', { name: 'Enregistrer mon évaluation' });
+  if (await save.isVisible().catch(() => false)) {
+    await save.focus();
+    await page.keyboard.press('Enter');
+  }
+  await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
+});

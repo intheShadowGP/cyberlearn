@@ -110,8 +110,8 @@ export default function SettingsPage() {
         </p>
         <div className="button-row">
           <button type="button" className="btn btn-primary" onClick={doExport}>Exporter ma progression (JSON)</button>
+          <input id={ids.file} ref={fileRef} type="file" accept="application/json,.json" className="sr-only file-input" onChange={(e) => void onFile(e.target.files?.[0])} />
           <label htmlFor={ids.file} className="btn">Importer une sauvegarde…</label>
-          <input id={ids.file} ref={fileRef} type="file" accept="application/json,.json" className="sr-only" onChange={(e) => void onFile(e.target.files?.[0])} />
         </div>
         {pending && (
           <div className="callout callout-warn" role="alertdialog" aria-labelledby="imp-h">

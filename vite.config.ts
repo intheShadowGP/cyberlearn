@@ -86,6 +86,9 @@ export default defineConfig({
   // Chemins relatifs : compatible avec https://user.github.io/<depot>/ sans configuration.
   base: './',
   plugins: [react(), securityHeadersPlugin(), serviceWorkerPlugin()],
+  define: {
+    __BUILD_ID__: JSON.stringify(process.env.BUILD_ID ?? new Date().toISOString().slice(0, 10)),
+  },
   build: {
     target: 'es2022',
     sourcemap: false,

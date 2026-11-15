@@ -58,7 +58,15 @@ describe('contenu pédagogique', () => {
     const labIds = new Set(set.labs.map((l) => l.meta.id));
     for (const p of PATHS) {
       expect(p.steps.length).toBeGreaterThan(2);
-      for (const s of p.steps) expect(s.kind === 'course' ? courseIds.has(s.id) : labIds.has(s.id), `${p.id} → ${s.id}`).toBe(true);
+      const seen = new Set<string>();
+      for (const s of p.steps) {
+        expect(s.kind === 'course' ? courseIds.has(s.id) : labIds.has(s.id), `${p.id} → ${s.id}`).toBe(true);
+        if (s.kind === 'course') {
+          const meta = set.courses.find((c) => c.meta.id === s.id)!.meta;
+          for (const pre of meta.prerequisites) expect(seen.has(pre), `parcours ${p.id} : ${s.id} exige ${pre} plus tôt dans le parcours`).toBe(true);
+          seen.add(s.id);
+        }
+      }
     }
   });
 
@@ -73,7 +81,7 @@ describe('contenu pédagogique', () => {
     const questions = set.courses.reduce((n, c) => n + c.body.questions.length, 0);
     console.info(
       `Couverture : ${set.courses.length} cours, ${set.labs.length} laboratoires, ${questions} questions, ` +
-        `${covered.size}/${total} sujets de la cartographie couverts.`,
+        `${covered.size}/${total} sujets de la cartographie abordés.`,
     );
     expect(covered.size).toBeGreaterThan(0);
   });

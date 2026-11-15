@@ -121,6 +121,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <nav aria-label="Liens secondaires">
             <Link to="/a-propos">À propos, éthique et confidentialité</Link> · <Link to="/parametres">Données et paramètres</Link>
           </nav>
+          <p className="muted" data-testid="build-id">Version {__BUILD_ID__}</p>
         </div>
       </footer>
     </>

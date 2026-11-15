@@ -19,7 +19,7 @@ export default function AboutPage() {
       <p>
         Version actuelle : <strong>{COURSES.length} cours complets</strong>, <strong>{LABS.length} laboratoires interactifs</strong>{' '}
         et <strong>{questions} questions corrigées</strong>. La cartographie compte {total} sujets répartis en {MODULES.length}{' '}
-        disciplines ; {covered} sont couverts par un cours publié. Les autres sont affichés comme « à venir » et ne sont jamais
+        disciplines ; {covered} sont abordés dans au moins un cours publié (un même cours peut aborder plusieurs sujets, plus ou moins en profondeur). Les autres sont affichés comme « à venir » et ne sont jamais
         présentés comme des cours.
       </p>
 

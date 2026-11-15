@@ -11,6 +11,8 @@ const ex = 'explication suffisamment longue pour le test unitaire ici présent';
 describe('normalizeShort', () => {
   it('ignore casse, accents et espaces', () => {
     expect(normalizeShort('  Trente   Hôtes ')).toBe('trente hotes');
+    expect(normalizeShort('Déclaration d’applicabilité')).toBe("declaration d'applicabilite");
+    expect(normalizeShort('admin’ —')).toBe("admin' --");
   });
 });
 

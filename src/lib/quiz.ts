@@ -1,8 +1,21 @@
 import type { Answer, Correction, Question } from '../content/types';
 
-/** Normalise une réponse courte : casse, accents, espaces superflus. */
-export function normalizeShort(s: string): string {
+/**
+ * Remplace la ponctuation « typographique » insérée automatiquement par les claviers
+ * mobiles et les traitements de texte (’ “ ” — –) par ses équivalents ASCII.
+ */
+export function normalizeTypography(s: string): string {
   return s
+    .replace(/[‘’ʼ′]/g, "'")
+    .replace(/[“”«»]/g, '"')
+    .replace(/—/g, '--')
+    .replace(/[–−]/g, '-')
+    .replace(/[  ]/g, ' ');
+}
+
+/** Normalise une réponse courte : typographie, casse, accents, espaces superflus. */
+export function normalizeShort(s: string): string {
+  return normalizeTypography(s)
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .trim()

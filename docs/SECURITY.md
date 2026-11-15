@@ -42,7 +42,7 @@ GitHub Pages ne permet pas de définir des en-têtes HTTP. La CSP est donc une b
 Les bonnes réponses et explications ne sont **pas présentes dans l’interface avant validation** :
 
 - `courses/<id>/body.ts` (leçon, questions) ne contient aucun champ de réponse ; le validateur (`src/content/validate.ts`) fait échouer le build si un champ `correct`, `accepted`, `explanation`, `whyWrong`, `model`, `criteria`, `solution` ou `answer` y apparaît.
-- `corrections.ts` est un chunk séparé, importé dynamiquement uniquement au clic sur « Valider ». Un test end-to-end vérifie qu’aucun chunk `corrections-*.js` n’est demandé et qu’aucune explication n’est dans le DOM avant validation.
+- `corrections.ts` est un chunk séparé, **chargé dans la page** uniquement au clic sur « Valider ». Un test end-to-end vérifie que la page ne demande aucun chunk `corrections-*.js` et qu’aucune explication n’est dans le DOM avant validation. Attention : le service worker, lui, télécharge tous les fichiers (corrections comprises) dans le cache du navigateur à l’installation, pour le fonctionnement hors ligne.
 - Les corrigés des exercices pratiques (`solutions.ts`) forment un troisième chunk, afin qu’afficher un corrigé ne charge pas les réponses du questionnaire.
 
 **Limite assumée** : sur un site statique, tous les fichiers publiés sont téléchargeables. Un utilisateur déterminé peut lire les chunks de corrections. Cette séparation empêche la consultation accidentelle ; ce n’est pas un secret, et la plateforme ne délivre aucune certification dont l’intégrité en dépendrait.

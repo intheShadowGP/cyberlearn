@@ -1,4 +1,4 @@
-import { useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { Answer, Correction, Question } from '../content/types';
 import { emptyAnswer, gradeQuestion, isAnswered, scoreQuiz, shuffle, type QuestionResult, type QuizScore, PASS_THRESHOLD } from '../lib/quiz';
 import { Inline } from './Inline';
@@ -13,6 +13,8 @@ export interface QuizProps {
   onFinished: (score: QuizScore, durationSec: number) => Promise<void> | void;
   onRetry?: () => void;
   recommendation?: (score: QuizScore) => string;
+  /** Passe à true pour forcer la validation (fin du temps imparti d'un examen). */
+  autoValidate?: boolean;
 }
 
 type Phase = 'answering' | 'loading' | 'review' | 'saving' | 'saved';
@@ -32,7 +34,7 @@ const VERDICT_LABEL: Record<string, string> = {
   ungraded: 'À auto-évaluer',
 };
 
-export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFinished, onRetry, recommendation }: QuizProps) {
+export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFinished, onRetry, recommendation, autoValidate }: QuizProps) {
   const [answers, setAnswers] = useState<Record<string, Answer>>(() =>
     Object.fromEntries(questions.map((q) => [q.id, emptyAnswer(q)])),
   );
@@ -104,6 +106,15 @@ export function Quiz({ sessionKey, questions, loadCorrections, skillLabels, onFi
       await save(gradeAll(questions, answers, c));
     }
   }
+
+  // Fin du temps imparti : validation automatique des réponses saisies.
+  const autoRef = useRef(false);
+  useEffect(() => {
+    if (autoValidate && phase === 'answering' && !autoRef.current) {
+      autoRef.current = true;
+      void validate();
+    }
+  });
 
   const reviewing = phase === 'review' || phase === 'saving' || phase === 'saved';
   const openPending =

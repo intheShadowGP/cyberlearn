@@ -119,7 +119,7 @@ export default function CatalogPage() {
         {showMap && (
           <>
             <p className="muted">
-              Sujets en accent : couverts par un cours publié (cliquez pour l’ouvrir). Sujets atténués : cours en préparation.
+              Sujets en accent : abordés dans au moins un cours publié (cliquez pour l’ouvrir), sans garantir un traitement exhaustif. Sujets en pointillés : cours en préparation.
             </p>
             {MODULES.filter((m) => !moduleF || m.id === moduleF).map((m) => {
               const n = m.topics.filter((t) => covered.has(t.id)).length;
@@ -130,7 +130,7 @@ export default function CatalogPage() {
                       {m.id}. {m.title}
                     </Link>{' '}
                     <span className="muted">
-                      ({n}/{m.topics.length} sujets couverts)
+                      ({n}/{m.topics.length} sujets abordés)
                     </span>
                   </h3>
                   <ul className="topic-list">

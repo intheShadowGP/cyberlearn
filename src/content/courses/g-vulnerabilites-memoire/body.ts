@@ -74,7 +74,7 @@ export const body: CourseBody = {
         id: 'prevention',
         title: 'Prévenir : code, outils, langages',
         blocks: [
-          { t: 'list', items: ['**Revue de code** ciblée sur les fonctions à risque : `strcpy`, `strcat`, `sprintf`, `gets` (interdite), `memcpy` avec taille calculée, `printf` sans format littéral.', '**Analyse statique (SAST)** : avertissements du compilateur (`-Wall -Wextra -Wformat-security`), clang-tidy, CodeQL, Coverity.', '**Sanitizers** pendant les tests : AddressSanitizer (ASan) détecte débordements et use-after-free, UBSan les comportements indéfinis.', '**Fuzzing** : générer massivement des entrées pour révéler les plantages (voir module P).', '**Langages sûrs pour la mémoire** (Rust, Go, Java, C#) pour le nouveau code : l’ANSSI, la NSA et la CISA recommandent cette transition.'] },
+          { t: 'list', items: ['**Revue de code** ciblée sur les fonctions à risque : `strcpy`, `strcat`, `sprintf`, `gets` (interdite), `memcpy` avec taille calculée, `printf` sans format littéral.', '**Analyse statique (SAST)** : avertissements du compilateur (`-Wall -Wextra -Wformat-security`), clang-tidy, CodeQL, Coverity.', '**Sanitizers** pendant les tests : AddressSanitizer (ASan) détecte débordements et use-after-free, UBSan les comportements indéfinis.', '**Fuzzing** : générer massivement des entrées pour révéler les plantages (voir module P).', '**Langages sûrs pour la mémoire** (Rust, Go, Java, C#) pour le nouveau code : la CISA, la NSA et leurs partenaires internationaux recommandent cette transition.'] },
           { t: 'code', lang: 'bash', caption: 'Compilation de test avec sanitizers et durcissement', code: 'gcc -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer \\\n    -Wall -Wextra -Wformat-security -D_FORTIFY_SOURCE=3 \\\n    -fstack-protector-strong -fPIE -pie programme.c -o programme' },
           { t: 'callout', kind: 'legal', text: 'L’exploitation de ces vulnérabilités ne doit être pratiquée que sur ses propres programmes ou des environnements d’entraînement (CTF, machines volontairement vulnérables).' },
         ],
@@ -142,7 +142,7 @@ export const body: CourseBody = {
     { id: 'mem-q16', type: 'multi', difficulty: 2, skills: ['g-secure-code', 'g-mem-layout'], prompt: 'Quels langages offrent la sécurité mémoire par défaut (hors blocs explicitement non sûrs) ?', options: [{ id: 'a', text: 'Rust' }, { id: 'b', text: 'C' }, { id: 'c', text: 'Go' }, { id: 'd', text: 'Java' }] },
   ],
   resources: [
-    { title: 'The Case for Memory Safe Roadmaps', source: 'CISA, NSA, ANSSI et partenaires', url: 'https://www.cisa.gov/resources-tools/resources/case-memory-safe-roadmaps' },
+    { title: 'The Case for Memory Safe Roadmaps', source: 'CISA, NSA, FBI et agences partenaires', url: 'https://www.cisa.gov/resources-tools/resources/case-memory-safe-roadmaps' },
     { title: 'SEI CERT C Coding Standard', source: 'Carnegie Mellon University', url: 'https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard' },
     { title: 'AddressSanitizer', source: 'Projet LLVM / Google', url: 'https://clang.llvm.org/docs/AddressSanitizer.html' },
     { title: 'Règles de programmation pour le développement sécurisé de logiciels en langage C', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c' },

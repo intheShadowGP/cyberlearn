@@ -31,6 +31,21 @@ Ce journal consigne **uniquement** les constats effectivement formulés par l’
 | Réponses courtes trop strictes | Variantes acceptées (`/21`, « 30 hôtes »…) | Corrections |
 | Ressources non HTTPS possibles | Règle du validateur | `validate.reject.test.ts` |
 
-## Audit 3 — final
+## Audit 3 — pré-livraison
 
-Voir la section ajoutée après l’audit final.
+| Constat | Correction | Vérification |
+| --- | --- | --- |
+| Quatre parcours sur six mènent à des évaluations verrouillées (prérequis absents du parcours) | Parcours complétés ; test vérifiant que chaque prérequis apparaît plus tôt dans le même parcours |  |
+| Couverture « 188/403 sujets couverts » déclarative et surévaluée | Libellé « abordés » partout (catalogue, À propos, README, test), avec explication | Revue |
+| Aucun laboratoire Windows (seule catégorie de la section 6 non couverte) | Laboratoire « Chasse à la persistance sur un poste Windows (Sysmon) » | E2E « tous les laboratoires » + axe |
+| Ponctuation typographique des claviers mobiles (’ —) faisant échouer réponses courtes et charges SQLi |  appliquée aux réponses courtes et au moteur SQL simulé | ,  |
+|  refusait des charges valides (liste exacte) | Question à choix multiples dont chaque option est vérifiée par le simulateur |  |
+| Liens externes jamais vérifiés ; attribution ANSSI douteuse sur la feuille de route « memory safe » | 73 liens vérifiés (71 OK, redirections contrôlées sans page d’erreur ; 2 en 403 anti-robots : modbus.org, uefi.org, pages existantes) ; attribution corrigée (CISA, NSA, FBI et partenaires) | Script de vérification |
+| Un seul navigateur testé | Projets Firefox et WebKit (tests @cross) ; CI installe les trois navigateurs | WebKit : 3/3 OK localement. Firefox : non exécutable sur ce poste (erreur Windows de configuration côte-à-côte du binaire Playwright) — **non vérifié localement**, exécuté en CI |
+| Mise à jour du service worker jamais testée | Deux builds v1/v2 servis par un serveur commutable ; test : bannière, mise à jour, version v2 affichée, objectif local conservé | E2E Chromium |
+| Installabilité PWA non vérifiée |  | E2E Chromium : aucune erreur |
+| Workflow de déploiement jamais exécuté, branche  alors que le workflow cible  | Branche renommée , Node 24 en CI | **Workflow non exécuté** (aucun dépôt distant) |
+| Champ fichier  : focus clavier invisible ; axe non lancé sur questionnaire corrigé ni sur chaque labo ; pas de parcours clavier | Focus reporté sur le libellé-bouton ; axe sur les 12 labos (2 thèmes) dont 2 après correction ; test clavier seul | E2E Chromium |
+| SECURITY.md affirmait qu’aucun chunk de corrections n’est demandé, alors que le SW les précache | Formulation corrigée : « non chargé dans la page » | Revue |
+| Minuteur d’examen sans effet à l’échéance | Validation automatique à zéro () | Revue de code |
+| Prompt tronqué non résolu | Signalé dans le README et le rapport final | — |

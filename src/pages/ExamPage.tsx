@@ -106,7 +106,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
           {remaining !== null && (
             <p className={`timer ${remaining === 0 ? 'timer-out' : ''}`} role="timer" aria-live={remaining < 60000 ? 'assertive' : 'off'}>
               {remaining === 0
-                ? 'Temps écoulé : validez vos réponses.'
+                ? 'Temps écoulé : vos réponses ont été validées automatiquement.'
                 : `Temps restant : ${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`}
             </p>
           )}
@@ -125,6 +125,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
             }}
             onFinished={(score, d) => recordExamAttempt(exam.id, score, d)}
             onRetry={() => setRound((r) => r + 1)}
+            autoValidate={remaining === 0}
           />
         </>
       )}

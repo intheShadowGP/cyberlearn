@@ -36,6 +36,16 @@ describe('moteur SQL simulé', () => {
     expect(r.rows).toHaveLength(3);
     for (const row of r.rows) expect(row).not.toHaveProperty('password');
   });
+  it('options de la question sqlab-q2 vérifiées par le simulateur', () => {
+    expect(runVulnerable("admin' -- ", '').rows[0]?.login).toBe('admin');
+    expect(runVulnerable("admin'#", '').rows[0]?.login).toBe('admin');
+    expect(runVulnerable("admin' OR '1'='1", '').rows.map((r) => r.login)).toEqual(['admin']);
+    expect(runVulnerable('admin', '').rows).toEqual([]);
+    expect(runVulnerable('"admin" -- ', '').rows).toEqual([]);
+  });
+  it('ponctuation typographique des claviers mobiles normalisée', () => {
+    expect(runVulnerable('admin’ — ', '').rows[0]?.login).toBe('admin');
+  });
   it('tokenize rejette les caractères inconnus', () => {
     expect(() => tokenize('a ~ b')).toThrow(SqlError);
   });

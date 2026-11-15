@@ -44,6 +44,7 @@ export const PATHS: PathDef[] = [
     audience: 'Futurs analystes N1/N2, administrateurs qui rejoignent la Blue Team',
     description: 'Détecter, qualifier, investiguer et reconstituer une attaque, des journaux à la mémoire.',
     steps: [
+      { kind: 'course', id: 'a-systemes-fondamentaux' },
       { kind: 'course', id: 'b-osi-tcpip' },
       { kind: 'course', id: 'i-soc-detection' },
       { kind: 'lab', id: 'log-hunt-lab' },
@@ -60,6 +61,7 @@ export const PATHS: PathDef[] = [
     audience: 'Profils techniques visant le test d’intrusion autorisé',
     description: 'Méthodologie, reconnaissance, failles web et systèmes, vulnérabilités mémoire et recherche, toujours dans un cadre légal.',
     steps: [
+      { kind: 'course', id: 'a-systemes-fondamentaux' },
       { kind: 'course', id: 'b-osi-tcpip' },
       { kind: 'course', id: 'h-pentest-methodologie' },
       { kind: 'lab', id: 'osint-lab' },
@@ -78,6 +80,7 @@ export const PATHS: PathDef[] = [
     audience: 'Développeurs web, back-end et systèmes',
     description: 'Écrire du code qui résiste aux attaques : injections, mémoire, cryptographie, authentification et IA.',
     steps: [
+      { kind: 'course', id: 'a-systemes-fondamentaux' },
       { kind: 'course', id: 'f-injections-xss' },
       { kind: 'lab', id: 'sqli-lab' },
       { kind: 'course', id: 'e-hachage-mots-de-passe' },
@@ -94,12 +97,16 @@ export const PATHS: PathDef[] = [
     audience: 'RSSI, consultants GRC, chefs de projet sécurité',
     description: 'Piloter la sécurité par les risques et comprendre les enjeux techniques majeurs pour arbitrer.',
     steps: [
+      { kind: 'course', id: 'a-systemes-fondamentaux' },
+      { kind: 'course', id: 'b-osi-tcpip' },
       { kind: 'course', id: 'm-risques-conformite' },
+      { kind: 'course', id: 'e-hachage-mots-de-passe' },
       { kind: 'course', id: 'o-identite-mfa-oauth' },
       { kind: 'course', id: 'l-cloud-iam' },
       { kind: 'course', id: 'i-soc-detection' },
       { kind: 'course', id: 'n-ics-modbus' },
       { kind: 'lab', id: 'modbus-lab' },
+      { kind: 'course', id: 'f-injections-xss' },
       { kind: 'course', id: 'q-securite-llm' },
       { kind: 'course', id: 'r-certifications-preparation' },
     ],
