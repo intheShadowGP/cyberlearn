@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 248 |
-| Cours complets | 26 |
-| Questions de cours (avec correction) | 417 |
+| Sujets abordés dans au moins un cours (déclaratif) | 276 |
+| Cours complets | 28 |
+| Questions de cours (avec correction) | 449 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 24 |
+| Évaluations transversales, examens blancs et finaux | 26 |
 
 ## Par discipline
 
@@ -25,8 +25,8 @@
 | B. Réseaux informatiques | 2 | 1, 2 | 9 / 36 |
 | C. Linux | 2 | 2, 3 | 16 / 22 |
 | D. Windows et Windows Server | 2 | 2, 3 | 20 / 25 |
-| E. Cryptographie | 1 | 2 | 9 / 22 |
-| F. Sécurité Web | 1 | 2 | 7 / 27 |
+| E. Cryptographie | 2 | 2, 3 | 22 / 22 |
+| F. Sécurité Web | 2 | 2, 3 | 22 / 27 |
 | G. Programmation et sécurité du code | 1 | 3 | 16 / 23 |
 | H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
@@ -52,7 +52,9 @@
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
+| Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 100 min | 5 | 16 | 2 | 6 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
@@ -95,12 +97,12 @@
 | Parcours débutant | 6 | 3 |
 | Administrateur systèmes et réseaux sécurité | 8 | 5 |
 | Analyste SOC | 9 | 4 |
-| Pentesteur | 7 | 5 |
-| Ingénieur cybersécurité | 10 | 3 |
+| Pentesteur | 8 | 5 |
+| Ingénieur cybersécurité | 11 | 3 |
 | Investigation numérique (forensic) | 8 | 4 |
 | Sécurité cloud | 7 | 1 |
 | Gouvernance, risques et conformité (GRC) | 11 | 1 |
-| DevSecOps | 10 | 3 |
+| DevSecOps | 12 | 3 |
 | Sécurité industrielle et IoT | 7 | 3 |
 | Expert en sécurité | 10 | 3 |
 
@@ -110,8 +112,7 @@
 - **B. Réseaux informatiques** : Adressage IPv6, VLAN, Routage, Switching, DNS, DHCP, NAT, PAT, VPN, Proxy, Reverse proxy, Pare-feu, IDS, IPS, Wi-Fi, WPA2, WPA3, 802.1X, RADIUS, TACACS+, BGP, OSPF, MPLS, SD-WAN, Analyse de paquets, Wireshark, Architecture réseau sécurisée
 - **C. Linux** : Architecture Linux, Distributions, Bash, Gestion des paquets, iptables, Automatisation
 - **D. Windows et Windows Server** : DNS Windows, DHCP Windows, PKI, Certificats, Sécurisation de Windows Server
-- **E. Cryptographie** : Chiffrement symétrique, Chiffrement asymétrique, AES, RSA, ECC, Signatures numériques, Certificats, PKI, TLS, Échange de clés, Perfect Forward Secrecy, Gestion des secrets, Cryptographie post-quantique
-- **F. Sécurité Web** : HTTPS, Cookies, Sessions, CORS, SameSite, CSRF, SSRF, XXE, Path Traversal, LFI, RFI, IDOR, Broken Access Control, Authentication flaws, Session fixation, Clickjacking, Race conditions, Sécurisation des API, OWASP ASVS, OWASP Testing Guide
+- **F. Sécurité Web** : XXE, RFI, Clickjacking, Race conditions, OWASP Testing Guide
 - **G. Programmation et sécurité du code** : Python, JavaScript, TypeScript, Java, Bash, PowerShell, Structures de données
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **J. Forensique numérique** : Analyse de malware

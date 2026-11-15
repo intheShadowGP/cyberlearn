@@ -50,7 +50,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Cadrer un test (convention, règles d’engagement)', 'Mener une reconnaissance OSINT et une énumération', 'Exploiter et corriger des injections en laboratoire', 'Repérer les chemins d’élévation Linux et AD', 'Rédiger un rapport exploitable'],
     prerequisites: ['Réseaux, Linux et Windows de base'],
     coreModules: ['H', 'F', 'G'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('h-pentest-methodologie'), l('osint-lab'), c('f-injections-xss'), l('sqli-lab'), c('c-linux-permissions'), l('linux-audit-lab'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('h-pentest-methodologie'), l('osint-lab'), c('f-injections-xss'), l('sqli-lab'), c('f-acces-sessions-ssrf'), c('c-linux-permissions'), l('linux-audit-lab'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab')],
   },
   {
     id: 'ingenieur-cybersecurite',
@@ -60,7 +60,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Concevoir une architecture segmentée et filtrée', 'Choisir les bons mécanismes cryptographiques et d’authentification', 'Sécuriser cloud et conteneurs', 'Concevoir la détection', 'Justifier ses choix par l’analyse de risques'],
     prerequisites: ['Expérience technique en systèmes, réseaux ou développement'],
     coreModules: ['B', 'E', 'O', 'L'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('o-identite-mfa-oauth'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('i-soc-detection'), c('m-risques-conformite')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('e-chiffrement-tls-pki'), c('o-identite-mfa-oauth'), c('c-linux-permissions'), c('l-cloud-iam'), l('iam-policy-lab'), c('l-conteneurs-kubernetes'), c('i-soc-detection'), c('m-risques-conformite')],
   },
   {
     id: 'forensic',
@@ -100,7 +100,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Corriger injections et vulnérabilités mémoire', 'Stocker correctement mots de passe et secrets', 'Intégrer SAST, SCA, IaC et secrets au pipeline', 'Durcir conteneurs et Kubernetes', 'Sécuriser les applications d’IA'],
     prerequisites: ['Pratique d’un langage de programmation et de Git'],
     coreModules: ['F', 'G', 'L'],
-    steps: [c('a-systemes-fondamentaux'), c('f-injections-xss'), l('sqli-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('o-identite-mfa-oauth'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('c-linux-permissions'), c('l-cloud-iam'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('q-securite-llm')],
+    steps: [c('a-systemes-fondamentaux'), c('f-injections-xss'), l('sqli-lab'), c('f-acces-sessions-ssrf'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('e-chiffrement-tls-pki'), c('o-identite-mfa-oauth'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('c-linux-permissions'), c('l-cloud-iam'), c('l-conteneurs-kubernetes'), c('l-devsecops-pipeline'), c('q-securite-llm')],
   },
   {
     id: 'securite-industrielle',

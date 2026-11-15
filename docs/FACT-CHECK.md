@@ -9,7 +9,7 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | bcrypt : facteur de coût ≥ 10, limite de 72 octets (E) | idem | Vérifié le 2026-11-15 |
 | CISSP : 5 ans d’expérience (R) | ISC2 | Vérifié le 2026-11-15 |
 | Cyber Resilience Act : règlement (UE) 2024/2847, application jusqu’en 2027 (M, N) | EUR-Lex | Vérifié le 2026-11-15 (numéro et échéance 2027) |
-| Liens des ressources (102) | `node scripts/linkcheck.mjs` (statut HTTP + titre de page) | Vérifiés le 2026-11-15 : 100 valides ; uefi.org et modbus.org renvoient 403 aux clients automatisés (page de protection anti-robot pour uefi.org), non vérifiables automatiquement |
+| Liens des ressources (111) | `node scripts/linkcheck.mjs` (statut HTTP + titre de page) | Vérifiés le 2026-11-15 : 109 valides ; uefi.org et modbus.org renvoient 403 aux clients automatisés (page de protection anti-robot pour uefi.org), non vérifiables automatiquement |
 | RGPD art. 33 : notification sous 72 h (I, M) | EUR-Lex, règlement (UE) 2016/679 | Vérifié le 2026-11-15 |
 | NIS2 : alerte précoce sous 24 h (M) | EUR-Lex, directive (UE) 2022/2555 | Vérifié le 2026-11-15 ; seuils d’assujettissement et transpositions nationales non revérifiés |
 | DORA applicable depuis le 17 janvier 2025 (M) | EUR-Lex, règlement (UE) 2022/2554 | Vérifié le 2026-11-15 |
@@ -26,6 +26,11 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | Stratégie d’exécution PowerShell : « pas une frontière de sécurité » (D) | Microsoft Learn, about_Execution_Policies | Vérifié le 2026-11-15 |
 | TLP 2.0 : définitions de TLP:AMBER et TLP:AMBER+STRICT (I) | FIRST | Vérifié le 2026-11-15 |
 | UAC non considérée comme une frontière de sécurité (D) | MSRC, Windows Security Servicing Criteria (UAC classée « defense-in-depth ») | Vérifié le 2026-11-15 |
+| Durée maximale des certificats TLS publics : 200 jours depuis le 15 mars 2026, 100 jours en mars 2027, 47 jours en mars 2029 (E) | CA/Browser Forum, vote SC-081v3 (sources secondaires concordantes) | Vérifié le 2026-11-15 sur sources secondaires |
+| RFC 8996 : abandon de TLS 1.0 et 1.1 (E) | RFC Editor | Vérifié le 2026-11-15 |
+| FIPS 203 (ML-KEM), 204 (ML-DSA), 205 (SLH-DSA) publiés en août 2024 (E) | NIST CSRC | Vérifié le 2026-11-15 |
+| RSA : 2 048 bits minimum, 3 072 bits au-delà de 2030 (ANSSI) (E) | Guide ANSSI des mécanismes cryptographiques | Non vérifié (page de l’ANSSI non lisible automatiquement) |
+| OWASP API Security Top 10 2023 : API1 = Broken Object Level Authorization (F) | OWASP | Vérifié le 2026-11-15 |
 | Plugins Volatility 3 et commandes The Sleuth Kit (J) | Documentations des projets | Non vérifié lors de cette révision (rédigé d’après la pratique) |
 
 Toute contribution qui vérifie une ligne « non vérifié » doit indiquer la source consultée et la date.
