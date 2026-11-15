@@ -10,9 +10,9 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 335 |
-| Cours complets | 36 |
-| Questions de cours (avec correction) | 577 |
+| Sujets abordés dans au moins un cours (déclaratif) | 340 |
+| Cours complets | 37 |
+| Questions de cours (avec correction) | 593 |
 | Laboratoires | 12 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 30 |
@@ -24,7 +24,7 @@
 | A. Fondamentaux de l'informatique | 1 | 1 | 11 / 16 |
 | B. Réseaux informatiques | 5 | 1, 2, 3 | 36 / 36 |
 | C. Linux | 3 | 1, 2, 3 | 22 / 22 |
-| D. Windows et Windows Server | 2 | 2, 3 | 20 / 25 |
+| D. Windows et Windows Server | 3 | 2, 3 | 25 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
 | F. Sécurité Web | 2 | 2, 3 | 22 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
@@ -55,6 +55,7 @@
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
+| Windows Server : services d’infrastructure, PKI et durcissement (`d-windows-server-pki-durcissement`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
@@ -103,7 +104,7 @@
 | Parcours | Cours | Laboratoires |
 | --- | --- | --- |
 | Parcours débutant | 6 | 3 |
-| Administrateur systèmes et réseaux sécurité | 12 | 5 |
+| Administrateur systèmes et réseaux sécurité | 13 | 5 |
 | Analyste SOC | 9 | 4 |
 | Pentesteur | 8 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
@@ -117,7 +118,6 @@
 ## Sujets non couverts (« à venir »)
 
 - **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
-- **D. Windows et Windows Server** : DNS Windows, DHCP Windows, PKI, Certificats, Sécurisation de Windows Server
 - **F. Sécurité Web** : XXE, RFI, Clickjacking, Race conditions, OWASP Testing Guide
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **J. Forensique numérique** : Analyse de malware

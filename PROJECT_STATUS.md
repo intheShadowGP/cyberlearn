@@ -8,7 +8,7 @@ Document de reprise (section 18 du cahier des charges).
 | --- | --- |
 | 1 — Conception (architecture, modèle de menace, organisation pédagogique) | Terminée |
 | 2 — Socle technique (routing, stockage, PWA, tests) | Terminée |
-| 3 — Plateforme pédagogique (36 cours, évaluations, progression) | Terminée |
+| 3 — Plateforme pédagogique (37 cours, évaluations, progression) | Terminée |
 | 4 — Fonctionnalités avancées (12 labos, 11 parcours, glossaire, recherche, révisions, examens, statistiques, gamification, profil) | Terminée |
 | 5 — Sécurisation (lint de sécurité, dépendances, CSP, imports, flux de données, actions épinglées) | Terminée |
 | 6 — Audit Fable 5.2 (5 axes) | Audit réalisé, constats corrigés ; voir docs/AUDIT.md (audit 5) |
@@ -20,7 +20,7 @@ Voir docs/TESTING.md (traçabilité des 20 contrôles fonctionnels) et docs/CURR
 
 ## Anomalies connues et risques résiduels
 
-- Contenu : 5 disciplines sur 18 n’ont qu’un cours (A, H, K, P, R) ; un seul cours de niveau expert (fuzzing). 68 sujets sur 403 restent « à venir ».
+- Contenu : 5 disciplines sur 18 n’ont qu’un cours (A, H, K, P, R) ; un seul cours de niveau expert (fuzzing). 63 sujets sur 403 restent « à venir ».
 - Faits non vérifiés à la source primaire : ISO 27001 annexe A (sources secondaires seulement), événement 7045, plugins Volatility et commandes The Sleuth Kit (voir docs/FACT-CHECK.md).
 - Aucune relecture du contenu par un expert tiers.
 - Firefox non exécutable sur le poste de développement (exécuté en CI).
