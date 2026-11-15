@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 361 |
-| Cours complets | 42 |
-| Questions de cours (avec correction) | 673 |
+| Sujets abordés dans au moins un cours (déclaratif) | 373 |
+| Cours complets | 43 |
+| Questions de cours (avec correction) | 689 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 31 |
+| Évaluations transversales, examens blancs et finaux | 32 |
 
 ## Par discipline
 
@@ -36,7 +36,7 @@
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 3 | 2, 3 | 21 / 21 |
 | O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
-| P. Sécurité avancée et recherche | 1 | 4 | 6 / 18 |
+| P. Sécurité avancée et recherche | 2 | 4 | 18 / 18 |
 | Q. Intelligence artificielle et cybersécurité | 2 | 3 | 16 / 16 |
 | R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
 
@@ -83,6 +83,7 @@
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 85 min | 5 | 16 | 2 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 4 |
+| Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 5 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 85 min | 4 | 16 | 2 | 4 |
 | Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 50 min | 3 | 16 | 2 | 4 |
@@ -118,10 +119,9 @@
 | Gouvernance, risques et conformité (GRC) | 12 | 1 |
 | DevSecOps | 14 | 3 |
 | Sécurité industrielle et IoT | 8 | 3 |
-| Expert en sécurité | 11 | 3 |
+| Expert en sécurité | 13 | 3 |
 
 ## Sujets non couverts (« à venir »)
 
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
-- **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing

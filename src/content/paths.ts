@@ -120,7 +120,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Analyser des chaînes d’attaque Active Directory', 'Comprendre et prévenir les vulnérabilités mémoire', 'Rechercher des vulnérabilités par fuzzing et en conduire la divulgation', 'Auditer une intégration OAuth/OIDC', 'Évaluer la sécurité d’agents IA'],
     prerequisites: ['Avoir validé un parcours intermédiaire (administrateur, SOC, pentesteur ou DevSecOps)'],
     coreModules: ['D', 'G', 'P', 'Q'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('p-fuzzing-recherche'), c('e-hachage-mots-de-passe'), c('o-identite-mfa-oauth'), c('f-injections-xss'), c('q-securite-llm'), c('q-ia-defense-ml'), c('h-pentest-methodologie'), l('osint-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab'), c('e-hachage-mots-de-passe'), c('e-chiffrement-tls-pki'), c('p-fuzzing-recherche'), c('p-materiel-zero-trust-confidentiel'), c('o-identite-mfa-oauth'), c('f-injections-xss'), c('q-securite-llm'), c('q-ia-defense-ml'), c('h-pentest-methodologie'), l('osint-lab')],
   },
 ];
 
