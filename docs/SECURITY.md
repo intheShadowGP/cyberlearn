@@ -56,3 +56,24 @@ Les bonnes réponses et explications ne sont **pas présentes dans l’interface
 ## Signaler une vulnérabilité
 
 Merci de ne pas ouvrir de ticket public : utilisez la fonction « Report a vulnerability » (avis de sécurité privé) du dépôt GitHub.
+
+## Modèle de menace complet (section 10)
+
+La sécurité **du site** est traitée ici ; elle est distincte des notions enseignées dans les cours.
+
+| Menace | Scénario | Mesures en place | Vérification | Risque résiduel |
+| --- | --- | --- | --- | --- |
+| XSS | Contenu ou donnée importée interprété comme HTML/JS | Aucun HTML brut (contenu en blocs, `Inline.tsx` ne produit que des nœuds React) ; ESLint interdit `innerHTML`, `document.write`, `dangerouslySetInnerHTML` ; CSP `script-src 'self'` sans `unsafe-inline` | Lint en CI ; e2e sans erreur CSP | Faible |
+| Dépendances compromises | Paquet npm malveillant ou vulnérable | 3 dépendances d’exécution (React, React DOM, React Router), versions figées, `npm ci`, `npm audit --audit-level=high` en CI, override de `minimatch` | CI | Moyen (actions GitHub épinglées par étiquette, pas par empreinte) |
+| Scripts tiers | Script externe détourné | Aucun script, police ou image tiers ; CSP `default-src 'self'` | e2e « aucune requête vers une autre origine » | Faible |
+| Imports malveillants | Fichier JSON forgé (pollution de prototype, types inattendus, volume) | Taille ≤ 5 Mo, `safeParse`, validation champ par champ, listes blanches d’identifiants, reconstruction d’objets, version vérifiée, empreinte, confirmation avant remplacement, transaction atomique | `backup.test.ts`, `storage-v2.test.ts`, e2e import malveillant | Faible |
+| Données locales altérées | Modification d’IndexedDB par l’utilisateur ou une extension | Les données ne servent qu’à l’affichage local ; XP et badges ignorent les identifiants inconnus ; pseudonyme nettoyé ; rendu toujours en texte | `gamification.test.ts` (identifiants fantômes) | Accepté : l’utilisateur peut modifier ses propres données, sans impact pour autrui |
+| Injection (laboratoires) | Les simulateurs exécutent une entrée utilisateur | Moteur SQL simulé (analyseur maison sans `eval`), terminal par table de correspondance, aucune exécution de code | `labs.test.ts` | Faible |
+| Manipulation du stockage | Corruption, schéma ancien, onglets concurrents | Schéma versionné et migré, transactions atomiques, gestion `onversionchange`/`onblocked` | `storage-v2.test.ts`, `progress.test.ts` | Faible |
+| Chaîne de développement | Workflow CI détourné | Permissions `contents: read` par défaut, droits Pages limités au job de déploiement, `persist-credentials: false`, déploiement conditionné aux tests | Revue du workflow | Moyen (épinglage par SHA recommandé) |
+| Mauvaise configuration GitHub Pages | Source Pages incorrecte, HTTPS non imposé, déploiement sous sous-chemin cassé | Chemins relatifs + HashRouter testés sous sous-chemin ; documentation DEPLOYMENT.md | e2e sous `/cyberacademie/` ; site publié vérifié | Faible (HTTPS imposé dépend du réglage du dépôt) |
+| Fuites involontaires | Secrets dans le dépôt, données personnelles dans l’historique ou les journaux | Aucun secret ni clé ; historique analysé avant la première publication ; aucune journalisation applicative ; adresse e-mail du propriétaire remplacée par l’adresse « noreply » de GitHub | Analyse de l’historique ; lint | Faible |
+
+### En-têtes non applicables sur GitHub Pages
+
+`frame-ancestors`, `Permissions-Policy`, `X-Content-Type-Options`, `Cross-Origin-Opener-Policy` et `Report-To` ne peuvent pas être définis : GitHub Pages ne permet pas d’en-têtes personnalisés et ces directives sont ignorées en balise meta. Elles **ne sont pas** présentées comme actives. Un hébergement permettant les en-têtes devrait les ajouter.
