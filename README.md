@@ -10,11 +10,13 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | --- | --- |
 | Disciplines cartographiées (modules A à R) | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section ou un seul tableau) | 188 |
-| Cours complets (structure obligatoire 4.2 vérifiée au build) | 19, au moins un par discipline, niveaux 1 à 4 |
-| Questions de cours (avec correction et explication) | 305 |
+| Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 209 |
+| Cours complets (structure obligatoire 4.2 vérifiée au build) | 22, au moins un par discipline, niveaux 1 à 4 |
+| Questions de cours (avec correction et explication) | 353 |
 | Laboratoires interactifs | 12, un par catégorie de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel) |
-| Parcours métiers | 6 |
+| Parcours métiers (avec examen final) | 11 |
+
+Inventaire détaillé et généré : [docs/CURRICULUM.md](docs/CURRICULUM.md). Site publié : https://intheshadowgp.github.io/cyberlearn/
 
 Les sujets non couverts apparaissent dans la cartographie comme « à venir », sans lien : aucun cours vide n’est publié. Le chiffre de couverture est recalculé par `npm test`.
 
@@ -25,9 +27,15 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 - **Formations** : recherche, filtres (discipline, niveau, statut), cartographie complète.
 - **Cours** : présentation, leçon (définitions, schémas, exemples, cas d’usage, erreurs fréquentes, bonnes pratiques, points clés), mise en pratique avec corrigés, questions tirées au hasard (5 types), correction détaillée, évaluation par compétence, validation et déblocage.
 - **Laboratoires** : terminal simulé, analyse de journaux, moteur SQL simulé, calculs Web Crypto réels, décodeur Modbus, évaluateur IAM, revue de code, OSINT, chronologie forensique.
-- **Évaluations** : évaluations transversales (4), examens blancs à temps limité avec validation automatique (2), tests par discipline lorsque la discipline compte au moins deux cours publiés (actuellement le module B uniquement).
+- **Évaluations** : évaluations transversales (4), examens blancs à temps limité facultatif (2), examens finaux des 11 parcours, tests par discipline lorsque la discipline compte au moins deux cours publiés (modules B, L et N).
+- **Parcours** : objectifs, prérequis, compétences visées, progression ordonnée, laboratoires, examen final, bilan des compétences ; suivi de plusieurs parcours à la fois.
+- **Profil local** : pseudonyme facultatif, XP et rang (sans effet sur le déverrouillage), niveaux, quatre états par cours (consulté, leçon terminée, évaluation réussie, maîtrisé), badges, séries, défis hebdomadaires, historique, résultats.
+- **Révisions** : questions ratées (révisables immédiatement), répétition espacée de Leitner, révision par discipline, flashcards du glossaire, recommandations selon les difficultés.
+- **Glossaire** et **recherche interne** : construits à partir des définitions et du contenu réels des cours.
+- **Compétences** : acquises, en cours, non maîtrisées, non évaluées, avec maîtrise et évaluations associées.
 - **Niveaux par compétences** : une compétence est acquise à 80 % de réussite sur au moins 3 questions ; un niveau de discipline exige 80 % des compétences publiées de ce niveau et des niveaux inférieurs.
-- **Paramètres** : thème, taille du texte, réduction des animations, mode libre, export/import JSON, effacement.
+- **Paramètres** : thème, taille du texte, réduction des animations, mode libre, données conservées, export/import JSON (format 2 avec empreinte), réinitialisation, suppression complète du profil local.
+- **Documentation** et **confidentialité** intégrées au site.
 
 ## Architecture
 
@@ -43,7 +51,7 @@ src/
   sw/                 Modèle du service worker et enregistrement
 ```
 
-- **React 19, TypeScript 7, Vite 8, React Router 7 (HashRouter)**, sans autre dépendance d’exécution.
+- **React 19, TypeScript 5.9, Vite 8, React Router 7 (HashRouter)**, sans autre dépendance d’exécution.
 - `base: './'` + HashRouter : fonctionne à la racine comme sous `https://<utilisateur>.github.io/<depot>/`, sans réécriture serveur.
 - Le service worker est généré au build avec la liste de **tous** les fichiers (cours, corrections, laboratoires) : un cours jamais ouvert reste disponible hors ligne.
 - Détails de sécurité : [docs/SECURITY.md](docs/SECURITY.md). Journal d’audit : [docs/AUDIT.md](docs/AUDIT.md).
@@ -98,6 +106,10 @@ Le cahier des charges reçu était **tronqué** au milieu de la section 7 (« Pa
 - page Paramètres (export/import, effacement, préférences) et page À propos (éthique, confidentialité, limites) ;
 - exigences d’accessibilité (WCAG 2.1 AA vérifié par axe), de sécurité (CSP, import non fiable), de tests et de documentation ;
 - toute exigence des sections manquantes (au-delà de 7) n’a pas pu être prise en compte.
+
+## Documentation du dépôt
+
+[ARCHITECTURE](docs/ARCHITECTURE.md) · [SECURITY (modèle de menace)](docs/SECURITY.md) · [PRIVACY](docs/PRIVACY.md) · [CURRICULUM (inventaire)](docs/CURRICULUM.md) · [FACT-CHECK](docs/FACT-CHECK.md) · [TESTING](docs/TESTING.md) · [DEPLOYMENT](docs/DEPLOYMENT.md) · [AUDIT](docs/AUDIT.md) · [PROJECT_STATUS](PROJECT_STATUS.md)
 
 ## Licence
 
