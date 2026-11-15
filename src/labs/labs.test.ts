@@ -3,6 +3,8 @@ import { runParameterized, runVulnerable, tokenize, SqlError } from './sqli-lab/
 import { runCommand } from './linux-audit-lab/fs';
 import { buildEvents } from './ad-events-lab/events';
 import { bitDiff, decodeBase64, digest, hmacSha256 } from './hash-lab/crypto';
+import { evaluate, matches, PRINCIPALS } from './iam-policy-lab/evaluator';
+import { decode, parseHex } from './modbus-lab/modbus';
 
 describe('moteur SQL simulé', () => {
   it('connexion normale', () => {
@@ -68,6 +70,40 @@ describe('journal AD fictif', () => {
   it('est trié chronologiquement avec des identifiants uniques', () => {
     expect(ev.map((e) => e.time)).toEqual([...ev.map((e) => e.time)].sort());
     expect(new Set(ev.map((e) => e.id)).size).toBe(ev.length);
+  });
+});
+
+describe('évaluateur IAM', () => {
+  const by = (id: string) => PRINCIPALS.find((p) => p.id === id)!;
+  it('refus explicite, autorisation, refus implicite', () => {
+    expect(evaluate(by('role-app'), 's3:GetObject', 'arn:aws:s3:::factures-prod/2026/F.pdf')).toBe('ALLOW');
+    expect(evaluate(by('role-app'), 's3:DeleteObject', 'arn:aws:s3:::factures-prod/2026/F.pdf')).toBe('EXPLICIT_DENY');
+    expect(evaluate(by('role-app'), 's3:GetObject', 'arn:aws:s3:::factures-test/a.pdf')).toBe('IMPLICIT_DENY');
+    expect(evaluate(by('role-ci'), 'lambda:UpdateFunctionCode', 'arn:aws:lambda:eu-west-3:123456789012:function:api-catalogue')).toBe('ALLOW');
+    expect(evaluate(by('role-ci'), 'lambda:UpdateFunctionCode', 'arn:aws:lambda:eu-west-3:123456789012:function:api-paiement')).toBe('EXPLICIT_DENY');
+    expect(evaluate(by('user-stagiaire'), 'iam:AttachUserPolicy', 'arn:aws:iam::123456789012:user/x')).toBe('ALLOW');
+  });
+  it('les actions sont insensibles à la casse, pas les ressources ; les métacaractères sont échappés', () => {
+    expect(evaluate(by('role-app'), 'S3:getobject', 'arn:aws:s3:::factures-prod/x')).toBe('ALLOW');
+    expect(evaluate(by('role-app'), 's3:GetObject', 'arn:aws:s3:::FACTURES-prod/x')).toBe('IMPLICIT_DENY');
+    expect(matches(['a.b'], 'axb')).toBe(false);
+  });
+});
+
+describe('décodeur Modbus', () => {
+  it('écriture de bobine et de registres', () => {
+    const a = decode(parseHex('00 10 00 00 00 06 01 05 00 02 00 00')!);
+    expect(a).toMatchObject({ unit: 1, fn: 5, write: true, address: 2, value: 'OFF (0x0000)', error: null });
+    const b = decode(parseHex('00 11 00 00 00 0B 01 10 00 05 00 02 04 03 E8 00 00')!);
+    expect(b).toMatchObject({ fn: 0x10, address: 5, value: '2 registre(s) : 1000, 0', error: null });
+    expect(decode(parseHex('00 2A 00 00 00 06 01 06 00 10 00 64')!).value).toBe('100');
+    expect(decode(parseHex('00 07 00 00 00 06 02 05 00 03 FF 00')!).value).toBe('ON (0xFF00)');
+  });
+  it('rejette les entrées invalides', () => {
+    expect(parseHex('zz')).toBeNull();
+    expect(decode([0, 1, 0, 0]).error).toMatch(/trop courte/);
+    expect(decode(parseHex('00 01 00 01 00 06 01 03 00 00 00 08')!).error).toMatch(/protocole/);
+    expect(decode(parseHex('00 01 00 00 00 09 01 03 00 00 00 08')!).error).toMatch(/Longueur/);
   });
 });
 
