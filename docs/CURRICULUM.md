@@ -10,18 +10,18 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 356 |
-| Cours complets | 41 |
-| Questions de cours (avec correction) | 657 |
+| Sujets abordés dans au moins un cours (déclaratif) | 361 |
+| Cours complets | 42 |
+| Questions de cours (avec correction) | 673 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 30 |
+| Évaluations transversales, examens blancs et finaux | 31 |
 
 ## Par discipline
 
 | Discipline | Cours | Niveaux | Sujets abordés / cartographiés |
 | --- | --- | --- | --- |
-| A. Fondamentaux de l'informatique | 1 | 1 | 11 / 16 |
+| A. Fondamentaux de l'informatique | 2 | 1 | 16 / 16 |
 | B. Réseaux informatiques | 5 | 1, 2, 3 | 36 / 36 |
 | C. Linux | 3 | 1, 2, 3 | 22 / 22 |
 | D. Windows et Windows Server | 3 | 2, 3 | 25 / 25 |
@@ -44,6 +44,7 @@
 
 | Cours | Discipline | Niveau | Durée | Sections | Questions | Exercices | Références |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| Fichiers, programmes et ligne de commande : le socle avant la sécurité (`a-fichiers-programmes-ligne-commande`) | A | 1 · Débutant | 75 min | 5 | 16 | 2 | 4 |
 | Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 70 min | 4 | 16 | 2 | 3 |
 | Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 60 min | 4 | 16 | 2 | 4 |
 | Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 75 min | 6 | 17 | 3 | 4 |
@@ -107,7 +108,7 @@
 
 | Parcours | Cours | Laboratoires |
 | --- | --- | --- |
-| Parcours débutant | 6 | 3 |
+| Parcours débutant | 7 | 3 |
 | Administrateur systèmes et réseaux sécurité | 13 | 5 |
 | Analyste SOC | 9 | 4 |
 | Pentesteur | 9 | 5 |
@@ -121,7 +122,6 @@
 
 ## Sujets non couverts (« à venir »)
 
-- **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg
 - **P. Sécurité avancée et recherche** : Architecture Zero Trust, Sécurité matérielle, TPM, HSM, Secure Boot, Side-channel attacks, Fault injection, Rowhammer, Sécurité des systèmes distribués, Cryptographie avancée, Sécurité quantique, Confidential Computing

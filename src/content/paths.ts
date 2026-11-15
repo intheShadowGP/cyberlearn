@@ -20,7 +20,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Comprendre le fonctionnement d’un ordinateur et d’un réseau', 'Calculer un plan d’adressage simple', 'Distinguer hachage, chiffrement et encodage', 'Reconnaître une injection et sa correction', 'Choisir une orientation professionnelle'],
     prerequisites: ['Aucun'],
     coreModules: ['A', 'B'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('f-injections-xss'), l('sqli-lab'), c('r-certifications-preparation')],
+    steps: [c('a-systemes-fondamentaux'), c('a-fichiers-programmes-ligne-commande'), c('b-osi-tcpip'), c('b-ipv4-subnetting'), l('subnet-lab'), c('e-hachage-mots-de-passe'), l('hash-lab'), c('f-injections-xss'), l('sqli-lab'), c('r-certifications-preparation')],
   },
   {
     id: 'admin-systemes-reseaux',
