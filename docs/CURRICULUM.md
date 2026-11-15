@@ -10,9 +10,9 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 302 |
-| Cours complets | 32 |
-| Questions de cours (avec correction) | 513 |
+| Sujets abordés dans au moins un cours (déclaratif) | 313 |
+| Cours complets | 34 |
+| Questions de cours (avec correction) | 545 |
 | Laboratoires | 12 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 30 |
@@ -22,7 +22,7 @@
 | Discipline | Cours | Niveaux | Sujets abordés / cartographiés |
 | --- | --- | --- | --- |
 | A. Fondamentaux de l'informatique | 1 | 1 | 11 / 16 |
-| B. Réseaux informatiques | 2 | 1, 2 | 9 / 36 |
+| B. Réseaux informatiques | 4 | 1, 2 | 20 / 36 |
 | C. Linux | 2 | 2, 3 | 16 / 22 |
 | D. Windows et Windows Server | 2 | 2, 3 | 20 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
@@ -47,6 +47,8 @@
 | Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 70 min | 4 | 16 | 2 | 3 |
 | Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 60 min | 4 | 16 | 2 | 4 |
 | Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 75 min | 6 | 17 | 3 | 4 |
+| Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage (`b-commutation-vlan-ipv6`) | B | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 5 |
+| Routage, DNS, DHCP et NAT : acheminer les paquets entre réseaux (`b-routage-dns-dhcp-nat`) | B | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 80 min | 5 | 16 | 2 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
@@ -99,7 +101,7 @@
 | Parcours | Cours | Laboratoires |
 | --- | --- | --- |
 | Parcours débutant | 6 | 3 |
-| Administrateur systèmes et réseaux sécurité | 8 | 5 |
+| Administrateur systèmes et réseaux sécurité | 10 | 5 |
 | Analyste SOC | 9 | 4 |
 | Pentesteur | 8 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
@@ -113,7 +115,7 @@
 ## Sujets non couverts (« à venir »)
 
 - **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
-- **B. Réseaux informatiques** : Adressage IPv6, VLAN, Routage, Switching, DNS, DHCP, NAT, PAT, VPN, Proxy, Reverse proxy, Pare-feu, IDS, IPS, Wi-Fi, WPA2, WPA3, 802.1X, RADIUS, TACACS+, BGP, OSPF, MPLS, SD-WAN, Analyse de paquets, Wireshark, Architecture réseau sécurisée
+- **B. Réseaux informatiques** : VPN, Proxy, Reverse proxy, Pare-feu, IDS, IPS, Wi-Fi, WPA2, WPA3, 802.1X, RADIUS, TACACS+, SD-WAN, Analyse de paquets, Wireshark, Architecture réseau sécurisée
 - **C. Linux** : Architecture Linux, Distributions, Bash, Gestion des paquets, iptables, Automatisation
 - **D. Windows et Windows Server** : DNS Windows, DHCP Windows, PKI, Certificats, Sécurisation de Windows Server
 - **F. Sécurité Web** : XXE, RFI, Clickjacking, Race conditions, OWASP Testing Guide
