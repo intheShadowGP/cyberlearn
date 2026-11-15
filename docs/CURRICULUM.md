@@ -10,9 +10,9 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 340 |
-| Cours complets | 37 |
-| Questions de cours (avec correction) | 593 |
+| Sujets abordés dans au moins un cours (déclaratif) | 345 |
+| Cours complets | 38 |
+| Questions de cours (avec correction) | 609 |
 | Laboratoires | 12 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 30 |
@@ -26,7 +26,7 @@
 | C. Linux | 3 | 1, 2, 3 | 22 / 22 |
 | D. Windows et Windows Server | 3 | 2, 3 | 25 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
-| F. Sécurité Web | 2 | 2, 3 | 22 / 27 |
+| F. Sécurité Web | 3 | 2, 3 | 27 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
 | H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
@@ -60,6 +60,7 @@
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 100 min | 5 | 16 | 2 | 6 |
+| Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
@@ -106,7 +107,7 @@
 | Parcours débutant | 6 | 3 |
 | Administrateur systèmes et réseaux sécurité | 13 | 5 |
 | Analyste SOC | 9 | 4 |
-| Pentesteur | 8 | 5 |
+| Pentesteur | 9 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
 | Investigation numérique (forensic) | 8 | 4 |
 | Sécurité cloud | 8 | 1 |
@@ -118,7 +119,6 @@
 ## Sujets non couverts (« à venir »)
 
 - **A. Fondamentaux de l'informatique** : Système de fichiers, Architecture logicielle, Notions de compilation, Terminal et ligne de commande, Notions de programmation
-- **F. Sécurité Web** : XXE, RFI, Clickjacking, Race conditions, OWASP Testing Guide
 - **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap
 - **J. Forensique numérique** : Analyse de malware
 - **K. Malware et reverse engineering** : Bootkits, Keyloggers, Analyse de binaires, Désassemblage, Débogage, Ghidra, IDA, x64dbg

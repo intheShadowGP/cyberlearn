@@ -50,7 +50,7 @@ export const PATHS: PathDef[] = [
     objectives: ['Cadrer un test (convention, règles d’engagement)', 'Mener une reconnaissance OSINT et une énumération', 'Exploiter et corriger des injections en laboratoire', 'Repérer les chemins d’élévation Linux et AD', 'Rédiger un rapport exploitable'],
     prerequisites: ['Réseaux, Linux et Windows de base'],
     coreModules: ['H', 'F', 'G'],
-    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('h-pentest-methodologie'), l('osint-lab'), c('f-injections-xss'), l('sqli-lab'), c('f-acces-sessions-ssrf'), c('c-linux-permissions'), l('linux-audit-lab'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab')],
+    steps: [c('a-systemes-fondamentaux'), c('b-osi-tcpip'), c('h-pentest-methodologie'), l('osint-lab'), c('f-injections-xss'), l('sqli-lab'), c('f-acces-sessions-ssrf'), c('f-xxe-rfi-clickjacking-race'), c('c-linux-permissions'), l('linux-audit-lab'), c('d-ad-authentification'), l('ad-events-lab'), c('g-vulnerabilites-memoire'), l('code-review-lab')],
   },
   {
     id: 'ingenieur-cybersecurite',
