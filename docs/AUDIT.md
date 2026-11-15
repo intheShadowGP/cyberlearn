@@ -55,10 +55,10 @@ Ce journal consigne **uniquement** les constats effectivement formulés par l’
 | Constat | Correction | Vérification |
 | --- | --- | --- |
 | Moteur d’examen et pages Évaluations, Discipline, Parcours (liste), À propos et 404 jamais rendus en test | Test de fumée de 9 routes (erreurs console + axe) ; test d’examen transversal complet (20 questions, corrections, tableau de bord) | E2E Chromium et WebKit |
-|  sans test ; libellé « minutes conseillées » obsolète | Test unitaire ; libellé « temps limité … validation automatique » |  |
-| Déverrouillage par validation d’un prérequis jamais exécuté ;  sans test | Test unitaire ; E2E par import d’une sauvegarde où le prérequis est validé | , E2E |
+| `autoValidate` sans test ; libellé « minutes conseillées » obsolète | Test unitaire ; libellé « temps limité … validation automatique » | `Quiz.test.tsx` |
+| Déverrouillage par validation d’un prérequis jamais exécuté ; `unlock.ts` sans test | Test unitaire ; E2E par import d’une sauvegarde où le prérequis est validé | `unlock.test.ts`, E2E |
 | Catalogue sans prérequis ni pourcentage de progression | Prérequis sur chaque carte de cours ; cours validés et pourcentage par discipline | E2E (« 1/2 cours validés, 50 % ») |
-|  affichait l’erreur au lieu de la 404 |  | E2E 404 |
+| `#/module/constructor` affichait l’erreur au lieu de la 404 | `Object.hasOwn` | E2E 404 |
 | « Sept artefacts » au lieu de huit | Corrigé | Revue |
 | Ligne de compilation combinant ASan et _FORTIFY_SOURCE | Deux compilations distinctes (tests avec sanitizers, production durcie) | Revue |
 | Divulgations demandées : tests de discipline limités au module B ; Firefox et CI non exécutés ; liens 403 | Indiqué dans README, AUDIT et rapport final | — |
