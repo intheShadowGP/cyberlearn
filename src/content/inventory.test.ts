@@ -9,6 +9,7 @@ import { MODULES } from './catalog';
 import { COURSES, LABS } from './registry';
 import { PATHS, pathCourseIds } from './paths';
 import { EXAMS } from './exams';
+import { SCENARIOS } from './scenarios';
 import { LEVEL_LABELS } from './types';
 import type { CourseBody } from './types';
 
@@ -38,6 +39,7 @@ function render(): string {
     `| Laboratoires | ${LABS.length} |`,
     `| Parcours | ${PATHS.length} |`,
     `| Évaluations transversales, examens blancs et finaux | ${EXAMS.length} |`,
+    `| Épreuves de démarche (scénarios) | ${SCENARIOS.length} |`,
     '',
     '## Par discipline',
     '',
@@ -58,6 +60,8 @@ function render(): string {
   for (const l of LABS) lines.push(`| ${l.title} (\`${l.id}\`) | ${l.category} | ${l.level} | ${l.relatedCourses.join(', ')} |`);
   lines.push('', '## Parcours', '', '| Parcours | Cours | Laboratoires |', '| --- | --- | --- |');
   for (const p of PATHS) lines.push(`| ${p.title} | ${pathCourseIds(p).length} | ${p.steps.length - pathCourseIds(p).length} |`);
+  lines.push('', '## Épreuves de démarche', '', '| Épreuve | Niveau | Questions | Cours liés |', '| --- | --- | --- | --- |');
+  for (const s of SCENARIOS) lines.push(`| ${s.title} (\`${s.id}\`) | ${s.level} | ${s.questionCount} | ${s.relatedCourses.join(', ')} |`);
   lines.push('', '## Sujets non couverts (« à venir »)', '');
   for (const m of MODULES) {
     const missing = m.topics.filter((t) => !covered.has(t.id)).map((t) => t.label);

@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { EXAMS, type ExamDef } from '../content/exams';
+import { SCENARIOS } from '../content/scenarios';
 import { COURSE_BY_ID } from '../content/registry';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
+import { LevelBadge } from '../components/Badges';
 
 const KIND_TITLE: Record<ExamDef['kind'], string> = {
   module: 'Tests par discipline',
@@ -54,6 +56,36 @@ export default function AssessmentsPage() {
           </section>
         );
       })}
+
+      {SCENARIOS.length > 0 && (
+        <section aria-labelledby="k-scenario">
+          <h2 id="k-scenario">Épreuves de démarche</h2>
+          <p className="muted">
+            Un dossier d’incident unique et une suite de questions ordonnées : on y évalue le raisonnement (triage,
+            corrélation, qualification, décision), pas une banque tirée au hasard.
+          </p>
+          <ul className="card-grid">
+            {SCENARIOS.map((s) => {
+              const att = examAttempts.filter((a) => a.refId === s.id);
+              const best = att.length ? Math.max(...att.map((a) => a.percent)) : null;
+              return (
+                <li key={s.id}>
+                  <article className="card">
+                    <h3>
+                      <Link className="card-link" to={`/epreuve/${s.id}`}>{s.title}</Link>
+                    </h3>
+                    <p className="muted">{s.objective}</p>
+                    <p className="card-foot muted">
+                      <LevelBadge level={s.level} /> · {s.questionCount} questions · {s.durationMin} min
+                      {best !== null && ` · meilleur score ${best} %`}
+                    </p>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }

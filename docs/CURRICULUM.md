@@ -16,6 +16,7 @@
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
+| Épreuves de démarche (scénarios) | 1 |
 
 ## Par discipline
 
@@ -128,6 +129,12 @@
 | DevSecOps | 14 | 3 |
 | Sécurité industrielle et IoT | 8 | 3 |
 | Expert en sécurité | 13 | 3 |
+
+## Épreuves de démarche
+
+| Épreuve | Niveau | Questions | Cours liés |
+| --- | --- | --- | --- |
+| Épreuve de démarche — Intrusion sur un domaine Active Directory (`soc-intrusion-ad`) | 3 | 7 | i-soc-detection, d-ad-authentification |
 
 ## Sujets non couverts (« à venir »)
 

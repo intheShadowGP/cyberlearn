@@ -36,4 +36,9 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | Cours G (code sûr), O (comptes à privilèges) et Q (IA pour la défense) : comportements des langages, fonctions PAM, typologie des attaques contre les modèles | Documentations citées en ressources (liens vérifiés) | Rédigés d’après la pratique ; aucun fait daté ou chiffré n’a été confronté individuellement à sa source |
 | Plugins Volatility 3 et commandes The Sleuth Kit (J) | Documentations des projets | Non vérifié lors de cette révision (rédigé d’après la pratique) |
 
+| MITRE ATT&CK T1110 Brute Force → tactique Credential Access (épreuve SOC) | attack.mitre.org/techniques/T1110 | Vérifié le 2026-11-16 |
+| MITRE ATT&CK T1558.003 Kerberoasting (parent T1558) → Credential Access ; demande de TGS, portions chiffrées en RC4 (épreuve SOC) | attack.mitre.org/techniques/T1558/003 | Vérifié le 2026-11-16 |
+| MITRE ATT&CK T1078.002 Valid Accounts: Domain Accounts → Initial Access, Persistence, Privilege Escalation, Defense Evasion (épreuve SOC) | attack.mitre.org/techniques/T1078/002 | Vérifié le 2026-11-16 |
+| MITRE ATT&CK T1098.007 Account Manipulation: Additional Local or Domain Groups → Persistence, Privilege Escalation (ajout à un groupe privilégié ; épreuve SOC) | attack.mitre.org/techniques/T1098/007 | Vérifié le 2026-11-16 (la page ne nomme pas « Admins du domaine » mais couvre l’ajout à des groupes de domaine) |
+
 Toute contribution qui vérifie une ligne « non vérifié » doit indiquer la source consultée et la date.

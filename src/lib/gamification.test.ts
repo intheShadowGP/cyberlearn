@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { badges, computeXp, courseStage, pathStatus, rankOf, streaks, weeklyChallenges, XP_RULES } from './gamification';
+import { badges, computeXp, courseStage, knownSnapshot, pathStatus, rankOf, streaks, weeklyChallenges, XP_RULES } from './gamification';
 import { emptySnapshot, type Snapshot } from './progress';
 import { COURSE_BY_ID } from '../content/registry';
+import { SCENARIO_BY_ID } from '../content/scenarios';
 import { PATH_BY_ID } from '../content/paths';
 import { isUnlocked, progressMap } from './unlock';
 import { moduleLevel } from './levels';
@@ -10,6 +11,18 @@ import { COURSES } from '../content/registry';
 const DAY = 86_400_000;
 const prog = (courseId: string, over: Partial<Snapshot['progress'][number]> = {}): Snapshot['progress'][number] => ({
   courseId, status: 'started', sectionsRead: [], practiceDone: [], bestPercent: null, attempts: 0, firstVisit: 1, lastVisit: 1, validatedAt: null, timeSpentSec: 0, ...over,
+});
+
+describe('knownSnapshot : filtrage des références', () => {
+  it('conserve une tentative d’épreuve de démarche publiée et rejette un identifiant forgé', () => {
+    const scenarioId = [...SCENARIO_BY_ID.keys()][0]!;
+    const attempt = (refId: string) => ({ kind: 'exam' as const, refId, date: 1, percent: 90, score: 9, max: 10, bySkill: {}, durationSec: 60, questionIds: [] });
+    const s = emptySnapshot();
+    s.attempts = [attempt(scenarioId), attempt('scenario-inexistant-xyz')];
+    const kept = knownSnapshot(s).attempts.map((a) => a.refId);
+    expect(kept).toContain(scenarioId);
+    expect(kept).not.toContain('scenario-inexistant-xyz');
+  });
 });
 
 describe('états d’un cours', () => {

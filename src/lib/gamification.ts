@@ -11,6 +11,7 @@
  */
 import { COURSES, COURSE_BY_ID, LABS, LAB_BY_ID } from '../content/registry';
 import { EXAM_BY_ID } from '../content/exams';
+import { SCENARIO_BY_ID } from '../content/scenarios';
 import { PATHS, pathExamId } from '../content/paths';
 import type { CourseMeta, PathDef } from '../content/types';
 import { skillState, type SkillState } from './levels';
@@ -26,7 +27,7 @@ import type { Snapshot } from './progress';
 export function knownSnapshot(snap: Snapshot): Snapshot {
   const skillIds = new Set(COURSES.flatMap((c) => c.skills.map((k) => k.id)));
   const knownRef = (kind: string, ref: string) =>
-    kind === 'course' ? COURSE_BY_ID.has(ref) : kind === 'lab' ? LAB_BY_ID.has(ref) : EXAM_BY_ID.has(ref);
+    kind === 'course' ? COURSE_BY_ID.has(ref) : kind === 'lab' ? LAB_BY_ID.has(ref) : EXAM_BY_ID.has(ref) || SCENARIO_BY_ID.has(ref);
   return {
     ...snap,
     progress: snap.progress.filter((p) => COURSE_BY_ID.has(p.courseId)),

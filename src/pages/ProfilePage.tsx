@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MODULES } from '../content/catalog';
 import { COURSE_BY_ID, COURSES, LABS, coursesOfModule } from '../content/registry';
 import { EXAM_BY_ID } from '../content/exams';
+import { SCENARIO_BY_ID } from '../content/scenarios';
 import { PATHS, PATH_BY_ID } from '../content/paths';
 import { LEVEL_LABELS } from '../content/types';
 import { ProgressBar } from '../components/Badges';
@@ -185,7 +186,7 @@ export default function ProfilePage() {
               {results.map((a) => (
                 <li key={a.id}>
                   <span className={`badge ${a.percent >= 70 ? 'badge-ok' : 'badge-warn'}`}>{a.percent} %</span>{' '}
-                  {a.kind === 'course' ? COURSE_BY_ID.get(a.refId)?.title : a.kind === 'lab' ? LABS.find((l) => l.id === a.refId)?.title : EXAM_BY_ID.get(a.refId)?.title ?? a.refId}
+                  {a.kind === 'course' ? COURSE_BY_ID.get(a.refId)?.title : a.kind === 'lab' ? LABS.find((l) => l.id === a.refId)?.title : EXAM_BY_ID.get(a.refId)?.title ?? SCENARIO_BY_ID.get(a.refId)?.title ?? a.refId}
                   <span className="muted"> — {new Date(a.date).toLocaleDateString('fr-FR')}</span>
                 </li>
               ))}

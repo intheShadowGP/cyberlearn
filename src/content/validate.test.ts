@@ -5,6 +5,7 @@ import { MODULES } from './catalog';
 import { DIAGRAMS } from '../components/diagrams';
 import { PATHS } from './paths';
 import { EXAM_BY_ID } from './exams';
+import type { ScenarioMeta, ScenarioBody, ScenarioCorrections } from './scenarios';
 import { VERIFICATION } from './verification';
 
 const metas = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { eager: true });
@@ -15,6 +16,9 @@ const labMetas = import.meta.glob<{ meta: LabMeta }>('../labs/*/meta.ts', { eage
 const labBodies = import.meta.glob<{ body: LabBody }>('../labs/*/body.ts', { eager: true });
 const labCorrs = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.ts', { eager: true });
 const labComponents = import.meta.glob('../labs/*/Lab.tsx');
+const scMetas = import.meta.glob<{ meta: ScenarioMeta }>('./scenarios/*/meta.ts', { eager: true });
+const scBodies = import.meta.glob<{ body: ScenarioBody }>('./scenarios/*/body.ts', { eager: true });
+const scCorrs = import.meta.glob<{ corrections: ScenarioCorrections }>('./scenarios/*/corrections.ts', { eager: true });
 
 const dir = (p: string) => p.split('/').at(-2) ?? '';
 
@@ -133,6 +137,80 @@ describe('contenu pédagogique', () => {
         `${covered.size}/${total} sujets de la cartographie abordés.`,
     );
     expect(covered.size).toBeGreaterThan(0);
+  });
+});
+
+describe('épreuves de démarche (scénarios)', () => {
+  const courseSkillIds = new Map<string, Set<string>>();
+  for (const { meta: m } of Object.values(metas)) {
+    courseSkillIds.set(m.id, new Set(m.skills.map((s) => s.id)));
+  }
+  const courseIds = new Set(Object.values(metas).map((m) => m.meta.id));
+
+  const scenarios = Object.entries(scMetas).map(([p, m]) => {
+    const d = dir(p);
+    const body = scBodies[`./scenarios/${d}/body.ts`]?.body;
+    const corrections = scCorrs[`./scenarios/${d}/corrections.ts`]?.corrections;
+    if (!body || !corrections) throw new Error(`Scénario ${d} incomplet (body.ts / corrections.ts)`);
+    return { dir: d, meta: m.meta, body, corrections };
+  });
+
+  it('au moins une épreuve, identifiants uniques et cohérents', () => {
+    expect(scenarios.length).toBeGreaterThan(0);
+    const ids = scenarios.map((s) => s.meta.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const s of scenarios) {
+      expect(s.meta.id, s.dir).toBe(s.dir);
+      expect(s.body.scenarioId, s.dir).toBe(s.meta.id);
+      expect(s.corrections.scenarioId, s.dir).toBe(s.meta.id);
+      expect(/^[a-z0-9-]{1,64}$/.test(s.meta.id), s.meta.id).toBe(true);
+    }
+  });
+
+  it('dossier multi-sources, questions notées, corrections complètes, compétences valides, réponses séparées', () => {
+    const errors: string[] = [];
+    for (const { meta, body, corrections } of scenarios) {
+      for (const c of meta.relatedCourses) if (!courseIds.has(c)) errors.push(`${meta.id} : cours lié inconnu ${c}`);
+      if (meta.relatedCourses.length < 1) errors.push(`${meta.id} : au moins un cours lié attendu`);
+      const validSkills = new Set(meta.relatedCourses.flatMap((c) => [...(courseSkillIds.get(c) ?? [])]));
+
+      const sources = body.dossier.filter((b) => b.t === 'code' || b.t === 'table').length;
+      if (sources < 2) errors.push(`${meta.id} : le dossier doit comporter au moins 2 sources (bloc code ou table)`);
+
+      if (body.questions.length !== meta.questionCount) errors.push(`${meta.id} : questionCount (${meta.questionCount}) ≠ ${body.questions.length} questions`);
+      if (body.questions.length < 5) errors.push(`${meta.id} : au moins 5 questions attendues`);
+
+      const qids = new Set<string>();
+      for (const q of body.questions) {
+        if (qids.has(q.id)) errors.push(`${meta.id} : question dupliquée ${q.id}`);
+        qids.add(q.id);
+        if (q.type === 'open') errors.push(`${meta.id}/${q.id} : question ouverte interdite (non notée, viderait le seuil de 70 %)`);
+        if (![1, 2, 3].includes(q.difficulty)) errors.push(`${meta.id}/${q.id} : difficulté invalide`);
+        if (q.skills.length === 0) errors.push(`${meta.id}/${q.id} : aucune compétence`);
+        for (const sk of q.skills) if (!validSkills.has(sk)) errors.push(`${meta.id}/${q.id} : compétence ${sk} absente des cours liés`);
+
+        const optIds = q.type === 'single' || q.type === 'multi' ? new Set(q.options.map((o) => o.id)) : new Set<string>();
+        if ((q.type === 'single' || q.type === 'multi') && (q.options.length < 2 || optIds.size !== q.options.length)) {
+          errors.push(`${meta.id}/${q.id} : au moins 2 options aux identifiants uniques`);
+        }
+
+        const c = corrections.questions[q.id];
+        if (!c) { errors.push(`${meta.id}/${q.id} : correction manquante`); continue; }
+        if (c.type !== q.type) errors.push(`${meta.id}/${q.id} : type de correction (${c.type}) ≠ type de question (${q.type})`);
+        if (!c.explanation || c.explanation.trim().length < 10) errors.push(`${meta.id}/${q.id} : explication trop courte`);
+        if (c.type === 'single' && !optIds.has(c.correct)) errors.push(`${meta.id}/${q.id} : réponse correcte hors options`);
+        if (c.type === 'multi') {
+          if (c.correct.length === 0) errors.push(`${meta.id}/${q.id} : correction multi vide`);
+          for (const id of c.correct) if (!optIds.has(id)) errors.push(`${meta.id}/${q.id} : option correcte ${id} hors options`);
+        }
+      }
+      for (const qid of Object.keys(corrections.questions)) if (!qids.has(qid)) errors.push(`${meta.id} : correction orpheline ${qid}`);
+      if (!corrections.debrief || corrections.debrief.length === 0) errors.push(`${meta.id} : débriefing vide`);
+
+      const forbidden = findForbiddenFields(body as unknown);
+      if (forbidden.length) errors.push(`${meta.id} : champ de réponse présent dans body (${forbidden.join(', ')})`);
+    }
+    expect(errors, errors.join('\n')).toEqual([]);
   });
 });
 

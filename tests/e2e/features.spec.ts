@@ -44,6 +44,8 @@ test('glossaire : notions extraites des leçons, recherche, sigles, lien vers le
 
 test('recherche interne : cours, notions, laboratoires, parcours @cross', async ({ page }) => {
   await page.goto('./#/recherche');
+  // L'index se construit de façon asynchrone ; attendre qu'il soit prêt évite une course sous charge.
+  await expect(page.getByText(/Construction de l.index/)).toBeHidden({ timeout: 15000 });
   await page.getByLabel(/Cours, notions/).fill('kerberos');
   await expect(page.getByRole('heading', { name: 'Cours', exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: /Active Directory : Kerberos/ })).toBeVisible();
@@ -132,6 +134,39 @@ test('parcours : 11 parcours, présentation, progression, examen final, bilan', 
   await axe(page, 'examen final');
 });
 
+test('épreuve de démarche : dossier multi-sources, parcours complet, débriefing, meilleur score', async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto('./#/epreuve/soc-intrusion-ad');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Active Directory');
+  await expect(page.getByRole('heading', { name: 'Dossier d’incident' })).toBeVisible();
+  await expect(page.getByText('Source 2 — Journal de sécurité de DC01')).toBeVisible();
+  await expect(page.locator('.question')).toHaveCount(7); // ordre fixe
+  await axe(page, 'épreuve de démarche');
+
+  // Réponses correctes : extraction (champs courts) et corrélation ; options ciblées par le texte (ordre mélangé).
+  await page.getByLabel('Réponse à la question 1').fill('PC-COMPTA-07');
+  await page.getByLabel('Réponse à la question 2').fill('svc_backup');
+  await page.getByRole('radio', { name: /Kerberoasting/ }).check();
+  await page.getByRole('radio', { name: 'Vrai' }).check();
+  await page.getByRole('radio', { name: /quasi constante/ }).check();
+  await page.getByRole('checkbox', { name: /Isoler PC-COMPTA-07/ }).check();
+  await page.getByRole('checkbox', { name: /comptes utilisés par/ }).check();
+  await page.getByRole('checkbox', { name: /Bloquer la destination/ }).check();
+  await page.getByRole('radio', { name: /capturer la mémoire vive/ }).check();
+
+  await page.getByRole('button', { name: 'Valider mes réponses' }).click();
+  await expect(page.getByRole('heading', { name: /Débriefing/ })).toBeVisible();
+  // Sans question ouverte, la validation enregistre directement ; sinon un bouton le fait.
+  const save = page.getByRole('button', { name: 'Enregistrer mon évaluation' });
+  if (await save.isVisible().catch(() => false)) await save.click();
+  await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
+
+  await page.goto('./#/evaluations');
+  await expect(page.getByRole('heading', { name: 'Épreuves de démarche' })).toBeVisible();
+  await expect(page.getByText(/meilleur score 100 %/)).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
 test('paramètres : données conservées et suppression complète du profil', async ({ page }) => {
   await page.goto('./#/profil');
   await page.getByLabel('Pseudonyme').fill('Ada');
@@ -170,7 +205,7 @@ test('confidentialité vérifiée : aucune requête vers une autre origine, aucu
 test('responsive : aucune page ne déborde horizontalement sur mobile', async ({ browser }) => {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 812 } });
   const page = await ctx.newPage();
-  for (const route of ['./', './#/catalogue', './#/cours/d-ad-authentification', './#/laboratoires/ad-events-lab', './#/laboratoires/code-review-lab', './#/tableau-de-bord', './#/parcours/expert', './#/profil', './#/glossaire', './#/competences', './#/parametres', './#/documentation']) {
+  for (const route of ['./', './#/catalogue', './#/cours/d-ad-authentification', './#/laboratoires/ad-events-lab', './#/laboratoires/code-review-lab', './#/epreuve/soc-intrusion-ad', './#/tableau-de-bord', './#/parcours/expert', './#/profil', './#/glossaire', './#/competences', './#/parametres', './#/documentation']) {
     await page.goto(`http://localhost:4173/cyberacademie/${route.slice(2)}`);
     await expect(page.locator('main h1').first()).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);

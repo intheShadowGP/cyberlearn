@@ -14,6 +14,7 @@ const LabsPage = lazy(() => import('./pages/LabsPage'));
 const LabPage = lazy(() => import('./pages/LabPage'));
 const AssessmentsPage = lazy(() => import('./pages/AssessmentsPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
+const ScenarioPage = lazy(() => import('./pages/ScenarioPage'));
 const PathsPage = lazy(() => import('./pages/PathsPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -42,6 +43,7 @@ export function App() {
               <Route path="/laboratoires/:id" element={<LabPage />} />
               <Route path="/evaluations" element={<AssessmentsPage />} />
               <Route path="/evaluations/:id" element={<ExamPage />} />
+              <Route path="/epreuve/:id" element={<ScenarioPage />} />
               <Route path="/parcours" element={<PathsPage />} />
               <Route path="/parcours/:id" element={<PathsPage />} />
               <Route path="/parametres" element={<SettingsPage />} />
