@@ -4,8 +4,9 @@
  * présentes dans les leçons : aucune définition n'est rédigée séparément.
  */
 import { MODULE_BY_ID } from '../content/catalog';
-import { COURSES, LABS, loadCourseBody } from '../content/registry';
+import { COURSES, COURSE_BY_ID, LABS, loadCourseBody } from '../content/registry';
 import { PATHS } from '../content/paths';
+import { SCENARIOS, loadScenarioBody } from '../content/scenarios';
 import type { Block, ModuleId } from '../content/types';
 import { normalizeShort } from './quiz';
 
@@ -66,7 +67,24 @@ export function loadGlossary(): Promise<GlossaryEntry[]> {
 
 /* ---------- Recherche ---------- */
 
-export type SearchKind = 'cours' | 'section' | 'notion' | 'laboratoire' | 'parcours';
+export type SearchKind = 'cours' | 'section' | 'notion' | 'laboratoire' | 'parcours' | 'epreuve';
+
+/** Aplatit des blocs de contenu en texte brut pour l'indexation (sans réponses, qui sont ailleurs). */
+function flattenBlocks(blocks: Block[], out: string[]): void {
+  for (const b of blocks) {
+    switch (b.t) {
+      case 'p': out.push(b.text); break;
+      case 'callout': out.push(b.text); if (b.title) out.push(b.title); break;
+      case 'h': out.push(b.text); break;
+      case 'list': out.push(b.items.join(' ')); break;
+      case 'code': out.push(b.code); if (b.caption) out.push(b.caption); break;
+      case 'table': out.push(b.head.join(' ')); for (const r of b.rows) out.push(r.join(' ')); if (b.caption) out.push(b.caption); break;
+      case 'def': out.push(`${b.term} ${b.text}`); break;
+      case 'diagram': out.push(`${b.caption} ${b.alt}`); break;
+      case 'example': out.push(b.title); flattenBlocks(b.blocks, out); break;
+    }
+  }
+}
 
 export interface SearchDoc {
   kind: SearchKind;
@@ -90,6 +108,16 @@ export function loadSearchIndex(): Promise<SearchDoc[]> {
     }
     for (const l of LABS) add('laboratoire', l.title, l.objective, `/laboratoires/${l.id}`, l.context);
     for (const p of PATHS) add('parcours', p.title, p.audience, `/parcours/${p.id}`, `${p.description} ${p.objectives.join(' ')}`);
+    for (const sc of SCENARIOS) {
+      const body = await loadScenarioBody(sc.id);
+      const parts: string[] = [];
+      if (body) {
+        flattenBlocks(body.dossier, parts);
+        for (const qn of body.questions) parts.push(qn.prompt);
+      }
+      const related = sc.relatedCourses.map((id) => COURSE_BY_ID.get(id)?.title ?? '').join(' ');
+      add('epreuve', sc.title, sc.objective, `/epreuve/${sc.id}`, `${sc.context} ${related} ${parts.join(' ')}`);
+    }
     for (const g of await loadGlossary()) add('notion', g.term, g.definition.replace(/[*`]/g, ''), `/glossaire?terme=${encodeURIComponent(g.id)}`);
     return docs;
   })().catch((e) => {

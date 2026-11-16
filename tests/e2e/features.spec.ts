@@ -55,6 +55,11 @@ test('recherche interne : cours, notions, laboratoires, parcours @cross', async 
   await expect(page.getByRole('heading', { name: 'Parcours' })).toBeVisible();
   await page.getByRole('link', { name: 'Analyste SOC' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Analyste SOC');
+  await page.goto('./#/recherche');
+  await expect(page.getByText(/Construction de l.index/)).toBeHidden({ timeout: 15000 });
+  await page.getByLabel(/Cours, notions/).fill('reconstruction chronologie');
+  await expect(page.getByRole('heading', { name: 'Épreuves de démarche' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Reconstruction d’une chronologie/ })).toBeVisible();
   await page.goto('./#/recherche?q=zzzzzz');
   // Statut de la recherche ciblé explicitement : le bandeau PWA « nouvelle version » porte aussi role="status".
   await expect(page.getByRole('status').filter({ hasText: /résultat/ })).toContainText('0 résultat');

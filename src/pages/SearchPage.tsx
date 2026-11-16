@@ -9,6 +9,7 @@ const KIND_LABEL: Record<SearchKind, string> = {
   notion: 'Notions (glossaire)',
   laboratoire: 'Laboratoires',
   parcours: 'Parcours',
+  epreuve: 'Épreuves de démarche',
 };
 
 export default function SearchPage() {
