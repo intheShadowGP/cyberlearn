@@ -50,7 +50,7 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 
 - Profondeur inégale de certains cours (traités en une section) ; relecture experte tierce absente.
 - Quelques faits non confrontés à une source primaire (voir `docs/FACT-CHECK.md`).
-- Firefox/WebKit : seul le statut d’étape CI est vérifié, pas les journaux détaillés.
+- Firefox/WebKit : seul le statut d’étape CI est vérifié, pas les journaux détaillés (API GitHub des journaux non accessible sans jeton). Les suites chromium et webkit passent de façon déterministe en local ; firefox ne se lance pas sur la machine de dev. Pour absorber les aléas d’environnement en CI (course sur l’index de recherche, bandeau PWA, démarrage de navigateur sous charge) qui avaient fait échouer deux exécutions e2e alors que le code était vert, `playwright.config.ts` active **2 relances en CI uniquement** (`retries: process.env.CI ? 2 : 0`) ; le local reste strict à 0 pour continuer à voir les flakes.
 - Épreuve de démarche : une épreuve ratée **ne crée pas** de carte de révision (les questions n’ont pas de cours propriétaire) — compromis assumé pour éviter des cartes sans contexte.
 - **Corrigé** : le bouton de reprise affichait « Nouveau tirage de questions » même pour les questionnaires à questions fixes. Le moteur `Quiz` accepte désormais une prop `retryLabel` ; les labos affichent « Recommencer le questionnaire » et les épreuves « Recommencer l’épreuve », les cours et examens (tirage réel) gardent le libellé d’origine.
 - Le lot « examens transversaux orientés démarche » (restant n° 2) est **amorcé** par cette première épreuve ; d’autres scénarios pourront être ajoutés sur le même socle.

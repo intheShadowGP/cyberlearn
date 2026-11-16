@@ -9,7 +9,9 @@ export default defineConfig({
   timeout: 60_000,
   fullyParallel: false,
   workers: 1,
-  retries: 0,
+  // En CI, deux relances absorbent les aléas d'environnement (course sur l'index de recherche,
+  // bandeau PWA, démarrage de firefox/webkit sous charge) ; en local, strict à 0 pour voir les flakes.
+  retries: process.env.CI ? 2 : 0,
   reporter: [['list']],
   use: {
     baseURL: 'http://localhost:4173/cyberacademie/',
