@@ -16,7 +16,7 @@
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
-| Épreuves de démarche (scénarios) | 2 |
+| Épreuves de démarche (scénarios) | 3 |
 
 ## Par discipline
 
@@ -136,6 +136,7 @@
 | --- | --- | --- | --- |
 | Épreuve de démarche — Compromission d’une application web (`web-appsec-intrusion`) | 3 | 7 | f-injections-xss, f-acces-sessions-ssrf, i-soc-detection |
 | Épreuve de démarche — Intrusion sur un domaine Active Directory (`soc-intrusion-ad`) | 3 | 7 | i-soc-detection, d-ad-authentification |
+| Épreuve de démarche — Reconstruction d’une chronologie (`forensic-timeline`) | 3 | 7 | j-forensique-principes, i-soc-detection |
 
 ## Sujets non couverts (« à venir »)
 
