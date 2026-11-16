@@ -124,6 +124,81 @@ export const PATHS: PathDef[] = [
   },
 ];
 
+/**
+ * Projets finaux (capstones) : une mise en situation professionnelle de synthèse par parcours.
+ * Déclarés à part et rattachés aux parcours ci-dessous, pour garder la liste des étapes lisible.
+ */
+const FINAL_PROJECTS: Record<string, PathDef['finalProject']> = {
+  debutant: {
+    title: 'Sécuriser son environnement numérique personnel',
+    mission: 'À partir d’un ordinateur et de comptes personnels fictifs, dresser un état des lieux de sécurité et appliquer les mesures de base apprises dans le parcours.',
+    deliverables: ['Un inventaire des comptes et des appareils, avec leur niveau de risque', 'Un plan d’action : mots de passe robustes et uniques, MFA, mises à jour, sauvegardes', 'Une courte note expliquant à un proche non technique pourquoi ces mesures comptent'],
+    criteria: ['Les notions clés (mot de passe, MFA, mise à jour, hameçonnage, sauvegarde) sont correctement employées', 'Chaque mesure proposée est justifiée par un risque concret', 'Le vocabulaire reste accessible à un débutant'],
+  },
+  'admin-systemes-reseaux': {
+    title: 'Durcir et segmenter le SI d’une PME',
+    mission: 'Concevoir, pour une PME fictive, un plan de durcissement et de segmentation couvrant le réseau, les serveurs Linux et Windows et les accès.',
+    deliverables: ['Un schéma de segmentation (VLAN, zones, DMZ) avec les flux autorisés', 'Un plan de durcissement Linux et Windows (comptes, services, correctifs, journalisation)', 'Une politique d’accès d’administration (comptes séparés, MFA, bastion)'],
+    criteria: ['La segmentation suit le refus par défaut et le moindre privilège', 'Les mesures de durcissement sont réalistes et priorisées', 'Les flux inter-zones sont limités au strict nécessaire et justifiés'],
+  },
+  'analyste-soc': {
+    title: 'Qualifier et traiter un incident de bout en bout',
+    mission: 'À partir de journaux et d’alertes fournis (Active Directory, SSH, réseau), reconstituer un incident, le qualifier et proposer la réponse.',
+    deliverables: ['Une chronologie de l’incident appuyée sur les événements', 'La qualification (vecteur, portée, gravité) et les indicateurs de compromission', 'Un plan de confinement, d’éradication et de rétablissement, et une règle de détection pour l’avenir'],
+    criteria: ['La chronologie est cohérente avec les journaux et distingue faits et hypothèses', 'Les IOC et la technique ATT&CK sont correctement identifiés', 'La réponse est proportionnée et une détection durable est proposée'],
+  },
+  pentesteur: {
+    title: 'Test d’intrusion d’une application de laboratoire et rapport',
+    mission: 'Dans un périmètre explicitement autorisé (application volontairement vulnérable), mener reconnaissance, identification de vulnérabilités et démonstration d’impact, puis rédiger le rapport.',
+    deliverables: ['Un rapport structuré : périmètre, méthodologie, constats classés par gravité, preuves', 'Pour chaque constat, une recommandation de remédiation et sa vérification', 'Une synthèse à destination de la direction (risque métier)'],
+    criteria: ['Le cadre (autorisation, périmètre) est rappelé et respecté', 'Chaque constat est reproductible, évalué et relié à une défense', 'Le rapport est exploitable par une équipe technique et par la direction'],
+  },
+  'ingenieur-cybersecurite': {
+    title: 'Architecture de sécurité d’un nouveau service',
+    mission: 'Concevoir l’architecture de sécurité d’un service web hébergé dans le cloud : identités, chiffrement, réseau, journalisation et conformité.',
+    deliverables: ['Un schéma d’architecture avec les zones, les flux et les points de contrôle', 'Les choix de chiffrement (en transit, au repos), de gestion des secrets et d’identités (MFA, moindre privilège)', 'Un plan de supervision et une analyse de risques synthétique'],
+    criteria: ['Les principes (défense en profondeur, moindre privilège, Zero Trust) sont appliqués', 'Les choix cryptographiques et d’identité sont justifiés et à l’état de l’art', 'Les risques résiduels sont identifiés et assumés explicitement'],
+  },
+  forensic: {
+    title: 'Investigation numérique d’un poste compromis',
+    mission: 'À partir d’artefacts fournis (mémoire, disque, journaux), conduire une investigation forensique et reconstituer les actions de l’attaquant.',
+    deliverables: ['Une chronologie multi-sources en UTC, reliée aux artefacts', 'L’identification du vecteur initial, de la persistance et des données touchées', 'Un rapport respectant la chaîne de conservation et l’intégrité des preuves'],
+    criteria: ['Chaque conclusion s’appuie sur un artefact daté et recoupé', 'La chaîne de conservation et l’ordre de volatilité sont respectés', 'Le rapport distingue faits, interprétations et incertitudes'],
+  },
+  'cloud-security': {
+    title: 'Audit de posture d’un compte cloud',
+    mission: 'Auditer la configuration d’un compte cloud fictif (IAM, stockage, réseau, journalisation) et produire un plan de remédiation priorisé.',
+    deliverables: ['Un relevé des écarts de configuration classés par gravité', 'Un plan de remédiation appliquant le moindre privilège et le refus par défaut', 'Des recommandations d’outillage (CSPM, IaC) pour éviter la dérive'],
+    criteria: ['Les écarts à fort impact (exposition publique, rôles trop larges) sont priorisés', 'Les corrections respectent le modèle de responsabilité partagée', 'La prévention de la dérive est traitée, pas seulement la correction ponctuelle'],
+  },
+  grc: {
+    title: 'Appréciation des risques et plan de traitement',
+    mission: 'Pour une organisation fictive, conduire une appréciation des risques et proposer un plan de traitement aligné sur un référentiel.',
+    deliverables: ['Un inventaire des actifs et une matrice des risques (vraisemblance × impact)', 'Un plan de traitement (réduire, transférer, éviter, accepter) avec propriétaires et échéances', 'Un état de conformité synthétique au regard d’un référentiel (ISO 27001, NIS2 ou équivalent)'],
+    criteria: ['Les risques sont estimés de façon cohérente et priorisés', 'Chaque traitement est justifié et affecté à un responsable', 'Le risque résiduel est explicitement accepté au bon niveau'],
+  },
+  devsecops: {
+    title: 'Sécuriser une chaîne CI/CD et sa chaîne d’approvisionnement',
+    mission: 'Intégrer la sécurité dans le pipeline d’une application : validation du code, gestion des secrets, dépendances et durcissement du déploiement.',
+    deliverables: ['Un pipeline annoté indiquant les contrôles de sécurité à chaque étape (SAST, SCA, secrets)', 'Une politique de gestion des secrets et des dépendances (verrouillage, signatures)', 'Un plan de durcissement du déploiement (conteneurs, moindre privilège, posture cloud)'],
+    criteria: ['Les contrôles sont placés au bon endroit et bloquent les problèmes graves', 'La chaîne d’approvisionnement (dépendances, intégrité) est prise en compte', 'Les secrets ne transitent jamais en clair et sont gérés par un coffre'],
+  },
+  'securite-industrielle': {
+    title: 'Sécuriser une installation industrielle',
+    mission: 'Pour un site industriel fictif, proposer une architecture et des mesures de sécurité adaptées aux contraintes OT (disponibilité, temps réel, sûreté).',
+    deliverables: ['Un schéma de segmentation IT/OT (zones et conduits, modèle de Purdue)', 'Une analyse des protocoles en présence (Modbus, etc.) et des mesures de surveillance passive', 'Un plan tenant compte de la sûreté de fonctionnement et des sécurités indépendantes'],
+    criteria: ['La segmentation IT/OT et le filtrage applicatif sont cohérents', 'Les contraintes OT (disponibilité, temps réel) sont respectées', 'Les mesures de sécurité ne compromettent pas la sûreté physique'],
+  },
+  expert: {
+    title: 'Évaluation de sécurité et ingénierie de détection avancées',
+    mission: 'Sur un périmètre fictif complexe (Active Directory, applications, cloud), conduire une évaluation avancée et transformer les constats en détections.',
+    deliverables: ['Une analyse de chemins d’attaque (dont Active Directory) et de leur impact', 'Un jeu de règles de détection (Sigma/EDR) couvrant les techniques identifiées, avec précision et rappel évalués', 'Des recommandations d’architecture (Zero Trust, racine de confiance, agilité cryptographique)'],
+    criteria: ['Les chemins d’attaque sont réalistes et rattachés à MITRE ATT&CK', 'Les détections sont testées (faux positifs mesurés) et documentées', 'Les recommandations traitent la cause, pas seulement les symptômes'],
+  },
+};
+
+for (const p of PATHS) p.finalProject = FINAL_PROJECTS[p.id];
+
 export const PATH_BY_ID: ReadonlyMap<string, PathDef> = new Map(PATHS.map((p) => [p.id, p]));
 
 export function pathCourseIds(p: PathDef): string[] {

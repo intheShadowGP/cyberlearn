@@ -224,11 +224,21 @@ export interface LabCorrections {
 
 /* ---------- Parcours ---------- */
 
+/** Projet final (capstone) d'un parcours : mise en situation professionnelle de synthèse. */
+export interface FinalProject {
+  title: string;
+  mission: string;
+  deliverables: string[];
+  criteria: string[];
+}
+
 export interface PathDef {
   id: string;
   title: string;
   audience: string;
   description: string;
+  /** Projet final de synthèse (mise en situation professionnelle). */
+  finalProject?: FinalProject;
   /** Objectifs pédagogiques du parcours. */
   objectives: string[];
   /** Connaissances supposées acquises avant de commencer. */

@@ -149,6 +149,24 @@ function PathDetail({ path, data }: { path: PathDef; data: Snapshot }) {
         </ol>
       </section>
 
+      {path.finalProject && (
+        <section className="panel" aria-labelledby="projet-h">
+          <h2 id="projet-h">Projet final — {path.finalProject.title}</h2>
+          <p>{path.finalProject.mission}</p>
+          <div className="presentation-grid">
+            <section>
+              <h3 className="h3">Livrables attendus</h3>
+              <ul>{path.finalProject.deliverables.map((d) => <li key={d}>{d}</li>)}</ul>
+            </section>
+            <section>
+              <h3 className="h3">Critères de réussite</h3>
+              <ul>{path.finalProject.criteria.map((c) => <li key={c}>{c}</li>)}</ul>
+            </section>
+          </div>
+          <p className="muted">Projet d’entraînement à réaliser par vous-même : CyberAcadémie ne corrige pas ce projet et ne délivre aucune certification.</p>
+        </section>
+      )}
+
       <section className="panel" aria-labelledby="bilan-h">
         <h2 id="bilan-h">Bilan des compétences</h2>
         <p>{acquired}/{skills.length} compétences acquises.</p>

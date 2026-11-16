@@ -50,6 +50,18 @@ describe('contenu pédagogique', () => {
     expect(errors, errors.join('\n')).toEqual([]);
   });
 
+  it('chaque parcours a un projet final complet (mission, livrables, critères)', () => {
+    const errors: string[] = [];
+    for (const p of PATHS) {
+      const fp = p.finalProject;
+      if (!fp) { errors.push(`${p.id} : projet final manquant`); continue; }
+      if (fp.mission.trim().length < 40) errors.push(`${p.id} : mission du projet final trop courte`);
+      if (fp.deliverables.length < 2) errors.push(`${p.id} : au moins 2 livrables attendus`);
+      if (fp.criteria.length < 2) errors.push(`${p.id} : au moins 2 critères de réussite`);
+    }
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
   it('chaque fichier de cours a ses trois parties', () => {
     for (const p of Object.keys(bodies)) expect(metas[p.replace('body.ts', 'meta.ts')]).toBeDefined();
     for (const p of Object.keys(corrs)) expect(metas[p.replace('corrections.ts', 'meta.ts')]).toBeDefined();
