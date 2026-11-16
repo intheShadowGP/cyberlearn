@@ -5,6 +5,9 @@ import { buildEvents } from './ad-events-lab/events';
 import { bitDiff, decodeBase64, digest, hmacSha256 } from './hash-lab/crypto';
 import { evaluate, matches, PRINCIPALS } from './iam-policy-lab/evaluator';
 import { decode, parseHex } from './modbus-lab/modbus';
+import { charsetSize, crackTimeSeconds, entropyBits, formatDuration, isCommon, SPEEDS, verdict } from './password-strength-lab/strength';
+import { runDetections } from './detection-engineering-lab/detection';
+import { analyzeTls, hostnameCovered, isSecure, PRESETS } from './tls-inspection-lab/tls';
 
 describe('moteur SQL simulé', () => {
   it('connexion normale', () => {
@@ -129,5 +132,87 @@ describe('primitives Web Crypto du labo', () => {
     expect(bitDiff('0f', '0f')).toBe(0);
     expect(decodeBase64('cGFzc3dvcmQxMjM=')).toBe('password123');
     expect(decodeBase64('%%%')).toBeNull();
+  });
+});
+
+describe('estimateur de robustesse des mots de passe', () => {
+  it('reconnaît les mots de passe très répandus (insensible à la casse)', () => {
+    expect(isCommon('AZERTY')).toBe(true);
+    expect(isCommon('motdepasse')).toBe(true);
+    expect(isCommon('cheval-bleu-ancre-42-rivière')).toBe(false);
+  });
+  it('calcule la taille du jeu de caractères', () => {
+    expect(charsetSize('')).toBe(0);
+    expect(charsetSize('abc')).toBe(26);
+    expect(charsetSize('P@ss1')).toBe(95);
+  });
+  it('estime l’entropie en bits', () => {
+    expect(entropyBits('')).toBe(0);
+    expect(entropyBits('abcdef')).toBe(28.2);
+  });
+  it('le hachage lent augmente le temps de cassage', () => {
+    expect(crackTimeSeconds(0, SPEEDS.hachageRapide)).toBe(0);
+    expect(crackTimeSeconds(50, SPEEDS.hachageLent)).toBeGreaterThan(crackTimeSeconds(50, SPEEDS.hachageRapide));
+  });
+  it('classe les mots de passe', () => {
+    expect(verdict('')).toBe('tres-faible');
+    expect(verdict('motdepasse')).toBe('tres-faible');
+    expect(verdict('cheval-bleu-ancre-42-rivière')).toBe('tres-fort');
+  });
+  it('met les durées sous forme lisible', () => {
+    expect(formatDuration(Infinity)).toBe('pratiquement infini');
+    expect(formatDuration(0.5)).toBe('moins d’une seconde');
+    expect(formatDuration(30)).toBe('30 s');
+  });
+});
+
+describe('ingénierie de détection', () => {
+  it('sans condition, rien n’est détecté', () => {
+    const m = runDetections([]);
+    expect(m.matched).toEqual([]);
+    expect(m.recall).toBe(0);
+  });
+  it('une condition large génère faux positif et faux négatif', () => {
+    const m = runDetections(['any-powershell']);
+    expect(m.truePositives).toBe(2);
+    expect(m.falsePositives).toBe(1);
+    expect(m.falseNegatives).toBe(1);
+    expect(m.perfect).toBe(false);
+  });
+  it('la combinaison ciblée atteint précision et rappel de 1', () => {
+    const m = runDetections(['office-shell', 'web-shell']);
+    expect(m.matched).toEqual([4, 5, 6]);
+    expect(m.truePositives).toBe(3);
+    expect(m.falsePositives).toBe(0);
+    expect(m.precision).toBe(1);
+    expect(m.recall).toBe(1);
+    expect(m.perfect).toBe(true);
+  });
+});
+
+describe('analyse TLS', () => {
+  it('couverture du nom par le SAN (joker inclus)', () => {
+    expect(hostnameCovered('portail.exemple.fr', ['*.exemple.fr'])).toBe(true);
+    expect(hostnameCovered('exemple.fr', ['*.exemple.fr'])).toBe(false);
+    expect(hostnameCovered('a.b.exemple.fr', ['*.exemple.fr'])).toBe(false);
+    expect(hostnameCovered('www.exemple.fr', ['www.exemple.fr'])).toBe(true);
+  });
+  it('une configuration conforme ne lève aucun défaut', () => {
+    const ok = PRESETS.find((p) => p.id === 'ok')!.cfg;
+    expect(analyzeTls(ok)).toEqual([]);
+    expect(isSecure(ok)).toBe(true);
+  });
+  it('détecte expiration, protocoles obsolètes et HSTS', () => {
+    const expire = PRESETS.find((p) => p.id === 'expire')!.cfg;
+    expect(analyzeTls(expire).map((f) => f.code)).toContain('expired');
+    const legacy = PRESETS.find((p) => p.id === 'legacy')!.cfg;
+    const codes = analyzeTls(legacy).map((f) => f.code);
+    expect(codes).toContain('weak-protocol');
+    expect(codes).toContain('no-hsts');
+    expect(codes).not.toContain('name-mismatch');
+  });
+  it('trie les défauts par gravité décroissante', () => {
+    const mismatch = PRESETS.find((p) => p.id === 'mismatch')!.cfg;
+    expect(analyzeTls(mismatch)[0]?.severity).toBe('haute');
   });
 });

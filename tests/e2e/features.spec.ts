@@ -190,8 +190,11 @@ test('filtres du catalogue et des laboratoires', async ({ page }) => {
   await expect(page.locator('.card-grid > li')).toHaveCount(1);
   expect(all).toBeGreaterThanOrEqual(22);
   await page.goto('./#/laboratoires');
+  await expect(page.locator('.card-grid > li').filter({ hasText: 'sous-réseaux' })).toHaveCount(1);
   await page.getByLabel('Catégorie').selectOption('windows');
-  await expect(page.locator('.card-grid > li')).toHaveCount(1);
+  // Le filtre conserve le labo Windows connu et masque les labos d'autres catégories (sans dépendre d'un compte exact).
+  await expect(page.locator('.card-grid > li').filter({ hasText: 'Windows' }).first()).toBeVisible();
+  await expect(page.locator('.card-grid > li').filter({ hasText: 'sous-réseaux' })).toHaveCount(0);
 });
 
 test('liens internes : chaque lien #/… mène à une page existante', async ({ page }) => {

@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 45 |
 | Questions de cours (avec correction) | 721 |
-| Laboratoires | 12 |
+| Laboratoires | 15 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
 
@@ -94,6 +94,7 @@
 
 | Laboratoire | Catégorie | Niveau | Cours liés |
 | --- | --- | --- | --- |
+| Robustesse des mots de passe et effet du hachage (initiation) (`password-strength-lab`) | crypto | 1 | e-hachage-mots-de-passe |
 | Atelier empreintes, HMAC et dérivation de clés (`hash-lab`) | crypto | 2 | e-hachage-mots-de-passe |
 | Atelier sous-réseaux (`subnet-lab`) | reseau | 2 | b-ipv4-subnetting |
 | Audit d’un serveur Linux compromis (`linux-audit-lab`) | linux | 2 | c-linux-permissions |
@@ -104,8 +105,10 @@
 | Injection SQL sur une page de connexion (simulation) (`sqli-lab`) | web | 2 | f-injections-xss |
 | Reconnaissance OSINT d’une entreprise fictive (`osint-lab`) | osint | 2 | h-pentest-methodologie |
 | Trames Modbus suspectes dans une station de pompage (`modbus-lab`) | ics | 2 | n-ics-modbus |
+| Analyse d’une configuration TLS et d’une chaîne de certificats (`tls-inspection-lab`) | crypto | 3 | e-chiffrement-tls-pki |
 | Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
+| Ingénierie de détection : composer une règle sans faux positifs (expert) (`detection-engineering-lab`) | soc | 4 | i-threat-hunting, i-soc-detection |
 
 ## Parcours
 

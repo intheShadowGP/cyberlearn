@@ -13,7 +13,7 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 403 |
 | Cours complets (structure obligatoire 4.2 vérifiée au build) | 45, au moins un par discipline, niveaux 1 à 4 |
 | Questions de cours (avec correction et explication) | 721 |
-| Laboratoires interactifs | 12, un par catégorie de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel) |
+| Laboratoires interactifs | 15, couvrant les catégories de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel), du niveau 1 (initiation) au niveau 4 (expert) |
 | Parcours métiers (avec examen final) | 11 |
 
 Inventaire détaillé et généré : [docs/CURRICULUM.md](docs/CURRICULUM.md). Site publié : https://intheshadowgp.github.io/cyberlearn/

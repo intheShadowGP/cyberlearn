@@ -589,3 +589,7 @@ select.input { max-width: 100%; text-overflow: ellipsis; }
 @media (max-width: 600px) { .form-grid { grid-template-columns: minmax(0, 1fr); } }
 .lab-workspace { grid-template-columns: minmax(0, 1fr); }
 .lab-workspace > *, .grid-2 > *, .two-col > *, .course-main, main > * { min-width: 0; }
+
+/* Listes interactives des laboratoires (cases, boutons de correction, défauts). */
+.lab-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.lab-list label { display: flex; gap: 0.5rem; align-items: baseline; }
