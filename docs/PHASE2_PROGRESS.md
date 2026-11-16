@@ -21,14 +21,15 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 - **Lot schémas (profondeur)** — 9 schémas de mécanisme ajoutés (hachage, injection SQL, permissions, PKI, pyramide de la douleur, matrice des risques, zones réseau/DMZ, résolution DNS, chaîne d’attaque, flux d’injection de prompt, ordre de volatilité, isolation Kubernetes). 20 cours illustrés.
 - **Lot parcours — projet final** — ajout d’un champ `finalProject` (titre, mission, livrables, critères) à `PathDef`, rattaché aux 11 parcours via une table dédiée dans `paths.ts` ; rendu d’une section « Projet final » dans le détail de parcours (`PathsPage.tsx`) ; test de cohérence ajouté (`validate.test.ts` : mission ≥ 40 car., ≥ 2 livrables, ≥ 2 critères). Vérifié : 147 → 12 tests du validateur, build et 31 e2e verts.
 
+- **Lot laboratoire gouvernance** — nouvelle catégorie de laboratoire `grc` (`LabCategory` + `CATEGORY_LABELS`) et laboratoire « Appréciation des risques : matrice et plan de traitement » (`risk-matrix-lab`) avec moteur pur testé (niveau, priorisation, défendabilité du traitement). 18 laboratoires. Vérifié : 150 tests unitaires, build et 31 e2e verts.
+
 ### En cours
 - (aucun)
 
 ### Restants (prochaines actions exactes)
-1. **Laboratoire gouvernance** : ajouter une catégorie de laboratoire `grc` (type `LabCategory` + `CATEGORY_LABELS`) et un labo « matrice des risques / plan de traitement » avec moteur testé.
-2. **Approfondissement par discipline** : relire et enrichir (cas professionnel supplémentaire, schéma si mécanisme) les cours les plus synthétiques, discipline par discipline, en consignant ici la note après relecture.
-3. **Examens transversaux** orientés démarche (incident multi-sources).
-4. **UX** : sommaire de cours et progression intra-cours.
+1. **Approfondissement par discipline** : relire et enrichir (cas professionnel supplémentaire, schéma si mécanisme) les cours les plus synthétiques, discipline par discipline, en consignant ici la note après relecture.
+2. **Examens transversaux** orientés démarche (incident multi-sources).
+3. **UX** : sommaire de cours et progression intra-cours.
 
 ## Décisions techniques prises
 

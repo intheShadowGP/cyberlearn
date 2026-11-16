@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 45 |
 | Questions de cours (avec correction) | 721 |
-| Laboratoires | 17 |
+| Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
 
@@ -95,6 +95,7 @@
 | Laboratoire | Catégorie | Niveau | Cours liés |
 | --- | --- | --- | --- |
 | Robustesse des mots de passe et effet du hachage (initiation) (`password-strength-lab`) | crypto | 1 | e-hachage-mots-de-passe |
+| Appréciation des risques : matrice et plan de traitement (`risk-matrix-lab`) | grc | 2 | m-risques-conformite, m-gouvernance-operationnelle |
 | Atelier empreintes, HMAC et dérivation de clés (`hash-lab`) | crypto | 2 | e-hachage-mots-de-passe |
 | Atelier sous-réseaux (`subnet-lab`) | reseau | 2 | b-ipv4-subnetting |
 | Audit d’un serveur Linux compromis (`linux-audit-lab`) | linux | 2 | c-linux-permissions |

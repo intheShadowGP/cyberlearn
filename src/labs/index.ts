@@ -21,4 +21,5 @@ export const CATEGORY_LABELS: Record<LabCategory, string> = {
   osint: 'OSINT',
   cloud: 'Cloud',
   ics: 'Sécurité industrielle',
+  grc: 'Gouvernance',
 };

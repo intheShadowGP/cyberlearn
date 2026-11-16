@@ -10,6 +10,7 @@ import { runDetections } from './detection-engineering-lab/detection';
 import { analyzeTls, hostnameCovered, isSecure, PRESETS } from './tls-inspection-lab/tls';
 import { analyzeCloud, isSecure as cloudSecure, PRESETS as CLOUD } from './cloud-misconfig-lab/cloud';
 import { analyzeOAuth, isSecure as oauthSecure, PRESETS as OAUTH } from './oauth-flow-lab/oauth';
+import { prioritize, riskLevel, treatmentDefensible } from './risk-matrix-lab/risk';
 
 describe('moteur SQL simulé', () => {
   it('connexion normale', () => {
@@ -255,5 +256,23 @@ describe('flux OAuth', () => {
     expect(codes).toContain('redirect-http');
     expect(codes).toContain('no-state');
     expect(analyzeOAuth(faible)[0]?.severity).toBe('haute');
+  });
+});
+
+describe('appréciation des risques', () => {
+  it('calcule le niveau par vraisemblance × gravité', () => {
+    expect(riskLevel({ likelihood: 1, impact: 2 })).toBe('faible');
+    expect(riskLevel({ likelihood: 2, impact: 3 })).toBe('moyen');
+    expect(riskLevel({ likelihood: 4, impact: 4 })).toBe('eleve');
+  });
+  it('priorise du score le plus élevé au plus faible', () => {
+    const ids = prioritize().map((r) => r.id);
+    expect(ids[0]).toBe('rancongiciel');
+    expect(ids[ids.length - 1]).toBe('panne-clim');
+  });
+  it('n’autorise l’acceptation que pour un risque faible', () => {
+    expect(treatmentDefensible('faible', 'accepter')).toBe(true);
+    expect(treatmentDefensible('eleve', 'accepter')).toBe(false);
+    expect(treatmentDefensible('eleve', 'reduire')).toBe(true);
   });
 });
