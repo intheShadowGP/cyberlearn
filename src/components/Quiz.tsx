@@ -12,6 +12,8 @@ export interface QuizProps {
   skillLabels: Record<string, string>;
   onFinished: (score: QuizScore, durationSec: number) => Promise<void> | void;
   onRetry?: () => void;
+  /** Libellé du bouton de reprise. Défaut adapté au tirage aléatoire ; les questionnaires à questions fixes (labos, épreuves) passent « Recommencer… ». */
+  retryLabel?: string;
   recommendation?: (score: QuizScore) => string;
   /** Passe à true pour forcer la validation (fin du temps imparti d'un examen). */
   autoValidate?: boolean;
@@ -34,7 +36,7 @@ const VERDICT_LABEL: Record<string, string> = {
   ungraded: 'À auto-évaluer',
 };
 
-export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRetry, recommendation, autoValidate }: QuizProps) {
+export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRetry, retryLabel, recommendation, autoValidate }: QuizProps) {
   const [answers, setAnswers] = useState<Record<string, Answer>>(() =>
     Object.fromEntries(questions.map((q) => [q.id, emptyAnswer(q)])),
   );
@@ -182,7 +184,7 @@ export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRe
 
       {phase === 'saved' && final && (
         <div ref={resultsRef} tabIndex={-1}>
-          <Evaluation score={final} skillLabels={skillLabels} recommendation={recommendation?.(final)} onRetry={onRetry} />
+          <Evaluation score={final} skillLabels={skillLabels} recommendation={recommendation?.(final)} onRetry={onRetry} retryLabel={retryLabel} />
         </div>
       )}
     </div>
@@ -341,7 +343,7 @@ function QuestionCard(props: {
   );
 }
 
-export function Evaluation({ score, skillLabels, recommendation, onRetry }: { score: QuizScore; skillLabels: Record<string, string>; recommendation?: string | undefined; onRetry?: (() => void) | undefined }) {
+export function Evaluation({ score, skillLabels, recommendation, onRetry, retryLabel }: { score: QuizScore; skillLabels: Record<string, string>; recommendation?: string | undefined; onRetry?: (() => void) | undefined; retryLabel?: string | undefined }) {
   const skills = Object.entries(score.bySkill).map(([id, v]) => ({ id, label: skillLabels[id] ?? id, ratio: v.total ? v.points / v.total : 0 }));
   const ok = skills.filter((s) => s.ratio >= 0.8);
   const ko = skills.filter((s) => s.ratio < 0.8).sort((a, b) => a.ratio - b.ratio);
@@ -394,7 +396,7 @@ export function Evaluation({ score, skillLabels, recommendation, onRetry }: { sc
       )}
       {onRetry && (
         <button type="button" className="btn" onClick={onRetry}>
-          Nouveau tirage de questions
+          {retryLabel ?? 'Nouveau tirage de questions'}
         </button>
       )}
     </section>

@@ -160,6 +160,8 @@ test('épreuve de démarche : dossier multi-sources, parcours complet, débriefi
   const save = page.getByRole('button', { name: 'Enregistrer mon évaluation' });
   if (await save.isVisible().catch(() => false)) await save.click();
   await expect(page.getByRole('heading', { name: 'Évaluation', exact: true })).toBeVisible();
+  // Questions fixes : le bouton de reprise ne parle pas de « tirage ».
+  await expect(page.getByRole('button', { name: 'Recommencer l’épreuve' })).toBeVisible();
 
   await page.goto('./#/evaluations');
   await expect(page.getByRole('heading', { name: 'Épreuves de démarche' })).toBeVisible();

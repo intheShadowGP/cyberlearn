@@ -93,6 +93,7 @@ function ScenarioView({ meta }: { meta: ScenarioMeta }) {
               return c.questions;
             }}
             onFinished={(score, d) => recordExamAttempt(meta.id, score, d)}
+            retryLabel="Recommencer l’épreuve"
             onRetry={() => {
               setDebrief(null);
               setRound((r) => r + 1);

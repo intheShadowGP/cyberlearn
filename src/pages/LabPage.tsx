@@ -99,6 +99,7 @@ function LabView({ meta }: { meta: LabMeta }) {
               return c.questions;
             }}
             onFinished={(score, d) => recordLabAttempt(meta.id, score, d)}
+            retryLabel="Recommencer le questionnaire"
             onRetry={() => {
               setDebrief(null);
               setRound((r) => r + 1);

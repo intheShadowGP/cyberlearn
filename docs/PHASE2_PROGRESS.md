@@ -51,5 +51,6 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 - Profondeur inégale de certains cours (traités en une section) ; relecture experte tierce absente.
 - Quelques faits non confrontés à une source primaire (voir `docs/FACT-CHECK.md`).
 - Firefox/WebKit : seul le statut d’étape CI est vérifié, pas les journaux détaillés.
-- Épreuve de démarche : une épreuve ratée **ne crée pas** de carte de révision (les questions n’ont pas de cours propriétaire) — compromis assumé pour éviter des cartes sans contexte. Après enregistrement, le bouton de reprise affiche « Nouveau tirage de questions » (libellé générique du moteur `Quiz`), impropre pour une épreuve à questions fixes : à corriger si le moteur évolue.
+- Épreuve de démarche : une épreuve ratée **ne crée pas** de carte de révision (les questions n’ont pas de cours propriétaire) — compromis assumé pour éviter des cartes sans contexte.
+- **Corrigé** : le bouton de reprise affichait « Nouveau tirage de questions » même pour les questionnaires à questions fixes. Le moteur `Quiz` accepte désormais une prop `retryLabel` ; les labos affichent « Recommencer le questionnaire » et les épreuves « Recommencer l’épreuve », les cours et examens (tirage réel) gardent le libellé d’origine.
 - Le lot « examens transversaux orientés démarche » (restant n° 2) est **amorcé** par cette première épreuve ; d’autres scénarios pourront être ajoutés sur le même socle.
