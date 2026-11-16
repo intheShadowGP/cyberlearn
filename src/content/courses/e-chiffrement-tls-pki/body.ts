@@ -48,6 +48,7 @@ export const body: CourseBody = {
         title: 'Certificats X.509 et PKI',
         blocks: [
           { t: 'p', text: 'Une clé publique seule ne dit pas **à qui** elle appartient. Le **certificat** lie une clé publique à une identité (un nom de domaine, une personne, un service) et il est signé par une **autorité de certification** (AC). La **PKI** est l’ensemble des AC, politiques et procédures qui rendent cette chaîne de confiance vérifiable.' },
+          { t: 'diagram', id: 'cert-chain', caption: 'Chaîne de confiance : l’AC racine (hors ligne) signe l’AC intermédiaire, qui signe le certificat du serveur ; le client vérifie la chaîne jusqu’à une racine de confiance.', alt: 'Schéma d’une chaîne de certificats : AC racine hors ligne qui signe une AC intermédiaire, laquelle signe le certificat du serveur portant le SAN www.exemple.fr.' },
           { t: 'code', lang: 'text', caption: 'Chaîne de certificats d’un site', code: 'AC racine (dans le magasin de confiance du système ou du navigateur)\n└─ AC intermédiaire (signée par la racine)\n   └─ Certificat du serveur : SAN = www.exemple.fr, exemple.fr\n      validité : 2026-09-01 → 2027-02-28, usage : authentification serveur' },
           {
             t: 'example',

@@ -30,6 +30,7 @@ export const body: CourseBody = {
         title: 'Pyramide de la douleur et hypothèses de chasse',
         blocks: [
           { t: 'p', text: 'La **pyramide de la douleur** (David Bianco) classe les indicateurs selon le coût qu’ils imposent à l’attaquant quand le défenseur les détecte.' },
+          { t: 'diagram', id: 'pyramid-of-pain', caption: 'Plus un indicateur est haut dans la pyramide, plus il coûte cher à l’attaquant d’en changer : détecter des TTP le gêne bien plus que bloquer une empreinte ou une adresse IP.', alt: 'Pyramide de la douleur, du bas vers le haut : empreintes de fichiers (trivial), adresses IP (facile), noms de domaine (simple), artefacts réseau et système (gênant), outils (difficile), TTP (très difficile).' },
           {
             t: 'table',
             head: ['Niveau (du bas vers le haut)', 'Pour l’attaquant, en changer est…'],

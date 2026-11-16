@@ -316,7 +316,93 @@ function UnixPerms(): ReactElement {
   );
 }
 
+function CertChain(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 240" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={200} y={10} w={280} h={52} title="AC racine" sub="hors ligne — point de confiance" kind="alt" />
+      <Box x={200} y={94} w={280} h={52} title="AC intermédiaire" sub="en ligne — émet les certificats" kind="warn" />
+      <Box x={200} y={178} w={280} h={52} title="Certificat serveur" sub="SAN : www.exemple.fr" />
+      <Arrow x1={340} y1={62} x2={340} y2={92} label="signe" />
+      <Arrow x1={340} y1={146} x2={340} y2={176} label="signe" />
+      <text x={500} y={40} className="d-muted">confiance</text>
+      <text x={500} y={210} className="d-muted">vérifié par le client</text>
+    </svg>
+  );
+}
+
+function PyramidOfPain(): ReactElement {
+  const rows: [string, string, 'accent' | 'warn' | 'alt'][] = [
+    ['TTP (tactiques, techniques)', 'très difficile', 'accent'],
+    ['Outils', 'difficile', 'accent'],
+    ['Artefacts réseau/système', 'gênant', 'warn'],
+    ['Noms de domaine', 'simple', 'warn'],
+    ['Adresses IP', 'facile', 'alt'],
+    ['Empreintes de fichiers', 'trivial', 'alt'],
+  ];
+  return (
+    <svg viewBox="0 0 680 260" role="img" aria-hidden="true" className="diagram">
+      <text x={340} y={16} textAnchor="middle" className="d-muted">Coût pour l’attaquant quand le défenseur détecte l’indicateur</text>
+      {rows.map(([label, cost, kind], i) => {
+        const w = 200 + i * 72;
+        const x = 340 - w / 2;
+        const y = 28 + i * 36;
+        return (
+          <g key={label}>
+            <rect x={x} y={y} width={w} height={30} rx={4} className={`d-${kind}-fill`} />
+            <text x={340} y={y + 20} textAnchor="middle" className="d-text">{label}</text>
+            <text x={x + w + 8} y={y + 20} className="d-muted">{cost}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function RiskMatrix(): ReactElement {
+  const n = 4;
+  const cell = 70;
+  const ox = 120;
+  const oy = 20;
+  const kind = (p: number, imp: number): 'alt' | 'warn' | 'danger' => {
+    const s = p * imp;
+    if (s <= 3) return 'alt';
+    if (s <= 8) return 'warn';
+    return 'danger';
+  };
+  return (
+    <svg viewBox="0 0 680 340" role="img" aria-hidden="true" className="diagram">
+      <text x={ox + (n * cell) / 2} y={14} textAnchor="middle" className="d-label">Impact →</text>
+      <text x={24} y={oy + (n * cell) / 2} className="d-label">Vraisemblance ↑</text>
+      {Array.from({ length: n }, (_, r) => {
+        const p = n - r; // ligne du haut = vraisemblance la plus forte
+        return Array.from({ length: n }, (_, c) => {
+          const imp = c + 1;
+          const x = ox + c * cell;
+          const y = oy + r * cell;
+          return (
+            <g key={`${r}-${c}`}>
+              <rect x={x} y={y} width={cell - 4} height={cell - 4} rx={4} className={`d-${kind(p, imp)}-fill`} />
+              <text x={x + (cell - 4) / 2} y={y + (cell - 4) / 2 + 4} textAnchor="middle" className="d-muted">{p * imp}</text>
+            </g>
+          );
+        });
+      })}
+      {Array.from({ length: n }, (_, c) => (
+        <text key={c} x={ox + c * cell + (cell - 4) / 2} y={oy + n * cell + 18} textAnchor="middle" className="d-muted">{c + 1}</text>
+      ))}
+      {Array.from({ length: n }, (_, r) => (
+        <text key={r} x={ox - 10} y={oy + r * cell + (cell - 4) / 2 + 4} textAnchor="end" className="d-muted">{n - r}</text>
+      ))}
+      <text x={ox} y={oy + n * cell + 44} className="d-muted">Vert : risque faible · Orange : moyen · Rouge : élevé (à traiter en priorité)</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'cert-chain': CertChain,
+  'pyramid-of-pain': PyramidOfPain,
+  'risk-matrix': RiskMatrix,
   'password-hash-flow': PasswordHashFlow,
   'sql-injection': SqlInjectionData,
   'unix-perms': UnixPerms,

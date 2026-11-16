@@ -22,6 +22,7 @@ export const body: CourseBody = {
               ['Mesure de sécurité', 'Moyen de réduire vraisemblance ou impact', 'MFA, sauvegardes hors ligne, PRA'],
             ],
           },
+          { t: 'diagram', id: 'risk-matrix', caption: 'On positionne chaque risque selon sa vraisemblance et son impact ; la couleur donne la priorité de traitement (le produit vraisemblance × impact n’est qu’une aide à la lecture).', alt: 'Matrice des risques 4 sur 4 croisant vraisemblance et impact, les cases les plus à risque (vraisemblance et impact élevés) étant en rouge et les plus faibles en vert.' },
           { t: 'list', items: ['**Réduire** : appliquer des mesures (le cas le plus courant).', '**Transférer** : assurance cyber, sous-traitance contractuellement engagée (la responsabilité ne se transfère pas entièrement).', '**Éviter** : renoncer à l’activité ou au projet risqué.', '**Accepter** : décision explicite et documentée de la direction, pour un risque résiduel jugé tolérable.'] },
           { t: 'callout', kind: 'key', text: "Le **risque résiduel** est celui qui subsiste après traitement. Il doit être formellement **accepté par la direction**, pas par l'équipe technique : c'est elle qui porte la responsabilité." },
         ],
