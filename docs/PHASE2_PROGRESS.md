@@ -22,6 +22,7 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 - **Lot parcours — projet final** — ajout d’un champ `finalProject` (titre, mission, livrables, critères) à `PathDef`, rattaché aux 11 parcours via une table dédiée dans `paths.ts` ; rendu d’une section « Projet final » dans le détail de parcours (`PathsPage.tsx`) ; test de cohérence ajouté (`validate.test.ts` : mission ≥ 40 car., ≥ 2 livrables, ≥ 2 critères). Vérifié : 147 → 12 tests du validateur, build et 31 e2e verts.
 
 - **Lot laboratoire gouvernance** — nouvelle catégorie de laboratoire `grc` (`LabCategory` + `CATEGORY_LABELS`) et laboratoire « Appréciation des risques : matrice et plan de traitement » (`risk-matrix-lab`) avec moteur pur testé (niveau, priorisation, défendabilité du traitement). 18 laboratoires. Vérifié : 150 tests unitaires, build et 31 e2e verts.
+- **Lot schémas (profondeur, suite)** — 3 schémas de mécanisme supplémentaires là où ils clarifient vraiment : pipeline DevSecOps avec barrières de sécurité (`l-devsecops-pipeline`, section `controles`), phases d’un test d’intrusion bornées par les RoE (`h-pentest-methodologie`, section `phases`), accès à privilèges via bastion/coffre (`o-comptes-privileges-pam`, section `pam`). 23 cours illustrés. Vérifié : validateur 12/12, 150 tests unitaires, build et 31 e2e verts.
 
 ### En cours
 - (aucun)

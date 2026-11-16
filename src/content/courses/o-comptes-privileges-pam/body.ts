@@ -59,6 +59,7 @@ export const body: CourseBody = {
             ],
           },
           { t: 'def', term: 'Poste d’administration dédié', text: 'Poste réservé aux tâches d’administration, sans messagerie ni navigation sur Internet, durci et maîtrisé. Il évite qu’un poste bureautique compromis serve à voler les identifiants d’administration. L’ANSSI en fait une recommandation centrale pour l’administration sécurisée.' },
+          { t: 'diagram', id: 'pam-flow', caption: 'Accès à privilèges via bastion et coffre : l’administrateur n’obtient jamais le mot de passe de la cible, et la session est enregistrée.', alt: 'L’administrateur s’authentifie (MFA) auprès du bastion ; le bastion récupère un secret éphémère dans le coffre puis ouvre une session enregistrée vers la cible.' },
           { t: 'callout', kind: 'warn', text: 'Un bastion mal protégé devient la cible la plus rentable du réseau : il doit lui-même être administré depuis le niveau le plus élevé, avec MFA, journalisation centralisée et surveillance.' },
         ],
       },

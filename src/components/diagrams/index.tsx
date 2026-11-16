@@ -516,7 +516,87 @@ function K8sIsolation(): ReactElement {
   );
 }
 
+function DevSecOpsPipeline(): ReactElement {
+  const stages: { name: string; gate: string }[] = [
+    { name: 'Commit', gate: 'Analyse de secrets' },
+    { name: 'Build', gate: 'SCA / SBOM' },
+    { name: 'Test', gate: 'SAST' },
+    { name: 'Pré-prod', gate: 'DAST' },
+    { name: 'Déploiement', gate: 'Scan IaC + signature' },
+  ];
+  return (
+    <svg viewBox="0 0 680 210" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      {stages.map((s, i) => {
+        const x = 6 + i * 134;
+        const cx = x + 64;
+        return (
+          <g key={s.name}>
+            <rect x={x} y={20} width={128} height={48} rx={6} className="d-accent-fill" />
+            <text x={cx} y={48} textAnchor="middle" className="d-label">{s.name}</text>
+            {i < stages.length - 1 && (
+              <line x1={x + 128} y1={44} x2={x + 134} y2={44} className="d-accent-stroke" markerEnd="url(#arr2)" />
+            )}
+            <line x1={cx} y1={68} x2={cx} y2={108} className="d-accent-stroke" strokeDasharray="3 3" />
+            <rect x={x} y={110} width={128} height={46} rx={6} className="d-warn-fill" />
+            <text x={cx} y={138} textAnchor="middle" className="d-mono">{s.gate}</text>
+          </g>
+        );
+      })}
+      <text x={340} y={190} textAnchor="middle" className="d-muted">Un contrôle en échec bloque la promotion vers l’étape suivante</text>
+    </svg>
+  );
+}
+
+function PentestPhases(): ReactElement {
+  const phases = ['Cadrage (ROE)', 'Reconnaissance', 'Énumération', 'Exploitation', 'Post-exploitation', 'Rapport'];
+  return (
+    <svg viewBox="0 0 680 140" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      {phases.map((s, i) => {
+        const x = 6 + i * 113;
+        const parts = s.split(' ');
+        const two = s.length > 13;
+        return (
+          <g key={s}>
+            <rect x={x} y={34} width={100} height={56} rx={6} className={i === phases.length - 1 ? 'd-alt-fill' : 'd-accent-fill'} />
+            {two ? (
+              <>
+                <text x={x + 50} y={58} textAnchor="middle" className="d-text">{parts[0]}</text>
+                <text x={x + 50} y={74} textAnchor="middle" className="d-muted">{parts.slice(1).join(' ')}</text>
+              </>
+            ) : (
+              <text x={x + 50} y={66} textAnchor="middle" className="d-text">{s}</text>
+            )}
+            {i < phases.length - 1 && <line x1={x + 100} y1={62} x2={x + 113} y2={62} className="d-accent-stroke" markerEnd="url(#arr2)" />}
+          </g>
+        );
+      })}
+      <text x={340} y={120} textAnchor="middle" className="d-muted">Tout le déroulé reste borné par l’autorisation écrite et le périmètre (ROE)</text>
+    </svg>
+  );
+}
+
+function PamFlow(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 250" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={20} y={95} w={150} h={64} title="Admin" sub="compte dédié" />
+      <Box x={270} y={90} w={160} h={74} title="Bastion" sub="MFA + enregistrement" kind="alt" />
+      <Box x={520} y={20} w={150} h={64} title="Coffre" sub="secret éphémère" kind="warn" />
+      <Box x={520} y={170} w={150} h={64} title="Cible" sub="serveur / équipement" />
+      <Arrow x1={170} y1={127} x2={268} y2={127} label="1. MFA + demande" ly={118} />
+      <Arrow x1={400} y1={90} x2={520} y2={58} label="2. secret éphémère" ly={66} />
+      <Arrow x1={400} y1={164} x2={520} y2={200} label="3. session ouverte" ly={210} />
+      <text x={340} y={242} textAnchor="middle" className="d-muted">L’administrateur ne connaît jamais le mot de passe de la cible ; la session est tracée</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'devsecops-pipeline': DevSecOpsPipeline,
+  'pentest-phases': PentestPhases,
+  'pam-flow': PamFlow,
   'network-zones': NetworkZones,
   'dns-resolution': DnsResolution,
   'attack-chain': AttackChain,
