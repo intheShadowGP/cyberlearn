@@ -14,6 +14,7 @@ import { usePrefs } from '../lib/prefs';
 import { isUnlocked, missingPrerequisites, progressMap } from '../lib/unlock';
 import { usePageTitle } from '../lib/usePageTitle';
 import { VERIFICATION } from '../content/verification';
+import { SCENARIOS } from '../content/scenarios';
 import NotFoundPage from './NotFoundPage';
 
 export default function CoursePage() {
@@ -111,6 +112,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
     [meta.id],
   );
 
+  const relatedScenarios = SCENARIOS.filter((s) => s.relatedCourses.includes(meta.id));
   const sectionsRead = new Set(p?.sectionsRead ?? []);
   const practiceDone = new Set(p?.practiceDone ?? []);
   const totalSections = body?.lesson.sections.length ?? 0;
@@ -165,6 +167,16 @@ function CourseView({ meta }: { meta: CourseMeta }) {
               ))}
             </ul>
           </section>
+          {relatedScenarios.length > 0 && (
+            <section>
+              <h2 className="h3">Épreuves de démarche associées</h2>
+              <ul>
+                {relatedScenarios.map((s) => (
+                  <li key={s.id}><Link to={`/epreuve/${s.id}`}>{s.title}</Link></li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
       </header>
 

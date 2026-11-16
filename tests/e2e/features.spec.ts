@@ -171,6 +171,11 @@ test('épreuve de démarche : dossier multi-sources, parcours complet, débriefi
   await page.goto('./#/evaluations');
   await expect(page.getByRole('heading', { name: 'Épreuves de démarche' })).toBeVisible();
   await expect(page.getByText(/meilleur score 100 %/)).toBeVisible();
+
+  // Renvoi cours → épreuve : un cours lié affiche la ou les épreuves associées.
+  await page.goto('./#/cours/i-soc-detection');
+  await expect(page.getByRole('heading', { name: 'Épreuves de démarche associées' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Compromission d’une application web/ })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
