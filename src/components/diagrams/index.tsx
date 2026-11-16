@@ -247,7 +247,79 @@ function StackFrame(): ReactElement {
   );
 }
 
+function PasswordHashFlow(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 210" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={10} y={30} w={150} h={50} title="Mot de passe" sub="saisi" />
+      <Box x={10} y={120} w={150} h={50} title="Sel aléatoire" sub="unique, non secret" kind="alt" />
+      <Box x={255} y={70} w={180} h={70} title="Hachage lent" sub="Argon2id (m, t, p)" kind="warn" />
+      <Box x={500} y={70} w={170} h={70} title="Empreinte stockée" sub="sel + coût + condensat" />
+      <Arrow x1={160} y1={55} x2={253} y2={95} label="" />
+      <Arrow x1={160} y1={145} x2={253} y2={120} label="" />
+      <Arrow x1={435} y1={105} x2={498} y2={105} label="" />
+      <text x={345} y={160} textAnchor="middle" className="d-muted">coût réglable : lent pour l’attaquant, négligeable pour une connexion</text>
+      <text x={345} y={190} textAnchor="middle" className="d-muted">vérification : re-hacher la saisie avec le même sel et comparer (temps constant)</text>
+    </svg>
+  );
+}
+
+function SqlInjectionData(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 230" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <text x={10} y={22} className="d-label">Concaténation (vulnérable)</text>
+      <rect x={10} y={34} width={300} height={34} rx={4} className="d-alt-fill" />
+      <text x={20} y={56} className="d-mono">… WHERE login = '</text>
+      <rect x={312} y={34} width={150} height={34} rx={4} className="d-danger-fill" />
+      <text x={387} y={56} textAnchor="middle" className="d-mono">admin' --</text>
+      <rect x={464} y={34} width={40} height={34} rx={4} className="d-alt-fill" />
+      <text x={474} y={56} className="d-mono">'</text>
+      <Arrow x1={400} y1={72} x2={400} y2={100} label="" />
+      <text x={400} y={120} textAnchor="middle" className="d-text">la saisie est interprétée comme du CODE → vérification contournée</text>
+
+      <text x={10} y={160} className="d-label">Requête paramétrée (sûre)</text>
+      <rect x={10} y={172} width={300} height={34} rx={4} className="d-alt-fill" />
+      <text x={20} y={194} className="d-mono">… WHERE login = ?</text>
+      <rect x={312} y={172} width={150} height={34} rx={4} className="d-accent-fill" />
+      <text x={387} y={194} textAnchor="middle" className="d-mono">admin' --</text>
+      <text x={480} y={194} className="d-text">traité comme DONNÉE</text>
+    </svg>
+  );
+}
+
+function UnixPerms(): ReactElement {
+  const groups: [string, [string, number, boolean][]][] = [
+    ['propriétaire (u)', [['r', 4, true], ['w', 2, true], ['x', 1, true]]],
+    ['groupe (g)', [['r', 4, true], ['w', 2, false], ['x', 1, true]]],
+    ['autres (o)', [['r', 4, false], ['w', 2, false], ['x', 1, false]]],
+  ];
+  const sums = [7, 5, 0];
+  return (
+    <svg viewBox="0 0 680 190" role="img" aria-hidden="true" className="diagram">
+      <text x={340} y={20} textAnchor="middle" className="d-muted">Permissions de rwxr-x--- → 750</text>
+      {groups.map(([label, cells], g) => (
+        <g key={label}>
+          <text x={40 + g * 220 + 90} y={46} textAnchor="middle" className="d-label">{label}</text>
+          {cells.map(([c, v, on], i) => (
+            <g key={c}>
+              <rect x={40 + g * 220 + i * 60} y={56} width={52} height={52} rx={5} className={on ? 'd-accent-fill' : 'd-alt-fill'} />
+              <text x={40 + g * 220 + i * 60 + 26} y={82} textAnchor="middle" className="d-text">{on ? c : '−'}</text>
+              <text x={40 + g * 220 + i * 60 + 26} y={100} textAnchor="middle" className="d-muted">{on ? v : 0}</text>
+            </g>
+          ))}
+          <text x={40 + g * 220 + 90} y={140} textAnchor="middle" className="d-label">= {sums[g]}</text>
+        </g>
+      ))}
+      <text x={340} y={172} textAnchor="middle" className="d-muted">chaque droit vaut r=4, w=2, x=1 ; on additionne par groupe</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'password-hash-flow': PasswordHashFlow,
+  'sql-injection': SqlInjectionData,
+  'unix-perms': UnixPerms,
   'ipv4-bits': Ipv4Bits,
   'osi-layers': OsiLayers,
   'tcp-handshake': TcpHandshake,

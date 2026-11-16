@@ -31,6 +31,7 @@ export const body: CourseBody = {
         blocks: [
           { t: 'code', lang: 'text', code: '-rwxr-x---  1 alice devs  4096 mars 3 10:12 deploy.sh\n│└┬┘└┬┘└┬┘\n│ │  │  └ autres (o) : aucun droit\n│ │  └ groupe (g) devs : lecture + exécution\n│ └ propriétaire (u) alice : lecture + écriture + exécution\n└ type : - fichier, d répertoire, l lien symbolique' },
           { t: 'table', caption: 'Valeurs octales', head: ['Droit', 'Fichier', 'Répertoire', 'Valeur'], rows: [['r', 'lire le contenu', 'lister les noms', '4'], ['w', 'modifier', 'créer, supprimer, renommer des entrées', '2'], ['x', 'exécuter', 'traverser (`cd`, accéder aux fichiers)', '1']] },
+          { t: 'diagram', id: 'unix-perms', caption: 'Chaque groupe (propriétaire, groupe, autres) additionne les droits actifs : rwx = 7, r-x = 5, --- = 0, soit la permission octale 750.', alt: 'Schéma des permissions rwxr-x--- décomposées en trois groupes propriétaire, groupe et autres, chaque droit valant r égale 4, w égale 2, x égale 1, donnant 7, 5 et 0.' },
           {
             t: 'example',
             title: 'Calcul de rwxr-x---',
