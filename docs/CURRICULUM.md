@@ -10,12 +10,12 @@
 | Disciplines cartographiées | 18 |
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
-| Sujets abordés dans au moins un cours (déclaratif) | 381 |
-| Cours complets | 44 |
-| Questions de cours (avec correction) | 705 |
+| Sujets abordés dans au moins un cours (déclaratif) | 403 |
+| Cours complets | 45 |
+| Questions de cours (avec correction) | 721 |
 | Laboratoires | 12 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 33 |
+| Évaluations transversales, examens blancs et finaux | 34 |
 
 ## Par discipline
 
@@ -28,7 +28,7 @@
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
 | F. Sécurité Web | 3 | 2, 3 | 27 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
-| H. Sécurité offensive et pentest | 1 | 2 | 12 / 34 |
+| H. Sécurité offensive et pentest | 2 | 2, 3 | 34 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
 | J. Forensique numérique | 3 | 2, 3 | 17 / 17 |
 | K. Malware et reverse engineering | 2 | 2, 3 | 22 / 22 |
@@ -65,6 +65,7 @@
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
+| Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 110 min | 5 | 16 | 2 | 5 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
@@ -113,7 +114,7 @@
 | Parcours débutant | 7 | 3 |
 | Administrateur systèmes et réseaux sécurité | 13 | 5 |
 | Analyste SOC | 9 | 4 |
-| Pentesteur | 9 | 5 |
+| Pentesteur | 10 | 5 |
 | Ingénieur cybersécurité | 12 | 3 |
 | Investigation numérique (forensic) | 10 | 4 |
 | Sécurité cloud | 9 | 1 |
@@ -124,4 +125,3 @@
 
 ## Sujets non couverts (« à venir »)
 
-- **H. Sécurité offensive et pentest** : Exploitation en laboratoire, Post-exploitation encadrée, Élévation de privilèges, Pivoting en laboratoire, Tests d'intrusion web, Tests d'intrusion réseau, Tests Active Directory, Sécurité Wi-Fi, Red Team, Purple Team, Burp Suite, OWASP ZAP, Metasploit, Nuclei, Nikto, Gobuster, FFUF, John the Ripper, Hashcat, Hydra, Netcat, sqlmap

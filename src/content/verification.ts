@@ -40,6 +40,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'g-vulnerabilites-memoire': sheet(['SEI CERT C', 'The Case for Memory Safe Roadmaps (CISA, NSA, FBI et partenaires)', 'Règles ANSSI pour le langage C'], ['Niveaux de FORTIFY_SOURCE et protections des compilateurs']),
   'g-code-sur-langages': sheet(['OWASP Cheat Sheets (validation, désérialisation, injection de commandes)', 'Documentation Python (pickle, secrets)', 'MDN (pollution de prototype)', 'OWASP ReDoS'], ['API et options des bibliothèques de validation', 'Règles des outils d’analyse statique']),
   'h-pentest-methodologie': sheet(['Référentiel PASSI (ANSSI)', 'OWASP WSTG', 'NIST SP 800-115', 'CVSS v4.0'], ['Version de CVSS', 'Catalogue CISA KEV']),
+  'h-execution-outils-equipes': sheet(['NIST SP 800-115', 'OWASP WSTG', 'Référentiel PASSI (ANSSI)', 'MITRE ATT&CK', 'OWASP Password Storage Cheat Sheet'], ['Versions et fonctionnalités des outils de test', 'Techniques ATT&CK et détections associées']),
   'i-soc-detection': sheet(['MITRE ATT&CK', 'Sigma', 'NIST SP 800-61 Rév. 3'], ['Techniques ATT&CK (identifiants révisés à chaque version)']),
   'i-threat-hunting': sheet(['TLP 2.0 (FIRST)', 'Pyramid of Pain (D. Bianco, 2013)', 'MITRE ATT&CK (T1053.005, T1136.001)', 'STIX 2.1', 'Zeek et Suricata'], ['Fonctionnalités des plateformes XDR, NDR et SOAR', 'Empreintes TLS (JA3, JA4)']),
   'j-forensique-principes': sheet(['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], ['Artefacts Windows selon les versions du système']),
