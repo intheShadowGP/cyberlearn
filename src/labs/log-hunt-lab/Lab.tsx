@@ -17,6 +17,16 @@ export default function LogHuntLab() {
     return [...m.entries()].sort((a, b) => b[1].fail - a[1].fail);
   }, [rows]);
 
+  const downloadDataset = () => {
+    const text = rows.map((r) => r.raw).join('\n') + '\n';
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'auth.log';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="lab-workspace">
       <section className="panel" aria-labelledby="log-h">
@@ -33,6 +43,10 @@ export default function LogHuntLab() {
           ]}
           filterKeys={['source', 'user', 'result']}
         />
+        <p className="muted">
+          <button type="button" className="btn btn-ghost" onClick={downloadDataset}>Télécharger le jeu de données (auth.log)</button>
+          {' '}pour l’analyser avec vos propres outils (grep, awk…).
+        </p>
       </section>
       <section className="panel" aria-labelledby="stats-h">
         <h3 id="stats-h">Agrégation par source</h3>

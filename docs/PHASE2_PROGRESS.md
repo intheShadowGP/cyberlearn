@@ -26,10 +26,13 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 ### En cours
 - (aucun)
 
+### Constats de relecture (évite de refaire l’existant)
+- **UX sommaire / progression intra-cours : DÉJÀ PRÉSENT.** `CoursePage.tsx` affiche un sommaire latéral (ancres par section, coche « lu », barre de progression ARIA) et rend les **prérequis comme liens cliquables** vers les cours concernés, avec ✓ si validé. Aucun développement nécessaire — ne pas dupliquer.
+
 ### Restants (prochaines actions exactes)
-1. **Approfondissement par discipline** : relire et enrichir (cas professionnel supplémentaire, schéma si mécanisme) les cours les plus synthétiques, discipline par discipline, en consignant ici la note après relecture.
-2. **Examens transversaux** orientés démarche (incident multi-sources).
-3. **UX** : sommaire de cours et progression intra-cours.
+1. **Approfondissement par discipline** : relire et enrichir (cas professionnel supplémentaire, schéma si mécanisme) les cours les plus synthétiques, discipline par discipline, en consignant ici la note après relecture. Travail itératif et subjectif : avancer par petits lots vérifiés, sans padding.
+2. **Examens transversaux** orientés démarche (incident multi-sources) : nécessiterait une évolution du moteur d’examen (actuellement tirage de QCM) — lot conséquent, à cadrer.
+3. **Données de laboratoire téléchargeables** (section 6.1.B) : **amorcé** — `log-hunt-lab` propose le téléchargement de son `auth.log` (Blob client, compatible GitHub Pages). À étendre aux autres labos d’analyse (trames Modbus, événements Windows).
 
 ## Décisions techniques prises
 
