@@ -1,0 +1,136 @@
+import type { ScenarioBody } from '../../scenarios';
+
+export const body: ScenarioBody = {
+  scenarioId: 'web-appsec-intrusion',
+  dossier: [
+    {
+      t: 'callout',
+      kind: 'legal',
+      title: 'Données fictives',
+      text: "Boutique, comptes, adresses et horodatages sont inventés. Les formats de journaux et les techniques sont réels ; les valeurs ne le sont pas. L'adresse 203.0.113.45 appartient à une plage réservée à la documentation (RFC 5737).",
+    },
+    {
+      t: 'p',
+      text: "Mardi, 10 h 10. La supervision de la boutique **Halbyx Shop** signale un pic d'erreurs puis des réponses anormalement volumineuses sur un point d'entrée public. Vous ouvrez les trois sources ci-dessous. **Lisez-les : les réponses s'y trouvent ou s'en déduisent.**",
+    },
+    { t: 'h', text: 'Source 1 — Alerte de supervision' },
+    {
+      t: 'table',
+      head: ['Champ', 'Valeur'],
+      rows: [
+        ['Hôte', 'shop-web01 (serveur web public)'],
+        ['Règle déclenchée', 'Pic d’erreurs 500 puis réponses volumineuses sur `/produits`'],
+        ['Adresse source', '`203.0.113.45` (externe)'],
+        ['Point d’entrée', '`/produits?id=…` (catalogue, paramètre numérique attendu)'],
+        ['Gravité', 'Élevée'],
+      ],
+    },
+    { t: 'h', text: 'Source 2 — Journal d’accès HTTP de shop-web01 (extrait)' },
+    {
+      t: 'code',
+      lang: 'text',
+      caption: 'Heure · adresse · requête · code de statut · octets renvoyés',
+      code: [
+        '10:02:11  203.0.113.45  "GET /produits?id=1"                                     200    5213',
+        '10:02:19  203.0.113.45  "GET /produits?id=1\'"                                    500     402',
+        '10:02:26  203.0.113.45  "GET /produits?id=1\' OR \'1\'=\'1"                          200    5210',
+        '10:03:04  203.0.113.45  "GET /produits?id=-1 UNION SELECT ... FROM utilisateurs"  200   48907',
+        '10:05:40  203.0.113.45  "GET /admin/commandes"                                   200    9004',
+        '10:06:12  203.0.113.45  "GET /export?fichier=../../../etc/passwd"                200    1840',
+      ].join('\n'),
+    },
+    { t: 'h', text: 'Source 3 — Journal applicatif de shop-web01 (extrait)' },
+    {
+      t: 'code',
+      lang: 'text',
+      caption: 'Heure · niveau · message',
+      code: [
+        '10:02:19  ERROR  Erreur de syntaxe SQL près de "\'" dans la requête du catalogue (/produits)',
+        '10:03:04  WARN   /produits : 1 482 lignes renvoyées depuis la table « utilisateurs »',
+        '10:05:38  AUTH   Session administrateur réutilisée depuis 203.0.113.45 (habituelle : 10.0.0.12)',
+      ].join('\n'),
+    },
+  ],
+  questions: [
+    {
+      id: 'sc-web-q1',
+      type: 'single',
+      difficulty: 2,
+      skills: ['f-sqli'],
+      prompt: 'Dans la source 2, la requête `/produits?id=1\' OR \'1\'=\'1`, confirmée par l’erreur de syntaxe SQL de la source 3, relève de quelle technique ?',
+      options: [
+        { id: 'a', text: 'Une injection SQL' },
+        { id: 'b', text: 'Un cross-site scripting (XSS) réfléchi via le paramètre de recherche' },
+        { id: 'c', text: 'Une falsification de requête côté serveur (SSRF)' },
+        { id: 'd', text: 'Une attaque par force brute du formulaire de connexion' },
+      ],
+    },
+    {
+      id: 'sc-web-q2',
+      type: 'short',
+      difficulty: 1,
+      skills: ['i-triage'],
+      prompt: 'Quel code de statut HTTP, dans la source 2, accompagne les requêtes malveillantes ayant renvoyé une page (et non une erreur) ?',
+      placeholder: 'ex. un code à 3 chiffres',
+    },
+    {
+      id: 'sc-web-q3',
+      type: 'single',
+      difficulty: 2,
+      skills: ['f-ssrf'],
+      prompt: 'La requête `GET /export?fichier=../../../etc/passwd` (source 2) relève de quelle catégorie ?',
+      options: [
+        { id: 'a', text: 'Une traversée de répertoires (path traversal)' },
+        { id: 'b', text: 'Une injection de commande système sur le serveur' },
+        { id: 'c', text: 'Un contournement du contrôle d’accès par manipulation d’identifiant (IDOR)' },
+        { id: 'd', text: 'Une redirection ouverte (open redirect)' },
+      ],
+    },
+    {
+      id: 'sc-web-q4',
+      type: 'truefalse',
+      difficulty: 2,
+      skills: ['f-session'],
+      prompt: 'La ligne `AUTH` de la source 3 — « session administrateur réutilisée depuis 203.0.113.45 » — indique un détournement de la session de l’administrateur.',
+    },
+    {
+      id: 'sc-web-q5',
+      type: 'single',
+      difficulty: 3,
+      skills: ['i-triage'],
+      prompt: 'Qu’est-ce qui confirme que l’attaque a abouti à une **extraction de données**, et pas seulement une tentative ?',
+      options: [
+        { id: 'a', text: 'La réponse anormalement volumineuse à la requête UNION et les 1 482 lignes de la table « utilisateurs » renvoyées au journal applicatif' },
+        { id: 'b', text: 'Le fait que plusieurs requêtes proviennent de la même adresse externe en quelques minutes seulement' },
+        { id: 'c', text: 'La présence d’une erreur 500 dans le journal d’accès' },
+        { id: 'd', text: 'L’emploi de la méthode GET plutôt que POST' },
+      ],
+    },
+    {
+      id: 'sc-web-q6',
+      type: 'multi',
+      difficulty: 2,
+      skills: ['i-ir'],
+      prompt: 'Quelles mesures de confinement immédiat sont appropriées ? (plusieurs réponses)',
+      options: [
+        { id: 'a', text: 'Bloquer l’adresse source et mettre hors service le point d’entrée vulnérable' },
+        { id: 'b', text: 'Invalider les sessions en cours et changer les secrets exposés' },
+        { id: 'c', text: 'Conserver et horodater les journaux comme preuves' },
+        { id: 'd', text: 'Effacer les journaux d’accès pour repartir proprement' },
+      ],
+    },
+    {
+      id: 'sc-web-q7',
+      type: 'single',
+      difficulty: 2,
+      skills: ['f-sqli'],
+      prompt: 'Quelle correction empêche durablement ce type d’attaque sur le paramètre `id` ?',
+      options: [
+        { id: 'a', text: 'Utiliser des requêtes préparées (paramétrées) côté serveur' },
+        { id: 'b', text: 'Déployer un pare-feu applicatif (WAF) comme unique protection et ne rien changer au code' },
+        { id: 'c', text: 'Masquer les messages d’erreur SQL renvoyés à l’utilisateur' },
+        { id: 'd', text: 'Limiter la taille des réponses HTTP du serveur' },
+      ],
+    },
+  ],
+};

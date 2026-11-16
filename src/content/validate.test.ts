@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { validateContent, findForbiddenFields, type ContentSet } from './validate';
-import type { CourseBody, CourseCorrections, CourseMeta, CourseSolutions, LabBody, LabCorrections, LabMeta } from './types';
+import type { Answer, CourseBody, CourseCorrections, CourseMeta, CourseSolutions, LabBody, LabCorrections, LabMeta } from './types';
+import { gradeQuestion } from '../lib/quiz';
 import { MODULES } from './catalog';
 import { DIAGRAMS } from '../components/diagrams';
 import { PATHS } from './paths';
@@ -209,6 +210,27 @@ describe('épreuves de démarche (scénarios)', () => {
 
       const forbidden = findForbiddenFields(body as unknown);
       if (forbidden.length) errors.push(`${meta.id} : champ de réponse présent dans body (${forbidden.join(', ')})`);
+    }
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
+  it('la réponse déclarée correcte de chaque question est bien notée « correct »', () => {
+    const errors: string[] = [];
+    for (const { meta, body, corrections } of scenarios) {
+      for (const q of body.questions) {
+        const c = corrections.questions[q.id];
+        if (!c) continue;
+        let a: Answer;
+        switch (c.type) {
+          case 'single': a = { type: 'single', value: c.correct }; break;
+          case 'multi': a = { type: 'multi', value: [...c.correct] }; break;
+          case 'truefalse': a = { type: 'truefalse', value: c.correct }; break;
+          case 'short': a = { type: 'short', value: c.accepted[0] ?? '' }; break;
+          default: continue;
+        }
+        const r = gradeQuestion(q, a, c);
+        if (r.verdict !== 'correct') errors.push(`${meta.id}/${q.id} : réponse correcte déclarée notée « ${r.verdict} »`);
+      }
     }
     expect(errors, errors.join('\n')).toEqual([]);
   });

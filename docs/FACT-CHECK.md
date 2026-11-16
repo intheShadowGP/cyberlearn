@@ -41,4 +41,7 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | MITRE ATT&CK T1078.002 Valid Accounts: Domain Accounts → Initial Access, Persistence, Privilege Escalation, Defense Evasion (épreuve SOC) | attack.mitre.org/techniques/T1078/002 | Vérifié le 2026-11-16 |
 | MITRE ATT&CK T1098.007 Account Manipulation: Additional Local or Domain Groups → Persistence, Privilege Escalation (ajout à un groupe privilégié ; épreuve SOC) | attack.mitre.org/techniques/T1098/007 | Vérifié le 2026-11-16 (la page ne nomme pas « Admins du domaine » mais couvre l’ajout à des groupes de domaine) |
 
+| OWASP Top 10 2021 — A03 Injection (inclut l’injection SQL ; épreuve AppSec) | owasp.org (le serveur redirige vers le chemin officiel `/2021/A03_2021-Injection/`) | Vérifié le 2026-11-16 (identifiant A03 confirmé par l’URL du serveur OWASP ; contenu détaillé non rouvert, page en redirection) |
+| CWE-22 « Improper Limitation of a Pathname to a Restricted Directory (Path Traversal) » (épreuve AppSec) | cwe.mitre.org/data/definitions/22.html | Vérifié le 2026-11-16 |
+
 Toute contribution qui vérifie une ligne « non vérifié » doit indiquer la source consultée et la date.
