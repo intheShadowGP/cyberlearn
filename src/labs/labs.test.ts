@@ -8,6 +8,8 @@ import { decode, parseHex } from './modbus-lab/modbus';
 import { charsetSize, crackTimeSeconds, entropyBits, formatDuration, isCommon, SPEEDS, verdict } from './password-strength-lab/strength';
 import { runDetections } from './detection-engineering-lab/detection';
 import { analyzeTls, hostnameCovered, isSecure, PRESETS } from './tls-inspection-lab/tls';
+import { analyzeCloud, isSecure as cloudSecure, PRESETS as CLOUD } from './cloud-misconfig-lab/cloud';
+import { analyzeOAuth, isSecure as oauthSecure, PRESETS as OAUTH } from './oauth-flow-lab/oauth';
 
 describe('moteur SQL simulé', () => {
   it('connexion normale', () => {
@@ -214,5 +216,44 @@ describe('analyse TLS', () => {
   it('trie les défauts par gravité décroissante', () => {
     const mismatch = PRESETS.find((p) => p.id === 'mismatch')!.cfg;
     expect(analyzeTls(mismatch)[0]?.severity).toBe('haute');
+  });
+});
+
+describe('posture cloud', () => {
+  it('le compte durci ne lève aucun écart', () => {
+    const ok = CLOUD.find((p) => p.id === 'durci')!.cfg;
+    expect(analyzeCloud(ok)).toEqual([]);
+    expect(cloudSecure(ok)).toBe(true);
+  });
+  it('détecte les expositions et les privilèges excessifs', () => {
+    const def = CLOUD.find((p) => p.id === 'defaut')!.cfg;
+    const codes = analyzeCloud(def).map((f) => f.code);
+    expect(codes).toContain('bucket-public');
+    expect(codes).toContain('sg-ssh-world');
+    expect(codes).toContain('role-wildcard');
+    expect(codes).toContain('no-mfa-root');
+    expect(analyzeCloud(def)[0]?.severity).toBe('haute');
+  });
+});
+
+describe('flux OAuth', () => {
+  it('le client robuste ne lève aucun défaut', () => {
+    const ok = OAUTH.find((p) => p.id === 'robuste')!.cfg;
+    expect(analyzeOAuth(ok)).toEqual([]);
+    expect(oauthSecure(ok)).toBe(true);
+  });
+  it('signale le flux implicite', () => {
+    const imp = OAUTH.find((p) => p.id === 'implicite')!.cfg;
+    const codes = analyzeOAuth(imp).map((f) => f.code);
+    expect(codes).toContain('implicit');
+    expect(codes).toContain('no-pkce');
+  });
+  it('signale les défauts d’un client mal configuré, triés par gravité', () => {
+    const faible = OAUTH.find((p) => p.id === 'faible')!.cfg;
+    const codes = analyzeOAuth(faible).map((f) => f.code);
+    expect(codes).toContain('redirect-loose');
+    expect(codes).toContain('redirect-http');
+    expect(codes).toContain('no-state');
+    expect(analyzeOAuth(faible)[0]?.severity).toBe('haute');
   });
 });

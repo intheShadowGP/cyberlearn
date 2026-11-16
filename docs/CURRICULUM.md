@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 45 |
 | Questions de cours (avec correction) | 721 |
-| Laboratoires | 15 |
+| Laboratoires | 17 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
 
@@ -103,11 +103,13 @@
 | Chronologie multi-sources d’une infection (`timeline-lab`) | forensic | 2 | j-forensique-principes |
 | Évaluateur de politiques IAM (`iam-policy-lab`) | cloud | 2 | l-cloud-iam |
 | Injection SQL sur une page de connexion (simulation) (`sqli-lab`) | web | 2 | f-injections-xss |
+| Mauvaises configurations cloud : repérer et corriger la posture (`cloud-misconfig-lab`) | cloud | 2 | l-cloud-iam, l-multicloud-serverless-hybride |
 | Reconnaissance OSINT d’une entreprise fictive (`osint-lab`) | osint | 2 | h-pentest-methodologie |
 | Trames Modbus suspectes dans une station de pompage (`modbus-lab`) | ics | 2 | n-ics-modbus |
 | Analyse d’une configuration TLS et d’une chaîne de certificats (`tls-inspection-lab`) | crypto | 3 | e-chiffrement-tls-pki |
 | Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
+| Sécurité d’un flux OAuth 2.0 : configuration d’un client (`oauth-flow-lab`) | web | 3 | o-identite-mfa-oauth |
 | Ingénierie de détection : composer une règle sans faux positifs (expert) (`detection-engineering-lab`) | soc | 4 | i-threat-hunting, i-soc-detection |
 
 ## Parcours
