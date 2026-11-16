@@ -18,6 +18,19 @@ export default function ModbusLab() {
   const bytes = custom.trim() ? parseHex(custom) : parseHex(CAPTURE[selected]?.hex ?? '');
   const d = bytes ? decode(bytes) : null;
 
+  const downloadCapture = () => {
+    const esc = (v: string) => `"${v.replace(/"/g, '""')}"`;
+    const header = 'heure;source;destination;charge_hex';
+    const lines = CAPTURE.map((c) => [c.t, c.src, c.dst, c.hex].map(esc).join(';'));
+    const text = '﻿' + [header, ...lines].join('\r\n') + '\r\n';
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'capture-modbus.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="lab-workspace">
       <section className="panel" aria-labelledby="doc-h">
@@ -46,6 +59,10 @@ export default function ModbusLab() {
             </tbody>
           </table>
         </div>
+        <p className="muted">
+          <button type="button" className="btn btn-ghost" onClick={downloadCapture}>Télécharger la capture (CSV)</button>
+          {' '}pour la rejouer ou l’analyser avec vos propres outils.
+        </p>
       </section>
       <section className="panel" aria-labelledby="dec-h">
         <h3 id="dec-h">Décodeur Modbus TCP</h3>

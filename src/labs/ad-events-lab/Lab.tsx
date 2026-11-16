@@ -4,6 +4,18 @@ import { buildEvents, EVENT_LABELS } from './events';
 
 export default function AdEventsLab() {
   const rows = useMemo(() => buildEvents().map((e) => ({ ...e, type: `${e.eventId} — ${EVENT_LABELS[e.eventId] ?? ''}` })), []);
+  const downloadDataset = () => {
+    const esc = (v: unknown) => `"${String(v).replace(/"/g, '""')}"`;
+    const header = 'horodatage;event_id;compte;source;detail';
+    const lines = rows.map((r) => [r.time, r.eventId, r.account, r.source, r.detail].map(esc).join(';'));
+    const text = '﻿' + [header, ...lines].join('\r\n') + '\r\n';
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'evenements-dc01.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
   return (
     <div className="lab-workspace">
       <section className="panel" aria-labelledby="ev-h">
@@ -21,6 +33,10 @@ export default function AdEventsLab() {
           ]}
           filterKeys={['type', 'account', 'source']}
         />
+        <p className="muted">
+          <button type="button" className="btn btn-ghost" onClick={downloadDataset}>Télécharger le jeu de données (CSV)</button>
+          {' '}pour construire votre chronologie dans un tableur ou un SIEM.
+        </p>
       </section>
     </div>
   );

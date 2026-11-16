@@ -32,7 +32,7 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 ### Restants (prochaines actions exactes)
 1. **Approfondissement par discipline** : relire et enrichir (cas professionnel supplémentaire, schéma si mécanisme) les cours les plus synthétiques, discipline par discipline, en consignant ici la note après relecture. Travail itératif et subjectif : avancer par petits lots vérifiés, sans padding.
 2. **Examens transversaux** orientés démarche (incident multi-sources) : nécessiterait une évolution du moteur d’examen (actuellement tirage de QCM) — lot conséquent, à cadrer.
-3. **Données de laboratoire téléchargeables** (section 6.1.B) : **amorcé** — `log-hunt-lab` propose le téléchargement de son `auth.log` (Blob client, compatible GitHub Pages). À étendre aux autres labos d’analyse (trames Modbus, événements Windows).
+3. **Données de laboratoire téléchargeables** (section 6.1.B) : **fait pour les trois labos d’analyse** — `log-hunt-lab` (auth.log), `ad-events-lab` (événements Windows, CSV), `modbus-lab` (capture, CSV). Blob client, compatible GitHub Pages. Les autres labos sont des simulations interactives sans jeu de données tabulaire à exporter.
 
 ## Décisions techniques prises
 
