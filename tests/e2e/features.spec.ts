@@ -54,7 +54,8 @@ test('recherche interne : cours, notions, laboratoires, parcours @cross', async 
   await page.getByRole('link', { name: 'Analyste SOC' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Analyste SOC');
   await page.goto('./#/recherche?q=zzzzzz');
-  await expect(page.getByRole('status')).toContainText('0 résultat');
+  // Statut de la recherche ciblé explicitement : le bandeau PWA « nouvelle version » porte aussi role="status".
+  await expect(page.getByRole('status').filter({ hasText: /résultat/ })).toContainText('0 résultat');
 });
 
 test('révisions : questions ratées, répétition espacée, discipline, flashcards du glossaire', async ({ page }) => {

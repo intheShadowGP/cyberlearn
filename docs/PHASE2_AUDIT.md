@@ -48,7 +48,7 @@ Aucun bloquant. Points de vigilance connus : assertions e2e historiquement sensi
 
 1. **Fiabilité et cohérence** : docs de pilotage (ce document, `PHASE2_PROGRESS.md`), chiffres recalculés.
 2. **Parcours** : projet final + critères pour les 11 parcours (lot 1, fait).
-3. **Qualité pédagogique** : relecture et approfondissement par discipline, cas professionnels, schémas (en cours — 20 cours illustrés).
+3. **Qualité pédagogique** : relecture et approfondissement par discipline, cas professionnels, schémas (en cours — 23 cours illustrés).
 4. **Pratique** : nouveaux laboratoires d’analyse de données, catégorie gouvernance.
 5. **Évaluations** : examens transversaux orientés démarche.
 6. **UX** : sommaire de cours, progression intra-cours.

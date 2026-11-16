@@ -25,7 +25,7 @@ export const body: CourseBody = {
           { t: 'def', term: 'SAST', text: "Static Application Security Testing : analyse du code sans l'exécuter. Rapide et précis sur la localisation, mais sujet aux faux positifs et aveugle aux erreurs de configuration d'exécution." },
           { t: 'def', term: 'SCA', text: "Software Composition Analysis : inventaire des composants tiers (directs et transitifs) et rapprochement avec les bases de vulnérabilités (CVE, avis GitHub, OSV)." },
           { t: 'callout', kind: 'key', text: "Un contrôle qui produit des centaines d'alertes non triées est contourné ou désactivé. On commence par **bloquer** sur un petit nombre de règles sûres (secrets, vulnérabilités critiques exploitées) et on **informe** sur le reste, puis on durcit progressivement." },
-          { t: 'diagram', id: 'devsecops-pipeline', caption: 'Chaque étape du pipeline porte un contrôle de sécurité (barrière) ; l’échec d’une barrière bloque la promotion.', alt: 'Pipeline en cinq étapes — Commit, Build, Test, Pré-prod, Déploiement — avec sous chacune sa barrière de sécurité : analyse de secrets, SCA/SBOM, SAST, DAST, scan IaC et signature.' },
+          { t: 'diagram', id: 'devsecops-pipeline', caption: 'Chaque étape du pipeline porte un contrôle de sécurité (barrière) : les règles critiques sont bloquantes, les autres informent.', alt: 'Pipeline en cinq étapes — Commit, Build, Test, Pré-prod, Déploiement — avec sous chacune sa barrière de sécurité : analyse de secrets, SCA/SBOM, SAST, DAST, analyse d’IaC et signature.' },
         ],
       },
       {

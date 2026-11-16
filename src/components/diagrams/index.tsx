@@ -522,7 +522,7 @@ function DevSecOpsPipeline(): ReactElement {
     { name: 'Build', gate: 'SCA / SBOM' },
     { name: 'Test', gate: 'SAST' },
     { name: 'Pré-prod', gate: 'DAST' },
-    { name: 'Déploiement', gate: 'Scan IaC + signature' },
+    { name: 'Déploiement', gate: 'IaC + signature' },
   ];
   return (
     <svg viewBox="0 0 680 210" role="img" aria-hidden="true" className="diagram">
@@ -543,36 +543,32 @@ function DevSecOpsPipeline(): ReactElement {
           </g>
         );
       })}
-      <text x={340} y={190} textAnchor="middle" className="d-muted">Un contrôle en échec bloque la promotion vers l’étape suivante</text>
+      <text x={340} y={190} textAnchor="middle" className="d-muted">Les barrières critiques (secrets, vulnérabilités exploitées) sont bloquantes ; les autres informent</text>
     </svg>
   );
 }
 
 function PentestPhases(): ReactElement {
-  const phases = ['Cadrage (ROE)', 'Reconnaissance', 'Énumération', 'Exploitation', 'Post-exploitation', 'Rapport'];
+  const phases = ['Préparation (RoE)', 'Reconnaissance', 'Énumération', 'Analyse des vulnérabilités', 'Exploitation', 'Post-exploitation', 'Rapport'];
+  const top = 12;
+  const pitch = 38;
+  const frameH = phases.length * pitch + 4;
   return (
-    <svg viewBox="0 0 680 140" role="img" aria-hidden="true" className="diagram">
+    <svg viewBox="0 0 680 310" role="img" aria-hidden="true" className="diagram">
       <Defs />
+      <rect x={186} y={top - 6} width={308} height={frameH} rx={10} fill="none" className="d-accent-stroke" strokeDasharray="4 4" />
       {phases.map((s, i) => {
-        const x = 6 + i * 113;
-        const parts = s.split(' ');
-        const two = s.length > 13;
+        const y = top + i * pitch;
+        const last = i === phases.length - 1;
         return (
           <g key={s}>
-            <rect x={x} y={34} width={100} height={56} rx={6} className={i === phases.length - 1 ? 'd-alt-fill' : 'd-accent-fill'} />
-            {two ? (
-              <>
-                <text x={x + 50} y={58} textAnchor="middle" className="d-text">{parts[0]}</text>
-                <text x={x + 50} y={74} textAnchor="middle" className="d-muted">{parts.slice(1).join(' ')}</text>
-              </>
-            ) : (
-              <text x={x + 50} y={66} textAnchor="middle" className="d-text">{s}</text>
-            )}
-            {i < phases.length - 1 && <line x1={x + 100} y1={62} x2={x + 113} y2={62} className="d-accent-stroke" markerEnd="url(#arr2)" />}
+            <rect x={200} y={y} width={280} height={28} rx={6} className={last ? 'd-alt-fill' : 'd-accent-fill'} />
+            <text x={340} y={y + 18} textAnchor="middle" className="d-text">{`${i + 1}. ${s}`}</text>
+            {!last && <line x1={340} y1={y + 28} x2={340} y2={y + pitch} className="d-accent-stroke" markerEnd="url(#arr2)" />}
           </g>
         );
       })}
-      <text x={340} y={120} textAnchor="middle" className="d-muted">Tout le déroulé reste borné par l’autorisation écrite et le périmètre (ROE)</text>
+      <text x={340} y={top + frameH + 18} textAnchor="middle" className="d-muted">Tout le déroulé reste borné par l’autorisation écrite et le périmètre (RoE)</text>
     </svg>
   );
 }
@@ -585,9 +581,9 @@ function PamFlow(): ReactElement {
       <Box x={270} y={90} w={160} h={74} title="Bastion" sub="MFA + enregistrement" kind="alt" />
       <Box x={520} y={20} w={150} h={64} title="Coffre" sub="secret éphémère" kind="warn" />
       <Box x={520} y={170} w={150} h={64} title="Cible" sub="serveur / équipement" />
-      <Arrow x1={170} y1={127} x2={268} y2={127} label="1. MFA + demande" ly={118} />
-      <Arrow x1={400} y1={90} x2={520} y2={58} label="2. secret éphémère" ly={66} />
-      <Arrow x1={400} y1={164} x2={520} y2={200} label="3. session ouverte" ly={210} />
+      <Arrow x1={170} y1={127} x2={268} y2={127} label="1. MFA" ly={118} />
+      <Arrow x1={400} y1={90} x2={520} y2={58} label="2. secret" ly={62} />
+      <Arrow x1={400} y1={164} x2={520} y2={200} label="3. session" ly={212} />
       <text x={340} y={242} textAnchor="middle" className="d-muted">L’administrateur ne connaît jamais le mot de passe de la cible ; la session est tracée</text>
     </svg>
   );
