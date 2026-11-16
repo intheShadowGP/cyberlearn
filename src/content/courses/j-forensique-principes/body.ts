@@ -11,6 +11,7 @@ export const body: CourseBody = {
         title: 'Principes fondamentaux',
         blocks: [
           { t: 'def', term: 'Principe d’échange de Locard', text: "« Tout contact laisse une trace. » Transposé au numérique : toute action sur un système laisse des artefacts, y compris l'action de l'enquêteur lui-même, d'où l'importance de minimiser son empreinte." },
+          { t: 'diagram', id: 'volatility-order', caption: 'On acquiert les preuves du plus volatile (caches, mémoire vive) au plus durable (disques, journaux distants, archives) pour ne pas perdre ce qui disparaît le plus vite.', alt: 'Schéma de l’ordre de volatilité des preuves, du plus volatile au plus durable : registres et caches du processeur, mémoire vive, état réseau, disques, journaux distants, sauvegardes et archives.' },
           { t: 'def', term: 'Ordre de volatilité', text: "Ordre de collecte recommandé par la RFC 3227 : on prélève d'abord ce qui disparaît le plus vite." },
           { t: 'list', ordered: true, items: ['Registres et cache du processeur, mémoire vive (processus, connexions, clés).', 'État réseau, table ARP, table de routage, processus en cours.', 'Fichiers temporaires, espace d’échange (swap).', 'Disque.', 'Journaux distants et données de supervision.', 'Configuration physique, topologie réseau.', 'Supports d’archivage.'] },
           { t: 'callout', kind: 'key', text: "On travaille **toujours sur une copie** (image), jamais sur l'original. L'original est scellé et conservé ; toute analyse doit pouvoir être reproduite sur une nouvelle copie." },

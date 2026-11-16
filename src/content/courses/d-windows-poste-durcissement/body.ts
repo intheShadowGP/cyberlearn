@@ -44,6 +44,7 @@ export const body: CourseBody = {
         title: 'PowerShell : outil d’administration et d’attaque',
         blocks: [
           { t: 'p', text: 'PowerShell donne un accès complet au système et à .NET : c’est l’outil des administrateurs, et pour la même raison l’un des plus utilisés par les attaquants (« living off the land »). Le bloquer complètement est rarement possible ; on le **rend observable** et on le **restreint**.' },
+          { t: 'diagram', id: 'attack-chain', caption: 'Chaîne d’attaque typique partant d’une macro Office, et la parade qui coupe chaque étape : aucune mesure n’est suffisante seule, mais ensemble elles brisent la chaîne.', alt: 'Schéma d’une chaîne d’attaque Word vers PowerShell vers téléchargement vers persistance vers accès LSASS, avec sous chaque étape la défense correspondante : règle ASR, langage restreint, filtrage proxy, contrôle d’applications, protection LSA.' },
           { t: 'callout', kind: 'warn', title: 'La stratégie d’exécution n’est pas une protection', text: 'La documentation Microsoft le précise : la stratégie d’exécution (`Set-ExecutionPolicy`) n’est pas une frontière de sécurité, seulement une défense en profondeur qui évite surtout d’exécuter un script par mégarde. Elle se contourne trivialement (`powershell -ExecutionPolicy Bypass`, copier-coller du contenu). Elle ne remplace ni la journalisation ni le contrôle des applications.' },
           {
             t: 'table',

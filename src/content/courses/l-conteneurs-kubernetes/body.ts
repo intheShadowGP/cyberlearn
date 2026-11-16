@@ -10,6 +10,7 @@ export const body: CourseBody = {
         id: 'isolation',
         title: 'Ce qui isole un conteneur',
         blocks: [
+          { t: 'diagram', id: 'k8s-isolation', caption: 'Les conteneurs d’un pod sont isolés par des mécanismes du noyau (namespaces, cgroups, capacités, seccomp, MAC) mais partagent le noyau de l’hôte : l’isolation est plus fine, non équivalente à celle d’une machine virtuelle.', alt: 'Schéma emboîté : un cluster contient un nœud au noyau partagé, qui contient un pod, qui contient deux conteneurs, isolés par namespaces, cgroups, capacités, seccomp et contrôle d’accès obligatoire.' },
           {
             t: 'table',
             head: ['Mécanisme Linux', 'Rôle'],

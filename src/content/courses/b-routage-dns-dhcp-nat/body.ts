@@ -46,6 +46,7 @@ export const body: CourseBody = {
         title: 'DNS : traduire les noms en adresses',
         blocks: [
           { t: 'p', text: 'Le **DNS** traduit les noms lisibles (`exemple.fr`) en adresses IP. La résolution est hiérarchique : le résolveur interroge successivement les serveurs racine, ceux du domaine de premier niveau (`.fr`), puis ceux du domaine, jusqu’à obtenir la réponse, qu’il met en cache pour une durée fixée par le TTL.' },
+          { t: 'diagram', id: 'dns-resolution', caption: 'Le résolveur descend la hiérarchie — racine, puis .fr, puis exemple.fr — avant de renvoyer l’adresse au poste et de la mettre en cache selon le TTL.', alt: 'Schéma de résolution DNS : un poste interroge le résolveur, qui interroge successivement les serveurs racine, les serveurs .fr puis les serveurs de exemple.fr pour obtenir l’adresse.' },
           { t: 'code', lang: 'text', caption: 'Résolution de www.exemple.fr', code: 'poste → résolveur : www.exemple.fr ?\n  résolveur → racine        : qui gère .fr ?\n  résolveur → serveurs .fr  : qui gère exemple.fr ?\n  résolveur → exemple.fr    : adresse de www ?  → 203.0.113.10\nrésolveur → poste : 203.0.113.10 (mis en cache selon le TTL)' },
           {
             t: 'table',

@@ -28,6 +28,7 @@ export const body: CourseBody = {
               ['**Indirecte**', 'Un contenu tiers lu par le modèle', 'Page web, courriel, document partagé, résultat d’outil contenant des instructions cachées'],
             ],
           },
+          { t: 'diagram', id: 'prompt-injection', caption: 'Le modèle fusionne l’instruction système (de confiance) et le contenu externe (non fiable) dans un même contexte : ce contenu peut donc porter des instructions qui détournent la sortie et les outils.', alt: 'Schéma : une instruction système de confiance et un contenu externe non fiable entrent tous deux dans le contexte du LLM, dont la sortie pilote des outils et des actions.' },
           {
             t: 'example',
             title: 'Injection indirecte dans un assistant de messagerie',

@@ -399,7 +399,130 @@ function RiskMatrix(): ReactElement {
   );
 }
 
+function NetworkZones(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 180" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={8} y={60} w={110} h={54} title="Internet" sub="non fiable" kind="danger" />
+      <Box x={230} y={50} w={160} h={74} title="DMZ" sub="serveur web publié" kind="warn" />
+      <Box x={500} y={50} w={172} h={74} title="Réseau interne" sub="postes, serveurs" />
+      <Arrow x1={118} y1={87} x2={228} y2={87} label="443" />
+      <Arrow x1={390} y1={87} x2={498} y2={87} label="flux restreint" />
+      <text x={173} y={40} textAnchor="middle" className="d-muted">pare-feu</text>
+      <text x={445} y={40} textAnchor="middle" className="d-muted">pare-feu</text>
+      <text x={340} y={160} textAnchor="middle" className="d-muted">Aucun accès direct Internet → interne : une DMZ compromise n’atteint pas le cœur</text>
+    </svg>
+  );
+}
+
+function DnsResolution(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 210" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={10} y={85} w={110} h={48} title="Poste" />
+      <Box x={160} y={85} w={140} h={48} title="Résolveur" sub="cache (TTL)" kind="alt" />
+      <Box x={430} y={10} w={240} h={40} title="Serveurs racine" kind="alt" />
+      <Box x={430} y={70} w={240} h={40} title="Serveurs .fr" kind="alt" />
+      <Box x={430} y={130} w={240} h={40} title="Serveurs exemple.fr" />
+      <Arrow x1={120} y1={100} x2={158} y2={100} label="" />
+      <Arrow x1={300} y1={100} x2={428} y2={34} label="1" />
+      <Arrow x1={300} y1={105} x2={428} y2={92} label="2" />
+      <Arrow x1={300} y1={112} x2={428} y2={150} label="3" />
+      <text x={85} y={78} textAnchor="middle" className="d-muted">www.exemple.fr ?</text>
+      <text x={340} y={198} textAnchor="middle" className="d-muted">Résolution hiérarchique ; la réponse est mise en cache selon le TTL</text>
+    </svg>
+  );
+}
+
+function AttackChain(): ReactElement {
+  const steps = ['Word (macro)', 'PowerShell', 'Téléchargement', 'Persistance', 'Accès LSASS'];
+  const defs = ['règle ASR', 'langage restreint', 'proxy / filtrage', 'contrôle d’applications', 'protection LSA'];
+  return (
+    <svg viewBox="0 0 680 200" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      {steps.map((s, i) => {
+        const x = 6 + i * 134;
+        return (
+          <g key={s}>
+            <rect x={x} y={30} width={118} height={48} rx={5} className="d-danger-fill" />
+            <text x={x + 59} y={58} textAnchor="middle" className="d-text">{s}</text>
+            {i < steps.length - 1 && <line x1={x + 118} y1={54} x2={x + 134} y2={54} className="d-accent-stroke" markerEnd="url(#arr2)" />}
+            <line x1={x + 59} y1={120} x2={x + 59} y2={80} className="d-accent-stroke" markerEnd="url(#arr2)" />
+            <rect x={x} y={120} width={118} height={44} rx={5} className="d-accent-fill" />
+            <text x={x + 59} y={146} textAnchor="middle" className="d-muted">{defs[i]}</text>
+          </g>
+        );
+      })}
+      <text x={340} y={186} textAnchor="middle" className="d-muted">Défense en profondeur : chaque étape de la chaîne a une parade</text>
+    </svg>
+  );
+}
+
+function PromptInjection(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 210" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={10} y={16} w={190} h={48} title="Instruction système" sub="de confiance" />
+      <Box x={10} y={104} w={190} h={54} title="Contenu externe" sub="non fiable : page, courriel, outil" kind="danger" />
+      <Box x={280} y={54} w={150} h={64} title="Contexte du LLM" kind="alt" />
+      <Box x={500} y={54} w={170} h={64} title="Sortie / outils" sub="actions, requêtes" kind="warn" />
+      <Arrow x1={200} y1={40} x2={278} y2={74} label="" />
+      <Arrow x1={200} y1={130} x2={278} y2={100} label="" />
+      <Arrow x1={430} y1={86} x2={498} y2={86} label="" />
+      <text x={340} y={190} textAnchor="middle" className="d-muted">Le contenu non fiable peut porter des instructions : cloisonner, limiter les outils, valider les sorties</text>
+    </svg>
+  );
+}
+
+function VolatilityOrder(): ReactElement {
+  const rows: [string, 'danger' | 'warn' | 'accent'][] = [
+    ['Registres et caches du processeur', 'danger'],
+    ['Mémoire vive (RAM) : processus, connexions', 'danger'],
+    ['État réseau et tables du système', 'warn'],
+    ['Disques : fichiers, fichier d’échange', 'warn'],
+    ['Journaux distants et supervision', 'accent'],
+    ['Sauvegardes et archives', 'accent'],
+  ];
+  return (
+    <svg viewBox="0 0 680 250" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      {rows.map(([label, kind], i) => (
+        <g key={label}>
+          <rect x={60} y={14 + i * 36} width={520} height={30} rx={4} className={`d-${kind}-fill`} />
+          <text x={320} y={34 + i * 36} textAnchor="middle" className="d-text">{label}</text>
+        </g>
+      ))}
+      <line x1={30} y1={20} x2={30} y2={224} className="d-accent-stroke" markerEnd="url(#arr2)" />
+      <text x={20} y={120} textAnchor="middle" className="d-muted" transform="rotate(-90 20 120)">ordre d’acquisition : du plus volatile au plus durable</text>
+    </svg>
+  );
+}
+
+function K8sIsolation(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 220" role="img" aria-hidden="true" className="diagram">
+      <rect x={20} y={20} width={640} height={184} rx={8} className="d-alt-fill" />
+      <text x={34} y={40} className="d-label">Cluster</text>
+      <rect x={50} y={50} width={580} height={140} rx={7} className="d-accent-fill" />
+      <text x={64} y={70} className="d-label">Nœud (noyau partagé)</text>
+      <rect x={90} y={80} width={500} height={96} rx={6} className="d-warn-fill" />
+      <text x={104} y={100} className="d-label">Pod</text>
+      <rect x={120} y={110} width={210} height={54} rx={5} className="d-alt-fill" />
+      <text x={225} y={142} textAnchor="middle" className="d-text">Conteneur</text>
+      <rect x={350} y={110} width={210} height={54} rx={5} className="d-alt-fill" />
+      <text x={455} y={142} textAnchor="middle" className="d-text">Conteneur</text>
+      <text x={620} y={206} textAnchor="end" className="d-muted">isolation : namespaces, cgroups, capacités, seccomp, MAC — mais noyau commun</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'network-zones': NetworkZones,
+  'dns-resolution': DnsResolution,
+  'attack-chain': AttackChain,
+  'prompt-injection': PromptInjection,
+  'volatility-order': VolatilityOrder,
+  'k8s-isolation': K8sIsolation,
   'cert-chain': CertChain,
   'pyramid-of-pain': PyramidOfPain,
   'risk-matrix': RiskMatrix,

@@ -92,6 +92,7 @@ export const body: CourseBody = {
         title: 'Architecture réseau sécurisée',
         blocks: [
           { t: 'p', text: 'Les équipements précédents ne valent que par leur agencement. Une **architecture segmentée** répartit les systèmes en zones de confiance, séparées par des pare-feux, pour qu’une compromission dans une zone ne donne pas accès aux autres.' },
+          { t: 'diagram', id: 'network-zones', caption: 'Les services publiés sont isolés dans une DMZ entre deux pare-feux ; aucun flux ne va directement d’Internet au réseau interne.', alt: 'Schéma d’architecture en zones : Internet relié par un pare-feu à une DMZ hébergeant le serveur web publié, puis un second pare-feu vers le réseau interne, sans accès direct d’Internet à l’interne.' },
           {
             t: 'table',
             head: ['Zone', 'Contenu', 'Exposition'],
