@@ -32,8 +32,11 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
   - **« Absence de journal/alerte ≠ absence d’activité »** : corollaire ajouté à l’encadré de couverture (source non collectée, règle manquante, traces désactivées/effacées par l’attaquant).
   - **Précision vs rappel** : définition ajoutée après la matrice VP/FP/FN/VN (précision = VP/(VP+FP), rappel = VP/(VP+FN), compromis entre les deux au réglage des règles). Définitions standard, sans fabrication.
 
+- **IA/LLM (`q-securite-llm`) — audité, à conserver (aucune correction)** : les points signalés sont déjà traités correctement — injection directe vs indirecte distinguée (table + questions `ia-q4`/`ia-q16`), **limites des garde-fous** explicites (« couches de défense, pas des garanties », testé par `ia-q5`), risques modèle/agent/outils/données distingués, délégation (« l’intention de l’attaquant, les droits de la victime ») et exfiltration (`ia-q6`) couvertes. Aucun changement forcé.
+- **Fuzzing (`p-fuzzing-recherche`) — précisé** : le cours couvrait déjà couverture par arêtes, corpus/dictionnaires/mutations, crash vs exploitabilité et triage/minimisation. Point signalé manquant ajouté : **limites des sanitizers** (chaque sanitizer ne voit que sa classe de défauts ; ASan/MSan incompatibles simultanément ; surcoût ; pas les bugs de logique ; une campagne sans plantage ne prouve pas l’absence de vulnérabilité). Faits standard sur les sanitizers LLVM, sans fabrication.
+
 ### À suivre
-- Audit exactitude : fuzzing (`p-fuzzing-recherche`), IA (`q-securite-llm`), threat hunting (`i-threat-hunting`).
+- Audit exactitude : threat hunting (`i-threat-hunting`) et balayage des autres cours techniques.
 - Étape 6 (évaluation) : ajouter des questions testant ces distinctions (échelle d’incident, précision/rappel, nuance gMSA).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.
 - Étapes suivantes du prompt : progression/prérequis croisés, professionnalisation des cours, laboratoires d’investigation, évaluation des compétences, parcours/projets, UX/accessibilité, cohérence documentaire et métriques.

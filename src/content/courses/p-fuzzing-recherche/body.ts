@@ -18,6 +18,7 @@ export const body: CourseBody = {
             head: ['Outil', 'Particularité'],
             rows: [['libFuzzer', 'Fuzzing en processus, très rapide, intégré à Clang'], ['AFL++', 'Fuzzer polyvalent, nombreux modes (binaire seul via QEMU, persistance)'], ['Honggfuzz', 'Retour d’information matériel possible'], ['OSS-Fuzz / ClusterFuzz', 'Infrastructure de fuzzing continu pour les projets libres']],
           },
+          { t: 'callout', kind: 'warn', title: 'Limites des sanitizers', text: "Chaque sanitizer ne détecte que **sa** classe de défauts : ASan les accès mémoire spatiaux et temporels (débordements, use-after-free), UBSan les comportements indéfinis, MSan les lectures de mémoire non initialisée. Aucun ne voit les **bugs de logique**. ASan et MSan ne peuvent pas s’exécuter ensemble, l’instrumentation ralentit l’exécution (donc rarement en production), et une campagne sans plantage ne prouve que l’absence des défauts effectivement instrumentés — pas l’absence de vulnérabilité." },
         ],
       },
       {
