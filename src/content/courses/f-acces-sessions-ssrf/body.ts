@@ -68,6 +68,7 @@ export const body: CourseBody = {
         blocks: [
           { t: 'p', text: 'Certaines fonctionnalités font **agir le serveur** à partir d’une donnée fournie par l’utilisateur : télécharger une image depuis une URL, générer un aperçu de lien, lire un fichier de modèle. Si cette donnée n’est pas contrainte, l’attaquant choisit la cible.' },
           { t: 'def', term: 'SSRF (falsification de requête côté serveur)', text: 'L’attaquant fait émettre par le serveur des requêtes vers des destinations qu’il ne peut pas atteindre lui-même : services internes, interfaces d’administration, ou service de métadonnées du cloud (`169.254.169.254`) qui délivre des identifiants temporaires.' },
+          { t: 'diagram', id: 'ssrf-flow', caption: 'SSRF : l’attaquant détourne une fonction du serveur pour atteindre une cible interne qu’il ne peut joindre lui-même.', alt: 'Flux en quatre étapes : l’attaquant envoie au serveur une URL interne (1), le serveur émet la requête SSRF vers le service de métadonnées 169.254.169.254 (2), celui-ci renvoie des identifiants temporaires (3) que le serveur retourne à l’attaquant (4) ; l’attaquant ne peut pas joindre cette adresse directement.' },
           {
             t: 'table',
             head: ['Défense contre la SSRF', 'Pourquoi'],

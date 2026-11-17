@@ -623,7 +623,24 @@ function SecureBoot(): ReactElement {
   );
 }
 
+function SsrfFlow(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 195" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={20} y={70} w={150} h={58} title="Attaquant" sub="navigateur" />
+      <Box x={265} y={70} w={160} h={58} title="Serveur de l’app" sub="fonction « aperçu »" kind="alt" />
+      <Box x={510} y={70} w={150} h={58} title="Métadonnées cloud" sub="169.254.169.254" kind="warn" />
+      <Arrow x1={170} y1={90} x2={263} y2={90} label="1. url interne" ly={82} />
+      <Arrow x1={425} y1={90} x2={508} y2={90} label="2. SSRF" ly={82} />
+      <Arrow x1={510} y1={112} x2={427} y2={112} label="3. identifiants" ly={128} />
+      <Arrow x1={265} y1={112} x2={172} y2={112} label="4. contenu" ly={128} />
+      <text x={340} y={172} textAnchor="middle" className="d-muted">L’attaquant ne peut pas joindre 169.254.169.254 directement ; le serveur, si — d’où le vol d’identifiants</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'ssrf-flow': SsrfFlow,
   'secure-boot': SecureBoot,
   'devsecops-pipeline': DevSecOpsPipeline,
   'pentest-phases': PentestPhases,
