@@ -64,7 +64,9 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 
 ### À suivre
 - Audit exactitude : poursuivre par échantillonnage les cours à fort risque (réseau avancé, forensique, cloud, OT).
-- Étendre les indices aux autres labos ; grilles de projets (Étape 7) ; puis `docs/PHASE3_FINAL_REPORT.md`.
+- Grilles de projets (Étape 7) ; puis `docs/PHASE3_FINAL_REPORT.md`.
+
+> Indices progressifs étendus à 7 labos d’investigation (log-hunt, ad-events, timeline, windows-persistence, linux-audit, modbus, osint).
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
 - Vers la fin de phase : `docs/PHASE3_FINAL_REPORT.md` et ouverture d’une PR `phase-3 → main` (sans fusion sans validation).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.

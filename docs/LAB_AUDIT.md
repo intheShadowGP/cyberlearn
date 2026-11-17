@@ -36,9 +36,9 @@ Audit des 18 laboratoires. **Nature réelle** : ce sont des **simulations pédag
 - **Points forts** : la majorité des labos sont orientés **investigation / analyse / conception** (reconstituer, distinguer, détecter une manipulation, concevoir une règle) et non la simple exécution d’une procédure. Les deux labos offensifs (`sqli-lab`, `osint-lab`) restent des simulations isolées, sans action vers un système tiers.
 - **Couverture** : 13 catégories, niveaux 1 à 4. Chaque labo mesure une compétence rattachée à des cours.
 - **Limites assumées** : simulations et données préenregistrées, pas d’exécution réelle (indiqué dans chaque débriefing).
-- **Indices progressifs (Étape 5.2) — implémentés** : composant `Hints` réutilisable, révélant les indices **un par un à la demande**, sans donner la solution. Déployé sur trois labos d’investigation (`log-hunt-lab`, `ad-events-lab`, `timeline-lab`) ; extensible à tout labo via le champ `hints` de `LabBody`. Couvert par le validateur (≥ 2 indices non triviaux si présents) et un test e2e.
+- **Indices progressifs (Étape 5.2) — implémentés** : composant `Hints` réutilisable, révélant les indices **un par un à la demande**, sans donner la solution. Déployé sur **sept labos d’investigation** (`log-hunt-lab`, `ad-events-lab`, `timeline-lab`, `windows-persistence-lab`, `linux-audit-lab`, `modbus-lab`, `osint-lab`) ; extensible à tout labo via le champ `hints` de `LabBody`. Couvert par le validateur (≥ 2 indices non triviaux si présents) et un test e2e.
 
 ## Reste à faire (laboratoires)
 
-- Étendre les indices progressifs aux autres labos d’investigation.
+- Indices progressifs sur les labos restants si pertinent (plusieurs sont des exercices guidés où ils ajoutent moins).
 - Revue interactive approfondie (pas seulement structurelle) de chaque moteur, au cas par cas.

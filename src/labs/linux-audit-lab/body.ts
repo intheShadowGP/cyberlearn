@@ -2,6 +2,11 @@ import type { LabBody } from '../../content/types';
 
 export const body: LabBody = {
   labId: 'linux-audit-lab',
+  hints: [
+    'Les binaires **SUID root** (`find / -perm -4000`) peuvent donner une élévation de privilèges s’ils sont détournables.',
+    'Vérifiez aussi `sudo` (règles permissives), les tâches `cron` modifiables, et les fichiers inscriptibles par tous dans des chemins sensibles.',
+    'Distinguez une **configuration faible** d’un **indicateur de compromission** : cherchez un processus, une connexion ou un fichier récent inattendu.',
+  ],
   questions: [
     { id: 'lxlab-q1', type: 'short', difficulty: 1, skills: ['c-users-sudo'], prompt: 'Quel compte, autre que root, possède l’UID 0 sur srv-web01 ?', placeholder: 'nom du compte' },
     { id: 'lxlab-q2', type: 'single', difficulty: 2, skills: ['c-perm-special'], prompt: 'Quel binaire SUID est anormal sur ce serveur ?', options: [{ id: 'a', text: '`/usr/bin/passwd`' }, { id: 'b', text: '`/usr/bin/sudo`' }, { id: 'c', text: '`/usr/local/bin/python3.11`' }, { id: 'd', text: '`/usr/bin/mount`' }] },

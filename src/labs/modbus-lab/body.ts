@@ -2,6 +2,11 @@ import type { LabBody } from '../../content/types';
 
 export const body: LabBody = {
   labId: 'modbus-lab',
+  hints: [
+    'Distinguez les fonctions de **lecture** (03, 04) des fonctions d’**écriture** (05, 06, 0F, 10) : une écriture inattendue est le premier signal.',
+    'Regardez la **source** : seul l’automate ou le SCADA légitime devrait écrire ; une écriture depuis une autre adresse est un signal fort.',
+    'Reliez le registre ou la bobine écrit à son **effet physique** (consigne, pompe, seuil) pour évaluer l’impact réel.',
+  ],
   questions: [
     { id: 'mb-q1', type: 'short', difficulty: 1, skills: ['n-modbus'], prompt: 'Quelle adresse est à l’origine des écritures anormales ?', placeholder: 'a.b.c.d' },
     { id: 'mb-q2', type: 'single', difficulty: 2, skills: ['n-modbus', 'n-ics-arch'], prompt: 'Que provoque la trame de 07:14:47 ?', options: [{ id: 'a', text: 'La lecture de l’état de la pompe' }, { id: 'b', text: 'L’arrêt de la pompe doseuse de chlore (bobine 2 à OFF)' }, { id: 'c', text: 'Le redémarrage de l’automate' }, { id: 'd', text: 'La modification de l’adresse IP de l’automate' }] },

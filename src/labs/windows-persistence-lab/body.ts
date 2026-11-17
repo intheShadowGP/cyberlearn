@@ -2,6 +2,11 @@ import type { LabBody } from '../../content/types';
 
 export const body: LabBody = {
   labId: 'windows-persistence-lab',
+  hints: [
+    'Passez en revue les emplacements de démarrage automatique : clés `Run`/`RunOnce`, tâches planifiées, services, dossier Démarrage.',
+    'Un **même binaire** référencé par plusieurs mécanismes = persistance redondante, un schéma typique à repérer.',
+    'Reconstituez l’ordre des faits : exécution initiale d’abord, **puis** installation de la persistance — l’horodatage le montre.',
+  ],
   questions: [
     { id: 'win-q1', type: 'single', difficulty: 1, skills: ['a-proc'], prompt: 'Quel a été le vecteur d’exécution initial ?', options: [{ id: 'a', text: 'Une mise à jour légitime de Teams' }, { id: 'b', text: 'Un document Word à macros (.docm) ouvert depuis Outlook, qui lance cmd puis PowerShell' }, { id: 'c', text: 'Une connexion RDP depuis Internet' }, { id: 'd', text: 'Une clé USB' }] },
     { id: 'win-q2', type: 'short', difficulty: 2, skills: ['k-dynamic'], prompt: 'Quel est le nom de la valeur de registre Run créée pour la persistance ?' },
