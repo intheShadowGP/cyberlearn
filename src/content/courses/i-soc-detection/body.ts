@@ -21,19 +21,21 @@ export const body: CourseBody = {
               ['**SOAR**', 'Automatise les actions répétitives (enrichissement, blocage) via des playbooks', 'Tickets, API des outils'],
             ],
           },
-          { t: 'callout', kind: 'key', text: "Un SIEM ne détecte que ce qu'il reçoit. La première question face à une menace est toujours : **avons-nous les journaux qui la rendraient visible ?** C'est la notion de couverture de détection." },
+          { t: 'callout', kind: 'key', text: "Un SIEM ne détecte que ce qu'il reçoit. La première question face à une menace est toujours : **avons-nous les journaux qui la rendraient visible ?** C'est la couverture de détection. Corollaire : **l'absence d'alerte — ou de journal — ne prouve pas l'absence d'activité** ; la source peut ne pas être collectée, la règle peut manquer, ou l'attaquant peut avoir désactivé ou effacé les traces." },
         ],
       },
       {
         id: 'triage',
         title: 'Trier une alerte',
         blocks: [
+          { t: 'def', term: 'Événement, alerte, incident, compromission', text: "Quatre niveaux à ne pas confondre. Un **événement** est une entrée de journal brute (une connexion, la création d’un processus). Une **alerte** est un événement — ou une corrélation d’événements — qu’une règle juge digne d’attention. Un **incident** est une alerte **qualifiée** qui nécessite une réponse. Une **compromission confirmée** est un incident où l’on a la **preuve** qu’un attaquant a réussi. Une alerte n’est donc pas un incident, et un incident n’est pas forcément une compromission." },
           {
             t: 'table',
             caption: 'Matrice de qualification',
             head: ['', 'Activité réellement malveillante', 'Activité légitime'],
             rows: [['**Alerte levée**', 'Vrai positif', 'Faux positif (bruit, à régler)'], ['**Pas d’alerte**', '**Faux négatif** (le plus dangereux)', 'Vrai négatif']],
           },
+          { t: 'def', term: 'Précision et rappel', text: "Deux mesures de la qualité d’une détection. La **précision** = vrais positifs / (vrais positifs + faux positifs) : quelle part des alertes est justifiée. Le **rappel** (sensibilité) = vrais positifs / (vrais positifs + faux négatifs) : quelle part des attaques réelles est effectivement détectée. Les deux évoluent souvent à l’inverse l’une de l’autre : une règle très sensible (rappel élevé) produit plus de faux positifs (précision basse), et inversement. Régler une règle, c’est chercher ce compromis." },
           { t: 'list', ordered: true, items: ['**Comprendre** la règle qui a déclenché l’alerte et ce qu’elle cherche.', '**Enrichir** : qui est l’utilisateur, quel est le rôle de la machine, l’adresse est-elle connue (réputation, géolocalisation, inventaire) ?', '**Contextualiser** : que s’est-il passé juste avant et juste après sur cet hôte et ce compte ?', '**Qualifier** : vrai ou faux positif, gravité (impact × probabilité), périmètre.', '**Décider** : clore avec justification, escalader, ou déclencher la réponse à incident.'] },
           {
             t: 'example',

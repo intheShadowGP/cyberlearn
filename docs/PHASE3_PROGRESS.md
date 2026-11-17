@@ -27,8 +27,14 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
   - **gMSA et Kerberoasting** : l’affirmation « inutilisables pour le Kerberoasting » (leçon) et « le Kerberoasting devient inopérant » (correction `ad-q9`) étaient trop absolues. Reformulé : le Kerberoasting reste **possible** (le ticket de service est toujours demandable) mais le mot de passe aléatoire (≈ 240 octets) renouvelé automatiquement rend le **cassage hors ligne irréaliste** — la protection vient de la robustesse/rotation du secret, pas d’une immunité à la technique. Vérifié à la source (Microsoft Learn, gMSA overview) et consigné dans `FACT-CHECK.md`.
   - **Limites de la détection des tickets forgés (golden/silver)** : ajout d’un encadré expliquant que ces tickets sont forgés hors ligne (le DC les accepte sans 4768), que la détection repose sur des heuristiques contournables, et que la parade est préventive (protéger krbtgt, modèle en tiers, double renouvellement de krbtgt).
 
+- **SOC (`i-soc-detection`) — précisé** (trois points de vigilance signalés) :
+  - **Échelle événement → alerte → incident → compromission confirmée** : ajout d’une définition distinguant les quatre niveaux (une alerte n’est pas un incident ; un incident n’est pas forcément une compromission).
+  - **« Absence de journal/alerte ≠ absence d’activité »** : corollaire ajouté à l’encadré de couverture (source non collectée, règle manquante, traces désactivées/effacées par l’attaquant).
+  - **Précision vs rappel** : définition ajoutée après la matrice VP/FP/FN/VN (précision = VP/(VP+FP), rappel = VP/(VP+FN), compromis entre les deux au réglage des règles). Définitions standard, sans fabrication.
+
 ### À suivre
-- Audit exactitude : fuzzing (`p-fuzzing-recherche`), SOC (`i-soc-detection`, `i-threat-hunting`), IA (`q-securite-llm`).
+- Audit exactitude : fuzzing (`p-fuzzing-recherche`), IA (`q-securite-llm`), threat hunting (`i-threat-hunting`).
+- Étape 6 (évaluation) : ajouter des questions testant ces distinctions (échelle d’incident, précision/rappel, nuance gMSA).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.
 - Étapes suivantes du prompt : progression/prérequis croisés, professionnalisation des cours, laboratoires d’investigation, évaluation des compétences, parcours/projets, UX/accessibilité, cohérence documentaire et métriques.
 
