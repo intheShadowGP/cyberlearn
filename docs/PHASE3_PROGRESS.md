@@ -48,9 +48,13 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
   - `fz-q17` (fuzzing) : ce qu’une campagne ASan sans plantage prouve — et ne prouve pas (classes de défauts non couvertes).
   - Chaque `questionCount` passé de 16 à 17 ; total **724** questions (721 → 724). README et inventaire régénérés ; le test `doc-stats` confirme la cohérence.
 
+### Terminé — P2 Garde-fou qualité (Étape 15.2)
+- **Test anti-placeholder** (`src/content/content-quality.test.ts`) : parcourt les valeurs de chaîne réelles de tout le contenu publié (cours, laboratoires, épreuves : meta/body/corrections/solutions) et échoue si un marqueur de remplissage non ambigu apparaît (TODO, FIXME, TBD, XXX, WIP, lorem ipsum, bouche-trou). Audit préalable : **aucun placeholder** dans le contenu actuel. La regex a d’abord faussement capté « sert **à rédiger** un cahier des charges » (prose légitime) ; restreinte aux marqueurs de développement sans équivoque.
+
 ### À suivre
 - Audit exactitude : threat hunting (`i-threat-hunting`) et balayage des autres cours techniques.
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
+- Vers la fin de phase : `docs/PHASE3_FINAL_REPORT.md` et ouverture d’une PR `phase-3 → main` (sans fusion sans validation).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.
 - Étapes suivantes du prompt : progression/prérequis croisés, professionnalisation des cours, laboratoires d’investigation, évaluation des compétences, parcours/projets, UX/accessibilité, cohérence documentaire et métriques.
 
