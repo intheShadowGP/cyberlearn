@@ -39,6 +39,7 @@ export const body: CourseBody = {
               ['**Agrégation (trunk)**', 'Relie deux commutateurs ou un commutateur et un routeur ; transporte plusieurs VLAN, chaque trame étant marquée 802.1Q'],
             ],
           },
+          { t: 'diagram', id: 'vlan-tagging', caption: 'L’étiquette 802.1Q n’est présente que sur le lien d’agrégation (trunk) ; sur les ports d’accès, les trames circulent sans étiquette.', alt: 'Un poste du VLAN 10 relié par un port d’accès (sans étiquette) au commutateur A, un lien d’agrégation étiqueté 802.1Q entre les commutateurs A et B, puis un port d’accès (sans étiquette) vers un autre poste du VLAN 10.' },
           { t: 'def', term: 'VLAN natif', text: 'Sur un lien d’agrégation, VLAN dont les trames circulent **sans étiquette**. S’il est mal maîtrisé, il permet des attaques par double marquage. Bonne pratique : lui attribuer un VLAN dédié et inutilisé, et marquer explicitement tout le trafic du trunk.' },
           { t: 'callout', kind: 'tip', text: 'Les VLAN servent à séparer des usages : postes de travail, téléphonie, serveurs, administration, équipements industriels, invités. Le VLAN d’administration des équipements réseau doit être isolé des postes utilisateurs, car il donne accès à la configuration des commutateurs.' },
         ],

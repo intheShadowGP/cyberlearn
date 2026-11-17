@@ -663,7 +663,24 @@ function Clickjacking(): ReactElement {
   );
 }
 
+function VlanTagging(): ReactElement {
+  return (
+    <svg viewBox="0 0 680 140" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <Box x={6} y={44} w={120} h={52} title="Poste" sub="VLAN 10" />
+      <Box x={178} y={44} w={120} h={52} title="Commutateur A" kind="alt" />
+      <Box x={350} y={44} w={120} h={52} title="Commutateur B" kind="alt" />
+      <Box x={522} y={44} w={120} h={52} title="Poste" sub="VLAN 10" />
+      <Arrow x1={126} y1={70} x2={178} y2={70} label="accès" ly={62} />
+      <Arrow x1={298} y1={70} x2={350} y2={70} label="802.1Q" ly={62} />
+      <Arrow x1={470} y1={70} x2={522} y2={70} label="accès" ly={62} />
+      <text x={340} y={122} textAnchor="middle" className="d-muted">Les trames sont étiquetées 802.1Q seulement sur le lien d’agrégation (trunk), pas sur les ports d’accès</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'vlan-tagging': VlanTagging,
   'clickjacking': Clickjacking,
   'ssrf-flow': SsrfFlow,
   'secure-boot': SecureBoot,
