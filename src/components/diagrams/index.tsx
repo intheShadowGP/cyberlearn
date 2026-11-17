@@ -639,7 +639,32 @@ function SsrfFlow(): ReactElement {
   );
 }
 
+function Clickjacking(): ReactElement {
+  const cursor = (px: number, py: number) => (
+    <path d={`M ${px},${py} l 0,14 l 4,-4 l 3,6 l 3,-1 l -3,-6 l 6,0 z`} className="d-accent-fill-solid" />
+  );
+  return (
+    <svg viewBox="0 0 680 200" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      <text x={150} y={22} textAnchor="middle" className="d-label">Ce que voit la victime</text>
+      <rect x={30} y={38} width={240} height={120} rx={8} fill="none" className="d-accent-stroke" />
+      <rect x={80} y={92} width={160} height={40} rx={6} className="d-accent-fill" />
+      <text x={160} y={116} textAnchor="middle" className="d-text">Voir la vidéo</text>
+      {cursor(196, 112)}
+
+      <text x={520} y={22} textAnchor="middle" className="d-label">En réalité : cadre invisible</text>
+      <rect x={400} y={38} width={240} height={120} rx={8} fill="none" className="d-warn-stroke" strokeDasharray="5 4" />
+      <rect x={450} y={92} width={160} height={40} rx={6} className="d-warn-fill" />
+      <text x={530} y={116} textAnchor="middle" className="d-text">Valider le paiement</text>
+      {cursor(566, 112)}
+
+      <text x={340} y={186} textAnchor="middle" className="d-muted">Le cadre invisible recouvre exactement le leurre : la victime actionne le bouton sensible sans le voir</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'clickjacking': Clickjacking,
   'ssrf-flow': SsrfFlow,
   'secure-boot': SecureBoot,
   'devsecops-pipeline': DevSecOpsPipeline,
