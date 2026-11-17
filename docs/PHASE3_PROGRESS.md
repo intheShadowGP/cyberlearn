@@ -54,8 +54,12 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 ### Terminé — P2 Accessibilité WCAG 2.2 AA (Étape 8/12)
 - **Tests axe passés à WCAG 2.2 AA** : ajout du tag `wcag22aa` aux quatre contrôles axe (axe-core 4.14, règle automatisée `target-size` / SC 2.5.8). Le site **passe** sur toutes les pages auditées — accueil, catalogue, cours, les 18 laboratoires (deux thèmes), pages secondaires, examen, épreuve de démarche, recherche/confidentialité/documentation — **aucune violation** de taille de cible ni autre. Libellés mis à jour (titres de test, `TESTING.md`, README : 2.1 → 2.2 AA).
 
+- **Crypto (`e-hachage-mots-de-passe`, `e-chiffrement-tls-pki`) — audités, à conserver (aucune correction)** : exactitude confirmée jusqu’aux valeurs concrètes — **les deux empreintes SHA-256 affichées ont été recalculées et sont exactes** ; paramètres OWASP/ANSSI/FIPS exacts (Argon2id 19 Mio/2, PBKDF2 600 000, bcrypt ≥ 10 et troncature 72 octets, RSA ≥ 2048/3072, TLS 1.3 RFC 8446, FIPS 203/204/205). Aucun écart trouvé.
+- **Document d’audit** `docs/PHASE3_AUDIT.md` créé (honnête : distingue audit en profondeur des 6 cours ci-dessus et vérification structurelle des 45 ; liste le reste à faire).
+
 ### À suivre
-- Audit exactitude : threat hunting (`i-threat-hunting`) et balayage des autres cours techniques.
+- Audit exactitude : poursuivre par échantillonnage les cours à fort risque (réseau avancé, forensique, cloud, OT).
+- `docs/LAB_AUDIT.md`, grilles de projets (Étape 7), puis `docs/PHASE3_FINAL_REPORT.md`.
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
 - Vers la fin de phase : `docs/PHASE3_FINAL_REPORT.md` et ouverture d’une PR `phase-3 → main` (sans fusion sans validation).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.
