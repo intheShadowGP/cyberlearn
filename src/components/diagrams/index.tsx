@@ -589,7 +589,42 @@ function PamFlow(): ReactElement {
   );
 }
 
+function SecureBoot(): ReactElement {
+  const steps: { t: string; s: string }[] = [
+    { t: 'Racine de confiance', s: 'ROM / clé gravée (OTP)' },
+    { t: 'Chargeur', s: 'bootloader' },
+    { t: 'Noyau', s: 'kernel' },
+    { t: 'Système', s: 'OS et services' },
+  ];
+  const top = 12;
+  const pitch = 58;
+  return (
+    <svg viewBox="0 0 680 262" role="img" aria-hidden="true" className="diagram">
+      <Defs />
+      {steps.map((st, i) => {
+        const y = top + i * pitch;
+        const last = i === steps.length - 1;
+        return (
+          <g key={st.t}>
+            <rect x={180} y={y} width={320} height={42} rx={6} className={i === 0 ? 'd-alt-fill' : 'd-accent-fill'} />
+            <text x={340} y={y + 19} textAnchor="middle" className="d-label">{st.t}</text>
+            <text x={340} y={y + 34} textAnchor="middle" className="d-muted">{st.s}</text>
+            {!last && (
+              <>
+                <line x1={340} y1={y + 42} x2={340} y2={y + pitch} className="d-accent-stroke" markerEnd="url(#arr2)" />
+                <text x={508} y={y + pitch - 5} className="d-mono">vérifie la signature</text>
+              </>
+            )}
+          </g>
+        );
+      })}
+      <text x={340} y={top + steps.length * pitch + 4} textAnchor="middle" className="d-muted">Une signature invalide arrête la chaîne : un firmware modifié est refusé</text>
+    </svg>
+  );
+}
+
 export const DIAGRAMS: Record<string, () => ReactElement> = {
+  'secure-boot': SecureBoot,
   'devsecops-pipeline': DevSecOpsPipeline,
   'pentest-phases': PentestPhases,
   'pam-flow': PamFlow,

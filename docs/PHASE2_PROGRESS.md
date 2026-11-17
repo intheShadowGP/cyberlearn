@@ -38,6 +38,10 @@ Travail par lots ; pour chaque lot : modifier → valider (validateur + `npm tes
 ### Constats de relecture (évite de refaire l’existant)
 - **UX sommaire / progression intra-cours : DÉJÀ PRÉSENT.** `CoursePage.tsx` affiche un sommaire latéral (ancres par section, coche « lu », barre de progression ARIA) et rend les **prérequis comme liens cliquables** vers les cours concernés, avec ✓ si validé. Aucun développement nécessaire — ne pas dupliquer.
 
+### Approfondissement par discipline (en cours)
+- **Audit de profondeur** : les cours les plus courts (3 sections) ne sont pas « pauvres » — ils possèdent déjà schéma, exemple et deux cas pratiques ; forcer des ajouts y serait du remplissage. Seul `n-iot-firmware` n’avait **aucun** schéma alors qu’il décrit un mécanisme concret.
+- **Enrichi** : `n-iot-firmware`, section « Concevoir un objet défendable » — ajout du schéma `secure-boot` (chaîne de confiance du démarrage sécurisé : racine matérielle → chargeur → noyau → système, chaque maillon vérifiant la signature du suivant), qui illustre un mécanisme jusque-là seulement décrit en prose. 24 cours illustrés. Vérifié : validateur 15, build, 37 e2e, rendu navigateur (desktop).
+
 ### Restants (prochaines actions exactes)
 1. **Approfondissement par discipline** : relire et enrichir (cas professionnel supplémentaire, schéma si mécanisme) les cours les plus synthétiques, discipline par discipline, en consignant ici la note après relecture. Travail itératif et subjectif : avancer par petits lots vérifiés, sans padding.
 2. **Examens transversaux** orientés démarche (incident multi-sources) : nécessiterait une évolution du moteur d’examen (actuellement tirage de QCM) — lot conséquent, à cadrer.
