@@ -44,4 +44,6 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | OWASP Top 10 2021 — A03 Injection (inclut l’injection SQL ; épreuve AppSec) | owasp.org (le serveur redirige vers le chemin officiel `/2021/A03_2021-Injection/`) | Vérifié le 2026-11-16 (identifiant A03 confirmé par l’URL du serveur OWASP ; contenu détaillé non rouvert, page en redirection) |
 | CWE-22 « Improper Limitation of a Pathname to a Restricted Directory (Path Traversal) » (épreuve AppSec) | cwe.mitre.org/data/definitions/22.html | Vérifié le 2026-11-16 |
 
+| gMSA : mot de passe géré automatiquement par le domaine et renouvelé périodiquement ; l’attaque Kerberoasting reste possible mais le cassage hors ligne est irréaliste (D) | Microsoft Learn, « Group Managed Service Accounts overview » (gestion et rotation auto du mot de passe) ; longueur ≈ 240 octets largement documentée | Vérifié le 2026-11-17 (gestion/rotation auto confirmées à la source ; valeur 240 octets d’après sources secondaires concordantes) |
+
 Toute contribution qui vérifie une ligne « non vérifié » doit indiquer la source consultée et la date.

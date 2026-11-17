@@ -69,6 +69,7 @@ export const body: CourseBody = {
               ['**Golden ticket**', 'TGT forgé avec la clé krbtgt', 'Tickets à durée anormale, 4769 sans 4768 préalable'],
             ],
           },
+          { t: 'callout', kind: 'warn', title: 'Limites de la détection des tickets forgés', text: "Un golden ticket (ou silver ticket) est **forgé hors ligne** avec une clé volée : le DC l’accepte sans émettre de 4768, et un attaquant soigneux imite les durées de vie et les attributs par défaut. La détection repose sur des **heuristiques faillibles** (durées anormales, 4769 sans 4768 corrélé, tickets pour des comptes inexistants) qu’on peut contourner. La vraie parade est **préventive** : protéger la clé krbtgt, appliquer le modèle en tiers, et renouveler **deux fois** krbtgt après compromission." },
           {
             t: 'example',
             title: 'Repérer une pulvérisation de mots de passe',
@@ -84,7 +85,7 @@ export const body: CourseBody = {
         id: 'defense',
         title: 'Durcir et surveiller',
         blocks: [
-          { t: 'list', items: ['**Modèle en tiers** et postes d’administration dédiés : les comptes tier 0 ne se connectent que sur les DC et les postes d’administration tier 0.', '**Windows LAPS** : mot de passe d’administrateur local unique et renouvelé par poste, ce qui bloque la réutilisation latérale.', '**gMSA** (comptes de service gérés) : mots de passe longs et renouvelés automatiquement, inutilisables pour le Kerberoasting.', 'Groupe **Protected Users** pour les comptes privilégiés : pas de NTLM, pas de RC4, pas de délégation.', 'Désactiver RC4 et NTLMv1, activer la signature SMB/LDAP.', 'Renouveler deux fois le mot de passe de **krbtgt** après une compromission du domaine.', 'Centraliser et superviser les événements 4624, 4625, 4740, 4768, 4769, 4771, 4720, 4728/4732/4756 (ajouts aux groupes).'] },
+          { t: 'list', items: ['**Modèle en tiers** et postes d’administration dédiés : les comptes tier 0 ne se connectent que sur les DC et les postes d’administration tier 0.', '**Windows LAPS** : mot de passe d’administrateur local unique et renouvelé par poste, ce qui bloque la réutilisation latérale.', '**gMSA / dMSA** (comptes de service gérés) : le mot de passe est aléatoire (≈ 240 octets), renouvelé automatiquement par le domaine. Le Kerberoasting reste **possible** (le ticket de service est toujours demandable), mais le cassage hors ligne devient irréaliste : la protection vient de la robustesse et de la rotation du secret, pas d’une immunité à la technique.', 'Groupe **Protected Users** pour les comptes privilégiés : pas de NTLM, pas de RC4, pas de délégation.', 'Désactiver RC4 et NTLMv1, activer la signature SMB/LDAP.', 'Renouveler deux fois le mot de passe de **krbtgt** après une compromission du domaine.', 'Centraliser et superviser les événements 4624, 4625, 4740, 4768, 4769, 4771, 4720, 4728/4732/4756 (ajouts aux groupes).'] },
           { t: 'callout', kind: 'tip', text: "L'outil gratuit de l'ANSSI **ORADAD** et le service d'audit **ADS** produisent un état de sécurité de l'AD. Côté communautaire, PingCastle offre une notation rapide." },
         ],
       },
