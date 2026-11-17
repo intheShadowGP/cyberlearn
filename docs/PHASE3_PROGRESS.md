@@ -57,9 +57,11 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 - **Crypto (`e-hachage-mots-de-passe`, `e-chiffrement-tls-pki`) — audités, à conserver (aucune correction)** : exactitude confirmée jusqu’aux valeurs concrètes — **les deux empreintes SHA-256 affichées ont été recalculées et sont exactes** ; paramètres OWASP/ANSSI/FIPS exacts (Argon2id 19 Mio/2, PBKDF2 600 000, bcrypt ≥ 10 et troncature 72 octets, RSA ≥ 2048/3072, TLS 1.3 RFC 8446, FIPS 203/204/205). Aucun écart trouvé.
 - **Document d’audit** `docs/PHASE3_AUDIT.md` créé (honnête : distingue audit en profondeur des 6 cours ci-dessus et vérification structurelle des 45 ; liste le reste à faire).
 
+- **Audit des laboratoires** `docs/LAB_AUDIT.md` créé : fiche par labo (compétence mesurée, nature, validation) des 18 laboratoires. Constat : majorité orientée investigation/analyse/conception (pas la simple procédure) ; validation automatique présente partout (moteur pur testé + questions corrigées + débriefing) ; les 18 passent axe WCAG 2.2 AA. Amélioration future notée (non bloquante) : indices progressifs révélés à la demande (Étape 5.2).
+
 ### À suivre
 - Audit exactitude : poursuivre par échantillonnage les cours à fort risque (réseau avancé, forensique, cloud, OT).
-- `docs/LAB_AUDIT.md`, grilles de projets (Étape 7), puis `docs/PHASE3_FINAL_REPORT.md`.
+- Amélioration labos : indices progressifs ; grilles de projets (Étape 7) ; puis `docs/PHASE3_FINAL_REPORT.md`.
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
 - Vers la fin de phase : `docs/PHASE3_FINAL_REPORT.md` et ouverture d’une PR `phase-3 → main` (sans fusion sans validation).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.
