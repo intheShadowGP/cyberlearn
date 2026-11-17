@@ -29,5 +29,6 @@ export const corrections: CourseCorrections = {
       explanation: 'Le nombre d’occurrences d’un plantage reflète la facilité à le déclencher, pas sa gravité.',
     },
     'fz-q16': { type: 'single', correct: 'b', explanation: 'Le fichier security.txt (RFC 9116), placé dans /.well-known/, indique les contacts et la politique de divulgation d’un site.' },
+    'fz-q17': { type: 'single', correct: 'a', explanation: 'Une campagne sans plantage ne prouve que l’absence des défauts effectivement instrumentés et atteints par le corpus. ASan couvre les erreurs mémoire spatiales et temporelles, pas les bugs de logique ni les lectures non initialisées (domaine de MSan), et la couverture peut rester incomplète. Le fuzzing trouve des bugs, il ne prouve pas leur absence.', whyWrong: { b: 'Seule une vérification formelle prouve l’absence d’une classe de défauts, relativement à une spécification.', c: 'L’absence de plantage ASan n’exclut pas un débordement non atteint par le corpus.', d: 'ASan augmente la visibilité des corruptions mémoire : il faut le conserver, pas le désactiver.' } },
   },
 };

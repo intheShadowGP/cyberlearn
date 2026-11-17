@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 45 |
-| Questions de cours (avec correction) | 721 |
+| Questions de cours (avec correction) | 724 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -56,7 +56,7 @@
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 80 min | 5 | 16 | 2 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
-| Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
+| Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 17 | 2 | 4 |
 | Windows Server : services d’infrastructure, PKI et durcissement (`d-windows-server-pki-durcissement`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
@@ -67,7 +67,7 @@
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 110 min | 5 | 16 | 2 | 5 |
-| SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 17 | 2 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
@@ -85,7 +85,7 @@
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 85 min | 5 | 16 | 2 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
-| Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 4 |
+| Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 17 | 2 | 4 |
 | Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 5 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 85 min | 4 | 16 | 2 | 4 |

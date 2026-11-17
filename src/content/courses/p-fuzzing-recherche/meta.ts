@@ -25,6 +25,6 @@ export const meta: CourseMeta = {
     { id: 'p-disclosure', label: 'Divulgation coordonnée', level: 3 },
   ],
   sectionCount: 5,
-  questionCount: 16,
+  questionCount: 17,
   quizSize: 8,
 };

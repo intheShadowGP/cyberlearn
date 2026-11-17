@@ -25,6 +25,6 @@ export const meta: CourseMeta = {
     { id: 'i-ir', label: 'Réponse à incident', level: 2 },
   ],
   sectionCount: 4,
-  questionCount: 16,
+  questionCount: 17,
   quizSize: 8,
 };

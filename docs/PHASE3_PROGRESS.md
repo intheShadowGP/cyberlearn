@@ -41,9 +41,16 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 - **Couverture de test des laboratoires corrigée** : les deux tests e2e « tous les laboratoires se chargent » et « accessibilité … tous les laboratoires » figeaient une liste de **12** labos — les 6 labos ajoutés en Phase 2 n’étaient donc ni testés au chargement ni audités par axe. Réécrits pour **dériver la liste du catalogue** (18 labos et futurs), dans les deux thèmes pour axe. Aucune violation d’accessibilité trouvée dans les 6 labos jusque-là non testés.
 - **`docs/TESTING.md`** mis à jour (12 → 18 labos, couverture dynamique, épreuve de démarche ; responsive sans compteur figé).
 
+### Terminé — P1 Évaluation du raisonnement (Étape 6, premier lot)
+- **3 questions de raisonnement ajoutées** (pas de reconnaissance de définition), sur les distinctions précisées en Étape 2 :
+  - `ad-q17` (AD) : la nuance gMSA/Kerberoasting (technique possible, cassage irréaliste — pas une immunité).
+  - `soc-q17` (SOC) : lire le compromis précision/rappel à partir d’un comportement de règle (sensible → rappel élevé, précision basse).
+  - `fz-q17` (fuzzing) : ce qu’une campagne ASan sans plantage prouve — et ne prouve pas (classes de défauts non couvertes).
+  - Chaque `questionCount` passé de 16 à 17 ; total **724** questions (721 → 724). README et inventaire régénérés ; le test `doc-stats` confirme la cohérence.
+
 ### À suivre
 - Audit exactitude : threat hunting (`i-threat-hunting`) et balayage des autres cours techniques.
-- Étape 6 (évaluation) : ajouter des questions testant ces distinctions (échelle d’incident, précision/rappel, nuance gMSA).
+- Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.
 - Étapes suivantes du prompt : progression/prérequis croisés, professionnalisation des cours, laboratoires d’investigation, évaluation des compétences, parcours/projets, UX/accessibilité, cohérence documentaire et métriques.
 

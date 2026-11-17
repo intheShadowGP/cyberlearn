@@ -29,5 +29,6 @@ export const corrections: CourseCorrections = {
       explanation: 'Cette autonomie du serveur explique aussi les « silver tickets » : avec la clé d’un compte de service, on forge des tickets acceptés par ce service sans aucune trace sur le DC.',
     },
     'ad-q16': { type: 'single', correct: 'b', explanation: 'Les membres de Protected Users ne peuvent utiliser ni NTLM, ni DES, ni RC4, ni la délégation ; leurs TGT ont une durée de vie réduite. Il est recommandé pour tous les comptes d’administration humains.' },
+    'ad-q17': { type: 'single', correct: 'a', explanation: 'Un gMSA a un SPN et reçoit donc un ticket de service comme tout compte de service : l’attaque est techniquement possible. Ce qui la neutralise, c’est le mot de passe aléatoire (≈ 240 octets) renouvelé automatiquement, qui rend le cassage hors ligne irréaliste. La protection vient du secret, pas d’une immunité à la technique.', whyWrong: { b: 'Un gMSA reçoit bien un ticket de service : il porte un SPN.', c: 'Désactiver RC4 renforce la défense, mais même en RC4 le mot de passe d’un gMSA reste incassable en pratique.', d: 'Le Kerberoasting vise précisément les comptes de service porteurs d’un SPN.' } },
   },
 };

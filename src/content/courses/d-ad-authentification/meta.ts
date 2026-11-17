@@ -25,6 +25,6 @@ export const meta: CourseMeta = {
     { id: 'd-ad-detect', label: 'Détection et durcissement AD', level: 3 },
   ],
   sectionCount: 5,
-  questionCount: 16,
+  questionCount: 17,
   quizSize: 8,
 };

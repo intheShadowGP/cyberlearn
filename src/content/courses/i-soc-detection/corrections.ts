@@ -29,5 +29,6 @@ export const corrections: CourseCorrections = {
       explanation: 'La couverture de détection se pense à partir des techniques à détecter, puis des sources qui les rendent visibles.',
     },
     'soc-q16': { type: 'single', correct: 'b', explanation: 'Une clôture documentée permet la revue par un pair, l’amélioration des règles (réduction du bruit) et la reprise rapide si l’alerte se révèle plus tard liée à un incident.' },
+    'soc-q17': { type: 'single', correct: 'a', explanation: 'Repérer presque toutes les attaques = peu de faux négatifs = rappel élevé. Beaucoup d’alertes injustifiées = beaucoup de faux positifs = précision basse. Précision et rappel évoluent souvent à l’inverse : régler une règle, c’est choisir ce compromis.', whyWrong: { b: 'Ce serait une règle très spécifique qui manque des attaques, l’inverse de l’énoncé.', c: 'Des faux positifs nombreux excluent une précision élevée.', d: 'Les alertes injustifiées sont justement des faux positifs.' } },
   },
 };
