@@ -41,8 +41,8 @@
 | Catégorie | Tests |
 | --- | --- |
 | Sécurité | Validateur (aucune réponse dans les chunks de leçon) ; règles ESLint ; CSP présente et aucune erreur CSP (e2e) ; aucune requête vers une autre origine et aucun cookie (e2e) ; import malveillant et pollution de prototype ; `npm audit` en CI |
-| Accessibilité | axe WCAG 2.1 AA sur l’accueil, le catalogue, les cours, les 12 laboratoires (dont 2 après correction), tableau de bord, paramètres, parcours, glossaire, révisions, profil, compétences, examen final, pages secondaires — thèmes sombre et clair pour les pages principales ; parcours au clavier seul |
-| Responsive | e2e : 12 pages à 375 px sans débordement horizontal |
+| Accessibilité | axe WCAG 2.1 AA sur l’accueil, le catalogue, les cours, **les 18 laboratoires (liste dérivée du catalogue, deux thèmes, dont 2 après validation)**, tableau de bord, paramètres, parcours, glossaire, révisions, profil, compétences, examen final, épreuve de démarche, pages secondaires ; parcours au clavier seul |
+| Responsive | e2e : les pages principales (accueil, catalogue, cours, laboratoires, épreuve, tableau de bord, parcours, profil, glossaire, compétences, paramètres, documentation) à 375 px sans débordement horizontal |
 | Compatibilité | Chromium (complet), WebKit et Firefox (tests `@cross`) |
 | Stockage | migration v1 → v2 sur base peuplée, transactions concurrentes, suppression |
 

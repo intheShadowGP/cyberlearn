@@ -106,8 +106,15 @@ test('laboratoire sous-réseaux : calculateur, validation et historique', async 
 
 test('tous les laboratoires se chargent sans erreur', async ({ page }) => {
   const errors = watchErrors(page);
-  for (const id of ['windows-persistence-lab', 'subnet-lab', 'linux-audit-lab', 'ad-events-lab', 'hash-lab', 'sqli-lab', 'log-hunt-lab', 'timeline-lab', 'code-review-lab', 'osint-lab', 'iam-policy-lab', 'modbus-lab']) {
-    await page.goto(`./#/laboratoires/${id}`);
+  // Liste dérivée du catalogue (pas de liste figée) : tout nouveau laboratoire est couvert automatiquement.
+  await page.goto('./#/laboratoires');
+  await expect(page.locator('a[href*="#/laboratoires/"]').first()).toBeVisible();
+  const hrefs = await page
+    .locator('a[href*="#/laboratoires/"]')
+    .evaluateAll((els) => [...new Set(els.map((e) => (e.getAttribute('href') ?? '').replace(/^.*#\//, '#/')))].filter((h) => /^#\/laboratoires\/[a-z0-9-]+$/.test(h)));
+  expect(hrefs.length, 'au moins 18 laboratoires listés').toBeGreaterThanOrEqual(18);
+  for (const href of hrefs) {
+    await page.goto(`./${href}`);
     await expect(page.locator('#ws-h')).toBeVisible();
     await expect(page.locator('.question').first()).toBeVisible();
   }
@@ -217,7 +224,15 @@ test('PWA installable (Chromium)', async ({ page }) => {
 });
 
 test('accessibilité : questionnaire corrigé et tous les laboratoires', async ({ page }) => {
-  const labs = ['subnet-lab', 'linux-audit-lab', 'ad-events-lab', 'windows-persistence-lab', 'hash-lab', 'sqli-lab', 'log-hunt-lab', 'timeline-lab', 'code-review-lab', 'osint-lab', 'iam-policy-lab', 'modbus-lab'];
+  // Liste dérivée du catalogue : les 18 laboratoires (et les futurs) sont couverts par axe, dans les deux thèmes.
+  await page.goto('./#/laboratoires');
+  await expect(page.locator('a[href*="#/laboratoires/"]').first()).toBeVisible();
+  const labs = await page.locator('a[href*="#/laboratoires/"]').evaluateAll((els) =>
+    [...new Set(els.map((e) => (e.getAttribute('href') ?? '').replace(/^.*#\//, '')))]
+      .filter((h) => /^laboratoires\/[a-z0-9-]+$/.test(h))
+      .map((h) => h.split('/')[1] as string),
+  );
+  expect(labs.length, 'au moins 18 laboratoires').toBeGreaterThanOrEqual(18);
   for (const theme of ['dark', 'light']) {
     await page.addInitScript((t) => {
       localStorage.setItem('cyberacademie.prefs.v1', JSON.stringify({ theme: t, freeMode: true, fontScale: 1, reduceMotion: true }));
