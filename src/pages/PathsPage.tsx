@@ -11,6 +11,18 @@ import { skillStatuses } from '../lib/levels';
 import { saveProfile, type Snapshot } from '../lib/progress';
 import NotFoundPage from './NotFoundPage';
 
+/** Grille d'évaluation commune aux projets de parcours (dimensions, pas de barème chiffré). */
+const PROJECT_GRID: [string, string][] = [
+  ['Exactitude technique', 'Faits, commandes, configurations et références corrects et à jour.'],
+  ['Méthodologie', 'Démarche structurée et traçable : cadrage, étapes, preuves.'],
+  ['Qualité de l’analyse', 'Hypothèses envisagées, corrélations établies, conclusions étayées.'],
+  ['Sécurité des décisions', 'Les choix ne créent pas de nouveau risque ni ne détruisent de preuves.'],
+  ['Justification', 'Chaque décision importante est argumentée.'],
+  ['Reproductibilité', 'Un tiers peut refaire la démarche à partir du livrable.'],
+  ['Documentation', 'Claire, complète, lisible par le destinataire visé.'],
+  ['Recommandations', 'Priorisées, réalistes et vérifiables.'],
+];
+
 function stepDone(step: PathDef['steps'][number], data: Snapshot): boolean {
   return step.kind === 'course'
     ? data.progress.some((p) => p.courseId === step.id && p.status === 'validated')
@@ -163,7 +175,17 @@ function PathDetail({ path, data }: { path: PathDef; data: Snapshot }) {
               <ul>{path.finalProject.criteria.map((c) => <li key={c}>{c}</li>)}</ul>
             </section>
           </div>
-          <p className="muted">Projet d’entraînement à réaliser par vous-même : CyberAcadémie ne corrige pas ce projet et ne délivre aucune certification.</p>
+          <section aria-labelledby="grille-h">
+            <h3 id="grille-h" className="h3">Grille d’évaluation</h3>
+            <div className="table-wrap">
+              <table>
+                <caption className="sr-only">Dimensions d’évaluation d’un projet de parcours</caption>
+                <thead><tr><th scope="col">Dimension</th><th scope="col">Ce qui est évalué</th></tr></thead>
+                <tbody>{PROJECT_GRID.map(([dim, desc]) => <tr key={dim}><td>{dim}</td><td>{desc}</td></tr>)}</tbody>
+              </table>
+            </div>
+          </section>
+          <p className="muted">Projet d’entraînement à réaliser par vous-même : CyberAcadémie ne corrige pas ce projet et ne délivre aucune certification. La grille ci-dessus sert à l’auto-évaluation.</p>
         </section>
       )}
 

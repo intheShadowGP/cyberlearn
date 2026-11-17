@@ -129,9 +129,10 @@ test('parcours : 11 parcours, présentation, progression, examen final, bilan', 
   await page.goto('./#/parcours');
   await expect(page.locator('.card')).toHaveCount(11);
   await page.goto('./#/parcours/devsecops');
-  for (const h of ['Objectifs pédagogiques', 'Prérequis', 'Compétences à acquérir', 'Progression structurée', 'Bilan des compétences']) {
+  for (const h of ['Objectifs pédagogiques', 'Prérequis', 'Compétences à acquérir', 'Progression structurée', 'Grille d’évaluation', 'Bilan des compétences']) {
     await expect(page.getByRole('heading', { name: h })).toBeVisible();
   }
+  await expect(page.getByRole('cell', { name: 'Exactitude technique' })).toBeVisible();
   await page.getByRole('link', { name: /Examen final — DevSecOps/ }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Examen final — DevSecOps');
   await page.getByRole('button', { name: 'Démarrer' }).click();

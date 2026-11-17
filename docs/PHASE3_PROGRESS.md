@@ -62,9 +62,12 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 ### Terminé — P2 Indices progressifs des laboratoires (Étape 5.2)
 - **Composant `Hints` réutilisable** : révèle les indices un par un à la demande (« Afficher un premier indice » → « Afficher l’indice suivant (n/N) »), avec consigne explicite qu’ils guident sans donner la réponse ; accessible (`aria-live`). Champ `hints?: string[]` ajouté à `LabBody` ; rendu dans `LabPage` entre l’espace de travail et les questions. Indices rédigés pour trois labos d’investigation (`log-hunt-lab`, `ad-events-lab`, `timeline-lab`) — des nudges, jamais la solution. Validateur : ≥ 2 indices non triviaux si présents. Test e2e de révélation progressive. Vérifié à l’écran.
 
+### Terminé — P2 Grille d’évaluation des projets (Étapes 7/11.2)
+- **Grille d’évaluation commune** rendue dans la section « Projet final » de chaque parcours (`PathsPage`) : les 8 dimensions attendues par le prompt (exactitude technique, méthodologie, qualité de l’analyse, sécurité des décisions, justification, reproductibilité, documentation, recommandations), chacune avec « ce qui est évalué ». Grille **partagée** (pas 11 variantes dupliquées), destinée à l’auto-évaluation (rappel : CyberAcadémie ne corrige pas et ne certifie pas). Table dans `.table-wrap` (mobile/axe sûrs) ; assertion e2e ajoutée.
+
 ### À suivre
 - Audit exactitude : poursuivre par échantillonnage les cours à fort risque (réseau avancé, forensique, cloud, OT).
-- Grilles de projets (Étape 7) ; puis `docs/PHASE3_FINAL_REPORT.md`.
+- `docs/PHASE3_FINAL_REPORT.md` en fin de phase.
 
 > Indices progressifs étendus à 7 labos d’investigation (log-hunt, ad-events, timeline, windows-persistence, linux-audit, modbus, osint).
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
