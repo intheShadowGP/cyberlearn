@@ -180,14 +180,14 @@ test('hors ligne : le site et un cours non encore visité restent accessibles @c
 });
 
 for (const theme of ['dark', 'light'] as const) {
-  test(`accessibilité (axe, WCAG 2.1 AA) — thème ${theme}`, async ({ page }) => {
+  test(`accessibilité (axe, WCAG 2.2 AA) — thème ${theme}`, async ({ page }) => {
     await page.addInitScript((t) => {
       localStorage.setItem('cyberacademie.prefs.v1', JSON.stringify({ theme: t, freeMode: true, fontScale: 1, reduceMotion: true }));
     }, theme);
     for (const route of ['./', './#/catalogue', './#/cours/d-ad-authentification', './#/laboratoires/ad-events-lab', './#/tableau-de-bord', './#/parametres', './#/parcours/analyste-soc']) {
       await page.goto(route);
       await expect(page.locator('main h1').first()).toBeVisible();
-      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
       const summary = results.violations.map((v) => `${route} ${v.id} (${v.nodes.length}) : ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
       expect(summary, summary.join('\n')).toEqual([]);
     }
@@ -244,7 +244,7 @@ test('accessibilité : questionnaire corrigé et tous les laboratoires', async (
         await page.getByRole('button', { name: 'Valider mes réponses' }).click();
         await expect(page.locator('.correction').first()).toBeVisible();
       }
-      const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
       const summary = r.violations.map((v) => `${theme} ${id} ${v.id} : ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
       expect(summary, summary.join('\n')).toEqual([]);
     }
@@ -293,7 +293,7 @@ test('pages secondaires : rendu, absence d’erreur, accessibilité, 404', async
   for (const [route, h1] of routes) {
     await page.goto(route);
     await expect(page.locator('main h1').first()).toHaveText(h1);
-    const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
     expect(r.violations.map((v) => `${route} ${v.id}`)).toEqual([]);
   }
   expect(errors).toEqual([]);

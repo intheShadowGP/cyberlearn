@@ -51,6 +51,9 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 ### Terminé — P2 Garde-fou qualité (Étape 15.2)
 - **Test anti-placeholder** (`src/content/content-quality.test.ts`) : parcourt les valeurs de chaîne réelles de tout le contenu publié (cours, laboratoires, épreuves : meta/body/corrections/solutions) et échoue si un marqueur de remplissage non ambigu apparaît (TODO, FIXME, TBD, XXX, WIP, lorem ipsum, bouche-trou). Audit préalable : **aucun placeholder** dans le contenu actuel. La regex a d’abord faussement capté « sert **à rédiger** un cahier des charges » (prose légitime) ; restreinte aux marqueurs de développement sans équivoque.
 
+### Terminé — P2 Accessibilité WCAG 2.2 AA (Étape 8/12)
+- **Tests axe passés à WCAG 2.2 AA** : ajout du tag `wcag22aa` aux quatre contrôles axe (axe-core 4.14, règle automatisée `target-size` / SC 2.5.8). Le site **passe** sur toutes les pages auditées — accueil, catalogue, cours, les 18 laboratoires (deux thèmes), pages secondaires, examen, épreuve de démarche, recherche/confidentialité/documentation — **aucune violation** de taille de cible ni autre. Libellés mis à jour (titres de test, `TESTING.md`, README : 2.1 → 2.2 AA).
+
 ### À suivre
 - Audit exactitude : threat hunting (`i-threat-hunting`) et balayage des autres cours techniques.
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.

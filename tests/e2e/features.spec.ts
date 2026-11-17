@@ -12,7 +12,7 @@ function watchErrors(page: Page): string[] {
 }
 
 async function axe(page: Page, label: string) {
-  const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+  const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
   expect(r.violations.map((v) => `${label} ${v.id} ${v.nodes[0]?.target.join(' ')}`)).toEqual([]);
 }
 

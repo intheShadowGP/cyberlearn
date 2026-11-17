@@ -106,7 +106,7 @@ Le cahier des charges reçu était **tronqué** au milieu de la section 7 (« Pa
 
 - parcours complémentaires (administrateur, analyste SOC, pentesteur, développeur, RSSI) ;
 - page Paramètres (export/import, effacement, préférences) et page À propos (éthique, confidentialité, limites) ;
-- exigences d’accessibilité (WCAG 2.1 AA vérifié par axe), de sécurité (CSP, import non fiable), de tests et de documentation ;
+- exigences d’accessibilité (WCAG 2.2 AA vérifié par axe), de sécurité (CSP, import non fiable), de tests et de documentation ;
 - toute exigence des sections manquantes (au-delà de 7) n’a pas pu être prise en compte.
 
 ## Documentation du dépôt
