@@ -2,6 +2,11 @@ import type { LabBody } from '../../content/types';
 
 export const body: LabBody = {
   labId: 'ad-events-lab',
+  hints: [
+    'Reconstituez une **chronologie** : triez les événements par heure et suivez un même compte ou une même adresse d’un événement au suivant.',
+    'Un échec 4625 suivi d’un succès 4624 depuis la même source, puis des demandes 4769 en chiffrement RC4 (0x17), dessinent une progression typique.',
+    'La fin de la chaîne est souvent une **modification de groupe sensible** (4728) : qui a été ajouté aux « Admins du domaine », et par quel compte ?',
+  ],
   questions: [
     { id: 'adlab-q1', type: 'short', difficulty: 1, skills: ['d-ad-detect'], prompt: 'Depuis quelle adresse IP la pulvérisation de mots de passe est-elle menée ?', placeholder: 'a.b.c.d' },
     { id: 'adlab-q2', type: 'short', difficulty: 2, skills: ['d-ad-attacks', 'd-ad-detect'], prompt: 'Quel compte a été compromis par cette pulvérisation ?', placeholder: 'compte' },

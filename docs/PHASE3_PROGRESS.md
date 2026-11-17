@@ -59,9 +59,12 @@ Audit ciblé des points de vigilance signalés (AD, fuzzing, SOC, IA), confront�
 
 - **Audit des laboratoires** `docs/LAB_AUDIT.md` créé : fiche par labo (compétence mesurée, nature, validation) des 18 laboratoires. Constat : majorité orientée investigation/analyse/conception (pas la simple procédure) ; validation automatique présente partout (moteur pur testé + questions corrigées + débriefing) ; les 18 passent axe WCAG 2.2 AA. Amélioration future notée (non bloquante) : indices progressifs révélés à la demande (Étape 5.2).
 
+### Terminé — P2 Indices progressifs des laboratoires (Étape 5.2)
+- **Composant `Hints` réutilisable** : révèle les indices un par un à la demande (« Afficher un premier indice » → « Afficher l’indice suivant (n/N) »), avec consigne explicite qu’ils guident sans donner la réponse ; accessible (`aria-live`). Champ `hints?: string[]` ajouté à `LabBody` ; rendu dans `LabPage` entre l’espace de travail et les questions. Indices rédigés pour trois labos d’investigation (`log-hunt-lab`, `ad-events-lab`, `timeline-lab`) — des nudges, jamais la solution. Validateur : ≥ 2 indices non triviaux si présents. Test e2e de révélation progressive. Vérifié à l’écran.
+
 ### À suivre
 - Audit exactitude : poursuivre par échantillonnage les cours à fort risque (réseau avancé, forensique, cloud, OT).
-- Amélioration labos : indices progressifs ; grilles de projets (Étape 7) ; puis `docs/PHASE3_FINAL_REPORT.md`.
+- Étendre les indices aux autres labos ; grilles de projets (Étape 7) ; puis `docs/PHASE3_FINAL_REPORT.md`.
 - Étape 6 (suite) : varier davantage les formats d’évaluation (analyse de configuration, lecture de code) là où c’est pertinent.
 - Vers la fin de phase : `docs/PHASE3_FINAL_REPORT.md` et ouverture d’une PR `phase-3 → main` (sans fusion sans validation).
 - Fiches d’audit par cours (`docs/COURSE_AUDIT.md`), laboratoires (`docs/LAB_AUDIT.md`), tableau de bord qualité (`docs/QUALITY_SCORECARD.md`), `docs/PHASE3_AUDIT.md`.

@@ -2,6 +2,11 @@ import type { LabBody } from '../../content/types';
 
 export const body: LabBody = {
   labId: 'timeline-lab',
+  hints: [
+    'Avant d’ordonner, **normalisez** : ramenez tous les horodatages au même fuseau et au même format, sinon l’ordre obtenu est faux.',
+    'Comparez les temps d’un même objet entre sources : un fichier **créé après** avoir été modifié, ou un journal qui revient en arrière, trahit une manipulation.',
+    'Une antidatation laisse souvent une **incohérence** : un artefact qui référence un événement censé lui être postérieur.',
+  ],
   questions: [
     { id: 'tl-q1', type: 'short', difficulty: 1, skills: ['j-timeline'], prompt: 'À quelle heure UTC l’utilisatrice a-t-elle visité la page de téléchargement (historique Chrome) ? (HH:MM:SS)', placeholder: 'HH:MM:SS' },
     { id: 'tl-q2', type: 'short', difficulty: 2, skills: ['j-timeline', 'j-artefacts'], prompt: 'À quelle heure UTC FACTURE.EXE a-t-il été exécuté pour la première fois ? (HH:MM:SS)', placeholder: 'HH:MM:SS' },

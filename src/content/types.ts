@@ -213,6 +213,8 @@ export interface LabMeta {
 export interface LabBody {
   labId: string;
   questions: Question[];
+  /** Indices progressifs, révélés un par un à la demande (sans donner la solution). */
+  hints?: string[];
 }
 
 export interface LabCorrections {

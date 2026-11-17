@@ -2,6 +2,11 @@ import type { LabBody } from '../../content/types';
 
 export const body: LabBody = {
   labId: 'log-hunt-lab',
+  hints: [
+    'Le bruit de fond d’Internet touche beaucoup de comptes différents, souvent inexistants, depuis de nombreuses adresses : massif mais désordonné.',
+    'Concentrez-vous sur une **même adresse source** : combien d’échecs, sur combien de comptes ? Une attaque ciblée s’acharne sur peu de comptes valides.',
+    'Une compromission réussie se repère à un **succès** qui suit une série d’échecs depuis la même source — puis regardez ce que la session a fait ensuite.',
+  ],
   questions: [
     { id: 'loglab-q1', type: 'short', difficulty: 1, skills: ['i-triage'], prompt: 'Quelle adresse source mène la force brute ciblée ?', placeholder: 'a.b.c.d' },
     { id: 'loglab-q2', type: 'short', difficulty: 2, skills: ['i-triage'], prompt: 'Quel compte a été compromis ?', placeholder: 'compte' },

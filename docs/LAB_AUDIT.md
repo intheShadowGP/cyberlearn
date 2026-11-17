@@ -35,9 +35,10 @@ Audit des 18 laboratoires. **Nature réelle** : ce sont des **simulations pédag
 
 - **Points forts** : la majorité des labos sont orientés **investigation / analyse / conception** (reconstituer, distinguer, détecter une manipulation, concevoir une règle) et non la simple exécution d’une procédure. Les deux labos offensifs (`sqli-lab`, `osint-lab`) restent des simulations isolées, sans action vers un système tiers.
 - **Couverture** : 13 catégories, niveaux 1 à 4. Chaque labo mesure une compétence rattachée à des cours.
-- **Limites assumées** : simulations et données préenregistrées, pas d’exécution réelle (indiqué dans chaque débriefing). Les indices sont aujourd’hui surtout portés par les consignes et le débriefing ; un système d’**indices progressifs** (Étape 5.2) reste une amélioration possible, non bloquante.
+- **Limites assumées** : simulations et données préenregistrées, pas d’exécution réelle (indiqué dans chaque débriefing).
+- **Indices progressifs (Étape 5.2) — implémentés** : composant `Hints` réutilisable, révélant les indices **un par un à la demande**, sans donner la solution. Déployé sur trois labos d’investigation (`log-hunt-lab`, `ad-events-lab`, `timeline-lab`) ; extensible à tout labo via le champ `hints` de `LabBody`. Couvert par le validateur (≥ 2 indices non triviaux si présents) et un test e2e.
 
 ## Reste à faire (laboratoires)
 
-- Système d’indices progressifs révélés à la demande (sans donner la solution), pour renforcer l’investigation.
+- Étendre les indices progressifs aux autres labos d’investigation.
 - Revue interactive approfondie (pas seulement structurelle) de chaque moteur, au cas par cas.

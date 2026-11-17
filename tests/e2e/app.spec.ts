@@ -129,6 +129,19 @@ test('tous les laboratoires se chargent sans erreur', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('indices progressifs d’un laboratoire : révélés un par un, à la demande', async ({ page }) => {
+  await page.goto('./#/laboratoires/log-hunt-lab');
+  const list = page.locator('.hint-list li');
+  await expect(list).toHaveCount(0); // rien affiché par défaut
+  await page.getByRole('button', { name: 'Afficher un premier indice' }).click();
+  await expect(list).toHaveCount(1);
+  await page.getByRole('button', { name: /Afficher l’indice suivant/ }).click();
+  await expect(list).toHaveCount(2);
+  await page.getByRole('button', { name: /Afficher l’indice suivant/ }).click();
+  await expect(list).toHaveCount(3);
+  await expect(page.getByText('Tous les indices sont affichés')).toBeVisible();
+});
+
 test('sauvegarde : export puis import aller-retour @cross', async ({ page }) => {
   await page.goto('./#/laboratoires/subnet-lab');
   await page.getByRole('button', { name: 'Valider mes réponses' }).click();

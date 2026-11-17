@@ -115,6 +115,17 @@ describe('contenu pédagogique', () => {
     expect(dup).toEqual([]);
   });
 
+  it('les indices de laboratoire, s’il y en a, sont au moins deux et non triviaux', () => {
+    const errors: string[] = [];
+    for (const l of set.labs) {
+      const h = l.body.hints;
+      if (!h) continue;
+      if (h.length < 2) errors.push(`${l.meta.id} : au moins 2 indices progressifs attendus`);
+      for (const s of h) if (!s || s.trim().length < 10) errors.push(`${l.meta.id} : indice vide ou trop court`);
+    }
+    expect(errors, errors.join('\n')).toEqual([]);
+  });
+
   it('chaque cours a une fiche de vérification', () => {
     for (const c of set.courses) {
       const v = VERIFICATION[c.meta.id];

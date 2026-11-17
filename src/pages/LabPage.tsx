@@ -5,6 +5,7 @@ import type { Block, LabBody, LabMeta } from '../content/types';
 import { CATEGORY_LABELS, LAB_COMPONENTS } from '../labs';
 import { LevelBadge } from '../components/Badges';
 import { Blocks } from '../components/Blocks';
+import { Hints } from '../components/Hints';
 import { Quiz } from '../components/Quiz';
 import { recordLabAttempt } from '../lib/progress';
 import { usePageTitle } from '../lib/usePageTitle';
@@ -83,6 +84,8 @@ function LabView({ meta }: { meta: LabMeta }) {
           <p className="error">Composant introuvable.</p>
         )}
       </section>
+
+      {body?.hints && body.hints.length > 0 && <Hints hints={body.hints} />}
 
       <section aria-labelledby="lq-h">
         <h2 id="lq-h">Questions et validation</h2>
