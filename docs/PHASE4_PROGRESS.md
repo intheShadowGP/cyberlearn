@@ -30,7 +30,13 @@ Cette phase a démarré dans un nouvel arbre de travail (`F:\claude`) ne contena
 - CSS `.discipline-grid`/`.discipline-card`/`.disc-icon` (états survol et focus clavier, responsive, palette existante).
 - Vérifié : typecheck, build, e2e dédié (une icône par carte, lien vers le module), axe 2.2 AA (deux thèmes), responsive mobile, rendu à l’écran (desktop + mobile).
 
+### Terminé — Évolution 2 : simplification et menus du header
+- `src/components/Layout.tsx` : navigation principale réduite à **Accueil · Tableau de bord · Formation · Profil · Paramètres**, plus une **icône loupe** « Rechercher » (lien vers `/recherche` existant, `aria-label` + `title`).
+- `src/components/NavMenu.tsx` : menu déroulant accessible réutilisable. **Formation** → Catalogue des cours, Laboratoires, Évaluations, Parcours, Révisions, Glossaire (le catalogue y figure en tête pour ne pas être perdu). **Profil** → Mon profil, Compétences.
+- Comportement : ouverture au **survol** (desktop pointeur, via `matchMedia('(hover:hover) and (pointer:fine)')`), au **clic** (ouvre sur desktop, bascule sur tactile) et au **clavier** (flèche bas ouvre + focus première entrée) ; fermeture par clic extérieur, perte de focus et **Échap** (focus rendu au bouton) ; **indication de page active** sur la rubrique. Sur mobile, le menu replié devient des **accordéons** en place.
+- CSS : dropdown absolu (desktop) / accordéon statique (mobile), états survol/focus. Correction de spécificité (`#main-nav ul{display:flex}` masquait le `[hidden]` du sous-menu → `#main-nav .nav-submenu[hidden]{display:none}`).
+- Vérifié : typecheck, build, e2e dédié (clic/clavier/Échap/page active) + **35 e2e chromium verts** (dont liens internes, filtres, accessibilité axe 2.2 AA), rendu desktop (dropdown) et mobile (accordéon) à l’écran.
+
 ### À suivre
-- Évolution 2 — header + menus déroulants + loupe (adapter l’e2e qui clique « Formations »).
 - Évolution 3 — onboarding, test 20 questions, calcul du score, mode libre (DB/migration), intégration Profil/Compétences.
 - Tests complets, build, `docs/PHASE4_FINAL_REPORT.md`, mise à jour documentation/inventaires.

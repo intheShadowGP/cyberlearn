@@ -14,6 +14,33 @@ function watchErrors(page: Page): string[] {
   return errors;
 }
 
+test('header : menu déroulant Formation (clic, clavier, Échap, page active)', async ({ page }) => {
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await page.goto('./#/tableau-de-bord');
+  const nav = page.getByRole('navigation', { name: 'Navigation principale' });
+  const formation = nav.getByRole('button', { name: 'Formation' });
+  const labo = nav.getByRole('link', { name: 'Laboratoires' });
+  await expect(formation).toHaveAttribute('aria-expanded', 'false');
+  await expect(labo).toBeHidden();
+  // clic : ouverture
+  await formation.click();
+  await expect(formation).toHaveAttribute('aria-expanded', 'true');
+  await expect(labo).toBeVisible();
+  // Échap : fermeture et focus rendu au bouton
+  await page.keyboard.press('Escape');
+  await expect(labo).toBeHidden();
+  await expect(formation).toBeFocused();
+  // clavier : flèche bas ouvre et place le focus sur la première entrée
+  await formation.press('ArrowDown');
+  await expect(nav.getByRole('link', { name: 'Catalogue des cours' })).toBeFocused();
+  // navigation via une entrée du menu
+  await labo.click();
+  await expect(page).toHaveURL(/#\/laboratoires/);
+  // indication de page active : la rubrique Profil est marquée sur /competences
+  await page.goto('./#/competences');
+  await expect(nav.locator('.nav-menu.is-active > .nav-menu-trigger')).toHaveText(/Profil/);
+});
+
 test('tableau de bord : chaque discipline a une carte avec icône', async ({ page }) => {
   await page.goto('./#/tableau-de-bord');
   const cards = page.locator('.discipline-card');
@@ -46,7 +73,9 @@ test('accueil sous un sous-chemin, sans erreur ni violation CSP', async ({ page 
   // Sous 1280 px, la navigation est repliée derrière le bouton Menu.
   const toggle = page.getByRole('button', { name: 'Menu' });
   if (await toggle.isVisible()) await toggle.click();
-  await page.getByRole('navigation', { name: 'Navigation principale' }).getByRole('link', { name: 'Formations' }).click();
+  const nav = page.getByRole('navigation', { name: 'Navigation principale' });
+  await nav.getByRole('button', { name: 'Formation' }).click();
+  await nav.getByRole('link', { name: 'Catalogue des cours' }).click();
   await expect(page).toHaveURL(/#\/catalogue/);
   await expect(page.getByRole('heading', { level: 1, name: 'Formations' })).toBeVisible();
   expect(errors).toEqual([]);

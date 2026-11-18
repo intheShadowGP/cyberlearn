@@ -2,19 +2,22 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { onUpdateAvailable } from '../sw/register';
 import { Logo } from './Logo';
+import { NavMenu, type NavMenuItem } from './NavMenu';
 
-const NAV = [
-  { to: '/', label: 'Accueil', end: true },
-  { to: '/tableau-de-bord', label: 'Tableau de bord' },
-  { to: '/catalogue', label: 'Formations' },
+// « Formation » regroupe les fonctionnalités d'apprentissage. Le catalogue (Formations)
+// y figure en tête pour rester accessible malgré la simplification de la barre principale.
+const FORMATION: NavMenuItem[] = [
+  { to: '/catalogue', label: 'Catalogue des cours' },
   { to: '/laboratoires', label: 'Laboratoires' },
   { to: '/evaluations', label: 'Évaluations' },
   { to: '/parcours', label: 'Parcours' },
   { to: '/revisions', label: 'Révisions' },
   { to: '/glossaire', label: 'Glossaire' },
+];
+
+const PROFIL: NavMenuItem[] = [
+  { to: '/profil', label: 'Mon profil', end: true },
   { to: '/competences', label: 'Compétences' },
-  { to: '/profil', label: 'Profil' },
-  { to: '/recherche', label: 'Rechercher' },
 ];
 
 function useOnline(): boolean {
@@ -77,16 +80,23 @@ export function Layout({ children }: { children: ReactNode }) {
           </button>
           <nav id="main-nav" aria-label="Navigation principale" className={menuOpen ? 'open' : ''}>
             <ul>
-              {NAV.map((n) => (
-                <li key={n.to}>
-                  <NavLink to={n.to} end={n.end ?? false} onClick={() => setMenuOpen(false)}>
-                    {n.label}
-                  </NavLink>
-                </li>
-              ))}
               <li>
-                <NavLink to="/parametres" className="nav-settings" onClick={() => setMenuOpen(false)}>
-                  Paramètres
+                <NavLink to="/" end onClick={() => setMenuOpen(false)}>Accueil</NavLink>
+              </li>
+              <li>
+                <NavLink to="/tableau-de-bord" onClick={() => setMenuOpen(false)}>Tableau de bord</NavLink>
+              </li>
+              <NavMenu label="Formation" items={FORMATION} onNavigate={() => setMenuOpen(false)} />
+              <NavMenu label="Profil" items={PROFIL} onNavigate={() => setMenuOpen(false)} />
+              <li>
+                <NavLink to="/parametres" className="nav-settings" onClick={() => setMenuOpen(false)}>Paramètres</NavLink>
+              </li>
+              <li className="nav-search-item">
+                <NavLink to="/recherche" className="nav-search" aria-label="Rechercher" title="Rechercher" onClick={() => setMenuOpen(false)}>
+                  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
+                  </svg>
+                  <span className="nav-search-text">Rechercher</span>
                 </NavLink>
               </li>
             </ul>

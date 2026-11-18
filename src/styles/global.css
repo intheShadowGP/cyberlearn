@@ -220,6 +220,35 @@ main:focus { outline: none; }
 }
 #main-nav a:hover { color: var(--text); background: var(--bg-elev-2); }
 #main-nav a.active { color: var(--text); background: var(--accent-soft); box-shadow: inset 0 -2px 0 var(--accent); }
+
+/* Menus déroulants de navigation (Formation, Profil) */
+.nav-menu { position: relative; }
+.nav-menu-trigger {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  padding: 0.45rem 0.7rem; border-radius: var(--radius-sm);
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font: inherit; font-size: 0.93rem; white-space: nowrap;
+}
+.nav-menu-trigger:hover { color: var(--text); background: var(--bg-elev-2); }
+.nav-menu.is-active > .nav-menu-trigger { color: var(--text); background: var(--accent-soft); box-shadow: inset 0 -2px 0 var(--accent); }
+.nav-caret { transition: transform 0.12s ease; }
+.nav-menu.open > .nav-menu-trigger .nav-caret { transform: rotate(180deg); }
+.nav-submenu {
+  list-style: none; margin: 0; padding: 0.3rem;
+  position: absolute; top: calc(100% + 2px); left: 0; z-index: 60; min-width: 210px;
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+/* Surcharge : #main-nav ul force flex ; le sous-menu doit empiler verticalement. */
+#main-nav .nav-submenu { display: block; }
+#main-nav .nav-submenu[hidden] { display: none; }
+.nav-submenu a { display: block; padding: 0.5rem 0.7rem; border-radius: var(--radius-sm); color: var(--text-muted); text-decoration: none; font-size: 0.9rem; white-space: nowrap; }
+.nav-submenu a:hover { color: var(--text); background: var(--bg-elev-2); }
+.nav-submenu a.active { color: var(--text); background: var(--accent-soft); }
+.nav-menu-trigger:focus-visible, .nav-submenu a:focus-visible, .nav-search:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.nav-search { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-muted); }
+.nav-search:hover { color: var(--text); }
+.nav-search-text { display: none; }
 .menu-toggle {
   display: none;
   background: none;
@@ -616,7 +645,15 @@ td .progress-bar { max-width: 140px; }
 .flashcard { max-width: 820px; }
 #main-nav a { white-space: nowrap; }
 @media (min-width: 1281px) and (max-width: 1500px) { #main-nav a { padding: 0.4rem 0.4rem; font-size: 0.84rem; } }
-@media (max-width: 1280px) { #main-nav.open ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); } }
+@media (max-width: 1280px) {
+  /* Menu replié : une colonne, les sous-menus deviennent des accordéons en place */
+  #main-nav.open ul { display: flex; flex-direction: column; gap: 0.15rem; }
+  .nav-menu { width: 100%; }
+  .nav-menu-trigger { width: 100%; justify-content: space-between; }
+  .nav-submenu { position: static; min-width: 0; box-shadow: none; border: none; background: none; padding: 0.1rem 0 0.4rem 0.9rem; }
+  .nav-search { justify-content: flex-start; padding: 0.45rem 0.7rem; }
+  .nav-search-text { display: inline; }
+}
 
 /* Garde-fous responsive : les contrôles de formulaire ne doivent jamais élargir la page. */
 .filters { grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); }
