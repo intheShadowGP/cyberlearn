@@ -4,6 +4,7 @@ import { MODULES } from '../content/catalog';
 import { COURSE_BY_ID, COURSES, LABS, coursesOfModule } from '../content/registry';
 import { LEVEL_LABELS } from '../content/types';
 import { ProgressBar } from '../components/Badges';
+import { DisciplineIcon } from '../components/DisciplineIcon';
 import { GoalsPanel } from '../components/GoalsPanel';
 import { moduleLevel, skillStatuses, weakSkills } from '../lib/levels';
 import { useSnapshot } from '../lib/useSnapshot';
@@ -46,40 +47,32 @@ export default function DashboardPage() {
         <li className="kpi"><span className="kpi-value">≈ {fmtDuration(remainingEstimate * 60)}</span><span className="kpi-label">estimé pour le reste</span></li>
       </ul>
 
-      <section className="panel" aria-labelledby="disc-h">
+      <section aria-labelledby="disc-h">
         <h2 id="disc-h">Progression par discipline</h2>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Discipline</th>
-                <th scope="col">Cours validés</th>
-                <th scope="col">Compétences</th>
-                <th scope="col">Niveau atteint</th>
-              </tr>
-            </thead>
-            <tbody>
-              {MODULES.map((m) => {
-                const cs = coursesOfModule(m.id);
-                if (!cs.length) return null;
-                const v = cs.filter((c) => validated.some((p) => p.courseId === c.id)).length;
-                const st = statuses.filter((s) => COURSE_BY_ID.get(s.courseId)?.module === m.id);
-                const lvl = moduleLevel(m.id, COURSES, data.skills);
-                return (
-                  <tr key={m.id}>
-                    <th scope="row"><Link to={`/module/${m.id}`}>{m.id}. {m.title}</Link></th>
-                    <td>
-                      {v}/{cs.length}
-                      <ProgressBar value={v} max={cs.length} label={`Cours validés en ${m.title}`} />
-                    </td>
-                    <td>{st.filter((s) => s.state === 'acquired').length}/{st.length}</td>
-                    <td>{lvl === 0 ? '—' : `${lvl} · ${LEVEL_LABELS[lvl]}`}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <ul className="discipline-grid">
+          {MODULES.map((m) => {
+            const cs = coursesOfModule(m.id);
+            if (!cs.length) return null;
+            const v = cs.filter((c) => validated.some((p) => p.courseId === c.id)).length;
+            const st = statuses.filter((s) => COURSE_BY_ID.get(s.courseId)?.module === m.id);
+            const acq = st.filter((s) => s.state === 'acquired').length;
+            const lvl = moduleLevel(m.id, COURSES, data.skills);
+            return (
+              <li key={m.id} className="discipline-card">
+                <p className="discipline-card-head">
+                  <span className="discipline-card-icon"><DisciplineIcon module={m.id} /></span>
+                  <Link to={`/module/${m.id}`} className="discipline-card-title">{m.id}. {m.title}</Link>
+                </p>
+                <p className="discipline-card-desc muted">{m.description}</p>
+                <p className="discipline-card-count">{v}/{cs.length} cours validés</p>
+                <ProgressBar value={v} max={cs.length} label={`Cours validés en ${m.title}`} />
+                <p className="discipline-card-meta muted">
+                  {acq}/{st.length} compétences · {lvl === 0 ? 'Niveau —' : `Niveau ${lvl} · ${LEVEL_LABELS[lvl]}`}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
       </section>
 
       <div className="grid-2">

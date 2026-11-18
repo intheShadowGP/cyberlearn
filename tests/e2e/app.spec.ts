@@ -14,6 +14,18 @@ function watchErrors(page: Page): string[] {
   return errors;
 }
 
+test('tableau de bord : chaque discipline a une carte avec icône', async ({ page }) => {
+  await page.goto('./#/tableau-de-bord');
+  const cards = page.locator('.discipline-card');
+  await expect(cards.first()).toBeVisible();
+  const n = await cards.count();
+  expect(n, 'au moins 18 disciplines').toBeGreaterThanOrEqual(18);
+  // une icône décorative par carte
+  await expect(page.locator('.discipline-card .disc-icon')).toHaveCount(n);
+  // le titre de discipline reste un lien vers la page du module
+  await expect(cards.first().getByRole('link')).toHaveAttribute('href', /#\/module\//);
+});
+
 async function answerAll(page: Page) {
   // Répond à chaque question avec la première option ou une valeur quelconque.
   for (const q of await page.locator('.question').all()) {

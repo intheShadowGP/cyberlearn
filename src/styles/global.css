@@ -367,6 +367,42 @@ label { cursor: pointer; }
 .card-link:hover { color: var(--accent); }
 .card-link:focus-visible { outline: none; }
 .card:has(.card-link:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* Cartes de discipline (tableau de bord) — identité visuelle par icône */
+.discipline-grid { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+.discipline-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+.discipline-card > * { margin: 0; }
+.discipline-card:hover { border-color: var(--border-strong); }
+.discipline-card:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.discipline-card-head { display: flex; align-items: center; gap: 0.6rem; }
+.discipline-card-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.disc-icon { width: 22px; height: 22px; }
+.discipline-card:hover .discipline-card-icon, .discipline-card:focus-within .discipline-card-icon { background: var(--accent); color: var(--accent-ink); }
+.discipline-card-title { color: var(--text); text-decoration: none; font-weight: 600; }
+.discipline-card-title:hover { color: var(--accent); }
+.discipline-card-title:focus-visible { outline: none; }
+.discipline-card-desc { font-size: 0.9rem; }
+.discipline-card-count { font-size: 0.92rem; font-weight: 600; }
+.discipline-card-meta { font-size: 0.85rem; }
 .card-foot { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; margin-top: auto; padding-top: 0.6rem; font-size: 0.88rem; }
 .module-card { padding-left: 4rem; }
 .module-letter {
