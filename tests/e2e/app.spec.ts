@@ -493,3 +493,17 @@ test('version de publication V1.4.3 affichée (pied de page et À propos)', asyn
   await expect(page.getByTestId('app-version')).toHaveText('CyberAcadémie V1.4.3');
   await expect(page.getByText('version V1.4.3')).toBeVisible();
 });
+
+test('nouveau logo : image chargée dans l’en-tête, favicons et manifeste à jour', async ({ page, request }) => {
+  await page.goto('./#/a-propos');
+  const logo = page.locator('.brand img.logo');
+  await expect(logo).toHaveAttribute('aria-hidden', 'true');
+  await expect.poll(() => logo.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth)).toBeGreaterThan(0);
+  const manifest = (await (await request.get('./manifest.webmanifest')).json()) as { icons: { src: string }[] };
+  expect(manifest.icons.map((i) => i.src)).toEqual(['icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png']);
+  for (const src of manifest.icons.map((i) => i.src).concat(['icons/favicon-32.png', 'icons/apple-touch-icon.png'])) {
+    const r = await request.get(`./${src}`);
+    expect(r.ok(), src).toBe(true);
+    expect(r.headers()['content-type'], src).toContain('image/png');
+  }
+});

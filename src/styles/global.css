@@ -207,8 +207,7 @@ main:focus { outline: none; }
   letter-spacing: -0.01em;
   margin-right: auto;
 }
-.logo-shield { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
-.logo-check { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.logo { display: block; flex: 0 0 auto; object-fit: contain; }
 #main-nav ul { list-style: none; display: flex; gap: 0.2rem; margin: 0; padding: 0; flex-wrap: wrap; }
 #main-nav a {
   display: block;
