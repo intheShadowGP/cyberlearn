@@ -4,11 +4,15 @@ import { clearAll, requestPersistence } from '../lib/db';
 import { DataControls } from '../components/DataControls';
 import { notify, type Snapshot } from '../lib/progress';
 import { resetPrefs, setPrefs, usePrefs, type Prefs } from '../lib/prefs';
+import { OnboardingStatus } from '../components/Onboarding';
+import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
 
 export default function SettingsPage() {
   usePageTitle('Paramètres');
   const prefs = usePrefs();
+  const { data } = useSnapshot();
+  const onboarding = data.profile[0]?.onboarding;
   const ids = { theme: useId(), font: useId(), file: useId() };
   const [msg, setMsg] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null);
   const [pending, setPending] = useState<Snapshot | null>(null);
@@ -84,14 +88,7 @@ export default function SettingsPage() {
         </label>
       </section>
 
-      <section className="panel" aria-labelledby="ped-h">
-        <h2 id="ped-h">Pédagogie</h2>
-        <label className="check">
-          <input type="checkbox" checked={prefs.freeMode} onChange={(e) => set('freeMode', e.target.checked)} />
-          Mode libre : ignorer les prérequis et déverrouiller toutes les évaluations
-        </label>
-        <p className="muted">Recommandé uniquement si vous possédez déjà les bases des cours prérequis.</p>
-      </section>
+      <OnboardingStatus onboarding={onboarding} />
 
       <section className="panel" aria-labelledby="data-h">
         <h2 id="data-h">Vos données</h2>

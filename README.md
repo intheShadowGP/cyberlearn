@@ -23,6 +23,7 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 
 ## Fonctionnalités
 
+- **Onboarding et positionnement** : à la première connexion, choix entre « débutant » (parcours guidé, sans test) et « initié » (test de positionnement de 20 questions, réussite à 14/20). La réussite valide le niveau et active le mode libre ; niveau *déclaré* et niveau *validé* restent distincts. Résultats conservés localement (IndexedDB), (re)passage possible depuis Profil et Compétences.
 - **Accueil** : reprise du dernier cours, progression, recommandations, objectifs, disciplines.
 - **Tableau de bord** : progression par discipline, cours en cours et terminés, scores, temps d’étude mesuré et estimé, compétences acquises, points faibles, objectifs.
 - **Formations** : recherche, filtres (discipline, niveau, statut), cartographie complète.
@@ -36,7 +37,7 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 - **Glossaire** et **recherche interne** : construits à partir des définitions et du contenu réels des cours.
 - **Compétences** : acquises, en cours, non maîtrisées, non évaluées, avec maîtrise et évaluations associées.
 - **Niveaux par compétences** : une compétence est acquise à 80 % de réussite sur au moins 3 questions ; un niveau de discipline exige 80 % des compétences publiées de ce niveau et des niveaux inférieurs.
-- **Paramètres** : thème, taille du texte, réduction des animations, mode libre, données conservées, export/import JSON (format 2 avec empreinte), réinitialisation, suppression complète du profil local.
+- **Paramètres** : thème, taille du texte, réduction des animations, statut de positionnement (le mode libre s’obtient en réussissant le test, non par une bascule), données conservées, export/import JSON (format 2 avec empreinte), réinitialisation, suppression complète du profil local.
 - **Documentation** et **confidentialité** intégrées au site.
 
 ## Architecture

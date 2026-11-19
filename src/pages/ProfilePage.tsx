@@ -11,6 +11,7 @@ import { GoalsPanel } from '../components/GoalsPanel';
 import { badges, computeXp, courseStage, pathStatus, rankOf, STAGE_LABELS, streaks, weeklyChallenges, type CourseStage } from '../lib/gamification';
 import { moduleLevel, skillStatuses } from '../lib/levels';
 import { PSEUDONYM_MAX, saveProfile } from '../lib/progress';
+import { OnboardingStatus } from '../components/Onboarding';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
 
@@ -87,6 +88,8 @@ export default function ProfilePage() {
         {saved && <p role="status" className="success">Pseudonyme enregistré localement.</p>}
         <p className="muted">Il sert uniquement à personnaliser l’affichage. Lettres, chiffres, espaces et ponctuation simple ; 40 caractères au plus.</p>
       </section>
+
+      <OnboardingStatus onboarding={profile?.onboarding} />
 
       <ul className="kpis" aria-label="Synthèse du profil">
         <li className="kpi"><span className="kpi-value">{xp.total} XP</span><span className="kpi-label">expérience</span></li>

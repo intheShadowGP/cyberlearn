@@ -7,7 +7,7 @@ import { CourseCard } from '../components/CourseCard';
 import { ProgressBar } from '../components/Badges';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
-import { isUnlocked, progressMap } from '../lib/unlock';
+import { effectiveFreeMode, isUnlocked, progressMap } from '../lib/unlock';
 import { normalizeShort } from '../lib/quiz';
 import { usePageTitle } from '../lib/usePageTitle';
 
@@ -22,6 +22,7 @@ export default function CatalogPage() {
   const statusF = (params.get('statut') ?? 'all') as StatusFilter;
   const { data } = useSnapshot();
   const prefs = usePrefs();
+  const freeMode = effectiveFreeMode(data.profile[0]?.onboarding, prefs.freeMode);
   const progress = useMemo(() => progressMap(data.progress), [data.progress]);
   const ids = { q: useId(), m: useId(), l: useId(), s: useId() };
   const [showMap, setShowMap] = useState(true);
@@ -105,7 +106,7 @@ export default function CatalogPage() {
       <ul className="card-grid">
         {filtered.map((c) => (
           <li key={c.id}>
-            <CourseCard course={c} progress={progress.get(c.id)} locked={!isUnlocked(c, progress, prefs.freeMode)} />
+            <CourseCard course={c} progress={progress.get(c.id)} locked={!isUnlocked(c, progress, freeMode)} />
           </li>
         ))}
       </ul>

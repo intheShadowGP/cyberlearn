@@ -3,6 +3,8 @@ import { MODULES } from '../content/catalog';
 import { COURSE_BY_ID, COURSES, LABS, coursesOfModule } from '../content/registry';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
+import { effectiveFreeMode } from '../lib/unlock';
+import { OnboardingWelcome } from '../components/Onboarding';
 import { recommendations } from '../lib/recommend';
 import { ProgressBar } from '../components/Badges';
 import { Logo } from '../components/Logo';
@@ -13,11 +15,14 @@ export function HomePage() {
   usePageTitle('');
   const { data, ready } = useSnapshot();
   const prefs = usePrefs();
+  const onboarding = data.profile[0]?.onboarding;
+  // Première connexion (ou utilisateur légataire sans onboarding) : écran de bienvenue.
+  if (ready && !onboarding) return <OnboardingWelcome />;
   const validated = data.progress.filter((p) => p.status === 'validated').length;
   const lastId = data.meta.find((m) => m.key === 'lastCourse')?.value;
   const last = typeof lastId === 'string' ? COURSE_BY_ID.get(lastId) : undefined;
   const lastProgress = last ? data.progress.find((p) => p.courseId === last.id) : undefined;
-  const recos = recommendations(data, prefs.freeMode);
+  const recos = recommendations(data, effectiveFreeMode(onboarding, prefs.freeMode));
   const totalQuestions = COURSES.reduce((n, c) => n + c.questionCount, 0);
 
   return (

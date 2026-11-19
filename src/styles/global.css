@@ -425,6 +425,28 @@ label { cursor: pointer; }
   transition: background 0.12s ease, color 0.12s ease;
 }
 .disc-icon { width: 22px; height: 22px; }
+
+/* Onboarding et test de positionnement */
+.choice-grid { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.choice-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.4rem;
+}
+.choice-card > * { margin: 0; }
+.choice-card h2 { font-size: 1.15rem; }
+.choice-card .btn { margin-top: auto; align-self: flex-start; }
+.choice-card:hover { border-color: var(--border-strong); }
+.callout-ok { border-left: 4px solid var(--ok); }
+.score-big { font-size: 2rem; margin: 0.4rem 0; }
+.question-prompt { display: block; font-weight: 600; margin-top: 0.3rem; font-size: 1.05rem; }
+.radio-option { align-items: flex-start; }
+.facts { list-style: none; padding: 0; margin: 0.6rem 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.facts .ok { color: var(--ok); }
 .discipline-card:hover .discipline-card-icon, .discipline-card:focus-within .discipline-card-icon { background: var(--accent); color: var(--accent-ink); }
 .discipline-card-title { color: var(--text); text-decoration: none; font-weight: 600; }
 .discipline-card-title:hover { color: var(--accent); }

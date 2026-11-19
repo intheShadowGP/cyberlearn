@@ -44,6 +44,55 @@ describe('validateBackup', () => {
   });
 });
 
+const validV2 = () => ({
+  app: 'cyberacademie',
+  format: 2,
+  exportedAt: '2026-01-01T00:00:00.000Z',
+  data: {
+    ...clone().data,
+    profile: [{
+      key: 'profile', pseudonym: 'Alex', followedPaths: [], createdAt: 1,
+      onboarding: {
+        declaredLevel: 'initie', onboardedAt: 10, attempts: 1, validated: true, freeMode: true,
+        lastResult: { date: 10, correct: 16, total: 20, percent: 80, validated: true, questionIds: ['pf1', 'pr1'] },
+        history: [{ date: 10, correct: 16, total: 20, percent: 80, validated: true, questionIds: ['pf1', 'pr1'] }],
+      },
+    }],
+    activity: [],
+    reviews: [],
+  },
+});
+
+describe('validateBackup — onboarding (format 2)', () => {
+  it('préserve l’onboarding au tour complet (pas de perte de données)', () => {
+    const ob = validateBackup(validV2()).profile[0]?.onboarding;
+    expect(ob?.declaredLevel).toBe('initie');
+    expect(ob?.validated).toBe(true);
+    expect(ob?.freeMode).toBe(true);
+    expect(ob?.attempts).toBe(1);
+    expect(ob?.lastResult?.correct).toBe(16);
+    expect(ob?.history).toHaveLength(1);
+  });
+  it('force le mode libre à faux si le positionnement n’est pas validé (fichier falsifié)', () => {
+    const raw = validV2();
+    raw.data.profile[0].onboarding.validated = false;
+    raw.data.profile[0].onboarding.freeMode = true;
+    expect(validateBackup(raw).profile[0]?.onboarding?.freeMode).toBe(false);
+  });
+  it('accepte un profil format 2 sans onboarding (rétrocompatibilité)', () => {
+    const raw = validV2();
+    delete raw.data.profile[0].onboarding;
+    const p = validateBackup(raw).profile[0];
+    expect(p?.pseudonym).toBe('Alex');
+    expect(p?.onboarding).toBeUndefined();
+  });
+  it('rejette un niveau déclaré inconnu', () => {
+    const raw = validV2();
+    raw.data.profile[0].onboarding.declaredLevel = 'expert';
+    expect(() => validateBackup(raw)).toThrow(ImportError);
+  });
+});
+
 describe('safeParse', () => {
   it('neutralise __proto__ et constructor', () => {
     const o = safeParse('{"a":1,"__proto__":{"polluted":true},"constructor":{"prototype":{"x":1}}}') as Record<string, unknown>;

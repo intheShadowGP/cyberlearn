@@ -2,6 +2,7 @@ import { lazy, Suspense, type ReactNode } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
+import { OnboardingWelcome } from './components/Onboarding';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // HashRouter : les routes vivent après « # », donc aucune réécriture serveur
@@ -24,6 +25,7 @@ const SearchPage = lazy(() => import('./pages/SearchPage'));
 const ReviewPage = lazy(() => import('./pages/ReviewPage'));
 const SkillsPage = lazy(() => import('./pages/SkillsPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const PositioningTestPage = lazy(() => import('./pages/PositioningTestPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const DocumentationPage = lazy(() => import('./pages/DocumentationPage'));
 
@@ -35,6 +37,8 @@ export function App() {
           <Suspense fallback={<p className="loading" role="status">Chargement…</p>}>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/bienvenue" element={<OnboardingWelcome />} />
+              <Route path="/positionnement" element={<PositioningTestPage />} />
               <Route path="/tableau-de-bord" element={<DashboardPage />} />
               <Route path="/catalogue" element={<CatalogPage />} />
               <Route path="/module/:id" element={<ModulePage />} />

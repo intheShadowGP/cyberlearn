@@ -5,6 +5,7 @@ import { COURSE_BY_ID, COURSES, LABS } from '../content/registry';
 import { EXAMS } from '../content/exams';
 import { LEVEL_LABELS, type Level } from '../content/types';
 import { MASTERY, MIN_EVIDENCE, skillStatuses, type SkillState } from '../lib/levels';
+import { OnboardingStatus } from '../components/Onboarding';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
 
@@ -32,6 +33,9 @@ export default function SkillsPage() {
         moins {MIN_EVIDENCE} questions qui l’évaluent (moyenne pondérée des six derniers résultats). L’expérience (XP) n’a aucun
         effet sur ce calcul.
       </p>
+
+      <OnboardingStatus onboarding={data.profile[0]?.onboarding} />
+
       <ul className="kpis" aria-label="Synthèse">
         <li className="kpi"><span className="kpi-value">{counts.acquired}</span><span className="kpi-label">acquises</span></li>
         <li className="kpi"><span className="kpi-value">{counts.learning}</span><span className="kpi-label">en cours</span></li>

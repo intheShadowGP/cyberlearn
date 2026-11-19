@@ -3,6 +3,8 @@ import AxeBuilder from '@axe-core/playwright';
 import { writeFileSync, mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+// `import type` : seule la banque de données est chargée (aucune dépendance IndexedDB au runtime).
+import { POSITIONING_BANK } from '../../src/lib/positioning';
 
 /** Collecte erreurs console et violations CSP. */
 function watchErrors(page: Page): string[] {
@@ -12,6 +14,45 @@ function watchErrors(page: Page): string[] {
   });
   page.on('pageerror', (e) => errors.push(e.message));
   return errors;
+}
+
+/** Texte de la bonne réponse, par identifiant de question (indépendant du mélange des options). */
+const CORRECT_TEXT = new Map(
+  POSITIONING_BANK.map((q) => [q.id, q.options.find((o) => o.id === q.correct)?.text ?? '']),
+);
+
+/** Déclare le niveau débutant depuis l'écran de bienvenue (onboardé, sans test). */
+async function onboardDebutant(page: Page) {
+  await page.goto('./');
+  await page.getByRole('button', { name: /Démarrer en débutant/ }).click();
+  await expect(page).toHaveURL(/#\/parcours/);
+}
+
+/**
+ * Passe le test de positionnement en répondant correctement aux `correct` premières
+ * questions (puis faux). 14+ bonnes réponses valident. Renvoie à l'écran de résultat.
+ */
+async function runPositioning(page: Page, correct: number) {
+  await page.goto('./#/positionnement');
+  const fs = page.locator('fieldset.question');
+  await expect(fs).toBeVisible();
+  for (let i = 0; i < 20; i++) {
+    const qid = await fs.getAttribute('data-qid');
+    const good = CORRECT_TEXT.get(qid ?? '') ?? '';
+    const labels = fs.locator('label.radio-option');
+    const n = await labels.count();
+    let chosen = 0;
+    for (let k = 0; k < n; k++) {
+      const t = (await labels.nth(k).innerText()).trim();
+      const isGood = t === good;
+      if ((i < correct && isGood) || (i >= correct && !isGood)) {
+        chosen = k;
+        break;
+      }
+    }
+    await labels.nth(chosen).click();
+    await page.getByRole('button', { name: i < 19 ? 'Suivant' : 'Terminer le test' }).click();
+  }
 }
 
 test('header : menu déroulant Formation (clic, clavier, Échap, page active)', async ({ page }) => {
@@ -68,6 +109,10 @@ async function answerAll(page: Page) {
 test('accueil sous un sous-chemin, sans erreur ni violation CSP', async ({ page }) => {
   const errors = watchErrors(page);
   await page.goto('./');
+  // Première connexion : écran de bienvenue, puis accueil normal une fois onboardé.
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Par où souhaitez-vous commencer');
+  await onboardDebutant(page);
+  await page.goto('./');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('cybersécurité');
   await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveCount(1);
   // Sous 1280 px, la navigation est repliée derrière le bouton Menu.
@@ -120,14 +165,21 @@ test('cours : leçon avant questions, réponses absentes avant validation, progr
   expect(errors).toEqual([]);
 });
 
-test('prérequis : évaluation verrouillée puis déverrouillée par le mode libre', async ({ page }) => {
+test('prérequis : évaluation verrouillée puis déverrouillée par la réussite du positionnement', async ({ page }) => {
   await page.goto('./#/cours/b-ipv4-subnetting');
   await expect(page.locator('#evaluation')).toContainText('Évaluation verrouillée');
   await expect(page.locator('#lecon')).toBeVisible(); // la leçon reste consultable
-  await page.goto('./#/parametres');
-  await page.getByLabel(/Mode libre/).check();
+  // Le mode libre n'a pas de bascule : il s'obtient en réussissant le test de positionnement.
+  await runPositioning(page, 20);
+  await expect(page.getByRole('heading', { name: 'Niveau initié validé' })).toBeVisible();
   await page.goto('./#/cours/b-ipv4-subnetting');
   await expect(page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' })).toBeVisible();
+});
+
+test('réglages : aucune bascule de mode libre dans l’interface', async ({ page }) => {
+  await page.goto('./#/parametres');
+  await expect(page.getByLabel(/Mode libre/)).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Positionnement' })).toBeVisible();
 });
 
 test('laboratoire sous-réseaux : calculateur, validation et historique', async ({ page }) => {
@@ -238,7 +290,9 @@ for (const theme of ['dark', 'light'] as const) {
     await page.addInitScript((t) => {
       localStorage.setItem('cyberacademie.prefs.v1', JSON.stringify({ theme: t, freeMode: true, fontScale: 1, reduceMotion: true }));
     }, theme);
-    for (const route of ['./', './#/catalogue', './#/cours/d-ad-authentification', './#/laboratoires/ad-events-lab', './#/tableau-de-bord', './#/parametres', './#/parcours/analyste-soc']) {
+    // Réussir le positionnement onboarde l'utilisateur et active le mode libre (cours déverrouillés).
+    await runPositioning(page, 20);
+    for (const route of ['./', './#/bienvenue', './#/positionnement', './#/catalogue', './#/cours/d-ad-authentification', './#/laboratoires/ad-events-lab', './#/tableau-de-bord', './#/parametres', './#/parcours/analyste-soc']) {
       await page.goto(route);
       await expect(page.locator('main h1').first()).toBeVisible();
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
@@ -256,6 +310,10 @@ test('mise à jour du service worker : bannière, nouvelle version, progression 
   await page.evaluate(async () => (await navigator.serviceWorker.ready).active?.state);
   await page.reload();
   await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+  // L'accueil (panneau Objectifs) n'est accessible qu'une fois le niveau de départ choisi.
+  await page.getByRole('button', { name: /Démarrer en débutant/ }).click();
+  await expect(page).toHaveURL(/#\/parcours/);
+  await page.goto(BASE);
   // Donnée locale à préserver
   await page.getByLabel('Nouvel objectif').fill('Objectif avant mise à jour');
   await page.getByRole('button', { name: 'Ajouter' }).click();
@@ -388,4 +446,44 @@ test('déverrouillage par validation du prérequis (sauvegarde importée)', asyn
   await expect(page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' })).toBeVisible();
   await page.goto('./#/catalogue?module=B');
   await expect(page.locator('#map-B')).toContainText(/1\/\d+ cours validés/);
+});
+
+test('onboarding : première connexion propose deux choix', async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto('./');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Par où souhaitez-vous commencer');
+  await expect(page.getByRole('button', { name: /Démarrer en débutant/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Passer le test de positionnement/ })).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('onboarding débutant : niveau déclaré, non validé, mode libre désactivé', async ({ page }) => {
+  await onboardDebutant(page);
+  await page.goto('./#/profil');
+  const pos = page.getByRole('region', { name: 'Positionnement' });
+  await expect(pos).toContainText('Niveau déclaré : Débutant');
+  await expect(pos).toContainText('Non validé par le test');
+  await expect(pos).toContainText('Mode libre : désactivé');
+  // Un cours à prérequis reste verrouillé (mode libre inactif).
+  await page.goto('./#/cours/b-ipv4-subnetting');
+  await expect(page.locator('#evaluation')).toContainText('Évaluation verrouillée');
+});
+
+test('positionnement réussi : validation, mode libre, statut dans Compétences', async ({ page }) => {
+  await runPositioning(page, 20);
+  await expect(page.getByRole('heading', { name: 'Niveau initié validé' })).toBeVisible();
+  await expect(page.getByText(/20\/20/)).toBeVisible();
+  await page.goto('./#/competences');
+  const pos = page.getByRole('region', { name: 'Positionnement' });
+  await expect(pos).toContainText('Initié — test réussi');
+  await expect(pos).toContainText('Mode libre : activé');
+});
+
+test('positionnement échoué : non validé, pas de mode libre', async ({ page }) => {
+  await runPositioning(page, 10);
+  await expect(page.getByRole('heading', { name: 'Positionnement non validé' })).toBeVisible();
+  await page.goto('./#/profil');
+  const pos = page.getByRole('region', { name: 'Positionnement' });
+  await expect(pos).toContainText('Non validé par le test');
+  await expect(pos).toContainText('Mode libre : désactivé');
 });

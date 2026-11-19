@@ -1,4 +1,4 @@
-import { getAll, req, withTx, type StoreName } from './db';
+import { get, getAll, req, withTx, type StoreName } from './db';
 import { PASS_THRESHOLD, type QuizScore } from './quiz';
 
 export interface CourseProgress {
@@ -79,12 +79,42 @@ export interface ReviewItem {
   updatedAt: number;
 }
 
+/** Niveau choisi par l'utilisateur à l'onboarding (déclaré, pas démontré). */
+export type DeclaredLevel = 'debutant' | 'initie';
+
+/** Résultat d'un passage du test de positionnement. */
+export interface PositioningResult {
+  date: number;
+  correct: number;
+  total: number;
+  percent: number;
+  validated: boolean;
+  /** Questions tirées, pour déprioriser leur réapparition à la tentative suivante. */
+  questionIds: string[];
+}
+
+/** État pédagogique initial : niveau déclaré vs positionnement validé. Stocké dans le store `profile`. */
+export interface Onboarding {
+  declaredLevel: DeclaredLevel;
+  onboardedAt: number;
+  /** Nombre de tentatives du test de positionnement. */
+  attempts: number;
+  /** Positionnement validé (test réussi). Distinct du niveau déclaré. */
+  validated: boolean;
+  /** Mode libre effectif : activé uniquement par la réussite du test. */
+  freeMode: boolean;
+  lastResult?: PositioningResult;
+  history: PositioningResult[];
+}
+
 export interface Profile {
   key: 'profile';
   /** Pseudonyme facultatif, jamais transmis. */
   pseudonym: string;
   followedPaths: string[];
   createdAt: number;
+  /** Présent dès que l'utilisateur a choisi son niveau initial (onboarding effectué). */
+  onboarding?: Onboarding;
 }
 
 export interface MetaRecord {
@@ -397,6 +427,63 @@ export async function saveProfile(patch: Partial<Pick<Profile, 'pseudonym' | 'fo
     s.put(next);
   });
   notify();
+}
+
+/* ---------- Onboarding et positionnement ---------- */
+
+const ONBOARDING_HISTORY_CAP = 10;
+
+async function readProfileRecord(tx: IDBTransaction): Promise<Profile> {
+  const cur = (await req(store(tx, 'profile').get('profile'))) as Profile | undefined;
+  return cur ?? { key: 'profile' as const, pseudonym: '', followedPaths: [], createdAt: Date.now() };
+}
+
+export async function loadOnboarding(): Promise<Onboarding | undefined> {
+  const p = await get<Profile>('profile', 'profile');
+  return p?.onboarding;
+}
+
+/** Enregistre le niveau initial choisi à l'onboarding (ne valide pas le positionnement). */
+export async function setDeclaredLevel(level: DeclaredLevel): Promise<Onboarding> {
+  let out!: Onboarding;
+  await withTx(['profile'], async (tx) => {
+    const cur = await readProfileRecord(tx);
+    out = cur.onboarding
+      ? { ...cur.onboarding, declaredLevel: level }
+      : { declaredLevel: level, onboardedAt: Date.now(), attempts: 0, validated: false, freeMode: false, history: [] };
+    store(tx, 'profile').put({ ...cur, onboarding: out });
+  });
+  notify();
+  return out;
+}
+
+/**
+ * Enregistre un passage du test de positionnement et met à jour le statut.
+ * Le mode libre et la validation ne s'activent qu'à la réussite et ne sont pas
+ * révoqués par un passage ultérieur moins bon.
+ */
+export async function recordPositioning(result: PositioningResult): Promise<Onboarding> {
+  let out!: Onboarding;
+  await withTx(['profile'], async (tx) => {
+    const cur = await readProfileRecord(tx);
+    const prev: Onboarding = cur.onboarding ?? {
+      declaredLevel: 'initie', onboardedAt: Date.now(), attempts: 0, validated: false, freeMode: false, history: [],
+    };
+    // La validation est recalculée ici (règle métier : 14/20 sur 20 questions),
+    // jamais prise sur parole de l'appelant. Elle n'est jamais révoquée par un passage ultérieur.
+    const passed = result.total === 20 && result.correct >= 14;
+    out = {
+      ...prev,
+      attempts: prev.attempts + 1,
+      validated: prev.validated || passed,
+      freeMode: prev.freeMode || passed,
+      lastResult: result,
+      history: [...prev.history, result].slice(-ONBOARDING_HISTORY_CAP),
+    };
+    store(tx, 'profile').put({ ...cur, onboarding: out });
+  });
+  notify();
+  return out;
 }
 
 /* ---------- Objectifs ---------- */

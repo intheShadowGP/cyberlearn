@@ -11,7 +11,7 @@ import { drawQuestions, PASS_THRESHOLD, type QuizScore } from '../lib/quiz';
 import { addTime, markPractice, markSection, recordCourseAttempt, touchCourse } from '../lib/progress';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
-import { isUnlocked, missingPrerequisites, progressMap } from '../lib/unlock';
+import { effectiveFreeMode, isUnlocked, missingPrerequisites, progressMap } from '../lib/unlock';
 import { usePageTitle } from '../lib/usePageTitle';
 import { VERIFICATION } from '../content/verification';
 import { SCENARIOS } from '../content/scenarios';
@@ -73,7 +73,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
   const prefs = usePrefs();
   const progress = useMemo(() => progressMap(snap.data.progress), [snap.data.progress]);
   const p = progress.get(meta.id);
-  const unlocked = isUnlocked(meta, progress, prefs.freeMode);
+  const unlocked = isUnlocked(meta, progress, effectiveFreeMode(snap.data.profile[0]?.onboarding, prefs.freeMode));
   const missing = missingPrerequisites(meta, progress);
   const module = MODULE_BY_ID[meta.module];
 

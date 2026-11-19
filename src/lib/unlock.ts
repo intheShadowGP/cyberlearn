@@ -1,6 +1,16 @@
 import type { CourseMeta } from '../content/types';
 import { COURSE_BY_ID } from '../content/registry';
-import type { CourseProgress } from './progress';
+import type { CourseProgress, Onboarding } from './progress';
+
+/**
+ * Mode libre effectif. Dès que l'onboarding est initialisé, il fait autorité : le mode
+ * libre n'est accordé que par la réussite du test de positionnement, pas par une préférence.
+ * Avant l'onboarding (utilisateurs légataires), on conserve l'ancienne préférence locale
+ * le temps de la transition, pour ne révoquer personne prématurément.
+ */
+export function effectiveFreeMode(onboarding: Onboarding | undefined, prefsFreeMode: boolean): boolean {
+  return onboarding ? onboarding.freeMode : prefsFreeMode;
+}
 
 export function isValidated(id: string, progress: ReadonlyMap<string, CourseProgress>): boolean {
   return progress.get(id)?.status === 'validated';

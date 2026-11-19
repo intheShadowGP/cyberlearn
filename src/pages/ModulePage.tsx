@@ -6,7 +6,7 @@ import { LEVEL_LABELS, type Level, type ModuleId } from '../content/types';
 import { CourseCard } from '../components/CourseCard';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
-import { isUnlocked, progressMap } from '../lib/unlock';
+import { effectiveFreeMode, isUnlocked, progressMap } from '../lib/unlock';
 import { moduleLevel, skillStatuses } from '../lib/levels';
 import { usePageTitle } from '../lib/usePageTitle';
 import NotFoundPage from './NotFoundPage';
@@ -17,6 +17,7 @@ export default function ModulePage() {
   usePageTitle(m ? m.title : 'Discipline introuvable');
   const { data } = useSnapshot();
   const prefs = usePrefs();
+  const freeMode = effectiveFreeMode(data.profile[0]?.onboarding, prefs.freeMode);
   const progress = useMemo(() => progressMap(data.progress), [data.progress]);
   if (!m) return <NotFoundPage what="Cette discipline" />;
 
@@ -58,7 +59,7 @@ export default function ModulePage() {
             <ul className="card-grid">
               {list.map((c) => (
                 <li key={c.id}>
-                  <CourseCard course={c} progress={progress.get(c.id)} locked={!isUnlocked(c, progress, prefs.freeMode)} />
+                  <CourseCard course={c} progress={progress.get(c.id)} locked={!isUnlocked(c, progress, freeMode)} />
                 </li>
               ))}
             </ul>

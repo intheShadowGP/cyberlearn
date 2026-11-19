@@ -2,7 +2,7 @@ import { replaceAll } from './db';
 import {
   loadSnapshot, notify, sanitizePseudonym,
   type Activity, type Attempt, type CourseProgress, type Goal, type LabProgress, type MetaRecord,
-  type Profile, type ReviewItem, type SkillRecord, type Snapshot,
+  type Onboarding, type PositioningResult, type Profile, type ReviewItem, type SkillRecord, type Snapshot,
 } from './progress';
 
 /**
@@ -177,15 +177,46 @@ function vMeta(v: unknown): MetaRecord | null {
   return { key, value: num(value, 'dailyGoalMin', 0, 1440) };
 }
 
+function vPositioning(v: unknown): PositioningResult {
+  if (!isObj(v)) throw new ImportError('résultat de positionnement invalide');
+  return {
+    date: num(v.date, 'date'),
+    correct: num(v.correct, 'correct', 0, 100),
+    total: num(v.total, 'total', 0, 100),
+    percent: num(v.percent, 'percent', ...PCT),
+    validated: bool(v.validated, 'validated'),
+    questionIds: arr(v.questionIds, 'questionIds', 100).map((x) => id(x, 'questionIds')),
+  };
+}
+
+function vOnboarding(v: unknown): Onboarding {
+  if (!isObj(v)) throw new ImportError('onboarding invalide');
+  const validated = bool(v.validated, 'validated');
+  const ob: Onboarding = {
+    declaredLevel: oneOf(v.declaredLevel, 'declaredLevel', ['debutant', 'initie'] as const),
+    onboardedAt: num(v.onboardedAt, 'onboardedAt'),
+    attempts: num(v.attempts, 'attempts', 0, 100_000),
+    validated,
+    // Règle métier préservée même pour un fichier falsifié : le mode libre n'existe qu'avec une validation.
+    freeMode: validated && bool(v.freeMode, 'freeMode'),
+    history: arr(v.history, 'history', 100).map(vPositioning),
+  };
+  if (v.lastResult !== undefined) ob.lastResult = vPositioning(v.lastResult);
+  return ob;
+}
+
 function vProfile(v: unknown): Profile {
   if (!isObj(v)) throw new ImportError('profil invalide');
   if (v.key !== 'profile') throw new ImportError('profil invalide');
-  return {
+  const p: Profile = {
     key: 'profile',
     pseudonym: sanitizePseudonym(str(v.pseudonym, 'pseudonym', 200)),
     followedPaths: arr(v.followedPaths, 'followedPaths', 50).map((x) => id(x, 'followedPaths')),
     createdAt: num(v.createdAt, 'createdAt'),
   };
+  // Rétrocompatible : une sauvegarde sans `onboarding` (format 2 ancien) s'importe telle quelle.
+  if (v.onboarding !== undefined) p.onboarding = vOnboarding(v.onboarding);
+  return p;
 }
 
 const ACTIVITY_TYPES = ['section', 'practice', 'course-attempt', 'lab-attempt', 'exam-attempt', 'review'] as const;
