@@ -135,6 +135,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <nav aria-label="Liens secondaires">
             <Link to="/documentation">Documentation</Link> · <Link to="/confidentialite">Confidentialité</Link> · <Link to="/a-propos">À propos et éthique</Link> · <Link to="/parametres">Données et paramètres</Link>
           </nav>
+          <p className="muted" data-testid="app-version">CyberAcadémie V{__APP_VERSION__}</p>
           <p className="muted" data-testid="build-id">Version {__BUILD_ID__}</p>
         </div>
       </footer>

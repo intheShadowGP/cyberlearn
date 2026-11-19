@@ -487,3 +487,9 @@ test('positionnement échoué : non validé, pas de mode libre', async ({ page }
   await expect(pos).toContainText('Non validé par le test');
   await expect(pos).toContainText('Mode libre : désactivé');
 });
+
+test('version de publication V1.4.3 affichée (pied de page et À propos)', async ({ page }) => {
+  await page.goto('./#/a-propos');
+  await expect(page.getByTestId('app-version')).toHaveText('CyberAcadémie V1.4.3');
+  await expect(page.getByText('version V1.4.3')).toBeVisible();
+});

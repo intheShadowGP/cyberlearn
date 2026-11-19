@@ -1,6 +1,6 @@
-# Phase 4 — Rapport final
+# Phase 4 — Rapport final (V1.4.3)
 
-Branche de travail : `phase-4` (aucune publication en production sans validation humaine). **L’état réel du dépôt fait foi.**
+Version de publication : **V1.4.3** (source unique : `version` de `package.json`, injectée au build ; affichée dans le pied de page, la page « À propos » et le README). Branche de travail : `phase-4`, fusionnée dans `main` sur demande explicite. **L’état réel du dépôt fait foi.**
 
 Base de départ : `main` à la fin de la phase 3 (clonée dans `F:\claude\cyberlearn`), vérifiée verte avant de commencer (typecheck, tests unitaires, build).
 

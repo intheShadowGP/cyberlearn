@@ -1,7 +1,7 @@
 {
   "name": "cyberacademie",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.4.3",
   "type": "module",
   "description": "Plateforme d'apprentissage de la cybersécurité — statique, hors ligne, sans compte.",
   "scripts": {

@@ -88,6 +88,10 @@ export default defineConfig({
   plugins: [react(), securityHeadersPlugin(), serviceWorkerPlugin()],
   define: {
     __BUILD_ID__: JSON.stringify(process.env.BUILD_ID ?? new Date().toISOString().slice(0, 10)),
+    // Version de publication : source unique = « version » de package.json.
+    __APP_VERSION__: JSON.stringify(
+      (JSON.parse(readFileSync('package.json', 'utf8')) as { version: string }).version,
+    ),
   },
   build: {
     target: 'es2022',
