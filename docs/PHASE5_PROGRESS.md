@@ -30,12 +30,13 @@ Guide de contribution : [I18N.md](I18N.md).
 
 ### Socle restant
 
-- [ ] Laboratoires : `meta.en.ts`, `body.en.ts`, `corrections.en.ts` et textes de `Lab.tsx` (18 laboratoires)
-- [ ] Épreuves de démarche : `meta.en.ts`, `body.en.ts`, `corrections.en.ts` (3 épreuves)
-- [ ] Schémas (diagrammes SVG) : libellés en anglais
-- [ ] Fiches de vérification en anglais (`verification.en.ts`)
-- [ ] `index.html` : description et message `noscript` bilingues
-- [ ] Tests e2e : bascule, persistance, balayage de toutes les pages en anglais (aucune fuite de français), axe FR + EN
+- [x] Laboratoires : 18/18 traduits (, , , textes et moteurs des ) ; test de parité
+- [x] Épreuves de démarche : 3/3 traduites ; test de parité
+- [x] Schémas (28 diagrammes SVG) : libellés en anglais () ; test de fuite de français
+- [x] Fiches de vérification en anglais (45/45) ; test de parité (toute nouvelle fiche doit avoir sa version anglaise)
+- [x]  : description (mise à jour dynamique) et message  bilingues
+- [x] Tests e2e anglais : bascule, persistance, positionnement, cours traduit, labo, épreuve, axe WCAG 2.2 AA (deux thèmes)
+- [ ] Balayage e2e de toutes les routes en anglais sans fuite de français (écrit, activé par )
 - [ ] Qualité de la banque de positionnement (40 questions) : longueurs des options
 - [ ] Documentation utilisateur (README, docs) mise à jour
 
