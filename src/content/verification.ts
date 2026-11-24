@@ -1,3 +1,5 @@
+import type { Lang } from '../lib/prefs';
+import { VERIFICATION_EN } from './verification.en';
 /**
  * Fiche de vérification de chaque cours (section 11 du cahier des charges).
  * Le libellé décrit exactement ce qui a été fait : la rédaction et la vérification
@@ -65,3 +67,11 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'q-ia-defense-ml': sheet(['MITRE ATLAS', 'NIST AI RMF 1.0', 'NIST AI 100-2', 'Recommandations ANSSI IA générative', 'Règlement (UE) 2024/1689 (AI Act)'], ['Taxonomie des attaques contre l’IA (NIST AI 100-2)', 'Calendrier d’application de l’AI Act']),
   'r-certifications-preparation': sheet(['Sites officiels ISC2 (exigence CISSP de 5 ans vérifiée le ' + D + '), CompTIA, OffSec'], ['Contenu et modalités des examens de certification']),
 };
+
+/** Fiche dans la langue demandée : les textes anglais remplacent les français quand ils existent. */
+export function getVerification(id: string, lang: Lang): VerificationSheet | undefined {
+  const base = VERIFICATION[id];
+  if (!base || lang === 'fr') return base;
+  const en = VERIFICATION_EN[id];
+  return en ? { ...base, versions: en.versions, evolving: en.evolving } : base;
+}

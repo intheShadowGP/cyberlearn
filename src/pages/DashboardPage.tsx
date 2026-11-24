@@ -1,27 +1,30 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { MODULES } from '../content/catalog';
-import { COURSE_BY_ID, COURSES, LABS, coursesOfModule } from '../content/registry';
-import { LEVEL_LABELS } from '../content/types';
+import { getModules } from '../content/catalog';
+import { COURSES, getCourse, getCourses, getLabs, LABS, coursesOfModule } from '../content/registry';
 import { ProgressBar } from '../components/Badges';
 import { DisciplineIcon } from '../components/DisciplineIcon';
 import { GoalsPanel } from '../components/GoalsPanel';
 import { moduleLevel, skillStatuses, weakSkills } from '../lib/levels';
 import { useSnapshot } from '../lib/useSnapshot';
-import { EXAM_BY_ID } from '../content/exams';
-import { SCENARIO_BY_ID } from '../content/scenarios';
+import { getExam } from '../content/exams';
+import { getScenario } from '../content/scenarios';
 import { usePageTitle } from '../lib/usePageTitle';
+import { useI18n, type I18n, type MsgKey } from '../i18n';
 
-function fmtDuration(sec: number): string {
+function fmtDuration(sec: number, t: I18n['t']): string {
   const h = Math.floor(sec / 3600);
   const m = Math.round((sec % 3600) / 60);
-  return h ? `${h} h ${String(m).padStart(2, '0')}` : `${m} min`;
+  return h ? t('dash.duration.h', { h, m: String(m).padStart(2, '0') }) : t('dash.duration.min', { m });
 }
 
 export default function DashboardPage() {
-  usePageTitle('Tableau de bord');
+  const { t, lang, date } = useI18n();
+  usePageTitle(t('dash.title'));
   const { data, ready, error } = useSnapshot();
-  const statuses = useMemo(() => skillStatuses(COURSES, data.skills), [data.skills]);
+  const courses = getCourses(lang);
+  const modules = getModules(lang);
+  const statuses = useMemo(() => skillStatuses(courses, data.skills), [courses, data.skills]);
   const acquired = statuses.filter((s) => s.state === 'acquired');
   const weak = weakSkills(statuses, 8);
   const validated = data.progress.filter((p) => p.status === 'validated');
@@ -30,31 +33,32 @@ export default function DashboardPage() {
   const remainingEstimate = COURSES.filter((c) => !validated.some((v) => v.courseId === c.id)).reduce((n, c) => n + c.durationMin, 0);
   const recent = [...data.attempts].sort((a, b) => b.date - a.date).slice(0, 12);
   const labsDone = data.labProgress.filter((l) => l.status === 'completed').length;
+  const title = (id: string) => getCourse(id, lang)?.title ?? id;
 
-  if (!ready) return <p role="status">Chargement…</p>;
+  if (!ready) return <p role="status">{t('dash.loading')}</p>;
 
   return (
     <div>
-      <h1>Tableau de bord</h1>
-      {error && <p className="error" role="alert">Stockage local indisponible : {error}. La progression ne pourra pas être enregistrée.</p>}
+      <h1>{t('dash.title')}</h1>
+      {error && <p className="error" role="alert">{t('dash.storageError', { error })}</p>}
 
-      <ul className="kpis" aria-label="Indicateurs">
-        <li className="kpi"><span className="kpi-value">{validated.length}/{COURSES.length}</span><span className="kpi-label">cours validés</span></li>
-        <li className="kpi"><span className="kpi-value">{started.length}</span><span className="kpi-label">cours en cours</span></li>
-        <li className="kpi"><span className="kpi-value">{labsDone}/{LABS.length}</span><span className="kpi-label">laboratoires réussis</span></li>
-        <li className="kpi"><span className="kpi-value">{acquired.length}/{statuses.length}</span><span className="kpi-label">compétences acquises</span></li>
-        <li className="kpi"><span className="kpi-value">{fmtDuration(timeSpent)}</span><span className="kpi-label">temps d’étude mesuré</span></li>
-        <li className="kpi"><span className="kpi-value">≈ {fmtDuration(remainingEstimate * 60)}</span><span className="kpi-label">estimé pour le reste</span></li>
+      <ul className="kpis" aria-label={t('dash.kpis.aria')}>
+        <li className="kpi"><span className="kpi-value">{validated.length}/{COURSES.length}</span><span className="kpi-label">{t('dash.kpi.courses')}</span></li>
+        <li className="kpi"><span className="kpi-value">{started.length}</span><span className="kpi-label">{t('dash.kpi.started')}</span></li>
+        <li className="kpi"><span className="kpi-value">{labsDone}/{LABS.length}</span><span className="kpi-label">{t('dash.kpi.labs')}</span></li>
+        <li className="kpi"><span className="kpi-value">{acquired.length}/{statuses.length}</span><span className="kpi-label">{t('dash.kpi.skills')}</span></li>
+        <li className="kpi"><span className="kpi-value">{fmtDuration(timeSpent, t)}</span><span className="kpi-label">{t('dash.kpi.time')}</span></li>
+        <li className="kpi"><span className="kpi-value">≈ {fmtDuration(remainingEstimate * 60, t)}</span><span className="kpi-label">{t('dash.kpi.remaining')}</span></li>
       </ul>
 
       <section aria-labelledby="disc-h">
-        <h2 id="disc-h">Progression par discipline</h2>
+        <h2 id="disc-h">{t('dash.byDiscipline')}</h2>
         <ul className="discipline-grid">
-          {MODULES.map((m) => {
+          {modules.map((m) => {
             const cs = coursesOfModule(m.id);
             if (!cs.length) return null;
             const v = cs.filter((c) => validated.some((p) => p.courseId === c.id)).length;
-            const st = statuses.filter((s) => COURSE_BY_ID.get(s.courseId)?.module === m.id);
+            const st = statuses.filter((s) => cs.some((c) => c.id === s.courseId));
             const acq = st.filter((s) => s.state === 'acquired').length;
             const lvl = moduleLevel(m.id, COURSES, data.skills);
             return (
@@ -64,10 +68,10 @@ export default function DashboardPage() {
                   <Link to={`/module/${m.id}`} className="discipline-card-title">{m.id}. {m.title}</Link>
                 </p>
                 <p className="discipline-card-desc muted">{m.description}</p>
-                <p className="discipline-card-count">{v}/{cs.length} cours validés</p>
-                <ProgressBar value={v} max={cs.length} label={`Cours validés en ${m.title}`} />
+                <p className="discipline-card-count">{t('dash.coursesValidated', { v, n: cs.length })}</p>
+                <ProgressBar value={v} max={cs.length} label={t('dash.validatedIn', { title: m.title })} />
                 <p className="discipline-card-meta muted">
-                  {acq}/{st.length} compétences · {lvl === 0 ? 'Niveau —' : `Niveau ${lvl} · ${LEVEL_LABELS[lvl]}`}
+                  {t('dash.skillsLevel', { acq, n: st.length, level: lvl === 0 ? t('dash.levelNone') : t('dash.levelN', { n: lvl, name: t(`level.${lvl}` as MsgKey) }) })}
                 </p>
               </li>
             );
@@ -77,9 +81,9 @@ export default function DashboardPage() {
 
       <div className="grid-2">
         <section className="panel" aria-labelledby="acq-h">
-          <h2 id="acq-h">Compétences acquises</h2>
+          <h2 id="acq-h">{t('dash.acquired')}</h2>
           {acquired.length === 0 ? (
-            <p className="muted">Une compétence est acquise après au moins 3 questions réussies à 80 % ou plus.</p>
+            <p className="muted">{t('dash.acquired.none')}</p>
           ) : (
             <ul>
               {acquired.map((s) => (
@@ -91,15 +95,15 @@ export default function DashboardPage() {
           )}
         </section>
         <section className="panel" aria-labelledby="weak-h">
-          <h2 id="weak-h">Points faibles</h2>
+          <h2 id="weak-h">{t('dash.weak')}</h2>
           {weak.length === 0 ? (
-            <p className="muted">Aucun point faible détecté pour l’instant.</p>
+            <p className="muted">{t('dash.weak.none')}</p>
           ) : (
             <ul>
               {weak.map((s) => (
                 <li key={s.skill.id}>
                   {s.skill.label} — {Math.round((s.mastery ?? 0) * 100)} % ·{' '}
-                  <Link to={`/cours/${s.courseId}`}>revoir « {COURSE_BY_ID.get(s.courseId)?.title} »</Link>
+                  <Link to={`/cours/${s.courseId}`}>{t('dash.weak.review', { title: title(s.courseId) })}</Link>
                 </li>
               ))}
             </ul>
@@ -109,27 +113,31 @@ export default function DashboardPage() {
 
       <div className="grid-2">
         <section className="panel" aria-labelledby="cur-h">
-          <h2 id="cur-h">Cours</h2>
-          <h3 className="h4">En cours</h3>
+          <h2 id="cur-h">{t('dash.courses')}</h2>
+          <h3 className="h4">{t('dash.inProgress')}</h3>
           {started.length ? (
-            <ul>{started.map((p) => <li key={p.courseId}><Link to={`/cours/${p.courseId}`}>{COURSE_BY_ID.get(p.courseId)?.title ?? p.courseId}</Link>{p.bestPercent != null && <span className="muted"> — meilleur score {p.bestPercent} %</span>}</li>)}</ul>
-          ) : <p className="muted">Aucun.</p>}
-          <h3 className="h4">Terminés</h3>
+            <ul>{started.map((p) => <li key={p.courseId}><Link to={`/cours/${p.courseId}`}>{title(p.courseId)}</Link>{p.bestPercent != null && <span className="muted">{t('dash.bestScore', { n: p.bestPercent })}</span>}</li>)}</ul>
+          ) : <p className="muted">{t('dash.none')}</p>}
+          <h3 className="h4">{t('dash.done')}</h3>
           {validated.length ? (
-            <ul>{validated.map((p) => <li key={p.courseId}><Link to={`/cours/${p.courseId}`}>{COURSE_BY_ID.get(p.courseId)?.title ?? p.courseId}</Link> <span className="muted">— {p.bestPercent} %</span></li>)}</ul>
-          ) : <p className="muted">Aucun.</p>}
+            <ul>{validated.map((p) => <li key={p.courseId}><Link to={`/cours/${p.courseId}`}>{title(p.courseId)}</Link> <span className="muted">— {p.bestPercent} %</span></li>)}</ul>
+          ) : <p className="muted">{t('dash.none')}</p>}
         </section>
         <section className="panel" aria-labelledby="sc-h">
-          <h2 id="sc-h">Derniers scores</h2>
+          <h2 id="sc-h">{t('dash.lastScores')}</h2>
           {recent.length === 0 ? (
-            <p className="muted">Aucune évaluation réalisée.</p>
+            <p className="muted">{t('dash.noAssessment')}</p>
           ) : (
             <ul className="score-list">
               {recent.map((a) => (
                 <li key={a.id}>
                   <span className={`badge ${a.percent >= 70 ? 'badge-ok' : 'badge-warn'}`}>{a.percent} %</span>{' '}
-                  {a.kind === 'course' ? COURSE_BY_ID.get(a.refId)?.title : a.kind === 'lab' ? `Labo : ${LABS.find((l) => l.id === a.refId)?.title ?? a.refId}` : `Évaluation : ${EXAM_BY_ID.get(a.refId)?.title ?? SCENARIO_BY_ID.get(a.refId)?.title ?? a.refId}`}
-                  <span className="muted"> — {new Date(a.date).toLocaleDateString('fr-FR')}</span>
+                  {a.kind === 'course'
+                    ? title(a.refId)
+                    : a.kind === 'lab'
+                      ? t('dash.lab', { title: getLabs(lang).find((l) => l.id === a.refId)?.title ?? a.refId })
+                      : t('dash.exam', { title: getExam(a.refId, lang)?.title ?? getScenario(a.refId, lang)?.title ?? a.refId })}
+                  <span className="muted"> — {date(a.date)}</span>
                 </li>
               ))}
             </ul>

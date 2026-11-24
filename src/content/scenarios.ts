@@ -1,4 +1,5 @@
-import type { Block, Level, ModuleId, Question, Correction } from './types';
+import type { Lang } from '../lib/prefs';
+import type { ActivityMetaText, Block, Level, ModuleId, Question, Correction } from './types';
 
 /**
  * Épreuves de démarche (scénarios).
@@ -46,8 +47,11 @@ export interface ScenarioCorrections {
 }
 
 const metaModules = import.meta.glob<{ meta: ScenarioMeta }>('./scenarios/*/meta.ts', { eager: true });
+const metaTextModules = import.meta.glob<{ metaText: ActivityMetaText }>('./scenarios/*/meta.en.ts', { eager: true });
 const bodyLoaders = import.meta.glob<{ body: ScenarioBody }>('./scenarios/*/body.ts');
+const bodyLoadersEn = import.meta.glob<{ body: ScenarioBody }>('./scenarios/*/body.en.ts');
 const correctionLoaders = import.meta.glob<{ corrections: ScenarioCorrections }>('./scenarios/*/corrections.ts');
+const correctionLoadersEn = import.meta.glob<{ corrections: ScenarioCorrections }>('./scenarios/*/corrections.en.ts');
 
 export const SCENARIOS: ScenarioMeta[] = Object.values(metaModules)
   .map((m) => m.meta)
@@ -63,15 +67,31 @@ function findLoader<T>(loaders: Record<string, () => Promise<T>>, id: string, fi
   return loaders[`./scenarios/${id}/${file}`];
 }
 
-export async function loadScenarioBody(id: string): Promise<ScenarioBody | null> {
-  const l = findLoader(bodyLoaders, id, 'body.ts');
+export async function loadScenarioBody(id: string, lang: Lang = 'fr'): Promise<ScenarioBody | null> {
+  const l = lang === 'en' ? findLoader(bodyLoadersEn, id, 'body.en.ts') : findLoader(bodyLoaders, id, 'body.ts');
   return l ? (await l()).body : null;
 }
 
-export async function loadScenarioCorrections(id: string): Promise<ScenarioCorrections | null> {
-  const l = findLoader(correctionLoaders, id, 'corrections.ts');
+export async function loadScenarioCorrections(id: string, lang: Lang = 'fr'): Promise<ScenarioCorrections | null> {
+  const l = lang === 'en' ? findLoader(correctionLoadersEn, id, 'corrections.en.ts') : findLoader(correctionLoaders, id, 'corrections.ts');
   return l ? (await l()).corrections : null;
 }
 
+const textEn = new Map<string, ActivityMetaText>(Object.entries(metaTextModules).map(([p, m]) => [p.split('/').at(-2) ?? '', m.metaText]));
+const localizedScenarios: Partial<Record<Lang, ScenarioMeta[]>> = {};
+
+/** Épreuves dans la langue demandée (même ordre que SCENARIOS). */
+export function getScenarios(lang: Lang): ScenarioMeta[] {
+  if (lang === 'fr') return SCENARIOS;
+  return (localizedScenarios[lang] ??= SCENARIOS.map((s) => {
+    const tx = textEn.get(s.id);
+    return tx ? { ...s, title: tx.title, context: tx.context, objective: tx.objective, steps: tx.steps } : s;
+  }));
+}
+
+export function getScenario(id: string, lang: Lang): ScenarioMeta | undefined {
+  return getScenarios(lang).find((s) => s.id === id);
+}
+
 /** Utilisé par le validateur de contenu. */
-export const __internalScenarios = { metaModules, bodyLoaders, correctionLoaders };
+export const __internalScenarios = { metaModules, bodyLoaders, correctionLoaders, metaTextModules, bodyLoadersEn, correctionLoadersEn };

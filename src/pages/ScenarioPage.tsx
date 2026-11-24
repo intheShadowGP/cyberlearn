@@ -13,7 +13,7 @@ import NotFoundPage from './NotFoundPage';
 export default function ScenarioPage() {
   const { id = '' } = useParams();
   const meta = SCENARIO_BY_ID.get(id);
-  if (!meta) return <NotFoundPage what="Cette épreuve" />;
+  if (!meta) return <NotFoundPage what="scenario" />;
   return <ScenarioView key={meta.id} meta={meta} />;
 }
 

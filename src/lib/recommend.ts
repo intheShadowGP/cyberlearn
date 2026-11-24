@@ -1,4 +1,5 @@
-import { COURSE_BY_ID, COURSES } from '../content/registry';
+import { getCourse, getCourses } from '../content/registry';
+import { getLang, t } from '../i18n';
 import type { CourseMeta } from '../content/types';
 import { skillStatuses, weakSkills } from './levels';
 import type { Snapshot } from './progress';
@@ -11,6 +12,8 @@ export interface Recommendation {
 
 /** Recommandations pédagogiques déterministes, calculées localement. */
 export function recommendations(snap: Snapshot, freeMode: boolean, limit = 3): Recommendation[] {
+  const lang = getLang();
+  const courses = getCourses(lang);
   const progress = progressMap(snap.progress);
   const out: Recommendation[] = [];
   const seen = new Set<string>();
@@ -21,23 +24,23 @@ export function recommendations(snap: Snapshot, freeMode: boolean, limit = 3): R
   };
 
   // 1. Compétences fragiles → revoir le cours concerné.
-  for (const w of weakSkills(skillStatuses(COURSES, snap.skills), 2)) {
-    push(COURSE_BY_ID.get(w.courseId), `Compétence à consolider : ${w.skill.label} (${Math.round((w.mastery ?? 0) * 100)} %).`);
+  for (const w of weakSkills(skillStatuses(courses, snap.skills), 2)) {
+    push(getCourse(w.courseId, lang), t('reco.weak', { skill: w.skill.label, pct: Math.round((w.mastery ?? 0) * 100) }));
   }
   // 2. Cours commencés non validés.
   for (const p of [...snap.progress].sort((a, b) => b.lastVisit - a.lastVisit)) {
-    if (p.status !== 'validated') push(COURSE_BY_ID.get(p.courseId), 'Cours commencé : terminez-le pour le valider.');
+    if (p.status !== 'validated') push(getCourse(p.courseId, lang), t('reco.started'));
   }
   // 3. Cours débloqués non commencés, du plus accessible au plus avancé.
-  const candidates = COURSES.filter((c) => !progress.has(c.id) && isUnlocked(c, progress, freeMode)).sort(
+  const candidates = courses.filter((c) => !progress.has(c.id) && isUnlocked(c, progress, freeMode)).sort(
     (a, b) => a.level - b.level || a.prerequisites.length - b.prerequisites.length,
   );
   for (const c of candidates) {
     const reason = c.prerequisites.length
-      ? 'Ses prérequis sont validés : c’est la suite logique de votre progression.'
+      ? t('reco.next')
       : c.level === 1
-        ? 'Cours d’entrée accessible sans prérequis.'
-        : 'Cours accessible directement.';
+        ? t('reco.entry')
+        : t('reco.open');
     push(c, reason);
   }
   return out;

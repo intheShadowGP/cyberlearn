@@ -14,7 +14,7 @@ import NotFoundPage from './NotFoundPage';
 export default function LabPage() {
   const { id = '' } = useParams();
   const meta = LAB_BY_ID.get(id);
-  if (!meta) return <NotFoundPage what="Ce laboratoire" />;
+  if (!meta) return <NotFoundPage what="lab" />;
   return <LabView key={meta.id} meta={meta} />;
 }
 

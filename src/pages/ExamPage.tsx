@@ -12,7 +12,7 @@ import NotFoundPage from './NotFoundPage';
 export default function ExamPage() {
   const { id = '' } = useParams();
   const exam = EXAM_BY_ID.get(id);
-  if (!exam) return <NotFoundPage what="Cette évaluation" />;
+  if (!exam) return <NotFoundPage what="exam" />;
   return <ExamView key={exam.id} exam={exam} />;
 }
 

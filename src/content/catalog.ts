@@ -1,3 +1,5 @@
+import type { Lang } from '../lib/prefs';
+import { MODULE_TEXT_EN } from './catalog.en';
 import type { ModuleDef, ModuleId, Topic } from './types';
 
 export function slugify(s: string): string {
@@ -137,3 +139,35 @@ export const MODULE_BY_ID: Record<ModuleId, ModuleDef> = Object.fromEntries(
 ) as Record<ModuleId, ModuleDef>;
 
 export const ALL_TOPIC_IDS = new Set(MODULES.flatMap((m) => m.topics.map((t) => t.id)));
+
+/* ---------- Version localisée ---------- */
+
+const localizedModules: Partial<Record<Lang, { list: ModuleDef[]; byId: Record<ModuleId, ModuleDef> }>> = {};
+
+function localizeModule(m: ModuleDef, lang: Lang): ModuleDef {
+  if (lang === 'fr') return m;
+  const tx = MODULE_TEXT_EN[m.id];
+  return {
+    ...m,
+    title: tx.title,
+    short: tx.short,
+    description: tx.description,
+    topics: m.topics.map((t, i) => ({ id: t.id, label: tx.topics[i] ?? t.label })),
+  };
+}
+
+function localized(lang: Lang) {
+  return (localizedModules[lang] ??= (() => {
+    const list = MODULES.map((m) => localizeModule(m, lang));
+    return { list, byId: Object.fromEntries(list.map((m) => [m.id, m])) as Record<ModuleId, ModuleDef> };
+  })());
+}
+
+/** Disciplines dans la langue demandée (mêmes identifiants de disciplines et de sujets). */
+export function getModules(lang: Lang): ModuleDef[] {
+  return localized(lang).list;
+}
+
+export function getModule(id: ModuleId, lang: Lang): ModuleDef {
+  return localized(lang).byId[id];
+}

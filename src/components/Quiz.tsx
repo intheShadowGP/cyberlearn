@@ -2,6 +2,8 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { Answer, Correction, Question } from '../content/types';
 import { emptyAnswer, gradeQuestion, isAnswered, scoreQuiz, shuffle, type QuestionResult, type QuizScore, PASS_THRESHOLD } from '../lib/quiz';
 import { Inline } from './Inline';
+import { translate, useI18n, type MsgKey } from '../i18n';
+import { getLang } from '../i18n';
 
 export interface QuizProps {
   /** Identifiant stable de la session de questions (change à chaque nouveau tirage). */
@@ -29,14 +31,8 @@ function gradeAll(questions: Question[], answers: Record<string, Answer>, correc
   });
 }
 
-const VERDICT_LABEL: Record<string, string> = {
-  correct: 'Bonne réponse',
-  partial: 'Réponse partielle',
-  incorrect: 'Réponse incorrecte',
-  ungraded: 'À auto-évaluer',
-};
-
 export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRetry, retryLabel, recommendation, autoValidate }: QuizProps) {
+  const { t, tp } = useI18n();
   const [answers, setAnswers] = useState<Record<string, Answer>>(() =>
     Object.fromEntries(questions.map((q) => [q.id, emptyAnswer(q)])),
   );
@@ -76,7 +72,7 @@ export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRe
     } catch {
       saving.current = false;
       setPhase('review');
-      setError("Le résultat n'a pas pu être enregistré localement. Réessayez.");
+      setError(translate(getLang(), 'quiz.saveError'));
     }
   }
 
@@ -87,7 +83,7 @@ export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRe
     try {
       c = await loadCorrections();
     } catch {
-      setError('Impossible de charger les corrections. Vérifiez votre connexion ou réessayez.');
+      setError(translate(getLang(), 'quiz.loadError'));
       setPhase('answering');
       return;
     }
@@ -152,21 +148,17 @@ export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRe
       {phase === 'answering' || phase === 'loading' ? (
         <div className="quiz-actions">
           <button type="button" className="btn btn-primary" onClick={validate} disabled={phase === 'loading'}>
-            {phase === 'loading' ? 'Correction en cours…' : 'Valider mes réponses'}
+            {phase === 'loading' ? t('quiz.validating') : t('quiz.validate')}
           </button>
-          {unanswered > 0 && (
-            <span className="muted">
-              {unanswered} question{unanswered > 1 ? 's' : ''} sans réponse (comptée{unanswered > 1 ? 's' : ''} fausse{unanswered > 1 ? 's' : ''})
-            </span>
-          )}
+          {unanswered > 0 && <span className="muted">{tp('quiz.unanswered', unanswered)}</span>}
         </div>
       ) : null}
 
       {phase === 'review' && live && results && (
         <div className="quiz-actions" ref={resultsRef} tabIndex={-1}>
           <p>
-            Score provisoire : <strong>{live.percent} %</strong>.
-            {openPending && ' Auto-évaluez vos réponses ouvertes à l’aide de la réponse modèle pour les inclure dans la note.'}
+            {t('quiz.provisional')} <strong>{live.percent} %</strong>.
+            {openPending && t('quiz.selfGradeHint')}
           </p>
           <button
             type="button"
@@ -176,11 +168,11 @@ export function Quiz({ questions, loadCorrections, skillLabels, onFinished, onRe
               void save(results);
             }}
           >
-            Enregistrer mon évaluation
+            {t('quiz.save')}
           </button>
         </div>
       )}
-      {phase === 'saving' && <p role="status">Enregistrement…</p>}
+      {phase === 'saving' && <p role="status">{t('quiz.saving')}</p>}
 
       {phase === 'saved' && final && (
         <div ref={resultsRef} tabIndex={-1}>
@@ -203,15 +195,16 @@ function QuestionCard(props: {
   canSelfGrade: boolean;
 }) {
   const { index, question: q, options, answer, onChange, locked, correction: c, result } = props;
+  const { t } = useI18n();
   const name = useId();
-  const typeLabel = { single: 'Choix unique', multi: 'Plusieurs réponses possibles', truefalse: 'Vrai ou faux', short: 'Réponse courte', open: 'Question ouverte' }[q.type];
+  const typeLabel = t(`quiz.type.${q.type}` as MsgKey);
   const verdict = result?.verdict;
 
   return (
     <li className={`question ${verdict ? `q-${verdict}` : ''}`}>
       <fieldset disabled={locked && !(q.type === 'open' && props.canSelfGrade)}>
         <legend>
-          <span className="q-index">Question {index}</span>
+          <span className="q-index">{t('quiz.question', { n: index })}</span>
           <span className="q-type">{typeLabel}</span>
           <span className="q-prompt">
             <Inline text={q.prompt} />
@@ -246,7 +239,7 @@ function QuestionCard(props: {
                   <span>
                     <Inline text={o.text} />
                   </span>
-                  {c && isGood && <span className="opt-flag">Bonne réponse</span>}
+                  {c && isGood && <span className="opt-flag">{t('quiz.goodFlag')}</span>}
                   {c && c.whyWrong?.[o.id] && checked && !isGood && (
                     <span className="opt-why">
                       <Inline text={c.whyWrong[o.id] as string} />
@@ -263,7 +256,7 @@ function QuestionCard(props: {
             {[true, false].map((v) => (
               <label key={String(v)} className={`option ${c && c.type === 'truefalse' ? (c.correct === v ? 'opt-good' : answer.value === v ? 'opt-bad' : '') : ''}`}>
                 <input type="radio" name={name} checked={answer.value === v} disabled={locked} onChange={() => onChange({ type: 'truefalse', value: v })} />
-                <span>{v ? 'Vrai' : 'Faux'}</span>
+                <span>{v ? t('quiz.true') : t('quiz.false')}</span>
               </label>
             ))}
           </div>
@@ -272,7 +265,7 @@ function QuestionCard(props: {
         {q.type === 'short' && answer.type === 'short' && (
           <input
             className="input"
-            aria-label={`Réponse à la question ${index}`}
+            aria-label={t('quiz.answerTo', { n: index })}
             value={answer.value}
             placeholder={q.placeholder}
             maxLength={120}
@@ -287,7 +280,7 @@ function QuestionCard(props: {
           <>
             <textarea
               className="input"
-              aria-label={`Réponse à la question ${index}`}
+              aria-label={t('quiz.answerTo', { n: index })}
               value={answer.value}
               rows={5}
               maxLength={4000}
@@ -296,11 +289,11 @@ function QuestionCard(props: {
             />
             {c && c.type === 'open' && (
               <div className="open-review">
-                <p className="callout-title">Réponse modèle</p>
+                <p className="callout-title">{t('quiz.model')}</p>
                 <p>
                   <Inline text={c.model} />
                 </p>
-                <p className="callout-title">Critères d’auto-évaluation</p>
+                <p className="callout-title">{t('quiz.criteria')}</p>
                 <ul>
                   {c.criteria.map((cr) => (
                     <li key={cr}>
@@ -309,12 +302,12 @@ function QuestionCard(props: {
                   ))}
                 </ul>
                 {props.canSelfGrade && (
-                  <div className="options options-inline" role="group" aria-label="Auto-évaluation">
+                  <div className="options options-inline" role="group" aria-label={t('quiz.selfGrade')}>
                     <button type="button" className={`btn ${answer.selfGrade === true ? 'btn-primary' : ''}`} aria-pressed={answer.selfGrade === true} onClick={() => onChange({ ...answer, selfGrade: true })}>
-                      Ma réponse remplit les critères
+                      {t('quiz.selfGrade.ok')}
                     </button>
                     <button type="button" className={`btn ${answer.selfGrade === false ? 'btn-primary' : ''}`} aria-pressed={answer.selfGrade === false} onClick={() => onChange({ ...answer, selfGrade: false })}>
-                      Ma réponse est incomplète
+                      {t('quiz.selfGrade.ko')}
                     </button>
                   </div>
                 )}
@@ -326,17 +319,17 @@ function QuestionCard(props: {
 
       {c && (
         <div className="correction" role="status">
-          <p className={`verdict v-${verdict}`}>{VERDICT_LABEL[verdict ?? 'ungraded']}</p>
+          <p className={`verdict v-${verdict}`}>{t(`quiz.verdict.${verdict ?? 'ungraded'}` as MsgKey)}</p>
           {c.type === 'short' && (
             <p>
-              Réponse attendue : <code>{c.accepted[0]}</code>
+              {t('quiz.expected')} <code>{c.accepted[0]}</code>
             </p>
           )}
-          {c.type === 'truefalse' && <p>Réponse attendue : <strong>{c.correct ? 'Vrai' : 'Faux'}</strong></p>}
+          {c.type === 'truefalse' && <p>{t('quiz.expected')} <strong>{c.correct ? t('quiz.true') : t('quiz.false')}</strong></p>}
           <p>
             <Inline text={c.explanation} />
           </p>
-          {c.refs && c.refs.length > 0 && <p className="muted">Pour aller plus loin : {c.refs.join(' · ')}</p>}
+          {c.refs && c.refs.length > 0 && <p className="muted">{t('quiz.further')} {c.refs.join(' · ')}</p>}
         </div>
       )}
     </li>
@@ -344,27 +337,28 @@ function QuestionCard(props: {
 }
 
 export function Evaluation({ score, skillLabels, recommendation, onRetry, retryLabel }: { score: QuizScore; skillLabels: Record<string, string>; recommendation?: string | undefined; onRetry?: (() => void) | undefined; retryLabel?: string | undefined }) {
+  const { t, num } = useI18n();
   const skills = Object.entries(score.bySkill).map(([id, v]) => ({ id, label: skillLabels[id] ?? id, ratio: v.total ? v.points / v.total : 0 }));
   const ok = skills.filter((s) => s.ratio >= 0.8);
   const ko = skills.filter((s) => s.ratio < 0.8).sort((a, b) => a.ratio - b.ratio);
   const passed = score.percent >= PASS_THRESHOLD;
   return (
     <section className="evaluation panel" aria-labelledby="eval-title">
-      <h3 id="eval-title">Évaluation</h3>
+      <h3 id="eval-title">{t('quiz.eval.title')}</h3>
       <div className="eval-score">
         <div className={`score-ring ${passed ? 'pass' : 'fail'}`} aria-hidden="true">
           {score.percent} %
         </div>
         <div>
           <p>
-            Note : <strong>{score.score.toLocaleString('fr-FR')} / {score.max}</strong> — {score.percent} % de réussite.
+            <Inline text={t('quiz.eval.score', { score: num(score.score), max: score.max, pct: score.percent })} />
           </p>
-          <p>{passed ? `Seuil de validation (${PASS_THRESHOLD} %) atteint.` : `Seuil de validation : ${PASS_THRESHOLD} %. Relisez les points à retravailler puis réessayez.`}</p>
+          <p>{passed ? t('quiz.eval.passed', { threshold: PASS_THRESHOLD }) : t('quiz.eval.failed', { threshold: PASS_THRESHOLD })}</p>
         </div>
       </div>
       <div className="eval-grid">
         <div>
-          <h4>Compétences démontrées</h4>
+          <h4>{t('quiz.eval.demonstrated')}</h4>
           {ok.length ? (
             <ul>
               {ok.map((s) => (
@@ -372,11 +366,11 @@ export function Evaluation({ score, skillLabels, recommendation, onRetry, retryL
               ))}
             </ul>
           ) : (
-            <p className="muted">Aucune compétence démontrée à 80 % sur ce questionnaire.</p>
+            <p className="muted">{t('quiz.eval.noneDemonstrated')}</p>
           )}
         </div>
         <div>
-          <h4>Points à retravailler</h4>
+          <h4>{t('quiz.eval.rework')}</h4>
           {ko.length ? (
             <ul>
               {ko.map((s) => (
@@ -384,19 +378,19 @@ export function Evaluation({ score, skillLabels, recommendation, onRetry, retryL
               ))}
             </ul>
           ) : (
-            <p className="muted">Rien à signaler.</p>
+            <p className="muted">{t('quiz.eval.nothing')}</p>
           )}
         </div>
       </div>
       {recommendation && (
         <p className="callout callout-tip">
-          <strong>Recommandation : </strong>
+          <strong>{t('quiz.eval.reco')} </strong>
           {recommendation}
         </p>
       )}
       {onRetry && (
         <button type="button" className="btn" onClick={onRetry}>
-          {retryLabel ?? 'Nouveau tirage de questions'}
+          {retryLabel ?? t('quiz.eval.retry')}
         </button>
       )}
     </section>

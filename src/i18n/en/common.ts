@@ -1,0 +1,25 @@
+import type { common as frCommon } from '../fr/common';
+
+export const common: Record<keyof typeof frCommon, string> = {
+  'level.1': 'Beginner',
+  'level.2': 'Intermediate',
+  'level.3': 'Advanced',
+  'level.4': 'Expert',
+  'level.badge': 'Level {n} · {name}',
+  'status.none': 'Not started',
+  'status.started': 'In progress',
+  'status.validated': 'Passed',
+  'status.validatedPct': 'Passed · {pct}%',
+  'status.locked': 'Prerequisites to pass',
+  'course.module': 'Module {id}',
+  'course.prereq': 'Prerequisites:',
+  'course.minutes': '{n} min',
+  'goals.title': 'Personal goals',
+  'goals.new': 'New goal',
+  'goals.placeholder': 'E.g.: pass the Networking module before the end of the month',
+  'goals.add': 'Add',
+  'goals.empty': 'Set yourself a concrete, dated goal: it is one of the best predictors of success.',
+  'goals.delete': 'Delete',
+  'goals.deleteAria': 'Delete the goal: {text}',
+  'error.storage': 'Storage error',
+};

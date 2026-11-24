@@ -1,3 +1,5 @@
+import type { Lang } from '../lib/prefs';
+import { PATH_TEXT_EN } from './paths.en';
 import type { PathDef } from './types';
 
 /**
@@ -207,4 +209,22 @@ export function pathCourseIds(p: PathDef): string[] {
 
 export function pathExamId(pathId: string): string {
   return `parcours-${pathId}`;
+}
+
+/* ---------- Version localisée ---------- */
+
+const localizedPaths: Partial<Record<Lang, PathDef[]>> = {};
+
+/** Parcours dans la langue demandée (étapes, modules et identifiants identiques). */
+export function getPaths(lang: Lang): PathDef[] {
+  if (lang === 'fr') return PATHS;
+  return (localizedPaths[lang] ??= PATHS.map((p) => {
+    const tx = PATH_TEXT_EN[p.id];
+    if (!tx) return p;
+    return { ...p, title: tx.title, audience: tx.audience, description: tx.description, objectives: tx.objectives, prerequisites: tx.prerequisites, finalProject: tx.finalProject };
+  }));
+}
+
+export function getPath(id: string, lang: Lang): PathDef | undefined {
+  return getPaths(lang).find((p) => p.id === id);
 }

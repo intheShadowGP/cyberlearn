@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { MODULES } from '../content/catalog';
-import { COURSE_BY_ID, COURSES, LABS, coursesOfModule } from '../content/registry';
+import { getModules } from '../content/catalog';
+import { COURSES, LABS, coursesOfModule, getCourse } from '../content/registry';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
 import { effectiveFreeMode } from '../lib/unlock';
@@ -10,17 +10,20 @@ import { ProgressBar } from '../components/Badges';
 import { Logo } from '../components/Logo';
 import { usePageTitle } from '../lib/usePageTitle';
 import { GoalsPanel } from '../components/GoalsPanel';
+import { useI18n } from '../i18n';
 
 export function HomePage() {
   usePageTitle('');
+  const { t, tp, lang } = useI18n();
   const { data, ready } = useSnapshot();
   const prefs = usePrefs();
   const onboarding = data.profile[0]?.onboarding;
   // Première connexion (ou utilisateur légataire sans onboarding) : écran de bienvenue.
   if (ready && !onboarding) return <OnboardingWelcome />;
+  const modules = getModules(lang);
   const validated = data.progress.filter((p) => p.status === 'validated').length;
   const lastId = data.meta.find((m) => m.key === 'lastCourse')?.value;
-  const last = typeof lastId === 'string' ? COURSE_BY_ID.get(lastId) : undefined;
+  const last = typeof lastId === 'string' ? getCourse(lastId, lang) : undefined;
   const lastProgress = last ? data.progress.find((p) => p.courseId === last.id) : undefined;
   const recos = recommendations(data, effectiveFreeMode(onboarding, prefs.freeMode));
   const totalQuestions = COURSES.reduce((n, c) => n + c.questionCount, 0);
@@ -29,31 +32,28 @@ export function HomePage() {
     <div className="home">
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-text">
-          <p className="eyebrow">Formation à la cybersécurité · gratuite · hors ligne · sans compte</p>
-          <h1 id="hero-title">Apprenez la cybersécurité, des bases jusqu’à l’expertise.</h1>
-          <p className="lead">
-            Des cours structurés, des laboratoires interactifs exécutés dans votre navigateur et des évaluations corrigées et
-            expliquées. Votre progression reste sur votre appareil.
-          </p>
+          <p className="eyebrow">{t('home.eyebrow')}</p>
+          <h1 id="hero-title">{t('home.title')}</h1>
+          <p className="lead">{t('home.lead')}</p>
           <div className="hero-actions">
             {last ? (
               <Link className="btn btn-primary" to={`/cours/${last.id}`}>
-                Reprendre : {last.title}
+                {t('home.resume', { title: last.title })}
               </Link>
             ) : (
               <Link className="btn btn-primary" to="/parcours">
-                Choisir un parcours
+                {t('home.choosePath')}
               </Link>
             )}
             <Link className="btn" to="/catalogue">
-              Explorer les formations
+              {t('home.explore')}
             </Link>
           </div>
-          <ul className="stats" aria-label="Contenu de la plateforme">
-            <li><strong>{MODULES.length}</strong> disciplines</li>
-            <li><strong>{COURSES.length}</strong> cours complets</li>
-            <li><strong>{LABS.length}</strong> laboratoires</li>
-            <li><strong>{totalQuestions}</strong> questions corrigées</li>
+          <ul className="stats" aria-label={t('home.stats.aria')}>
+            <li><strong>{modules.length}</strong> {t('home.stats.disciplines')}</li>
+            <li><strong>{COURSES.length}</strong> {t('home.stats.courses')}</li>
+            <li><strong>{LABS.length}</strong> {t('home.stats.labs')}</li>
+            <li><strong>{totalQuestions}</strong> {t('home.stats.questions')}</li>
           </ul>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -63,32 +63,30 @@ export function HomePage() {
 
       <div className="grid-2">
         <section className="panel" aria-labelledby="prog-title">
-          <h2 id="prog-title">Votre progression</h2>
+          <h2 id="prog-title">{t('home.progress.title')}</h2>
           {!ready ? (
-            <p className="muted">Chargement…</p>
+            <p className="muted">{t('home.loading')}</p>
           ) : (
             <>
-              <p>
-                <strong>{validated}</strong> cours validé{validated > 1 ? 's' : ''} sur {COURSES.length}.
-              </p>
-              <ProgressBar value={validated} max={COURSES.length} label="Cours validés" />
+              <p>{tp('home.validated', validated, { total: COURSES.length })}</p>
+              <ProgressBar value={validated} max={COURSES.length} label={t('home.validatedBar')} />
               {last && lastProgress && (
                 <p className="muted">
-                  Dernier cours consulté : <Link to={`/cours/${last.id}`}>{last.title}</Link>
-                  {lastProgress.bestPercent != null && ` — meilleur score ${lastProgress.bestPercent} %`}.
+                  {t('home.last')} <Link to={`/cours/${last.id}`}>{last.title}</Link>
+                  {lastProgress.bestPercent != null && t('home.bestScore', { n: lastProgress.bestPercent })}.
                 </p>
               )}
               <p>
-                <Link to="/tableau-de-bord">Voir le tableau de bord détaillé →</Link>
+                <Link to="/tableau-de-bord">{t('home.dashboardLink')}</Link>
               </p>
             </>
           )}
         </section>
 
         <section className="panel" aria-labelledby="reco-title">
-          <h2 id="reco-title">Recommandé pour vous</h2>
+          <h2 id="reco-title">{t('home.reco.title')}</h2>
           {recos.length === 0 ? (
-            <p className="muted">Tous les cours disponibles sont validés. Bravo ! Passez aux examens blancs.</p>
+            <p className="muted">{t('home.reco.none')}</p>
           ) : (
             <ul className="reco-list">
               {recos.map((r) => (
@@ -105,9 +103,9 @@ export function HomePage() {
       <GoalsPanel />
 
       <section aria-labelledby="disc-title">
-        <h2 id="disc-title">Disciplines</h2>
+        <h2 id="disc-title">{t('home.disciplines')}</h2>
         <ul className="module-grid">
-          {MODULES.map((m) => {
+          {modules.map((m) => {
             const courses = coursesOfModule(m.id);
             const done = courses.filter((c) => data.progress.some((p) => p.courseId === c.id && p.status === 'validated')).length;
             return (
@@ -118,8 +116,8 @@ export function HomePage() {
                 </h3>
                 <p className="muted">{m.description}</p>
                 <p className="card-foot muted">
-                  {courses.length} cours · {m.topics.length} sujets cartographiés
-                  {courses.length > 0 && ` · ${done}/${courses.length} validés`}
+                  {t('home.module.counts', { courses: courses.length, topics: m.topics.length })}
+                  {courses.length > 0 && t('home.module.done', { done, courses: courses.length })}
                 </p>
               </li>
             );

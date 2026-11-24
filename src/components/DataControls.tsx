@@ -4,9 +4,11 @@ import { countAll, deleteDatabase, STORES, type StoreName } from '../lib/db';
 import { notify } from '../lib/progress';
 import { resetPrefs } from '../lib/prefs';
 import { subscribe } from '../lib/progress';
+import { useI18n } from '../i18n';
 
 /** Consultation des données conservées et suppression complète du profil local. */
 export function DataControls() {
+  const { t } = useI18n();
   const [counts, setCounts] = useState<Record<StoreName, number> | null>(null);
   const [lsKeys, setLsKeys] = useState<string[]>([]);
   const [confirm, setConfirm] = useState(false);
@@ -27,33 +29,32 @@ export function DataControls() {
 
   return (
     <>
-      <h3 className="h4" id="donnees-conservees">Données conservées sur cet appareil</h3>
+      <h3 className="h4" id="donnees-conservees">{t('data.kept')}</h3>
       {counts ? (
         <div className="table-wrap">
           <table>
-            <caption className="sr-only">Nombre d’enregistrements par magasin IndexedDB</caption>
-            <thead><tr><th scope="col">Magasin IndexedDB</th><th scope="col">Enregistrements</th></tr></thead>
+            <caption className="sr-only">{t('data.caption')}</caption>
+            <thead><tr><th scope="col">{t('data.store')}</th><th scope="col">{t('data.records')}</th></tr></thead>
             <tbody>
               {(Object.keys(STORES) as StoreName[]).map((k) => <tr key={k}><td className="mono">{k}</td><td>{counts[k]}</td></tr>)}
             </tbody>
           </table>
         </div>
       ) : (
-        <p className="muted">Stockage indisponible.</p>
+        <p className="muted">{t('data.unavailable')}</p>
       )}
       <p className="muted">
-        localStorage : {lsKeys.length ? lsKeys.map((k) => <code key={k}>{k} </code>) : 'aucune clé'}. Le contenu complet est visible dans
-        le fichier d’export. Détail de chaque magasin : <Link to="/confidentialite">politique de confidentialité</Link>.
+        {t('data.ls')} {lsKeys.length ? lsKeys.map((k) => <code key={k}>{k} </code>) : t('data.noKey')}. {t('data.ls.after')} <Link to="/confidentialite">{t('data.privacyLink')}</Link>.
       </p>
 
-      <h3 className="h4">Suppression complète du profil local</h3>
-      <p>Détruit la base IndexedDB et les préférences : progression, résultats, révisions, profil, objectifs. Le cache des fichiers du site (sans aucune donnée personnelle) est conservé pour le fonctionnement hors ligne.</p>
+      <h3 className="h4">{t('data.delete.title')}</h3>
+      <p>{t('data.delete.text')}</p>
       {!confirm ? (
-        <button type="button" className="btn btn-danger" onClick={() => setConfirm(true)}>Supprimer complètement le profil local…</button>
+        <button type="button" className="btn btn-danger" onClick={() => setConfirm(true)}>{t('data.delete.btn')}</button>
       ) : (
         <div className="callout callout-warn" role="alertdialog" aria-labelledby="del-h">
-          <p id="del-h" className="callout-title">Suppression définitive</p>
-          <p>Toutes les données de CyberAcadémie seront supprimées de ce navigateur. Cette action est irréversible ; exportez d’abord vos données si vous souhaitez les conserver.</p>
+          <p id="del-h" className="callout-title">{t('data.delete.h')}</p>
+          <p>{t('data.delete.warn')}</p>
           <div className="button-row">
             <button
               type="button"
@@ -68,16 +69,16 @@ export function DataControls() {
                     /* stockage indisponible */
                   }
                   setConfirm(false);
-                  setMsg({ ok: true, text: 'Profil local supprimé.' });
+                  setMsg({ ok: true, text: t('data.delete.done') });
                   notify();
                 } catch (e) {
-                  setMsg({ ok: false, text: e instanceof Error ? e.message : 'Suppression impossible.' });
+                  setMsg({ ok: false, text: e instanceof Error ? e.message : t('data.delete.fail') });
                 }
               }}
             >
-              Tout supprimer définitivement
+              {t('data.delete.confirm')}
             </button>
-            <button type="button" className="btn" autoFocus onClick={() => setConfirm(false)}>Annuler</button>
+            <button type="button" className="btn" autoFocus onClick={() => setConfirm(false)}>{t('settings.cancel')}</button>
           </div>
         </div>
       )}

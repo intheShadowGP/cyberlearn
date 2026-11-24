@@ -1,8 +1,8 @@
 import { useId, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { MODULES } from '../content/catalog';
-import { COURSES } from '../content/registry';
-import { LEVEL_LABELS, type Level, type ModuleId } from '../content/types';
+import { getModules } from '../content/catalog';
+import { COURSES, getCourses } from '../content/registry';
+import { type Level, type ModuleId } from '../content/types';
 import { CourseCard } from '../components/CourseCard';
 import { ProgressBar } from '../components/Badges';
 import { useSnapshot } from '../lib/useSnapshot';
@@ -10,11 +10,13 @@ import { usePrefs } from '../lib/prefs';
 import { effectiveFreeMode, isUnlocked, progressMap } from '../lib/unlock';
 import { normalizeShort } from '../lib/quiz';
 import { usePageTitle } from '../lib/usePageTitle';
+import { useI18n, type MsgKey } from '../i18n';
 
 type StatusFilter = 'all' | 'todo' | 'started' | 'validated';
 
 export default function CatalogPage() {
-  usePageTitle('Formations');
+  const { t, tp, lang } = useI18n();
+  usePageTitle(t('catalog.title'));
   const [params, setParams] = useSearchParams();
   const q = params.get('q') ?? '';
   const moduleF = (params.get('module') ?? '') as ModuleId | '';
@@ -26,6 +28,8 @@ export default function CatalogPage() {
   const progress = useMemo(() => progressMap(data.progress), [data.progress]);
   const ids = { q: useId(), m: useId(), l: useId(), s: useId() };
   const [showMap, setShowMap] = useState(true);
+  const modules = getModules(lang);
+  const courses = getCourses(lang);
 
   const update = (key: string, value: string) => {
     const next = new URLSearchParams(params);
@@ -34,7 +38,7 @@ export default function CatalogPage() {
     setParams(next, { replace: true });
   };
 
-  const filtered = COURSES.filter((c) => {
+  const filtered = courses.filter((c) => {
     if (moduleF && c.module !== moduleF) return false;
     if (levelF && c.level !== levelF) return false;
     const p = progress.get(c.id);
@@ -50,28 +54,25 @@ export default function CatalogPage() {
 
   const covered = useMemo(() => {
     const m = new Map<string, string>();
-    for (const c of COURSES) for (const t of c.topics) if (!m.has(t)) m.set(t, c.id);
+    for (const c of COURSES) for (const topic of c.topics) if (!m.has(topic)) m.set(topic, c.id);
     return m;
   }, []);
 
   return (
     <div>
-      <h1>Formations</h1>
-      <p className="lead">
-        {COURSES.length} cours complets répartis dans {MODULES.length} disciplines. La cartographie ci-dessous indique
-        aussi les sujets dont le cours est encore en préparation.
-      </p>
+      <h1>{t('catalog.title')}</h1>
+      <p className="lead">{t('catalog.lead', { courses: COURSES.length, modules: modules.length })}</p>
 
       <form className="filters panel" role="search" onSubmit={(e) => e.preventDefault()}>
         <div>
-          <label htmlFor={ids.q}>Rechercher</label>
-          <input id={ids.q} className="input" type="search" value={q} maxLength={80} placeholder="ex. Kerberos, XSS, sous-réseau…" onChange={(e) => update('q', e.target.value)} />
+          <label htmlFor={ids.q}>{t('catalog.search')}</label>
+          <input id={ids.q} className="input" type="search" value={q} maxLength={80} placeholder={t('catalog.search.placeholder')} onChange={(e) => update('q', e.target.value)} />
         </div>
         <div>
-          <label htmlFor={ids.m}>Discipline</label>
+          <label htmlFor={ids.m}>{t('catalog.discipline')}</label>
           <select id={ids.m} className="input" value={moduleF} onChange={(e) => update('module', e.target.value)}>
-            <option value="">Toutes</option>
-            {MODULES.map((m) => (
+            <option value="">{t('catalog.all')}</option>
+            {modules.map((m) => (
               <option key={m.id} value={m.id}>
                 {m.id} — {m.title}
               </option>
@@ -79,30 +80,28 @@ export default function CatalogPage() {
           </select>
         </div>
         <div>
-          <label htmlFor={ids.l}>Niveau</label>
+          <label htmlFor={ids.l}>{t('catalog.level')}</label>
           <select id={ids.l} className="input" value={levelF || ''} onChange={(e) => update('niveau', e.target.value)}>
-            <option value="">Tous</option>
+            <option value="">{t('catalog.allM')}</option>
             {([1, 2, 3, 4] as Level[]).map((l) => (
               <option key={l} value={l}>
-                {l} — {LEVEL_LABELS[l]}
+                {l} — {t(`level.${l}` as MsgKey)}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor={ids.s}>Statut</label>
+          <label htmlFor={ids.s}>{t('catalog.status')}</label>
           <select id={ids.s} className="input" value={statusF} onChange={(e) => update('statut', e.target.value === 'all' ? '' : e.target.value)}>
-            <option value="all">Tous</option>
-            <option value="todo">Non commencés</option>
-            <option value="started">En cours</option>
-            <option value="validated">Validés</option>
+            <option value="all">{t('catalog.allM')}</option>
+            <option value="todo">{t('catalog.status.todo')}</option>
+            <option value="started">{t('catalog.status.started')}</option>
+            <option value="validated">{t('catalog.status.validated')}</option>
           </select>
         </div>
       </form>
 
-      <p role="status" className="muted">
-        {filtered.length} cours correspondant{filtered.length > 1 ? 's' : ''}.
-      </p>
+      <p role="status" className="muted">{tp('catalog.results', filtered.length)}</p>
       <ul className="card-grid">
         {filtered.map((c) => (
           <li key={c.id}>
@@ -113,18 +112,16 @@ export default function CatalogPage() {
 
       <section aria-labelledby="map-title" className="topic-map">
         <div className="section-head">
-          <h2 id="map-title">Cartographie des disciplines</h2>
+          <h2 id="map-title">{t('catalog.map.title')}</h2>
           <button type="button" className="btn btn-small" aria-expanded={showMap} onClick={() => setShowMap((v) => !v)}>
-            {showMap ? 'Masquer' : 'Afficher'}
+            {showMap ? t('catalog.map.hide') : t('catalog.map.show')}
           </button>
         </div>
         {showMap && (
           <>
-            <p className="muted">
-              Sujets en accent : abordés dans au moins un cours publié (cliquez pour l’ouvrir), sans garantir un traitement exhaustif. Sujets en pointillés : cours en préparation.
-            </p>
-            {MODULES.filter((m) => !moduleF || m.id === moduleF).map((m) => {
-              const n = m.topics.filter((t) => covered.has(t.id)).length;
+            <p className="muted">{t('catalog.map.help')}</p>
+            {modules.filter((m) => !moduleF || m.id === moduleF).map((m) => {
+              const n = m.topics.filter((topic) => covered.has(topic.id)).length;
               const mc = COURSES.filter((c) => c.module === m.id);
               const done = mc.filter((c) => progress.get(c.id)?.status === 'validated').length;
               const pct = mc.length ? Math.round((done / mc.length) * 100) : 0;
@@ -134,21 +131,19 @@ export default function CatalogPage() {
                     <Link to={`/module/${m.id}`}>
                       {m.id}. {m.title}
                     </Link>{' '}
-                    <span className="muted">
-                      ({n}/{m.topics.length} sujets abordés · {done}/{mc.length} cours validés, {pct} %)
-                    </span>
+                    <span className="muted">{t('catalog.map.stats', { n, total: m.topics.length, done, courses: mc.length, pct })}</span>
                   </h3>
-                  <ProgressBar value={done} max={mc.length} label={`Progression en ${m.title}`} />
+                  <ProgressBar value={done} max={mc.length} label={t('catalog.map.progress', { title: m.title })} />
                   <ul className="topic-list">
-                    {m.topics.map((t) => {
-                      const cid = covered.get(t.id);
+                    {m.topics.map((topic) => {
+                      const cid = covered.get(topic.id);
                       return (
-                        <li key={t.id} className={cid ? 'topic covered' : 'topic upcoming'}>
+                        <li key={topic.id} className={cid ? 'topic covered' : 'topic upcoming'}>
                           {cid ? (
-                            <Link to={`/cours/${cid}`}>{t.label}</Link>
+                            <Link to={`/cours/${cid}`}>{topic.label}</Link>
                           ) : (
                             <span>
-                              {t.label} <span className="sr-only">(à venir)</span>
+                              {topic.label} <span className="sr-only">{t('catalog.upcoming')}</span>
                             </span>
                           )}
                         </li>

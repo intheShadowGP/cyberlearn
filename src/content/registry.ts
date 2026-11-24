@@ -5,6 +5,7 @@ import type {
   CourseMeta,
   CourseMetaText,
   CourseSolutions,
+  ActivityMetaText,
   LabBody,
   LabCorrections,
   LabMeta,
@@ -29,8 +30,11 @@ const courseSolutionLoaders = import.meta.glob<{ solutions: CourseSolutions }>('
 const courseSolutionLoadersEn = import.meta.glob<{ solutions: CourseSolutions }>('./courses/*/solutions.en.ts');
 
 const labMetaModules = import.meta.glob<{ meta: LabMeta }>('../labs/*/meta.ts', { eager: true });
+const labMetaTextModules = import.meta.glob<{ metaText: ActivityMetaText }>('../labs/*/meta.en.ts', { eager: true });
 const labBodyLoaders = import.meta.glob<{ body: LabBody }>('../labs/*/body.ts');
+const labBodyLoadersEn = import.meta.glob<{ body: LabBody }>('../labs/*/body.en.ts');
 const labCorrectionLoaders = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.ts');
+const labCorrectionLoadersEn = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.en.ts');
 
 function dirOf(path: string): string {
   const parts = path.split('/');
@@ -124,14 +128,34 @@ export async function loadCourseSolutions(id: string, lang: Lang = 'fr'): Promis
   return l ? (await l()).solutions : null;
 }
 
-export async function loadLabBody(id: string): Promise<LabBody | null> {
-  const l = findLoader(labBodyLoaders, id, 'body.ts', '../labs');
+export async function loadLabBody(id: string, lang: Lang = 'fr'): Promise<LabBody | null> {
+  const l = lang === 'en' ? findLoader(labBodyLoadersEn, id, 'body.en.ts', '../labs') : findLoader(labBodyLoaders, id, 'body.ts', '../labs');
   return l ? (await l()).body : null;
 }
 
-export async function loadLabCorrections(id: string): Promise<LabCorrections | null> {
-  const l = findLoader(labCorrectionLoaders, id, 'corrections.ts', '../labs');
+export async function loadLabCorrections(id: string, lang: Lang = 'fr'): Promise<LabCorrections | null> {
+  const l = lang === 'en' ? findLoader(labCorrectionLoadersEn, id, 'corrections.en.ts', '../labs') : findLoader(labCorrectionLoaders, id, 'corrections.ts', '../labs');
   return l ? (await l()).corrections : null;
+}
+
+const labTextEn = new Map<string, ActivityMetaText>(Object.entries(labMetaTextModules).map(([p, m]) => [dirOf(p), m.metaText]));
+const localizedLabs: Partial<Record<Lang, LabMeta[]>> = {};
+
+/** Laboratoires dans la langue demandée (même ordre que LABS). */
+export function getLabs(lang: Lang): LabMeta[] {
+  if (lang === 'fr') return LABS;
+  return (localizedLabs[lang] ??= LABS.map((l) => {
+    const tx = labTextEn.get(l.id);
+    return tx ? { ...l, title: tx.title, context: tx.context, objective: tx.objective, steps: tx.steps } : l;
+  }));
+}
+
+export function getLab(id: string, lang: Lang): LabMeta | undefined {
+  return getLabs(lang).find((l) => l.id === id);
+}
+
+export function hasEnglishLab(id: string): boolean {
+  return labTextEn.has(id);
 }
 
 /** Utilisé par le validateur de contenu et les tests. */
@@ -147,5 +171,8 @@ export const __internal = {
   labMetaModules,
   labBodyLoaders,
   labCorrectionLoaders,
+  labMetaTextModules,
+  labBodyLoadersEn,
+  labCorrectionLoadersEn,
   dirOf,
 };

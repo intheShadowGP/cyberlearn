@@ -1,9 +1,11 @@
-import { LEVEL_LABELS, type Level } from '../content/types';
+import { type Level } from '../content/types';
+import { useI18n, type MsgKey } from '../i18n';
 
 export function LevelBadge({ level }: { level: Level }) {
+  const { t } = useI18n();
   return (
     <span className={`badge level-${level}`}>
-      <span aria-hidden="true">{'▮'.repeat(level)}{'▯'.repeat(4 - level)}</span> Niveau {level} · {LEVEL_LABELS[level]}
+      <span aria-hidden="true">{'▮'.repeat(level)}{'▯'.repeat(4 - level)}</span> {t('level.badge', { n: level, name: t(`level.${level}` as MsgKey) })}
     </span>
   );
 }
@@ -18,11 +20,12 @@ export function ProgressBar({ value, max, label }: { value: number; max: number;
 }
 
 export function CourseStatus({ status, best }: { status: 'none' | 'started' | 'validated' | 'locked'; best?: number | null }) {
+  const { t } = useI18n();
   const map = {
-    none: ['Non commencé', 'badge'],
-    started: ['En cours', 'badge badge-warn'],
-    validated: [`Validé${best != null ? ` · ${best} %` : ''}`, 'badge badge-ok'],
-    locked: ['Prérequis à valider', 'badge badge-muted'],
+    none: [t('status.none'), 'badge'],
+    started: [t('status.started'), 'badge badge-warn'],
+    validated: [best != null ? t('status.validatedPct', { pct: best }) : t('status.validated'), 'badge badge-ok'],
+    locked: [t('status.locked'), 'badge badge-muted'],
   } as const;
   const [label, cls] = map[status];
   return <span className={cls}>{label}</span>;

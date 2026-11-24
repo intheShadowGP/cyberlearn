@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { MODULE_BY_ID } from '../content/catalog';
-import { COURSE_BY_ID, COURSES, LAB_BY_ID, loadCourseBody, loadCourseCorrections, loadCourseSolutions } from '../content/registry';
-import { LEVEL_LABELS, type CourseBody, type CourseMeta, type PracticeSolution, type Question } from '../content/types';
+import { getModule } from '../content/catalog';
+import { COURSE_BY_ID, getCourse, getCourses, getLab, loadCourseBody, loadCourseCorrections, loadCourseSolutions } from '../content/registry';
+import { type CourseBody, type CourseMeta, type PracticeSolution, type Question } from '../content/types';
 import { Blocks } from '../components/Blocks';
 import { Inline } from '../components/Inline';
 import { Quiz } from '../components/Quiz';
@@ -13,15 +13,18 @@ import { useSnapshot } from '../lib/useSnapshot';
 import { usePrefs } from '../lib/prefs';
 import { effectiveFreeMode, isUnlocked, missingPrerequisites, progressMap } from '../lib/unlock';
 import { usePageTitle } from '../lib/usePageTitle';
-import { VERIFICATION } from '../content/verification';
-import { SCENARIOS } from '../content/scenarios';
+import { getVerification } from '../content/verification';
+import { getScenarios } from '../content/scenarios';
+import { getLang, t as tGlobal, useI18n, type MsgKey } from '../i18n';
 import NotFoundPage from './NotFoundPage';
 
 export default function CoursePage() {
   const { id = '' } = useParams();
-  const meta = COURSE_BY_ID.get(id);
-  if (!meta) return <NotFoundPage what="Ce cours" />;
-  return <CourseView key={meta.id} meta={meta} />;
+  const { lang } = useI18n();
+  const meta = COURSE_BY_ID.has(id) ? getCourse(id, lang) : undefined;
+  if (!meta) return <NotFoundPage what="course" />;
+  // La clé inclut la langue : le contenu (leçon, questions, corrections) est rechargé dans la nouvelle langue.
+  return <CourseView key={`${meta.id}-${lang}`} meta={meta} />;
 }
 
 /** Compte le temps actif (onglet visible) passé sur le cours. */
@@ -53,19 +56,16 @@ function useActiveTime(courseId: string) {
 }
 
 function recommendationFor(meta: CourseMeta, score: QuizScore): string {
-  const next = COURSES.filter((c) => c.prerequisites.includes(meta.id));
+  const next = getCourses(getLang()).filter((c) => c.prerequisites.includes(meta.id));
   if (score.percent >= 90) {
-    return next.length
-      ? `Excellente maîtrise. Poursuivez avec « ${next[0]?.title} ».`
-      : 'Excellente maîtrise. Testez-vous sur une évaluation transversale de la discipline.';
+    return next.length ? tGlobal('course.reco.excellentNext', { title: next[0]?.title ?? '' }) : tGlobal('course.reco.excellent');
   }
-  if (score.percent >= PASS_THRESHOLD) {
-    return 'Cours validé. Refaites un tirage dans quelques jours pour consolider les compétences encore fragiles (répétition espacée).';
-  }
-  return 'Relisez les sections liées aux points à retravailler, refaites les exercices pratiques, puis lancez un nouveau tirage.';
+  if (score.percent >= PASS_THRESHOLD) return tGlobal('course.reco.passed');
+  return tGlobal('course.reco.failed');
 }
 
 function CourseView({ meta }: { meta: CourseMeta }) {
+  const { t, tp, lang } = useI18n();
   usePageTitle(meta.title);
   const [body, setBody] = useState<CourseBody | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -74,19 +74,19 @@ function CourseView({ meta }: { meta: CourseMeta }) {
   const progress = useMemo(() => progressMap(snap.data.progress), [snap.data.progress]);
   const p = progress.get(meta.id);
   const unlocked = isUnlocked(meta, progress, effectiveFreeMode(snap.data.profile[0]?.onboarding, prefs.freeMode));
-  const missing = missingPrerequisites(meta, progress);
-  const module = MODULE_BY_ID[meta.module];
+  const missing = missingPrerequisites(meta, progress).map((m) => getCourse(m.id, lang) ?? m);
+  const module = getModule(meta.module, lang);
 
   useEffect(() => {
     let alive = true;
-    loadCourseBody(meta.id)
+    loadCourseBody(meta.id, lang)
       .then((b) => alive && (b ? setBody(b) : setLoadError(true)))
       .catch(() => alive && setLoadError(true));
     void touchCourse(meta.id).catch(() => undefined);
     return () => {
       alive = false;
     };
-  }, [meta.id]);
+  }, [meta.id, lang]);
 
   useActiveTime(meta.id);
 
@@ -101,52 +101,51 @@ function CourseView({ meta }: { meta: CourseMeta }) {
     async (score: QuizScore, duration: number) => {
       const r = await recordCourseAttempt(meta.id, score, duration);
       if (r.firstValidation) {
-        const unlockedNext = COURSES.filter((c) => c.prerequisites.includes(meta.id));
+        const unlockedNext = getCourses(getLang()).filter((c) => c.prerequisites.includes(meta.id));
         setValidationMsg(
-          'Cours validé et enregistré dans votre progression.' +
-            (unlockedNext.length ? ` Contenu débloqué : ${unlockedNext.map((c) => `« ${c.title} »`).join(', ')}.` : ''),
+          tGlobal('course.validated.msg') +
+            (unlockedNext.length ? tGlobal('course.validated.unlocked', { list: unlockedNext.map((c) => `« ${c.title} »`).join(', ') }) : ''),
         );
-      } else if (r.validated) setValidationMsg('Résultat enregistré. Ce cours était déjà validé.');
-      else setValidationMsg('Résultat enregistré. Le cours n’est pas encore validé.');
+      } else if (r.validated) setValidationMsg(tGlobal('course.validated.already'));
+      else setValidationMsg(tGlobal('course.validated.not'));
     },
     [meta.id],
   );
 
-  const relatedScenarios = SCENARIOS.filter((s) => s.relatedCourses.includes(meta.id));
+  const relatedScenarios = getScenarios(lang).filter((s) => s.relatedCourses.includes(meta.id));
   const sectionsRead = new Set(p?.sectionsRead ?? []);
   const practiceDone = new Set(p?.practiceDone ?? []);
   const totalSections = body?.lesson.sections.length ?? 0;
   const readCount = body ? body.lesson.sections.filter((s) => sectionsRead.has(s.id)).length : 0;
+  const verification = getVerification(meta.id, lang);
 
   return (
     <article className="course">
-      <nav aria-label="Fil d’Ariane" className="breadcrumb">
-        <Link to="/catalogue">Formations</Link> › <Link to={`/module/${meta.module}`}>{module.title}</Link> › <span aria-current="page">{meta.title}</span>
+      <nav aria-label={t('course.breadcrumb')} className="breadcrumb">
+        <Link to="/catalogue">{t('catalog.title')}</Link> › <Link to={`/module/${meta.module}`}>{module.title}</Link> › <span aria-current="page">{meta.title}</span>
       </nav>
 
       {/* 1. Présentation */}
       <header className="course-header panel" id="presentation">
-        <p className="eyebrow">
-          Module {meta.module} · {module.title}
-        </p>
+        <p className="eyebrow">{t('course.eyebrow', { id: meta.module, title: module.title })}</p>
         <h1>{meta.title}</h1>
         <p className="lead">{meta.summary}</p>
-        <ul className="meta-row" aria-label="Informations du cours">
+        <ul className="meta-row" aria-label={t('course.info.aria')}>
           <li><LevelBadge level={meta.level} /></li>
-          <li>Durée indicative : {meta.durationMin} min</li>
-          <li>{meta.questionCount} questions dans la banque, {meta.quizSize} par évaluation</li>
-          {p?.status === 'validated' && <li className="badge badge-ok">Validé · meilleur score {p.bestPercent} %</li>}
+          <li>{t('course.duration', { n: meta.durationMin })}</li>
+          <li>{t('course.bank', { count: meta.questionCount, size: meta.quizSize })}</li>
+          {p?.status === 'validated' && <li className="badge badge-ok">{t('course.validatedBest', { pct: p.bestPercent ?? 0 })}</li>}
         </ul>
         <div className="presentation-grid">
           <section>
-            <h2 className="h3">Objectifs pédagogiques</h2>
+            <h2 className="h3">{t('course.objectives')}</h2>
             <ul>{meta.objectives.map((o) => <li key={o}>{o}</li>)}</ul>
           </section>
           <section>
-            <h2 className="h3">Prérequis</h2>
+            <h2 className="h3">{t('course.prerequisites')}</h2>
             <ul>
               {meta.prerequisites.map((pid) => {
-                const pc = COURSE_BY_ID.get(pid);
+                const pc = getCourse(pid, lang);
                 return pc ? (
                   <li key={pid}>
                     <Link to={`/cours/${pid}`}>{pc.title}</Link> {progress.get(pid)?.status === 'validated' ? '✓' : ''}
@@ -154,22 +153,22 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                 ) : null;
               })}
               {meta.prerequisiteKnowledge.map((k) => <li key={k}>{k}</li>)}
-              {meta.prerequisites.length === 0 && meta.prerequisiteKnowledge.length === 0 && <li>Aucun</li>}
+              {meta.prerequisites.length === 0 && meta.prerequisiteKnowledge.length === 0 && <li>{t('course.noPrereq')}</li>}
             </ul>
           </section>
           <section>
-            <h2 className="h3">Compétences visées</h2>
+            <h2 className="h3">{t('course.skills')}</h2>
             <ul>
               {meta.skills.map((s) => (
                 <li key={s.id}>
-                  {s.label} <span className="muted">({LEVEL_LABELS[s.level]})</span>
+                  {s.label} <span className="muted">({t(`level.${s.level}` as MsgKey)})</span>
                 </li>
               ))}
             </ul>
           </section>
           {relatedScenarios.length > 0 && (
             <section>
-              <h2 className="h3">Épreuves de démarche associées</h2>
+              <h2 className="h3">{t('course.scenarios')}</h2>
               <ul>
                 {relatedScenarios.map((s) => (
                   <li key={s.id}><Link to={`/epreuve/${s.id}`}>{s.title}</Link></li>
@@ -181,20 +180,18 @@ function CourseView({ meta }: { meta: CourseMeta }) {
       </header>
 
       {loadError && (
-        <p role="alert" className="error panel">
-          Le contenu de ce cours n’a pas pu être chargé. Si vous êtes hors ligne, reconnectez-vous une fois pour le mettre en cache.
-        </p>
+        <p role="alert" className="error panel">{t('course.loadError')}</p>
       )}
-      {!body && !loadError && <p role="status" className="loading">Chargement de la leçon…</p>}
+      {!body && !loadError && <p role="status" className="loading">{t('course.loading')}</p>}
 
       {body && (
         <div className="course-layout">
-          <aside className="toc" aria-label="Sommaire du cours">
-            <p className="toc-title">Sommaire</p>
+          <aside className="toc" aria-label={t('course.toc.aria')}>
+            <p className="toc-title">{t('course.toc')}</p>
             <ol>
-              <li><a href="#presentation" onClick={jump}>Présentation</a></li>
+              <li><a href="#presentation" onClick={jump}>{t('course.toc.presentation')}</a></li>
               <li>
-                <a href="#lecon" onClick={jump}>Leçon</a> <span className="muted">({readCount}/{totalSections})</span>
+                <a href="#lecon" onClick={jump}>{t('course.toc.lesson')}</a> <span className="muted">({readCount}/{totalSections})</span>
                 <ol>
                   {body.lesson.sections.map((s) => (
                     <li key={s.id}>
@@ -204,13 +201,13 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                       </a>
                     </li>
                   ))}
-                  <li><a href="#retenir" onClick={jump}>À retenir</a></li>
+                  <li><a href="#retenir" onClick={jump}>{t('course.toc.keep')}</a></li>
                 </ol>
               </li>
-              <li><a href="#pratique" onClick={jump}>Mise en pratique</a></li>
-              <li><a href="#evaluation" onClick={jump}>Questions et évaluation</a></li>
+              <li><a href="#pratique" onClick={jump}>{t('course.toc.practice')}</a></li>
+              <li><a href="#evaluation" onClick={jump}>{t('course.toc.eval')}</a></li>
             </ol>
-            <div className="progress-bar" role="progressbar" aria-label="Lecture de la leçon" aria-valuemin={0} aria-valuemax={totalSections} aria-valuenow={readCount}>
+            <div className="progress-bar" role="progressbar" aria-label={t('course.reading.aria')} aria-valuemin={0} aria-valuemax={totalSections} aria-valuenow={readCount}>
               <span style={{ width: `${totalSections ? (readCount / totalSections) * 100 : 0}%` }} />
             </div>
           </aside>
@@ -218,7 +215,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
           <div className="course-main">
             {/* 2. Leçon */}
             <section id="lecon" aria-labelledby="lecon-title" className="lesson">
-              <h2 id="lecon-title">Leçon</h2>
+              <h2 id="lecon-title">{t('course.lesson')}</h2>
               <p className="lead"><Inline text={body.lesson.intro} /></p>
               {body.lesson.sections.map((s, i) => (
                 <section key={s.id} id={`s-${s.id}`} className="lesson-section" aria-labelledby={`h-${s.id}`}>
@@ -228,34 +225,34 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                   <Blocks blocks={s.blocks} />
                   <label className="read-toggle">
                     <input type="checkbox" checked={sectionsRead.has(s.id)} onChange={(e) => void markSection(meta.id, s.id, e.target.checked)} />
-                    Section lue et comprise
+                    {t('course.sectionRead')}
                   </label>
                 </section>
               ))}
 
               <section className="lesson-section" aria-labelledby="h-cas">
-                <h3 id="h-cas">Cas d’utilisation professionnels</h3>
+                <h3 id="h-cas">{t('course.useCases')}</h3>
                 <ul>{body.lesson.useCases.map((u) => <li key={u}><Inline text={u} /></li>)}</ul>
               </section>
               <div className="two-col">
                 <section className="callout callout-warn" aria-labelledby="h-err">
-                  <h3 id="h-err" className="callout-title">Erreurs fréquentes</h3>
+                  <h3 id="h-err" className="callout-title">{t('course.mistakes')}</h3>
                   <ul>{body.lesson.commonMistakes.map((u) => <li key={u}><Inline text={u} /></li>)}</ul>
                 </section>
                 <section className="callout callout-tip" aria-labelledby="h-bp">
-                  <h3 id="h-bp" className="callout-title">Bonnes pratiques</h3>
+                  <h3 id="h-bp" className="callout-title">{t('course.bestPractices')}</h3>
                   <ul>{body.lesson.bestPractices.map((u) => <li key={u}><Inline text={u} /></li>)}</ul>
                 </section>
               </div>
               <section id="retenir" className="callout callout-key" aria-labelledby="h-key">
-                <h3 id="h-key" className="callout-title">Points importants à retenir</h3>
+                <h3 id="h-key" className="callout-title">{t('course.keyPoints')}</h3>
                 <ul>{body.lesson.keyPoints.map((u) => <li key={u}><Inline text={u} /></li>)}</ul>
               </section>
             </section>
 
             {/* 3. Mise en pratique */}
             <section id="pratique" aria-labelledby="pratique-title">
-              <h2 id="pratique-title">Mise en pratique</h2>
+              <h2 id="pratique-title">{t('course.practice')}</h2>
               {body.practice.map((pr) => (
                 <PracticeCard
                   key={pr.id}
@@ -268,37 +265,31 @@ function CourseView({ meta }: { meta: CourseMeta }) {
 
             {/* 4–7. Questions, correction, évaluation, validation */}
             <section id="evaluation" aria-labelledby="eval-h">
-              <h2 id="eval-h">Questions de compréhension et évaluation</h2>
+              <h2 id="eval-h">{t('course.eval.title')}</h2>
               {!unlocked ? (
                 <div className="panel locked">
                   <p>
-                    <strong>Évaluation verrouillée.</strong> Validez d’abord :{' '}
+                    <Inline text={t('course.locked')} />{' '}
                     {missing.map((m, i) => (
                       <span key={m.id}>
                         {i > 0 && ', '}
                         <Link to={`/cours/${m.id}`}>{m.title}</Link>
                       </span>
                     ))}
-                    . La leçon et les exercices restent consultables. Vous pouvez aussi activer le mode libre dans les{' '}
-                    <Link to="/parametres">paramètres</Link>.
+                    . {t('course.locked.after')} <Link to="/positionnement">{t('course.locked.link')}</Link>.
                   </p>
                 </div>
               ) : !quizStarted ? (
                 <div className="panel">
-                  <p>
-                    {meta.quizSize} questions sont tirées au hasard parmi {meta.questionCount}. Les corrections ne sont chargées qu’au
-                    moment où vous validez vos réponses. Seuil de validation : {PASS_THRESHOLD} %.
-                  </p>
+                  <p>{t('course.eval.intro', { size: meta.quizSize, count: meta.questionCount, threshold: PASS_THRESHOLD })}</p>
                   {readCount < totalSections && (
-                    <p className="muted">
-                      Conseil : vous avez marqué {readCount} section{readCount > 1 ? 's' : ''} sur {totalSections} comme lue{readCount > 1 ? 's' : ''}.
-                    </p>
+                    <p className="muted">{tp('course.eval.tip', readCount, { total: totalSections })}</p>
                   )}
                   <button type="button" className="btn btn-primary" onClick={() => {
                       if (body) setDrawn(drawQuestions(body.questions, meta.quizSize));
                       setQuizStarted(true);
                     }}>
-                    Commencer l’évaluation
+                    {t('course.eval.start')}
                   </button>
                 </div>
               ) : (
@@ -309,7 +300,7 @@ function CourseView({ meta }: { meta: CourseMeta }) {
                     questions={drawn}
                     skillLabels={skillLabels}
                     loadCorrections={async () => {
-                      const c = await loadCourseCorrections(meta.id);
+                      const c = await loadCourseCorrections(meta.id, lang);
                       if (!c) throw new Error('corrections absentes');
                       return c.questions;
                     }}
@@ -330,20 +321,20 @@ function CourseView({ meta }: { meta: CourseMeta }) {
               )}
             </section>
 
-            {VERIFICATION[meta.id] && (
+            {verification && (
               <section aria-labelledby="verif-h" className="panel">
-                <h2 id="verif-h" className="h3">Fiche de vérification</h2>
+                <h2 id="verif-h" className="h3">{t('course.verif.title')}</h2>
                 <ul>
-                  <li>Contenu rédigé ou révisé le {VERIFICATION[meta.id]!.revisedOn} ; liens des ressources vérifiés automatiquement le {VERIFICATION[meta.id]!.linksCheckedOn}.</li>
-                  <li>Référentiels : {VERIFICATION[meta.id]!.versions.join(' · ')}.</li>
-                  {VERIFICATION[meta.id]!.evolving.length > 0 && <li>Notions susceptibles d’évoluer : {VERIFICATION[meta.id]!.evolving.join(' · ')}.</li>}
+                  <li>{t('course.verif.revised', { rev: verification.revisedOn, links: verification.linksCheckedOn })}</li>
+                  <li>{t('course.verif.versions', { list: verification.versions.join(' · ') })}</li>
+                  {verification.evolving.length > 0 && <li>{t('course.verif.evolving', { list: verification.evolving.join(' · ') })}</li>}
                 </ul>
-                <p className="muted">Aucune relecture par un expert tiers n’est revendiquée. Signalez toute erreur via le dépôt du projet.</p>
+                <p className="muted">{t('course.verif.note')}</p>
               </section>
             )}
 
             <section aria-labelledby="res-h" className="resources">
-              <h2 id="res-h">Ressources complémentaires</h2>
+              <h2 id="res-h">{t('course.resources')}</h2>
               <ul>
                 {body.resources.map((r) => (
                   <li key={r.title}>
@@ -380,21 +371,21 @@ function jump(e: MouseEvent<HTMLAnchorElement>) {
 }
 
 function PracticeCard({ courseId, practice: pr, done }: { courseId: string; practice: CourseBody['practice'][number]; done: boolean }) {
+  const { t, lang } = useI18n();
   const [solution, setSolution] = useState<PracticeSolution | null>(null);
   const [err, setErr] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const KIND = { guided: 'Exercice guidé', case: 'Cas pratique', simulation: 'Manipulation simulée', analysis: 'Analyse de situation', scenario: 'Scénario réaliste' };
-  const lab = pr.labId ? LAB_BY_ID.get(pr.labId) : undefined;
+  const lab = pr.labId ? getLab(pr.labId, lang) : undefined;
 
   return (
     <section className="panel practice" aria-labelledby={`pr-${pr.id}`}>
-      <p className="eyebrow">{KIND[pr.kind]}</p>
+      <p className="eyebrow">{t(`practice.${pr.kind}` as const)}</p>
       <h3 id={`pr-${pr.id}`}>{pr.title}</h3>
       <Blocks blocks={pr.context} />
       <ol className="steps">{pr.steps.map((s) => <li key={s}><Inline text={s} /></li>)}</ol>
       {lab && (
         <p>
-          <Link className="btn" to={`/laboratoires/${lab.id}`}>Ouvrir le laboratoire « {lab.title} »</Link>
+          <Link className="btn" to={`/laboratoires/${lab.id}`}>{t('practice.openLab', { title: lab.title })}</Link>
         </p>
       )}
       <div className="practice-actions">
@@ -404,7 +395,7 @@ function PracticeCard({ courseId, practice: pr, done }: { courseId: string; prac
             className="btn"
             onClick={async () => {
               try {
-                const s = await loadCourseSolutions(courseId);
+                const s = await loadCourseSolutions(courseId, lang);
                 const sol = s?.practice[pr.id];
                 if (!sol) throw new Error();
                 setSolution(sol);
@@ -414,18 +405,18 @@ function PracticeCard({ courseId, practice: pr, done }: { courseId: string; prac
               }
             }}
           >
-            Afficher le corrigé
+            {t('practice.showSolution')}
           </button>
         )}
         <label className="read-toggle">
           <input type="checkbox" checked={done} onChange={(e) => void markPractice(courseId, pr.id, e.target.checked)} />
-          Exercice réalisé
+          {t('practice.done')}
         </label>
       </div>
-      {err && <p role="alert" className="error">Corrigé indisponible hors ligne pour le moment.</p>}
+      {err && <p role="alert" className="error">{t('practice.solutionError')}</p>}
       {solution && (
-        <div className="solution" ref={ref} tabIndex={-1} aria-label="Corrigé">
-          <p className="callout-title">Corrigé</p>
+        <div className="solution" ref={ref} tabIndex={-1} aria-label={t('practice.solution')}>
+          <p className="callout-title">{t('practice.solution')}</p>
           <Blocks blocks={solution.blocks} />
         </div>
       )}

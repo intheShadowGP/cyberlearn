@@ -168,6 +168,14 @@ export interface CourseMetaText {
   skills: Record<string, string>;
 }
 
+/** Partie traduisible des métadonnées d'un laboratoire ou d'une épreuve (fichier `meta.en.ts`). */
+export interface ActivityMetaText {
+  title: string;
+  context: string;
+  objective: string;
+  steps: string[];
+}
+
 export interface CourseBody {
   courseId: string;
   lesson: {

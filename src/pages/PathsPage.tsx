@@ -49,7 +49,7 @@ export default function PathsPage() {
   const { data } = useSnapshot();
   const path = id ? PATHS.find((p) => p.id === id) : undefined;
   usePageTitle(path ? path.title : 'Parcours pédagogiques');
-  if (id && !path) return <NotFoundPage what="Ce parcours" />;
+  if (id && !path) return <NotFoundPage what="path" />;
   if (path) return <PathDetail path={path} data={data} />;
 
   const followed = data.profile[0]?.followedPaths ?? [];

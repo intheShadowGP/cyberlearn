@@ -1,7 +1,9 @@
-import { MODULES } from './catalog';
+import type { Lang } from '../lib/prefs';
+import { translate, type MsgKey } from '../i18n';
+import { MODULES, getModule } from './catalog';
 import { COURSE_BY_ID, COURSES } from './registry';
 import type { ModuleId } from './types';
-import { PATHS, pathCourseIds, pathExamId } from './paths';
+import { PATHS, getPath, pathCourseIds, pathExamId } from './paths';
 
 export interface ExamDef {
   id: string;
@@ -114,3 +116,30 @@ export const EXAMS: ExamDef[] = [...moduleExams, ...transversal, ...mocks, ...pa
 );
 
 export const EXAM_BY_ID = new Map(EXAMS.map((e) => [e.id, e]));
+
+/* ---------- Version localisée ---------- */
+
+const localizedExams: Partial<Record<Lang, ExamDef[]>> = {};
+
+function localizeExam(e: ExamDef, lang: Lang): ExamDef {
+  if (e.kind === 'module') {
+    const id = e.id.slice('module-'.length).toUpperCase() as ModuleId;
+    const m = getModule(id, lang);
+    return { ...e, title: translate(lang, 'exam.module.title', { module: m.title }), description: translate(lang, 'exam.module.desc', { id }) };
+  }
+  if (e.kind === 'path') {
+    const p = getPath(e.id.slice('parcours-'.length), lang);
+    return { ...e, title: translate(lang, 'exam.path.title', { path: p?.title ?? '' }), description: translate(lang, 'exam.path.desc', { n: e.courseIds.length }) };
+  }
+  return { ...e, title: translate(lang, `exam.${e.id}.title` as MsgKey), description: translate(lang, `exam.${e.id}.desc` as MsgKey) };
+}
+
+/** Évaluations dans la langue demandée (mêmes identifiants, mêmes cours, même taille). */
+export function getExams(lang: Lang): ExamDef[] {
+  if (lang === 'fr') return EXAMS;
+  return (localizedExams[lang] ??= EXAMS.map((e) => localizeExam(e, lang)));
+}
+
+export function getExam(id: string, lang: Lang): ExamDef | undefined {
+  return getExams(lang).find((e) => e.id === id);
+}

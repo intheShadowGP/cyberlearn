@@ -5,26 +5,29 @@ import { DataControls } from '../components/DataControls';
 import { notify, type Snapshot } from '../lib/progress';
 import { resetPrefs, setPrefs, usePrefs, type Prefs } from '../lib/prefs';
 import { OnboardingStatus } from '../components/Onboarding';
+import { Inline } from '../components/Inline';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
+import { useI18n } from '../i18n';
 
 export default function SettingsPage() {
-  usePageTitle('Paramètres');
+  const { t, lang } = useI18n();
+  usePageTitle(t('nav.settings'));
   const prefs = usePrefs();
   const { data } = useSnapshot();
   const onboarding = data.profile[0]?.onboarding;
-  const ids = { theme: useId(), font: useId(), file: useId() };
+  const ids = { lang: useId(), theme: useId(), font: useId(), file: useId() };
   const [msg, setMsg] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null);
   const [pending, setPending] = useState<Snapshot | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [persisted, setPersisted] = useState<boolean | null>(null);
-  const [usage, setUsage] = useState<string | null>(null);
+  const [usageMb, setUsageMb] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     void navigator.storage?.persisted?.().then(setPersisted).catch(() => setPersisted(null));
     void navigator.storage?.estimate?.().then((e) => {
-      if (e.usage != null) setUsage(`${(e.usage / 1024 / 1024).toFixed(1)} Mo utilisés`);
+      if (e.usage != null) setUsageMb((e.usage / 1024 / 1024).toFixed(1));
     }).catch(() => undefined);
   }, []);
 
@@ -40,9 +43,9 @@ export default function SettingsPage() {
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setMsg({ kind: 'ok', text: 'Sauvegarde exportée.' });
+      setMsg({ kind: 'ok', text: t('settings.exported') });
     } catch {
-      setMsg({ kind: 'error', text: 'L’export a échoué.' });
+      setMsg({ kind: 'error', text: t('settings.exportFail') });
     }
   }
 
@@ -54,69 +57,71 @@ export default function SettingsPage() {
       const snap = await parseBackupFile(f);
       setPending(snap);
     } catch (e) {
-      setMsg({ kind: 'error', text: e instanceof ImportError ? e.message : 'Fichier illisible.' });
+      setMsg({ kind: 'error', text: e instanceof ImportError ? e.message : t('settings.unreadable') });
     } finally {
       if (fileRef.current) fileRef.current.value = '';
     }
   }
 
   const set = <K extends keyof Prefs>(k: K, v: Prefs[K]) => setPrefs({ [k]: v } as Partial<Prefs>);
+  const persistText = persisted === null ? t('settings.persist.unknown') : persisted ? t('settings.persist.yes') : t('settings.persist.no');
 
   return (
     <div className="settings">
-      <h1>Paramètres et données</h1>
+      <h1>{t('settings.title')}</h1>
 
       <section className="panel" aria-labelledby="disp-h">
-        <h2 id="disp-h">Affichage</h2>
+        <h2 id="disp-h">{t('settings.display')}</h2>
         <div className="form-grid">
-          <label htmlFor={ids.theme}>Thème</label>
-          <select id={ids.theme} className="input" value={prefs.theme} onChange={(e) => set('theme', e.target.value as Prefs['theme'])}>
-            <option value="dark">Sombre</option>
-            <option value="light">Clair</option>
-            <option value="system">Selon le système</option>
+          <label htmlFor={ids.lang}>{t('settings.language')}</label>
+          <select id={ids.lang} className="input" value={lang} onChange={(e) => set('lang', e.target.value as Prefs['lang'])} data-testid="lang-select">
+            <option value="fr" lang="fr">Français</option>
+            <option value="en" lang="en">English</option>
           </select>
-          <label htmlFor={ids.font}>Taille du texte</label>
+          <label htmlFor={ids.theme}>{t('settings.theme')}</label>
+          <select id={ids.theme} className="input" value={prefs.theme} onChange={(e) => set('theme', e.target.value as Prefs['theme'])}>
+            <option value="dark">{t('settings.theme.dark')}</option>
+            <option value="light">{t('settings.theme.light')}</option>
+            <option value="system">{t('settings.theme.system')}</option>
+          </select>
+          <label htmlFor={ids.font}>{t('settings.font')}</label>
           <select id={ids.font} className="input" value={prefs.fontScale} onChange={(e) => set('fontScale', Number(e.target.value) as Prefs['fontScale'])}>
-            <option value={1}>Normale</option>
-            <option value={1.125}>Grande</option>
-            <option value={1.25}>Très grande</option>
+            <option value={1}>{t('settings.font.normal')}</option>
+            <option value={1.125}>{t('settings.font.large')}</option>
+            <option value={1.25}>{t('settings.font.xlarge')}</option>
           </select>
         </div>
+        <p className="muted">{t('settings.language.help')}</p>
         <label className="check">
           <input type="checkbox" checked={prefs.reduceMotion} onChange={(e) => set('reduceMotion', e.target.checked)} />
-          Réduire les animations
+          {t('settings.motion')}
         </label>
       </section>
 
       <OnboardingStatus onboarding={onboarding} />
 
       <section className="panel" aria-labelledby="data-h">
-        <h2 id="data-h">Vos données</h2>
-        <p>
-          Toute votre progression est stockée <strong>uniquement dans ce navigateur</strong> (IndexedDB). Aucune donnée n’est
-          transmise à un serveur. Effacer les données du site dans votre navigateur supprime votre progression : exportez-la
-          régulièrement.
-        </p>
+        <h2 id="data-h">{t('settings.data')}</h2>
+        <p><Inline text={t('settings.data.text')} /></p>
         <p className="muted">
-          Stockage persistant : {persisted === null ? 'inconnu' : persisted ? 'accordé' : 'non accordé (le navigateur peut évincer les données en cas de manque d’espace)'}
-          {usage ? ` · ${usage}` : ''}.{' '}
+          {t('settings.persist')} {persistText}
+          {usageMb ? ` · ${t('settings.usage', { mb: usageMb })}` : ''}.{' '}
           {!persisted && (
             <button type="button" className="btn btn-small" onClick={() => void requestPersistence().then(setPersisted)}>
-              Demander le stockage persistant
+              {t('settings.persist.ask')}
             </button>
           )}
         </p>
         <div className="button-row">
-          <button type="button" className="btn btn-primary" onClick={doExport}>Exporter ma progression (JSON)</button>
+          <button type="button" className="btn btn-primary" onClick={doExport}>{t('settings.export')}</button>
           <input id={ids.file} ref={fileRef} type="file" accept="application/json,.json" className="sr-only file-input" onChange={(e) => void onFile(e.target.files?.[0])} />
-          <label htmlFor={ids.file} className="btn">Importer une sauvegarde…</label>
+          <label htmlFor={ids.file} className="btn">{t('settings.import')}</label>
         </div>
         {pending && (
           <div className="callout callout-warn" role="alertdialog" aria-labelledby="imp-h">
-            <p id="imp-h" className="callout-title">Confirmer l’import</p>
+            <p id="imp-h" className="callout-title">{t('settings.import.title')}</p>
             <p>
-              Ce fichier contient {pending.progress.length} cours suivis, {pending.attempts.length} tentatives et{' '}
-              {pending.goals.length} objectifs. L’import <strong>remplace</strong> toute la progression actuelle.
+              <Inline text={t('settings.import.text', { courses: pending.progress.length, attempts: pending.attempts.length, goals: pending.goals.length })} />
             </p>
             <div className="button-row">
               <button
@@ -125,29 +130,29 @@ export default function SettingsPage() {
                 onClick={async () => {
                   try {
                     await applyBackup(pending);
-                    setMsg({ kind: 'ok', text: 'Sauvegarde importée.' });
+                    setMsg({ kind: 'ok', text: t('settings.import.ok') });
                   } catch {
-                    setMsg({ kind: 'error', text: 'L’import a échoué : aucune donnée n’a été modifiée.' });
+                    setMsg({ kind: 'error', text: t('settings.import.fail') });
                   }
                   setPending(null);
                 }}
               >
-                Remplacer ma progression
+                {t('settings.import.confirm')}
               </button>
-              <button type="button" className="btn" autoFocus onClick={() => setPending(null)}>Annuler</button>
+              <button type="button" className="btn" autoFocus onClick={() => setPending(null)}>{t('settings.cancel')}</button>
             </div>
           </div>
         )}
 
         <DataControls />
 
-        <h3 className="h4">Réinitialisation de la progression</h3>
+        <h3 className="h4">{t('settings.reset.title')}</h3>
         {!confirmReset ? (
-          <button type="button" className="btn btn-danger" onClick={() => setConfirmReset(true)}>Effacer toute ma progression…</button>
+          <button type="button" className="btn btn-danger" onClick={() => setConfirmReset(true)}>{t('settings.reset.btn')}</button>
         ) : (
           <div className="callout callout-warn" role="alertdialog" aria-labelledby="rst-h">
-            <p id="rst-h" className="callout-title">Effacement définitif</p>
-            <p>Tous les cours suivis, scores, compétences et objectifs seront supprimés de ce navigateur. Cette action est irréversible.</p>
+            <p id="rst-h" className="callout-title">{t('settings.reset.h')}</p>
+            <p>{t('settings.reset.text')}</p>
             <div className="button-row">
               <button
                 type="button"
@@ -157,12 +162,12 @@ export default function SettingsPage() {
                   resetPrefs();
                   notify();
                   setConfirmReset(false);
-                  setMsg({ kind: 'ok', text: 'Progression et préférences effacées.' });
+                  setMsg({ kind: 'ok', text: t('settings.reset.done') });
                 }}
               >
-                Tout effacer
+                {t('settings.reset.confirm')}
               </button>
-              <button type="button" className="btn" autoFocus onClick={() => setConfirmReset(false)}>Annuler</button>
+              <button type="button" className="btn" autoFocus onClick={() => setConfirmReset(false)}>{t('settings.cancel')}</button>
             </div>
           </div>
         )}
