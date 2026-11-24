@@ -18,6 +18,14 @@ export const solutions: CourseSolutions = {
         { t: 'callout', kind: 'warn', text: 'Si le VPN annonçait `0.0.0.0/0`, tout le trafic non local partirait par le tunnel (mode « full tunnel ») : utile pour forcer le passage par la passerelle de l’entreprise, mais à décider explicitement, car cela redirige aussi la navigation personnelle.' },
       ],
     },
+    'diagnostic-acces': {
+      blocks: [
+        { t: 'p', text: 'Le poste a une adresse valide et joint le routeur 192.168.1.1 : l’attribution d’adresse et la couche locale fonctionnent. En revanche, il ne joint ni sa passerelle déclarée (192.168.1.254) ni Internet par adresse : la panne vient de la **passerelle par défaut**, et non du DNS (le ping par adresse échoue déjà).' },
+        { t: 'list', items: ['Hypothèse : la passerelle configurée sur le poste est fausse ou obsolète. Le collègue utilise 192.168.1.1, qui répond ; 192.168.1.254 n’existe plus ou ne répond pas.', 'Vérification : lire la table de routage du poste, comparer avec celle du collègue, puis tester avec la bonne passerelle.'] },
+        { t: 'list', items: ['Correction : renseigner 192.168.1.1 comme passerelle, ou mieux repasser le poste en DHCP pour qu’il reçoive la bonne valeur.', 'Prévention : éviter les configurations statiques sur les postes, tenir à jour le plan d’adressage et documenter les passerelles.'] },
+        { t: 'callout', kind: 'info', text: 'Le raisonnement du plus proche au plus lointain a isolé la cause en trois pings : adresse, passerelle, Internet. Chercher du côté du DNS aurait été une fausse piste.' },
+      ],
+    },
     'incident-dns-dhcp': {
       blocks: [
         { t: 'p', text: 'Les symptômes (passerelle et DNS inattendus, certificats bancaires invalides) pointent vers une interception, montée soit par un **serveur DHCP pirate** qui a distribué ses propres paramètres, soit par une **usurpation de la résolution de noms** (faux DNS / empoisonnement) sur le réseau local.' },
