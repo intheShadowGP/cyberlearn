@@ -125,7 +125,8 @@ test('anglais : un cours traduit, son évaluation et ses corrections', async ({ 
   // Les corrections (chunk séparé) sont chargées en anglais.
   const explanations = await page.locator('.correction p').allInnerTexts();
   expect(explanations.length).toBeGreaterThan(0);
-  expect(explanations.join(' ')).not.toMatch(/[àâçéèêëîïôùûœ]/);
+  // « résumé » (mot anglais) et CyberAcadémie (nom propre) contiennent des lettres accentuées légitimes.
+  expect(explanations.join(' ').replace(/résumé|CyberAcadémie/gi, '')).not.toMatch(/[àâçéèêëîïôùûœ]/);
 });
 
 test('anglais : laboratoire, épreuve de démarche et schéma', async ({ page }) => {

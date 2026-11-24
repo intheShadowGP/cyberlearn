@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['B-adressage-ipv4', 'B-subnetting'],
   title: 'Adressage IPv4 et découpage en sous-réseaux',
   level: 2,
-  durationMin: 75,
+  durationMin: 95,
   summary:
     "Lire, calculer et concevoir un plan d'adressage IPv4 : masques, notation CIDR, VLSM et conséquences sur la segmentation de sécurité.",
   objectives: [
@@ -21,10 +21,11 @@ export const meta: CourseMeta = {
   skills: [
     { id: 'b-ipv4-struct', label: 'Structure et catégories d’adresses IPv4', level: 1 },
     { id: 'b-ipv4-cidr', label: 'Masques et notation CIDR', level: 2 },
-    { id: 'b-ipv4-calc', label: 'Calcul de sous-réseaux et VLSM', level: 2 },
+    { id: 'b-ipv4-calc', label: 'Calcul d’adresse réseau, de diffusion et de plage', level: 2 },
+    { id: 'b-ipv4-vlsm', label: 'Plan VLSM et agrégation de routes', level: 2 },
     { id: 'b-ipv4-secu', label: 'Adressage et segmentation de sécurité', level: 2 },
   ],
   sectionCount: 6,
-  questionCount: 17,
-  quizSize: 8,
+  questionCount: 40,
+  quizSize: 10,
 };

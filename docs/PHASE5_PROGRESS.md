@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (4 migrés) + 40 cours à créer (3 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 37 cours à créer et 41 cours existants à migrer.
+Total : 45 cours existants (6 migrés) + 40 cours à créer (3 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 37 cours à créer et 39 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -79,3 +79,5 @@ Total : 45 cours existants (4 migrés) + 40 cours à créer (3 créés) = 85 cou
 | `a-virtualisation-conteneurs` (nouveau, niveau 2) | ✔ 40 | ✔ 40 | ✔ |
 | `a-compilation-memoire-execution` (nouveau, niveau 3) | ✔ 40 | ✔ 40 | ✔ |
 | `a-isolation-confiance-plateforme` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
+| `b-osi-tcpip` | ✔ 40 | ✔ 40 | ✔ (diagnostic couche par couche) |
+| `b-ipv4-subnetting` | ✔ 40 | ✔ 40 | ✔ (préfixes courants, agrégation) |

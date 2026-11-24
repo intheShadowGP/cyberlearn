@@ -39,7 +39,7 @@ describe('validateur : rejette les contenus non conformes', () => {
     ['erreurs fréquentes insuffisantes', (s) => (s.courses[0]!.body.lesson.commonMistakes = ['a']), /erreurs fréquentes/],
     ['pas assez de pratique', (s) => s.courses[0]!.body.practice.splice(1), /exercices pratiques/],
     ['corrigé d’exercice manquant', (s) => delete s.courses[0]!.solutions.practice['calc-27'], /correction d'exercice manquante/],
-    ['banque trop petite pour le tirage', (s) => (s.courses[0]!.meta.quizSize = 12), /quizSize/],
+    ['banque trop petite pour le tirage', (s) => (s.courses[0]!.meta.quizSize = 25), /quizSize/],
     ['questionCount incohérent', (s) => (s.courses[0]!.meta.questionCount = 99), /questionCount/],
     ['compétence peu évaluée', (s) => s.courses[0]!.meta.skills.push({ id: 'b-orpheline', label: 'X', level: 1 }), /n'est évaluée que par 0/],
     ['sujet inconnu', (s) => s.courses[0]!.meta.topics.push('B-inexistant'), /sujet inconnu/],
@@ -48,9 +48,14 @@ describe('validateur : rejette les contenus non conformes', () => {
     ['schéma inconnu', (s) => s.courses[0]!.body.lesson.sections[0]!.blocks.push({ t: 'diagram', id: 'nope', caption: 'c', alt: 'a' }), /schéma inconnu/],
     ['type utilisé une seule fois', (s) => {
       const qs = s.courses[0]!.body.questions;
-      const idx = qs.findIndex((q) => q.type === 'open');
-      qs.splice(idx, 1);
-      delete s.courses[0]!.corrections.questions['ipv4-q12'];
+      // ne garde qu'une seule question ouverte (la première), supprime les autres et leurs corrections
+      for (let i = qs.length - 1; i >= 0; i--) {
+        const q = qs[i]!;
+        if (q.type === 'open' && qs.findIndex((x) => x.type === 'open') !== i) {
+          qs.splice(i, 1);
+          delete s.courses[0]!.corrections.questions[q.id];
+        }
+      }
       s.courses[0]!.meta.questionCount = qs.length;
     }, /utilisé par une seule question/],
     ['laboratoire sans composant', (s) => (s.labs[0]!.hasComponent = false), /Lab.tsx manquant/],
