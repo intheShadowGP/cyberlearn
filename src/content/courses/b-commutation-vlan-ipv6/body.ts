@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'b-commutation-vlan-ipv6',
@@ -15,6 +16,17 @@ export const body: CourseBody = {
           { t: 'def', term: 'Table CAM', text: 'Mémoire associative du commutateur qui stocke les couples (adresse MAC, port). Chaque entrée a une durée de vie : une adresse qui ne parle plus est oubliée. La table a une taille limitée, ce qui a des conséquences de sécurité.' },
           { t: 'p', text: 'Quand la destination d’une trame est **inconnue** de la table, le commutateur diffuse la trame sur tous les ports (comportement dit « fail open », ou inondation d’unicast inconnu). Ce comportement, normal, devient dangereux s’il est provoqué volontairement.' },
           { t: 'def', term: 'Domaine de diffusion', text: 'Ensemble des machines qui reçoivent les trames de diffusion (broadcast) les unes des autres. Un commutateur ne sépare pas les domaines de diffusion : par défaut, tout le réseau local n’en forme qu’un. Les VLAN servent précisément à le découper.' },
+          {
+            t: 'table',
+            caption: 'Concentrateur, commutateur, routeur',
+            head: ['Équipement', 'Couche', 'Décide d’après', 'Domaine de diffusion'],
+            rows: [
+              ['Concentrateur (hub)', '1', 'Rien : répète sur tous les ports', 'Un seul, et écoute facile'],
+              ['Commutateur (switch)', '2', 'Adresse MAC de destination', 'Un seul sans VLAN'],
+              ['Routeur', '3', 'Adresse IP de destination', 'Un par interface'],
+            ],
+          },
+          { t: 'def', term: 'Spanning Tree (STP)', text: "Protocole qui évite les boucles de couche 2 dans un réseau commuté redondant : il élit un commutateur **racine** et bloque les liens superflus. Un commutateur pirate qui se déclare racine peut détourner le trafic ; **BPDU Guard** coupe les ports d'accès qui reçoivent des messages STP, et **Root Guard** empêche un changement de racine." },
           {
             t: 'example',
             title: 'Deux machines, un échange',
@@ -41,6 +53,7 @@ export const body: CourseBody = {
           },
           { t: 'diagram', id: 'vlan-tagging', caption: 'L’étiquette 802.1Q n’est présente que sur le lien d’agrégation (trunk) ; sur les ports d’accès, les trames circulent sans étiquette.', alt: 'Un poste du VLAN 10 relié par un port d’accès (sans étiquette) au commutateur A, un lien d’agrégation étiqueté 802.1Q entre les commutateurs A et B, puis un port d’accès (sans étiquette) vers un autre poste du VLAN 10.' },
           { t: 'def', term: 'VLAN natif', text: 'Sur un lien d’agrégation, VLAN dont les trames circulent **sans étiquette**. S’il est mal maîtrisé, il permet des attaques par double marquage. Bonne pratique : lui attribuer un VLAN dédié et inutilisé, et marquer explicitement tout le trafic du trunk.' },
+          { t: 'def', term: 'Routage inter-VLAN', text: "Chaque VLAN est un réseau IP distinct : pour qu'ils communiquent, il faut un équipement de couche 3 (routeur, commutateur de niveau 3, pare-feu). C'est à ce point de passage que l'on applique la politique de filtrage entre zones." },
           { t: 'callout', kind: 'tip', text: 'Les VLAN servent à séparer des usages : postes de travail, téléphonie, serveurs, administration, équipements industriels, invités. Le VLAN d’administration des équipements réseau doit être isolé des postes utilisateurs, car il donne accès à la configuration des commutateurs.' },
         ],
       },
@@ -58,6 +71,8 @@ export const body: CourseBody = {
               ['**Saut de VLAN par double marquage**', 'Insérer deux étiquettes 802.1Q : la première (VLAN natif) est retirée, la seconde fait passer la trame dans un autre VLAN', 'VLAN natif dédié et inutilisé, marquage explicite du trafic'],
               ['**Usurpation ARP**', 'Répondre à la place d’une autre machine pour intercepter son trafic (attaque de l’intercepteur)', '**Dynamic ARP Inspection**, appuyée sur la surveillance DHCP'],
               ['**Serveur DHCP pirate**', 'Répondre aux demandes DHCP pour imposer une passerelle contrôlée par l’attaquant', '**DHCP snooping** : n’autoriser les réponses DHCP que depuis les ports de confiance'],
+              ['**Manipulation de Spanning Tree**', 'Brancher un commutateur pirate qui se fait élire racine pour détourner le trafic', '**BPDU Guard** sur les ports d’accès, **Root Guard** sur les liens vers la périphérie'],
+              ['**Appareil non autorisé sur une prise**', 'Brancher un équipement inconnu pour accéder au réseau interne', '**802.1X** (authentification du port), complété par le port security'],
             ],
           },
           { t: 'def', term: 'DHCP snooping', text: 'Fonction du commutateur qui classe les ports en « de confiance » (vers le vrai serveur DHCP) et « non fiables » (côté utilisateurs). Les réponses DHCP venant d’un port non fiable sont rejetées, et le commutateur construit une table des baux qui sert ensuite à l’inspection ARP et au contrôle des adresses source.' },
@@ -81,6 +96,8 @@ export const body: CourseBody = {
             ],
           },
           { t: 'def', term: 'SLAAC', text: 'Autoconfiguration d’adresse sans état : la machine écoute les messages d’annonce de routeur (Router Advertisement, via ICMPv6) qui annoncent le préfixe du réseau, puis construit elle-même son adresse. Aucun serveur n’est obligatoire, à la différence de DHCP ; DHCPv6 existe mais est optionnel.' },
+          { t: 'def', term: 'Préfixe /64', text: "Les sous-réseaux IPv6 sont en pratique des **/64** : 64 bits de préfixe de réseau, 64 bits d'identifiant d'interface. SLAAC l'exige. Un site reçoit généralement un /48 ou un /56 à découper en /64." },
+          { t: 'def', term: 'Adresses particulières', text: "`::1` est la boucle locale (équivalent de 127.0.0.1) ; `::` est l'adresse non spécifiée ; `2001:db8::/32` est réservée à la documentation. IPv6 n'a plus de diffusion : on utilise la multidiffusion (`ff02::1` : tous les nœuds du lien)." },
           { t: 'def', term: 'NDP', text: 'Protocole de découverte de voisins (Neighbor Discovery Protocol), fondé sur ICMPv6, qui remplace l’ARP d’IPv4 : il résout les adresses, découvre les routeurs et détecte les adresses en double.' },
         ],
       },
@@ -97,6 +114,7 @@ export const body: CourseBody = {
               ['Serveur DHCPv6 pirate', 'DHCPv6 Guard, équivalent du DHCP snooping'],
               ['Pare-feu et surveillance limités à IPv4', 'Appliquer les mêmes règles de filtrage et la même journalisation en IPv6'],
               ['Tunnels IPv6 sur IPv4 non maîtrisés', 'Bloquer les mécanismes de transition inutiles (6to4, Teredo) sur les postes'],
+              ['Blocage de tout ICMPv6', 'Autoriser les types indispensables : NDP, annonces de routeur et « Packet Too Big » (découverte du MTU), car les routeurs IPv6 ne fragmentent pas'],
             ],
           },
           { t: 'callout', kind: 'warn', text: 'Désactiver IPv6 « pour simplifier » n’est pas recommandé par les éditeurs et peut casser certains services. La bonne approche est de le prendre en compte : l’adresser, le filtrer et le surveiller comme IPv4.' },
@@ -151,24 +169,7 @@ export const body: CourseBody = {
       steps: ['Formuler les deux hypothèses d’attaque compatibles avec ces symptômes.', 'Indiquer comment les distinguer.', 'Donner les protections qui auraient empêché chacune.'],
     },
   ],
-  questions: [
-    { id: 'cvi-q1', type: 'single', difficulty: 1, skills: ['b-l2-commutation'], prompt: 'Comment un commutateur apprend-il sur quel port se trouve une adresse MAC ?', options: [{ id: 'a', text: 'En lisant l’adresse MAC source des trames qu’il reçoit sur chaque port' }, { id: 'b', text: 'En interrogeant le serveur DNS' }, { id: 'c', text: 'En lisant l’adresse IP de destination' }, { id: 'd', text: 'Il ne l’apprend pas : il diffuse toujours tout partout' }] },
-    { id: 'cvi-q2', type: 'single', difficulty: 2, skills: ['b-l2-commutation'], prompt: 'Que fait un commutateur d’une trame dont l’adresse MAC de destination est absente de sa table ?', options: [{ id: 'a', text: 'Il la diffuse sur tous les ports sauf celui d’arrivée' }, { id: 'b', text: 'Il la détruit' }, { id: 'c', text: 'Il la renvoie à l’expéditeur' }, { id: 'd', text: 'Il la stocke jusqu’à connaître la destination' }] },
-    { id: 'cvi-q3', type: 'truefalse', difficulty: 2, skills: ['b-l2-commutation'], prompt: 'Par défaut, un commutateur seul sépare un réseau en plusieurs domaines de diffusion.' },
-    { id: 'cvi-q4', type: 'short', difficulty: 2, skills: ['b-l2-commutation'], prompt: 'Comment appelle-t-on la table d’un commutateur qui associe les adresses MAC aux ports ? (sigle de trois lettres)', placeholder: 'sigle' },
-    { id: 'cvi-q5', type: 'single', difficulty: 2, skills: ['b-vlan'], prompt: 'Que transporte un lien d’agrégation (trunk) entre deux commutateurs ?', options: [{ id: 'a', text: 'Le trafic de plusieurs VLAN, chaque trame portant une étiquette 802.1Q' }, { id: 'b', text: 'Le trafic d’un seul VLAN sans étiquette' }, { id: 'c', text: 'Uniquement du trafic de diffusion' }, { id: 'd', text: 'Uniquement des adresses IPv6' }] },
-    { id: 'cvi-q6', type: 'short', difficulty: 2, skills: ['b-vlan'], prompt: 'Combien de bits le champ identifiant de VLAN (VID) de l’étiquette 802.1Q comporte-t-il ?', placeholder: 'nombre' },
-    { id: 'cvi-q7', type: 'truefalse', difficulty: 2, skills: ['b-vlan'], prompt: 'Deux machines placées sur des VLAN différents communiquent directement, sans passer par un routeur.' },
-    { id: 'cvi-q8', type: 'multi', difficulty: 2, skills: ['b-vlan', 'b-l2-securite'], prompt: 'Quelles pratiques concernent le VLAN natif d’un lien d’agrégation ?', options: [{ id: 'a', text: 'Lui attribuer un VLAN dédié et inutilisé' }, { id: 'b', text: 'Marquer explicitement le trafic du trunk' }, { id: 'c', text: 'Y placer les postes utilisateurs pour simplifier' }, { id: 'd', text: 'Le laisser par défaut sur le VLAN 1' }] },
-    { id: 'cvi-q9', type: 'open', difficulty: 3, skills: ['b-l2-securite'], prompt: 'Un attaquant inonde un commutateur de milliers de fausses adresses MAC sources. Expliquez l’effet recherché sur le commutateur et la protection standard qui l’empêche.' },
-    { id: 'cvi-q10', type: 'single', difficulty: 2, skills: ['b-l2-securite'], prompt: 'Quelle protection limite le nombre d’adresses MAC autorisées sur un port d’accès ?', options: [{ id: 'a', text: 'Le port security' }, { id: 'b', text: 'Le NAT' }, { id: 'c', text: 'Le routage OSPF' }, { id: 'd', text: 'Le reverse proxy' }] },
-    { id: 'cvi-q11', type: 'multi', difficulty: 3, skills: ['b-l2-securite'], prompt: 'Quelles protections s’appuient sur la table construite par le DHCP snooping ?', options: [{ id: 'a', text: 'L’inspection dynamique des requêtes ARP (DAI)' }, { id: 'b', text: 'Le contrôle des adresses IP source (IP Source Guard)' }, { id: 'c', text: 'Le chiffrement TLS des pages web' }, { id: 'd', text: 'Le rejet des réponses DHCP venant d’un port non fiable' }] },
-    { id: 'cvi-q12', type: 'single', difficulty: 1, skills: ['b-ipv6'], prompt: 'Sur combien de bits porte une adresse IPv6 ?', options: [{ id: 'a', text: '128' }, { id: 'b', text: '32' }, { id: 'c', text: '64' }, { id: 'd', text: '256' }] },
-    { id: 'cvi-q13', type: 'short', difficulty: 2, skills: ['b-ipv6'], prompt: 'Quel préfixe identifie les adresses IPv6 lien-local ?', placeholder: 'fe80::/…' },
-    { id: 'cvi-q14', type: 'single', difficulty: 2, skills: ['b-ipv6'], prompt: 'Grâce à quel message une machine construit-elle son adresse IPv6 par SLAAC ?', options: [{ id: 'a', text: 'L’annonce de routeur (Router Advertisement) en ICMPv6' }, { id: 'b', text: 'Une requête ARP' }, { id: 'c', text: 'Un bail DHCPv4' }, { id: 'd', text: 'Une requête DNS inverse' }] },
-    { id: 'cvi-q15', type: 'truefalse', difficulty: 2, skills: ['b-ipv6', 'b-l2-securite'], prompt: 'Sur un réseau utilisé « en IPv4 seulement », IPv6 est généralement inactif et ne présente donc aucun risque.' },
-    { id: 'cvi-q16', type: 'open', difficulty: 3, skills: ['b-ipv6', 'b-l2-securite'], prompt: 'Un réseau d’entreprise filtre et surveille IPv4 mais n’a jamais configuré IPv6. Expliquez le risque et proposez trois mesures concrètes.' },
-  ],
+  questions,
   resources: [
     { title: 'RFC 4861 — Neighbor Discovery for IP version 6 (IPv6)', source: 'IETF', url: 'https://www.rfc-editor.org/rfc/rfc4861' },
     { title: 'RFC 4862 — IPv6 Stateless Address Autoconfiguration', source: 'IETF', url: 'https://www.rfc-editor.org/rfc/rfc4862' },

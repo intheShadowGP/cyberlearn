@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['B-switching', 'B-vlan', 'B-adressage-ipv6'],
   title: 'Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage',
   level: 2,
-  durationMin: 85,
+  durationMin: 105,
   summary:
     'Comprendre comment un commutateur apprend les adresses MAC, segmenter un réseau avec des VLAN marqués 802.1Q, reconnaître et contrer les attaques de couche 2, et maîtriser l’adressage IPv6, son autoconfiguration et sa sécurisation.',
   objectives: [
@@ -22,9 +22,10 @@ export const meta: CourseMeta = {
     { id: 'b-l2-commutation', label: 'Commutation Ethernet et table d’adresses MAC', level: 2 },
     { id: 'b-vlan', label: 'VLAN et segmentation 802.1Q', level: 2 },
     { id: 'b-l2-securite', label: 'Sécurité de la couche 2', level: 3 },
-    { id: 'b-ipv6', label: 'Adressage et sécurité IPv6', level: 2 },
+    { id: 'b-ipv6', label: 'Adressage IPv6 et autoconfiguration', level: 2 },
+    { id: 'b-ipv6-secu', label: 'Sécurité d’IPv6', level: 3 },
   ],
   sectionCount: 5,
-  questionCount: 16,
-  quizSize: 8,
+  questionCount: 40,
+  quizSize: 10,
 };
