@@ -11,6 +11,13 @@ export const solutions: CourseSolutions = {
         { t: 'callout', kind: 'tip', text: 'Si `prix` venait d’une saisie utilisateur, il faudrait le valider côté serveur : vérifier que c’est bien un nombre, positif, dans une plage raisonnable, avant tout calcul — sinon une valeur forgée (négative, énorme, non numérique) pourrait fausser le résultat.' },
       ],
     },
+    'lire-commande': {
+      blocks: [
+        { t: 'list', items: ['`cat` lit le fichier du journal d’authentification et envoie son contenu sur sa sortie.', '`grep "Failed password"` ne garde que les lignes qui contiennent cette expression, c’est-à-dire les échecs de connexion.', '`wc -l` compte les lignes reçues. Les deux tubes `|` relient la sortie de chaque commande à l’entrée de la suivante.'] },
+        { t: 'p', text: 'Le résultat est un nombre : le total d’échecs de connexion consignés dans le fichier. Un total anormalement élevé peut révéler une attaque par force brute, à confirmer en regardant les adresses sources et les horaires.' },
+        { t: 'callout', kind: 'tip', text: 'Sous Windows, l’idée est la même avec PowerShell : par exemple `Get-Content journal.log | Select-String "Failed" | Measure-Object`, ou l’interrogation du journal de sécurité des événements.' },
+      ],
+    },
     'classer-notions': {
       blocks: [
         { t: 'list', items: ['Type réel d’un fichier : un fichier nommé `facture.pdf.exe` est en réalité un exécutable ; se fier au nom conduit à l’ouvrir en croyant lire un document.', 'Dépendance : une bibliothèque réutilisée par l’application comporte une vulnérabilité connue ; l’application en hérite tant qu’on ne l’a pas mise à jour.', 'Ne pas faire confiance au client : une vérification faite seulement dans le navigateur (par exemple « montant positif ») se contourne en envoyant directement la requête ; le serveur doit revérifier.'] },

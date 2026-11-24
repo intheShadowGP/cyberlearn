@@ -37,6 +37,7 @@ Guide de contribution : [I18N.md](I18N.md).
 - [x] `index.html` : description (mise à jour dynamique) et message `noscript` bilingues
 - [x] Tests e2e anglais : bascule, persistance, positionnement, cours traduit, labo, épreuve, axe WCAG 2.2 AA (deux thèmes)
 - [ ] Balayage e2e de toutes les routes en anglais sans fuite de français (écrit, activé par `PHASE5_COMPLETE`)
+- [ ] Intégration des nouveaux cours du module A dans les parcours (`paths.ts`), sans reverrouiller de cours existant
 - [ ] Qualité de la banque de positionnement (40 questions) : longueurs des options
 - [ ] Documentation utilisateur (README, docs) mise à jour
 
@@ -46,7 +47,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 
 | Discipline | Débutant | Intermédiaire | Avancé | Expert |
 | --- | --- | --- | --- | --- |
-| A Fondamentaux | ✔ ×2 | ➕ | ➕ | ➕ |
+| A Fondamentaux | ✔ ×2 (banques 40 + anglais) | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) |
 | B Réseaux | ✔ | ✔ ×3 | ✔ | ➕ |
 | C Linux | ✔ | ✔ | ✔ | ➕ |
 | D Windows | ➕ | ✔ | ✔ ×2 | ➕ |
@@ -65,11 +66,16 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (1 migré) + 40 cours à créer = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises.
+Total : 45 cours existants (4 migrés) + 40 cours à créer (3 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 37 cours à créer et 41 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
 | Cours | Banque FR | Banque EN | Leçon EN |
 | --- | --- | --- | --- |
 | `r-certifications-preparation` | ✔ 46 | ✔ 46 | ✔ |
+| `a-systemes-fondamentaux` | ✔ 40 | ✔ 40 | ✔ (leçon enrichie : données, mémoire des processus) |
+| `a-fichiers-programmes-ligne-commande` | ✔ 40 | ✔ 40 | ✔ (leçon enrichie : entrées non fiables, commandes) |
+| `a-virtualisation-conteneurs` (nouveau, niveau 2) | ✔ 40 | ✔ 40 | ✔ |
+| `a-compilation-memoire-execution` (nouveau, niveau 3) | ✔ 40 | ✔ 40 | ✔ |
+| `a-isolation-confiance-plateforme` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |

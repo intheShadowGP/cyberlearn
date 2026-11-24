@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 45 |
-| Questions de cours (avec correction) | 754 |
+| Cours complets | 48 |
+| Questions de cours (avec correction) | 922 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -22,7 +22,7 @@
 
 | Discipline | Cours | Niveaux | Sujets abordés / cartographiés |
 | --- | --- | --- | --- |
-| A. Fondamentaux de l'informatique | 2 | 1 | 16 / 16 |
+| A. Fondamentaux de l'informatique | 5 | 1, 2, 3, 4 | 16 / 16 |
 | B. Réseaux informatiques | 5 | 1, 2, 3 | 36 / 36 |
 | C. Linux | 3 | 1, 2, 3 | 22 / 22 |
 | D. Windows et Windows Server | 3 | 2, 3 | 25 / 25 |
@@ -45,8 +45,11 @@
 
 | Cours | Discipline | Niveau | Durée | Sections | Questions | Exercices | Références |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Fichiers, programmes et ligne de commande : le socle avant la sécurité (`a-fichiers-programmes-ligne-commande`) | A | 1 · Débutant | 75 min | 5 | 16 | 2 | 4 |
-| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 70 min | 4 | 16 | 2 | 3 |
+| Fichiers, programmes et ligne de commande : le socle avant la sécurité (`a-fichiers-programmes-ligne-commande`) | A | 1 · Débutant | 95 min | 5 | 40 | 3 | 4 |
+| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 90 min | 6 | 40 | 2 | 3 |
+| Virtualisation et conteneurs : isoler les charges de travail (`a-virtualisation-conteneurs`) | A | 2 · Intermédiaire | 100 min | 6 | 40 | 2 | 4 |
+| Du code au processus : compilation, binaires, mémoire et exécution (`a-compilation-memoire-execution`) | A | 3 · Avancé | 110 min | 6 | 40 | 2 | 4 |
+| Base de confiance, isolation et architecture de sécurité d’une plateforme (`a-isolation-confiance-plateforme`) | A | 4 · Expert | 120 min | 6 | 40 | 2 | 4 |
 | Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 60 min | 4 | 16 | 2 | 4 |
 | Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 75 min | 6 | 17 | 3 | 4 |
 | Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage (`b-commutation-vlan-ipv6`) | B | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 5 |

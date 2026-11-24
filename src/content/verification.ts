@@ -23,6 +23,9 @@ const sheet = (versions: string[], evolving: string[]): VerificationSheet => ({ 
 export const VERIFICATION: Record<string, VerificationSheet> = {
   'a-systemes-fondamentaux': sheet(['Spécification UEFI (UEFI Forum)', 'NIST SP 800-147'], ['Mécanismes de démarrage sécurisé des constructeurs']),
   'a-fichiers-programmes-ligne-commande': sheet(['Filesystem Hierarchy Standard', 'MDN Web Docs (compilation, client-serveur, ligne de commande)'], ['Outils et commandes selon les systèmes']),
+  'a-virtualisation-conteneurs': sheet(['NIST SP 800-125 (virtualisation)', 'NIST SP 800-190 (conteneurs)', 'Documentation Docker (sécurité)', 'namespaces(7) (man-pages Linux)'], ['Fonctions de sécurité des moteurs de conteneurs', 'Technologies de micro-VM et de noyau intercepté']),
+  'a-compilation-memoire-execution': sheet(['elf(5) (man-pages Linux)', 'Spécification du format PE (Microsoft)', 'CWE-121 et CWE-416 (MITRE)'], ['Protections de compilation et d’exécution selon les systèmes et les compilateurs']),
+  'a-isolation-confiance-plateforme': sheet(['NIST SP 800-193', 'Saltzer et Schroeder (1975)', 'TPM 2.0 Library Specification (TCG)', 'seL4 Foundation'], ['Attaques contre le démarrage sécurisé et révocation des composants', 'Technologies d’informatique confidentielle et canaux auxiliaires']),
   'b-osi-tcpip': sheet(['RFC 9293 (TCP)', 'RFC 768 (UDP)', 'RFC 826 (ARP)'], []),
   'b-ipv4-subnetting': sheet(['RFC 4632 (CIDR)', 'RFC 1918', 'RFC 3021', 'RFC 6598', 'RFC 5737'], []),
   'b-commutation-vlan-ipv6': sheet(['IEEE 802.1Q', 'RFC 4861 (NDP)', 'RFC 4862 (SLAAC)', 'NIST SP 800-119 (déploiement IPv6)'], ['Noms commerciaux des protections de couche 2 selon les constructeurs', 'Mécanismes de transition IPv6 encore actifs']),

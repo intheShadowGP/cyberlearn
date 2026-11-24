@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'a-systemes-fondamentaux',
@@ -13,6 +14,7 @@ export const body: CourseBody = {
           { t: 'def', term: 'Processeur (CPU)', text: "Exécute les instructions machine, une à une, à partir de la mémoire. Il possède des **registres** (mémoire minuscule et ultra-rapide) et plusieurs **cœurs** capables de travailler en parallèle." },
           { t: 'def', term: 'Mémoire vive (RAM)', text: "Mémoire de travail **volatile** : elle contient les programmes en cours d'exécution et leurs données, et s'efface à l'extinction." },
           { t: 'def', term: 'Stockage', text: "Mémoire **persistante** (SSD, disque dur) qui conserve fichiers et système d'exploitation hors tension. Beaucoup plus lente que la RAM." },
+          { t: 'def', term: 'Cache', text: "Petite mémoire très rapide, placée entre le processeur et la RAM, qui garde les données et instructions récemment utilisées. Elle est organisée en niveaux (L1, L2, L3) et reste volatile." },
           {
             t: 'table',
             caption: 'Hiérarchie mémoire (ordres de grandeur)',
@@ -28,11 +30,36 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'donnees',
+        title: 'Représenter l’information : bits, octets, hexadécimal',
+        blocks: [
+          { t: 'p', text: "Tout ce qu'un ordinateur manipule (texte, image, programme, clé de chiffrement) est représenté par des **bits**, qui valent 0 ou 1. Un **octet** regroupe 8 bits et peut prendre 256 valeurs, de 0 à 255. Un fichier n'est rien d'autre qu'une suite d'octets : c'est la façon de les interpréter qui en fait du texte, une image ou un programme." },
+          { t: 'def', term: 'Hexadécimal', text: "Écriture en base 16, avec les chiffres 0 à 9 puis les lettres A à F. Un octet s'écrit toujours avec **deux** chiffres hexadécimaux (de `00` à `FF`) : c'est la notation des adresses mémoire, des empreintes et des vidages d'octets." },
+          {
+            t: 'table',
+            caption: 'Un même octet, trois écritures',
+            head: ['Décimal', 'Binaire', 'Hexadécimal'],
+            rows: [['10', '00001010', '0A'], ['65', '01000001', '41'], ['255', '11111111', 'FF']],
+          },
+          { t: 'def', term: 'Encodage de caractères', text: "Règle qui associe un caractère à une valeur numérique. L'**ASCII** couvre 128 caractères (`A` = 65, `a` = 97). **UTF-8** représente tout Unicode avec 1 à 4 octets par caractère et reste identique à l'ASCII pour les 128 premiers." },
+          {
+            t: 'example',
+            title: 'Lire les premiers octets d’un fichier',
+            blocks: [
+              { t: 'code', lang: 'text', code: '4D 5A 90 00 03 00 00 00 ...   →  « MZ » : exécutable Windows (format PE)\n25 50 44 46 2D ...            →  « %PDF- » : document PDF\nFF D8 FF E0 ...               →  image JPEG' },
+              { t: 'p', text: "Ces premiers octets, la **signature** du fichier, indiquent son vrai type. Un fichier nommé `facture.pdf` qui commence par `4D 5A` est un exécutable déguisé : en investigation, on lit le contenu plutôt que de se fier au nom." },
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Savoir passer du binaire à l'hexadécimal et lire un vidage d'octets est une compétence de base de l'analyse de fichiers, de la forensique et de l'étude des malwares." },
+        ],
+      },
+      {
         id: 'demarrage',
         title: 'Le démarrage : du firmware au système',
         blocks: [
           { t: 'list', ordered: true, items: ["Mise sous tension : le **firmware** (UEFI, anciennement BIOS) s'exécute depuis une puce de la carte mère.", 'Le firmware initialise le matériel et cherche un **chargeur d’amorçage** (bootloader).', 'Le chargeur (Windows Boot Manager, GRUB) charge le **noyau** du système d’exploitation.', 'Le noyau initialise les pilotes puis lance le premier processus (`systemd` sous Linux, `smss.exe` puis `wininit.exe` sous Windows).'] },
           { t: 'def', term: 'Secure Boot', text: "Fonction UEFI qui n'autorise l'exécution que de chargeurs et de noyaux **signés** par une clé de confiance. Elle bloque les bootkits qui s'insèrent avant le système." },
+          { t: 'def', term: 'TPM (Trusted Platform Module)', text: "Composant (puce dédiée ou fonction du firmware) qui protège des clés et enregistre des **mesures** de la chaîne de démarrage. Il permet, par exemple, à BitLocker de ne libérer la clé du disque que si le démarrage n'a pas été modifié." },
           { t: 'callout', kind: 'warn', text: "Un code malveillant qui s'exécute avant le système d'exploitation (bootkit, implant UEFI) échappe à l'antivirus, qui démarre après lui. C'est pourquoi Secure Boot, le mot de passe firmware et les mises à jour UEFI comptent." },
         ],
       },
@@ -55,6 +82,27 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'espace-adressage',
+        title: 'La mémoire d’un processus et son isolation',
+        blocks: [
+          { t: 'p', text: "Chaque processus croit disposer de toute la mémoire pour lui seul : il voit un espace d'adressage **virtuel** privé. Le processeur (son unité de gestion mémoire, la **MMU**) et le noyau traduisent ces adresses virtuelles en adresses de la mémoire physique, et contrôlent les droits de chaque page : lecture, écriture, exécution." },
+          { t: 'def', term: 'Mémoire virtuelle', text: "Abstraction qui donne à chaque processus son propre espace d'adressage. Un processus ordinaire ne peut pas lire ni modifier la mémoire d'un autre : c'est la première barrière d'isolation du système." },
+          {
+            t: 'table',
+            caption: 'Zones principales de la mémoire d’un processus',
+            head: ['Zone', 'Contenu', 'Intérêt pour la sécurité'],
+            rows: [
+              ['Code', 'Instructions du programme', 'Lecture et exécution, pas d’écriture'],
+              ['Pile (stack)', 'Appels de fonctions, variables locales, adresses de retour', 'Cible des débordements de tampon'],
+              ['Tas (heap)', 'Données allouées dynamiquement', 'Cible des erreurs de gestion mémoire (use-after-free)'],
+            ],
+          },
+          { t: 'def', term: 'NX / DEP', text: "Protection qui marque la pile et le tas comme **non exécutables** : du code injecté dans ces zones ne peut plus s'exécuter directement." },
+          { t: 'def', term: 'ASLR', text: "Technique qui **rend aléatoires** les adresses du code, de la pile et du tas à chaque lancement, pour qu'un attaquant ne puisse pas les prédire." },
+          { t: 'callout', kind: 'warn', text: "L'isolation des processus est une barrière, pas une garantie : une vulnérabilité mémoire dans une application ou dans le noyau peut permettre de la franchir. Ces failles sont étudiées dans le module G." },
+        ],
+      },
+      {
         id: 'privileges',
         title: 'Privilèges et moindre privilège',
         blocks: [
@@ -65,6 +113,8 @@ export const body: CourseBody = {
             rows: [['Linux', '`root` (UID 0)', '`sudo`, binaires SUID'], ['Windows', '`SYSTEM`, Administrateurs', 'UAC (contrôle de compte d’utilisateur), services']],
           },
           { t: 'def', term: 'Principe du moindre privilège', text: "Chaque utilisateur, processus ou service ne doit disposer que des droits **strictement nécessaires** à sa fonction, et seulement pour la durée nécessaire." },
+          { t: 'def', term: 'Bit SUID', text: "Permission Linux qui fait exécuter un programme avec l'identité de son **propriétaire** (souvent `root`) et non celle de l'utilisateur qui le lance. Indispensable pour certains outils, mais un programme SUID vulnérable est un vecteur classique d'élévation de privilèges." },
+          { t: 'def', term: 'Compte de service', text: "Compte dédié à un service ou à une application : droits limités à sa tâche, pas d'ouverture de session interactive, mot de passe long et géré. Il évite de faire tourner un service avec un compte administrateur." },
           { t: 'def', term: 'Élévation de privilèges', text: "Technique par laquelle un attaquant passe d'un contexte limité (utilisateur) à un contexte plus puissant (administrateur, SYSTEM, root) en exploitant une faille ou une mauvaise configuration." },
           { t: 'callout', kind: 'key', text: "Une compromission sous un compte standard reste souvent **contenue**. La même compromission sous un compte administrateur donne l'ensemble de la machine. Travailler au quotidien sans droits d'administration est l'une des mesures les plus rentables." },
         ],
@@ -113,24 +163,7 @@ export const body: CourseBody = {
       steps: ['Identifier les risques de cette configuration.', 'Proposer une organisation alternative pour l’installation de logiciels.', 'Proposer une configuration pour le compte du service de sauvegarde.'],
     },
   ],
-  questions: [
-    { id: 'afund-q1', type: 'single', difficulty: 1, skills: ['a-hw'], prompt: 'Quelle mémoire perd son contenu à l’extinction de la machine ?', options: [{ id: 'a', text: 'Le SSD' }, { id: 'b', text: 'La mémoire vive (RAM)' }, { id: 'c', text: 'Le disque dur' }, { id: 'd', text: 'La puce du firmware UEFI' }] },
-    { id: 'afund-q2', type: 'truefalse', difficulty: 1, skills: ['a-hw'], prompt: 'Lors d’un incident, il est recommandé d’éteindre immédiatement la machine pour préserver les preuves en mémoire.' },
-    { id: 'afund-q3', type: 'multi', difficulty: 2, skills: ['a-hw'], prompt: 'Quelles informations peut-on typiquement trouver en mémoire vive sur une machine en fonctionnement ?', options: [{ id: 'a', text: 'Des clés de chiffrement de disque en cours d’usage' }, { id: 'b', text: 'Des processus malveillants « sans fichier »' }, { id: 'c', text: 'Le numéro de série gravé du processeur uniquement' }, { id: 'd', text: 'Des connexions réseau actives' }] },
-    { id: 'afund-q4', type: 'single', difficulty: 1, skills: ['a-boot'], prompt: 'Quel composant s’exécute en premier à la mise sous tension ?', options: [{ id: 'a', text: 'Le noyau du système d’exploitation' }, { id: 'b', text: 'Le firmware UEFI (ou BIOS)' }, { id: 'c', text: 'L’antivirus' }, { id: 'd', text: 'Le gestionnaire de session' }] },
-    { id: 'afund-q5', type: 'short', difficulty: 1, skills: ['a-boot'], prompt: 'Quelle fonction UEFI n’autorise que des chargeurs d’amorçage signés par une clé de confiance ? (deux mots)' },
-    { id: 'afund-q6', type: 'truefalse', difficulty: 2, skills: ['a-boot'], prompt: 'Un bootkit est particulièrement difficile à détecter car il s’exécute avant l’antivirus du système d’exploitation.' },
-    { id: 'afund-q7', type: 'single', difficulty: 1, skills: ['a-proc'], prompt: 'Comment une application en espace utilisateur demande-t-elle au noyau de lire un fichier ?', options: [{ id: 'a', text: 'Elle accède directement au contrôleur de disque' }, { id: 'b', text: 'Par un appel système' }, { id: 'c', text: 'En modifiant la table des processus' }, { id: 'd', text: 'Par une interruption du firmware' }] },
-    { id: 'afund-q8', type: 'multi', difficulty: 2, skills: ['a-proc'], prompt: 'Quelles caractéristiques possède chaque processus ?', options: [{ id: 'a', text: 'Un identifiant (PID)' }, { id: 'b', text: 'Un processus parent' }, { id: 'c', text: 'Un contexte de sécurité (compte)' }, { id: 'd', text: 'Une adresse MAC dédiée' }] },
-    { id: 'afund-q9', type: 'single', difficulty: 2, skills: ['a-proc', 'a-priv'], prompt: 'Sur un poste, `WINWORD.EXE` lance `powershell.exe -enc …`. Quelle est l’interprétation la plus probable ?', options: [{ id: 'a', text: 'Une mise à jour automatique de Word' }, { id: 'b', text: 'Un document piégé exécutant une commande encodée' }, { id: 'c', text: 'Le correcteur orthographique' }, { id: 'd', text: 'Un comportement normal de l’impression' }] },
-    { id: 'afund-q10', type: 'short', difficulty: 1, skills: ['a-priv'], prompt: 'Sous Linux, quel est le nom du compte tout-puissant (UID 0) ?' },
-    { id: 'afund-q11', type: 'truefalse', difficulty: 1, skills: ['a-priv'], prompt: 'Le principe du moindre privilège consiste à accorder à chaque compte uniquement les droits strictement nécessaires à sa fonction.' },
-    { id: 'afund-q12', type: 'single', difficulty: 2, skills: ['a-priv'], prompt: 'Un attaquant passe d’un compte utilisateur standard au compte SYSTEM grâce à un service mal configuré. Comment s’appelle cette étape ?', options: [{ id: 'a', text: 'Mouvement latéral' }, { id: 'b', text: 'Élévation de privilèges' }, { id: 'c', text: 'Exfiltration' }, { id: 'd', text: 'Reconnaissance' }] },
-    { id: 'afund-q13', type: 'open', difficulty: 2, skills: ['a-priv', 'a-proc'], prompt: 'Expliquez pourquoi un service exécuté sous un compte administrateur du domaine représente un risque, et ce que vous proposez à la place.' },
-    { id: 'afund-q14', type: 'single', difficulty: 2, skills: ['a-hw', 'a-boot'], prompt: 'Pourquoi le chiffrement intégral du disque (BitLocker, LUKS) est-il recommandé sur un ordinateur portable ?', options: [{ id: 'a', text: 'Il accélère les accès disque' }, { id: 'b', text: 'Il protège les données si l’appareil est volé éteint' }, { id: 'c', text: 'Il remplace l’antivirus' }, { id: 'd', text: 'Il empêche les attaques réseau' }] },
-    { id: 'afund-q15', type: 'open', difficulty: 2, skills: ['a-boot', 'a-hw'], prompt: 'Un serveur suspect est toujours allumé. Le responsable veut l’éteindre « pour arrêter l’attaque ». Que lui répondez-vous et quel ordre d’actions proposez-vous ?' },
-    { id: 'afund-q16', type: 'multi', difficulty: 2, skills: ['a-proc', 'a-boot'], prompt: 'Quels éléments s’exécutent avec un niveau de privilège maximal sur la machine ?', options: [{ id: 'a', text: 'Le noyau du système' }, { id: 'b', text: 'Le firmware UEFI' }, { id: 'c', text: 'Un navigateur lancé par un utilisateur standard' }, { id: 'd', text: 'Un pilote de périphérique chargé dans le noyau' }] },
-  ],
+  questions,
   resources: [
     { title: 'Recommandations de configuration d’un système GNU/Linux', source: 'ANSSI (guide)' },
     { title: 'NIST SP 800-147 — BIOS Protection Guidelines', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/147/final' },

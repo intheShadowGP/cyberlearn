@@ -368,7 +368,7 @@ test('utilisation au clavier seul d’un questionnaire', async ({ page }) => {
   const start = page.getByRole('button', { name: 'Commencer l’évaluation' });
   await start.focus();
   await page.keyboard.press('Enter');
-  await expect(page.locator('.question')).toHaveCount(8);
+  await expect(page.locator('.question')).toHaveCount(10);
   for (const q of await page.locator('.question').all()) {
     const input = q.locator('input, textarea').first();
     await input.focus();

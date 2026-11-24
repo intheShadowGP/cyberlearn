@@ -7,6 +7,9 @@ const D = '2026-11-15';
 export const VERIFICATION_EN: Record<string, { versions: string[]; evolving: string[] }> = {
   'a-systemes-fondamentaux': { versions: ['UEFI specification (UEFI Forum)', 'NIST SP 800-147'], evolving: ['Manufacturers’ secure boot mechanisms'] },
   'a-fichiers-programmes-ligne-commande': { versions: ['Filesystem Hierarchy Standard', 'MDN Web Docs (compilation, client-server, command line)'], evolving: ['Tools and commands depending on the systems'] },
+  'a-virtualisation-conteneurs': { versions: ['NIST SP 800-125 (virtualization)', 'NIST SP 800-190 (containers)', 'Docker documentation (security)', 'namespaces(7) (Linux man-pages)'], evolving: ['Security features of container engines', 'Micro-VM and intercepted-kernel technologies'] },
+  'a-compilation-memoire-execution': { versions: ['elf(5) (Linux man-pages)', 'PE format specification (Microsoft)', 'CWE-121 and CWE-416 (MITRE)'], evolving: ['Compile-time and run-time protections depending on systems and compilers'] },
+  'a-isolation-confiance-plateforme': { versions: ['NIST SP 800-193', 'Saltzer and Schroeder (1975)', 'TPM 2.0 Library Specification (TCG)', 'seL4 Foundation'], evolving: ['Attacks on secure boot and revocation of components', 'Confidential computing technologies and side channels'] },
   'b-osi-tcpip': { versions: ['RFC 9293 (TCP)', 'RFC 768 (UDP)', 'RFC 826 (ARP)'], evolving: [] },
   'b-ipv4-subnetting': { versions: ['RFC 4632 (CIDR)', 'RFC 1918', 'RFC 3021', 'RFC 6598', 'RFC 5737'], evolving: [] },
   'b-commutation-vlan-ipv6': { versions: ['IEEE 802.1Q', 'RFC 4861 (NDP)', 'RFC 4862 (SLAAC)', 'NIST SP 800-119 (IPv6 deployment)'], evolving: ['Vendors’ commercial names for layer 2 protections', 'IPv6 transition mechanisms still in use'] },
