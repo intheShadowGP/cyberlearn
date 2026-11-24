@@ -71,7 +71,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q4",
+    "id": "afund-q17",
     "prompt": "Quel composant exécute les instructions machine d’un programme ?",
     "skills": [
       "a-hw"
@@ -85,7 +85,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Le disque de stockage"
+        "text": "Le module de mémoire vive"
       },
       {
         "id": "c",
@@ -93,12 +93,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Le module de mémoire vive"
+        "text": "Le disque de stockage"
       }
     ]
   },
   {
-    "id": "afund-q5",
+    "id": "afund-q18",
     "prompt": "Pourquoi place-t-on plusieurs niveaux de cache entre le processeur et la RAM ?",
     "skills": [
       "a-hw"
@@ -112,20 +112,20 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Augmenter le nombre de cœurs de calcul disponibles sur la puce"
+        "text": "Conserver les données durablement quand la machine est éteinte"
       },
       {
         "id": "c",
-        "text": "Chiffrer automatiquement chaque échange avec le disque dur"
+        "text": "Augmenter le nombre de cœurs de calcul disponibles sur la puce"
       },
       {
         "id": "d",
-        "text": "Conserver les données durablement quand la machine est éteinte"
+        "text": "Chiffrer automatiquement chaque échange avec le disque dur"
       }
     ]
   },
   {
-    "id": "afund-q6",
+    "id": "afund-q19",
     "prompt": "Des attaques comme Spectre et Meltdown exploitent des effets de bord de l’exécution du processeur, notamment sur l’état des caches.",
     "skills": [
       "a-hw"
@@ -134,7 +134,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q7",
+    "id": "afund-q20",
     "prompt": "Un ordinateur portable contenant un disque non chiffré est volé. Que peut faire le voleur ?",
     "skills": [
       "a-hw"
@@ -144,7 +144,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Rien : le système efface le disque après trois démarrages ratés"
+        "text": "Seulement lire les fichiers dont il est le propriétaire"
       },
       {
         "id": "b",
@@ -152,7 +152,7 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Seulement lire les fichiers dont il est le propriétaire"
+        "text": "Rien : le système efface le disque après trois démarrages ratés"
       },
       {
         "id": "d",
@@ -161,7 +161,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q8",
+    "id": "afund-q21",
     "prompt": "Comment appelle-t-on la mémoire minuscule et ultra-rapide située dans le processeur lui-même ? (un mot, au pluriel)",
     "skills": [
       "a-hw"
@@ -170,7 +170,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q9",
+    "id": "afund-q22",
     "prompt": "Quel ordre de grandeur correspond à la latence d’accès à la mémoire vive ?",
     "skills": [
       "a-hw"
@@ -184,11 +184,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "≈ 10 ms"
+        "text": "≈ 100 µs"
       },
       {
         "id": "c",
-        "text": "≈ 100 µs"
+        "text": "≈ 10 ms"
       },
       {
         "id": "d",
@@ -197,7 +197,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q10",
+    "id": "afund-q23",
     "prompt": "Combien de valeurs différentes un octet peut-il prendre ?",
     "skills": [
       "a-data"
@@ -215,16 +215,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "128 valeurs, de 0 à 127"
+        "text": "255 valeurs, de 1 à 255"
       },
       {
         "id": "d",
-        "text": "255 valeurs, de 1 à 255"
+        "text": "128 valeurs, de 0 à 127"
       }
     ]
   },
   {
-    "id": "afund-q11",
+    "id": "afund-q24",
     "prompt": "Quelle écriture hexadécimale correspond à l’octet binaire 11111111 ?",
     "skills": [
       "a-data"
@@ -234,7 +234,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "80"
+        "text": "1F"
       },
       {
         "id": "b",
@@ -242,16 +242,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "F0"
+        "text": "80"
       },
       {
         "id": "d",
-        "text": "1F"
+        "text": "F0"
       }
     ]
   },
   {
-    "id": "afund-q12",
+    "id": "afund-q25",
     "prompt": "Quel encodage de caractères, compatible avec l’ASCII, représente tous les caractères Unicode avec 1 à 4 octets ?",
     "skills": [
       "a-data"
@@ -260,7 +260,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q13",
+    "id": "afund-q26",
     "prompt": "Un fichier dont l’extension est .txt contient forcément du texte.",
     "skills": [
       "a-data"
@@ -269,7 +269,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q14",
+    "id": "afund-q27",
     "prompt": "En ASCII, quelle lettre correspond à l’octet 0x41 (65 en décimal) ?",
     "skills": [
       "a-data"
@@ -296,7 +296,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q15",
+    "id": "afund-q28",
     "prompt": "Quelles affirmations sur la représentation des données sont exactes ?",
     "skills": [
       "a-data"
@@ -306,28 +306,28 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "L’ASCII représente tous les caractères de toutes les langues"
+        "text": "Deux chiffres hexadécimaux suffisent pour écrire un octet"
       },
       {
         "id": "b",
-        "text": "Un bit peut prendre 256 valeurs différentes"
+        "text": "L’ASCII représente tous les caractères de toutes les langues"
       },
       {
         "id": "c",
-        "text": "Un octet regroupe 8 bits"
+        "text": "Un bit peut prendre 256 valeurs différentes"
       },
       {
         "id": "d",
-        "text": "L’hexadécimal est une base 16 : chiffres de 0 à 9 puis lettres de A à F"
+        "text": "Un octet regroupe 8 bits"
       },
       {
         "id": "e",
-        "text": "Deux chiffres hexadécimaux suffisent pour écrire un octet"
+        "text": "L’hexadécimal est une base 16 : chiffres de 0 à 9 puis lettres de A à F"
       }
     ]
   },
   {
-    "id": "afund-q16",
+    "id": "afund-q29",
     "prompt": "Un analyste ouvre dans un éditeur hexadécimal un fichier nommé « facture.pdf » et lit « 4D 5A » aux deux premiers octets. Que peut-il en déduire et quelle est sa conduite ?",
     "skills": [
       "a-data",
@@ -337,7 +337,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "afund-q17",
+    "id": "afund-q4",
     "prompt": "Quel composant s’exécute en premier à la mise sous tension ?",
     "skills": [
       "a-boot"
@@ -355,16 +355,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "L’antivirus installé sur la machine"
+        "text": "Le noyau du système d’exploitation"
       },
       {
         "id": "d",
-        "text": "Le noyau du système d’exploitation"
+        "text": "L’antivirus installé sur la machine"
       }
     ]
   },
   {
-    "id": "afund-q18",
+    "id": "afund-q5",
     "prompt": "Quelle fonction UEFI n’autorise que des chargeurs d’amorçage et des noyaux signés par une clé de confiance ? (deux mots)",
     "skills": [
       "a-boot"
@@ -373,7 +373,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q19",
+    "id": "afund-q6",
     "prompt": "Un bootkit est difficile à détecter car il s’exécute avant l’antivirus du système d’exploitation.",
     "skills": [
       "a-boot"
@@ -382,7 +382,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q20",
+    "id": "afund-q30",
     "prompt": "Dans quel ordre se déroule le démarrage d’une machine ?",
     "skills": [
       "a-boot"
@@ -392,11 +392,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Premier processus, noyau, firmware, chargeur d’amorçage"
+        "text": "Chargeur d’amorçage, firmware, premier processus, noyau"
       },
       {
         "id": "b",
-        "text": "Chargeur d’amorçage, firmware, premier processus, noyau"
+        "text": "Premier processus, noyau, firmware, chargeur d’amorçage"
       },
       {
         "id": "c",
@@ -409,7 +409,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q21",
+    "id": "afund-q31",
     "prompt": "À quoi sert un TPM dans la chaîne de démarrage ?",
     "skills": [
       "a-boot"
@@ -436,7 +436,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q22",
+    "id": "afund-q32",
     "prompt": "Quelles mesures renforcent la protection de la chaîne de démarrage ?",
     "skills": [
       "a-boot"
@@ -463,7 +463,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q23",
+    "id": "afund-q14",
     "prompt": "Pourquoi le chiffrement intégral du disque (BitLocker, LUKS) est-il recommandé sur un ordinateur portable ?",
     "skills": [
       "a-boot",
@@ -474,7 +474,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Il empêche les attaques menées à travers le réseau local"
+        "text": "Il accélère les accès au disque lors de chaque lecture"
       },
       {
         "id": "b",
@@ -486,12 +486,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Il accélère les accès au disque lors de chaque lecture"
+        "text": "Il empêche les attaques menées à travers le réseau local"
       }
     ]
   },
   {
-    "id": "afund-q24",
+    "id": "afund-q33",
     "prompt": "Un antivirus installé dans le système d’exploitation détecte toujours un implant du firmware UEFI, car il surveille la machine dès la mise sous tension.",
     "skills": [
       "a-boot"
@@ -500,7 +500,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q25",
+    "id": "afund-q15",
     "prompt": "Un serveur suspect est toujours allumé. Le responsable veut l’éteindre « pour arrêter l’attaque ». Que lui répondez-vous et quel ordre d’actions proposez-vous ?",
     "skills": [
       "a-boot",
@@ -510,7 +510,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "afund-q26",
+    "id": "afund-q7",
     "prompt": "Comment une application en espace utilisateur demande-t-elle au noyau de lire un fichier ?",
     "skills": [
       "a-proc"
@@ -537,7 +537,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q27",
+    "id": "afund-q8",
     "prompt": "Quelles caractéristiques possède chaque processus ?",
     "skills": [
       "a-proc"
@@ -547,11 +547,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Un identifiant (PID)"
+        "text": "Un contexte de sécurité (le compte au nom duquel il agit)"
       },
       {
         "id": "b",
-        "text": "Une adresse MAC dédiée"
+        "text": "Un firmware qui lui est propre"
       },
       {
         "id": "c",
@@ -559,16 +559,16 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Un contexte de sécurité (le compte au nom duquel il agit)"
+        "text": "Un identifiant (PID)"
       },
       {
         "id": "e",
-        "text": "Un firmware qui lui est propre"
+        "text": "Une adresse MAC dédiée"
       }
     ]
   },
   {
-    "id": "afund-q28",
+    "id": "afund-q34",
     "prompt": "Quelle est la différence entre un processus et un thread ?",
     "skills": [
       "a-proc"
@@ -582,7 +582,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Un processus est un thread qui a terminé son exécution"
+        "text": "Un thread s’exécute uniquement dans le firmware de la machine"
       },
       {
         "id": "c",
@@ -590,12 +590,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Un thread s’exécute uniquement dans le firmware de la machine"
+        "text": "Un processus est un thread qui a terminé son exécution"
       }
     ]
   },
   {
-    "id": "afund-q29",
+    "id": "afund-q9",
     "prompt": "Sur un poste, WINWORD.EXE lance cmd.exe, qui lance powershell.exe -enc … Quelle est l’interprétation la plus probable ?",
     "skills": [
       "a-proc",
@@ -606,11 +606,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Le fonctionnement normal du correcteur orthographique"
+        "text": "Une mise à jour automatique du traitement de texte"
       },
       {
         "id": "b",
-        "text": "Une mise à jour automatique du traitement de texte"
+        "text": "Le fonctionnement normal du correcteur orthographique"
       },
       {
         "id": "c",
@@ -623,7 +623,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q30",
+    "id": "afund-q35",
     "prompt": "Un service (ou démon) est un processus lancé en arrière-plan, souvent au démarrage, sans interface utilisateur.",
     "skills": [
       "a-proc"
@@ -632,7 +632,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q31",
+    "id": "afund-q36",
     "prompt": "Que se passe-t-il quand un processus ordinaire tente de lire la mémoire d’un autre processus sans autorisation ?",
     "skills": [
       "a-proc"
@@ -646,7 +646,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Le processeur fusionne les deux espaces d’adressage"
+        "text": "L’accès réussit car toute la RAM est partagée"
       },
       {
         "id": "c",
@@ -654,12 +654,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "L’accès réussit car toute la RAM est partagée"
+        "text": "Le processeur fusionne les deux espaces d’adressage"
       }
     ]
   },
   {
-    "id": "afund-q32",
+    "id": "afund-q37",
     "prompt": "Comment s’appelle la technique qui rend aléatoires, à chaque lancement, les adresses des zones mémoire d’un processus ? (sigle)",
     "skills": [
       "a-proc"
@@ -668,7 +668,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q33",
+    "id": "afund-q38",
     "prompt": "Quelles zones de la mémoire d’un processus sont souvent visées par les corruptions mémoire ?",
     "skills": [
       "a-proc"
@@ -678,7 +678,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Le registre des tâches planifiées du système"
+        "text": "La pile (stack), avec ses adresses de retour"
       },
       {
         "id": "b",
@@ -690,12 +690,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "La pile (stack), avec ses adresses de retour"
+        "text": "Le registre des tâches planifiées du système"
       }
     ]
   },
   {
-    "id": "afund-q34",
+    "id": "afund-q39",
     "prompt": "La protection NX (ou DEP) empêche d’exécuter du code situé dans des pages mémoire marquées comme données.",
     "skills": [
       "a-proc"
@@ -704,7 +704,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q35",
+    "id": "afund-q40",
     "prompt": "Quel mécanisme traduit les adresses virtuelles d’un processus en adresses de la mémoire physique ?",
     "skills": [
       "a-proc"
@@ -714,7 +714,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Le contrôleur du disque, piloté par le BIOS"
+        "text": "L’écran, piloté par le gestionnaire de session"
       },
       {
         "id": "b",
@@ -722,16 +722,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "La carte réseau, pilotée par le pare-feu"
+        "text": "Le contrôleur du disque, piloté par le BIOS"
       },
       {
         "id": "d",
-        "text": "L’écran, piloté par le gestionnaire de session"
+        "text": "La carte réseau, pilotée par le pare-feu"
       }
     ]
   },
   {
-    "id": "afund-q36",
+    "id": "afund-q10",
     "prompt": "Sous Linux, quel est le nom du compte tout-puissant (UID 0) ?",
     "skills": [
       "a-priv"
@@ -740,7 +740,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q37",
+    "id": "afund-q11",
     "prompt": "Le principe du moindre privilège consiste à n’accorder à chaque compte que les droits strictement nécessaires à sa fonction.",
     "skills": [
       "a-priv"
@@ -749,7 +749,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q38",
+    "id": "afund-q12",
     "prompt": "Un attaquant passe d’un compte utilisateur standard au compte SYSTEM grâce à un service mal configuré. Comment nomme-t-on cette étape ?",
     "skills": [
       "a-priv"
@@ -763,7 +763,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Exfiltration de données"
+        "text": "Reconnaissance du réseau"
       },
       {
         "id": "c",
@@ -771,12 +771,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Reconnaissance du réseau"
+        "text": "Exfiltration de données"
       }
     ]
   },
   {
-    "id": "afund-q39",
+    "id": "afund-q41",
     "prompt": "Un programme SUID dont le propriétaire est root est lancé par un utilisateur standard. Avec quels droits s’exécute-t-il ?",
     "skills": [
       "a-priv"
@@ -803,7 +803,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q40",
+    "id": "afund-q13",
     "prompt": "Un service de sauvegarde s’exécute sous un compte administrateur du domaine. Expliquez le risque et ce que vous proposez à la place.",
     "skills": [
       "a-priv",

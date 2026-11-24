@@ -77,7 +77,7 @@ export const questions: Question[] = [
     "placeholder": "… path"
   },
   {
-    "id": "fpc-q5",
+    "id": "fpc-q17",
     "prompt": "A site saves uploaded files in `/var/www/uploads/` by appending the name provided by the user. Which name lets the user leave this folder?",
     "skills": [
       "a-fs",
@@ -88,7 +88,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "annual-report-2024.pdf"
+        "text": "holiday-photo.jpg"
       },
       {
         "id": "b",
@@ -96,7 +96,7 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "holiday-photo.jpg"
+        "text": "annual-report-2024.pdf"
       },
       {
         "id": "d",
@@ -105,7 +105,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q6",
+    "id": "fpc-q18",
     "prompt": "What is a symbolic link?",
     "skills": [
       "a-fs"
@@ -119,7 +119,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "A full copy of a file in another folder"
+        "text": "A file compressed with a password"
       },
       {
         "id": "c",
@@ -127,12 +127,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "A file compressed with a password"
+        "text": "A full copy of a file in another folder"
       }
     ]
   },
   {
-    "id": "fpc-q7",
+    "id": "fpc-q19",
     "prompt": "Which items are part of a file’s metadata?",
     "skills": [
       "a-fs"
@@ -142,28 +142,28 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The bytes that make up an image"
-      },
-      {
-        "id": "b",
-        "text": "The text contained in the document"
-      },
-      {
-        "id": "c",
         "text": "The creation and modification dates"
       },
       {
+        "id": "b",
+        "text": "The access rights"
+      },
+      {
+        "id": "c",
+        "text": "The bytes that make up an image"
+      },
+      {
         "id": "d",
-        "text": "The owner of the file"
+        "text": "The text contained in the document"
       },
       {
         "id": "e",
-        "text": "The access rights"
+        "text": "The owner of the file"
       }
     ]
   },
   {
-    "id": "fpc-q8",
+    "id": "fpc-q20",
     "prompt": "Renaming a file does not change its content.",
     "skills": [
       "a-fs"
@@ -172,7 +172,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q9",
+    "id": "fpc-q21",
     "prompt": "A colleague received a file called “invoice.pdf.exe” and hesitates to open it. Explain what you tell them, and how you would check what it is.",
     "skills": [
       "a-fs",
@@ -182,7 +182,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "fpc-q10",
+    "id": "fpc-q7",
     "prompt": "What is source code?",
     "skills": [
       "a-build"
@@ -192,15 +192,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The electric current that powers the machine’s processor"
-      },
-      {
-        "id": "b",
         "text": "The cable that links the computer to the company’s local network"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "The binary file that the processor executes directly"
+      },
+      {
+        "id": "c",
+        "text": "The electric current that powers the machine’s processor"
       },
       {
         "id": "d",
@@ -209,7 +209,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q11",
+    "id": "fpc-q5",
     "prompt": "What is the difference between compilation and interpretation?",
     "skills": [
       "a-build"
@@ -223,20 +223,20 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Compilation concerns texts, interpretation concerns images and videos"
-      },
-      {
-        "id": "c",
         "text": "Compilation always runs on a remote server, interpretation on the workstation"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "There is no difference, both words designate the same operation"
+      },
+      {
+        "id": "d",
+        "text": "Compilation concerns texts, interpretation concerns images and videos"
       }
     ]
   },
   {
-    "id": "fpc-q12",
+    "id": "fpc-q22",
     "prompt": "Which of these languages is usually compiled to machine code?",
     "skills": [
       "a-build"
@@ -263,7 +263,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q13",
+    "id": "fpc-q6",
     "prompt": "Which statements about a software’s dependencies are correct?",
     "skills": [
       "a-build"
@@ -277,7 +277,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "A vulnerable dependency can make the application vulnerable"
+        "text": "They are not part of the delivered software"
       },
       {
         "id": "c",
@@ -285,7 +285,7 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "They are not part of the delivered software"
+        "text": "A vulnerable dependency can make the application vulnerable"
       },
       {
         "id": "e",
@@ -294,7 +294,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q14",
+    "id": "fpc-q23",
     "prompt": "A Java program is compiled to bytecode then run by a virtual machine. Which approach is this?",
     "skills": [
       "a-build"
@@ -312,16 +312,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Direct compilation to machine code, with no virtual machine"
+        "text": "An execution carried out only by the system kernel"
       },
       {
         "id": "d",
-        "text": "An execution carried out only by the system kernel"
+        "text": "Direct compilation to machine code, with no virtual machine"
       }
     ]
   },
   {
-    "id": "fpc-q15",
+    "id": "fpc-q24",
     "prompt": "A software’s dependencies are not part of its security surface.",
     "skills": [
       "a-build"
@@ -330,7 +330,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q16",
+    "id": "fpc-q25",
     "prompt": "Why does a vendor publish the hash of its software next to the download?",
     "skills": [
       "a-build"
@@ -340,7 +340,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "To speed up the download of the file on slow connections"
+        "text": "To encrypt the file and make it unreadable to third parties"
       },
       {
         "id": "b",
@@ -352,12 +352,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "To encrypt the file and make it unreadable to third parties"
+        "text": "To speed up the download of the file on slow connections"
       }
     ]
   },
   {
-    "id": "fpc-q17",
+    "id": "fpc-q26",
     "prompt": "What do you call the external libraries a program reuses instead of rewriting everything? (one word)",
     "skills": [
       "a-build"
@@ -366,7 +366,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "fpc-q18",
+    "id": "fpc-q27",
     "prompt": "An attacker publishes a booby-trapped version of a widely used library, which thousands of applications install. Which notion describes this attack?",
     "skills": [
       "a-build",
@@ -381,11 +381,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "A brute-force attack on a password"
+        "text": "A targeted phishing campaign by mail"
       },
       {
         "id": "c",
-        "text": "A targeted phishing campaign by mail"
+        "text": "A brute-force attack on a password"
       },
       {
         "id": "d",
@@ -394,7 +394,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q19",
+    "id": "fpc-q8",
     "prompt": "In the client-server model, who processes the requests and sends back the answers?",
     "skills": [
       "a-archi-log"
@@ -404,11 +404,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The user themself"
+        "text": "The network cable"
       },
       {
         "id": "b",
-        "text": "The network cable"
+        "text": "The user themself"
       },
       {
         "id": "c",
@@ -421,7 +421,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q20",
+    "id": "fpc-q9",
     "prompt": "A security check performed only on the client side (in the browser) is enough to be protected.",
     "skills": [
       "a-archi-log"
@@ -430,7 +430,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q21",
+    "id": "fpc-q10",
     "prompt": "What do you call the limit between a controlled zone and an untrusted one, for example between the browser and the server? (two words)",
     "skills": [
       "a-archi-log"
@@ -440,7 +440,7 @@ export const questions: Question[] = [
     "placeholder": "trust …"
   },
   {
-    "id": "fpc-q22",
+    "id": "fpc-q28",
     "prompt": "In a three-layer application (presentation, business logic, data access), which layer talks to the database?",
     "skills": [
       "a-archi-log"
@@ -450,11 +450,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The company’s local network"
+        "text": "The user’s browser"
       },
       {
         "id": "b",
-        "text": "The user’s browser"
+        "text": "The company’s local network"
       },
       {
         "id": "c",
@@ -467,7 +467,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q23",
+    "id": "fpc-q29",
     "prompt": "The browser sends the server a basket with the price “€1” instead of “€100” (value changed before sending). What should the server do?",
     "skills": [
       "a-archi-log",
@@ -478,11 +478,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Trust the price sent by the client’s browser"
+        "text": "Ask the browser to recompute the price itself"
       },
       {
         "id": "b",
-        "text": "Ask the browser to recompute the price itself"
+        "text": "Trust the price sent by the client’s browser"
       },
       {
         "id": "c",
@@ -495,7 +495,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q24",
+    "id": "fpc-q30",
     "prompt": "What is an API?",
     "skills": [
       "a-archi-log"
@@ -522,7 +522,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q25",
+    "id": "fpc-q31",
     "prompt": "Which items are part of a web application’s attack surface?",
     "skills": [
       "a-archi-log"
@@ -532,28 +532,28 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The color of the navigation bar"
-      },
-      {
-        "id": "b",
         "text": "The developer’s desktop wallpaper"
       },
       {
-        "id": "c",
-        "text": "An open port on the server"
-      },
-      {
-        "id": "d",
+        "id": "b",
         "text": "An API reachable from the outside"
       },
       {
-        "id": "e",
+        "id": "c",
         "text": "A login form exposed on the Internet"
+      },
+      {
+        "id": "d",
+        "text": "The color of the navigation bar"
+      },
+      {
+        "id": "e",
+        "text": "An open port on the server"
       }
     ]
   },
   {
-    "id": "fpc-q26",
+    "id": "fpc-q11",
     "prompt": "Explain in your own words why “do not trust what comes from the client” is a central rule, and give an example.",
     "skills": [
       "a-archi-log",
@@ -563,7 +563,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "fpc-q27",
+    "id": "fpc-q32",
     "prompt": "In a services architecture, exchanges between services go over the network, which adds exchange points to protect.",
     "skills": [
       "a-archi-log"
@@ -572,7 +572,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q28",
+    "id": "fpc-q12",
     "prompt": "What is a loop used for in a program?",
     "skills": [
       "a-prog"
@@ -586,11 +586,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "To shut the machine down cleanly"
+        "text": "To encrypt the content of a file"
       },
       {
         "id": "c",
-        "text": "To encrypt the content of a file"
+        "text": "To shut the machine down cleanly"
       },
       {
         "id": "d",
@@ -599,7 +599,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q29",
+    "id": "fpc-q13",
     "prompt": "Which statements about programming notions are correct?",
     "skills": [
       "a-prog"
@@ -609,19 +609,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "A list is an ordered sequence of values"
-      },
-      {
-        "id": "b",
-        "text": "A loop is used to encrypt a file"
-      },
-      {
-        "id": "c",
         "text": "A condition repeats a block of instructions indefinitely"
       },
       {
-        "id": "d",
+        "id": "b",
         "text": "A dictionary associates a key with a value"
+      },
+      {
+        "id": "c",
+        "text": "A list is an ordered sequence of values"
+      },
+      {
+        "id": "d",
+        "text": "A loop is used to encrypt a file"
       },
       {
         "id": "e",
@@ -630,7 +630,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q30",
+    "id": "fpc-q33",
     "prompt": "With the function below, what price does a member pay for an item at 200?",
     "skills": [
       "a-prog"
@@ -644,11 +644,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "180"
+        "text": "190"
       },
       {
         "id": "b",
-        "text": "190"
+        "text": "180"
       },
       {
         "id": "c",
@@ -661,7 +661,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q31",
+    "id": "fpc-q34",
     "prompt": "Which data structure associates a key with a value?",
     "skills": [
       "a-prog"
@@ -671,7 +671,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "A list"
+        "text": "A loop"
       },
       {
         "id": "b",
@@ -679,7 +679,7 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "A loop"
+        "text": "A list"
       },
       {
         "id": "d",
@@ -688,7 +688,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q32",
+    "id": "fpc-q35",
     "prompt": "A user input inserted as is into a command can allow an attacker to run other commands.",
     "skills": [
       "a-prog"
@@ -697,7 +697,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q33",
+    "id": "fpc-q36",
     "prompt": "If the user enters “example.org ; cat /etc/passwd” in the program below, what is the risk?",
     "skills": [
       "a-prog"
@@ -711,7 +711,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "A loss of network packets"
+        "text": "A disk quota overrun"
       },
       {
         "id": "b",
@@ -723,12 +723,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "A disk quota overrun"
+        "text": "A loss of network packets"
       }
     ]
   },
   {
-    "id": "fpc-q34",
+    "id": "fpc-q37",
     "prompt": "What do you call a reusable block of instructions that receives parameters and returns a result? (one word)",
     "skills": [
       "a-prog"
@@ -737,7 +737,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "fpc-q35",
+    "id": "fpc-q38",
     "prompt": "In the program below, spot the untrusted data, explain the risk and suggest a fix.",
     "skills": [
       "a-prog",
@@ -751,7 +751,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "fpc-q36",
+    "id": "fpc-q39",
     "prompt": "What is the role of a shell?",
     "skills": [
       "a-cli"
@@ -761,11 +761,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Managing the machine’s power and sleep modes"
+        "text": "Displaying the web pages requested by the browser"
       },
       {
         "id": "b",
-        "text": "Encrypting all the files of the disk"
+        "text": "Managing the machine’s power and sleep modes"
       },
       {
         "id": "c",
@@ -773,12 +773,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Displaying the web pages requested by the browser"
+        "text": "Encrypting all the files of the disk"
       }
     ]
   },
   {
-    "id": "fpc-q37",
+    "id": "fpc-q14",
     "prompt": "The command line makes it possible to perform actions in a precise and reproducible way.",
     "skills": [
       "a-cli"
@@ -787,7 +787,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q38",
+    "id": "fpc-q15",
     "prompt": "What do you call the program that interprets typed commands, such as Bash or PowerShell? (one word)",
     "skills": [
       "a-cli"
@@ -796,7 +796,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "fpc-q39",
+    "id": "fpc-q40",
     "prompt": "What does the command `cat journal.log | grep \"Failed\" | wc -l` do?",
     "skills": [
       "a-cli"
@@ -823,7 +823,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q40",
+    "id": "fpc-q41",
     "prompt": "Which advantages does the command line offer in administration?",
     "skills": [
       "a-cli",
@@ -834,19 +834,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "It works only on a local workstation"
-      },
-      {
-        "id": "b",
-        "text": "It prevents any handling mistake"
-      },
-      {
-        "id": "c",
         "text": "Actions are explicit and reproducible"
       },
       {
-        "id": "d",
+        "id": "b",
         "text": "They can be automated with scripts"
+      },
+      {
+        "id": "c",
+        "text": "It prevents any handling mistake"
+      },
+      {
+        "id": "d",
+        "text": "It works only on a local workstation"
       }
     ]
   }

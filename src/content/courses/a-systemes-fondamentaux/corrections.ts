@@ -31,35 +31,35 @@ export const corrections: CourseCorrections = {
         "e": "Elle ne dépend pas de l’état d’exécution du système."
       }
     },
-    "afund-q4": {
+    "afund-q17": {
       "type": "single",
       "correct": "c",
       "explanation": "Le processeur lit les instructions en mémoire et les exécute une à une. La RAM les contient, le stockage les conserve hors tension, la carte réseau n’exécute pas le programme."
     },
-    "afund-q5": {
+    "afund-q18": {
       "type": "single",
       "correct": "a",
       "explanation": "La RAM est beaucoup plus lente que le processeur. Les caches gardent à proximité les données et instructions récemment utilisées pour limiter les attentes. Ils sont eux aussi volatils.",
       "whyWrong": {
-        "d": "Les caches sont volatils comme la RAM.",
-        "b": "Le nombre de cœurs est une caractéristique du processeur, sans rapport avec les caches."
+        "b": "Les caches sont volatils comme la RAM.",
+        "c": "Le nombre de cœurs est une caractéristique du processeur, sans rapport avec les caches."
       }
     },
-    "afund-q6": {
+    "afund-q19": {
       "type": "truefalse",
       "correct": true,
       "explanation": "Ces attaques par canaux auxiliaires mesurent, par exemple, le temps d’accès aux caches pour déduire des données auxquelles le programme n’a pas droit. Elles ne reposent pas sur un bug d’application mais sur des optimisations matérielles."
     },
-    "afund-q7": {
+    "afund-q20": {
       "type": "single",
       "correct": "b",
       "explanation": "Le mot de passe de session n’est vérifié que par le système en fonctionnement. Un disque branché ailleurs est lu directement. Le chiffrement intégral (BitLocker, LUKS) rend les données illisibles sans la clé.",
       "whyWrong": {
         "d": "Le mot de passe de session ne protège pas un disque lu hors du système.",
-        "a": "Aucun mécanisme standard n’efface le disque après des échecs de démarrage."
+        "c": "Aucun mécanisme standard n’efface le disque après des échecs de démarrage."
       }
     },
-    "afund-q8": {
+    "afund-q21": {
       "type": "short",
       "accepted": [
         "registres",
@@ -67,35 +67,35 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Les registres contiennent les opérandes et les adresses utilisés par l’instruction en cours. Ils sont le niveau le plus rapide de la hiérarchie mémoire (moins d’une nanoseconde)."
     },
-    "afund-q9": {
+    "afund-q22": {
       "type": "single",
       "correct": "d",
       "explanation": "La RAM répond en une centaine de nanosecondes. Les registres sont sous la nanoseconde, un SSD répond en quelques dizaines à centaines de microsecondes et un disque dur mécanique en une dizaine de millisecondes.",
       "whyWrong": {
         "a": "Cet ordre de grandeur est celui des registres et du cache le plus proche.",
-        "b": "C’est la latence d’un disque dur mécanique.",
-        "c": "C’est plutôt la latence d’un SSD."
+        "c": "C’est la latence d’un disque dur mécanique.",
+        "b": "C’est plutôt la latence d’un SSD."
       }
     },
-    "afund-q10": {
+    "afund-q23": {
       "type": "single",
       "correct": "a",
       "explanation": "Un octet regroupe 8 bits ; chaque bit a deux états, d’où 2⁸ = 256 combinaisons, de 0 à 255.",
       "whyWrong": {
-        "c": "128 valeurs correspondent à 7 bits (jeu ASCII d’origine).",
-        "d": "La valeur 0 existe : il y a bien 256 combinaisons."
+        "d": "128 valeurs correspondent à 7 bits (jeu ASCII d’origine).",
+        "c": "La valeur 0 existe : il y a bien 256 combinaisons."
       }
     },
-    "afund-q11": {
+    "afund-q24": {
       "type": "single",
       "correct": "b",
       "explanation": "Quatre bits à 1 valent F en hexadécimal ; l’octet 1111 1111 s’écrit donc FF (soit 255 en décimal).",
       "whyWrong": {
-        "c": "F0 correspond à 1111 0000.",
-        "a": "80 correspond à 1000 0000, soit 128."
+        "d": "F0 correspond à 1111 0000.",
+        "c": "80 correspond à 1000 0000, soit 128."
       }
     },
-    "afund-q12": {
+    "afund-q25": {
       "type": "short",
       "accepted": [
         "utf-8",
@@ -104,12 +104,12 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "UTF-8 code les caractères ASCII sur un octet, identique à l’ASCII, et les autres sur 2 à 4 octets. C’est l’encodage dominant sur le web et sous Linux."
     },
-    "afund-q13": {
+    "afund-q26": {
       "type": "truefalse",
       "correct": false,
       "explanation": "L’extension n’est qu’une partie du nom : on peut renommer n’importe quel fichier. Le type réel se lit dans le contenu (les premiers octets, appelés signature)."
     },
-    "afund-q14": {
+    "afund-q27": {
       "type": "single",
       "correct": "c",
       "explanation": "Les majuscules ASCII commencent à 65 (0x41) : A = 65, B = 66… Z = 90 (0x5A). Les minuscules commencent à 97 (0x61).",
@@ -117,20 +117,20 @@ export const corrections: CourseCorrections = {
         "a": "Le « a » minuscule vaut 97, soit 0x61."
       }
     },
-    "afund-q15": {
+    "afund-q28": {
       "type": "multi",
       "correct": [
-        "c",
+        "a",
         "d",
         "e"
       ],
       "explanation": "Un octet = 8 bits = deux chiffres hexadécimaux (de 00 à FF). Un bit n’a que deux états, et l’ASCII ne couvre que 128 caractères, d’où l’usage d’Unicode et d’UTF-8.",
       "whyWrong": {
-        "b": "Un bit vaut 0 ou 1 ; c’est l’octet qui peut prendre 256 valeurs.",
-        "a": "L’ASCII se limite à 128 caractères, sans lettres accentuées."
+        "c": "Un bit vaut 0 ou 1 ; c’est l’octet qui peut prendre 256 valeurs.",
+        "b": "L’ASCII se limite à 128 caractères, sans lettres accentuées."
       }
     },
-    "afund-q16": {
+    "afund-q29": {
       "type": "open",
       "model": "Les octets 4D 5A correspondent aux caractères « MZ », signature des exécutables Windows (format PE). Le fichier n’est donc pas un PDF : l’extension est trompeuse, ce qui est typique d’une pièce jointe piégée. L’analyste ne l’ouvre pas, l’isole, calcule son empreinte (SHA-256), la compare à des bases de réputation, et ne l’exécute que dans un bac à sable dédié. Il conserve le message d’origine pour l’investigation et informe l’équipe de sécurité.",
       "criteria": [
@@ -140,12 +140,12 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Le contenu prime sur le nom : les premiers octets (signature ou « magic number ») révèlent le vrai type d’un fichier."
     },
-    "afund-q17": {
+    "afund-q4": {
       "type": "single",
       "correct": "a",
       "explanation": "Le firmware, stocké sur la carte mère, initialise le matériel puis cherche un chargeur d’amorçage. Le noyau, l’antivirus et la session arrivent ensuite."
     },
-    "afund-q18": {
+    "afund-q5": {
       "type": "short",
       "accepted": [
         "secure boot",
@@ -154,17 +154,17 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Secure Boot vérifie la signature de chaque élément de la chaîne de démarrage et bloque les composants non signés, notamment les bootkits."
     },
-    "afund-q19": {
+    "afund-q6": {
       "type": "truefalse",
       "correct": true,
       "explanation": "Le code qui s’exécute avant le système peut cacher sa présence à tout ce qui démarre après lui, antivirus compris. D’où l’intérêt de Secure Boot, des mises à jour du firmware et des contrôles d’intégrité."
     },
-    "afund-q20": {
+    "afund-q30": {
       "type": "single",
       "correct": "c",
       "explanation": "Le firmware démarre et trouve le chargeur ; le chargeur charge le noyau ; le noyau lance le premier processus (systemd sous Linux, smss.exe puis wininit.exe sous Windows)."
     },
-    "afund-q21": {
+    "afund-q31": {
       "type": "single",
       "correct": "d",
       "explanation": "Le TPM enregistre des mesures (empreintes) des composants démarrés et protège des clés. BitLocker peut ainsi ne libérer la clé du disque que si la chaîne de démarrage n’a pas été modifiée.",
@@ -172,7 +172,7 @@ export const corrections: CourseCorrections = {
         "a": "Un TPM ne précharge rien : c’est un coffre-fort de clés et de mesures."
       }
     },
-    "afund-q22": {
+    "afund-q32": {
       "type": "multi",
       "correct": [
         "b",
@@ -184,20 +184,20 @@ export const corrections: CourseCorrections = {
         "a": "Un support amovible piégé peut démarrer un système contrôlé par l’attaquant."
       }
     },
-    "afund-q23": {
+    "afund-q14": {
       "type": "single",
       "correct": "b",
       "explanation": "Sans la clé, un disque chiffré est illisible, même branché sur une autre machine. Il ne remplace ni l’antivirus ni les protections réseau.",
       "whyWrong": {
-        "d": "Le chiffrement a un coût, il n’accélère pas les accès."
+        "a": "Le chiffrement a un coût, il n’accélère pas les accès."
       }
     },
-    "afund-q24": {
+    "afund-q33": {
       "type": "truefalse",
       "correct": false,
       "explanation": "L’antivirus démarre après le firmware : il ne voit pas ce qui s’exécute avant lui et peut être trompé par lui. La parade passe par Secure Boot, des mises à jour du firmware et des mesures d’intégrité (TPM)."
     },
-    "afund-q25": {
+    "afund-q15": {
       "type": "open",
       "model": "Éteindre détruit la RAM, qui contient les processus malveillants, les clés de chiffrement et les connexions actives. On propose : (1) isoler le serveur du réseau sans l’éteindre (couper le lien ou le placer en quarantaine), (2) acquérir la mémoire vive, (3) réaliser une copie des disques, (4) noter l’heure et les actions menées, (5) seulement ensuite arrêter ou reconstruire la machine. Si le risque est immédiat et grave, la décision d’éteindre se prend en connaissance de la perte de preuves.",
       "criteria": [
@@ -207,12 +207,12 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "L’ordre de volatilité guide la collecte : on capture d’abord ce qui disparaît le plus vite."
     },
-    "afund-q26": {
+    "afund-q7": {
       "type": "single",
       "correct": "b",
       "explanation": "Les applications n’accèdent pas au matériel : elles appellent le noyau par des appels système (open, read, write…) et le noyau vérifie leurs droits avant d’agir."
     },
-    "afund-q27": {
+    "afund-q8": {
       "type": "multi",
       "correct": [
         "a",
@@ -221,11 +221,11 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Un processus a un PID, un parent (d’où l’arbre des processus) et un contexte de sécurité. L’adresse MAC appartient à une interface réseau et le firmware à la machine.",
       "whyWrong": {
-        "b": "Une adresse MAC identifie une carte réseau, pas un processus.",
-        "e": "Le firmware appartient à la machine, pas à un processus."
+        "e": "Une adresse MAC identifie une carte réseau, pas un processus.",
+        "b": "Le firmware appartient à la machine, pas à un processus."
       }
     },
-    "afund-q28": {
+    "afund-q34": {
       "type": "single",
       "correct": "a",
       "explanation": "Un processus possède son espace d’adressage ; ses threads, fils d’exécution internes, partagent cette mémoire. D’où la facilité de communication entre threads et le besoin de synchronisation.",
@@ -233,25 +233,25 @@ export const corrections: CourseCorrections = {
         "c": "Un thread vit dans un processus et hérite de son contexte de sécurité."
       }
     },
-    "afund-q29": {
+    "afund-q9": {
       "type": "single",
       "correct": "d",
       "explanation": "Un traitement de texte n’a pas de raison de lancer un interpréteur de commandes puis PowerShell avec une commande encodée. C’est la signature classique d’une macro malveillante, que les EDR surveillent."
     },
-    "afund-q30": {
+    "afund-q35": {
       "type": "truefalse",
       "correct": true,
       "explanation": "Serveur web, SSH, planificateur de tâches : ce sont des services. Ils tournent souvent avec des privilèges élevés, ce qui en fait des cibles de choix."
     },
-    "afund-q31": {
+    "afund-q36": {
       "type": "single",
       "correct": "c",
       "explanation": "Chaque processus a un espace d’adressage virtuel privé. La traduction vers la mémoire physique est contrôlée par le noyau et le matériel, qui empêchent un processus de lire celui d’un autre.",
       "whyWrong": {
-        "d": "La mémoire est virtualisée : chaque processus ne voit que son propre espace."
+        "b": "La mémoire est virtualisée : chaque processus ne voit que son propre espace."
       }
     },
-    "afund-q32": {
+    "afund-q37": {
       "type": "short",
       "accepted": [
         "aslr",
@@ -259,41 +259,41 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "L’ASLR (Address Space Layout Randomization) complique les attaques qui doivent connaître l’adresse du code ou des données à atteindre."
     },
-    "afund-q33": {
+    "afund-q38": {
       "type": "multi",
       "correct": [
-        "c",
-        "d"
+        "a",
+        "c"
       ],
       "explanation": "Les débordements de tampon touchent la pile ; les erreurs de gestion du tas (use-after-free, dépassements) touchent le tas. Les deux sont étudiées dans le cours sur les vulnérabilités mémoire.",
       "whyWrong": {
-        "a": "Ce n’est pas une zone mémoire du processus.",
+        "d": "Ce n’est pas une zone mémoire du processus.",
         "b": "Le firmware ne fait pas partie de l’espace d’adressage d’un processus applicatif."
       }
     },
-    "afund-q34": {
+    "afund-q39": {
       "type": "truefalse",
       "correct": true,
       "explanation": "En marquant la pile et le tas comme non exécutables, NX empêche qu’un code injecté dans ces zones s’exécute directement. Les attaquants contournent cette protection avec d’autres techniques (réutilisation de code existant)."
     },
-    "afund-q35": {
+    "afund-q40": {
       "type": "single",
       "correct": "b",
       "explanation": "L’unité de gestion mémoire (MMU) du processeur applique les tables de traduction que le noyau construit pour chaque processus. C’est aussi là que se vérifient les droits (lecture, écriture, exécution)."
     },
-    "afund-q36": {
+    "afund-q10": {
       "type": "short",
       "accepted": [
         "root"
       ],
       "explanation": "Le compte root peut tout faire sur le système. Son équivalent Windows est le compte SYSTEM (et le groupe Administrateurs). On ne l’utilise pas au quotidien."
     },
-    "afund-q37": {
+    "afund-q11": {
       "type": "truefalse",
       "correct": true,
       "explanation": "Moins un compte a de droits, moins une compromission a de conséquences. Le principe s’applique aux utilisateurs, aux processus et aux comptes de service, et aussi dans la durée."
     },
-    "afund-q38": {
+    "afund-q12": {
       "type": "single",
       "correct": "c",
       "explanation": "L’élévation de privilèges consiste à obtenir plus de droits sur la même machine. Le mouvement latéral, lui, consiste à passer d’une machine à une autre.",
@@ -301,7 +301,7 @@ export const corrections: CourseCorrections = {
         "a": "Le mouvement latéral change de machine, ici l’attaquant reste sur le même poste."
       }
     },
-    "afund-q39": {
+    "afund-q41": {
       "type": "single",
       "correct": "d",
       "explanation": "Le bit SUID fait exécuter le programme avec l’identité de son propriétaire. Utile pour des outils comme passwd, mais dangereux si le programme est vulnérable : c’est un vecteur classique d’élévation de privilèges.",
@@ -309,7 +309,7 @@ export const corrections: CourseCorrections = {
         "c": "C’est justement ce que le bit SUID modifie."
       }
     },
-    "afund-q40": {
+    "afund-q13": {
       "type": "open",
       "model": "Si ce service est compromis (faille, identifiants volés), l’attaquant obtient les droits d’administrateur de tout le domaine : lecture de toutes les données, création de comptes, déploiement de malwares. On applique le moindre privilège : un compte de service dédié (idéalement géré, comme un gMSA), limité aux données à sauvegarder, sans ouverture de session interactive, avec un mot de passe long et renouvelé, et un usage surveillé.",
       "criteria": [

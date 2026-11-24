@@ -165,7 +165,7 @@ export const body: CourseBody = {
   ],
   questions,
   resources: [
-    { title: 'Recommandations de configuration d’un système GNU/Linux', source: 'ANSSI (guide)' },
+    { title: 'Configuration recommendations for a GNU/Linux system (in French)', source: 'ANSSI (guide)' },
     { title: 'NIST SP 800-147 — BIOS Protection Guidelines', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/147/final' },
     { title: 'UEFI Specification — Secure Boot', source: 'UEFI Forum', url: 'https://uefi.org/specifications' },
   ],

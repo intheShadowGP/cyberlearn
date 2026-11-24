@@ -71,7 +71,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q4",
+    "id": "afund-q17",
     "prompt": "Which component executes the machine instructions of a program?",
     "skills": [
       "a-hw"
@@ -85,7 +85,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "The storage disk"
+        "text": "The main memory module"
       },
       {
         "id": "c",
@@ -93,12 +93,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "The main memory module"
+        "text": "The storage disk"
       }
     ]
   },
   {
-    "id": "afund-q5",
+    "id": "afund-q18",
     "prompt": "Why are several cache levels placed between the processor and the RAM?",
     "skills": [
       "a-hw"
@@ -112,20 +112,20 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "To increase the number of compute cores available on the chip"
+        "text": "To keep data durably when the machine is off"
       },
       {
         "id": "c",
-        "text": "To automatically encrypt each exchange with the hard disk"
+        "text": "To increase the number of compute cores available on the chip"
       },
       {
         "id": "d",
-        "text": "To keep data durably when the machine is off"
+        "text": "To automatically encrypt each exchange with the hard disk"
       }
     ]
   },
   {
-    "id": "afund-q6",
+    "id": "afund-q19",
     "prompt": "Attacks such as Spectre and Meltdown exploit side effects of processor execution, notably on the state of the caches.",
     "skills": [
       "a-hw"
@@ -134,7 +134,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q7",
+    "id": "afund-q20",
     "prompt": "A laptop with an unencrypted disk is stolen. What can the thief do?",
     "skills": [
       "a-hw"
@@ -144,7 +144,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Nothing: the system wipes the disk after three failed boots"
+        "text": "Only read the files they own"
       },
       {
         "id": "b",
@@ -152,7 +152,7 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Only read the files they own"
+        "text": "Nothing: the system wipes the disk after three failed boots"
       },
       {
         "id": "d",
@@ -161,7 +161,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q8",
+    "id": "afund-q21",
     "prompt": "What is the tiny, ultra-fast memory located inside the processor itself called? (one word, plural)",
     "skills": [
       "a-hw"
@@ -170,7 +170,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q9",
+    "id": "afund-q22",
     "prompt": "Which order of magnitude matches the access latency of main memory?",
     "skills": [
       "a-hw"
@@ -184,11 +184,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "≈ 10 ms"
+        "text": "≈ 100 µs"
       },
       {
         "id": "c",
-        "text": "≈ 100 µs"
+        "text": "≈ 10 ms"
       },
       {
         "id": "d",
@@ -197,7 +197,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q10",
+    "id": "afund-q23",
     "prompt": "How many different values can a byte take?",
     "skills": [
       "a-data"
@@ -215,16 +215,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "128 values, from 0 to 127"
+        "text": "255 values, from 1 to 255"
       },
       {
         "id": "d",
-        "text": "255 values, from 1 to 255"
+        "text": "128 values, from 0 to 127"
       }
     ]
   },
   {
-    "id": "afund-q11",
+    "id": "afund-q24",
     "prompt": "Which hexadecimal notation matches the binary byte 11111111?",
     "skills": [
       "a-data"
@@ -234,7 +234,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "80"
+        "text": "1F"
       },
       {
         "id": "b",
@@ -242,16 +242,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "F0"
+        "text": "80"
       },
       {
         "id": "d",
-        "text": "1F"
+        "text": "F0"
       }
     ]
   },
   {
-    "id": "afund-q12",
+    "id": "afund-q25",
     "prompt": "Which character encoding, compatible with ASCII, represents all Unicode characters with 1 to 4 bytes?",
     "skills": [
       "a-data"
@@ -260,7 +260,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q13",
+    "id": "afund-q26",
     "prompt": "A file whose extension is .txt necessarily contains text.",
     "skills": [
       "a-data"
@@ -269,7 +269,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q14",
+    "id": "afund-q27",
     "prompt": "In ASCII, which letter matches the byte 0x41 (65 in decimal)?",
     "skills": [
       "a-data"
@@ -296,7 +296,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q15",
+    "id": "afund-q28",
     "prompt": "Which statements about data representation are correct?",
     "skills": [
       "a-data"
@@ -306,28 +306,28 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "ASCII represents every character of every language"
+        "text": "Two hexadecimal digits are enough to write a byte"
       },
       {
         "id": "b",
-        "text": "A bit can take 256 different values"
+        "text": "ASCII represents every character of every language"
       },
       {
         "id": "c",
-        "text": "A byte groups 8 bits"
+        "text": "A bit can take 256 different values"
       },
       {
         "id": "d",
-        "text": "Hexadecimal is base 16: digits 0 to 9 then letters A to F"
+        "text": "A byte groups 8 bits"
       },
       {
         "id": "e",
-        "text": "Two hexadecimal digits are enough to write a byte"
+        "text": "Hexadecimal is base 16: digits 0 to 9 then letters A to F"
       }
     ]
   },
   {
-    "id": "afund-q16",
+    "id": "afund-q29",
     "prompt": "An analyst opens a file named “facture.pdf” in a hex editor and reads “4D 5A” as the first two bytes. What can they conclude and how should they proceed?",
     "skills": [
       "a-data",
@@ -337,7 +337,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "afund-q17",
+    "id": "afund-q4",
     "prompt": "Which component runs first at power-on?",
     "skills": [
       "a-boot"
@@ -355,16 +355,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "The antivirus installed on the machine"
+        "text": "The operating system kernel"
       },
       {
         "id": "d",
-        "text": "The operating system kernel"
+        "text": "The antivirus installed on the machine"
       }
     ]
   },
   {
-    "id": "afund-q18",
+    "id": "afund-q5",
     "prompt": "Which UEFI feature only allows bootloaders and kernels signed by a trusted key? (two words)",
     "skills": [
       "a-boot"
@@ -373,7 +373,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q19",
+    "id": "afund-q6",
     "prompt": "A bootkit is hard to detect because it runs before the operating system’s antivirus.",
     "skills": [
       "a-boot"
@@ -382,7 +382,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q20",
+    "id": "afund-q30",
     "prompt": "In which order does a machine boot?",
     "skills": [
       "a-boot"
@@ -392,11 +392,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "First process, kernel, firmware, bootloader"
+        "text": "Bootloader, firmware, first process, kernel"
       },
       {
         "id": "b",
-        "text": "Bootloader, firmware, first process, kernel"
+        "text": "First process, kernel, firmware, bootloader"
       },
       {
         "id": "c",
@@ -409,7 +409,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q21",
+    "id": "afund-q31",
     "prompt": "What is a TPM used for in the boot chain?",
     "skills": [
       "a-boot"
@@ -436,7 +436,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q22",
+    "id": "afund-q32",
     "prompt": "Which measures strengthen the protection of the boot chain?",
     "skills": [
       "a-boot"
@@ -463,7 +463,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q23",
+    "id": "afund-q14",
     "prompt": "Why is full-disk encryption (BitLocker, LUKS) recommended on a laptop?",
     "skills": [
       "a-boot",
@@ -474,7 +474,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "It prevents attacks carried out across the local network"
+        "text": "It speeds up disk access on every read"
       },
       {
         "id": "b",
@@ -486,12 +486,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "It speeds up disk access on every read"
+        "text": "It prevents attacks carried out across the local network"
       }
     ]
   },
   {
-    "id": "afund-q24",
+    "id": "afund-q33",
     "prompt": "An antivirus installed in the operating system always detects a UEFI firmware implant, because it monitors the machine from power-on.",
     "skills": [
       "a-boot"
@@ -500,7 +500,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q25",
+    "id": "afund-q15",
     "prompt": "A suspicious server is still running. The manager wants to power it off “to stop the attack”. What do you answer and which order of actions do you suggest?",
     "skills": [
       "a-boot",
@@ -510,7 +510,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "afund-q26",
+    "id": "afund-q7",
     "prompt": "How does a user-space application ask the kernel to read a file?",
     "skills": [
       "a-proc"
@@ -537,7 +537,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q27",
+    "id": "afund-q8",
     "prompt": "Which characteristics does every process have?",
     "skills": [
       "a-proc"
@@ -547,11 +547,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "An identifier (PID)"
+        "text": "A security context (the account it acts for)"
       },
       {
         "id": "b",
-        "text": "A dedicated MAC address"
+        "text": "A firmware of its own"
       },
       {
         "id": "c",
@@ -559,16 +559,16 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "A security context (the account it acts for)"
+        "text": "An identifier (PID)"
       },
       {
         "id": "e",
-        "text": "A firmware of its own"
+        "text": "A dedicated MAC address"
       }
     ]
   },
   {
-    "id": "afund-q28",
+    "id": "afund-q34",
     "prompt": "What is the difference between a process and a thread?",
     "skills": [
       "a-proc"
@@ -582,7 +582,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "A process is a thread that has finished running"
+        "text": "A thread runs only inside the machine’s firmware"
       },
       {
         "id": "c",
@@ -590,12 +590,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "A thread runs only inside the machine’s firmware"
+        "text": "A process is a thread that has finished running"
       }
     ]
   },
   {
-    "id": "afund-q29",
+    "id": "afund-q9",
     "prompt": "On a workstation, WINWORD.EXE starts cmd.exe, which starts powershell.exe -enc … What is the most likely interpretation?",
     "skills": [
       "a-proc",
@@ -606,11 +606,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Normal operation of the spell checker"
+        "text": "An automatic update of the word processor"
       },
       {
         "id": "b",
-        "text": "An automatic update of the word processor"
+        "text": "Normal operation of the spell checker"
       },
       {
         "id": "c",
@@ -623,7 +623,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q30",
+    "id": "afund-q35",
     "prompt": "A service (or daemon) is a process started in the background, often at boot, with no user interface.",
     "skills": [
       "a-proc"
@@ -632,7 +632,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q31",
+    "id": "afund-q36",
     "prompt": "What happens when an ordinary process tries to read another process’s memory without authorization?",
     "skills": [
       "a-proc"
@@ -646,7 +646,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "The processor merges the two address spaces"
+        "text": "The access succeeds because all the RAM is shared"
       },
       {
         "id": "c",
@@ -654,12 +654,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "The access succeeds because all the RAM is shared"
+        "text": "The processor merges the two address spaces"
       }
     ]
   },
   {
-    "id": "afund-q32",
+    "id": "afund-q37",
     "prompt": "What is the technique that randomizes, at each launch, the addresses of a process’s memory areas called? (acronym)",
     "skills": [
       "a-proc"
@@ -668,7 +668,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q33",
+    "id": "afund-q38",
     "prompt": "Which areas of a process’s memory are often targeted by memory corruption?",
     "skills": [
       "a-proc"
@@ -678,7 +678,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The system’s scheduled task registry"
+        "text": "The stack, with its return addresses"
       },
       {
         "id": "b",
@@ -690,12 +690,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "The stack, with its return addresses"
+        "text": "The system’s scheduled task registry"
       }
     ]
   },
   {
-    "id": "afund-q34",
+    "id": "afund-q39",
     "prompt": "The NX (or DEP) protection prevents the execution of code located in memory pages marked as data.",
     "skills": [
       "a-proc"
@@ -704,7 +704,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q35",
+    "id": "afund-q40",
     "prompt": "Which mechanism translates a process’s virtual addresses into physical memory addresses?",
     "skills": [
       "a-proc"
@@ -714,7 +714,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The disk controller, driven by the BIOS"
+        "text": "The screen, driven by the session manager"
       },
       {
         "id": "b",
@@ -722,16 +722,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "The network card, driven by the firewall"
+        "text": "The disk controller, driven by the BIOS"
       },
       {
         "id": "d",
-        "text": "The screen, driven by the session manager"
+        "text": "The network card, driven by the firewall"
       }
     ]
   },
   {
-    "id": "afund-q36",
+    "id": "afund-q10",
     "prompt": "On Linux, what is the name of the all-powerful account (UID 0)?",
     "skills": [
       "a-priv"
@@ -740,7 +740,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "afund-q37",
+    "id": "afund-q11",
     "prompt": "The principle of least privilege means granting each account only the rights strictly necessary for its function.",
     "skills": [
       "a-priv"
@@ -749,7 +749,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "afund-q38",
+    "id": "afund-q12",
     "prompt": "An attacker moves from a standard user account to the SYSTEM account through a misconfigured service. What is this step called?",
     "skills": [
       "a-priv"
@@ -763,7 +763,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Data exfiltration"
+        "text": "Network reconnaissance"
       },
       {
         "id": "c",
@@ -771,12 +771,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Network reconnaissance"
+        "text": "Data exfiltration"
       }
     ]
   },
   {
-    "id": "afund-q39",
+    "id": "afund-q41",
     "prompt": "A SUID program owned by root is launched by a standard user. With which rights does it run?",
     "skills": [
       "a-priv"
@@ -803,7 +803,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "afund-q40",
+    "id": "afund-q13",
     "prompt": "A backup service runs under a domain administrator account. Explain the risk and what you suggest instead.",
     "skills": [
       "a-priv",

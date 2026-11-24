@@ -77,7 +77,7 @@ export const questions: Question[] = [
     "placeholder": "chemin …"
   },
   {
-    "id": "fpc-q5",
+    "id": "fpc-q17",
     "prompt": "Un site enregistre les fichiers téléversés dans `/var/www/uploads/` en ajoutant le nom fourni par l’utilisateur. Quel nom permet de sortir de ce dossier ?",
     "skills": [
       "a-fs",
@@ -88,7 +88,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "rapport-annuel-2024.pdf"
+        "text": "photo-vacances.jpg"
       },
       {
         "id": "b",
@@ -96,7 +96,7 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "photo-vacances.jpg"
+        "text": "rapport-annuel-2024.pdf"
       },
       {
         "id": "d",
@@ -105,7 +105,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q6",
+    "id": "fpc-q18",
     "prompt": "Qu’est-ce qu’un lien symbolique ?",
     "skills": [
       "a-fs"
@@ -119,7 +119,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Une copie complète d’un fichier dans un autre dossier"
+        "text": "Un fichier compressé avec un mot de passe"
       },
       {
         "id": "c",
@@ -127,12 +127,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Un fichier compressé avec un mot de passe"
+        "text": "Une copie complète d’un fichier dans un autre dossier"
       }
     ]
   },
   {
-    "id": "fpc-q7",
+    "id": "fpc-q19",
     "prompt": "Quels éléments font partie des métadonnées d’un fichier ?",
     "skills": [
       "a-fs"
@@ -142,28 +142,28 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Les octets qui composent une image"
-      },
-      {
-        "id": "b",
-        "text": "Le texte contenu dans le document"
-      },
-      {
-        "id": "c",
         "text": "Les dates de création et de modification"
       },
       {
+        "id": "b",
+        "text": "Les droits d’accès"
+      },
+      {
+        "id": "c",
+        "text": "Les octets qui composent une image"
+      },
+      {
         "id": "d",
-        "text": "Le propriétaire du fichier"
+        "text": "Le texte contenu dans le document"
       },
       {
         "id": "e",
-        "text": "Les droits d’accès"
+        "text": "Le propriétaire du fichier"
       }
     ]
   },
   {
-    "id": "fpc-q8",
+    "id": "fpc-q20",
     "prompt": "Renommer un fichier ne modifie pas son contenu.",
     "skills": [
       "a-fs"
@@ -172,7 +172,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q9",
+    "id": "fpc-q21",
     "prompt": "Un collègue a reçu un fichier « facture.pdf.exe » et hésite à l’ouvrir. Expliquez ce que vous lui dites, et comment vous vérifieriez de quoi il s’agit.",
     "skills": [
       "a-fs",
@@ -182,7 +182,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "fpc-q10",
+    "id": "fpc-q7",
     "prompt": "Qu’est-ce que le code source ?",
     "skills": [
       "a-build"
@@ -192,15 +192,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Le courant électrique qui alimente le processeur de la machine"
-      },
-      {
-        "id": "b",
         "text": "Le câble qui relie l’ordinateur au réseau local de l’entreprise"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Le fichier binaire que le processeur exécute directement"
+      },
+      {
+        "id": "c",
+        "text": "Le courant électrique qui alimente le processeur de la machine"
       },
       {
         "id": "d",
@@ -209,7 +209,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q11",
+    "id": "fpc-q5",
     "prompt": "Quelle est la différence entre compilation et interprétation ?",
     "skills": [
       "a-build"
@@ -223,20 +223,20 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "La compilation concerne les textes, l’interprétation concerne les images et les vidéos"
-      },
-      {
-        "id": "c",
         "text": "La compilation s’exécute toujours sur un serveur distant, l’interprétation sur le poste"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Il n’y a aucune différence, les deux mots désignent la même opération"
+      },
+      {
+        "id": "d",
+        "text": "La compilation concerne les textes, l’interprétation concerne les images et les vidéos"
       }
     ]
   },
   {
-    "id": "fpc-q12",
+    "id": "fpc-q22",
     "prompt": "Lequel de ces langages est habituellement compilé en code machine ?",
     "skills": [
       "a-build"
@@ -263,7 +263,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q13",
+    "id": "fpc-q6",
     "prompt": "Quelles affirmations sur les dépendances d’un logiciel sont exactes ?",
     "skills": [
       "a-build"
@@ -277,7 +277,7 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Une dépendance vulnérable peut rendre l’application vulnérable"
+        "text": "Elles ne font pas partie du logiciel livré"
       },
       {
         "id": "c",
@@ -285,7 +285,7 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Elles ne font pas partie du logiciel livré"
+        "text": "Une dépendance vulnérable peut rendre l’application vulnérable"
       },
       {
         "id": "e",
@@ -294,7 +294,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q14",
+    "id": "fpc-q23",
     "prompt": "Un programme Java est compilé en bytecode puis exécuté par une machine virtuelle. De quelle approche s’agit-il ?",
     "skills": [
       "a-build"
@@ -312,16 +312,16 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Une compilation directe en code machine, sans machine virtuelle"
+        "text": "Une exécution réalisée uniquement par le noyau du système"
       },
       {
         "id": "d",
-        "text": "Une exécution réalisée uniquement par le noyau du système"
+        "text": "Une compilation directe en code machine, sans machine virtuelle"
       }
     ]
   },
   {
-    "id": "fpc-q15",
+    "id": "fpc-q24",
     "prompt": "Les dépendances d’un logiciel ne font pas partie de sa surface de sécurité.",
     "skills": [
       "a-build"
@@ -330,7 +330,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q16",
+    "id": "fpc-q25",
     "prompt": "Pourquoi un éditeur publie-t-il l’empreinte (hash) de son logiciel à côté du téléchargement ?",
     "skills": [
       "a-build"
@@ -340,7 +340,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Pour accélérer le téléchargement du fichier sur les connexions lentes"
+        "text": "Pour chiffrer le fichier et le rendre illisible aux tiers"
       },
       {
         "id": "b",
@@ -352,12 +352,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Pour chiffrer le fichier et le rendre illisible aux tiers"
+        "text": "Pour accélérer le téléchargement du fichier sur les connexions lentes"
       }
     ]
   },
   {
-    "id": "fpc-q17",
+    "id": "fpc-q26",
     "prompt": "Comment appelle-t-on les bibliothèques externes qu’un programme réutilise au lieu de tout réécrire ? (un mot)",
     "skills": [
       "a-build"
@@ -366,7 +366,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "fpc-q18",
+    "id": "fpc-q27",
     "prompt": "Un attaquant publie une version piégée d’une bibliothèque très utilisée, qui est installée par des milliers d’applications. Quelle notion décrit cette attaque ?",
     "skills": [
       "a-build",
@@ -381,11 +381,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Une attaque par force brute sur un mot de passe"
+        "text": "Un hameçonnage ciblé par courrier"
       },
       {
         "id": "c",
-        "text": "Un hameçonnage ciblé par courrier"
+        "text": "Une attaque par force brute sur un mot de passe"
       },
       {
         "id": "d",
@@ -394,7 +394,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q19",
+    "id": "fpc-q8",
     "prompt": "Dans le modèle client-serveur, qui traite les requêtes et renvoie les réponses ?",
     "skills": [
       "a-archi-log"
@@ -404,11 +404,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "L’utilisateur lui-même"
+        "text": "Le câble réseau"
       },
       {
         "id": "b",
-        "text": "Le câble réseau"
+        "text": "L’utilisateur lui-même"
       },
       {
         "id": "c",
@@ -421,7 +421,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q20",
+    "id": "fpc-q9",
     "prompt": "Un contrôle de sécurité effectué uniquement côté client (dans le navigateur) suffit à se protéger.",
     "skills": [
       "a-archi-log"
@@ -430,7 +430,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q21",
+    "id": "fpc-q10",
     "prompt": "Comment appelle-t-on la limite entre une zone maîtrisée et une zone non fiable, par exemple entre le navigateur et le serveur ? (trois mots)",
     "skills": [
       "a-archi-log"
@@ -440,7 +440,7 @@ export const questions: Question[] = [
     "placeholder": "frontière de …"
   },
   {
-    "id": "fpc-q22",
+    "id": "fpc-q28",
     "prompt": "Dans une application en trois couches (présentation, logique métier, accès aux données), quelle couche dialogue avec la base de données ?",
     "skills": [
       "a-archi-log"
@@ -450,11 +450,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Le réseau local de l’entreprise"
+        "text": "Le navigateur de l’utilisateur"
       },
       {
         "id": "b",
-        "text": "Le navigateur de l’utilisateur"
+        "text": "Le réseau local de l’entreprise"
       },
       {
         "id": "c",
@@ -467,7 +467,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q23",
+    "id": "fpc-q29",
     "prompt": "Le navigateur envoie au serveur un panier avec le prix « 1 € » au lieu de « 100 € » (valeur modifiée avant l’envoi). Que doit faire le serveur ?",
     "skills": [
       "a-archi-log",
@@ -478,11 +478,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Faire confiance au prix envoyé par le navigateur du client"
+        "text": "Demander au navigateur de recalculer le prix lui-même"
       },
       {
         "id": "b",
-        "text": "Demander au navigateur de recalculer le prix lui-même"
+        "text": "Faire confiance au prix envoyé par le navigateur du client"
       },
       {
         "id": "c",
@@ -495,7 +495,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q24",
+    "id": "fpc-q30",
     "prompt": "Qu’est-ce qu’une API ?",
     "skills": [
       "a-archi-log"
@@ -522,7 +522,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q25",
+    "id": "fpc-q31",
     "prompt": "Quels éléments font partie de la surface d’attaque d’une application web ?",
     "skills": [
       "a-archi-log"
@@ -532,28 +532,28 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "La couleur de la barre de navigation"
-      },
-      {
-        "id": "b",
         "text": "Le fond d’écran du poste du développeur"
       },
       {
-        "id": "c",
-        "text": "Un port ouvert sur le serveur"
-      },
-      {
-        "id": "d",
+        "id": "b",
         "text": "Une API accessible depuis l’extérieur"
       },
       {
-        "id": "e",
+        "id": "c",
         "text": "Un formulaire de connexion exposé sur Internet"
+      },
+      {
+        "id": "d",
+        "text": "La couleur de la barre de navigation"
+      },
+      {
+        "id": "e",
+        "text": "Un port ouvert sur le serveur"
       }
     ]
   },
   {
-    "id": "fpc-q26",
+    "id": "fpc-q11",
     "prompt": "Expliquez avec vos mots pourquoi « ne pas faire confiance à ce qui vient du client » est une règle centrale, et donnez un exemple.",
     "skills": [
       "a-archi-log",
@@ -563,7 +563,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "fpc-q27",
+    "id": "fpc-q32",
     "prompt": "Dans une architecture en services, les échanges entre services passent par le réseau, ce qui ajoute des points d’échange à protéger.",
     "skills": [
       "a-archi-log"
@@ -572,7 +572,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q28",
+    "id": "fpc-q12",
     "prompt": "À quoi sert une boucle dans un programme ?",
     "skills": [
       "a-prog"
@@ -586,11 +586,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "À éteindre proprement la machine"
+        "text": "À chiffrer le contenu d’un fichier"
       },
       {
         "id": "c",
-        "text": "À chiffrer le contenu d’un fichier"
+        "text": "À éteindre proprement la machine"
       },
       {
         "id": "d",
@@ -599,7 +599,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q29",
+    "id": "fpc-q13",
     "prompt": "Quelles affirmations sur les notions de programmation sont exactes ?",
     "skills": [
       "a-prog"
@@ -609,19 +609,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Une liste est une suite ordonnée de valeurs"
-      },
-      {
-        "id": "b",
-        "text": "Une boucle sert à chiffrer un fichier"
-      },
-      {
-        "id": "c",
         "text": "Une condition répète indéfiniment un bloc d’instructions"
       },
       {
-        "id": "d",
+        "id": "b",
         "text": "Un dictionnaire associe une clé à une valeur"
+      },
+      {
+        "id": "c",
+        "text": "Une liste est une suite ordonnée de valeurs"
+      },
+      {
+        "id": "d",
+        "text": "Une boucle sert à chiffrer un fichier"
       },
       {
         "id": "e",
@@ -630,7 +630,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q30",
+    "id": "fpc-q33",
     "prompt": "Avec la fonction fournie avec la question, quel prix paie un adhérent pour un article à 200 ?",
     "skills": [
       "a-prog"
@@ -644,11 +644,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "180"
+        "text": "190"
       },
       {
         "id": "b",
-        "text": "190"
+        "text": "180"
       },
       {
         "id": "c",
@@ -661,7 +661,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q31",
+    "id": "fpc-q34",
     "prompt": "Quelle structure de données associe une clé à une valeur ?",
     "skills": [
       "a-prog"
@@ -671,7 +671,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Une liste"
+        "text": "Une boucle"
       },
       {
         "id": "b",
@@ -679,7 +679,7 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Une boucle"
+        "text": "Une liste"
       },
       {
         "id": "d",
@@ -688,7 +688,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q32",
+    "id": "fpc-q35",
     "prompt": "Une saisie utilisateur insérée telle quelle dans une commande peut permettre à un attaquant d’exécuter d’autres commandes.",
     "skills": [
       "a-prog"
@@ -697,7 +697,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q33",
+    "id": "fpc-q36",
     "prompt": "Si l’utilisateur saisit « exemple.org ; cat /etc/passwd » dans le programme fourni avec la question, quel est le risque ?",
     "skills": [
       "a-prog"
@@ -711,7 +711,7 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Une perte de paquets réseau"
+        "text": "Un dépassement de quota disque"
       },
       {
         "id": "b",
@@ -723,12 +723,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Un dépassement de quota disque"
+        "text": "Une perte de paquets réseau"
       }
     ]
   },
   {
-    "id": "fpc-q34",
+    "id": "fpc-q37",
     "prompt": "Comment appelle-t-on un bloc d’instructions réutilisable qui reçoit des paramètres et rend un résultat ? (un mot)",
     "skills": [
       "a-prog"
@@ -737,7 +737,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "fpc-q35",
+    "id": "fpc-q38",
     "prompt": "Dans le programme fourni avec la question, repérez la donnée non fiable, expliquez le risque et proposez un correctif.",
     "skills": [
       "a-prog",
@@ -751,7 +751,7 @@ export const questions: Question[] = [
     "type": "open"
   },
   {
-    "id": "fpc-q36",
+    "id": "fpc-q39",
     "prompt": "Quel est le rôle d’un shell ?",
     "skills": [
       "a-cli"
@@ -761,11 +761,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Gérer l’alimentation et la veille de la machine"
+        "text": "Afficher les pages web demandées par le navigateur"
       },
       {
         "id": "b",
-        "text": "Chiffrer l’ensemble des fichiers du disque"
+        "text": "Gérer l’alimentation et la veille de la machine"
       },
       {
         "id": "c",
@@ -773,12 +773,12 @@ export const questions: Question[] = [
       },
       {
         "id": "d",
-        "text": "Afficher les pages web demandées par le navigateur"
+        "text": "Chiffrer l’ensemble des fichiers du disque"
       }
     ]
   },
   {
-    "id": "fpc-q37",
+    "id": "fpc-q14",
     "prompt": "La ligne de commande permet d’effectuer des actions de façon précise et reproductible.",
     "skills": [
       "a-cli"
@@ -787,7 +787,7 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "fpc-q38",
+    "id": "fpc-q15",
     "prompt": "Comment appelle-t-on le programme qui interprète les commandes tapées, comme Bash ou PowerShell ? (un mot)",
     "skills": [
       "a-cli"
@@ -796,7 +796,7 @@ export const questions: Question[] = [
     "type": "short"
   },
   {
-    "id": "fpc-q39",
+    "id": "fpc-q40",
     "prompt": "Que fait la commande `cat journal.log | grep \"Failed\" | wc -l` ?",
     "skills": [
       "a-cli"
@@ -823,7 +823,7 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "fpc-q40",
+    "id": "fpc-q41",
     "prompt": "Quels avantages la ligne de commande offre-t-elle en administration ?",
     "skills": [
       "a-cli",
@@ -834,19 +834,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Elle fonctionne uniquement sur un poste local"
-      },
-      {
-        "id": "b",
-        "text": "Elle empêche toute erreur de manipulation"
-      },
-      {
-        "id": "c",
         "text": "Les actions sont explicites et reproductibles"
       },
       {
-        "id": "d",
+        "id": "b",
         "text": "On peut les automatiser par des scripts"
+      },
+      {
+        "id": "c",
+        "text": "Elle empêche toute erreur de manipulation"
+      },
+      {
+        "id": "d",
+        "text": "Elle fonctionne uniquement sur un poste local"
       }
     ]
   }
