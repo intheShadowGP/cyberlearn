@@ -36,4 +36,5 @@ export const layout = {
   'footer.version': 'CyberAcadémie V{v}',
   'footer.build': 'Version {id}',
   'title.suffix': 'CyberAcadémie',
+  'meta.description': 'CyberAcadémie : plateforme gratuite d’apprentissage de la cybersécurité, du niveau débutant au niveau expert. Cours, laboratoires interactifs et évaluations, hors ligne et sans compte.',
 } as const;

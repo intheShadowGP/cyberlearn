@@ -1,4 +1,6 @@
-import type { ReactElement } from 'react';
+import { cloneElement, isValidElement, type ReactElement, type ReactNode } from 'react';
+import { useI18n } from '../../i18n';
+import { DIAGRAM_EN } from './diagrams.en';
 
 /**
  * Schémas pédagogiques en SVG inline. Les couleurs proviennent des variables
@@ -679,7 +681,7 @@ function VlanTagging(): ReactElement {
   );
 }
 
-export const DIAGRAMS: Record<string, () => ReactElement> = {
+const RAW_DIAGRAMS: Record<string, () => ReactElement> = {
   'vlan-tagging': VlanTagging,
   'clickjacking': Clickjacking,
   'ssrf-flow': SsrfFlow,
@@ -709,3 +711,28 @@ export const DIAGRAMS: Record<string, () => ReactElement> = {
   'purdue-model': PurdueModel,
   'stack-frame': StackFrame,
 };
+
+/** Remplace, dans un arbre de composants, les chaînes françaises par leur traduction (props title/sub/label et enfants texte). */
+export function translateTree(node: ReactNode): ReactNode {
+  if (typeof node === 'string') return DIAGRAM_EN[node] ?? node;
+  if (Array.isArray(node)) return node.map((n) => translateTree(n));
+  if (!isValidElement(node)) return node;
+  const props = node.props as Record<string, unknown>;
+  const next: Record<string, unknown> = {};
+  for (const k of ['title', 'sub', 'label'] as const) {
+    if (typeof props[k] === 'string') next[k] = DIAGRAM_EN[props[k] as string] ?? props[k];
+  }
+  if (props.children !== undefined) next.children = translateTree(props.children as ReactNode);
+  return cloneElement(node as ReactElement<Record<string, unknown>>, next);
+}
+
+function Localized({ render }: { render: () => ReactElement }) {
+  const { lang } = useI18n();
+  const el = render();
+  return lang === 'fr' ? el : <>{translateTree(el)}</>;
+}
+
+/** Schémas localisés : écrits en français, traduits à l'affichage selon la langue active. */
+export const DIAGRAMS: Record<string, () => ReactElement> = Object.fromEntries(
+  Object.entries(RAW_DIAGRAMS).map(([id, render]) => [id, () => <Localized render={render} />]),
+);

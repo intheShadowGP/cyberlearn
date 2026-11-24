@@ -1,0 +1,136 @@
+import type { ScenarioBody } from '../../scenarios';
+
+export const body: ScenarioBody = {
+  scenarioId: 'web-appsec-intrusion',
+  dossier: [
+    {
+      t: 'callout',
+      kind: 'legal',
+      title: 'Fictional data',
+      text: 'The shop, accounts, addresses and timestamps are invented. The log formats and the techniques are real; the values are not. The address 203.0.113.45 belongs to a range reserved for documentation (RFC 5737).',
+    },
+    {
+      t: 'p',
+      text: 'Tuesday, 10:10 a.m. The monitoring of the **Halbyx Shop** store reports a spike of errors then abnormally large responses on a public entry point. You open the three sources below. **Read them: the answers are there or can be deduced from them.**',
+    },
+    { t: 'h', text: 'Source 1 — Monitoring alert' },
+    {
+      t: 'table',
+      head: ['Field', 'Value'],
+      rows: [
+        ['Host', 'shop-web01 (public web server)'],
+        ['Rule triggered', 'Spike of 500 errors then large responses on `/produits`'],
+        ['Source address', '`203.0.113.45` (external)'],
+        ['Entry point', '`/produits?id=…` (catalog, numeric parameter expected)'],
+        ['Severity', 'High'],
+      ],
+    },
+    { t: 'h', text: 'Source 2 — HTTP access log of shop-web01 (extract)' },
+    {
+      t: 'code',
+      lang: 'text',
+      caption: 'Time · address · request · status code · bytes returned',
+      code: [
+        '10:02:11  203.0.113.45  "GET /produits?id=1"                                     200    5213',
+        '10:02:19  203.0.113.45  "GET /produits?id=1\'"                                    500     402',
+        '10:02:26  203.0.113.45  "GET /produits?id=1\' OR \'1\'=\'1"                          200    5210',
+        '10:03:04  203.0.113.45  "GET /produits?id=-1 UNION SELECT ... FROM users"        200   48907',
+        '10:05:40  203.0.113.45  "GET /admin/commandes"                                   200    9004',
+        '10:06:12  203.0.113.45  "GET /export?fichier=../../../etc/passwd"                200    1840',
+      ].join('\n'),
+    },
+    { t: 'h', text: 'Source 3 — Application log of shop-web01 (extract)' },
+    {
+      t: 'code',
+      lang: 'text',
+      caption: 'Time · level · message',
+      code: [
+        '10:02:19  ERROR  SQL syntax error near "\'" in the catalog query (/produits)',
+        '10:03:04  WARN   /produits: 1,482 rows returned from the “users” table',
+        '10:05:38  AUTH   Administrator session reused from 203.0.113.45 (usual: 10.0.0.12)',
+      ].join('\n'),
+    },
+  ],
+  questions: [
+    {
+      id: 'sc-web-q1',
+      type: 'single',
+      difficulty: 2,
+      skills: ['f-sqli'],
+      prompt: 'In source 2, the request `/produits?id=1\' OR \'1\'=\'1`, confirmed by the SQL syntax error in source 3, is an example of which technique?',
+      options: [
+        { id: 'a', text: 'An SQL injection' },
+        { id: 'b', text: 'A reflected cross-site scripting (XSS) through the search parameter' },
+        { id: 'c', text: 'A server-side request forgery (SSRF)' },
+        { id: 'd', text: 'A brute-force attack on the login form' },
+      ],
+    },
+    {
+      id: 'sc-web-q2',
+      type: 'short',
+      difficulty: 1,
+      skills: ['i-triage'],
+      prompt: 'Which HTTP status code, in source 2, accompanies the malicious requests that returned a page (rather than an error)?',
+      placeholder: 'e.g. a 3-digit code',
+    },
+    {
+      id: 'sc-web-q3',
+      type: 'single',
+      difficulty: 2,
+      skills: ['f-ssrf'],
+      prompt: 'The request `GET /export?fichier=../../../etc/passwd` (source 2) falls into which category?',
+      options: [
+        { id: 'a', text: 'A path traversal' },
+        { id: 'b', text: 'An operating system command injection on the server' },
+        { id: 'c', text: 'An access control bypass by manipulating an identifier (IDOR)' },
+        { id: 'd', text: 'An open redirect' },
+      ],
+    },
+    {
+      id: 'sc-web-q4',
+      type: 'truefalse',
+      difficulty: 2,
+      skills: ['f-session'],
+      prompt: 'The `AUTH` line of source 3 — “administrator session reused from 203.0.113.45” — indicates a hijacking of the administrator’s session.',
+    },
+    {
+      id: 'sc-web-q5',
+      type: 'single',
+      difficulty: 3,
+      skills: ['i-triage'],
+      prompt: 'What confirms that the attack led to a **data extraction**, and not just an attempt?',
+      options: [
+        { id: 'a', text: 'The abnormally large response to the UNION request and the 1,482 rows of the “users” table returned in the application log' },
+        { id: 'b', text: 'The fact that several requests come from the same external address within just a few minutes' },
+        { id: 'c', text: 'The presence of a 500 error in the access log' },
+        { id: 'd', text: 'The use of the GET method rather than POST' },
+      ],
+    },
+    {
+      id: 'sc-web-q6',
+      type: 'multi',
+      difficulty: 2,
+      skills: ['i-ir'],
+      prompt: 'Which immediate containment measures are appropriate? (several answers)',
+      options: [
+        { id: 'a', text: 'Block the source address and take the vulnerable entry point out of service' },
+        { id: 'b', text: 'Invalidate the current sessions and change the exposed secrets' },
+        { id: 'c', text: 'Keep and timestamp the logs as evidence' },
+        { id: 'd', text: 'Erase the access logs to start clean' },
+      ],
+    },
+    {
+      id: 'sc-web-q7',
+      type: 'single',
+      difficulty: 2,
+      skills: ['f-sqli'],
+      prompt: 'Which fix durably prevents this type of attack on the `id` parameter?',
+      options: [
+        { id: 'a', text: 'Using prepared (parameterized) queries on the server side' },
+        { id: 'b', text: 'Deploying a web application firewall (WAF) as the only protection and changing nothing in the code' },
+        { id: 'c', text: 'Hiding the SQL error messages returned to the user' },
+        { id: 'd', text: 'Limiting the size of the server’s HTTP responses' },
+      ],
+    },
+  ],
+};

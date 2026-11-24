@@ -38,4 +38,5 @@ export const layout: Record<keyof typeof frLayout, string> = {
   'footer.version': 'CyberAcadémie V{v}',
   'footer.build': 'Build {id}',
   'title.suffix': 'CyberAcadémie',
+  'meta.description': 'CyberAcadémie: a free cybersecurity learning platform, from beginner to expert level. Courses, interactive labs and assessments, offline and with no account.',
 };

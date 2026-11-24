@@ -46,6 +46,11 @@ export function Layout({ children }: { children: ReactNode }) {
   const online = useOnline();
   const first = useRef(true);
 
+  // La description du site (balise meta) suit la langue.
+  useEffect(() => {
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'));
+  }, [t]);
+
   useEffect(() => onUpdateAvailable((apply) => setApplyUpdate(() => apply)), []);
 
   // Accessibilité : à chaque changement de page, le focus va au contenu principal.

@@ -89,3 +89,17 @@ describe('catalogues traduits', () => {
     expect(Object.keys(POSITIONING_EN).sort()).toEqual(POSITIONING_BANK.map((q) => q.id).sort());
   });
 });
+
+describe('fiches de vérification', () => {
+  it('chaque fiche française a sa version anglaise (mêmes nombres d’éléments)', async () => {
+    const { VERIFICATION } = await import('../content/verification');
+    const { VERIFICATION_EN } = await import('../content/verification.en');
+    const bad: string[] = [];
+    for (const [id, v] of Object.entries(VERIFICATION)) {
+      const e = VERIFICATION_EN[id];
+      if (!e) bad.push(`${id} : manquante`);
+      else if (e.versions.length !== v.versions.length || e.evolving.length !== v.evolving.length) bad.push(`${id} : structure`);
+    }
+    expect(bad, bad.join('\n')).toEqual([]);
+  });
+});
