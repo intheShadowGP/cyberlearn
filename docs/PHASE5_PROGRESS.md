@@ -48,7 +48,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Discipline | Débutant | Intermédiaire | Avancé | Expert |
 | --- | --- | --- | --- | --- |
 | A Fondamentaux | ✔ ×2 (banques 40 + anglais) | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) |
-| B Réseaux | ✔ | ✔ ×3 | ✔ | ➕ |
+| B Réseaux | ✔ | ✔ ×3 | ✔ | ✔ |
 | C Linux | ✔ | ✔ | ✔ | ➕ |
 | D Windows | ➕ | ✔ | ✔ ×2 | ➕ |
 | E Cryptographie | ➕ | ✔ | ✔ | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (9 migrés) + 40 cours à créer (3 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 37 cours à créer et 36 cours existants à migrer.
+Total : 45 cours existants (9 migrés) + 40 cours à créer (4 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 36 cours à créer et 36 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -84,3 +84,4 @@ Total : 45 cours existants (9 migrés) + 40 cours à créer (3 créés) = 85 cou
 | `b-commutation-vlan-ipv6` | ✔ 40 | ✔ 40 | ✔ (STP, 802.1X, ICMPv6, /64) |
 | `b-routage-dns-dhcp-nat` | ✔ 40 | ✔ 40 | ✔ (états de liens, enregistrements DNS, DNAT, section diagnostic) |
 | `b-perimetre-vpn-wifi` | ✔ 40 | ✔ 40 | ✔ (ordre des règles, balayage de ports, evil twin, flux de la DMZ) |
+| `b-defense-reseau-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |

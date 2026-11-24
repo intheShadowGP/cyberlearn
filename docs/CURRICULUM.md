@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 48 |
-| Questions de cours (avec correction) | 1041 |
+| Cours complets | 49 |
+| Questions de cours (avec correction) | 1081 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -23,7 +23,7 @@
 | Discipline | Cours | Niveaux | Sujets abordés / cartographiés |
 | --- | --- | --- | --- |
 | A. Fondamentaux de l'informatique | 5 | 1, 2, 3, 4 | 16 / 16 |
-| B. Réseaux informatiques | 5 | 1, 2, 3 | 36 / 36 |
+| B. Réseaux informatiques | 6 | 1, 2, 3, 4 | 36 / 36 |
 | C. Linux | 3 | 1, 2, 3 | 22 / 22 |
 | D. Windows et Windows Server | 3 | 2, 3 | 25 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
@@ -55,6 +55,7 @@
 | Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage (`b-commutation-vlan-ipv6`) | B | 2 · Intermédiaire | 105 min | 5 | 40 | 2 | 5 |
 | Routage, DNS, DHCP et NAT : acheminer les paquets entre réseaux (`b-routage-dns-dhcp-nat`) | B | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 5 |
 | Périmètre réseau : pare-feu, détection, VPN, Wi-Fi et architecture sécurisée (`b-perimetre-vpn-wifi`) | B | 3 · Avancé | 120 min | 5 | 40 | 3 | 5 |
+| Défense réseau avancée : déni de service, plan de contrôle, visibilité et résilience (`b-defense-reseau-avancee`) | B | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Linux au quotidien : architecture, shell Bash, paquets et automatisation (`c-shell-paquets-automatisation`) | C | 1 · Débutant | 80 min | 5 | 16 | 2 | 5 |
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 80 min | 5 | 16 | 2 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
