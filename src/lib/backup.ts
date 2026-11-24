@@ -1,4 +1,6 @@
 import { replaceAll } from './db';
+import { translate, type MsgKey, type Params } from '../i18n';
+import type { Lang } from './prefs';
 import {
   loadSnapshot, notify, sanitizePseudonym,
   type Activity, type Attempt, type CourseProgress, type Goal, type LabProgress, type MetaRecord,
@@ -20,7 +22,19 @@ const MAX_RECORDS = 20_000;
 const MAX_STR = 2_000;
 const ID_RE = /^[A-Za-z0-9._:-]{1,128}$/;
 
-export class ImportError extends Error {}
+/**
+ * Erreur d'import. `message` reste en français (journaux, tests) ; `key` et `params` permettent
+ * d'afficher le même message dans la langue de l'interface via `localized(lang)`.
+ */
+export class ImportError extends Error {
+  constructor(message: string, readonly key?: MsgKey, readonly params?: Params) {
+    super(message);
+  }
+
+  localized(lang: Lang): string {
+    return this.key ? translate(lang, this.key, this.params) : this.message;
+  }
+}
 
 /**
  * Empreinte SHA-256 (hexadécimal) de la sérialisation canonique des données.
@@ -57,41 +71,41 @@ function isObj(v: unknown): v is Obj {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 function str(v: unknown, field: string, max = MAX_STR): string {
-  if (typeof v !== 'string' || v.length > max) throw new ImportError(`Champ invalide : ${field}`);
+  if (typeof v !== 'string' || v.length > max) throw new ImportError(`Champ invalide : ${field}`, 'backup.err.field', { field });
   return v;
 }
 function id(v: unknown, field: string): string {
   const s = str(v, field, 128);
-  if (!ID_RE.test(s)) throw new ImportError(`Identifiant invalide : ${field}`);
+  if (!ID_RE.test(s)) throw new ImportError(`Identifiant invalide : ${field}`, 'backup.err.id', { field });
   return s;
 }
 function num(v: unknown, field: string, min = 0, max = Number.MAX_SAFE_INTEGER): number {
-  if (typeof v !== 'number' || !Number.isFinite(v) || v < min || v > max) throw new ImportError(`Nombre invalide : ${field}`);
+  if (typeof v !== 'number' || !Number.isFinite(v) || v < min || v > max) throw new ImportError(`Nombre invalide : ${field}`, 'backup.err.number', { field });
   return v;
 }
 function numOrNull(v: unknown, field: string, min = 0, max = Number.MAX_SAFE_INTEGER): number | null {
   return v === null ? null : num(v, field, min, max);
 }
 function bool(v: unknown, field: string): boolean {
-  if (typeof v !== 'boolean') throw new ImportError(`Booléen invalide : ${field}`);
+  if (typeof v !== 'boolean') throw new ImportError(`Booléen invalide : ${field}`, 'backup.err.bool', { field });
   return v;
 }
 function arr(v: unknown, field: string, max = MAX_RECORDS): unknown[] {
-  if (!Array.isArray(v) || v.length > max) throw new ImportError(`Liste invalide : ${field}`);
+  if (!Array.isArray(v) || v.length > max) throw new ImportError(`Liste invalide : ${field}`, 'backup.err.list', { field });
   return v;
 }
 function oneOf<T extends string>(v: unknown, field: string, values: readonly T[]): T {
-  if (typeof v !== 'string' || !(values as readonly string[]).includes(v)) throw new ImportError(`Valeur invalide : ${field}`);
+  if (typeof v !== 'string' || !(values as readonly string[]).includes(v)) throw new ImportError(`Valeur invalide : ${field}`, 'backup.err.value', { field });
   return v as T;
 }
 
 function bySkill(v: unknown): Attempt['bySkill'] {
-  if (!isObj(v)) throw new ImportError('bySkill invalide');
+  if (!isObj(v)) throw new ImportError('bySkill invalide', 'backup.err.record', { what: 'bySkill' });
   const out: Attempt['bySkill'] = Object.create(null);
   const entries = Object.entries(v);
-  if (entries.length > 500) throw new ImportError('bySkill trop volumineux');
+  if (entries.length > 500) throw new ImportError('bySkill trop volumineux', 'backup.err.tooBig', { what: 'bySkill' });
   for (const [k, e] of entries) {
-    if (!ID_RE.test(k) || !isObj(e)) throw new ImportError('bySkill invalide');
+    if (!ID_RE.test(k) || !isObj(e)) throw new ImportError('bySkill invalide', 'backup.err.record', { what: 'bySkill' });
     out[k] = { points: num(e.points, 'points', 0, 10_000), total: num(e.total, 'total', 0, 10_000) };
   }
   return { ...out };
@@ -100,7 +114,7 @@ function bySkill(v: unknown): Attempt['bySkill'] {
 const PCT = [0, 100] as const;
 
 function vProgress(v: unknown): CourseProgress {
-  if (!isObj(v)) throw new ImportError('progress invalide');
+  if (!isObj(v)) throw new ImportError('progress invalide', 'backup.err.record', { what: 'progress' });
   return {
     courseId: id(v.courseId, 'courseId'),
     status: oneOf(v.status, 'status', ['started', 'validated'] as const),
@@ -116,7 +130,7 @@ function vProgress(v: unknown): CourseProgress {
 }
 
 function vLab(v: unknown): LabProgress {
-  if (!isObj(v)) throw new ImportError('labProgress invalide');
+  if (!isObj(v)) throw new ImportError('labProgress invalide', 'backup.err.record', { what: 'labProgress' });
   return {
     labId: id(v.labId, 'labId'),
     status: oneOf(v.status, 'status', ['started', 'completed'] as const),
@@ -128,7 +142,7 @@ function vLab(v: unknown): LabProgress {
 }
 
 function vAttempt(v: unknown): Attempt {
-  if (!isObj(v)) throw new ImportError('attempt invalide');
+  if (!isObj(v)) throw new ImportError('attempt invalide', 'backup.err.record', { what: 'attempt' });
   const a: Attempt = {
     kind: oneOf(v.kind, 'kind', ['course', 'lab', 'exam'] as const),
     refId: id(v.refId, 'refId'),
@@ -145,18 +159,18 @@ function vAttempt(v: unknown): Attempt {
 }
 
 function vSkill(v: unknown): SkillRecord {
-  if (!isObj(v)) throw new ImportError('skill invalide');
+  if (!isObj(v)) throw new ImportError('skill invalide', 'backup.err.record', { what: 'skill' });
   return {
     skillId: id(v.skillId, 'skillId'),
     history: arr(v.history, 'history', 50).map((h) => {
-      if (!isObj(h)) throw new ImportError('history invalide');
+      if (!isObj(h)) throw new ImportError('history invalide', 'backup.err.record', { what: 'history' });
       return { ratio: num(h.ratio, 'ratio', 0, 1), weight: num(h.weight, 'weight', 0, 10_000), date: num(h.date, 'date') };
     }),
   };
 }
 
 function vGoal(v: unknown): Goal {
-  if (!isObj(v)) throw new ImportError('goal invalide');
+  if (!isObj(v)) throw new ImportError('goal invalide', 'backup.err.record', { what: 'goal' });
   const g: Goal = {
     id: id(v.id, 'id'),
     text: str(v.text, 'text', 300),
@@ -169,7 +183,7 @@ function vGoal(v: unknown): Goal {
 
 const META_KEYS = new Set(['lastCourse', 'dailyGoalMin']);
 function vMeta(v: unknown): MetaRecord | null {
-  if (!isObj(v)) throw new ImportError('meta invalide');
+  if (!isObj(v)) throw new ImportError('meta invalide', 'backup.err.record', { what: 'meta' });
   const key = str(v.key, 'key', 64);
   if (!META_KEYS.has(key)) return null; // clés inconnues ignorées
   const value = v.value;
@@ -178,7 +192,7 @@ function vMeta(v: unknown): MetaRecord | null {
 }
 
 function vPositioning(v: unknown): PositioningResult {
-  if (!isObj(v)) throw new ImportError('résultat de positionnement invalide');
+  if (!isObj(v)) throw new ImportError('résultat de positionnement invalide', 'backup.err.record', { what: 'positioning' });
   return {
     date: num(v.date, 'date'),
     correct: num(v.correct, 'correct', 0, 100),
@@ -190,7 +204,7 @@ function vPositioning(v: unknown): PositioningResult {
 }
 
 function vOnboarding(v: unknown): Onboarding {
-  if (!isObj(v)) throw new ImportError('onboarding invalide');
+  if (!isObj(v)) throw new ImportError('onboarding invalide', 'backup.err.record', { what: 'onboarding' });
   const validated = bool(v.validated, 'validated');
   const ob: Onboarding = {
     declaredLevel: oneOf(v.declaredLevel, 'declaredLevel', ['debutant', 'initie'] as const),
@@ -206,8 +220,8 @@ function vOnboarding(v: unknown): Onboarding {
 }
 
 function vProfile(v: unknown): Profile {
-  if (!isObj(v)) throw new ImportError('profil invalide');
-  if (v.key !== 'profile') throw new ImportError('profil invalide');
+  if (!isObj(v)) throw new ImportError('profil invalide', 'backup.err.record', { what: 'profil' });
+  if (v.key !== 'profile') throw new ImportError('profil invalide', 'backup.err.record', { what: 'profil' });
   const p: Profile = {
     key: 'profile',
     pseudonym: sanitizePseudonym(str(v.pseudonym, 'pseudonym', 200)),
@@ -221,24 +235,24 @@ function vProfile(v: unknown): Profile {
 
 const ACTIVITY_TYPES = ['section', 'practice', 'course-attempt', 'lab-attempt', 'exam-attempt', 'review'] as const;
 function vActivity(v: unknown): Activity {
-  if (!isObj(v)) throw new ImportError('activité invalide');
+  if (!isObj(v)) throw new ImportError('activité invalide', 'backup.err.record', { what: 'activité' });
   const a: Activity = {
     type: oneOf(v.type, 'type', ACTIVITY_TYPES),
     ref: str(v.ref, 'ref', 200),
     date: num(v.date, 'date'),
   };
-  if (!/^[A-Za-z0-9._:#-]{1,200}$/.test(a.ref)) throw new ImportError('Référence d’activité invalide');
+  if (!/^[A-Za-z0-9._:#-]{1,200}$/.test(a.ref)) throw new ImportError('Référence d’activité invalide', 'backup.err.record', { what: 'activity.ref' });
   if (v.ok !== undefined) a.ok = bool(v.ok, 'ok');
   if (v.id !== undefined) a.id = num(v.id, 'id', 1);
   return a;
 }
 
 function vReview(v: unknown): ReviewItem {
-  if (!isObj(v)) throw new ImportError('révision invalide');
+  if (!isObj(v)) throw new ImportError('révision invalide', 'backup.err.record', { what: 'révision' });
   const box = num(v.box, 'box', 1, 5);
-  if (!Number.isInteger(box)) throw new ImportError('Boîte de révision invalide');
+  if (!Number.isInteger(box)) throw new ImportError('Boîte de révision invalide', 'backup.err.record', { what: 'review.box' });
   const itemId = str(v.itemId, 'itemId', 200);
-  if (!/^[qg]:[A-Za-z0-9._:-]{1,190}$/.test(itemId)) throw new ImportError('Identifiant de révision invalide');
+  if (!/^[qg]:[A-Za-z0-9._:-]{1,190}$/.test(itemId)) throw new ImportError('Identifiant de révision invalide', 'backup.err.record', { what: 'review.itemId' });
   return {
     itemId,
     kind: oneOf(v.kind, 'kind', ['question', 'glossary'] as const),
@@ -252,13 +266,13 @@ function vReview(v: unknown): ReviewItem {
 }
 
 export function validateBackup(raw: unknown): Snapshot {
-  if (!isObj(raw)) throw new ImportError('Fichier de sauvegarde invalide.');
-  if (raw.app !== 'cyberacademie') throw new ImportError('Ce fichier ne provient pas de CyberAcadémie.');
+  if (!isObj(raw)) throw new ImportError('Fichier de sauvegarde invalide.', 'backup.err.file');
+  if (raw.app !== 'cyberacademie') throw new ImportError('Ce fichier ne provient pas de CyberAcadémie.', 'backup.err.notOurs');
   if (!(SUPPORTED_FORMATS as readonly unknown[]).includes(raw.format)) {
-    throw new ImportError('Version de format non prise en charge (formats acceptés : ' + SUPPORTED_FORMATS.join(', ') + ').');
+    throw new ImportError('Version de format non prise en charge (formats acceptés : ' + SUPPORTED_FORMATS.join(', ') + ').', 'backup.err.format', { list: SUPPORTED_FORMATS.join(', ') });
   }
   const d = raw.data;
-  if (!isObj(d)) throw new ImportError('Données absentes.');
+  if (!isObj(d)) throw new ImportError('Données absentes.', 'backup.err.noData');
   const v2 = raw.format === 2;
   const profile = v2 ? arr(d.profile, 'profile', 1).map(vProfile) : [];
   return {
@@ -277,23 +291,23 @@ export function validateBackup(raw: unknown): Snapshot {
 }
 
 export async function parseBackupFile(file: File): Promise<Snapshot> {
-  if (file.size > MAX_IMPORT_BYTES) throw new ImportError('Fichier trop volumineux (5 Mo maximum).');
+  if (file.size > MAX_IMPORT_BYTES) throw new ImportError('Fichier trop volumineux (5 Mo maximum).', 'backup.err.tooLarge');
   const text = await file.text();
   let raw: unknown;
   try {
     raw = safeParse(text);
   } catch {
-    throw new ImportError('Le fichier n’est pas un JSON valide.');
+    throw new ImportError('Le fichier n’est pas un JSON valide.', 'backup.err.json');
   }
   const snapshot = validateBackup(raw);
   // Contrôle d'intégrité (format 2) : détection d'une altération accidentelle.
   if (isObj(raw) && raw.format === 2) {
     const integ = raw.integrity;
     if (!isObj(integ) || integ.alg !== 'SHA-256' || typeof integ.value !== 'string') {
-      throw new ImportError('Empreinte d’intégrité absente ou invalide.');
+      throw new ImportError('Empreinte d’intégrité absente ou invalide.', 'backup.err.noIntegrity');
     }
     const expected = await integrityOf(raw.data);
-    if (expected !== integ.value) throw new ImportError('Contrôle d’intégrité échoué : le fichier a été modifié ou est corrompu.');
+    if (expected !== integ.value) throw new ImportError('Contrôle d’intégrité échoué : le fichier a été modifié ou est corrompu.', 'backup.err.integrity');
   }
   return snapshot;
 }

@@ -57,7 +57,7 @@ export default function SettingsPage() {
       const snap = await parseBackupFile(f);
       setPending(snap);
     } catch (e) {
-      setMsg({ kind: 'error', text: e instanceof ImportError ? e.message : t('settings.unreadable') });
+      setMsg({ kind: 'error', text: e instanceof ImportError ? e.localized(lang) : t('settings.unreadable') });
     } finally {
       if (fileRef.current) fileRef.current.value = '';
     }

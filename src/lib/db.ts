@@ -3,6 +3,7 @@
  * Toutes les données restent dans le navigateur de l'utilisateur ; rien n'est
  * transmis à un serveur. Le schéma est versionné et migré de façon incrémentale.
  */
+import { t } from '../i18n';
 
 export const DB_NAME = 'cyberacademie';
 export const DB_VERSION = 2;
@@ -73,7 +74,7 @@ export function openDb(): Promise<IDBDatabase> {
     req.onblocked = () => {
       // Ne pas garder en cache une promesse rejetée : une nouvelle tentative pourra réussir.
       dbPromise = null;
-      reject(new Error('Base de données bloquée par un autre onglet : fermez les autres onglets de CyberAcadémie.'));
+      reject(new Error(t('db.err.blocked')));
     };
   });
   return dbPromise;
@@ -120,7 +121,7 @@ function done(tx: IDBTransaction): Promise<void> {
   return new Promise((resolve, reject) => {
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);
-    tx.onabort = () => reject(tx.error ?? new Error('Transaction annulée'));
+    tx.onabort = () => reject(tx.error ?? new Error(t('db.err.aborted')));
   });
 }
 
@@ -190,7 +191,7 @@ export async function deleteDatabase(): Promise<void> {
     const req = indexedDB.deleteDatabase(DB_NAME);
     req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error ?? new Error('Suppression impossible'));
-    req.onblocked = () => reject(new Error('Suppression bloquée : fermez les autres onglets de CyberAcadémie.'));
+    req.onblocked = () => reject(new Error(t('db.err.deleteBlocked')));
   });
 }
 

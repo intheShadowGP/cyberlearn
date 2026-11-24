@@ -14,6 +14,7 @@ import { profile } from './profile';
 import { browse } from './browse';
 import { ui } from './ui';
 import { docs } from './docs';
+import { errors } from './errors';
 
 /** Source de vérité des messages : le français. Un fichier par zone fonctionnelle. */
 export const fr = {
@@ -33,6 +34,7 @@ export const fr = {
   ...browse,
   ...ui,
   ...docs,
+  ...errors,
 } as const;
 
 export type MsgKey = keyof typeof fr;
