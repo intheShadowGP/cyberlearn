@@ -49,7 +49,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | --- | --- | --- | --- | --- |
 | A Fondamentaux | ✔ ×2 (banques 40 + anglais) | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) |
 | B Réseaux | ✔ | ✔ ×3 | ✔ | ✔ |
-| C Linux | ✔ | ✔ | ✔ | ➕ |
+| C Linux | ✔ | ✔ (migré) | ✔ | ➕ |
 | D Windows | ➕ | ✔ | ✔ ×2 | ➕ |
 | E Cryptographie | ➕ | ✔ | ✔ | ➕ |
 | F Web | ➕ | ✔ | ✔ ×2 | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (10 migrés) + 40 cours à créer (4 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 36 cours à créer et 35 cours existants à migrer.
+Total : 45 cours existants (11 migrés) + 40 cours à créer (4 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 36 cours à créer et 34 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -86,3 +86,4 @@ Total : 45 cours existants (10 migrés) + 40 cours à créer (4 créés) = 85 co
 | `b-perimetre-vpn-wifi` | ✔ 40 | ✔ 40 | ✔ (ordre des règles, balayage de ports, evil twin, flux de la DMZ) |
 | `b-defense-reseau-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
 | `c-shell-paquets-automatisation` | ✔ 40 | ✔ 40 | ✔ (inspection système, PATH, flock, sources de paquets) |
+| `c-linux-permissions` | ✔ 40 | ✔ 40 | ✔ (diagnostic d’un refus d’accès, umask, capacités, sudoers.d, SSH sans verrouillage) |

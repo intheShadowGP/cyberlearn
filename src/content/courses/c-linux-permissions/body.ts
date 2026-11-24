@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'c-linux-permissions',
@@ -23,6 +24,7 @@ export const body: CourseBody = {
           },
           { t: 'code', lang: 'text', caption: 'Une ligne de /etc/passwd', code: 'alice:x:1001:1001:Alice Martin:/home/alice:/bin/bash\n│     │ │    │    │            │           └ shell de connexion\n│     │ │    │    │            └ répertoire personnel\n│     │ │    │    └ commentaire\n│     │ │    └ GID principal\n│     │ └ UID\n│     └ « x » : empreinte stockée dans /etc/shadow\n└ nom' },
           { t: 'def', term: 'UID 0', text: "Tout compte avec l'UID 0 est **root**, quel que soit son nom. Un second compte en UID 0 dans `/etc/passwd` est un indicateur de compromission classique." },
+          { t: 'code', lang: 'bash', caption: 'Connaître une identité et changer la propriété', code: 'id alice\n# uid=1001(alice) gid=1001(alice) groups=1001(alice),27(sudo)\n\nsudo chown root:app /srv/app/conf/app.yml   # propriétaire root, groupe app\nsudo chmod 640 /srv/app/conf/app.yml        # rw- pour root, r-- pour le groupe app' },
         ],
       },
       {
@@ -41,6 +43,13 @@ export const body: CourseBody = {
           },
           { t: 'callout', kind: 'warn', title: 'Piège des répertoires', text: "Le droit `w` sur un **répertoire** permet de supprimer ou remplacer n'importe quel fichier qu'il contient, **même sans droit sur le fichier lui-même**. Un répertoire de scripts modifiable par tous est donc aussi dangereux qu'un script modifiable par tous." },
           { t: 'def', term: 'umask', text: "Masque appliqué aux permissions par défaut des fichiers créés. Un `umask 027` produit des fichiers `640` et des répertoires `750` : rien pour les « autres »." },
+          {
+            t: 'example',
+            title: 'Effet d’un umask 027',
+            blocks: [
+              { t: 'p', text: 'Un programme demande `666` pour un fichier et `777` pour un répertoire. Avec `umask 027`, on retire `027` : le fichier reçoit **640** (`rw-r-----`), le répertoire **750** (`rwxr-x---`). Un fichier ordinaire ne reçoit jamais le droit `x` à sa création.' },
+            ],
+          },
         ],
       },
       {
@@ -58,6 +67,8 @@ export const body: CourseBody = {
           },
           { t: 'code', lang: 'bash', caption: 'Lister les binaires SUID et les fichiers modifiables par tous', code: '# Binaires SUID (à comparer avec une liste de référence)\nfind / -xdev -perm -4000 -type f 2>/dev/null\n\n# Fichiers modifiables par tous, hors /proc\nfind / -xdev -type f -perm -0002 2>/dev/null' },
           { t: 'p', text: "`passwd` est légitimement SUID root (il doit écrire dans `/etc/shadow`). En revanche, un éditeur, un interpréteur (`python`, `find`, `vim`) ou un script maison en SUID root permet d'obtenir un shell root : la base de données publique GTFOBins recense ces détournements." },
+          { t: 'p', text: "Le noyau Linux **ignore** SUID et SGID sur les scripts commençant par `#!` : le danger vient des binaires compilés et des interpréteurs placés en SUID. Le **SGID sur un répertoire** fait hériter les nouveaux fichiers du groupe du répertoire, ce qui facilite le partage au sein d'une équipe." },
+          { t: 'def', term: 'Capacités Linux', text: "Découpage des privilèges de root en droits unitaires. `setcap cap_net_bind_service+ep /usr/local/bin/app` permet à un programme d'ouvrir un port inférieur à 1024 **sans** être root ni SUID : c'est l'alternative à préférer à un SUID root." },
           { t: 'def', term: 'ACL POSIX', text: "Listes de contrôle d'accès étendues (`getfacl`, `setfacl`) qui accordent des droits à des utilisateurs ou groupes supplémentaires. Un `+` à la fin des permissions (`-rw-r-----+`) signale leur présence : à vérifier lors d'un audit." },
         ],
       },
@@ -68,6 +79,8 @@ export const body: CourseBody = {
           { t: 'p', text: "`sudo` permet à un utilisateur d'exécuter des commandes précises avec d'autres droits, en journalisant chaque usage. Une règle trop large annule tout le bénéfice." },
           { t: 'code', lang: 'text', caption: 'Règles sudoers commentées', code: '# Correct : uniquement le redémarrage du service web\nwebops ALL=(root) /usr/bin/systemctl restart nginx\n\n# Dangereux : root complet sans mot de passe\nstagiaire ALL=(ALL) NOPASSWD: ALL\n\n# Piège : vim permet d\'ouvrir un shell (:!sh) → root\nbackup ALL=(root) /usr/bin/vim /etc/backup.conf' },
           { t: 'callout', kind: 'key', text: "Avant d'autoriser une commande via sudo, se demander : **ce programme permet-il de lancer un shell, d'écrire un fichier arbitraire ou d'exécuter un autre programme ?** Si oui, la règle équivaut à donner root." },
+          { t: 'code', lang: 'bash', caption: 'Auditer et gérer les règles sudo', code: 'sudo -l                                  # règles de l’utilisateur courant\nsudo visudo -f /etc/sudoers.d/webops     # règle propre à une application (droits 440)\nsudoedit /etc/nginx/nginx.conf           # modifie une copie, sans lancer l’éditeur en root' },
+          { t: 'p', text: "Quand une règle précise des arguments, seule cette ligne de commande exacte est autorisée : `systemctl restart nginx` n'autorise pas `systemctl restart sshd`. Un caractère générique (`*`) élargit la règle et se justifie rarement." },
         ],
       },
       {
@@ -75,8 +88,31 @@ export const body: CourseBody = {
         title: 'Durcir SSH et le serveur',
         blocks: [
           { t: 'code', lang: 'text', caption: 'Extrait de /etc/ssh/sshd_config durci', code: 'PermitRootLogin no\nPasswordAuthentication no\nKbdInteractiveAuthentication no\nPubkeyAuthentication yes\nAllowGroups ssh-users\nMaxAuthTries 3\nX11Forwarding no\nAllowTcpForwarding no' },
-          { t: 'list', items: ["Authentification **par clé uniquement** : supprime le risque de force brute sur les mots de passe.", "Interdire la connexion directe de root : on se connecte avec un compte nominatif, puis `sudo` (traçabilité).", 'Restreindre les comptes autorisés (`AllowGroups`).', 'Limiter l’exposition : SSH accessible uniquement depuis un bastion ou un VPN d’administration.', 'Mises à jour automatiques de sécurité, services inutiles désactivés, pare-feu local (`nftables`).'] },
+          { t: 'list', items: ["Authentification **par clé uniquement** : supprime le risque de force brute sur les mots de passe.", "Interdire la connexion directe de root : on se connecte avec un compte nominatif, puis `sudo` (traçabilité).", 'Restreindre les comptes autorisés (`AllowGroups`).', 'Limiter l’exposition : SSH accessible uniquement depuis un bastion ou un VPN d’administration.', 'Mises à jour automatiques de sécurité, services inutiles désactivés, pare-feu local (`nftables`).', 'La clé **privée** reste sur le poste de l’administrateur, protégée par une phrase secrète ; le serveur ne reçoit que la clé publique (`authorized_keys`).', 'Avant de recharger : `sshd -t` valide la syntaxe, et l’on garde une session ouverte jusqu’à avoir réussi une nouvelle connexion.'] },
           { t: 'callout', kind: 'tip', text: "Le guide ANSSI « Recommandations de configuration d'un système GNU/Linux » classe ces mesures par niveau (minimal, intermédiaire, renforcé, élevé) : une excellente base pour un audit." },
+        ],
+      },
+      {
+        id: 'diagnostic',
+        title: 'Diagnostiquer un refus d’accès',
+        blocks: [
+          { t: 'p', text: "Face à un « Permission denied », la tentation est d'ouvrir les droits jusqu'à ce que ça fonctionne. Il faut au contraire **observer** : qui est l'utilisateur réel du processus, quels droits impose **chaque répertoire du chemin**, existe-t-il une ACL, un montage en lecture seule ou un confinement ?" },
+          {
+            t: 'table',
+            caption: 'Les outils du diagnostic',
+            head: ['Commande', 'Ce qu’elle montre'],
+            rows: [
+              ['`id`, `id compte`', 'UID, GID et groupes du compte (à comparer au propriétaire et au groupe du fichier)'],
+              ['`namei -l /chemin/complet`', 'Type, permissions, propriétaire et groupe de **chaque composant** du chemin'],
+              ['`ls -ld répertoire`', 'Les droits du répertoire lui-même (et non de son contenu)'],
+              ['`getfacl fichier`', 'Les ACL qui complètent les permissions classiques'],
+              ['`sudo -l -U compte`', 'Les règles sudo accordées à un compte'],
+              ['`findmnt -T chemin`', 'Le montage qui porte le chemin (option `ro`, `noexec`…)'],
+            ],
+          },
+          { t: 'code', lang: 'text', caption: 'Un fichier lisible, mais un chemin fermé', code: '$ namei -l /srv/app/conf/app.yml\nf: /srv/app/conf/app.yml\ndrwxr-xr-x root root /\ndrwxr-xr-x root root srv\ndrwxr-x--- root app  app          <- les « autres » n’ont aucun droit ici\ndrwxr-xr-x root root conf\n-rw-r--r-- root root app.yml' },
+          { t: 'callout', kind: 'key', text: "Pour accéder à un fichier, il faut le droit `x` sur **chaque répertoire** du chemin, puis le droit voulu sur le fichier. Un fichier en `644` reste inaccessible si un répertoire parent est fermé à l'utilisateur." },
+          { t: 'list', ordered: true, items: ['Lire le message d’erreur exact et reproduire le problème avec le compte concerné (`sudo -u compte …`).', 'Vérifier l’identité réelle du processus : un service peut tourner sous un autre compte ou groupe après une mise à jour.', 'Examiner tout le chemin avec `namei -l`, puis les ACL avec `getfacl`.', 'Écarter un montage en lecture seule, un disque plein ou un confinement (SELinux, AppArmor, options de l’unité systemd).', 'Corriger au plus juste (propriétaire, groupe, ACL ciblée), jamais par `chmod 777`.'] },
         ],
       },
     ],
@@ -84,6 +120,7 @@ export const body: CourseBody = {
       "Audit de serveur : rechercher les binaires SUID inattendus, les fichiers modifiables par tous et les règles sudo trop larges.",
       'Test d’intrusion autorisé : vérifier si un accès utilisateur peut mener à root via une mauvaise configuration.',
       "Mise en production : appliquer une configuration SSH durcie et un umask restrictif avant d'exposer un serveur.",
+      'Dépannage : comprendre pourquoi un service ou un utilisateur n’a plus accès à un fichier après une mise à jour.',
     ],
     commonMistakes: [
       '« Corriger » un problème d’accès avec `chmod 777` : n’importe quel utilisateur peut alors modifier ou remplacer le fichier.',
@@ -91,6 +128,7 @@ export const body: CourseBody = {
       'Laisser `PasswordAuthentication yes` sur un serveur exposé à Internet.',
       'Oublier que le droit d’écriture sur un répertoire permet de remplacer les fichiers qu’il contient.',
       'Modifier `/etc/sudoers` sans `visudo` : une erreur de syntaxe peut bloquer toute administration.',
+      'Chercher la cause d’un refus d’accès uniquement sur le fichier, sans examiner le droit `x` des répertoires du chemin.',
     ],
     bestPractices: [
       'Appliquer un umask restrictif (027) et des permissions minimales sur les configurations sensibles.',
@@ -98,12 +136,14 @@ export const body: CourseBody = {
       'Rédiger des règles sudo par commande précise, avec arguments, et sans NOPASSWD sauf justification.',
       'SSH : clés uniquement, pas de root, accès via bastion, journalisation centralisée.',
       'Surveiller `/etc/passwd`, `/etc/shadow` et `/etc/sudoers` avec un contrôle d’intégrité (AIDE, auditd).',
+      'Diagnostiquer d’abord (`id`, `namei -l`, `getfacl`), puis corriger au plus juste.',
     ],
     keyPoints: [
       'Permissions : r=4, w=2, x=1 pour propriétaire, groupe, autres.',
       'SUID root + programme détournable = élévation de privilèges.',
       'Une règle sudo qui autorise un programme ouvrant un shell équivaut à root.',
       'SSH durci : clés uniquement, pas de root, accès restreint.',
+      'Un accès exige le droit `x` sur chaque répertoire du chemin : `namei -l` le montre.',
     ],
   },
   practice: [
@@ -125,25 +165,18 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un VPS exposé sur Internet reçoit des milliers de tentatives de connexion SSH par jour. Configuration actuelle : `PermitRootLogin yes`, `PasswordAuthentication yes`, port 22 ouvert à tous.' }],
       steps: ['Proposer les directives `sshd_config` à modifier.', 'Décrire comment déployer la clé de l’administrateur sans perdre l’accès.', 'Proposer une mesure réseau complémentaire.'],
     },
+    {
+      id: 'diagnostic-acces',
+      kind: 'analysis',
+      title: 'Diagnostic : un service ne lit plus sa configuration',
+      context: [
+        { t: 'p', text: 'Après une mise à jour, le service `webapp`, exécuté sous le compte `webapp` (groupe principal `webapp`), échoue au démarrage avec « Permission denied » sur `/srv/webapp/conf/app.yml`. Relevés :' },
+        { t: 'code', lang: 'text', code: '$ id webapp\nuid=998(webapp) gid=998(webapp) groups=998(webapp)\n\n$ namei -l /srv/webapp/conf/app.yml\ndrwxr-xr-x root root /\ndrwxr-xr-x root root srv\ndrwxr-x--- root app  webapp\ndrwxr-xr-x root root conf\n-rw-r--r-- root root app.yml' },
+      ],
+      steps: ['Expliquer pourquoi le fichier, pourtant lisible par tous, reste inaccessible au service.', 'Proposer la correction la plus restreinte, en justifiant le choix de la solution.', 'Citer deux autres vérifications à faire si la correction ne suffit pas.'],
+    },
   ],
-  questions: [
-    { id: 'lnx-q1', type: 'short', difficulty: 1, skills: ['c-perm-read'], prompt: 'Quelle est la valeur octale de la permission `rwxr-x---` ?', placeholder: 'ex. 644' },
-    { id: 'lnx-q2', type: 'single', difficulty: 1, skills: ['c-perm-read'], prompt: 'Que signifie la permission `x` sur un répertoire ?', options: [{ id: 'a', text: 'Exécuter tous les scripts qu’il contient' }, { id: 'b', text: 'Le traverser et accéder aux fichiers qu’il contient' }, { id: 'c', text: 'Lister les noms des fichiers' }, { id: 'd', text: 'Le supprimer' }] },
-    { id: 'lnx-q3', type: 'truefalse', difficulty: 2, skills: ['c-perm-read'], prompt: 'Sans aucun droit sur un fichier, un utilisateur ne peut jamais le supprimer, même s’il a le droit d’écriture sur le répertoire qui le contient.' },
-    { id: 'lnx-q4', type: 'short', difficulty: 1, skills: ['c-perm-read'], prompt: 'Quelle permission octale donne lecture et écriture au propriétaire, lecture au groupe et rien aux autres ?' },
-    { id: 'lnx-q5', type: 'single', difficulty: 2, skills: ['c-perm-special'], prompt: 'Le fichier `/usr/bin/find` est en `-rwsr-xr-x root root`. Quel est le risque ?', options: [{ id: 'a', text: 'Aucun, find ne modifie rien' }, { id: 'b', text: 'find peut exécuter des commandes (-exec) avec les droits root : élévation de privilèges' }, { id: 'c', text: 'find devient plus lent' }, { id: 'd', text: 'Seul root peut désormais l’utiliser' }] },
-    { id: 'lnx-q6', type: 'multi', difficulty: 2, skills: ['c-perm-special'], prompt: 'Quelles affirmations sur les bits spéciaux sont exactes ?', options: [{ id: 'a', text: 'Le sticky bit sur /tmp empêche un utilisateur de supprimer les fichiers des autres.' }, { id: 'b', text: 'Un binaire SUID s’exécute avec les droits de son propriétaire.' }, { id: 'c', text: 'Le SUID n’a aucun effet si le propriétaire est root.' }, { id: 'd', text: 'Un `+` après les permissions dans `ls -l` signale la présence d’ACL.' }] },
-    { id: 'lnx-q7', type: 'single', difficulty: 2, skills: ['c-users-sudo'], prompt: 'Quelle règle sudoers respecte le mieux le moindre privilège pour un opérateur qui doit redémarrer nginx ?', options: [{ id: 'a', text: '`op ALL=(ALL) NOPASSWD: ALL`' }, { id: 'b', text: '`op ALL=(root) /usr/bin/systemctl restart nginx`' }, { id: 'c', text: '`op ALL=(root) /usr/bin/systemctl`' }, { id: 'd', text: '`op ALL=(root) /usr/bin/vim /etc/nginx/nginx.conf`' }] },
-    { id: 'lnx-q8', type: 'truefalse', difficulty: 2, skills: ['c-users-sudo'], prompt: 'Autoriser un utilisateur à lancer `less` en root via sudo peut lui donner un shell root.' },
-    { id: 'lnx-q9', type: 'multi', difficulty: 2, skills: ['c-users-sudo', 'c-perm-read'], prompt: 'Lesquels de ces constats sont des indicateurs de compromission ou de grave mauvaise configuration ?', options: [{ id: 'a', text: 'Un second compte avec l’UID 0 dans /etc/passwd' }, { id: 'b', text: '/etc/shadow en permissions 666' }, { id: 'c', text: '/etc/passwd en permissions 644' }, { id: 'd', text: 'Une règle `ALL=(ALL) NOPASSWD: ALL` pour un compte de stagiaire' }] },
-    { id: 'lnx-q10', type: 'short', difficulty: 1, skills: ['c-users-sudo'], prompt: 'Quelle commande faut-il utiliser pour modifier /etc/sudoers en toute sécurité ?' },
-    { id: 'lnx-q11', type: 'single', difficulty: 2, skills: ['c-hardening'], prompt: 'Quelle directive sshd_config interdit l’authentification par mot de passe ?', options: [{ id: 'a', text: '`PermitRootLogin no`' }, { id: 'b', text: '`PasswordAuthentication no`' }, { id: 'c', text: '`PubkeyAuthentication no`' }, { id: 'd', text: '`MaxAuthTries 0`' }] },
-    { id: 'lnx-q12', type: 'truefalse', difficulty: 1, skills: ['c-hardening'], prompt: 'Changer le port SSH de 22 à 2222 suffit à sécuriser un serveur exposé à Internet.' },
-    { id: 'lnx-q13', type: 'open', difficulty: 3, skills: ['c-hardening', 'c-perm-special'], prompt: 'Un script `/opt/scripts/backup.sh` est exécuté chaque nuit par cron en root. Le répertoire `/opt/scripts` est en `drwxrwxrwx`. Décrivez le scénario d’attaque et les corrections.' },
-    { id: 'lnx-q14', type: 'multi', difficulty: 2, skills: ['c-hardening'], prompt: 'Quelles mesures réduisent efficacement le risque d’attaque par force brute sur SSH ?', options: [{ id: 'a', text: 'Authentification par clé uniquement' }, { id: 'b', text: 'Restreindre l’accès à SSH depuis un VPN ou un bastion' }, { id: 'c', text: 'Afficher une bannière d’avertissement' }, { id: 'd', text: 'Limiter les tentatives (MaxAuthTries, fail2ban)' }] },
-    { id: 'lnx-q15', type: 'open', difficulty: 2, skills: ['c-perm-special', 'c-users-sudo'], prompt: 'Expliquez à un administrateur junior pourquoi `chmod 777` n’est jamais une bonne solution à un problème d’accès, et ce qu’il doit faire à la place.' },
-    { id: 'lnx-q16', type: 'single', difficulty: 2, skills: ['c-perm-special', 'c-perm-read'], prompt: 'Quelle commande liste les fichiers SUID du système de fichiers racine ?', options: [{ id: 'a', text: '`find / -xdev -perm -4000 -type f`' }, { id: 'b', text: '`ls -suid /`' }, { id: 'c', text: '`chmod -R u-s /`' }, { id: 'd', text: '`grep suid /etc/passwd`' }] },
-  ],
+  questions,
   resources: [
     { title: 'Recommandations de configuration d’un système GNU/Linux', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/recommandations-de-securite-relatives-un-systeme-gnulinux' },
     { title: 'Recommandations pour un usage sécurisé d’(Open)SSH', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/openssh-secure-use-recommendations' },
