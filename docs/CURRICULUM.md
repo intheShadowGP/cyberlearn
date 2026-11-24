@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 48 |
-| Questions de cours (avec correction) | 1017 |
+| Questions de cours (avec correction) | 1041 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -54,7 +54,7 @@
 | Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 95 min | 6 | 40 | 3 | 4 |
 | Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage (`b-commutation-vlan-ipv6`) | B | 2 · Intermédiaire | 105 min | 5 | 40 | 2 | 5 |
 | Routage, DNS, DHCP et NAT : acheminer les paquets entre réseaux (`b-routage-dns-dhcp-nat`) | B | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 5 |
-| Périmètre réseau : pare-feu, détection, VPN, Wi-Fi et architecture sécurisée (`b-perimetre-vpn-wifi`) | B | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
+| Périmètre réseau : pare-feu, détection, VPN, Wi-Fi et architecture sécurisée (`b-perimetre-vpn-wifi`) | B | 3 · Avancé | 120 min | 5 | 40 | 3 | 5 |
 | Linux au quotidien : architecture, shell Bash, paquets et automatisation (`c-shell-paquets-automatisation`) | C | 1 · Débutant | 80 min | 5 | 16 | 2 | 5 |
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 80 min | 5 | 16 | 2 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |

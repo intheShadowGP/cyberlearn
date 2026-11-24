@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (8 migrés) + 40 cours à créer (3 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 37 cours à créer et 37 cours existants à migrer.
+Total : 45 cours existants (9 migrés) + 40 cours à créer (3 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 37 cours à créer et 36 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -83,3 +83,4 @@ Total : 45 cours existants (8 migrés) + 40 cours à créer (3 créés) = 85 cou
 | `b-ipv4-subnetting` | ✔ 40 | ✔ 40 | ✔ (préfixes courants, agrégation) |
 | `b-commutation-vlan-ipv6` | ✔ 40 | ✔ 40 | ✔ (STP, 802.1X, ICMPv6, /64) |
 | `b-routage-dns-dhcp-nat` | ✔ 40 | ✔ 40 | ✔ (états de liens, enregistrements DNS, DNAT, section diagnostic) |
+| `b-perimetre-vpn-wifi` | ✔ 40 | ✔ 40 | ✔ (ordre des règles, balayage de ports, evil twin, flux de la DMZ) |
