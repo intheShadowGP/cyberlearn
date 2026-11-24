@@ -6,7 +6,7 @@ const COMMON = new Set([
   '123456', '123456789', 'password', 'motdepasse', 'azerty', 'azertyuiop', 'qwerty',
   '111111', '000000', '123123', 'admin', 'admin123', 'root', 'soleil', 'bonjour',
   'iloveyou', 'abc123', 'password1', 'motdepasse1', 'loulou', 'doudou', 'marseille',
-  'chouchou', '12345678', '1234567890', 'azerty123', 'welcome', 'monkey', 'dragon',
+  'chouchou', '12345678', '1234567890', 'azerty123', 'qwerty123', 'welcome', 'monkey', 'dragon',
 ]);
 
 export function isCommon(pw: string): boolean {
@@ -50,20 +50,27 @@ export const SPEEDS = {
   hachageLent: 1e4,
 } as const;
 
+/** Mots utilisés pour exprimer une durée, par langue. */
+const DURATION_WORDS = {
+  fr: { inf: 'pratiquement infini', lt1: 'moins d’une seconde', s: 's', min: 'min', h: 'h', d: 'j', years: 'ans', k: 'milliers d’années', m: 'millions d’années', b: 'des milliards d’années' },
+  en: { inf: 'practically infinite', lt1: 'less than a second', s: 's', min: 'min', h: 'h', d: 'd', years: 'years', k: 'thousand years', m: 'million years', b: 'billions of years' },
+} as const;
+
 /** Met un nombre de secondes sous une forme lisible. */
-export function formatDuration(seconds: number): string {
-  if (seconds === Infinity) return 'pratiquement infini';
-  if (seconds < 1) return 'moins d’une seconde';
+export function formatDuration(seconds: number, lang: 'fr' | 'en' = 'fr'): string {
+  const w = DURATION_WORDS[lang];
+  if (seconds === Infinity) return w.inf;
+  if (seconds < 1) return w.lt1;
   const minute = 60, heure = 3600, jour = 86_400, an = 365 * jour;
-  if (seconds < minute) return `${Math.round(seconds)} s`;
-  if (seconds < heure) return `${Math.round(seconds / minute)} min`;
-  if (seconds < jour) return `${Math.round(seconds / heure)} h`;
-  if (seconds < an) return `${Math.round(seconds / jour)} j`;
+  if (seconds < minute) return `${Math.round(seconds)} ${w.s}`;
+  if (seconds < heure) return `${Math.round(seconds / minute)} ${w.min}`;
+  if (seconds < jour) return `${Math.round(seconds / heure)} ${w.h}`;
+  if (seconds < an) return `${Math.round(seconds / jour)} ${w.d}`;
   const ans = seconds / an;
-  if (ans < 1e3) return `${Math.round(ans)} ans`;
-  if (ans < 1e6) return `${Math.round(ans / 1e3)} milliers d’années`;
-  if (ans < 1e9) return `${Math.round(ans / 1e6)} millions d’années`;
-  return 'des milliards d’années';
+  if (ans < 1e3) return `${Math.round(ans)} ${w.years}`;
+  if (ans < 1e6) return `${Math.round(ans / 1e3)} ${w.k}`;
+  if (ans < 1e9) return `${Math.round(ans / 1e6)} ${w.m}`;
+  return w.b;
 }
 
 export type Verdict = 'tres-faible' | 'faible' | 'moyen' | 'fort' | 'tres-fort';

@@ -6,6 +6,33 @@
  */
 
 import { normalizeTypography } from '../../lib/quiz';
+import { currentLabTexts, fill, type LabTexts } from '../i18n';
+
+const fr = {
+  unterminated: 'chaîne de caractères non terminée',
+  unexpectedChar: 'caractère inattendu « {c} »',
+  incomplete: 'expression incomplète',
+  unknownColumn: 'colonne inconnue « {c} »',
+  unclosedParen: 'parenthèse non fermée',
+  unexpectedToken: 'jeton inattendu « {c} »',
+  syntax: 'erreur de syntaxe près de la fin de la requête',
+  generic: 'erreur',
+};
+const en: typeof fr = {
+  unterminated: 'unterminated string',
+  unexpectedChar: 'unexpected character “{c}”',
+  incomplete: 'incomplete expression',
+  unknownColumn: 'unknown column “{c}”',
+  unclosedParen: 'unclosed parenthesis',
+  unexpectedToken: 'unexpected token “{c}”',
+  syntax: 'syntax error near the end of the query',
+  generic: 'error',
+};
+const MSG: LabTexts<typeof fr> = { fr, en };
+/** Message d'erreur SQL simulé dans la langue active. */
+function msg(key: keyof typeof fr, c = ''): string {
+  return fill(currentLabTexts(MSG)[key], { c });
+}
 
 export interface UserRow {
   id: number;
@@ -44,7 +71,7 @@ export function tokenize(sql: string): { tokens: Tok[]; comment: string | null }
       let j = i + 1;
       let v = '';
       for (;;) {
-        if (j >= sql.length) throw new SqlError('chaîne de caractères non terminée');
+        if (j >= sql.length) throw new SqlError(msg('unterminated'));
         if (sql[j] === "'" && sql[j + 1] === "'") { v += "'"; j += 2; continue; }
         if (sql[j] === "'") break;
         v += sql[j];
@@ -75,7 +102,7 @@ export function tokenize(sql: string): { tokens: Tok[]; comment: string | null }
     if (c === '!' && sql[i + 1] === '=') { tokens.push({ k: 'op', v: '<>' }); i += 2; continue; }
     if (c === '=') { tokens.push({ k: 'op', v: '=' }); i++; continue; }
     if ('(),*;'.includes(c)) { tokens.push({ k: 'punc', v: c }); i++; continue; }
-    throw new SqlError(`caractère inattendu « ${c} »`);
+    throw new SqlError(msg('unexpectedChar', c));
   }
   return { tokens, comment: null };
 }
@@ -90,21 +117,21 @@ function evalWhere(tokens: Tok[], row: UserRow): boolean {
 
   function primary(): Val {
     const t = next();
-    if (!t) throw new SqlError('expression incomplète');
+    if (!t) throw new SqlError(msg('incomplete'));
     if (t.k === 'str' || t.k === 'num') return t.v;
     if (t.k === 'id') {
       if (t.v === 'true') return true;
       if (t.v === 'false') return false;
-      if (!(t.v in row)) throw new SqlError(`colonne inconnue « ${t.v} »`);
+      if (!(t.v in row)) throw new SqlError(msg('unknownColumn', String(t.v)));
       return row[t.v as keyof UserRow];
     }
     if (t.k === 'punc' && t.v === '(') {
       const v = orExpr();
       const close = next();
-      if (!close || close.k !== 'punc' || close.v !== ')') throw new SqlError('parenthèse non fermée');
+      if (!close || close.k !== 'punc' || close.v !== ')') throw new SqlError(msg('unclosedParen'));
       return v;
     }
-    throw new SqlError(`jeton inattendu « ${'v' in t ? String(t.v) : ''} »`);
+    throw new SqlError(msg('unexpectedToken', 'v' in t ? String(t.v) : ''));
   }
   function comparison(): Val {
     const left = primary();
@@ -150,7 +177,7 @@ function evalWhere(tokens: Tok[], row: UserRow): boolean {
   }
   const result = orExpr();
   const rest = tokens.slice(p).filter((t) => !(t.k === 'punc' && t.v === ';'));
-  if (rest.length) throw new SqlError('erreur de syntaxe près de la fin de la requête');
+  if (rest.length) throw new SqlError(msg('syntax'));
   return truthy(result);
 }
 
@@ -188,7 +215,7 @@ export function runVulnerable(rawLogin: string, rawPassword: string): QueryResul
     const rows = USERS.filter((r) => evalWhere(where, r)).map((r) => ({ id: r.id, login: r.login, role: r.role }));
     return { sql, rows, error: null, comment, union };
   } catch (e) {
-    return { sql, rows: [], error: e instanceof SqlError ? e.message : 'erreur', comment: null, union: false };
+    return { sql, rows: [], error: e instanceof SqlError ? e.message : msg('generic'), comment: null, union: false };
   }
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { PROMPT, runCommand } from './fs';
+import { useLabTexts, type LabTexts } from '../i18n';
 
 interface Line {
   id: number;
@@ -9,8 +10,19 @@ interface Line {
 
 const SUGGESTIONS = ['id', 'cat /etc/passwd', 'sudo -l', 'find / -perm -4000', 'find / -perm -0002', 'cat /etc/crontab', 'ls -l /opt/scripts', 'cat /etc/ssh/sshd_config'];
 
+const fr = {
+  welcome: 'Connexion à srv-web01 (environnement simulé). Tapez « help » pour la liste des commandes.',
+  title: 'Terminal — srv-web01 (simulation)', output: 'Sortie du terminal', suggested: 'Commandes suggérées',
+};
+const en: typeof fr = {
+  welcome: 'Connected to srv-web01 (simulated environment). Type “help” for the list of commands.',
+  title: 'Terminal — srv-web01 (simulation)', output: 'Terminal output', suggested: 'Suggested commands',
+};
+const TEXTS: LabTexts<typeof fr> = { fr, en };
+
 export default function LinuxAuditLab() {
-  const [lines, setLines] = useState<Line[]>([{ id: 0, kind: 'out', text: 'Connexion à srv-web01 (environnement simulé). Tapez « help » pour la liste des commandes.' }]);
+  const T = useLabTexts(TEXTS);
+  const [lines, setLines] = useState<Line[]>([{ id: 0, kind: 'out', text: T.welcome }]);
   const [value, setValue] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [hIdx, setHIdx] = useState(-1);
@@ -38,8 +50,8 @@ export default function LinuxAuditLab() {
   return (
     <div className="lab-workspace">
       <section className="panel" aria-labelledby="term-h">
-        <h3 id="term-h">Terminal — srv-web01 (simulation)</h3>
-        <div className="terminal" role="log" aria-live="polite" aria-label="Sortie du terminal">
+        <h3 id="term-h">{T.title}</h3>
+        <div className="terminal" role="log" aria-live="polite" aria-label={T.output}>
           {lines.map((l) => (
             <pre key={l.id} className="terminal-line">
               {l.kind === 'in' ? <span className="terminal-prompt">{PROMPT} </span> : null}
@@ -85,7 +97,7 @@ export default function LinuxAuditLab() {
             }}
           />
         </form>
-        <div className="button-row" aria-label="Commandes suggérées">
+        <div className="button-row" aria-label={T.suggested}>
           {SUGGESTIONS.map((s) => (
             <button key={s} type="button" className="btn btn-small" onClick={() => submit(s)}>
               <code>{s}</code>

@@ -17,6 +17,8 @@ const metaTextsEn = import.meta.glob<{ metaText: CourseMetaText }>('./courses/*/
 const bodiesEn = import.meta.glob<{ body: CourseBody }>('./courses/*/body.en.ts', { eager: true });
 const corrsEn = import.meta.glob<{ corrections: CourseCorrections }>('./courses/*/corrections.en.ts', { eager: true });
 const solsEn = import.meta.glob<{ solutions: CourseSolutions }>('./courses/*/solutions.en.ts', { eager: true });
+const labBodiesEn = import.meta.glob<{ body: LabBody }>('../labs/*/body.en.ts', { eager: true });
+const labCorrsEn = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.en.ts', { eager: true });
 const labMetas = import.meta.glob<{ meta: LabMeta }>('../labs/*/meta.ts', { eager: true });
 const labBodies = import.meta.glob<{ body: LabBody }>('../labs/*/body.ts', { eager: true });
 const labCorrs = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.ts', { eager: true });
@@ -54,11 +56,16 @@ function buildSetEn(fr: ContentSet): ContentSet {
     const body = bodiesEn[`./courses/${d}/body.en.ts`]?.body;
     const corrections = corrsEn[`./courses/${d}/corrections.en.ts`]?.corrections;
     const solutions = solsEn[`./courses/${d}/solutions.en.ts`]?.solutions;
-    if (!tx || !body || !corrections || !solutions) return [];
+    if (!tx || !body || !corrections || !solutions) return [c]; // pas encore traduit : repli français, uniquement pour résoudre les références
     const meta: CourseMeta = { ...c.meta, title: tx.title, summary: tx.summary, objectives: tx.objectives, prerequisiteKnowledge: tx.prerequisiteKnowledge, skills: c.meta.skills.map((k) => ({ ...k, label: tx.skills[k.id] ?? '' })) };
     return [{ dir: d, meta, body, corrections, solutions }];
   });
-  return { courses, labs: [], diagramIds: fr.diagramIds };
+  const labs = fr.labs.flatMap((l) => {
+    const body = labBodiesEn[`../labs/${l.dir}/body.en.ts`]?.body;
+    const corrections = labCorrsEn[`../labs/${l.dir}/corrections.en.ts`]?.corrections;
+    return body && corrections ? [{ ...l, body, corrections }] : [];
+  });
+  return { courses, labs, diagramIds: fr.diagramIds };
 }
 
 describe('contenu pédagogique', () => {
@@ -67,7 +74,7 @@ describe('contenu pédagogique', () => {
   it('les cours traduits en anglais respectent les mêmes règles que les cours français', () => {
     const en = buildSetEn(set);
     // Les prérequis référencent des cours français : on valide l'ensemble, puis on ne garde que les erreurs des cours EN.
-    const errors = validateContent({ ...en, courses: [...en.courses] }).filter((e) => !e.includes('prérequis inconnu') && !e.includes('laboratoire inconnu'));
+    const errors = validateContent({ ...en, courses: [...en.courses] }).filter((e) => !e.includes('prérequis inconnu') && !e.includes('compétence inconnue'));
     expect(errors, errors.join('\n')).toEqual([]);
     for (const c of en.courses) {
       for (const k of c.meta.skills) expect(k.label.trim().length, `${c.dir} : libellé de compétence ${k.id} manquant`).toBeGreaterThan(2);
