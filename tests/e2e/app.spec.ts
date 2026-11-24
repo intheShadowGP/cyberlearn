@@ -142,7 +142,7 @@ test('cours : leçon avant questions, réponses absentes avant validation, progr
   expect(order).toBe(true);
 
   await page.locator('#evaluation').getByRole('button', { name: 'Commencer l’évaluation' }).click();
-  await expect(page.locator('.question')).toHaveCount(8);
+  await expect(page.locator('.question')).toHaveCount(10);
 
   // Avant validation : aucun chunk de corrections chargé, aucune explication dans le DOM.
   expect(requested.some((u) => /\/corrections-[^/]+\.js$/.test(u))).toBe(false);

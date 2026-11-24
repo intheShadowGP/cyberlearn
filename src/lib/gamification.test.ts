@@ -32,7 +32,7 @@ describe('états d’un cours', () => {
     expect(courseStage(osi, s)).toBe('non-commence');
     s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches'] })];
     expect(courseStage(osi, s)).toBe('consulte');
-    s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'encapsulation', 'transport', 'securite'] })];
+    s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'encapsulation', 'transport', 'securite', 'diagnostic'] })];
     expect(courseStage(osi, s)).toBe('lecon-terminee');
     s.progress = [prog('b-osi-tcpip', { status: 'validated', bestPercent: 75 })];
     expect(courseStage(osi, s)).toBe('evaluation-reussie');
@@ -45,8 +45,8 @@ describe('expérience', () => {
   it('dérivée de l’état : cocher plusieurs fois la même section ne rapporte rien de plus', () => {
     const s = emptySnapshot();
     s.progress = [prog('b-osi-tcpip', { sectionsRead: ['couches', 'couches', 'x', 'y', 'z', 'w', 'v'], attempts: 1 })];
-    // dédoublonnage puis plafond au nombre réel de sections (4)
-    expect(computeXp(s).total).toBe(4 * XP_RULES.section);
+    // dédoublonnage puis plafond au nombre réel de sections (5)
+    expect(computeXp(s).total).toBe(5 * XP_RULES.section);
   });
   it('les identifiants inconnus (import forgé) ne rapportent rien', () => {
     const s = emptySnapshot();

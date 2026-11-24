@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['B-modele-osi', 'B-modele-tcp-ip', 'B-tcp', 'B-udp', 'B-icmp', 'B-arp', 'B-ethernet'],
   title: 'Modèles OSI et TCP/IP : comment circulent les données',
   level: 1,
-  durationMin: 60,
+  durationMin: 80,
   summary:
     "Comprendre l'empilement des couches réseau, l'encapsulation, le rôle de TCP, UDP, IP, ARP et ICMP, et savoir à quelle couche agit chaque attaque et chaque protection.",
   objectives: [
@@ -14,6 +14,7 @@ export const meta: CourseMeta = {
     'Expliquer l’encapsulation et identifier l’unité de données de chaque couche.',
     'Distinguer TCP et UDP et décrire la poignée de main en trois temps.',
     'Associer protocoles, équipements, attaques et protections à leur couche.',
+    'Diagnostiquer une panne en remontant les couches avec les outils usuels (ping, traceroute, ARP, DNS).',
   ],
   prerequisites: [],
   prerequisiteKnowledge: ['Aucun : cours d’entrée du module Réseaux'],
@@ -22,8 +23,9 @@ export const meta: CourseMeta = {
     { id: 'b-osi-encap', label: 'Encapsulation et adressage par couche', level: 1 },
     { id: 'b-osi-transport', label: 'TCP, UDP et ports', level: 1 },
     { id: 'b-osi-secu', label: 'Attaques et défenses par couche', level: 1 },
+    { id: 'b-osi-diag', label: 'Diagnostic couche par couche', level: 1 },
   ],
-  sectionCount: 4,
-  questionCount: 16,
-  quizSize: 8,
+  sectionCount: 5,
+  questionCount: 40,
+  quizSize: 10,
 };
