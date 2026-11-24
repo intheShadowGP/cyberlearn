@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'r-certifications-preparation',
@@ -12,13 +13,13 @@ export const body: CourseBody = {
         blocks: [
           {
             t: 'table',
-            head: ['Domaine', 'Certifications', 'Profil visé', 'Modules associés'],
+            head: ['Domaine', 'Certifications (organisme)', 'Profil visé', 'Modules associés'],
             rows: [
-              ['Fondamentaux', 'ISC2 CC, CompTIA Security+, CompTIA Network+', 'Débutant, reconversion, support', 'A, B, E, O'],
-              ['Réseau', 'Cisco CCNA, Network+', 'Administrateur réseau', 'B'],
-              ['Défense / SOC', 'CompTIA CySA+, Cisco CyberOps Associate, certifications GIAC (GCIH, GCIA…)', 'Analyste SOC, réponse à incident', 'I, J, K'],
-              ['Offensif', 'eJPT, PNPT, CompTIA PenTest+, OSCP, CEH', 'Pentesteur', 'H, F, C, D, G'],
-              ['Gouvernance', 'ISO 27001 Lead Implementer / Lead Auditor, CISSP, CISM', 'RSSI, auditeur, consultant GRC', 'M, O, L'],
+              ['Fondamentaux', 'ISC2 CC (ISC2), Security+ et Network+ (CompTIA)', 'Débutant, reconversion, support', 'A, B, E, O'],
+              ['Réseau', 'CCNA (Cisco), Network+ (CompTIA)', 'Administrateur réseau', 'B'],
+              ['Défense / SOC', 'CySA+ (CompTIA), CyberOps Associate (Cisco), certifications GIAC (GCIH, GCIA…)', 'Analyste SOC, réponse à incident', 'I, J, K'],
+              ['Offensif', 'eJPT (INE), PNPT (TCM Security), PenTest+ (CompTIA), OSCP (OffSec), CEH (EC-Council)', 'Pentesteur', 'H, F, C, D, G'],
+              ['Gouvernance', 'ISO 27001 Lead Implementer / Lead Auditor, CISSP (ISC2), CISM (ISACA)', 'RSSI, auditeur, consultant GRC', 'M, O, L'],
             ],
           },
           { t: 'def', term: 'Examen pratique', text: "Épreuve dans laquelle le candidat doit réellement compromettre ou analyser un environnement en temps limité (par exemple l'OSCP, la PNPT), puis rédiger un rapport. Il valide des compétences opérationnelles." },
@@ -42,6 +43,29 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'valeur',
+        title: 'Juger la valeur et le maintien d’une certification',
+        blocks: [
+          { t: 'p', text: 'Toutes les certifications ne se valent pas pour un même objectif. Avant de s’engager (temps, argent), on vérifie **ce que l’examen évalue réellement**, **qui le reconnaît** dans le métier visé et **comment le titre se maintient**.' },
+          { t: 'def', term: 'Certification neutre vis-à-vis des éditeurs', text: 'Certification qui valide des connaissances applicables quel que soit le produit ou le constructeur (par exemple CompTIA Security+ ou ISC2 CC). À l’inverse, une certification d’éditeur ou de constructeur, comme la Cisco CCNA, valide la maîtrise d’un écosystème précis.' },
+          { t: 'def', term: 'Formation continue', text: 'Exigence de renouvellement : le titulaire doit justifier d’activités (formations, conférences, publications, nouvelle certification) sur la durée de validité pour que le titre reste actif. Les certifications CompTIA, par exemple, sont valables trois ans.' },
+          { t: 'def', term: 'ISO/IEC 17024', text: 'Norme internationale qui fixe les exigences applicables aux organismes qui certifient des personnes (impartialité, évaluation, maintien de la certification). Elle ne doit pas être confondue avec l’ISO/IEC 27001, qui spécifie un système de management de la sécurité de l’information, ni avec l’ISO 19011, qui guide l’audit des systèmes de management.' },
+          {
+            t: 'table',
+            head: ['Critère', 'Question à se poser', 'Exemple'],
+            rows: [
+              ['Contenu évalué', 'L’examen valide-t-il des connaissances ou des gestes opérationnels ?', 'OSCP (pratique) et CISSP (QCM)'],
+              ['Reconnaissance', 'Les employeurs visés la demandent-ils ?', 'Offres d’emploi du métier ciblé'],
+              ['Prérequis', 'Faut-il de l’expérience pour la recevoir pleinement ?', 'CISSP : cinq ans, sinon « Associate of ISC2 »'],
+              ['Maintien', 'Quelle formation continue pour la conserver ?', 'CompTIA : validité de trois ans'],
+              ['Coût total', 'Examen, formation, renouvellement, temps de préparation ?', 'À comparer à l’objectif professionnel'],
+            ],
+            caption: 'Grille de décision avant de choisir une certification',
+          },
+          { t: 'callout', kind: 'key', text: 'Une certification atteste de connaissances ou de compétences à un instant donné : elle ne prouve pas à elle seule une expérience professionnelle. Le portfolio (comptes rendus de laboratoires, code, CTF) apporte les preuves complémentaires.' },
+        ],
+      },
+      {
         id: 'preparer',
         title: 'Se préparer efficacement',
         blocks: [
@@ -61,6 +85,7 @@ export const body: CourseBody = {
       'Viser d’emblée une certification avancée sans les bases réseau et système.',
       'Préparer uniquement en relisant, sans pratique ni auto-évaluation.',
       'Utiliser des « dumps » de questions d’examen.',
+      'Ignorer les conditions de renouvellement et la valeur du titre pour le métier visé.',
       'Accumuler des certifications sans projet professionnel ni pratique.',
       'Ne pas vérifier la validité et les conditions de renouvellement (formation continue).',
     ],
@@ -70,11 +95,13 @@ export const body: CourseBody = {
       'Pratiquer chaque notion en laboratoire légal.',
       'Utiliser le rappel actif et la répétition espacée.',
       'Constituer un portfolio de réalisations.',
+      'Vérifier ce que l’examen évalue, sa reconnaissance et son renouvellement avant de s’inscrire.',
     ],
     keyPoints: [
       'Fondamentaux : ISC2 CC, Security+ ; SOC : CySA+, GIAC ; offensif : eJPT, OSCP ; gouvernance : ISO 27001, CISSP.',
       'Examens pratiques et à choix multiples valident des compétences différentes.',
       'Pratique, rappel actif et répétition espacée sont plus efficaces que la relecture.',
+      'La valeur d’une certification se juge sur ce qu’elle évalue, sa reconnaissance et son maintien (formation continue, ISO/IEC 17024 pour les organismes).',
       'CyberAcadémie prépare aux connaissances, mais ne délivre aucune certification officielle.',
     ],
   },
@@ -94,24 +121,7 @@ export const body: CourseBody = {
       steps: ['Proposer une certification de départ pour chacun.', 'Proposer les modules prioritaires de la plateforme.', 'Justifier vos choix.'],
     },
   ],
-  questions: [
-    { id: 'cert-q1', type: 'single', difficulty: 1, skills: ['r-panorama'], prompt: 'Laquelle de ces certifications est la plus adaptée à un grand débutant en cybersécurité ?', options: [{ id: 'a', text: 'ISC2 CC (Certified in Cybersecurity)' }, { id: 'b', text: 'OSCP' }, { id: 'c', text: 'CISSP' }, { id: 'd', text: 'ISO 27001 Lead Auditor' }] },
-    { id: 'cert-q2', type: 'truefalse', difficulty: 1, skills: ['r-panorama'], prompt: 'L’OSCP repose principalement sur un examen pratique en environnement réel, suivi d’un rapport.' },
-    { id: 'cert-q3', type: 'multi', difficulty: 1, skills: ['r-panorama'], prompt: 'Quelles certifications relèvent principalement du domaine offensif (test d’intrusion) ?', options: [{ id: 'a', text: 'eJPT' }, { id: 'b', text: 'PNPT' }, { id: 'c', text: 'ISO 27001 Lead Implementer' }, { id: 'd', text: 'CompTIA PenTest+' }] },
-    { id: 'cert-q4', type: 'short', difficulty: 1, skills: ['r-panorama'], prompt: 'Quel éditeur propose les certifications Security+, Network+ et CySA+ ?' },
-    { id: 'cert-q5', type: 'single', difficulty: 2, skills: ['r-choix'], prompt: 'Une consultante veut mener des audits de SMSI pour des organismes de certification. Quelle certification vise-t-elle en priorité ?', options: [{ id: 'a', text: 'ISO 27001 Lead Auditor' }, { id: 'b', text: 'CCNA' }, { id: 'c', text: 'eJPT' }, { id: 'd', text: 'CySA+' }] },
-    { id: 'cert-q6', type: 'truefalse', difficulty: 2, skills: ['r-choix'], prompt: 'Le CISSP exige, pour être pleinement délivré, une expérience professionnelle dans plusieurs de ses domaines.' },
-    { id: 'cert-q7', type: 'single', difficulty: 2, skills: ['r-choix'], prompt: 'Un analyste SOC débutant souhaite une certification orientée détection et analyse. Quel choix est le plus cohérent ?', options: [{ id: 'a', text: 'CompTIA CySA+' }, { id: 'b', text: 'ISO 27001 Lead Implementer' }, { id: 'c', text: 'OSCP' }, { id: 'd', text: 'Aucune, seules les certifications offensives comptent' }] },
-    { id: 'cert-q8', type: 'multi', difficulty: 2, skills: ['r-choix'], prompt: 'Quels éléments renforcent une candidature en plus d’une certification ?', options: [{ id: 'a', text: 'Comptes rendus de laboratoires ou de CTF' }, { id: 'b', text: 'Contributions à des projets libres' }, { id: 'c', text: 'Un fichier de questions d’examen copiées' }, { id: 'd', text: 'Des projets personnels documentés' }] },
-    { id: 'cert-q9', type: 'short', difficulty: 2, skills: ['r-choix'], prompt: 'Quel statut ISC2 obtient un candidat qui réussit l’examen CISSP sans avoir encore l’expérience requise ? (« Associate of … »)' },
-    { id: 'cert-q10', type: 'single', difficulty: 1, skills: ['r-prepa'], prompt: 'Quelle méthode améliore le plus la mémorisation à long terme ?', options: [{ id: 'a', text: 'Relire ses notes la veille de l’examen' }, { id: 'b', text: 'Se tester régulièrement à intervalles croissants (rappel actif et répétition espacée)' }, { id: 'c', text: 'Surligner le manuel' }, { id: 'd', text: 'Regarder des vidéos en accéléré' }] },
-    { id: 'cert-q11', type: 'truefalse', difficulty: 1, skills: ['r-prepa'], prompt: 'Utiliser des « dumps » de questions d’examen réelles est une méthode de préparation acceptable si l’on comprend les réponses.' },
-    { id: 'cert-q12', type: 'multi', difficulty: 2, skills: ['r-prepa'], prompt: 'Quelles pratiques font partie d’une bonne préparation ?', options: [{ id: 'a', text: 'Partir du référentiel officiel de l’examen' }, { id: 'b', text: 'Pratiquer en laboratoire chaque notion' }, { id: 'c', text: 'Passer des examens blancs et analyser ses erreurs' }, { id: 'd', text: 'Étudier uniquement la veille de l’examen' }] },
-    { id: 'cert-q13', type: 'short', difficulty: 1, skills: ['r-prepa'], prompt: 'Comment appelle-t-on la technique qui consiste à revoir une notion à des intervalles de plus en plus longs ? (deux mots)' },
-    { id: 'cert-q14', type: 'open', difficulty: 2, skills: ['r-choix', 'r-panorama'], prompt: 'Conseillez les trois profils (juriste vers la conformité, administrateur systèmes vers RSSI, étudiant passionné de CTF vers le pentest) : certification de départ et modules prioritaires.' },
-    { id: 'cert-q15', type: 'open', difficulty: 2, skills: ['r-prepa'], prompt: 'Proposez un plan de préparation de 16 semaines pour une certification fondamentale, avec un rythme de 6 heures par semaine.' },
-    { id: 'cert-q16', type: 'truefalse', difficulty: 1, skills: ['r-panorama', 'r-prepa'], prompt: 'Valider tous les cours de CyberAcadémie donne droit à une certification officielle reconnue.' },
-  ],
+  questions,
   resources: [
     { title: 'ISC2 Certifications', source: 'ISC2', url: 'https://www.isc2.org/certifications' },
     { title: 'CompTIA Certifications', source: 'CompTIA', url: 'https://www.comptia.org/certifications' },

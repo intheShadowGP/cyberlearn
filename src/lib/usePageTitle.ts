@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
+import { t } from '../i18n';
+import { useLang } from '../i18n';
 
 export function usePageTitle(title: string): void {
+  const lang = useLang();
   useEffect(() => {
-    document.title = title ? `${title} — CyberAcadémie` : 'CyberAcadémie';
-  }, [title]);
+    const app = t('title.suffix');
+    document.title = title ? `${title} — ${app}` : app;
+  }, [title, lang]);
 }

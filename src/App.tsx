@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 import { OnboardingWelcome } from './components/Onboarding';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { useI18n } from './i18n';
 
 // HashRouter : les routes vivent après « # », donc aucune réécriture serveur
 // n'est nécessaire sur GitHub Pages, quel que soit le sous-chemin du dépôt.
@@ -30,11 +31,12 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const DocumentationPage = lazy(() => import('./pages/DocumentationPage'));
 
 export function App() {
+  const { t } = useI18n();
   return (
     <HashRouter>
       <Layout>
         <RoutedBoundary>
-          <Suspense fallback={<p className="loading" role="status">Chargement…</p>}>
+          <Suspense fallback={<p className="loading" role="status">{t('app.loading')}</p>}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/bienvenue" element={<OnboardingWelcome />} />

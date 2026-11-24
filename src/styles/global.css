@@ -687,3 +687,11 @@ select.input { max-width: 100%; text-overflow: ellipsis; }
 /* Listes interactives des laboratoires (cases, boutons de correction, défauts). */
 .lab-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
 .lab-list label { display: flex; gap: 0.5rem; align-items: baseline; }
+
+/* Sélecteur de langue FR / EN */
+.lang-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.lang-btn { background: transparent; color: inherit; border: 0; padding: 0.35rem 0.6rem; font: inherit; font-weight: 600; font-size: 0.85rem; cursor: pointer; min-height: 2.25rem; min-width: 2.5rem; }
+.lang-btn + .lang-btn { border-left: 1px solid var(--border); }
+.lang-btn:hover { background: var(--bg-elev-2); }
+.lang-btn[aria-pressed='true'] { background: var(--accent); color: var(--accent-ink); }
+.nav-lang-item { display: flex; align-items: center; }

@@ -1,7 +1,12 @@
 import { useSyncExternalStore } from 'react';
 
 /** Préférences simples d'affichage, seules données stockées dans localStorage. */
+export type Lang = 'fr' | 'en';
+export const LANGS: readonly Lang[] = ['fr', 'en'];
+
 export interface Prefs {
+  /** Langue de l'interface et des contenus (fr par défaut : aucun changement pour les utilisateurs existants). */
+  lang: Lang;
   theme: 'dark' | 'light' | 'system';
   /** Ignore les prérequis et déverrouille tous les cours. */
   freeMode: boolean;
@@ -10,12 +15,13 @@ export interface Prefs {
 }
 
 const KEY = 'cyberacademie.prefs.v1';
-export const DEFAULT_PREFS: Prefs = { theme: 'dark', freeMode: false, fontScale: 1, reduceMotion: false };
+export const DEFAULT_PREFS: Prefs = { lang: 'fr', theme: 'dark', freeMode: false, fontScale: 1, reduceMotion: false };
 
 function sanitize(raw: unknown): Prefs {
   const p = { ...DEFAULT_PREFS };
   if (typeof raw !== 'object' || raw === null) return p;
   const r = raw as Record<string, unknown>;
+  if (r.lang === 'fr' || r.lang === 'en') p.lang = r.lang;
   if (r.theme === 'dark' || r.theme === 'light' || r.theme === 'system') p.theme = r.theme;
   if (typeof r.freeMode === 'boolean') p.freeMode = r.freeMode;
   if (r.fontScale === 1 || r.fontScale === 1.125 || r.fontScale === 1.25) p.fontScale = r.fontScale;
@@ -63,6 +69,7 @@ export function resetPrefs(): void {
 
 export function applyPrefs(p: Prefs): void {
   const root = document.documentElement;
+  root.lang = p.lang;
   root.dataset.theme = p.theme;
   root.dataset.motion = p.reduceMotion ? 'reduce' : 'auto';
   root.style.setProperty('--font-scale', String(p.fontScale));

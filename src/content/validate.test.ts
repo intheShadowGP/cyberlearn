@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { validateContent, findForbiddenFields, type ContentSet } from './validate';
-import type { Answer, CourseBody, CourseCorrections, CourseMeta, CourseSolutions, LabBody, LabCorrections, LabMeta } from './types';
+import type { Answer, CourseBody, CourseCorrections, CourseMeta, CourseMetaText, CourseSolutions, LabBody, LabCorrections, LabMeta } from './types';
 import { gradeQuestion } from '../lib/quiz';
 import { MODULES } from './catalog';
 import { DIAGRAMS } from '../components/diagrams';
@@ -13,6 +13,10 @@ const metas = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { ea
 const bodies = import.meta.glob<{ body: CourseBody }>('./courses/*/body.ts', { eager: true });
 const corrs = import.meta.glob<{ corrections: CourseCorrections }>('./courses/*/corrections.ts', { eager: true });
 const sols = import.meta.glob<{ solutions: CourseSolutions }>('./courses/*/solutions.ts', { eager: true });
+const metaTextsEn = import.meta.glob<{ metaText: CourseMetaText }>('./courses/*/meta.en.ts', { eager: true });
+const bodiesEn = import.meta.glob<{ body: CourseBody }>('./courses/*/body.en.ts', { eager: true });
+const corrsEn = import.meta.glob<{ corrections: CourseCorrections }>('./courses/*/corrections.en.ts', { eager: true });
+const solsEn = import.meta.glob<{ solutions: CourseSolutions }>('./courses/*/solutions.en.ts', { eager: true });
 const labMetas = import.meta.glob<{ meta: LabMeta }>('../labs/*/meta.ts', { eager: true });
 const labBodies = import.meta.glob<{ body: LabBody }>('../labs/*/body.ts', { eager: true });
 const labCorrs = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.ts', { eager: true });
@@ -42,8 +46,33 @@ function buildSet(): ContentSet {
   return { courses, labs, diagramIds: new Set(Object.keys(DIAGRAMS)) };
 }
 
+/** Jeu de contenu anglais : mêmes règles de validation que le français, appliquées aux cours déjà traduits. */
+function buildSetEn(fr: ContentSet): ContentSet {
+  const courses = fr.courses.flatMap((c) => {
+    const d = c.dir;
+    const tx = metaTextsEn[`./courses/${d}/meta.en.ts`]?.metaText;
+    const body = bodiesEn[`./courses/${d}/body.en.ts`]?.body;
+    const corrections = corrsEn[`./courses/${d}/corrections.en.ts`]?.corrections;
+    const solutions = solsEn[`./courses/${d}/solutions.en.ts`]?.solutions;
+    if (!tx || !body || !corrections || !solutions) return [];
+    const meta: CourseMeta = { ...c.meta, title: tx.title, summary: tx.summary, objectives: tx.objectives, prerequisiteKnowledge: tx.prerequisiteKnowledge, skills: c.meta.skills.map((k) => ({ ...k, label: tx.skills[k.id] ?? '' })) };
+    return [{ dir: d, meta, body, corrections, solutions }];
+  });
+  return { courses, labs: [], diagramIds: fr.diagramIds };
+}
+
 describe('contenu pédagogique', () => {
   const set = buildSet();
+
+  it('les cours traduits en anglais respectent les mêmes règles que les cours français', () => {
+    const en = buildSetEn(set);
+    // Les prérequis référencent des cours français : on valide l'ensemble, puis on ne garde que les erreurs des cours EN.
+    const errors = validateContent({ ...en, courses: [...en.courses] }).filter((e) => !e.includes('prérequis inconnu') && !e.includes('laboratoire inconnu'));
+    expect(errors, errors.join('\n')).toEqual([]);
+    for (const c of en.courses) {
+      for (const k of c.meta.skills) expect(k.label.trim().length, `${c.dir} : libellé de compétence ${k.id} manquant`).toBeGreaterThan(2);
+    }
+  });
 
   it('contient au moins un cours et un laboratoire', () => {
     expect(set.courses.length).toBeGreaterThan(0);

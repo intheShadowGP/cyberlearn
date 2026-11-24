@@ -155,6 +155,19 @@ export interface CourseMeta {
   quizSize: number;
 }
 
+/**
+ * Partie traduisible des métadonnées d'un cours (fichier `meta.en.ts`).
+ * Les champs structurels (id, module, niveau, prérequis, compteurs…) ne sont jamais dupliqués.
+ */
+export interface CourseMetaText {
+  title: string;
+  summary: string;
+  objectives: string[];
+  prerequisiteKnowledge: string[];
+  /** Libellé de chaque compétence, par identifiant (mêmes ids qu'en français). */
+  skills: Record<string, string>;
+}
+
 export interface CourseBody {
   courseId: string;
   lesson: {
