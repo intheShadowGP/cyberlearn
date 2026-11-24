@@ -7,6 +7,11 @@ import { catalog } from './catalog';
 import { misc } from './misc';
 import { course } from './course';
 import { quiz } from './quiz';
+import { labs } from './labs';
+import { paths } from './paths';
+import { gamification } from './gamification';
+import { profile } from './profile';
+import { browse } from './browse';
 
 /** Source de vérité des messages : le français. Un fichier par zone fonctionnelle. */
 export const fr = {
@@ -19,6 +24,11 @@ export const fr = {
   ...misc,
   ...course,
   ...quiz,
+  ...labs,
+  ...paths,
+  ...gamification,
+  ...profile,
+  ...browse,
 } as const;
 
 export type MsgKey = keyof typeof fr;

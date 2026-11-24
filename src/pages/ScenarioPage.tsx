@@ -1,23 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { COURSE_BY_ID } from '../content/registry';
-import { SCENARIO_BY_ID, loadScenarioBody, loadScenarioCorrections, type ScenarioBody, type ScenarioMeta } from '../content/scenarios';
+import { COURSE_BY_ID, getCourse } from '../content/registry';
+import { SCENARIO_BY_ID, getScenario, loadScenarioBody, loadScenarioCorrections, type ScenarioBody, type ScenarioMeta } from '../content/scenarios';
 import type { Block } from '../content/types';
 import { LevelBadge } from '../components/Badges';
 import { Blocks } from '../components/Blocks';
 import { Quiz } from '../components/Quiz';
 import { recordExamAttempt } from '../lib/progress';
 import { usePageTitle } from '../lib/usePageTitle';
+import { useI18n } from '../i18n';
 import NotFoundPage from './NotFoundPage';
 
 export default function ScenarioPage() {
   const { id = '' } = useParams();
-  const meta = SCENARIO_BY_ID.get(id);
+  const { lang } = useI18n();
+  const meta = SCENARIO_BY_ID.has(id) ? getScenario(id, lang) : undefined;
   if (!meta) return <NotFoundPage what="scenario" />;
-  return <ScenarioView key={meta.id} meta={meta} />;
+  return <ScenarioView key={`${meta.id}-${lang}`} meta={meta} />;
 }
 
 function ScenarioView({ meta }: { meta: ScenarioMeta }) {
+  const { t, lang } = useI18n();
   usePageTitle(meta.title);
   const [body, setBody] = useState<ScenarioBody | null>(null);
   const [debrief, setDebrief] = useState<Block[] | null>(null);
@@ -27,59 +30,59 @@ function ScenarioView({ meta }: { meta: ScenarioMeta }) {
   const skillLabels = useMemo(
     () =>
       Object.fromEntries(
-        meta.relatedCourses.flatMap((c) => COURSE_BY_ID.get(c)?.skills.map((s) => [s.id, s.label] as const) ?? []),
+        meta.relatedCourses.flatMap((c) => getCourse(c, lang)?.skills.map((s) => [s.id, s.label] as const) ?? []),
       ),
-    [meta.relatedCourses],
+    [meta.relatedCourses, lang],
   );
 
   useEffect(() => {
     let alive = true;
-    loadScenarioBody(meta.id)
+    loadScenarioBody(meta.id, lang)
       .then((b) => alive && (b ? setBody(b) : setLoadError(true)))
       .catch(() => alive && setLoadError(true));
     return () => {
       alive = false;
     };
-  }, [meta.id]);
+  }, [meta.id, lang]);
 
   return (
     <article>
-      <nav aria-label="Fil d’Ariane" className="breadcrumb">
-        <Link to="/evaluations">Évaluations</Link> › <span aria-current="page">{meta.title}</span>
+      <nav aria-label={t('lab.breadcrumb')} className="breadcrumb">
+        <Link to="/evaluations">{t('assess.title')}</Link> › <span aria-current="page">{meta.title}</span>
       </nav>
       <header className="panel">
-        <p className="eyebrow">Épreuve de démarche</p>
+        <p className="eyebrow">{t('scn.eyebrow')}</p>
         <h1>{meta.title}</h1>
         <ul className="meta-row">
           <li><LevelBadge level={meta.level} /></li>
-          <li>Durée : {meta.durationMin} min</li>
+          <li>{t('scn.duration', { n: meta.durationMin })}</li>
           {meta.relatedCourses.map((c) => (
             <li key={c}>
-              Cours lié : <Link to={`/cours/${c}`}>{COURSE_BY_ID.get(c)?.title}</Link>
+              {t('lab.related')} <Link to={`/cours/${c}`}>{COURSE_BY_ID.has(c) ? getCourse(c, lang)?.title : c}</Link>
             </li>
           ))}
         </ul>
-        <h2 className="h3">Mise en situation</h2>
+        <h2 className="h3">{t('scn.situation')}</h2>
         <p>{meta.context}</p>
-        <h2 className="h3">Objectif</h2>
+        <h2 className="h3">{t('scn.objective')}</h2>
         <p>{meta.objective}</p>
-        <h2 className="h3">Démarche</h2>
+        <h2 className="h3">{t('scn.approach')}</h2>
         <ol>{meta.steps.map((s) => <li key={s}>{s}</li>)}</ol>
       </header>
 
       <section className="panel" aria-labelledby="dossier-h">
-        <h2 id="dossier-h">Dossier d’incident</h2>
+        <h2 id="dossier-h">{t('scn.dossier')}</h2>
         {body ? (
           <Blocks blocks={body.dossier} />
         ) : loadError ? (
-          <p role="alert" className="error">Le dossier n’a pas pu être chargé. Si vous êtes hors ligne, reconnectez-vous une fois pour le mettre en cache.</p>
+          <p role="alert" className="error">{t('scn.dossierError')}</p>
         ) : (
-          <p role="status">Chargement du dossier…</p>
+          <p role="status">{t('scn.dossierLoading')}</p>
         )}
       </section>
 
       <section aria-labelledby="sq-h">
-        <h2 id="sq-h">Questions de démarche et validation</h2>
+        <h2 id="sq-h">{t('scn.questions')}</h2>
         {body ? (
           <Quiz
             key={round}
@@ -87,28 +90,28 @@ function ScenarioView({ meta }: { meta: ScenarioMeta }) {
             questions={body.questions}
             skillLabels={skillLabels}
             loadCorrections={async () => {
-              const c = await loadScenarioCorrections(meta.id);
+              const c = await loadScenarioCorrections(meta.id, lang);
               if (!c) throw new Error('corrections absentes');
               setDebrief(c.debrief);
               return c.questions;
             }}
             onFinished={(score, d) => recordExamAttempt(meta.id, score, d)}
-            retryLabel="Recommencer l’épreuve"
+            retryLabel={t('scn.retry')}
             onRetry={() => {
               setDebrief(null);
               setRound((r) => r + 1);
             }}
           />
         ) : loadError ? (
-          <p role="alert" className="error">Les questions n’ont pas pu être chargées.</p>
+          <p role="alert" className="error">{t('scn.questionsError')}</p>
         ) : (
-          <p role="status">Chargement…</p>
+          <p role="status">{t('lab.loadingShort')}</p>
         )}
       </section>
 
       {debrief && (
         <section className="panel" aria-labelledby="debrief-h">
-          <h2 id="debrief-h">Débriefing : corrigé d’ensemble et enseignements</h2>
+          <h2 id="debrief-h">{t('scn.debrief')}</h2>
           <Blocks blocks={debrief} />
         </section>
       )}

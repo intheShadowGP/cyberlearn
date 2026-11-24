@@ -17,6 +17,7 @@ import type { CourseMeta, PathDef } from '../content/types';
 import { skillState, type SkillState } from './levels';
 import { PASS_THRESHOLD } from './quiz';
 import type { Snapshot } from './progress';
+import { t, type MsgKey } from '../i18n';
 
 /* ---------- Filtrage des données importées ---------- */
 
@@ -46,13 +47,12 @@ function distinctPerDay(list: { ref: string; date: number }[]): number {
 
 export type CourseStage = 'non-commence' | 'consulte' | 'lecon-terminee' | 'evaluation-reussie' | 'maitrise';
 
-export const STAGE_LABELS: Record<CourseStage, string> = {
-  'non-commence': 'Non commencé',
-  consulte: 'Contenu consulté',
-  'lecon-terminee': 'Leçon terminée',
-  'evaluation-reussie': 'Évaluation réussie',
-  maitrise: 'Compétences maîtrisées',
-};
+export const STAGES: readonly CourseStage[] = ['non-commence', 'consulte', 'lecon-terminee', 'evaluation-reussie', 'maitrise'];
+
+/** Libellé (dans la langue active) d'un état d'apprentissage. */
+export function stageLabel(stage: CourseStage): string {
+  return t(`stage.${stage}` as MsgKey);
+}
 
 /**
  * Quatre états distincts (section 8) :
@@ -136,38 +136,38 @@ export function computeXp(rawSnap: Snapshot): { total: number; lines: XpLine[] }
   const reviewXp = Math.min(reviewsOk * XP_RULES.reviewCorrect, XP_RULES.reviewCap);
 
   const lines: XpLine[] = [
-    { label: 'Sections de leçon lues (cours dont l’évaluation a été tentée)', count: sections, xp: sections * XP_RULES.section },
-    { label: 'Exercices pratiques réalisés', count: practices, xp: practices * XP_RULES.practice },
-    { label: 'Cours validés', count: validated.length, xp: validated.length * XP_RULES.courseValidated },
-    { label: 'Cours réussis à 90 % ou plus', count: excellent, xp: excellent * XP_RULES.courseExcellent },
-    { label: 'Laboratoires réussis', count: labs, xp: labs * XP_RULES.labCompleted },
-    { label: 'Évaluations et examens réussis (distincts)', count: examsPassed, xp: examsPassed * XP_RULES.examPassed },
-    { label: 'Compétences maîtrisées', count: mastered, xp: mastered * XP_RULES.skillMastered },
-    { label: 'Parcours terminés', count: paths, xp: paths * XP_RULES.pathCompleted },
-    { label: `Révisions réussies, distinctes par jour (plafond ${XP_RULES.reviewCap} XP)`, count: reviewsOk, xp: reviewXp },
+    { label: t('xp.sections'), count: sections, xp: sections * XP_RULES.section },
+    { label: t('xp.practices'), count: practices, xp: practices * XP_RULES.practice },
+    { label: t('xp.courses'), count: validated.length, xp: validated.length * XP_RULES.courseValidated },
+    { label: t('xp.excellent'), count: excellent, xp: excellent * XP_RULES.courseExcellent },
+    { label: t('xp.labs'), count: labs, xp: labs * XP_RULES.labCompleted },
+    { label: t('xp.exams'), count: examsPassed, xp: examsPassed * XP_RULES.examPassed },
+    { label: t('xp.skills'), count: mastered, xp: mastered * XP_RULES.skillMastered },
+    { label: t('xp.paths'), count: paths, xp: paths * XP_RULES.pathCompleted },
+    { label: t('xp.reviews', { cap: XP_RULES.reviewCap }), count: reviewsOk, xp: reviewXp },
   ];
   return { total: lines.reduce((n, l) => n + l.xp, 0), lines };
 }
 
 /** Rangs d'expérience — distincts des niveaux de compétence 1 à 4. */
-export const RANKS: { min: number; name: string }[] = [
-  { min: 0, name: 'Recrue' },
-  { min: 150, name: 'Initié' },
-  { min: 400, name: 'Apprenti' },
-  { min: 800, name: 'Technicien' },
-  { min: 1400, name: 'Analyste' },
-  { min: 2200, name: 'Spécialiste' },
-  { min: 3200, name: 'Confirmé' },
-  { min: 4500, name: 'Référent' },
-  { min: 6000, name: 'Architecte' },
-  { min: 8000, name: 'Maître' },
+export const RANKS: { min: number }[] = [
+  { min: 0 },
+  { min: 150 },
+  { min: 400 },
+  { min: 800 },
+  { min: 1400 },
+  { min: 2200 },
+  { min: 3200 },
+  { min: 4500 },
+  { min: 6000 },
+  { min: 8000 },
 ];
 
 export function rankOf(xp: number): { index: number; name: string; min: number; next: number | null } {
   let i = 0;
   for (let k = 0; k < RANKS.length; k++) if (xp >= (RANKS[k] as { min: number }).min) i = k;
-  const r = RANKS[i] as { min: number; name: string };
-  return { index: i + 1, name: r.name, min: r.min, next: RANKS[i + 1]?.min ?? null };
+  const r = RANKS[i] as { min: number };
+  return { index: i + 1, name: t(`rank.${i}` as MsgKey), min: r.min, next: RANKS[i + 1]?.min ?? null };
 }
 
 /* ---------- Séries ---------- */
@@ -232,24 +232,24 @@ export function badges(rawSnap: Snapshot, now = Date.now()): Badge[] {
   const s = streaks(snap, now);
   const pathsDone = PATHS.filter((p) => pathStatus(p, snap).completed).length;
   const sectionsRead = snap.progress.reduce((n, p) => n + p.sectionsRead.length, 0);
-  const b = (id: string, title: string, description: string, value: number, target: number): Badge => ({
-    id, title, description, earned: value >= target, progress: `${Math.min(value, target)}/${target}`,
+  const b = (id: string, value: number, target: number): Badge => ({
+    id, title: t(`badge.${id}.title` as MsgKey), description: t(`badge.${id}.desc` as MsgKey), earned: value >= target, progress: `${Math.min(value, target)}/${target}`,
   });
   return [
-    b('premiere-lecon', 'Premiers pas', 'Lire une première section de leçon.', sectionsRead, 1),
-    b('premier-cours', 'Premier cours validé', 'Réussir l’évaluation d’un cours (70 % ou plus).', validated.length, 1),
-    b('cinq-cours', 'Cinq cours validés', 'Valider cinq cours.', validated.length, 5),
-    b('dix-cours', 'Dix cours validés', 'Valider dix cours.', validated.length, 10),
-    b('polyvalent', 'Polyvalent', 'Valider des cours dans cinq disciplines différentes.', modulesValidated.size, 5),
-    b('premier-labo', 'Les mains dans le cambouis', 'Réussir un laboratoire.', labs.length, 1),
-    b('tous-labos', 'Tous les laboratoires', 'Réussir tous les laboratoires.', labs.length, LABS.length),
-    b('perfection', 'Sans faute', 'Obtenir 100 % à une évaluation d’au moins huit questions.', perfect ? 1 : 0, 1),
-    b('examen', 'À l’épreuve', 'Réussir une évaluation transversale, un examen blanc ou un examen final.', exams.length, 1),
-    b('maitrise-10', 'Dix compétences maîtrisées', 'Maîtriser dix compétences (80 % sur au moins trois questions).', mastered, 10),
-    b('revision-50', 'Mémoire longue', 'Réussir cinquante cartes de révision (une même carte compte une fois par jour).', reviewsOk, 50),
-    b('serie-3', 'Régularité', 'Apprendre trois jours de suite.', s.longest, 3),
-    b('serie-7', 'Une semaine d’affilée', 'Apprendre sept jours de suite.', s.longest, 7),
-    b('parcours', 'Parcours accompli', 'Terminer un parcours, examen final compris.', pathsDone, 1),
+    b('premiere-lecon', sectionsRead, 1),
+    b('premier-cours', validated.length, 1),
+    b('cinq-cours', validated.length, 5),
+    b('dix-cours', validated.length, 10),
+    b('polyvalent', modulesValidated.size, 5),
+    b('premier-labo', labs.length, 1),
+    b('tous-labos', labs.length, LABS.length),
+    b('perfection', perfect ? 1 : 0, 1),
+    b('examen', exams.length, 1),
+    b('maitrise-10', mastered, 10),
+    b('revision-50', reviewsOk, 50),
+    b('serie-3', s.longest, 3),
+    b('serie-7', s.longest, 7),
+    b('parcours', pathsDone, 1),
   ];
 }
 
@@ -278,12 +278,12 @@ export function weeklyChallenges(rawSnap: Snapshot, now = Date.now()): Challenge
   /** Références distinctes : cocher six fois la même section ne compte qu'une fois. */
   const distinct = (type: string, ok?: boolean) => new Set(week.filter((a) => a.type === type && (ok === undefined || a.ok === ok)).map((a) => a.ref)).size;
   const pool: Omit<Challenge, 'done'>[] = [
-    { id: 'sections', title: 'Lire 6 sections de leçon', value: distinct('section'), target: 6 },
-    { id: 'reussir', title: 'Réussir 2 évaluations de cours', value: new Set(attempts.filter((a) => a.kind === 'course' && a.percent >= PASS_THRESHOLD).map((a) => a.refId)).size, target: 2 },
-    { id: 'reviser', title: 'Réussir 15 cartes de révision', value: distinctPerDay(week.filter((a) => a.type === 'review' && a.ok)), target: 15 },
-    { id: 'labo', title: 'Réussir 1 laboratoire', value: attempts.filter((a) => a.kind === 'lab' && a.percent >= PASS_THRESHOLD).length, target: 1 },
-    { id: 'pratique', title: 'Réaliser 3 exercices pratiques', value: distinct('practice'), target: 3 },
-    { id: 'examen', title: 'Passer 1 évaluation transversale ou examen', value: attempts.filter((a) => a.kind === 'exam').length, target: 1 },
+    { id: 'sections', title: t('challenge.sections'), value: distinct('section'), target: 6 },
+    { id: 'reussir', title: t('challenge.reussir'), value: new Set(attempts.filter((a) => a.kind === 'course' && a.percent >= PASS_THRESHOLD).map((a) => a.refId)).size, target: 2 },
+    { id: 'reviser', title: t('challenge.reviser'), value: distinctPerDay(week.filter((a) => a.type === 'review' && a.ok)), target: 15 },
+    { id: 'labo', title: t('challenge.labo'), value: attempts.filter((a) => a.kind === 'lab' && a.percent >= PASS_THRESHOLD).length, target: 1 },
+    { id: 'pratique', title: t('challenge.pratique'), value: distinct('practice'), target: 3 },
+    { id: 'examen', title: t('challenge.examen'), value: attempts.filter((a) => a.kind === 'exam').length, target: 1 },
   ];
   // Trois défis par semaine, choisis de façon déterministe selon le numéro de semaine.
   const n = Math.floor(since / (7 * 86_400_000));

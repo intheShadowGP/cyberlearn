@@ -1,36 +1,30 @@
 import { Link } from 'react-router-dom';
-import { EXAMS, type ExamDef } from '../content/exams';
-import { SCENARIOS } from '../content/scenarios';
+import { getExams } from '../content/exams';
+import { getScenarios } from '../content/scenarios';
 import { COURSE_BY_ID } from '../content/registry';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
 import { LevelBadge } from '../components/Badges';
-
-const KIND_TITLE: Record<ExamDef['kind'], string> = {
-  module: 'Tests par discipline',
-  transversal: 'Évaluations transversales',
-  mock: 'Examens blancs',
-  path: 'Examens finaux des parcours',
-};
+import { useI18n } from '../i18n';
 
 export default function AssessmentsPage() {
-  usePageTitle('Évaluations');
+  const { t, lang } = useI18n();
+  usePageTitle(t('assess.title'));
   const { data } = useSnapshot();
   const examAttempts = data.attempts.filter((a) => a.kind === 'exam');
+  const exams = getExams(lang);
+  const scenarios = getScenarios(lang);
 
   return (
     <div>
-      <h1>Évaluations</h1>
-      <p className="lead">
-        Questions tirées aléatoirement dans les banques de tous les cours concernés : chaque passage est différent. Les résultats
-        détaillés alimentent votre profil de compétences.
-      </p>
+      <h1>{t('assess.title')}</h1>
+      <p className="lead">{t('assess.lead')}</p>
       {(['module', 'transversal', 'mock', 'path'] as const).map((kind) => {
-        const list = EXAMS.filter((e) => e.kind === kind);
+        const list = exams.filter((e) => e.kind === kind);
         if (!list.length) return null;
         return (
           <section key={kind} aria-labelledby={`k-${kind}`}>
-            <h2 id={`k-${kind}`}>{KIND_TITLE[kind]}</h2>
+            <h2 id={`k-${kind}`}>{t(`assess.kind.${kind}` as const)}</h2>
             <ul className="card-grid">
               {list.map((e) => {
                 const att = examAttempts.filter((a) => a.refId === e.id);
@@ -44,9 +38,9 @@ export default function AssessmentsPage() {
                       </h3>
                       <p className="muted">{e.description}</p>
                       <p className="card-foot muted">
-                        {Math.min(e.size, pool)} questions parmi {pool}
-                        {e.timeLimitMin ? ` · ${e.timeLimitMin} min` : ''}
-                        {best !== null && ` · meilleur score ${best} %`}
+                        {t('assess.poolInfo', { n: Math.min(e.size, pool), pool })}
+                        {e.timeLimitMin ? t('assess.timeInfo', { n: e.timeLimitMin }) : ''}
+                        {best !== null && t('assess.best', { n: best })}
                       </p>
                     </article>
                   </li>
@@ -57,15 +51,12 @@ export default function AssessmentsPage() {
         );
       })}
 
-      {SCENARIOS.length > 0 && (
+      {scenarios.length > 0 && (
         <section aria-labelledby="k-scenario">
-          <h2 id="k-scenario">Épreuves de démarche</h2>
-          <p className="muted">
-            Un dossier d’incident unique et une suite de questions ordonnées : on y évalue le raisonnement (triage,
-            corrélation, qualification, décision), pas une banque tirée au hasard.
-          </p>
+          <h2 id="k-scenario">{t('assess.scenarios')}</h2>
+          <p className="muted">{t('assess.scenarios.help')}</p>
           <ul className="card-grid">
-            {SCENARIOS.map((s) => {
+            {scenarios.map((s) => {
               const att = examAttempts.filter((a) => a.refId === s.id);
               const best = att.length ? Math.max(...att.map((a) => a.percent)) : null;
               return (
@@ -76,8 +67,8 @@ export default function AssessmentsPage() {
                     </h3>
                     <p className="muted">{s.objective}</p>
                     <p className="card-foot muted">
-                      <LevelBadge level={s.level} /> · {s.questionCount} questions · {s.durationMin} min
-                      {best !== null && ` · meilleur score ${best} %`}
+                      <LevelBadge level={s.level} /> · {t('assess.scenarioInfo', { n: s.questionCount, min: s.durationMin })}
+                      {best !== null && t('assess.best', { n: best })}
                     </p>
                   </article>
                 </li>

@@ -1,16 +1,18 @@
 import { useEffect, useId, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { MODULES, MODULE_BY_ID } from '../content/catalog';
-import { COURSE_BY_ID } from '../content/registry';
+import { getModule, getModules } from '../content/catalog';
+import { getCourse } from '../content/registry';
 import type { ModuleId } from '../content/types';
 import { Inline } from '../components/Inline';
 import { loadGlossary, type GlossaryEntry } from '../lib/contentIndex';
 import { normalizeShort } from '../lib/quiz';
 import { usePageTitle } from '../lib/usePageTitle';
+import { useI18n } from '../i18n';
 
 export default function GlossaryPage() {
-  usePageTitle('Glossaire');
-  const [entries, setEntries] = useState<GlossaryEntry[] | null>(null);
+  const { t, tp, lang } = useI18n();
+  usePageTitle(t('gloss.title'));
+  const [loaded, setLoaded] = useState<{ lang: string; entries: GlossaryEntry[] } | null>(null);
   const [error, setError] = useState(false);
   const [params, setParams] = useSearchParams();
   const q = params.get('q') ?? '';
@@ -18,14 +20,16 @@ export default function GlossaryPage() {
   const onlyAcronyms = params.get('sigles') === '1';
   const focus = params.get('terme');
   const ids = { q: useId(), c: useId() };
+  // Les données ne sont valables que pour la langue pour laquelle elles ont été chargées.
+  const entries = loaded?.lang === lang ? loaded.entries : null;
 
   useEffect(() => {
     let alive = true;
-    loadGlossary().then((e) => alive && setEntries(e)).catch(() => alive && setError(true));
+    loadGlossary(lang).then((e) => alive && setLoaded({ lang, entries: e })).catch(() => alive && setError(true));
     return () => {
       alive = false;
     };
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     if (!focus || !entries) return;
@@ -51,37 +55,34 @@ export default function GlossaryPage() {
 
   return (
     <div>
-      <h1>Glossaire</h1>
-      <p className="lead">
-        {entries ? `${entries.length} notions` : 'Notions'} extraites des définitions des leçons, avec un lien vers chaque cours qui les
-        définit.
-      </p>
+      <h1>{t('gloss.title')}</h1>
+      <p className="lead">{t('gloss.lead', { count: entries ? tp('gloss.count', entries.length) : t('gloss.notions') })}</p>
       <form className="filters panel" role="search" onSubmit={(e) => e.preventDefault()}>
         <div>
-          <label htmlFor={ids.q}>Rechercher une notion</label>
+          <label htmlFor={ids.q}>{t('gloss.search')}</label>
           <input id={ids.q} className="input" type="search" value={q} maxLength={80} onChange={(e) => update('q', e.target.value)} />
         </div>
         <div>
-          <label htmlFor={ids.c}>Catégorie (discipline)</label>
+          <label htmlFor={ids.c}>{t('gloss.category')}</label>
           <select id={ids.c} className="input" value={cat} onChange={(e) => update('discipline', e.target.value)}>
-            <option value="">Toutes</option>
-            {MODULES.map((m) => (
+            <option value="">{t('gloss.all')}</option>
+            {getModules(lang).map((m) => (
               <option key={m.id} value={m.id}>{m.id} — {m.title}</option>
             ))}
           </select>
         </div>
         <label className="check">
           <input type="checkbox" checked={onlyAcronyms} onChange={(e) => update('sigles', e.target.checked ? '1' : '')} />
-          Sigles et acronymes uniquement
+          {t('gloss.acronyms')}
         </label>
       </form>
-      {error && <p role="alert" className="error">Le glossaire n’a pas pu être chargé (contenu non disponible hors ligne ?).</p>}
-      {!entries && !error && <p role="status">Construction du glossaire…</p>}
+      {error && <p role="alert" className="error">{t('gloss.error')}</p>}
+      {!entries && !error && <p role="status">{t('gloss.building')}</p>}
       {entries && (
         <>
-          <p role="status" className="muted">{list.length} notion{list.length > 1 ? 's' : ''}.</p>
+          <p role="status" className="muted">{tp('gloss.count', list.length)}.</p>
           {letters.length > 1 && (
-            <nav aria-label="Lettres" className="button-row">
+            <nav aria-label={t('gloss.letters')} className="button-row">
               {letters.map((l) => (
                 <a key={l} className="btn btn-small" href={`#lettre-${l}`} onClick={(e) => { e.preventDefault(); document.getElementById(`lettre-${l}`)?.scrollIntoView(); }}>{l}</a>
               ))}
@@ -95,18 +96,18 @@ export default function GlossaryPage() {
                 <div key={e.id} id={`terme-${e.id}`} className={`definition ${focus === e.id ? 'focused' : ''}`}>
                   <dt>
                     {first && <span id={`lettre-${letter}`} className="sr-only">{letter} </span>}
-                    {e.term} {e.acronym && <span className="badge">sigle</span>}{' '}
-                    <span className="muted">— {MODULE_BY_ID[e.module].short}</span>
+                    {e.term} {e.acronym && <span className="badge">{t('gloss.acronym')}</span>}{' '}
+                    <span className="muted">— {getModule(e.module, lang).short}</span>
                   </dt>
                   <dd>
                     <Inline text={e.definition} />
                     <br />
                     <span className="muted">
-                      Défini dans :{' '}
+                      {t('gloss.definedIn')}{' '}
                       {e.courseIds.map((c, k) => (
                         <span key={c}>
                           {k > 0 && ' · '}
-                          <Link to={`/cours/${c}`}>{COURSE_BY_ID.get(c)?.title ?? c}</Link>
+                          <Link to={`/cours/${c}`}>{getCourse(c, lang)?.title ?? c}</Link>
                         </span>
                       ))}
                     </span>

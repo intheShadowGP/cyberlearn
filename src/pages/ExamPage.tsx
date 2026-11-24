@@ -1,24 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { EXAM_BY_ID, type ExamDef } from '../content/exams';
-import { COURSE_BY_ID, loadCourseBody, loadCourseCorrections } from '../content/registry';
+import { EXAM_BY_ID, getExam, type ExamDef } from '../content/exams';
+import { getCourse, loadCourseBody, loadCourseCorrections } from '../content/registry';
 import type { Correction, Question } from '../content/types';
 import { Quiz } from '../components/Quiz';
 import { drawQuestions, cryptoRandom } from '../lib/quiz';
 import { recordExamAttempt } from '../lib/progress';
 import { usePageTitle } from '../lib/usePageTitle';
+import { useI18n, type Lang } from '../i18n';
 import NotFoundPage from './NotFoundPage';
 
 export default function ExamPage() {
   const { id = '' } = useParams();
-  const exam = EXAM_BY_ID.get(id);
+  const { lang } = useI18n();
+  const exam = EXAM_BY_ID.has(id) ? getExam(id, lang) : undefined;
   if (!exam) return <NotFoundPage what="exam" />;
-  return <ExamView key={exam.id} exam={exam} />;
+  return <ExamView key={`${exam.id}-${lang}`} exam={exam} />;
 }
 
 /** Tire des questions réparties équitablement entre les cours inclus. */
-async function drawExam(exam: ExamDef): Promise<{ questions: Question[]; owner: Map<string, string> }> {
-  const bodies = await Promise.all(exam.courseIds.map((id) => loadCourseBody(id)));
+async function drawExam(exam: ExamDef, lang: Lang): Promise<{ questions: Question[]; owner: Map<string, string> }> {
+  const bodies = await Promise.all(exam.courseIds.map((id) => loadCourseBody(id, lang)));
   const owner = new Map<string, string>();
   const perCourse = Math.max(1, Math.ceil(exam.size / exam.courseIds.length));
   let pool: Question[] = [];
@@ -35,6 +37,7 @@ async function drawExam(exam: ExamDef): Promise<{ questions: Question[]; owner: 
 }
 
 function ExamView({ exam }: { exam: ExamDef }) {
+  const { t, lang } = useI18n();
   usePageTitle(exam.title);
   const [round, setRound] = useState(0);
   const [started, setStarted] = useState(false);
@@ -51,7 +54,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
   useEffect(() => {
     if (!started) return;
     let alive = true;
-    drawExam(exam)
+    drawExam(exam, lang)
       .then((d) => {
         if (!alive) return;
         setDrawn({ round, ...d });
@@ -61,7 +64,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
     return () => {
       alive = false;
     };
-  }, [exam, round, started, timed]);
+  }, [exam, round, started, timed, lang]);
 
   useEffect(() => {
     if (!deadline) return;
@@ -70,8 +73,8 @@ function ExamView({ exam }: { exam: ExamDef }) {
   }, [deadline]);
 
   const skillLabels = useMemo(
-    () => Object.fromEntries(exam.courseIds.flatMap((c) => COURSE_BY_ID.get(c)?.skills.map((s) => [s.id, s.label] as const) ?? [])),
-    [exam.courseIds],
+    () => Object.fromEntries(exam.courseIds.flatMap((c) => getCourse(c, lang)?.skills.map((s) => [s.id, s.label] as const) ?? [])),
+    [exam.courseIds, lang],
   );
 
   const remaining = deadline ? Math.max(0, deadline - now) : null;
@@ -80,43 +83,42 @@ function ExamView({ exam }: { exam: ExamDef }) {
 
   return (
     <article>
-      <nav aria-label="Fil d’Ariane" className="breadcrumb">
-        <Link to="/evaluations">Évaluations</Link> › <span aria-current="page">{exam.title}</span>
+      <nav aria-label={t('exam.breadcrumb')} className="breadcrumb">
+        <Link to="/evaluations">{t('assess.title')}</Link> › <span aria-current="page">{exam.title}</span>
       </nav>
       <header className="panel">
         <h1>{exam.title}</h1>
         <p>{exam.description}</p>
         <p className="muted">
-          Cours inclus : {exam.courseIds.map((c) => COURSE_BY_ID.get(c)?.title).filter(Boolean).join(' · ')}
+          {t('exam.included')} {exam.courseIds.map((c) => getCourse(c, lang)?.title).filter(Boolean).join(' · ')}
         </p>
       </header>
       {!started ? (
         <div className="panel">
           <p>
-            {exam.size} questions{exam.timeLimitMin ? `, temps limité facultatif de ${exam.timeLimitMin} minutes (validation automatique à l’échéance)` : ''}. Les corrections détaillées
-            s’affichent après validation.
+            {t('exam.intro', { n: exam.size })}{exam.timeLimitMin ? t('exam.intro.timed', { min: exam.timeLimitMin }) : ''}{t('exam.intro.after')}
           </p>
           {exam.timeLimitMin && (
             <label className="check">
               <input type="checkbox" checked={timed} onChange={(e) => setTimed(e.target.checked)} />
-              Activer le minuteur ({exam.timeLimitMin} minutes)
+              {t('exam.timer.toggle', { min: exam.timeLimitMin })}
             </label>
           )}
           <button type="button" className="btn btn-primary" onClick={() => setStarted(true)}>
-            Démarrer
+            {t('exam.start')}
           </button>
         </div>
       ) : loadError ? (
-        <p role="alert" className="error panel">Le sujet n’a pas pu être préparé : certains cours ne sont pas disponibles hors ligne. Reconnectez-vous puis réessayez.</p>
+        <p role="alert" className="error panel">{t('exam.loadError')}</p>
       ) : !data ? (
-        <p role="status">Préparation du sujet…</p>
+        <p role="status">{t('exam.preparing')}</p>
       ) : (
         <>
           {remaining !== null && (
             <p className={`timer ${remaining === 0 ? 'timer-out' : ''}`} role="timer" aria-live={remaining < 60000 ? 'assertive' : 'off'}>
               {remaining === 0
-                ? 'Temps écoulé : vos réponses ont été validées automatiquement.'
-                : `Temps restant : ${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`}
+                ? t('exam.timeUp')
+                : t('exam.remaining', { mm: String(mm).padStart(2, '0'), ss: String(ss).padStart(2, '0') })}
             </p>
           )}
           <Quiz
@@ -126,7 +128,7 @@ function ExamView({ exam }: { exam: ExamDef }) {
             skillLabels={skillLabels}
             loadCorrections={async () => {
               const needed = [...new Set(data.questions.map((q) => data.owner.get(q.id) as string))];
-              const all = await Promise.all(needed.map((c) => loadCourseCorrections(c)));
+              const all = await Promise.all(needed.map((c) => loadCourseCorrections(c, lang)));
               const merged: Record<string, Correction> = {};
               for (const c of all) if (c) Object.assign(merged, c.questions);
               setDeadline(null);

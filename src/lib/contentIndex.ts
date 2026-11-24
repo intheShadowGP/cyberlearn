@@ -3,10 +3,11 @@
  * Le glossaire est construit à partir des définitions (blocs « def ») réellement
  * présentes dans les leçons : aucune définition n'est rédigée séparément.
  */
-import { MODULE_BY_ID } from '../content/catalog';
-import { COURSES, COURSE_BY_ID, LABS, loadCourseBody } from '../content/registry';
-import { PATHS } from '../content/paths';
-import { SCENARIOS, loadScenarioBody } from '../content/scenarios';
+import { getModule } from '../content/catalog';
+import { COURSES, getCourse, getCourses, getLabs, loadCourseBody } from '../content/registry';
+import { getPaths } from '../content/paths';
+import { getScenarios, loadScenarioBody } from '../content/scenarios';
+import { collator, translate, type Lang } from '../i18n';
 import type { Block, ModuleId } from '../content/types';
 import { normalizeShort } from './quiz';
 
@@ -37,11 +38,12 @@ export function isAcronym(term: string): boolean {
   return /^[A-Z0-9][A-Z0-9+/&-]{1,}$/.test(first) && /[A-Z]/.test(first);
 }
 
-let glossaryCache: Promise<GlossaryEntry[]> | null = null;
+const glossaryCache: Partial<Record<Lang, Promise<GlossaryEntry[]>>> = {};
 
-export function loadGlossary(): Promise<GlossaryEntry[]> {
-  glossaryCache ??= (async () => {
-    const bodies = await Promise.all(COURSES.map(async (c) => ({ meta: c, body: await loadCourseBody(c.id) })));
+/** Glossaire de la langue demandée : construit à partir des définitions des leçons de cette langue. */
+export function loadGlossary(lang: Lang): Promise<GlossaryEntry[]> {
+  glossaryCache[lang] ??= (async () => {
+    const bodies = await Promise.all(COURSES.map(async (c) => ({ meta: c, body: await loadCourseBody(c.id, lang) })));
     const map = new Map<string, GlossaryEntry>();
     for (const { meta, body } of bodies) {
       if (!body) continue;
@@ -57,12 +59,13 @@ export function loadGlossary(): Promise<GlossaryEntry[]> {
         }
       }
     }
-    return [...map.values()].sort((a, b) => a.term.localeCompare(b.term, 'fr', { sensitivity: 'base' }));
+    const cmp = collator(lang);
+    return [...map.values()].sort((a, b) => cmp(a.term, b.term));
   })().catch((e) => {
-    glossaryCache = null;
+    delete glossaryCache[lang];
     throw e;
   });
-  return glossaryCache;
+  return glossaryCache[lang] as Promise<GlossaryEntry[]>;
 }
 
 /* ---------- Recherche ---------- */
@@ -94,41 +97,41 @@ export interface SearchDoc {
   haystack: string;
 }
 
-let docsCache: Promise<SearchDoc[]> | null = null;
+const docsCache: Partial<Record<Lang, Promise<SearchDoc[]>>> = {};
 
-export function loadSearchIndex(): Promise<SearchDoc[]> {
-  docsCache ??= (async () => {
+export function loadSearchIndex(lang: Lang): Promise<SearchDoc[]> {
+  docsCache[lang] ??= (async () => {
     const docs: SearchDoc[] = [];
     const add = (kind: SearchKind, title: string, context: string, href: string, extra = '') =>
       docs.push({ kind, title, context, href, haystack: normalizeShort(`${title} ${context} ${extra}`) });
-    for (const c of COURSES) {
-      add('cours', c.title, `${MODULE_BY_ID[c.module].title} · niveau ${c.level}`, `/cours/${c.id}`, `${c.summary} ${c.objectives.join(' ')} ${c.skills.map((s) => s.label).join(' ')}`);
-      const body = await loadCourseBody(c.id);
+    for (const c of getCourses(lang)) {
+      add('cours', c.title, translate(lang, 'search.courseContext', { module: getModule(c.module, lang).title, level: c.level }), `/cours/${c.id}`, `${c.summary} ${c.objectives.join(' ')} ${c.skills.map((s) => s.label).join(' ')}`);
+      const body = await loadCourseBody(c.id, lang);
       for (const s of body?.lesson.sections ?? []) add('section', s.title, c.title, `/cours/${c.id}`);
     }
-    for (const l of LABS) add('laboratoire', l.title, l.objective, `/laboratoires/${l.id}`, l.context);
-    for (const p of PATHS) add('parcours', p.title, p.audience, `/parcours/${p.id}`, `${p.description} ${p.objectives.join(' ')}`);
-    for (const sc of SCENARIOS) {
-      const body = await loadScenarioBody(sc.id);
+    for (const l of getLabs(lang)) add('laboratoire', l.title, l.objective, `/laboratoires/${l.id}`, l.context);
+    for (const p of getPaths(lang)) add('parcours', p.title, p.audience, `/parcours/${p.id}`, `${p.description} ${p.objectives.join(' ')}`);
+    for (const sc of getScenarios(lang)) {
+      const body = await loadScenarioBody(sc.id, lang);
       const parts: string[] = [];
       if (body) {
         flattenBlocks(body.dossier, parts);
         for (const qn of body.questions) parts.push(qn.prompt);
       }
-      const related = sc.relatedCourses.map((id) => COURSE_BY_ID.get(id)?.title ?? '').join(' ');
+      const related = sc.relatedCourses.map((id) => getCourse(id, lang)?.title ?? '').join(' ');
       add('epreuve', sc.title, sc.objective, `/epreuve/${sc.id}`, `${sc.context} ${related} ${parts.join(' ')}`);
     }
-    for (const g of await loadGlossary()) add('notion', g.term, g.definition.replace(/[*`]/g, ''), `/glossaire?terme=${encodeURIComponent(g.id)}`);
+    for (const g of await loadGlossary(lang)) add('notion', g.term, g.definition.replace(/[*`]/g, ''), `/glossaire?terme=${encodeURIComponent(g.id)}`);
     return docs;
   })().catch((e) => {
-    docsCache = null;
+    delete docsCache[lang];
     throw e;
   });
-  return docsCache;
+  return docsCache[lang] as Promise<SearchDoc[]>;
 }
 
 /** Tous les mots de la requête doivent apparaître (accents et casse ignorés) ; le titre pèse plus. */
-export function searchDocs(docs: readonly SearchDoc[], query: string, limit = 60): SearchDoc[] {
+export function searchDocs(docs: readonly SearchDoc[], query: string, limit = 60, lang: Lang = 'fr'): SearchDoc[] {
   const words = normalizeShort(query).split(' ').filter((w) => w.length > 1);
   if (!words.length) return [];
   const scored: { d: SearchDoc; score: number }[] = [];
@@ -138,5 +141,5 @@ export function searchDocs(docs: readonly SearchDoc[], query: string, limit = 60
     const score = words.reduce((n, w) => n + (t.includes(w) ? 3 : 1), 0) + (t === normalizeShort(query) ? 10 : 0);
     scored.push({ d, score });
   }
-  return scored.sort((a, b) => b.score - a.score || a.d.title.localeCompare(b.d.title, 'fr')).slice(0, limit).map((x) => x.d);
+  return scored.sort((a, b) => b.score - a.score || collator(lang)(a.d.title, b.d.title)).slice(0, limit).map((x) => x.d);
 }

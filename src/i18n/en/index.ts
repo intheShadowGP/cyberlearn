@@ -7,6 +7,11 @@ import { catalog } from './catalog';
 import { misc } from './misc';
 import { course } from './course';
 import { quiz } from './quiz';
+import { labs } from './labs';
+import { paths } from './paths';
+import { gamification } from './gamification';
+import { profile } from './profile';
+import { browse } from './browse';
 import type { MsgKey } from '../fr';
 
 export const en: Record<MsgKey, string> = {
@@ -19,4 +24,9 @@ export const en: Record<MsgKey, string> = {
   ...misc,
   ...course,
   ...quiz,
+  ...labs,
+  ...paths,
+  ...gamification,
+  ...profile,
+  ...browse,
 };

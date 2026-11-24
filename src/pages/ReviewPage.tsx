@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MODULES, MODULE_BY_ID } from '../content/catalog';
-import { COURSE_BY_ID, COURSES, LAB_BY_ID, loadCourseBody, loadCourseCorrections, loadLabBody, loadLabCorrections } from '../content/registry';
+import { getModule, getModules } from '../content/catalog';
+import { COURSES, getCourse, getLab, loadCourseBody, loadCourseCorrections, loadLabBody, loadLabCorrections } from '../content/registry';
 import type { Correction, ModuleId, Question } from '../content/types';
 import { Inline } from '../components/Inline';
 import { answerReview, type ReviewItem } from '../lib/progress';
@@ -10,25 +10,26 @@ import { shuffle } from '../lib/quiz';
 import { skillStatuses, weakSkills } from '../lib/levels';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
+import { translate, useI18n, type Lang } from '../i18n';
 
 /** Carte à réviser : une question d'un cours ou d'un labo, ou une notion du glossaire. */
 type Card =
   | { kind: 'question'; itemId: string; owner: string; ownerKind: 'course' | 'lab'; questionId: string }
   | { kind: 'glossary'; itemId: string; owner: string; entry: GlossaryEntry };
 
-async function loadQuestion(card: Extract<Card, { kind: 'question' }>): Promise<Question | null> {
-  const body = card.ownerKind === 'course' ? await loadCourseBody(card.owner) : await loadLabBody(card.owner);
+async function loadQuestion(card: Extract<Card, { kind: 'question' }>, lang: Lang): Promise<Question | null> {
+  const body = card.ownerKind === 'course' ? await loadCourseBody(card.owner, lang) : await loadLabBody(card.owner, lang);
   return body?.questions.find((q) => q.id === card.questionId) ?? null;
 }
-async function loadCorrection(card: Extract<Card, { kind: 'question' }>): Promise<Correction | null> {
-  const c = card.ownerKind === 'course' ? await loadCourseCorrections(card.owner) : await loadLabCorrections(card.owner);
+async function loadCorrection(card: Extract<Card, { kind: 'question' }>, lang: Lang): Promise<Correction | null> {
+  const c = card.ownerKind === 'course' ? await loadCourseCorrections(card.owner, lang) : await loadLabCorrections(card.owner, lang);
   return c?.questions[card.questionId] ?? null;
 }
 
-function expected(q: Question, c: Correction): string {
+function expected(q: Question, c: Correction, lang: Lang): string {
   if (c.type === 'single' && (q.type === 'single' || q.type === 'multi')) return q.options.find((o) => o.id === c.correct)?.text ?? '';
   if (c.type === 'multi' && (q.type === 'single' || q.type === 'multi')) return q.options.filter((o) => c.correct.includes(o.id)).map((o) => o.text).join(' ; ');
-  if (c.type === 'truefalse') return c.correct ? 'Vrai' : 'Faux';
+  if (c.type === 'truefalse') return c.correct ? translate(lang, 'quiz.true') : translate(lang, 'quiz.false');
   if (c.type === 'short') return c.accepted[0] ?? '';
   if (c.type === 'open') return c.model;
   return '';
@@ -56,25 +57,26 @@ function FlashSession({ cards, onDone }: { cards: Card[]; onDone: (stats: { ok: 
 }
 
 function FlashCard({ card, position, total, onRated }: { card: Card; position: number; total: number; onRated: (ok: boolean) => void }) {
+  const { t, lang } = useI18n();
   const [question, setQuestion] = useState<Question | null>(null);
   const [answer, setAnswer] = useState<{ text: string; explanation: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     let alive = true;
-    if (card.kind === 'question') void loadQuestion(card).then((q) => alive && setQuestion(q));
+    if (card.kind === 'question') void loadQuestion(card, lang).then((q) => alive && setQuestion(q));
     return () => {
       alive = false;
     };
-  }, [card]);
+  }, [card, lang]);
 
   async function reveal() {
     if (card.kind === 'glossary') {
       setAnswer({ text: card.entry.definition, explanation: '' });
       return;
     }
-    const [q, c] = [question, await loadCorrection(card)];
-    if (q && c) setAnswer({ text: expected(q, c), explanation: c.explanation });
+    const [q, c] = [question, await loadCorrection(card, lang)];
+    if (q && c) setAnswer({ text: expected(q, c, lang), explanation: c.explanation });
   }
 
   async function rate(ok: boolean) {
@@ -85,14 +87,14 @@ function FlashCard({ card, position, total, onRated }: { card: Card; position: n
   }
 
   const source = card.kind === 'question'
-    ? card.ownerKind === 'course' ? COURSE_BY_ID.get(card.owner)?.title : LAB_BY_ID.get(card.owner)?.title
-    : COURSE_BY_ID.get(card.owner)?.title;
+    ? card.ownerKind === 'course' ? getCourse(card.owner, lang)?.title : getLab(card.owner, lang)?.title
+    : getCourse(card.owner, lang)?.title;
 
   return (
     <section className="panel flashcard" aria-labelledby="fc-h" aria-live="polite">
-      <p className="eyebrow">Carte {position} / {total} · {source}</p>
+      <p className="eyebrow">{t('review.card', { i: position, n: total, source: source ?? '' })}</p>
       {card.kind === 'glossary' ? (
-        <h2 id="fc-h" className="h3">Que signifie « {card.entry.term} » ?</h2>
+        <h2 id="fc-h" className="h3">{t('review.whatMeans', { term: card.entry.term })}</h2>
       ) : question ? (
         <>
           <h2 id="fc-h" className="h3"><Inline text={question.prompt} /></h2>
@@ -100,23 +102,23 @@ function FlashCard({ card, position, total, onRated }: { card: Card; position: n
           {(question.type === 'single' || question.type === 'multi') && (
             <ul>{question.options.map((o) => <li key={o.id}><Inline text={o.text} /></li>)}</ul>
           )}
-          {question.type === 'truefalse' && <p className="muted">Vrai ou faux ?</p>}
+          {question.type === 'truefalse' && <p className="muted">{t('review.trueFalse')}</p>}
         </>
       ) : (
-        <p id="fc-h" role="status">Chargement…</p>
+        <p id="fc-h" role="status">{t('review.loading')}</p>
       )}
       {!answer ? (
         <button type="button" className="btn btn-primary" onClick={() => void reveal()} disabled={card.kind === 'question' && !question}>
-          Afficher la réponse
+          {t('review.reveal')}
         </button>
       ) : (
         <div className="solution">
-          <p className="callout-title">Réponse</p>
+          <p className="callout-title">{t('review.answer')}</p>
           <p><Inline text={answer.text} /></p>
           {answer.explanation && <p className="muted"><Inline text={answer.explanation} /></p>}
-          <div className="button-row" role="group" aria-label="Auto-évaluation">
-            <button type="button" className="btn btn-primary" onClick={() => void rate(true)} disabled={busy}>Je savais</button>
-            <button type="button" className="btn" onClick={() => void rate(false)} disabled={busy}>Je ne savais pas</button>
+          <div className="button-row" role="group" aria-label={t('review.selfAssess')}>
+            <button type="button" className="btn btn-primary" onClick={() => void rate(true)} disabled={busy}>{t('review.knew')}</button>
+            <button type="button" className="btn" onClick={() => void rate(false)} disabled={busy}>{t('review.didntKnow')}</button>
           </div>
         </div>
       )}
@@ -125,18 +127,26 @@ function FlashCard({ card, position, total, onRated }: { card: Card; position: n
 }
 
 export default function ReviewPage() {
-  usePageTitle('Révisions');
+  const { t, tp, lang } = useI18n();
+  usePageTitle(t('review.title'));
   const { data, ready } = useSnapshot();
   const [cards, setCards] = useState<Card[] | null>(null);
   const [result, setResult] = useState<{ ok: number; ko: number } | null>(null);
   const [mod, setMod] = useState<ModuleId | ''>('');
-  const [glossary, setGlossary] = useState<GlossaryEntry[] | null>(null);
+  const [loadedGlossary, setLoadedGlossary] = useState<{ lang: Lang; entries: GlossaryEntry[] } | null>(null);
   const [nowTs] = useState(() => Date.now());
   const modId = useId();
+  const glossary = loadedGlossary?.lang === lang ? loadedGlossary.entries : null;
 
   useEffect(() => {
-    void loadGlossary().then(setGlossary).catch(() => setGlossary([]));
-  }, []);
+    let alive = true;
+    void loadGlossary(lang)
+      .then((entries) => alive && setLoadedGlossary({ lang, entries }))
+      .catch(() => alive && setLoadedGlossary({ lang, entries: [] }));
+    return () => {
+      alive = false;
+    };
+  }, [lang]);
 
   // Cartes de questions de cours et de glossaire uniquement (les questions de laboratoire exigent les données du labo).
   const due = useMemo(() => data.reviews.filter((r) => r.due <= nowTs && r.ownerKind === 'course').sort((a, b) => a.due - b.due), [data.reviews, nowTs]);
@@ -155,7 +165,7 @@ export default function ReviewPage() {
     const courses = COURSES.filter((c) => c.module === m);
     const qs: Card[] = [];
     for (const c of courses) {
-      const body = await loadCourseBody(c.id);
+      const body = await loadCourseBody(c.id, lang);
       for (const q of body?.questions ?? []) if (q.type !== 'open') qs.push({ kind: 'question', itemId: `q:${q.id}`, owner: c.id, ownerKind: 'course', questionId: q.id });
     }
     start(shuffle(qs).slice(0, 10));
@@ -163,83 +173,81 @@ export default function ReviewPage() {
 
   const weak = weakSkills(skillStatuses(COURSES, data.skills), 5);
   const boxes = [1, 2, 3, 4, 5].map((b) => data.reviews.filter((r) => r.box === b).length);
+  const modules = getModules(lang);
 
   if (cards) {
     return (
       <div>
-        <h1>Révisions</h1>
+        <h1>{t('review.title')}</h1>
         <FlashSession key={cards.map((c) => c.itemId).join('|')} cards={cards} onDone={(s) => { setCards(null); setResult(s); }} />
-        <button type="button" className="btn btn-ghost" onClick={() => setCards(null)}>Arrêter la session</button>
+        <button type="button" className="btn btn-ghost" onClick={() => setCards(null)}>{t('review.stop')}</button>
       </div>
     );
   }
 
   return (
     <div>
-      <h1>Révisions</h1>
-      <p className="lead">
-        Répétition espacée (système de Leitner à 5 boîtes) : une question de cours ratée lors d’une évaluation est à réviser
-        immédiatement ; une erreur en révision la fait revenir le lendemain ; chaque réussite allonge l’intervalle (3, 7, 14 puis
-        30 jours).
-      </p>
+      <h1>{t('review.title')}</h1>
+      <p className="lead">{t('review.lead')}</p>
       {result && (
-        <p className="panel validation" role="status">
-          Session terminée : {result.ok} réussite{result.ok > 1 ? 's' : ''}, {result.ko} à revoir. Votre programme de révision a été mis à jour.
-        </p>
+        <p className="panel validation" role="status">{tp('review.done', result.ok, { ko: result.ko, ok: result.ok })}</p>
       )}
       <div className="grid-2">
         <section className="panel" aria-labelledby="due-h">
-          <h2 id="due-h">À réviser aujourd’hui</h2>
-          {!ready ? <p>Chargement…</p> : due.length === 0 ? (
-            <p className="muted">Aucune carte en attente. Les questions ratées lors de vos évaluations apparaîtront ici.</p>
+          <h2 id="due-h">{t('review.due')}</h2>
+          {!ready ? <p>{t('review.loading')}</p> : due.length === 0 ? (
+            <p className="muted">{t('review.noneDue')}</p>
           ) : (
             <>
-              <p><strong>{due.length}</strong> carte{due.length > 1 ? 's' : ''} à revoir.</p>
+              <p><Inline text={tp('review.dueCount', due.length)} /></p>
               <button type="button" className="btn btn-primary" onClick={() => start(due.slice(0, 20).map(toCard).filter((c): c is Card => c !== null))}>
-                Réviser ({Math.min(due.length, 20)})
+                {t('review.start', { n: Math.min(due.length, 20) })}
               </button>
             </>
           )}
-          <p className="muted">Répartition par boîte : {boxes.map((n, i) => `B${i + 1} : ${n}`).join(' · ')}</p>
+          <p className="muted">{t('review.boxes', { list: boxes.map((n, i) => `B${i + 1} : ${n}`).join(' · ') })}</p>
         </section>
         <section className="panel" aria-labelledby="mod-h">
-          <h2 id="mod-h">Réviser une discipline</h2>
+          <h2 id="mod-h">{t('review.module')}</h2>
           <div className="form-row">
-            <label htmlFor={modId}>Discipline</label>
+            <label htmlFor={modId}>{t('review.discipline')}</label>
             <select id={modId} className="input" value={mod} onChange={(e) => setMod(e.target.value as ModuleId | '')}>
-              <option value="">Choisir…</option>
-              {MODULES.filter((m) => COURSES.some((c) => c.module === m.id)).map((m) => <option key={m.id} value={m.id}>{m.id} — {m.title}</option>)}
+              <option value="">{t('review.choose')}</option>
+              {modules.filter((m) => COURSES.some((c) => c.module === m.id)).map((m) => <option key={m.id} value={m.id}>{m.id} — {m.title}</option>)}
             </select>
-            <button type="button" className="btn" disabled={!mod} onClick={() => mod && void startModule(mod)}>10 questions</button>
+            <button type="button" className="btn" disabled={!mod} onClick={() => mod && void startModule(mod)}>{t('review.tenQuestions')}</button>
           </div>
         </section>
       </div>
       <div className="grid-2">
         <section className="panel" aria-labelledby="gl-h">
-          <h2 id="gl-h">Flashcards du glossaire</h2>
-          <p className="muted">{glossary ? `${glossary.length} notions disponibles.` : 'Chargement…'}</p>
+          <h2 id="gl-h">{t('review.glossary')}</h2>
+          <p className="muted">{glossary ? t('review.glossaryCount', { n: glossary.length }) : t('review.loading')}</p>
           <button
             type="button"
             className="btn"
             disabled={!glossary?.length}
             onClick={() => glossary && start(shuffle(glossary).slice(0, 10).map((g) => ({ kind: 'glossary', itemId: `g:${g.id}`, owner: g.courseIds[0] as string, entry: g })))}
           >
-            10 notions au hasard
+            {t('review.tenNotions')}
           </button>
         </section>
         <section className="panel" aria-labelledby="rec-h">
-          <h2 id="rec-h">Recommandations selon vos difficultés</h2>
-          {weak.length === 0 ? <p className="muted">Aucune compétence fragile détectée pour l’instant.</p> : (
+          <h2 id="rec-h">{t('review.reco')}</h2>
+          {weak.length === 0 ? <p className="muted">{t('review.recoNone')}</p> : (
             <ul>
-              {weak.map((w) => (
-                <li key={w.skill.id}>
-                  {w.skill.label} ({Math.round((w.mastery ?? 0) * 100)} %) — <Link to={`/cours/${w.courseId}`}>relire « {COURSE_BY_ID.get(w.courseId)?.title} »</Link>
-                  {' '}ou{' '}
-                  <button type="button" className="btn btn-small" onClick={() => void startModule(COURSE_BY_ID.get(w.courseId)?.module as ModuleId)}>
-                    réviser {MODULE_BY_ID[COURSE_BY_ID.get(w.courseId)?.module as ModuleId]?.short}
-                  </button>
-                </li>
-              ))}
+              {weak.map((w) => {
+                const course = getCourse(w.courseId, lang);
+                return (
+                  <li key={w.skill.id}>
+                    {getCourse(w.courseId, lang)?.skills.find((s) => s.id === w.skill.id)?.label ?? w.skill.label} ({Math.round((w.mastery ?? 0) * 100)} %) — <Link to={`/cours/${w.courseId}`}>{t('review.reread', { title: course?.title ?? '' })}</Link>
+                    {' '}{t('review.or')}{' '}
+                    <button type="button" className="btn btn-small" onClick={() => void startModule(course?.module as ModuleId)}>
+                      {t('review.reviewModule', { name: course ? getModule(course.module, lang).short : '' })}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </section>
