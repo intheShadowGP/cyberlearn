@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 49 |
-| Questions de cours (avec correction) | 1129 |
+| Questions de cours (avec correction) | 1153 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -58,7 +58,7 @@
 | Défense réseau avancée : déni de service, plan de contrôle, visibilité et résilience (`b-defense-reseau-avancee`) | B | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Linux au quotidien : architecture, shell Bash, paquets et automatisation (`c-shell-paquets-automatisation`) | C | 1 · Débutant | 110 min | 6 | 40 | 3 | 5 |
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 6 | 40 | 3 | 4 |
-| Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |
+| Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 6 | 40 | 3 | 5 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 17 | 2 | 4 |
 | Windows Server : services d’infrastructure, PKI et durcissement (`d-windows-server-pki-durcissement`) | D | 3 · Avancé | 95 min | 5 | 16 | 2 | 5 |

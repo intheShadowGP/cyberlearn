@@ -24,5 +24,21 @@ export const solutions: CourseSolutions = {
         { t: 'list', ordered: true, items: ['Créer le compte de service `rapports` et lui donner la propriété de `/var/lib/rapports`.', '`systemctl daemon-reload && systemctl restart rapports`, puis générer un rapport de test et lire `journalctl -u rapports` pour repérer les refus.', 'Relancer `systemd-analyze security rapports.service` : la note doit nettement baisser ; relâcher une directive uniquement si un refus précis le justifie.'] },
       ],
     },
+    'chasse-persistance': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Constat', 'Verdict', 'Pourquoi'],
+          rows: [
+            ['Crontab de `www-data` : `/tmp/.x/kworker` toutes les 10 minutes', '**Suspect**', 'Un compte de service web n’a aucune raison de planifier un binaire caché dans `/tmp` : c’est le binaire du triage, relancé s’il est tué'],
+            ['`/etc/ld.so.preload` contient `libsystem-cache.so`', '**Suspect**', 'Le fichier est normalement absent ou vide ; la bibliothèque est chargée dans tous les processus et peut masquer des fichiers ou des processus'],
+            ['Clé `deploy@poste-admin`', 'À confirmer', 'Plausible, mais à rapprocher de l’inventaire des clés de l’équipe et de la date d’ajout'],
+            ['Clé `maintenance@vps-inconnu`', '**Suspect**', 'Commentaire sans lien avec l’organisation, absente de l’inventaire : probablement ajoutée par l’attaquant'],
+          ],
+        },
+        { t: 'list', ordered: true, items: ['Préserver : copier la crontab, `/etc/ld.so.preload`, la bibliothèque et le binaire, relever leurs dates (`stat`) et les journaux (`journalctl`, `ausearch`) pour fixer la chronologie.', 'Retirer ensuite chaque mécanisme (entrée cron, `ld.so.preload`, clé SSH), sachant que la bibliothèque préchargée peut fausser l’affichage : relire depuis un support fiable.', 'Renouveler les secrets exposés (clés SSH, mots de passe, jetons) et corriger la faille d’entrée.', 'Surveiller : règles auditd sur `/etc/ld.so.preload`, `/etc/cron.d`, `/etc/systemd/system` et les `authorized_keys`, alertes dans le SIEM, nouvelle recherche après quelques jours ; reconstruire à partir d’une image saine si le doute persiste.'] },
+        { t: 'callout', kind: 'warn', text: 'Une bibliothèque préchargée peut masquer ce que montrent `ls` et `ps` : confirmez ces constats avec des outils fiables ou depuis un système de secours.' },
+      ],
+    },
   },
 };
