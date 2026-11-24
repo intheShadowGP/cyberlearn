@@ -1,4 +1,6 @@
 import type { PositioningResult } from './progress';
+import type { Lang } from './prefs';
+import { POSITIONING_EN } from './positioning.en';
 
 /**
  * Test de positionnement : 20 questions tirées de façon équilibrée dans une banque
@@ -124,7 +126,15 @@ function shuffleOptions(q: PositioningQuestion, rng: () => number): PositioningQ
  * étant au moins deux fois plus grande que le tirage, deux tentatives successives peuvent
  * ne partager aucune question.
  */
-export function buildPositioningTest(rng: () => number = Math.random, seen: readonly string[] = []): PositioningQuestion[] {
+/** Version localisée d'une question (mêmes identifiants et même ordre d'options : la bonne réponse reste « a »). */
+export function localizeQuestion(q: PositioningQuestion, lang: Lang): PositioningQuestion {
+  if (lang === 'fr') return q;
+  const tx = POSITIONING_EN[q.id];
+  if (!tx) return q;
+  return { ...q, prompt: tx.prompt, options: q.options.map((opt, i) => ({ id: opt.id, text: tx.options[i] ?? opt.text })) };
+}
+
+export function buildPositioningTest(rng: () => number = Math.random, seen: readonly string[] = [], lang: Lang = 'fr'): PositioningQuestion[] {
   const seenSet = new Set(seen);
   const picked: PositioningQuestion[] = [];
   for (const domain of Object.keys(DOMAIN_DRAW) as PositioningDomain[]) {
@@ -133,7 +143,7 @@ export function buildPositioningTest(rng: () => number = Math.random, seen: read
     const reused = shuffle(pool.filter((q) => seenSet.has(q.id)), rng);
     picked.push(...[...fresh, ...reused].slice(0, DOMAIN_DRAW[domain]));
   }
-  return shuffle(picked, rng).map((q) => shuffleOptions(q, rng));
+  return shuffle(picked, rng).map((q) => shuffleOptions(localizeQuestion(q, lang), rng));
 }
 
 export function scorePositioning(questions: PositioningQuestion[], answers: Record<string, string>): PositioningResult {

@@ -1,4 +1,5 @@
 import { useId, useMemo, useState } from 'react';
+import { useI18n } from '../i18n';
 
 export interface Column<T> {
   key: keyof T & string;
@@ -23,6 +24,7 @@ export function EventTable<T extends { id: number }>({
   filterKeys: (keyof T & string)[];
   maxRows?: number;
 }) {
+  const { t, tp } = useI18n();
   const [text, setText] = useState('');
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [selected, setSelected] = useState<Set<number>>(new Set());
@@ -53,7 +55,7 @@ export function EventTable<T extends { id: number }>({
     <div>
       <div className="filters">
         <div>
-          <label htmlFor={textId}>Recherche plein texte</label>
+          <label htmlFor={textId}>{t('events.fulltext')}</label>
           <input id={textId} className="input" value={text} maxLength={80} onChange={(e) => setText(e.target.value)} />
         </div>
         {filterKeys.map((k) => {
@@ -63,7 +65,7 @@ export function EventTable<T extends { id: number }>({
             <div key={k}>
               <label htmlFor={id}>{col?.label ?? k}</label>
               <select id={id} className="input" value={filters[k] ?? ''} onChange={(e) => setFilters((f) => ({ ...f, [k]: e.target.value }))}>
-                <option value="">Tous</option>
+                <option value="">{t('events.all')}</option>
                 {(options[k] ?? []).map((o) => (
                   <option key={o} value={o}>{o}</option>
                 ))}
@@ -73,15 +75,15 @@ export function EventTable<T extends { id: number }>({
         })}
       </div>
       <p className="muted" role="status">
-        {shown.length} ligne{shown.length > 1 ? 's' : ''} affichée{shown.length > 1 ? 's' : ''} sur {rows.length}
-        {selected.size > 0 && ` · ${selected.size} marquée${selected.size > 1 ? 's' : ''} comme suspecte${selected.size > 1 ? 's' : ''}`}
+        {tp('events.shown', shown.length, { total: rows.length })}
+        {selected.size > 0 && tp('events.marked', selected.size)}
       </p>
       <div className="table-wrap">
         <table>
           <caption className="sr-only">{caption}</caption>
           <thead>
             <tr>
-              <th scope="col"><span className="sr-only">Marquer</span></th>
+              <th scope="col"><span className="sr-only">{t('events.mark')}</span></th>
               {columns.map((c) => <th key={c.key} scope="col">{c.label}</th>)}
             </tr>
           </thead>
@@ -89,7 +91,7 @@ export function EventTable<T extends { id: number }>({
             {shown.slice(0, maxRows).map((r) => (
               <tr key={r.id} className={`log-row ${selected.has(r.id) ? 'selected' : ''}`}>
                 <td>
-                  <input type="checkbox" aria-label={`Marquer la ligne ${r.id} comme suspecte`} checked={selected.has(r.id)} onChange={() => toggle(r.id)} />
+                  <input type="checkbox" aria-label={t('events.markRow', { id: r.id })} checked={selected.has(r.id)} onChange={() => toggle(r.id)} />
                 </td>
                 {columns.map((c) => (
                   <td key={c.key} className={c.mono ? 'mono' : undefined}>{String(r[c.key])}</td>

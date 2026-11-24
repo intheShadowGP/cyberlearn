@@ -12,6 +12,8 @@ import { paths } from './paths';
 import { gamification } from './gamification';
 import { profile } from './profile';
 import { browse } from './browse';
+import { ui } from './ui';
+import { docs } from './docs';
 import type { MsgKey } from '../fr';
 
 export const en: Record<MsgKey, string> = {
@@ -29,4 +31,6 @@ export const en: Record<MsgKey, string> = {
   ...gamification,
   ...profile,
   ...browse,
+  ...ui,
+  ...docs,
 };

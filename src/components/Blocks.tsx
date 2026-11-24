@@ -1,14 +1,7 @@
 import type { Block } from '../content/types';
 import { Inline } from './Inline';
 import { DIAGRAMS } from './diagrams';
-
-const CALLOUT_LABEL: Record<string, string> = {
-  info: 'À savoir',
-  warn: 'Attention',
-  tip: 'Conseil',
-  key: 'Point clé',
-  legal: 'Cadre légal',
-};
+import { useI18n, type MsgKey } from '../i18n';
 
 export function Blocks({ blocks }: { blocks: Block[] }) {
   return (
@@ -21,6 +14,7 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
 }
 
 function BlockView({ block: b }: { block: Block }) {
+  const { t } = useI18n();
   switch (b.t) {
     case 'p':
       return (
@@ -42,15 +36,15 @@ function BlockView({ block: b }: { block: Block }) {
       return (
         <figure className="code-figure">
           {b.caption && <figcaption>{b.caption}</figcaption>}
-          <pre tabIndex={0} aria-label={b.caption ?? `Extrait ${b.lang}`}>
+          <pre tabIndex={0} aria-label={b.caption ?? t('block.codeExtract', { lang: b.lang })}>
             <code data-lang={b.lang}>{b.code}</code>
           </pre>
         </figure>
       );
     case 'callout':
       return (
-        <aside className={`callout callout-${b.kind}`} aria-label={b.title ?? CALLOUT_LABEL[b.kind]}>
-          <p className="callout-title">{b.title ?? CALLOUT_LABEL[b.kind]}</p>
+        <aside className={`callout callout-${b.kind}`} aria-label={b.title ?? t(`callout.${b.kind}` as MsgKey)}>
+          <p className="callout-title">{b.title ?? t(`callout.${b.kind}` as MsgKey)}</p>
           <p>
             <Inline text={b.text} />
           </p>
@@ -58,7 +52,7 @@ function BlockView({ block: b }: { block: Block }) {
       );
     case 'table':
       return (
-        <div className="table-wrap" tabIndex={0} role="region" aria-label={b.caption ?? 'Tableau'}>
+        <div className="table-wrap" tabIndex={0} role="region" aria-label={b.caption ?? t('block.table')}>
           <table>
             {b.caption && <caption>{b.caption}</caption>}
             <thead>
@@ -97,7 +91,7 @@ function BlockView({ block: b }: { block: Block }) {
       const D = DIAGRAMS[b.id];
       return (
         <figure className="diagram-figure" role="img" aria-label={b.alt}>
-          {D ? <D /> : <p className="muted">Schéma indisponible.</p>}
+          {D ? <D /> : <p className="muted">{t('block.diagramMissing')}</p>}
           <figcaption>{b.caption}</figcaption>
         </figure>
       );
@@ -105,7 +99,7 @@ function BlockView({ block: b }: { block: Block }) {
     case 'example':
       return (
         <section className="example">
-          <p className="example-title">Exemple — {b.title}</p>
+          <p className="example-title">{t('block.example', { title: b.title })}</p>
           <Blocks blocks={b.blocks} />
         </section>
       );

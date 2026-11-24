@@ -12,6 +12,8 @@ import { paths } from './paths';
 import { gamification } from './gamification';
 import { profile } from './profile';
 import { browse } from './browse';
+import { ui } from './ui';
+import { docs } from './docs';
 
 /** Source de vérité des messages : le français. Un fichier par zone fonctionnelle. */
 export const fr = {
@@ -29,6 +31,8 @@ export const fr = {
   ...gamification,
   ...profile,
   ...browse,
+  ...ui,
+  ...docs,
 } as const;
 
 export type MsgKey = keyof typeof fr;

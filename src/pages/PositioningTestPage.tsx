@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ProgressBar } from '../components/Badges';
-import { DOMAIN_LABEL, buildPositioningTest, scorePositioning, type PositioningQuestion } from '../lib/positioning';
+import { buildPositioningTest, scorePositioning, type PositioningQuestion } from '../lib/positioning';
 import { recordPositioning, type PositioningResult } from '../lib/progress';
 import { useSnapshot } from '../lib/useSnapshot';
 import { usePageTitle } from '../lib/usePageTitle';
+import { Inline } from '../components/Inline';
+import { useI18n, type MsgKey } from '../i18n';
 
 export default function PositioningTestPage() {
-  usePageTitle('Test de positionnement');
+  const { t, lang } = useI18n();
+  usePageTitle(t('posTest.title'));
   const nav = useNavigate();
   const { data, ready } = useSnapshot();
   const [questions, setQuestions] = useState<PositioningQuestion[] | null>(null);
@@ -20,36 +23,30 @@ export default function PositioningTestPage() {
   // les questions de la tentative précédente. Initialisation paresseuse au rendu (pas d'effet).
   if (ready && !questions) {
     const seen = data.profile[0]?.onboarding?.lastResult?.questionIds ?? [];
-    setQuestions(buildPositioningTest(Math.random, seen));
+    setQuestions(buildPositioningTest(Math.random, seen, lang));
   }
 
   const answeredCount = useMemo(() => (questions ? questions.filter((q) => answers[q.id]).length : 0), [questions, answers]);
 
-  if (!questions) return <p role="status">Préparation du test…</p>;
+  if (!questions) return <p role="status">{t('posTest.preparing')}</p>;
 
   if (result) {
     return (
       <div className="positioning">
-        <h1>Résultat du positionnement</h1>
+        <h1>{t('posTest.resultTitle')}</h1>
         <section className={`panel ${result.validated ? 'callout-ok' : 'callout-warn'}`} aria-labelledby="pr-h">
-          <h2 id="pr-h">{result.validated ? 'Niveau initié validé' : 'Positionnement non validé'}</h2>
+          <h2 id="pr-h">{result.validated ? t('posTest.validated') : t('posTest.notValidated')}</h2>
           <p className="score-big"><strong>{result.correct}/{result.total}</strong> ({result.percent} %)</p>
           {result.validated ? (
-            <p>
-              Vous atteignez le seuil de 14/20. Le <strong>mode libre</strong> est activé : vous pouvez suivre les cours sans
-              respecter l’ordre des prérequis.
-            </p>
+            <p><Inline text={t('posTest.passedText')} /></p>
           ) : (
-            <p>
-              Il faut 14/20 (70 %) pour valider. Rien n’est perdu : commencez par les fondamentaux, puis repassez le test quand
-              vous le souhaitez — il sera différent.
-            </p>
+            <p>{t('posTest.failedText')}</p>
           )}
-          <p className="muted">Les réponses détaillées ne sont pas affichées : le test mesure un positionnement, il n’est pas un support de révision.</p>
+          <p className="muted">{t('posTest.noAnswers')}</p>
           <div className="button-row">
-            <Link className="btn btn-primary" to="/competences">Voir mes compétences</Link>
-            <Link className="btn" to="/catalogue">Explorer les cours</Link>
-            <Link className="btn" to="/profil">Mon profil</Link>
+            <Link className="btn btn-primary" to="/competences">{t('posTest.seeSkills')}</Link>
+            <Link className="btn" to="/catalogue">{t('posTest.explore')}</Link>
+            <Link className="btn" to="/profil">{t('posTest.myProfile')}</Link>
           </div>
         </section>
       </div>
@@ -73,17 +70,14 @@ export default function PositioningTestPage() {
 
   return (
     <div className="positioning">
-      <h1>Test de positionnement</h1>
-      <p className="lead">
-        20 questions réparties sur l’ensemble des disciplines. Seuil de réussite : 14/20 (70 %). Vous pouvez revenir en arrière ;
-        les bonnes réponses ne sont pas révélées.
-      </p>
-      <ProgressBar value={step + 1} max={questions.length} label={`Question ${step + 1} sur ${questions.length}`} />
-      <p className="muted">Répondu : {answeredCount}/{questions.length}</p>
+      <h1>{t('posTest.title')}</h1>
+      <p className="lead">{t('posTest.lead')}</p>
+      <ProgressBar value={step + 1} max={questions.length} label={t('posTest.progress', { n: step + 1, total: questions.length })} />
+      <p className="muted">{t('posTest.answered', { n: answeredCount, total: questions.length })}</p>
 
       <fieldset className="panel question" data-qid={q.id} key={q.id}>
         <legend>
-          <span className="eyebrow">{DOMAIN_LABEL[q.domain]} · question {step + 1}</span>
+          <span className="eyebrow">{t('posTest.domainQuestion', { domain: t(`posDomain.${q.domain}` as MsgKey), n: step + 1 })}</span>
           <span className="question-prompt">{q.prompt}</span>
         </legend>
         {q.options.map((opt) => (
@@ -102,21 +96,21 @@ export default function PositioningTestPage() {
 
       <div className="button-row">
         <button type="button" className="btn" disabled={step === 0} onClick={() => setStep((s) => Math.max(0, s - 1))}>
-          Précédent
+          {t('posTest.prev')}
         </button>
         {last ? (
           <button type="button" className="btn btn-primary" disabled={saving} onClick={() => void finish()}>
-            {saving ? 'Enregistrement…' : 'Terminer le test'}
+            {saving ? t('posTest.saving') : t('posTest.finish')}
           </button>
         ) : (
           <button type="button" className="btn btn-primary" onClick={() => setStep((s) => Math.min(questions.length - 1, s + 1))}>
-            Suivant
+            {t('posTest.next')}
           </button>
         )}
-        <button type="button" className="btn btn-ghost" onClick={() => nav('/')}>Quitter</button>
+        <button type="button" className="btn btn-ghost" onClick={() => nav('/')}>{t('posTest.quit')}</button>
       </div>
       {last && answeredCount < questions.length && (
-        <p className="muted" role="status">Les questions sans réponse seront comptées comme incorrectes.</p>
+        <p className="muted" role="status">{t('posTest.unanswered')}</p>
       )}
     </div>
   );

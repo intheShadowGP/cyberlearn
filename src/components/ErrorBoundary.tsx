@@ -1,4 +1,5 @@
 import { Component, type ReactNode } from 'react';
+import { getLang, translate } from '../i18n';
 
 interface State {
   error: Error | null;
@@ -14,17 +15,16 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, State> {
 
   render() {
     if (this.state.error) {
+      const lang = getLang();
       const chunk = /dynamically imported module|Failed to fetch|Loading chunk/i.test(this.state.error.message);
       return (
         <div className="panel" role="alert">
-          <h1>Une erreur est survenue</h1>
+          <h1>{translate(lang, 'error.title')}</h1>
           <p>
-            {chunk
-              ? 'Ce contenu n’a pas pu être chargé. Vous êtes peut-être hors ligne et ce contenu n’est pas encore en cache, ou une nouvelle version du site a été publiée.'
-              : 'L’affichage de cette page a échoué. Votre progression locale n’est pas affectée.'}
+            {translate(lang, chunk ? 'error.chunk' : 'error.render')}
           </p>
           <button type="button" className="btn btn-primary" onClick={() => window.location.reload()}>
-            Recharger la page
+            {translate(lang, 'error.reload')}
           </button>
         </div>
       );
