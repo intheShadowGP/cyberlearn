@@ -49,7 +49,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | --- | --- | --- | --- | --- |
 | A Fondamentaux | ✔ ×2 (banques 40 + anglais) | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) |
 | B Réseaux | ✔ | ✔ ×3 | ✔ | ✔ |
-| C Linux | ✔ | ✔ (migré) | ✔ (migré) | ➕ |
+| C Linux | ✔ | ✔ (migré) | ✔ (migré) | ✔ (nouveau) |
 | D Windows | ➕ | ✔ | ✔ ×2 | ➕ |
 | E Cryptographie | ➕ | ✔ | ✔ | ➕ |
 | F Web | ➕ | ✔ | ✔ ×2 | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (12 migrés) + 40 cours à créer (4 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 36 cours à créer et 33 cours existants à migrer.
+Total : 45 cours existants (12 migrés) + 40 cours à créer (5 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 35 cours à créer et 33 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -88,3 +88,4 @@ Total : 45 cours existants (12 migrés) + 40 cours à créer (4 créés) = 85 co
 | `c-shell-paquets-automatisation` | ✔ 40 | ✔ 40 | ✔ (inspection système, PATH, flock, sources de paquets) |
 | `c-linux-permissions` | ✔ 40 | ✔ 40 | ✔ (diagnostic d’un refus d’accès, umask, capacités, sudoers.d, SSH sans verrouillage) |
 | `c-systemd-journaux-confinement` | ✔ 40 | ✔ 40 | ✔ (persistance et chronologie, auid, journald persistant, nft -c, AmbientCapabilities) |
+| `c-linux-securite-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
