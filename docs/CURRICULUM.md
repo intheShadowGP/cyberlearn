@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 54 |
-| Questions de cours (avec correction) | 1544 |
+| Cours complets | 55 |
+| Questions de cours (avec correction) | 1584 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -27,7 +27,7 @@
 | C. Linux | 4 | 1, 2, 3, 4 | 22 / 22 |
 | D. Windows et Windows Server | 5 | 1, 2, 3, 4 | 25 / 25 |
 | E. Cryptographie | 4 | 1, 2, 3, 4 | 22 / 22 |
-| F. Sécurité Web | 3 | 2, 3 | 27 / 27 |
+| F. Sécurité Web | 4 | 1, 2, 3 | 27 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
 | H. Sécurité offensive et pentest | 2 | 2, 3 | 34 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
@@ -69,6 +69,7 @@
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 115 min | 6 | 40 | 3 | 7 |
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 140 min | 6 | 40 | 3 | 7 |
 | Cryptographie appliquée avancée : protocoles, implémentation, clés et transition post-quantique (`e-crypto-appliquee-avancee`) | E | 4 · Expert | 150 min | 6 | 40 | 3 | 6 |
+| Sécurité web : comprendre HTTP, les sessions et les grands risques (`f-web-fondamentaux`) | F | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 6 | 40 | 3 | 4 |
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 6 |
 | Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
