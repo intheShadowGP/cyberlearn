@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'g-code-sur-langages',
@@ -88,6 +89,57 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Les outils repèrent les motifs connus ; la revue humaine repère les erreurs de logique (contrôle d’accès, règles métier). Les deux sont nécessaires.' },
         ],
       },
+      {
+        id: 'erreurs-logs',
+        title: 'Erreurs, journalisation et secrets dans le code',
+        blocks: [
+          { t: 'p', text: 'La façon dont un programme **échoue**, ce qu’il **écrit** dans ses journaux et où il **range** ses secrets décident souvent de la gravité d’un incident. Ces trois points se règlent dans le code, langage par langage.' },
+          {
+            t: 'table',
+            head: ['Sujet', 'À éviter', 'À faire'],
+            rows: [
+              ['**Erreurs**', '`except: pass`, `catch (e) {}` : l’échec est avalé et le contrôle de sécurité est ignoré', '**Échouer fermé** : en cas de doute, refuser ; journaliser l’erreur'],
+              ['**Messages**', 'Renvoyer la trace d’appels ou le message de la base à l’utilisateur', 'Message générique avec un **identifiant de corrélation** ; détail dans les journaux'],
+              ['**Journaux**', '`log.info("connexion " + login)` avec un login contenant un retour à la ligne', 'Journalisation structurée (JSON), valeurs échappées, jamais de mots de passe ni de jetons'],
+              ['**Secrets**', 'Clé d’API ou mot de passe écrit dans le code ou le dépôt', 'Gestionnaire de secrets, variable d’environnement injectée au déploiement, rotation'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Échouer ouvert ou échouer fermé',
+            blocks: [
+              { t: 'code', lang: 'python', caption: 'Dangereux : une panne du service d’autorisation accorde l’accès', code: 'def peut_lire(utilisateur, document):\n    try:\n        return service_droits.verifier(utilisateur, document)\n    except Exception:\n        return True      # « pour ne pas bloquer les utilisateurs »' },
+              { t: 'code', lang: 'python', caption: 'Corrigé : refus par défaut, erreur journalisée', code: 'def peut_lire(utilisateur, document):\n    try:\n        return service_droits.verifier(utilisateur, document)\n    except Exception:\n        journal.error("verification des droits impossible", exc_info=True)\n        return False     # échouer fermé' },
+            ],
+          },
+          { t: 'def', term: 'Injection dans les journaux (log forging)', text: 'Une donnée non assainie contenant des retours à la ligne permet d’écrire de **fausses entrées** dans un journal (« connexion réussie de admin »), de brouiller une enquête ou d’attaquer l’outil qui lit les journaux. On échappe les valeurs ou l’on utilise un format structuré.' },
+          { t: 'list', items: ['**Jamais de secret dans le dépôt** : même supprimé du dernier commit, il reste dans l’historique. Un secret publié est un secret **compromis** : on le révoque et on le remplace.', '**Détecter** : outils d’analyse de secrets (gitleaks, TruffleHog, détection native des plateformes) en pré-commit et dans le pipeline.', '**Séparer** les secrets par environnement et leur donner les droits minimaux ; les faire tourner régulièrement.', '**Masquer** jetons et mots de passe dans les journaux et dans les messages d’erreur.'] },
+          { t: 'callout', kind: 'warn', text: 'Un message d’erreur trop bavard (requête SQL, chemin de fichier, version) aide l’attaquant à préparer l’étape suivante : le détail va dans les journaux, pas à l’écran.' },
+        ],
+      },
+      {
+        id: 'fichiers',
+        title: 'Fichiers, chemins, archives et concurrence',
+        blocks: [
+          { t: 'p', text: 'Lire ou écrire un fichier à partir d’un nom fourni par l’utilisateur, extraire une archive, créer un fichier temporaire : chacune de ces opérations banales ouvre une porte si elle n’est pas encadrée.' },
+          {
+            t: 'table',
+            head: ['Risque', 'Mécanisme', 'Parade'],
+            rows: [
+              ['**Traversée de répertoires**', '`../../etc/passwd` dans un nom de fichier', 'Résoudre le chemin réel et vérifier qu’il reste dans le répertoire autorisé'],
+              ['**Lien symbolique**', 'Un lien placé par l’attaquant redirige l’écriture vers un fichier sensible', 'Ne pas suivre les liens (`O_NOFOLLOW`), répertoires non modifiables par d’autres'],
+              ['**Zip Slip**', 'Une archive contient des entrées nommées `../../x` qui s’écrivent hors du dossier d’extraction', 'Vérifier la destination de chaque entrée avant d’écrire'],
+              ['**Bombe de décompression**', 'Archive de quelques ko qui se décompresse en gigaoctets', 'Limites de taille décompressée, de nombre d’entrées et de profondeur'],
+              ['**Fichier temporaire prévisible**', 'Nom devinable dans `/tmp` : l’attaquant le crée d’abord (lien symbolique)', '`mkstemp`, `NamedTemporaryFile`, droits `0600`'],
+              ['**TOCTOU sur fichier**', 'Entre la vérification (`exists`) et l’ouverture, le fichier est remplacé', 'Ouvrir directement et gérer l’erreur, travailler sur le descripteur obtenu'],
+            ],
+          },
+          { t: 'code', lang: 'python', caption: 'Ouvrir un fichier sans sortir du répertoire autorisé', code: 'from pathlib import Path\n\nBASE = Path("/srv/documents").resolve()\n\ndef ouvrir(nom):\n    chemin = (BASE / nom).resolve()          # résout « .. » et les liens symboliques\n    if not chemin.is_relative_to(BASE):\n        raise PermissionError("chemin hors du répertoire autorisé")\n    return chemin.open("rb")' },
+          { t: 'def', term: 'Zip Slip', text: 'Faille d’extraction d’archives : le nom d’une entrée contient des séquences `../` et l’extracteur écrit hors du dossier prévu, pouvant écraser un fichier de configuration ou un script. Elle touche de nombreuses bibliothèques d’extraction.' },
+          { t: 'list', items: ['**Ignorer le nom de fichier envoyé par le client** : générer son propre nom, conserver l’original comme simple métadonnée.', '**Moindre privilège** : le compte du service n’a accès qu’aux répertoires dont il a besoin, en lecture seule si possible.', '**Concurrence** : protéger les écritures partagées par un verrou ou une transaction, et préférer les opérations atomiques (écrire un fichier temporaire puis le renommer).'] },
+          { t: 'callout', kind: 'tip', text: 'Les failles de fichiers sont presque toujours des erreurs de confiance dans un nom : traitez tout nom, chemin ou entrée d’archive venant de l’extérieur comme hostile.' },
+        ],
+      },
     ],
     useCases: [
       'Revue de code d’un microservice Python qui convertit des fichiers téléversés en appelant un outil externe.',
@@ -135,25 +187,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une équipe maintient une API en TypeScript, des traitements en Python, un service historique en Java et des scripts d’exploitation en Bash et PowerShell. Elle vous demande une liste courte de règles et l’outillage pour les faire respecter.' }],
       steps: ['Rédiger huit règles communes, avec leur déclinaison par langage si nécessaire.', 'Associer à chaque règle un outil ou un contrôle automatique.', 'Proposer une stratégie pour le code existant (dette) sans bloquer l’équipe.'],
     },
+    {
+      id: 'revue-fichiers',
+      kind: 'analysis',
+      title: 'Revue d’un service de dépôt de documents',
+      context: [
+        { t: 'code', lang: 'python', code: 'API_KEY = "sk_live_8f3a…"          # dans le dépôt\n\n@app.post("/depot")\ndef depot():\n    nom = request.form["nom"]\n    archive = zipfile.ZipFile(request.files["archive"])\n    archive.extractall("/srv/documents/" + nom)\n    tmp = "/tmp/rapport.txt"\n    open(tmp, "w").write(request.form["commentaire"])\n    try:\n        indexer(tmp)\n    except Exception:\n        pass\n    log.info("depot de " + request.form["utilisateur"])\n    return "ok"' },
+      ],
+      steps: ['Relever chaque faiblesse et la conséquence possible.', 'Réécrire les passages dangereux de façon sûre.', 'Proposer les contrôles automatiques (outils, tests) qui les auraient détectées.'],
+    },
   ],
-  questions: [
-    { id: 'code-q1', type: 'truefalse', difficulty: 2, skills: ['g-entrees'], prompt: 'En TypeScript, déclarer `req.body` avec une interface suffit à garantir que les données reçues respectent ce type à l’exécution.' },
-    { id: 'code-q2', type: 'single', difficulty: 1, skills: ['g-entrees'], prompt: 'Quelle approche de validation des entrées est recommandée ?', options: [{ id: 'a', text: 'Une liste d’autorisation : décrire précisément ce qui est accepté et rejeter le reste' }, { id: 'b', text: 'Une liste de refus des caractères dangereux' }, { id: 'c', text: 'Aucune validation, le framework s’en charge toujours' }, { id: 'd', text: 'Valider uniquement côté client' }] },
-    { id: 'code-q3', type: 'multi', difficulty: 2, skills: ['g-entrees'], prompt: 'Quelles sources de données franchissent une frontière de confiance et doivent être validées ?', options: [{ id: 'a', text: 'Le corps d’une requête HTTP' }, { id: 'b', text: 'Un fichier téléversé par un utilisateur' }, { id: 'c', text: 'La réponse d’une API tierce' }, { id: 'd', text: 'Une constante définie dans le code source' }] },
-    { id: 'code-q4', type: 'short', difficulty: 2, skills: ['g-entrees'], prompt: 'Quelle bibliothèque Python, courante avec FastAPI, valide des données par modèles typés ?' },
-    { id: 'code-q5', type: 'single', difficulty: 2, skills: ['g-commandes'], prompt: 'Quelle forme d’appel Python évite l’injection de commandes ?', options: [{ id: 'a', text: '`subprocess.run(["ping", "-c", "1", hote])`' }, { id: 'b', text: '`subprocess.run(f"ping -c 1 {hote}", shell=True)`' }, { id: 'c', text: '`os.system("ping -c 1 " + hote)`' }, { id: 'd', text: '`eval("ping " + hote)`' }] },
-    { id: 'code-q6', type: 'multi', difficulty: 2, skills: ['g-commandes'], prompt: 'Lesquelles de ces fonctions exécutent du code à partir d’une chaîne et sont dangereuses avec une donnée externe ?', options: [{ id: 'a', text: '`eval` en JavaScript' }, { id: 'b', text: '`Invoke-Expression` en PowerShell' }, { id: 'c', text: '`exec` en Python' }, { id: 'd', text: '`JSON.parse` en JavaScript' }] },
-    { id: 'code-q7', type: 'truefalse', difficulty: 2, skills: ['g-commandes'], prompt: 'En Bash, mettre les variables entre guillemets (`"$fichier"`) évite qu’un nom contenant des espaces ou des caractères spéciaux soit découpé en plusieurs arguments.' },
-    { id: 'code-q8', type: 'open', difficulty: 3, skills: ['g-commandes', 'g-entrees'], prompt: 'Une fonction Node.js appelle `exec(`nslookup ${domaine}`)` avec un domaine saisi par l’utilisateur. Expliquez le risque et proposez une correction complète.' },
-    { id: 'code-q9', type: 'single', difficulty: 2, skills: ['g-serialisation'], prompt: 'Pourquoi ne faut-il jamais appliquer `pickle.loads` à des données reçues d’un utilisateur ?', options: [{ id: 'a', text: 'Le format pickle peut demander la construction d’objets arbitraires, ce qui permet d’exécuter du code' }, { id: 'b', text: 'Parce que pickle est trop lent' }, { id: 'c', text: 'Parce que pickle ne gère pas l’Unicode' }, { id: 'd', text: 'Parce que pickle chiffre les données' }] },
-    { id: 'code-q10', type: 'short', difficulty: 2, skills: ['g-serialisation'], prompt: 'Quelle fonction de PyYAML faut-il utiliser pour charger un document YAML non fiable ?', placeholder: 'yaml.…' },
-    { id: 'code-q11', type: 'multi', difficulty: 3, skills: ['g-serialisation'], prompt: 'Quelles mesures empêchent la pollution de prototype en JavaScript ?', options: [{ id: 'a', text: 'Ignorer les clés `__proto__`, `constructor` et `prototype` lors des fusions' }, { id: 'b', text: 'Utiliser `Map` ou `Object.create(null)` pour les dictionnaires de clés externes' }, { id: 'c', text: 'Valider le JSON reçu par un schéma n’acceptant que les clés prévues' }, { id: 'd', text: 'Minifier le code JavaScript' }] },
-    { id: 'code-q12', type: 'truefalse', difficulty: 2, skills: ['g-serialisation'], prompt: 'En Java, désérialiser avec `ObjectInputStream` un flux reçu du réseau est sûr tant que la classe attendue est vérifiée après lecture.' },
-    { id: 'code-q13', type: 'single', difficulty: 2, skills: ['g-robustesse'], prompt: 'Pourquoi l’expression régulière `^(a+)+$` est-elle dangereuse ?', options: [{ id: 'a', text: 'Ses quantificateurs imbriqués provoquent un retour arrière exponentiel sur certaines chaînes presque valides' }, { id: 'b', text: 'Elle accepte les lettres majuscules' }, { id: 'c', text: 'Elle est trop courte' }, { id: 'd', text: 'Elle ne fonctionne qu’en Python' }] },
-    { id: 'code-q14', type: 'single', difficulty: 1, skills: ['g-robustesse'], prompt: 'Quel module Python faut-il utiliser pour générer un jeton de réinitialisation de mot de passe ?', options: [{ id: 'a', text: '`secrets`' }, { id: 'b', text: '`random`' }, { id: 'c', text: '`time`' }, { id: 'd', text: '`math`' }] },
-    { id: 'code-q15', type: 'open', difficulty: 3, skills: ['g-robustesse', 'g-entrees'], prompt: 'Une API accepte des documents JSON de configuration. Quelles limites imposer pour qu’un document hostile ne puisse pas épuiser les ressources du serveur ? Justifiez chacune.' },
-    { id: 'code-q16', type: 'truefalse', difficulty: 2, skills: ['g-robustesse'], prompt: 'Comparer un jeton secret avec l’opérateur `==` peut divulguer de l’information par le temps de réponse.' },
-  ],
+  questions,
   resources: [
     { title: 'OWASP Cheat Sheet Series (Input Validation, Deserialization, OS Command Injection)', source: 'OWASP', url: 'https://cheatsheetseries.owasp.org/' },
     { title: 'Module pickle — avertissement de sécurité', source: 'Documentation Python', url: 'https://docs.python.org/fr/3/library/pickle.html' },
