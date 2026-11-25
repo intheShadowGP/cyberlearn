@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'i-soc-detection',
@@ -80,6 +81,57 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', title: 'Obligations', text: "Selon le contexte : notification à la CNIL sous 72 h en cas de violation de données personnelles (RGPD, art. 33), notification des incidents importants par les entités soumises à NIS2, dépôt de plainte. En France, le CERT-FR et le dispositif cybermalveillance.gouv.fr peuvent être sollicités." },
         ],
       },
+      {
+        id: 'sources',
+        title: 'Sources de journaux et couverture de détection',
+        blocks: [
+          { t: 'p', text: 'Une règle de détection ne vaut que par la **donnée** qu’elle exploite : si la source n’est pas collectée, si les horloges divergent ou si les journaux sont incomplets, la meilleure règle ne se déclenchera jamais. Construire une détection, c’est d’abord choisir les bonnes sources.' },
+          {
+            t: 'table',
+            head: ['Source', 'Ce qu’elle apporte', 'Exemples d’événements'],
+            rows: [
+              ['**Journal Sécurité Windows**', 'Authentifications, comptes, groupes, processus', '4624 (ouverture de session), 4625 (échec), 4688 (création de processus), 4720 (création de compte), 4732 (ajout à un groupe local)'],
+              ['**Sysmon / EDR**', 'Processus et leur parenté, connexions réseau, fichiers créés', 'Création de processus, connexion sortante, chargement d’image'],
+              ['**DNS et proxy web**', 'Destinations contactées par les postes', 'Domaines rares ou récents, téléchargements, volumes anormaux'],
+              ['**Identité cloud et messagerie**', 'Connexions, consentements, règles de transfert', 'Connexion à risque, nouvelle règle de transfert, accord d’une application'],
+              ['**Pare-feu et VPN**', 'Flux et accès distants', 'Refus répétés, connexion depuis un pays inhabituel'],
+            ],
+          },
+          { t: 'def', term: 'Normalisation', text: 'Transformation de journaux de formats différents en **champs communs** (utilisateur, hôte, adresse source, action). Elle permet d’écrire une règle indépendante de la source et de corréler des événements venus de systèmes variés.' },
+          { t: 'list', items: ['**Horodatage** : horloges synchronisées (NTP) et fuseau cohérent (de préférence UTC), sans quoi la chronologie est fausse.', '**Complétude** : une source qui devient silencieuse est elle-même un signal (collecteur arrêté, journalisation désactivée).', '**Intégrité** : journaux envoyés hors de la machine, droits restreints, pour qu’un attaquant ne puisse pas les effacer.', '**Rétention** : durée suffisante pour enquêter rétroactivement (souvent plusieurs mois) et répondre aux obligations.', '**Coût** : on ne collecte pas « tout » ; on choisit les sources selon les techniques à couvrir.'] },
+          {
+            t: 'example',
+            title: 'Cartographier une technique, sa source et sa règle',
+            blocks: [
+              { t: 'p', text: 'Technique visée : création d’un compte local (T1136.001, persistance). Source nécessaire : journal Sécurité des postes (événement 4720). Règle : Sigma sur 4720 puis 4732. État de la couverture : **couverte** si la source est collectée et la règle testée ; **non couverte** si le journal des postes n’est pas envoyé au SIEM, même si la règle existe.' },
+              { t: 'p', text: 'Cette cartographie « technique → source → règle → état » se tient à jour : elle indique où investir (nouvelle source, nouvelle règle) et sert à rendre compte de la couverture de détection.' },
+            ],
+          },
+          { t: 'callout', kind: 'key', text: 'Une détection manquante vient souvent d’une **donnée manquante**, pas d’une règle mal écrite. Surveillez la santé de la collecte comme vous surveillez les menaces.' },
+        ],
+      },
+      {
+        id: 'ingenierie',
+        title: 'Ingénierie de détection et indicateurs du SOC',
+        blocks: [
+          { t: 'p', text: 'Une règle est un petit produit logiciel : elle se conçoit, se teste, se déploie, se règle et se retire. Cette discipline s’appelle l’**ingénierie de détection**. Elle évite à la fois les angles morts et la fatigue d’alerte.' },
+          { t: 'list', ordered: true, items: ['**Hypothèse** : quelle technique, quelle trace attendue, dans quelle source.', '**Données** : la source existe-t-elle, avec les champs nécessaires ?', '**Écriture** : règle en Sigma, rattachée à une technique ATT&CK et à un niveau de gravité.', '**Test** : rejouer l’activité visée en laboratoire, puis appliquer la règle à des données historiques pour estimer le bruit.', '**Déploiement progressif** : mode observation avant l’alerte réelle, puis notification aux analystes.', '**Revue** : mesurer la précision, ajuster, retirer les règles obsolètes.'] },
+          {
+            t: 'table',
+            head: ['Indicateur', 'Définition', 'Lecture'],
+            rows: [
+              ['**MTTD** (délai moyen de détection)', 'Temps entre le début d’une activité malveillante et sa détection', 'Mesure la capacité à voir vite une attaque'],
+              ['**MTTR** (délai moyen de réponse)', 'Temps entre la détection et la réponse (confinement, résolution selon la définition retenue)', 'Mesure la capacité à agir vite'],
+              ['**Précision d’une règle**', 'Part des alertes qui sont des vrais positifs', 'Une précision basse alimente la fatigue d’alerte'],
+              ['**Couverture ATT&CK**', 'Part des techniques prioritaires couvertes par une source et une règle testées', 'Oriente les investissements'],
+              ['**Charge par analyste**', 'Alertes traitées par personne et par poste de travail', 'Un volume trop élevé dégrade la qualité du triage'],
+            ],
+          },
+          { t: 'def', term: 'Fatigue d’alerte', text: 'Désensibilisation des analystes face à un flux d’alertes trop bruyant : les vraies alertes finissent par être ignorées. Elle se traite en réglant les règles (exclusions documentées), en regroupant les alertes liées et en automatisant l’enrichissement.' },
+          { t: 'list', items: ['**Exclusions documentées** : chaque exception est justifiée, datée et réexaminée.', '**SOAR et playbooks** : automatiser l’enrichissement et les actions peu risquées ; garder une décision humaine pour les actions à fort impact (isoler un serveur critique).', '**Relève** : un journal de passation entre équipes évite de perdre le fil des enquêtes en cours.'] },
+          { t: 'callout', kind: 'warn', text: 'Une exclusion trop large crée un **angle mort** qu’un attaquant peut exploiter. Plus une exception est vaste, plus elle doit être justifiée et surveillée.' },
+        ],
+      },
     ],
     useCases: [
       'Analyste N1 : qualifier en quelques minutes une alerte de connexion anormale grâce à l’enrichissement.',
@@ -124,26 +176,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Vous voulez détecter la création d’un compte local suivie de son ajout au groupe Administrateurs (événements Windows 4720 puis 4732).' }],
       steps: ['Choisir la source de journaux (logsource).', 'Écrire la sélection sur l’événement 4732 pour le groupe Administrateurs.', 'Associer la technique ATT&CK correspondante et un niveau.'],
     },
+    {
+      id: 'couverture-detection',
+      kind: 'analysis',
+      title: 'Analyse : mesurer la couverture de détection d’un SOC',
+      context: [
+        { t: 'code', lang: 'text', code: 'Sources collectées : pare-feu, VPN, journal Sécurité des contrôleurs de domaine\nSources absentes : postes de travail (journal Sécurité, Sysmon), DNS, proxy web, messagerie\nTechniques à couvrir :\n A. Hameçonnage avec pièce jointe\n B. PowerShell lancé par une application Office\n C. Création d’un compte local sur un poste\n D. Vol d’identifiants dans la mémoire de LSASS\n E. Mouvement latéral par partage administratif\n F. Exfiltration vers un service de stockage en ligne' },
+      ],
+      steps: ['Indiquer, pour chaque technique, si elle est couverte, partiellement couverte ou non couverte, avec la source de journaux nécessaire.', 'Classer les sources à ajouter par priorité et justifier.', 'Proposer deux indicateurs pour suivre l’amélioration de la couverture.'],
+    },
   ],
-  questions: [
-    { id: 'soc-q1', type: 'single', difficulty: 1, skills: ['i-soc-tools'], prompt: 'Quel outil collecte et corrèle les journaux de multiples sources pour générer des alertes ?', options: [{ id: 'a', text: 'Le SIEM' }, { id: 'b', text: 'Le pare-feu' }, { id: 'c', text: 'Le gestionnaire de mots de passe' }, { id: 'd', text: 'Le serveur DNS' }] },
-    { id: 'soc-q2', type: 'multi', difficulty: 2, skills: ['i-soc-tools'], prompt: 'Quelles capacités offre typiquement un EDR ?', options: [{ id: 'a', text: 'Télémétrie des processus et des connexions sur le poste' }, { id: 'b', text: 'Isolement réseau d’un poste à distance' }, { id: 'c', text: 'Routage BGP' }, { id: 'd', text: 'Détection comportementale' }] },
-    { id: 'soc-q3', type: 'short', difficulty: 1, skills: ['i-soc-tools'], prompt: 'Quel sigle désigne les plateformes qui automatisent les actions de réponse à l’aide de playbooks ?' },
-    { id: 'soc-q4', type: 'single', difficulty: 1, skills: ['i-triage'], prompt: 'Une attaque réelle qui ne déclenche aucune alerte est :', options: [{ id: 'a', text: 'Un faux positif' }, { id: 'b', text: 'Un vrai négatif' }, { id: 'c', text: 'Un faux négatif' }, { id: 'd', text: 'Un vrai positif' }] },
-    { id: 'soc-q5', type: 'truefalse', difficulty: 2, skills: ['i-triage'], prompt: 'Une validation MFA acceptée suffit à prouver qu’une connexion est légitime.' },
-    { id: 'soc-q6', type: 'single', difficulty: 2, skills: ['i-triage'], prompt: 'Deux connexions d’un même compte, depuis Lyon puis Singapour, à 40 minutes d’intervalle. Comment s’appelle cette anomalie ?', options: [{ id: 'a', text: 'Déplacement impossible (impossible travel)' }, { id: 'b', text: 'Pulvérisation de mots de passe' }, { id: 'c', text: 'Déni de service' }, { id: 'd', text: 'Mouvement latéral' }] },
-    { id: 'soc-q7', type: 'single', difficulty: 2, skills: ['i-attack'], prompt: 'Selon la pyramide de la douleur, quel indicateur est le plus coûteux à changer pour un attaquant ?', options: [{ id: 'a', text: 'L’empreinte d’un fichier' }, { id: 'b', text: 'Une adresse IP' }, { id: 'c', text: 'Un nom de domaine' }, { id: 'd', text: 'Ses techniques (TTP)' }] },
-    { id: 'soc-q8', type: 'truefalse', difficulty: 1, skills: ['i-attack'], prompt: 'MITRE ATT&CK classe les techniques d’attaque par tactiques, c’est-à-dire par objectif de l’attaquant.' },
-    { id: 'soc-q9', type: 'short', difficulty: 2, skills: ['i-attack'], prompt: 'Comment s’appelle le format générique et portable de règles de détection, convertible vers de nombreux SIEM ?' },
-    { id: 'soc-q10', type: 'multi', difficulty: 2, skills: ['i-attack'], prompt: 'Lesquels sont des IOC ?', options: [{ id: 'a', text: 'L’empreinte SHA-256 d’un exécutable malveillant' }, { id: 'b', text: 'Le domaine de commande et contrôle `update-check.example`' }, { id: 'c', text: 'La technique « vol d’identifiants dans LSASS »' }, { id: 'd', text: 'Une clé de registre de persistance précise' }] },
-    { id: 'soc-q11', type: 'single', difficulty: 2, skills: ['i-ir'], prompt: 'Dans quelle phase isole-t-on les machines compromises du réseau ?', options: [{ id: 'a', text: 'Préparation' }, { id: 'b', text: 'Confinement' }, { id: 'c', text: 'Retour d’expérience' }, { id: 'd', text: 'Rétablissement' }] },
-    { id: 'soc-q12', type: 'truefalse', difficulty: 2, skills: ['i-ir'], prompt: 'En cas de violation de données personnelles, le RGPD prévoit une notification à l’autorité de contrôle dans un délai de 72 heures après en avoir pris connaissance, sauf risque improbable pour les personnes.' },
-    { id: 'soc-q13', type: 'open', difficulty: 3, skills: ['i-ir', 'i-triage'], prompt: 'Un vendredi à 17 h, l’EDR signale le chiffrement de fichiers sur un serveur de fichiers. Décrivez vos dix premières minutes d’actions, dans l’ordre, en justifiant.' },
-    { id: 'soc-q14', type: 'multi', difficulty: 2, skills: ['i-ir'], prompt: 'Quelles actions relèvent de la phase de préparation ?', options: [{ id: 'a', text: 'Rédiger et tester des playbooks' }, { id: 'b', text: 'Disposer de sauvegardes hors ligne testées' }, { id: 'c', text: 'Supprimer la persistance de l’attaquant' }, { id: 'd', text: 'Prévoir un canal de communication hors bande' }] },
-    { id: 'soc-q15', type: 'open', difficulty: 2, skills: ['i-attack', 'i-soc-tools'], prompt: 'Votre SIEM reçoit uniquement les journaux du pare-feu. Expliquez quelles attaques resteront invisibles et quelles sources vous ajouteriez en priorité.' },
-    { id: 'soc-q16', type: 'single', difficulty: 2, skills: ['i-triage', 'i-attack'], prompt: 'Que doit contenir la clôture d’une alerte qualifiée de faux positif ?', options: [{ id: 'a', text: 'Rien, il suffit de la fermer' }, { id: 'b', text: 'Les éléments vérifiés et la justification de la conclusion' }, { id: 'c', text: 'La suppression de la règle qui l’a générée' }, { id: 'd', text: 'Un message à l’utilisateur concerné uniquement' }] },
-    { id: 'soc-q17', type: 'single', difficulty: 2, skills: ['i-triage'], prompt: 'Une règle de détection très sensible repère presque toutes les attaques réelles mais produit beaucoup d’alertes injustifiées. Que peut-on dire de ses métriques ?', options: [{ id: 'a', text: 'Rappel élevé, précision basse' }, { id: 'b', text: 'Précision élevée, rappel bas' }, { id: 'c', text: 'Précision et rappel tous deux élevés' }, { id: 'd', text: 'Ni faux positif ni faux négatif' }] },
-  ],
+  questions,
   resources: [
     { title: 'MITRE ATT&CK', source: 'MITRE', url: 'https://attack.mitre.org/' },
     { title: 'Sigma — règles de détection génériques', source: 'SigmaHQ', url: 'https://github.com/SigmaHQ/sigma' },

@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['I-blue-team', 'I-soc', 'I-siem', 'I-edr', 'I-detection', 'I-correlation', 'I-analyse-des-logs', 'I-gestion-des-incidents', 'I-reponse-a-incident', 'I-ioc', 'I-ttp', 'I-mitre-attck', 'I-sigma', 'I-playbooks'],
   title: 'SOC : détection, triage d’alertes et réponse à incident',
   level: 2,
-  durationMin: 90,
+  durationMin: 120,
   summary:
     "Comprendre l'organisation d'un SOC, la collecte et la corrélation de journaux dans un SIEM, la différence entre IOC et TTP, l'usage de MITRE ATT&CK et de Sigma, puis la conduite d'une réponse à incident.",
   objectives: [
@@ -15,6 +15,8 @@ export const meta: CourseMeta = {
     'Distinguer IOC et TTP et situer une activité dans MITRE ATT&CK.',
     'Lire et écrire une règle de détection Sigma simple.',
     'Dérouler les phases de la réponse à incident.',
+    'Choisir et évaluer les sources de journaux d’un SOC, cartographier la couverture de détection et surveiller la santé de la collecte.',
+    'Concevoir, tester, déployer et régler une règle de détection, et suivre les indicateurs du SOC (MTTD, MTTR, précision).',
   ],
   prerequisites: ['b-osi-tcpip'],
   prerequisiteKnowledge: ['Notions de réseau et de systèmes', 'Lecture de journaux texte'],
@@ -23,8 +25,10 @@ export const meta: CourseMeta = {
     { id: 'i-triage', label: 'Triage et qualification des alertes', level: 2 },
     { id: 'i-attack', label: 'IOC, TTP, MITRE ATT&CK et Sigma', level: 2 },
     { id: 'i-ir', label: 'Réponse à incident', level: 2 },
+    { id: 'i-sources', label: 'Sources de journaux et couverture de détection', level: 2 },
+    { id: 'i-ingenierie', label: 'Ingénierie de détection et indicateurs du SOC', level: 3 },
   ],
-  sectionCount: 4,
-  questionCount: 17,
-  quizSize: 8,
+  sectionCount: 6,
+  questionCount: 40,
+  quizSize: 10,
 };

@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 60 |
-| Questions de cours (avec correction) | 1880 |
+| Questions de cours (avec correction) | 1903 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -82,7 +82,7 @@
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Exercices adverses avancés : cadrage, émulation d’adversaire, chemins d’attaque et gouvernance (`h-pentest-avance`) | H | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
-| SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 17 | 2 | 4 |
+| SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
