@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (25 migrés) + 40 cours à créer (14 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 25 cours à créer et 20 cours existants à migrer.
+Total : 45 cours existants (26 migrés) + 40 cours à créer (14 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 25 cours à créer et 19 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -112,3 +112,4 @@ Total : 45 cours existants (25 migrés) + 40 cours à créer (14 créés) = 85 c
 | `h-pentest-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `h-pentest-avance` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
 | `i-soc-detection` | ✔ 40 | ✔ 40 | ✔ |
+| `i-threat-hunting` | ✔ 40 | ✔ 40 | ✔ |

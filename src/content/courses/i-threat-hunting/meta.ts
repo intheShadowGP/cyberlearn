@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['I-threat-intelligence', 'I-threat-hunting', 'I-ndr', 'I-ids-ips', 'I-analyse-reseau', 'I-xdr', 'I-soar', 'I-yara', 'I-alerting', 'I-investigation', 'I-analyse-comportementale', 'I-detection-d-anomalies'],
   title: 'Threat hunting et renseignement : chasser ce que les alertes ne voient pas',
   level: 3,
-  durationMin: 100,
+  durationMin: 135,
   summary:
     'Exploiter le renseignement sur la menace, formuler des hypothèses de chasse, analyser le trafic réseau (Zeek, Suricata), repérer les anomalies par empilement et transformer chaque chasse réussie en détection automatisée.',
   objectives: [
@@ -15,6 +15,8 @@ export const meta: CourseMeta = {
     'Formuler une hypothèse de chasse testable à partir d’une technique ATT&CK.',
     'Repérer une balise de commande et contrôle et un tunnel DNS dans des journaux réseau.',
     'Transformer le résultat d’une chasse en règle de détection et en playbook.',
+    'Chasser des comportements sur les postes et les identités (persistance, authentifications, mouvement latéral, vol d’identifiants) à partir de journaux Windows.',
+    'Piloter un programme de chasse : choisir selon la couverture ATT&CK, documenter les fiches, mesurer par des indicateurs et partager dans le respect du TLP.',
   ],
   prerequisites: ['i-soc-detection'],
   prerequisiteKnowledge: ['Fonctionnement d’un SOC, SIEM, règles Sigma et MITRE ATT&CK (cours précédent du module I)', 'Notions de TCP/IP et de DNS'],
@@ -23,8 +25,10 @@ export const meta: CourseMeta = {
     { id: 'i-hunt-method', label: 'Méthode de chasse fondée sur des hypothèses', level: 3 },
     { id: 'i-hunt-network', label: 'Analyse réseau, IDS et NDR', level: 3 },
     { id: 'i-hunt-anomalies', label: 'Analyse comportementale et industrialisation', level: 3 },
+    { id: 'i-hunt-hotes', label: 'Chasse sur les postes et les identités', level: 3 },
+    { id: 'i-hunt-programme', label: 'Pilotage d’un programme de chasse', level: 3 },
   ],
-  sectionCount: 5,
-  questionCount: 16,
-  quizSize: 8,
+  sectionCount: 7,
+  questionCount: 40,
+  quizSize: 10,
 };

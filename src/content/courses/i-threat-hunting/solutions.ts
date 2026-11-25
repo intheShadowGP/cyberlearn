@@ -24,5 +24,22 @@ export const solutions: CourseSolutions = {
         { t: 'callout', kind: 'info', text: 'TLP:AMBER : le rapport et vos résultats qui en reprennent le contenu peuvent être partagés au sein de votre organisation et avec vos clients qui en ont besoin, pas au-delà. Pour un partage plus large (par exemple avec l’ISAC du secteur), demander l’accord de l’émetteur ou partager uniquement vos propres observations sous un marquage adapté.' },
       ],
     },
+    'chasse-identites': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Observation', 'Lecture'],
+          rows: [
+            ['SRV-BKP01 → 14 hôtes, type 3, 02:00-03:00 chaque nuit', 'Ligne de base : sauvegarde nocturne planifiée, régulière et attendue'],
+            ['PC-COMPTA-07 → 38 hôtes, type 3, une seule nuit', '**Anormal** : une source qui est un poste ordinaire, un nombre d’hôtes très élevé en peu de temps, un compte qui n’y est jamais vu. Mouvement latéral probable avec un compte volé'],
+            ['SRV-BKP01 → une session de type 10 à 14:22', '**Anormal** : un compte de service n’ouvre pas de session interactive, et l’heure ne correspond pas à la sauvegarde'],
+            ['SRV-BKP01 → type 3 à 02:10 (maintenance)', 'Probablement normal, à rapprocher de la fenêtre de maintenance'],
+          ],
+        },
+        { t: 'list', items: ['**Poste PC-COMPTA-07** : EDR (processus, parent, outils d’accès distant), événements 4624 et 4648 correspondants, 4688 ou Sysmon, qui était connecté à ce moment.', '**Compte** : date de dernier changement de mot de passe, origine des identifiants, autres connexions (VPN, cloud).', '**Hôtes cibles** : quelles actions après l’authentification (services créés, tâches planifiées, partages d’administration).'] },
+        { t: 'p', text: 'Hypothèse : « Si le compte `svc-sauvegarde` est compromis, il s’authentifie depuis des sources hors de sa liste habituelle, ou sur un grand nombre d’hôtes en peu de temps, ou en session interactive. »' },
+        { t: 'code', lang: 'text', caption: 'Logique de détection durable', code: 'Pour chaque compte de service, sur 1 h :\n  source absente de la liste autorisée du compte\n  OU nombre d’hôtes cibles distincts > seuil de la ligne de base\n  OU type de session = 10 (interactive à distance)\n→ alerte de priorité haute, enrichie du processus (EDR) et du propriétaire du compte' },
+      ],
+    },
   },
 };
