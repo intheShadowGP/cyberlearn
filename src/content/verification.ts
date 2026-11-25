@@ -62,6 +62,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'i-detection-avancee': sheet(['MITRE ATT&CK', 'Sigma', 'Palantir Alerting and Detection Strategy Framework', 'SOC-CMM', 'NIST SP 800-61 Rév. 3'], ['Version d’ATT&CK', 'Exigences réglementaires (RGPD, NIS2)', 'Fonctionnalités des plateformes SIEM, XDR et SOAR']),
   'i-soc-detection': sheet(['MITRE ATT&CK', 'Sigma', 'NIST SP 800-61 Rév. 3'], ['Techniques ATT&CK (identifiants révisés à chaque version)']),
   'i-threat-hunting': sheet(['TLP 2.0 (FIRST)', 'Pyramid of Pain (D. Bianco, 2013)', 'MITRE ATT&CK (T1053.005, T1136.001)', 'STIX 2.1', 'Zeek et Suricata'], ['Fonctionnalités des plateformes XDR, NDR et SOAR', 'Empreintes TLS (JA3, JA4)']),
+  'j-forensique-initiation': sheet(['RFC 3227', 'NIST SP 800-86', 'Guide d’hygiène informatique (ANSSI)'], ['Algorithmes de hachage recommandés', 'Cadre légal des enquêtes internes (RGPD, droit du travail)']),
   'j-forensique-principes': sheet(['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], ['Artefacts Windows selon les versions du système']),
   'j-memoire-artefacts-linux': sheet(['Volatility 3', 'The Sleuth Kit et Autopsy', 'NIST SP 800-86', 'MITRE ATT&CK (T1070.006)', 'plaso'], ['Noms et options des plugins Volatility 3', 'Emplacements des journaux selon les distributions']),
   'j-analyse-maliciels-investigation': sheet(['NIST SP 800-83 Rév. 1', 'YARA', 'MITRE ATT&CK', 'TLP 2.0 (FIRST)'], ['Techniques d’évasion d’analyse des maliciels', 'Services de réputation et bacs à sable']),
