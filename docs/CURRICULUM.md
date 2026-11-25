@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 57 |
-| Questions de cours (avec correction) | 1712 |
+| Cours complets | 58 |
+| Questions de cours (avec correction) | 1752 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -28,7 +28,7 @@
 | D. Windows et Windows Server | 5 | 1, 2, 3, 4 | 25 / 25 |
 | E. Cryptographie | 4 | 1, 2, 3, 4 | 22 / 22 |
 | F. Sécurité Web | 5 | 1, 2, 3, 4 | 27 / 27 |
-| G. Programmation et sécurité du code | 3 | 1, 2, 3 | 23 / 23 |
+| G. Programmation et sécurité du code | 4 | 1, 2, 3, 4 | 23 / 23 |
 | H. Sécurité offensive et pentest | 2 | 2, 3 | 34 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
 | J. Forensique numérique | 3 | 2, 3 | 17 / 17 |
@@ -77,6 +77,7 @@
 | Programmation sécurisée : les bonnes habitudes dès les premiers programmes (`g-code-securise-bases`) | G | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
+| Sécurité du code avancée : analyse, fuzzing, revue, chaîne de construction et programme de sécurité (`g-code-securise-avance`) | G | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 110 min | 5 | 16 | 2 | 5 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 17 | 2 | 4 |
