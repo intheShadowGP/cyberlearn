@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 67 |
-| Questions de cours (avec correction) | 2423 |
+| Cours complets | 68 |
+| Questions de cours (avec correction) | 2463 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -33,7 +33,7 @@
 | I. Défense et SOC | 4 | 1, 2, 3, 4 | 26 / 26 |
 | J. Forensique numérique | 5 | 1, 2, 3, 4 | 17 / 17 |
 | K. Malware et reverse engineering | 4 | 1, 2, 3, 4 | 22 / 22 |
-| L. Sécurité Cloud | 5 | 1, 2, 3 | 23 / 23 |
+| L. Sécurité Cloud | 6 | 1, 2, 3, 4 | 23 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 3 | 2, 3 | 21 / 21 |
 | O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
@@ -100,6 +100,7 @@
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 130 min | 5 | 40 | 3 | 4 |
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
+| Architecture cloud sécurisée : zones d’atterrissage, politiques en code, identités et détection (`l-cloud-avance`) | L | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
