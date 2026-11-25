@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 55 |
-| Questions de cours (avec correction) | 1584 |
+| Cours complets | 56 |
+| Questions de cours (avec correction) | 1624 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -27,7 +27,7 @@
 | C. Linux | 4 | 1, 2, 3, 4 | 22 / 22 |
 | D. Windows et Windows Server | 5 | 1, 2, 3, 4 | 25 / 25 |
 | E. Cryptographie | 4 | 1, 2, 3, 4 | 22 / 22 |
-| F. Sécurité Web | 4 | 1, 2, 3 | 27 / 27 |
+| F. Sécurité Web | 5 | 1, 2, 3, 4 | 27 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
 | H. Sécurité offensive et pentest | 2 | 2, 3 | 34 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
@@ -73,6 +73,7 @@
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 6 | 40 | 3 | 4 |
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 6 |
 | Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
+| Sécurité web avancée : modélisation, protocole, navigateur, API et chaîne logicielle (`f-web-defense-avancee`) | F | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 4 |
