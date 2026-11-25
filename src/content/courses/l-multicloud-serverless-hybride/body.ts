@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'l-multicloud-serverless-hybride',
@@ -109,6 +110,57 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'En hybride et multi-cloud, on vise une **identité fédérée** (un seul annuaire de référence), des **politiques cohérentes** d’un environnement à l’autre et une **posture surveillée de façon unifiée** (CSPM multi-cloud). Multiplier les consoles sans vue d’ensemble multiplie les angles morts.' },
         ],
       },
+      {
+        id: 'detection',
+        title: 'Journalisation, détection et réponse dans plusieurs clouds',
+        blocks: [
+          { t: 'p', text: 'Sans journaux, un incident cloud ne peut ni être détecté ni être reconstitué. Chaque fournisseur propose ses journaux d’**opérations de gestion** (qui a créé, modifié, supprimé quoi), ses journaux d’**accès aux données** et ses journaux de **flux réseau**. Il faut les **activer avant** l’incident, les **centraliser** et les **surveiller**.' },
+          {
+            t: 'table',
+            head: ['Besoin', 'AWS', 'Azure', 'Google Cloud'],
+            rows: [
+              ['Opérations de gestion', 'CloudTrail', 'Journal d’activité', 'Journaux d’audit Cloud (activité d’administration)'],
+              ['Accès aux données', 'Événements de données CloudTrail, journaux d’accès au stockage', 'Journaux de ressources (diagnostics)', 'Journaux d’audit Cloud (accès aux données, à activer)'],
+              ['Flux réseau', 'VPC Flow Logs', 'Journaux de flux des groupes de sécurité', 'Journaux de flux VPC'],
+              ['Alertes et posture', 'GuardDuty, Security Hub', 'Microsoft Defender for Cloud', 'Security Command Center'],
+            ],
+          },
+          { t: 'def', term: 'Centralisation des journaux', text: 'Envoi des journaux de tous les comptes, abonnements et projets vers un espace **séparé et protégé** (en écriture seule). Un attaquant qui prend le contrôle d’un compte ne peut ainsi pas effacer ses traces, et les analystes disposent d’une vue unique, par exemple dans un SIEM.' },
+          {
+            t: 'table',
+            head: ['Événement à surveiller', 'Pourquoi c’est suspect'],
+            rows: [
+              ['Désactivation ou suppression de la journalisation', 'Effacement de traces'],
+              ['Création d’une clé d’accès ou de compte de service', 'Identifiant durable pour persister'],
+              ['Attribution d’un rôle d’administrateur à un nouveau compte', 'Élévation de privilèges ou persistance'],
+              ['Connexion depuis un pays ou une adresse inhabituels', 'Identifiant volé'],
+              ['Ouverture d’un port d’administration au monde entier', 'Préparation d’un accès ou erreur dangereuse'],
+            ],
+          },
+          { t: 'list', ordered: true, items: ['**Contenir** : désactiver les clés et sessions de l’identité compromise, retirer ses droits, isoler la ressource par un groupe de sécurité restrictif (sans la supprimer).', '**Préserver** : exporter les journaux de gestion et de flux, réaliser un instantané des disques, noter les empreintes.', '**Investiguer** : actions réalisées par l’identité, ressources créées, données lues, autres comptes touchés.', '**Éradiquer et rétablir** : supprimer les ressources et identifiants créés par l’attaquant, **faire pivoter** les secrets exposés, corriger la cause.'] },
+          { t: 'callout', kind: 'warn', text: 'La journalisation n’est pas rétroactive : un journal non activé n’a rien enregistré. Activez-la, centralisez-la et fixez la durée de conservation avant d’en avoir besoin.' },
+        ],
+      },
+      {
+        id: 'donnees',
+        title: 'Données, clés de chiffrement et souveraineté',
+        blocks: [
+          { t: 'p', text: 'Les fournisseurs chiffrent les données au repos et en transit, mais la question décisive est : **qui contrôle les clés** ? Le chiffrement protège contre le vol d’un support, pas contre l’abus d’un compte qui a le droit de lire : le service déchiffre de façon transparente pour une identité autorisée.' },
+          {
+            t: 'table',
+            head: ['Modèle de clé', 'Qui contrôle', 'Usage typique'],
+            rows: [
+              ['Clé gérée par le fournisseur', 'Le fournisseur, de façon transparente', 'Protection de base, sans effort'],
+              ['Clé gérée par le client (CMK) dans un service de clés', 'Le client : droits, rotation, révocation', 'Données sensibles et exigences de conformité'],
+              ['Clé apportée par le client (BYOK)', 'Le client génère, le fournisseur utilise', 'Maîtrise de l’origine de la clé'],
+              ['Clé conservée hors du cloud (HYOK)', 'Le client, hors de l’infrastructure du fournisseur', 'Données très sensibles, souveraineté'],
+            ],
+          },
+          { t: 'def', term: 'Résidence et souveraineté des données', text: 'La **résidence** est le lieu (région, pays) où les données sont stockées et traitées. La **souveraineté** ajoute la question du droit applicable : un fournisseur soumis à une loi extraterritoriale peut être contraint de livrer des données, même hébergées en Europe. Le référentiel **SecNumCloud** de l’ANSSI qualifie des fournisseurs protégés de ces lois.' },
+          { t: 'list', items: ['**Séparer** l’administration de la clé (qui la gère) de son usage (qui chiffre et déchiffre).', '**Faire pivoter** régulièrement les clés et **journaliser** chaque usage.', '**Protéger la destruction** d’une clé (délai de suppression, droits séparés) : sans clé, les données sont irrécupérables.', '**Classer** les données pour réserver les clés du client et la résidence stricte à celles qui l’exigent.'] },
+          { t: 'callout', kind: 'tip', text: 'Une clé de chiffrement stockée à côté des données qu’elle protège ne protège rien. La clé reste dans un service dédié, avec des droits distincts de ceux du stockage.' },
+        ],
+      },
     ],
     useCases: [
       'Revue de sécurité d’un abonnement Azure : rôles RBAC, administrateurs Entra ID, accès conditionnel, identités managées.',
@@ -164,25 +216,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une fonction serverless est déclenchée par le dépôt d’un fichier dans un stockage, le transforme et écrit le résultat dans une base. Elle utilise aujourd’hui un rôle d’administration du projet, lit ses secrets dans ses variables d’environnement et embarque plusieurs bibliothèques jamais mises à jour.' }],
       steps: ['Lister les problèmes de sécurité.', 'Proposer la configuration cible (permissions, secrets, dépendances, déclencheur).', 'Indiquer ce qu’il reste à surveiller.'],
     },
+    {
+      id: 'incident-multicloud',
+      kind: 'analysis',
+      title: 'Analyse : un extrait de journal d’audit cloud',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure (UTC)  Identité                         Action                                               Détail\n02:10        svc-ci (compte de service)        CreateServiceAccountKey                              pour svc-ci, depuis 198.51.100.23\n02:14        svc-ci                            SetIamPolicy (projet « paie »)                       rôle Owner accordé à external-user@exemple.net\n02:16        svc-ci                            UpdateSink (journalisation)                          destination de l’export des journaux supprimée\n02:19        external-user@exemple.net         storage.objects.list / get                           bucket « paie-archives » (4 800 objets)\n02:41        external-user@exemple.net         compute.firewalls.insert                             tcp:22 depuis 0.0.0.0/0 sur le réseau « prod »\n\nLe compte svc-ci n’est utilisé en temps normal que depuis le réseau du pipeline.' },
+      ],
+      steps: ['Reconstituer l’enchaînement et les erreurs de configuration qui l’ont permis.', 'Indiquer les actions de confinement et de préservation, dans l’ordre.', 'Proposer les mesures de prévention et de détection pour éviter la répétition.'],
+    },
   ],
-  questions: [
-    { id: 'mch-q1', type: 'single', difficulty: 1, skills: ['l-multicloud'], prompt: 'Que recouvre le modèle de responsabilité partagée, commun aux fournisseurs cloud ?', options: [{ id: 'a', text: 'Le fournisseur sécurise le socle, le client sécurise sa configuration, ses identités et ses données' }, { id: 'b', text: 'Le fournisseur est responsable de tout' }, { id: 'c', text: 'Le client n’a aucune responsabilité de sécurité' }, { id: 'd', text: 'La responsabilité change chaque mois' }] },
-    { id: 'mch-q2', type: 'single', difficulty: 2, skills: ['l-multicloud'], prompt: 'Quelle est la cause la plus fréquente des incidents de sécurité cloud ?', options: [{ id: 'a', text: 'Une erreur de configuration du client (exposition, droits excessifs, secret exposé)' }, { id: 'b', text: 'Une faille du socle matériel du fournisseur' }, { id: 'c', text: 'La panne d’un câble sous-marin' }, { id: 'd', text: 'La mise à jour automatique du système d’exploitation' }] },
-    { id: 'mch-q3', type: 'short', difficulty: 2, skills: ['l-multicloud'], prompt: 'Quel type d’outil évalue en continu la configuration d’un cloud par rapport aux bonnes pratiques et signale les écarts ? (sigle)', placeholder: 'sigle' },
-    { id: 'mch-q4', type: 'single', difficulty: 2, skills: ['l-azure-gcp'], prompt: 'Comment s’appelle l’annuaire d’identités d’Azure ?', options: [{ id: 'a', text: 'Microsoft Entra ID (anciennement Azure AD)' }, { id: 'b', text: 'Cloud Identity' }, { id: 'c', text: 'AWS IAM' }, { id: 'd', text: 'Active Directory Federation Services' }] },
-    { id: 'mch-q5', type: 'truefalse', difficulty: 3, skills: ['l-azure-gcp'], prompt: 'Sur Google Cloud, un rôle accordé au niveau de l’organisation s’hérite sur tous les dossiers et projets en dessous.' },
-    { id: 'mch-q6', type: 'multi', difficulty: 3, skills: ['l-azure-gcp'], prompt: 'Quelles pratiques réduisent le risque lié aux identités non humaines dans le cloud ?', options: [{ id: 'a', text: 'Donner à chaque identité managée (Azure) ou compte de service (GCP) le minimum de droits' }, { id: 'b', text: 'Éviter les clés de compte de service exportées au profit d’une fédération' }, { id: 'c', text: 'Utiliser le compte de service par défaut sur-privilégié partout' }, { id: 'd', text: 'Attribuer les droits au niveau le plus bas suffisant' }] },
-    { id: 'mch-q7', type: 'single', difficulty: 2, skills: ['l-azure-gcp'], prompt: 'Pourquoi limiter le nombre de titulaires du rôle « administrateur général » d’Entra ID ?', options: [{ id: 'a', text: 'Ce rôle contrôle tout le locataire : chaque titulaire est une cible à très fort impact' }, { id: 'b', text: 'Pour réduire la facture' }, { id: 'c', text: 'Parce qu’Azure limite à deux administrateurs' }, { id: 'd', text: 'Pour accélérer les connexions' }] },
-    { id: 'mch-q8', type: 'open', difficulty: 3, skills: ['l-azure-gcp', 'l-multicloud'], prompt: 'Expliquez pourquoi accorder un droit « trop haut dans la hiérarchie » est une erreur majeure sur Azure comme sur Google Cloud, et comment l’éviter.' },
-    { id: 'mch-q9', type: 'single', difficulty: 2, skills: ['l-reseau-cloud'], prompt: 'À quoi sert un groupe de sécurité dans un réseau cloud ?', options: [{ id: 'a', text: 'C’est un pare-feu attaché à une ressource, qui n’autorise que les flux voulus' }, { id: 'b', text: 'Il attribue les rôles IAM' }, { id: 'c', text: 'Il chiffre les disques' }, { id: 'd', text: 'Il remplace le compte de service' }] },
-    { id: 'mch-q10', type: 'truefalse', difficulty: 2, skills: ['l-reseau-cloud'], prompt: 'Ouvrir un port d’administration (SSH, RDP) à 0.0.0.0/0 dans le cloud est une pratique acceptable si le mot de passe est fort.' },
-    { id: 'mch-q11', type: 'multi', difficulty: 3, skills: ['l-reseau-cloud'], prompt: 'Quelles mesures sécurisent un réseau cloud ?', options: [{ id: 'a', text: 'Groupes de sécurité en refus par défaut' }, { id: 'b', text: 'Sous-réseaux privés pour les ressources sans besoin d’adresse publique' }, { id: 'c', text: 'Points d’accès privés vers les services du cloud' }, { id: 'd', text: 'Journalisation des flux réseau' }] },
-    { id: 'mch-q12', type: 'single', difficulty: 2, skills: ['l-serverless-hybride'], prompt: 'Où se déplace la surface de sécurité avec le serverless ?', options: [{ id: 'a', text: 'Vers le code, les permissions de la fonction et ses déclencheurs (il n’y a plus de serveur à corriger)' }, { id: 'b', text: 'Vers le refroidissement des serveurs' }, { id: 'c', text: 'Elle disparaît complètement' }, { id: 'd', text: 'Vers le câblage réseau physique' }] },
-    { id: 'mch-q13', type: 'truefalse', difficulty: 2, skills: ['l-serverless-hybride'], prompt: 'Stocker les secrets d’une fonction serverless en clair dans ses variables d’environnement est à éviter au profit d’un coffre de secrets.' },
-    { id: 'mch-q14', type: 'short', difficulty: 2, skills: ['l-serverless-hybride'], prompt: 'Dans un environnement hybride ou multi-cloud, quel principe vise à n’avoir qu’un annuaire d’identités de référence ? (deux mots)', placeholder: 'identité …' },
-    { id: 'mch-q15', type: 'open', difficulty: 3, skills: ['l-serverless-hybride', 'l-reseau-cloud'], prompt: 'Une entreprise exploite à la fois des serveurs internes et deux fournisseurs cloud, chacun avec sa console. Quels problèmes cela pose-t-il et que recommandez-vous ?' },
-    { id: 'mch-q16', type: 'single', difficulty: 2, skills: ['l-serverless-hybride'], prompt: 'Pourquoi analyser les dépendances embarquées dans une fonction serverless ?', options: [{ id: 'a', text: 'Elles peuvent contenir des vulnérabilités connues, exploitables même sans serveur à administrer' }, { id: 'b', text: 'Pour réduire le temps de démarrage uniquement' }, { id: 'c', text: 'Parce que le fournisseur l’interdit' }, { id: 'd', text: 'Cela n’a aucun intérêt en serverless' }] },
-  ],
+  questions,
   resources: [
     { title: 'Microsoft Cloud Security Benchmark', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/security/benchmark/azure/' },
     { title: 'Google Cloud Security Best Practices Center', source: 'Google Cloud', url: 'https://cloud.google.com/security/best-practices' },
