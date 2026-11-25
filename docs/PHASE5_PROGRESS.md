@@ -54,7 +54,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | E Cryptographie | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | F Web | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | G Code | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
-| H Pentest | ✔ (nouveau) | ✔ | ✔ | ➕ |
+| H Pentest | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | I SOC | ➕ | ✔ | ✔ | ➕ |
 | J Forensique | ➕ | ✔ | ✔ ×2 | ➕ |
 | K Malware | ➕ | ✔ | ✔ | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (24 migrés) + 40 cours à créer (13 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 26 cours à créer et 21 cours existants à migrer.
+Total : 45 cours existants (24 migrés) + 40 cours à créer (14 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 25 cours à créer et 21 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -110,3 +110,4 @@ Total : 45 cours existants (24 migrés) + 40 cours à créer (13 créés) = 85 c
 | `h-pentest-methodologie` | ✔ 40 | ✔ 40 | ✔ (services et analyse de vulnérabilités ; exploitation maîtrisée ; énumération des résultats) |
 | `h-execution-outils-equipes` | ✔ 40 | ✔ 40 | ✔ (API, cloud et conteneurs ; mesure et suivi de la remédiation ; exercice Purple Team rançongiciel) |
 | `h-pentest-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
+| `h-pentest-avance` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |

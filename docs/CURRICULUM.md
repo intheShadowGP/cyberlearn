@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 59 |
-| Questions de cours (avec correction) | 1840 |
+| Cours complets | 60 |
+| Questions de cours (avec correction) | 1880 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -29,7 +29,7 @@
 | E. Cryptographie | 4 | 1, 2, 3, 4 | 22 / 22 |
 | F. Sécurité Web | 5 | 1, 2, 3, 4 | 27 / 27 |
 | G. Programmation et sécurité du code | 4 | 1, 2, 3, 4 | 23 / 23 |
-| H. Sécurité offensive et pentest | 3 | 1, 2, 3 | 34 / 34 |
+| H. Sécurité offensive et pentest | 4 | 1, 2, 3, 4 | 34 / 34 |
 | I. Défense et SOC | 2 | 2, 3 | 26 / 26 |
 | J. Forensique numérique | 3 | 2, 3 | 17 / 17 |
 | K. Malware et reverse engineering | 2 | 2, 3 | 22 / 22 |
@@ -81,6 +81,7 @@
 | Test d’intrusion : initiation, cadre légal et première démarche (`h-pentest-initiation`) | H | 1 · Débutant | 100 min | 6 | 40 | 3 | 6 |
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
+| Exercices adverses avancés : cadrage, émulation d’adversaire, chemins d’attaque et gouvernance (`h-pentest-avance`) | H | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 90 min | 4 | 17 | 2 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
