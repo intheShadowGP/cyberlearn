@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 51 |
-| Questions de cours (avec correction) | 1304 |
+| Cours complets | 52 |
+| Questions de cours (avec correction) | 1344 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -25,7 +25,7 @@
 | A. Fondamentaux de l'informatique | 5 | 1, 2, 3, 4 | 16 / 16 |
 | B. Réseaux informatiques | 6 | 1, 2, 3, 4 | 36 / 36 |
 | C. Linux | 4 | 1, 2, 3, 4 | 22 / 22 |
-| D. Windows et Windows Server | 4 | 1, 2, 3 | 25 / 25 |
+| D. Windows et Windows Server | 5 | 1, 2, 3, 4 | 25 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
 | F. Sécurité Web | 3 | 2, 3 | 27 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
@@ -64,6 +64,7 @@
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 7 |
 | Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 125 min | 6 | 40 | 3 | 5 |
 | Windows Server : services d’infrastructure, PKI et durcissement (`d-windows-server-pki-durcissement`) | D | 3 · Avancé | 130 min | 6 | 40 | 3 | 6 |
+| Windows et Active Directory : durcissement avancé, détection et réponse (`d-windows-defense-avancee`) | D | 4 · Expert | 150 min | 6 | 40 | 3 | 6 |
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
