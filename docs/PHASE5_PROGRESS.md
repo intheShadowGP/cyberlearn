@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (32 migrés) + 40 cours à créer (20 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 19 cours à créer et 13 cours existants à migrer.
+Total : 45 cours existants (33 migrés) + 40 cours à créer (20 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 19 cours à créer et 12 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -125,3 +125,4 @@ Total : 45 cours existants (32 migrés) + 40 cours à créer (20 créés) = 85 c
 | `k-malware-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `k-malware-avance` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
 | `l-cloud-iam` | ✔ 40 | ✔ 40 | ✔ |
+| `l-conteneurs-kubernetes` | ✔ 40 | ✔ 40 | ✔ |

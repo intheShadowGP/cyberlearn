@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'l-conteneurs-kubernetes',
@@ -61,6 +62,56 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: "Le CIS Kubernetes Benchmark et des outils comme kube-bench ou Kubescape permettent d'évaluer un cluster. La documentation officielle de Kubernetes décrit les Pod Security Standards." },
         ],
       },
+      {
+        id: 'execution',
+        title: 'À l’exécution : audit, détection et réponse',
+        blocks: [
+          { t: 'p', text: 'Le durcissement réduit les risques, il ne les supprime pas. Il faut aussi **voir** ce qui se passe dans le cluster et **réagir** sans détruire les preuves. Trois sources se complètent : le **journal d’audit** de l’API, la **détection à l’exécution** (appels système) et les **journaux** des applications et des nœuds.' },
+          {
+            t: 'table',
+            head: ['Signal', 'Pourquoi c’est suspect', 'Source'],
+            rows: [
+              ['`kubectl exec` inattendu dans un pod de production', 'Prise de contrôle ou curiosité malveillante', 'Journal d’audit'],
+              ['Création d’un pod privilégié ou avec `hostPath`', 'Tentative d’évasion ou abus de droits', 'Journal d’audit, admission'],
+              ['Lecture de Secrets par un compte inhabituel', 'Vol d’identifiants', 'Journal d’audit'],
+              ['Shell ou outil réseau lancé dans un conteneur applicatif', 'Exécution de commandes par un attaquant', 'Détection à l’exécution (par exemple Falco)'],
+              ['Connexions sortantes inattendues d’un pod', 'Commande et contrôle, exfiltration', 'Journaux réseau, NetworkPolicy en mode journalisation'],
+              ['Nouveau compte de service avec des droits étendus', 'Persistance et élévation', 'Journal d’audit'],
+            ],
+          },
+          { t: 'def', term: 'Détection à l’exécution', text: 'Surveillance du comportement des conteneurs au niveau du noyau (appels système) selon des règles : un conteneur applicatif qui ouvre un shell ou lit des fichiers sensibles déclenche une alerte. Falco est un exemple libre.' },
+          { t: 'list', ordered: true, items: ['**Isoler** le pod par une NetworkPolicy plus stricte (sans le supprimer).', '**Préserver** : journaux du pod et du nœud, liste des processus, copie du système de fichiers, évènements d’audit liés, empreintes.', '**Contenir** : révoquer les jetons de compte de service exposés, **cordonner** le nœud pour qu’il ne reçoive plus de nouveaux pods.', '**Investiguer** : d’où vient l’image, quels droits avait le pod, quels autres pods ont été touchés.', '**Éradiquer** : reconstruire à partir d’images saines, faire pivoter les secrets, corriger la cause (image, configuration, droits).'] },
+          { t: 'callout', kind: 'warn', text: 'Supprimer un pod compromis efface des preuves, et l’orchestrateur peut le recréer à partir de la même image vulnérable. On isole d’abord, on supprime ensuite.' },
+        ],
+      },
+      {
+        id: 'admission',
+        title: 'Contrôler ce qui s’exécute : registre, signature et admission',
+        blocks: [
+          { t: 'p', text: 'La sécurité d’un cluster dépend de ce qu’on y **admet**. L’idée est de ne laisser entrer que des images **connues, analysées et signées**, et des pods **conformes** à une politique.' },
+          {
+            t: 'table',
+            head: ['Contrôle', 'Rôle', 'Outil ou mécanisme'],
+            rows: [
+              ['**Registre privé**', 'Limiter les sources d’images', 'Registre d’entreprise avec droits restreints'],
+              ['**Analyse de vulnérabilités**', 'Repérer les composants vulnérables', 'Trivy, Grype, en CI et en continu sur le registre'],
+              ['**Signature d’image**', 'Prouver origine et intégrité', 'cosign et vérification à l’admission'],
+              ['**Nomenclature (SBOM)**', 'Savoir quels composants contient l’image', 'Génération en CI, stockage avec l’image'],
+              ['**Politique d’admission**', 'Refuser les pods non conformes', 'Pod Security Admission, Kyverno, Gatekeeper'],
+            ],
+          },
+          { t: 'def', term: 'Contrôleur d’admission', text: 'Composant qui intercepte les requêtes à l’API Kubernetes avant que l’objet soit enregistré, pour les valider ou les modifier. Une politique peut par exemple refuser un pod privilégié, exiger l’exécution non root ou n’accepter que des images signées d’un registre approuvé.' },
+          { t: 'list', items: ['**Épingler par empreinte** et exiger la signature pour que le contenu déployé soit celui qui a été analysé.', '**Reconstruire régulièrement** : une image saine aujourd’hui peut être vulnérable demain.', '**Analyser en continu** les images déjà déployées, pas seulement à la construction.', '**Séparer les rôles** : l’équipe qui écrit les politiques n’est pas celle qui déploie.'] },
+          {
+            t: 'example',
+            title: 'Une image non signée refusée',
+            blocks: [
+              { t: 'p', text: 'Un développeur tente de déployer une image tirée d’un registre public, non signée. La politique d’admission exige une signature valide d’un registre approuvé : la requête est refusée avec un message explicite. Il doit passer par la CI, qui construit, analyse, signe et publie l’image.' },
+              { t: 'p', text: 'Le contrôle a empêché à la fois une image potentiellement compromise et un contournement du processus.' },
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Revue des manifestes Kubernetes d’une application avant sa mise en production.',
@@ -103,25 +154,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Espace de noms `boutique` : le pod `front` doit joindre le pod `api` sur le port 8080 ; `api` doit joindre `db` sur 5432 ; rien d’autre.' }],
       steps: ['Écrire une politique de refus par défaut.', 'Ouvrir front → api et api → db.', 'Vérifier ce qui reste interdit.'],
     },
+    {
+      id: 'audit-k8s',
+      kind: 'analysis',
+      title: 'Analyse : un extrait du journal d’audit Kubernetes',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure (UTC)  Utilisateur / compte                       Action                                             Ressource\n03:02:11     system:serviceaccount:boutique:web      create pods/exec                                   pod web-5c9d (espace boutique)\n03:03:40     system:serviceaccount:boutique:web      get secrets (liste complète)                       espace boutique\n03:05:12     system:serviceaccount:boutique:web      create pods                                        pod « maintenance » (privileged: true, hostPath: /)\n03:07:55     system:serviceaccount:boutique:web      create clusterrolebindings                         binding « maintenance-admin » (cluster-admin)\n03:09:30     (nœud worker-3)                         connexion sortante du pod maintenance              198.51.100.77:443\n\nLe compte de service « web » a normalement le droit de lire une seule ConfigMap.' },
+      ],
+      steps: ['Décrire l’enchaînement et ce qu’il révèle des droits du compte de service.', 'Indiquer ce qu’on préserve, puis les actions de confinement, dans l’ordre.', 'Proposer les mesures qui auraient évité ou détecté l’incident.'],
+    },
   ],
-  questions: [
-    { id: 'k8s-q1', type: 'single', difficulty: 1, skills: ['l-k8s-isolation'], prompt: 'Quelle différence fondamentale distingue un conteneur d’une machine virtuelle ?', options: [{ id: 'a', text: 'Le conteneur partage le noyau de l’hôte' }, { id: 'b', text: 'Le conteneur a son propre noyau' }, { id: 'c', text: 'La machine virtuelle n’a pas de système d’exploitation' }, { id: 'd', text: 'Aucune' }] },
-    { id: 'k8s-q2', type: 'multi', difficulty: 2, skills: ['l-k8s-isolation'], prompt: 'Quels mécanismes du noyau Linux participent à l’isolation des conteneurs ?', options: [{ id: 'a', text: 'Les espaces de noms' }, { id: 'b', text: 'Les cgroups' }, { id: 'c', text: 'seccomp' }, { id: 'd', text: 'Le BIOS' }] },
-    { id: 'k8s-q3', type: 'truefalse', difficulty: 2, skills: ['l-k8s-isolation'], prompt: 'Monter le socket Docker de l’hôte dans un conteneur permet à ce conteneur de prendre le contrôle de l’hôte.' },
-    { id: 'k8s-q4', type: 'short', difficulty: 2, skills: ['l-k8s-isolation'], prompt: 'Quel paramètre de securityContext donne à un conteneur quasiment tous les privilèges de l’hôte ? (un mot)' },
-    { id: 'k8s-q5', type: 'single', difficulty: 2, skills: ['l-k8s-images'], prompt: 'Un Dockerfile copie un fichier .env puis le supprime dans l’instruction suivante. Le secret est-il protégé ?', options: [{ id: 'a', text: 'Oui, il a été supprimé' }, { id: 'b', text: 'Non, il reste lisible dans la couche créée par la copie' }, { id: 'c', text: 'Oui, si l’image est privée' }, { id: 'd', text: 'Oui, car les couches sont chiffrées' }] },
-    { id: 'k8s-q6', type: 'multi', difficulty: 2, skills: ['l-k8s-images'], prompt: 'Quelles pratiques améliorent la sécurité d’une image ?', options: [{ id: 'a', text: 'Image de base minimale (distroless, slim)' }, { id: 'b', text: 'Utilisateur non root' }, { id: 'c', text: 'Étiquette `latest` pour avoir toujours la dernière version' }, { id: 'd', text: 'Analyse des vulnérabilités en CI' }] },
-    { id: 'k8s-q7', type: 'truefalse', difficulty: 1, skills: ['l-k8s-images'], prompt: 'Épingler une image par son empreinte `@sha256:…` garantit que le même contenu est déployé à chaque fois.' },
-    { id: 'k8s-q8', type: 'short', difficulty: 2, skills: ['l-k8s-images'], prompt: 'Quelle commande Docker affiche l’historique des couches d’une image ? (deux mots)' },
-    { id: 'k8s-q9', type: 'single', difficulty: 2, skills: ['l-k8s-cluster'], prompt: 'Par défaut, sans NetworkPolicy, quels pods d’un cluster Kubernetes peuvent communiquer entre eux ?', options: [{ id: 'a', text: 'Aucun' }, { id: 'b', text: 'Tous' }, { id: 'c', text: 'Seulement ceux du même nœud' }, { id: 'd', text: 'Seulement ceux du même espace de noms' }] },
-    { id: 'k8s-q10', type: 'truefalse', difficulty: 2, skills: ['l-k8s-cluster'], prompt: 'Un objet Secret Kubernetes est chiffré par défaut puisque ses valeurs sont en Base64.' },
-    { id: 'k8s-q11', type: 'multi', difficulty: 3, skills: ['l-k8s-cluster'], prompt: 'Quelles permissions RBAC sont particulièrement sensibles ?', options: [{ id: 'a', text: '`get` sur les `secrets`' }, { id: 'b', text: '`create` sur les `pods`' }, { id: 'c', text: '`get` sur les `configmaps` d’un espace de noms de démonstration' }, { id: 'd', text: '`bind` ou `escalate` sur les rôles' }] },
-    { id: 'k8s-q12', type: 'short', difficulty: 3, skills: ['l-k8s-cluster'], prompt: 'Quel est le nom du profil Pod Security Standards le plus strict ?' },
-    { id: 'k8s-q13', type: 'single', difficulty: 3, skills: ['l-k8s-cluster', 'l-k8s-isolation'], prompt: 'Pourquoi `create pods` dans un espace de noms est-il dangereux même sans accès aux Secrets ?', options: [{ id: 'a', text: 'Parce qu’un pod peut monter les Secrets et utiliser les comptes de service de cet espace de noms' }, { id: 'b', text: 'Parce que cela consomme du CPU' }, { id: 'c', text: 'Ce n’est pas dangereux' }, { id: 'd', text: 'Parce que cela supprime les journaux' }] },
-    { id: 'k8s-q14', type: 'open', difficulty: 3, skills: ['l-k8s-isolation', 'l-k8s-cluster'], prompt: 'Analysez le manifeste (hostNetwork, privileged, socket Docker monté, image `latest`) : risques, chemin d’évasion et version durcie.' },
-    { id: 'k8s-q15', type: 'open', difficulty: 3, skills: ['l-k8s-cluster'], prompt: 'Décrivez les NetworkPolicy nécessaires pour que front joigne api:8080 et api joigne db:5432, et rien d’autre, dans l’espace de noms `boutique`.' },
-    { id: 'k8s-q16', type: 'single', difficulty: 1, skills: ['l-k8s-images', 'l-k8s-cluster'], prompt: 'Quel réglage empêche un processus du conteneur d’obtenir plus de privilèges que son parent (setuid) ?', options: [{ id: 'a', text: '`allowPrivilegeEscalation: false`' }, { id: 'b', text: '`hostPID: true`' }, { id: 'c', text: '`privileged: true`' }, { id: 'd', text: '`replicas: 1`' }] },
-  ],
+  questions,
   resources: [
     { title: 'Pod Security Standards', source: 'Documentation Kubernetes', url: 'https://kubernetes.io/docs/concepts/security/pod-security-standards/' },
     { title: 'CIS Kubernetes Benchmark', source: 'Center for Internet Security', url: 'https://www.cisecurity.org/benchmark/kubernetes' },
