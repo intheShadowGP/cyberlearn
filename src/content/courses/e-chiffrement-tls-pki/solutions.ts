@@ -27,5 +27,22 @@ export const solutions: CourseSolutions = {
         { t: 'p', text: 'Post-quantique : activer l’échange de clés hybride (X25519 + ML-KEM-768) dès que le serveur et ses clients le permettent, en commençant par ce portail dont les données ont une longue durée de sensibilité ; inscrire la migration des certificats vers des signatures post-quantiques dans la feuille de route, à mesure que les AC et les navigateurs les prendront en charge.' },
       ],
     },
+    'plan-chiffrement': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Niveau', 'Menace couverte', 'Réalisation'],
+          rows: [
+            ['Transit', 'Écoute et usurpation sur le réseau', 'TLS 1.3 (1.2 minimum), HSTS, certificats renouvelés automatiquement, mTLS entre services internes et pour les API partenaires'],
+            ['Volume', 'Vol d’un disque ou d’une machine virtuelle', 'Chiffrement des disques des serveurs de base de données et des volumes de sauvegarde'],
+            ['Sauvegardes', 'Vol ou fuite chez le prestataire', 'Chiffrement avant envoi, avec des clés qui restent chez l’organisation ; copies isolées'],
+            ['Champs sensibles', 'Lecture par un administrateur de la base, sauvegarde volée, injection', 'Chiffrement par l’application (AES-256-GCM) avec l’identifiant du dossier en données associées'],
+          ],
+        },
+        { t: 'list', items: ['Clés : chiffrement d’enveloppe avec une clé maîtresse dans un KMS ou un HSM, des clés de données par jeu de données, séparées entre test et production, avec accès limités et journalisés et alertes sur les usages anormaux.', 'Rotation : calendrier régulier et rotation immédiate après un incident ; anciennes versions de la clé maîtresse conservées pour déchiffrer pendant la migration, rechiffrement progressif des clés de données.'] },
+        { t: 'list', items: ['Sauvegardes et récupération : sauvegarder les clés (ou leur moyen de récupération) séparément des données, tester la restauration avec les clés, documenter la procédure de reprise.', 'Vigilance : aucune clé dans le dépôt ni dans la base, inventaire des algorithmes pour l’agilité (migration post-quantique), tests réguliers de la configuration TLS.'] },
+        { t: 'callout', kind: 'tip', text: 'Aucun niveau ne suffit seul : le chiffrement du volume protège du vol de matériel, celui des champs d’un administrateur curieux. La valeur de l’ensemble tient à la gestion des clés.' },
+      ],
+    },
   },
 };
