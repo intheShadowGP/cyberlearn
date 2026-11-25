@@ -53,7 +53,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | D Windows | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | E Cryptographie | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | F Web | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
-| G Code | ➕ | ✔ | ✔ | ➕ |
+| G Code | ✔ (nouveau) | ✔ | ✔ | ➕ |
 | H Pentest | ➕ | ✔ | ✔ | ➕ |
 | I SOC | ➕ | ✔ | ✔ | ➕ |
 | J Forensique | ➕ | ✔ | ✔ ×2 | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (22 migrés) + 40 cours à créer (10 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 29 cours à créer et 23 cours existants à migrer.
+Total : 45 cours existants (22 migrés) + 40 cours à créer (11 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 28 cours à créer et 23 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -103,5 +103,6 @@ Total : 45 cours existants (22 migrés) + 40 cours à créer (10 créés) = 85 c
 | `f-acces-sessions-ssrf` | ✔ 40 | ✔ 40 | ✔ (MFA, OAuth 2.0 et OpenID Connect ; détection et limitation des abus ; revue d’une intégration OAuth) |
 | `f-xxe-rfi-clickjacking-race` | ✔ 40 | ✔ 40 | ✔ (téléversement et désérialisation ; logique métier et restitution des constats ; revue de code d’un téléversement) |
 | `f-web-defense-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
+| `g-code-securise-bases` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `g-code-sur-langages` | ✔ 40 | ✔ 40 | ✔ (erreurs, journaux et secrets ; fichiers, chemins et archives ; revue d’un service de dépôt) |
 | `g-vulnerabilites-memoire` | ✔ 40 | ✔ 40 | ✔ (tas et exploitation ; C++ moderne, Rust et migration ; revue d’un lecteur de messages) |
