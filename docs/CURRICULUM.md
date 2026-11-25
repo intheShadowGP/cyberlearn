@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 50 |
-| Questions de cours (avec correction) | 1241 |
+| Questions de cours (avec correction) | 1264 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -61,7 +61,7 @@
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 6 | 40 | 3 | 5 |
 | Linux avancé : durcissement du noyau, intégrité, chaîne d’approvisionnement et investigation (`c-linux-securite-avancee`) | C | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 7 |
-| Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 95 min | 5 | 17 | 2 | 4 |
+| Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 125 min | 6 | 40 | 3 | 5 |
 | Windows Server : services d’infrastructure, PKI et durcissement (`d-windows-server-pki-durcissement`) | D | 3 · Avancé | 130 min | 6 | 40 | 3 | 6 |
 | Hachage, HMAC et stockage sécurisé des mots de passe (`e-hachage-mots-de-passe`) | E | 2 · Intermédiaire | 80 min | 4 | 16 | 2 | 4 |
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |

@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['D-active-directory', 'D-domaine', 'D-controleur-de-domaine', 'D-ldap', 'D-kerberos', 'D-ntlm', 'D-gpo', 'D-windows-event-logs', 'D-analyse-des-evenements', 'D-windows-laps'],
   title: 'Active Directory : Kerberos, NTLM et attaques sur l’authentification',
   level: 3,
-  durationMin: 95,
+  durationMin: 125,
   summary:
     "Comprendre l'annuaire Active Directory, le fonctionnement de Kerberos et NTLM, les attaques qui les visent (pulvérisation de mots de passe, Kerberoasting, pass-the-hash, golden ticket) et leur détection dans les journaux Windows.",
   objectives: [
@@ -15,6 +15,7 @@ export const meta: CourseMeta = {
     'Expliquer les faiblesses de NTLM et les attaques associées.',
     'Détecter les attaques courantes à partir des événements 4624, 4625, 4768, 4769, 4771.',
     'Proposer des mesures de durcissement : modèle en tiers, LAPS, comptes de service gérés.',
+    'Auditer les droits, la délégation et les chemins d’attaque indirects (ACL, GPO, DCSync) et les couper.',
   ],
   prerequisites: ['a-systemes-fondamentaux'],
   prerequisiteKnowledge: ['Notions de réseau (adresses IP, ports)', 'Notion de hachage de mot de passe'],
@@ -23,8 +24,9 @@ export const meta: CourseMeta = {
     { id: 'd-kerberos', label: 'Fonctionnement de Kerberos et NTLM', level: 3 },
     { id: 'd-ad-attacks', label: 'Attaques sur l’authentification AD', level: 3 },
     { id: 'd-ad-detect', label: 'Détection et durcissement AD', level: 3 },
+    { id: 'd-ad-chemins', label: 'Droits, délégation et chemins d’attaque AD', level: 3 },
   ],
-  sectionCount: 5,
-  questionCount: 17,
-  quizSize: 8,
+  sectionCount: 6,
+  questionCount: 40,
+  quizSize: 10,
 };
