@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 61 |
-| Questions de cours (avec correction) | 1967 |
+| Cours complets | 62 |
+| Questions de cours (avec correction) | 2007 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -30,7 +30,7 @@
 | F. Sécurité Web | 5 | 1, 2, 3, 4 | 27 / 27 |
 | G. Programmation et sécurité du code | 4 | 1, 2, 3, 4 | 23 / 23 |
 | H. Sécurité offensive et pentest | 4 | 1, 2, 3, 4 | 34 / 34 |
-| I. Défense et SOC | 3 | 1, 2, 3 | 26 / 26 |
+| I. Défense et SOC | 4 | 1, 2, 3, 4 | 26 / 26 |
 | J. Forensique numérique | 3 | 2, 3 | 17 / 17 |
 | K. Malware et reverse engineering | 2 | 2, 3 | 22 / 22 |
 | L. Sécurité Cloud | 4 | 2, 3 | 23 / 23 |
@@ -85,6 +85,7 @@
 | Défense et SOC : initiation aux journaux, aux alertes et aux premiers réflexes (`i-soc-initiation`) | I | 1 · Débutant | 90 min | 6 | 40 | 3 | 4 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
+| Ingénierie de détection avancée et pilotage d’un SOC (`i-detection-avancee`) | I | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |

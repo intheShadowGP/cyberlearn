@@ -59,6 +59,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'h-pentest-methodologie': sheet(['Référentiel PASSI (ANSSI)', 'OWASP WSTG', 'NIST SP 800-115', 'CVSS v4.0'], ['Version de CVSS', 'Catalogue CISA KEV']),
   'h-execution-outils-equipes': sheet(['NIST SP 800-115', 'OWASP WSTG', 'Référentiel PASSI (ANSSI)', 'MITRE ATT&CK', 'OWASP Password Storage Cheat Sheet'], ['Versions et fonctionnalités des outils de test', 'Techniques ATT&CK et détections associées']),
   'i-soc-initiation': sheet(['Guide d’hygiène informatique (ANSSI)', 'NIST SP 800-61 Rév. 3', 'RGPD, article 33'], ['Obligations de notification (NIS2, transposition)', 'Fonctionnalités des outils SIEM et EDR']),
+  'i-detection-avancee': sheet(['MITRE ATT&CK', 'Sigma', 'Palantir Alerting and Detection Strategy Framework', 'SOC-CMM', 'NIST SP 800-61 Rév. 3'], ['Version d’ATT&CK', 'Exigences réglementaires (RGPD, NIS2)', 'Fonctionnalités des plateformes SIEM, XDR et SOAR']),
   'i-soc-detection': sheet(['MITRE ATT&CK', 'Sigma', 'NIST SP 800-61 Rév. 3'], ['Techniques ATT&CK (identifiants révisés à chaque version)']),
   'i-threat-hunting': sheet(['TLP 2.0 (FIRST)', 'Pyramid of Pain (D. Bianco, 2013)', 'MITRE ATT&CK (T1053.005, T1136.001)', 'STIX 2.1', 'Zeek et Suricata'], ['Fonctionnalités des plateformes XDR, NDR et SOAR', 'Empreintes TLS (JA3, JA4)']),
   'j-forensique-principes': sheet(['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], ['Artefacts Windows selon les versions du système']),
