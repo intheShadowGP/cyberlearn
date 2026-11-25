@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'k-retro-ingenierie-defensive',
@@ -98,6 +99,47 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Face à ces familles, la défense ne consiste pas à les reproduire mais à réduire ce qu’elles rapportent (MFA contre le vol de mot de passe), à ancrer la confiance dans le matériel (contre les bootkits) et à surveiller les comportements (EDR, persistance), puis à analyser tout échantillon capturé pour produire des indicateurs.' },
         ],
       },
+      {
+        id: 'obfuscation',
+        title: 'Obfuscation et analyse du code dépaqueté',
+        blocks: [
+          { t: 'p', text: 'Un auteur de maliciel cherche à gêner l’analyste : il **brouille** son code pour qu’il soit difficile à lire et à détecter. Connaître ces protections permet de savoir **où chercher** quand l’analyse statique de base ne montre presque rien. Le cadre reste défensif : on décrit les protections pour les contourner à des fins d’analyse, jamais pour les appliquer.' },
+          {
+            t: 'table',
+            head: ['Protection', 'Effet sur l’analyse', 'Réponse de l’analyste'],
+            rows: [
+              ['**Chiffrement des chaînes**', 'Aucune adresse ni nom de fichier lisible dans le binaire', 'Repérer la routine de déchiffrement ; observer la mémoire après exécution'],
+              ['**Résolution dynamique des fonctions**', 'Table d’imports presque vide', 'Examiner le code qui retrouve les fonctions ; lire les appels au débogueur'],
+              ['**Flot de contrôle compliqué**', 'Désassemblage difficile à suivre', 'Partir des points d’intérêt (imports, chaînes) plutôt que lire en séquence'],
+              ['**Empaquetage**', 'Le vrai code n’existe qu’en mémoire', 'Instantané de la mémoire après le dépaquetage, puis analyse statique de ce code'],
+              ['**Anti-débogage et détection d’environnement**', 'Le programme se comporte autrement ou s’arrête s’il est observé', 'Étudier la routine de détection, observer autrement (traces système, mémoire), prolonger l’observation'],
+            ],
+          },
+          { t: 'def', term: 'Code dépaqueté', text: 'Code réel d’un exécutable empaqueté, une fois déchiffré ou décompressé en mémoire à l’exécution. On le récupère par une copie de la région mémoire (en environnement isolé) et on l’analyse comme un binaire ordinaire.' },
+          { t: 'list', items: ['**Partir des indices** : une routine qui boucle sur un tampon et applique une opération simple est souvent un déchiffrement ; on la repère à partir des chaînes absentes ou des constantes.', '**Extraire plutôt qu’exécuter** : lorsque c’est possible, on reconstitue la configuration en lisant la mémoire plutôt qu’en laissant le programme joindre son serveur.', '**Garder l’isolement** : un échantillon qui détecte l’analyse peut ne rien faire ou déclencher une action dangereuse ; la machine d’analyse reste coupée du réseau de production.'] },
+          { t: 'callout', kind: 'warn', text: 'Une absence de comportement sous débogueur n’est pas une preuve d’innocuité : le programme peut avoir détecté l’observation.' },
+        ],
+      },
+      {
+        id: 'rapport',
+        title: 'Du binaire à la détection : configuration, règles et rapport',
+        blocks: [
+          { t: 'p', text: 'La rétro-ingénierie défensive se termine toujours par un **produit utilisable** : des indicateurs fiables, des règles de détection et un rapport qu’une autre équipe peut réutiliser.' },
+          {
+            t: 'table',
+            head: ['Produit', 'Origine', 'Usage'],
+            rows: [
+              ['**Configuration extraite**', 'Domaines, clés, identifiant de campagne, intervalle de balise lus dans le code dépaqueté', 'Indicateurs réseau durables, regroupement de campagnes'],
+              ['**Capacités**', 'Imports résolus, fonctions identifiées (persistance, injection, communication)', 'Rattachement à ATT&CK, lacunes de détection'],
+              ['**Règles de détection**', 'Routine de déchiffrement, structure de configuration, constantes', 'YARA sur disque et en mémoire, règles EDR'],
+              ['**Rapport**', 'Méthode, constats, indicateurs datés, niveau de confiance, limites', 'SOC, réponse à incident, partenaires (TLP)'],
+            ],
+          },
+          { t: 'list', items: ['**Cibler le stable** : une routine ou une structure de configuration persiste d’une variante à l’autre ; une chaîne claire change à chaque campagne.', '**Deux règles** : une pour le fichier empaqueté sur disque, une pour le code dépaqueté en mémoire.', '**Tester** : sur des variantes (doit correspondre) et sur un corpus sain (ne doit pas correspondre).', '**Limites assumées** : parties non analysées, comportements non déclenchés, hypothèses.'] },
+          { t: 'callout', kind: 'legal', title: 'Cadre légal', text: 'L’analyse d’un échantillon est légitime dans une mission défensive documentée (incident, formation, recherche encadrée), avec un stockage protégé et des accès tracés. Fabriquer, diffuser ou utiliser un maliciel est une infraction, comme tester sur le système d’un tiers. Le partage de résultats se limite à des indicateurs et des règles, pas à l’échantillon armé en clair.' },
+          { t: 'callout', kind: 'key', text: 'La valeur défensive vient de ce que l’on peut **détecter** et **prévenir** grâce à l’analyse, jamais de la reproduction de la menace.' },
+        ],
+      },
     ],
     useCases: [
       'Analyse approfondie d’un échantillon d’incident quand l’analyse statique et dynamique de base ne suffit pas.',
@@ -144,25 +186,19 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un responsable vous demande comment réduire le risque lié aux bootkits et aux keyloggers sur un parc, sans entrer dans la technique offensive.' }],
       steps: ['Donner les mesures contre les bootkits et expliquer pourquoi elles agissent.', 'Donner les mesures contre les keyloggers.', 'Expliquer le rôle de l’analyse d’un échantillon capturé dans cette défense.'],
     },
+    {
+      id: 'routine-dechiffrement',
+      kind: 'analysis',
+      title: 'Analyse : lire une routine de déchiffrement dans un code décompilé',
+      context: [
+        { t: 'p', text: 'Extrait de pseudo-code (décompilation, en environnement isolé) d’un échantillon dépaqueté. Les valeurs sont fictives :' },
+        { t: 'code', lang: 'text', code: 'fonction decoder(tampon, longueur):\n    pour i de 0 à longueur - 1:\n        tampon[i] = tampon[i] XOR 0x37\n    retourner tampon\n\nfonction principale():\n    config = decoder(donnees_chiffrees, 41)\n    domaine = lire(config, "domaine")\n    identifiant = lire(config, "campagne")\n    creer_mutex("Local\\\\SyncHelper_" + identifiant)\n    boucle: attendre(60 secondes); envoyer(domaine, "/gate.php?id=" + identifiant)' },
+        { t: 'p', text: 'Après exécution de `decoder` en mémoire, la configuration contient : domaine `upd.cdn-sync-helper.example`, campagne `93`.' },
+      ],
+      steps: ['Expliquer ce que fait `decoder` et pourquoi on ne voyait aucune chaîne lisible.', 'Lister la configuration et les indicateurs à produire, avec leur qualification.', 'Proposer deux règles de détection (disque et mémoire) et la façon de les tester.'],
+    },
   ],
-  questions: [
-    { id: 'rid-q1', type: 'single', difficulty: 2, skills: ['k-binaires'], prompt: 'Quels formats de binaires exécutables correspondent respectivement à Windows et à Linux ?', options: [{ id: 'a', text: 'PE (Windows) et ELF (Linux)' }, { id: 'b', text: 'ELF (Windows) et PE (Linux)' }, { id: 'c', text: 'ZIP (Windows) et TAR (Linux)' }, { id: 'd', text: 'PDF (Windows) et DOC (Linux)' }] },
-    { id: 'rid-q2', type: 'single', difficulty: 2, skills: ['k-binaires'], prompt: 'Qu’indique la table des imports d’un binaire ?', options: [{ id: 'a', text: 'Les fonctions externes qu’il appelle, ce qui suggère ses capacités (réseau, chiffrement, processus)' }, { id: 'b', text: 'La liste des utilisateurs du système' }, { id: 'c', text: 'Le mot de passe du fichier' }, { id: 'd', text: 'La vitesse du processeur' }] },
-    { id: 'rid-q3', type: 'truefalse', difficulty: 2, skills: ['k-binaires'], prompt: 'Lire la structure d’un binaire (sections, imports) fait partie de l’analyse statique et ne nécessite pas de l’exécuter.' },
-    { id: 'rid-q4', type: 'multi', difficulty: 3, skills: ['k-binaires'], prompt: 'Quels éléments de structure d’un binaire sont des signaux à examiner ?', options: [{ id: 'a', text: 'Un point d’entrée dans une section inhabituelle' }, { id: 'b', text: 'Une section à la fois inscriptible et exécutable' }, { id: 'c', text: 'Un contenu à très forte entropie (apparence aléatoire)' }, { id: 'd', text: 'La présence d’un en-tête standard conforme au format' }] },
-    { id: 'rid-q5', type: 'single', difficulty: 2, skills: ['k-desassemblage-debogage'], prompt: 'Que produit le désassemblage ?', options: [{ id: 'a', text: 'Une représentation en assembleur des instructions, à partir du code machine' }, { id: 'b', text: 'Le code source d’origine exact' }, { id: 'c', text: 'Une image du programme' }, { id: 'd', text: 'Un fichier chiffré' }] },
-    { id: 'rid-q6', type: 'truefalse', difficulty: 2, skills: ['k-desassemblage-debogage'], prompt: 'Le désassemblage permet de retrouver exactement le code source d’origine du programme.' },
-    { id: 'rid-q7', type: 'single', difficulty: 3, skills: ['k-desassemblage-debogage'], prompt: 'Pourquoi le débogage complète-t-il souvent le désassemblage pour un maliciel empaqueté ?', options: [{ id: 'a', text: 'Le vrai code n’apparaît souvent qu’une fois le binaire déchiffré en mémoire, à l’exécution' }, { id: 'b', text: 'Le débogage accélère le maliciel' }, { id: 'c', text: 'Le débogage supprime le maliciel' }, { id: 'd', text: 'Le désassemblage est interdit' }] },
-    { id: 'rid-q8', type: 'truefalse', difficulty: 2, skills: ['k-desassemblage-debogage'], prompt: 'Déboguer un maliciel revient à l’exécuter : cela ne se fait que dans un environnement isolé, jamais sur un poste de travail.' },
-    { id: 'rid-q9', type: 'short', difficulty: 2, skills: ['k-outils-re'], prompt: 'Citez un débogueur libre couramment utilisé pour l’analyse dynamique de binaires Windows.', placeholder: 'nom de l’outil' },
-    { id: 'rid-q10', type: 'multi', difficulty: 2, skills: ['k-outils-re'], prompt: 'Quelles affirmations sur les outils de rétro-ingénierie sont exactes ?', options: [{ id: 'a', text: 'Ghidra est un désassembleur/décompilateur libre' }, { id: 'b', text: 'IDA est une référence (commerciale) de l’analyse statique' }, { id: 'c', text: 'x64dbg sert à l’analyse dynamique pas à pas' }, { id: 'd', text: 'Ces outils sont par nature malveillants et interdits' }] },
-    { id: 'rid-q11', type: 'short', difficulty: 2, skills: ['k-outils-re'], prompt: 'Comment appelle-t-on l’étape, au-dessus du désassemblage, qui reconstruit une approximation en pseudo-code de haut niveau ?', placeholder: 'déc…' },
-    { id: 'rid-q12', type: 'single', difficulty: 3, skills: ['k-familles'], prompt: 'Pourquoi un bootkit est-il difficile à détecter par les outils classiques ?', options: [{ id: 'a', text: 'Il s’exécute avant le système d’exploitation et peut masquer sa présence aux outils qui tournent ensuite' }, { id: 'b', text: 'Il est écrit dans un langage secret' }, { id: 'c', text: 'Il est trop volumineux' }, { id: 'd', text: 'Il ne s’exécute jamais' }] },
-    { id: 'rid-q13', type: 'single', difficulty: 2, skills: ['k-familles'], prompt: 'Quelle mesure matérielle aide le plus à contrer un bootkit ?', options: [{ id: 'a', text: 'Secure Boot et le démarrage mesuré (TPM), qui vérifient l’intégrité avant que le code ne prenne la main' }, { id: 'b', text: 'Un mot de passe de session plus long' }, { id: 'c', text: 'Un écran plus grand' }, { id: 'd', text: 'La désactivation du pare-feu' }] },
-    { id: 'rid-q14', type: 'multi', difficulty: 2, skills: ['k-familles'], prompt: 'Quelles mesures réduisent le risque lié aux keyloggers ?', options: [{ id: 'a', text: 'Un EDR qui détecte l’accès au clavier et la persistance' }, { id: 'b', text: 'La MFA, qui limite la valeur d’un mot de passe volé' }, { id: 'c', text: 'La surveillance des processus' }, { id: 'd', text: 'Partager son mot de passe avec un collègue' }] },
-    { id: 'rid-q15', type: 'open', difficulty: 3, skills: ['k-familles', 'k-binaires'], prompt: 'Expliquez pourquoi, pour se défendre d’un bootkit ou d’un keylogger, on étudie leur fonctionnement et on analyse les échantillons capturés, plutôt que de chercher à les reproduire.' },
-    { id: 'rid-q16', type: 'open', difficulty: 3, skills: ['k-desassemblage-debogage', 'k-outils-re'], prompt: 'Décrivez une démarche d’analyse d’un échantillon empaqueté combinant analyse statique et dynamique, en précisant les outils et les précautions.' },
-  ],
+  questions,
   resources: [
     { title: 'Ghidra', source: 'National Security Agency', url: 'https://ghidra-sre.org/' },
     { title: 'PE Format', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/windows/win32/debug/pe-format' },
