@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'j-analyse-maliciels-investigation',
@@ -92,6 +93,56 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Le partage d’IOC (avec le CERT, l’ISAC du secteur) selon le marquage TLP aide toute la communauté : la même analyse profite à d’autres défenseurs. On partage des indicateurs défensifs, jamais l’échantillon armé en clair.' },
         ],
       },
+      {
+        id: 'documents',
+        title: 'Documents piégés et scripts : une analyse défensive',
+        blocks: [
+          { t: 'p', text: 'Une grande part des incidents commence par un **document** (bureautique, PDF) ou un **script** qui entraîne l’exécution de code. Leur analyse suit les mêmes règles que celle d’un exécutable : isolement, statique d’abord, indicateurs en sortie. Elle reste **défensive** : on lit ce que contient le document, on ne le rend pas plus dangereux.' },
+          {
+            t: 'table',
+            head: ['Type', 'Mécanisme fréquent', 'Ce qu’on extrait (sans exécuter)'],
+            rows: [
+              ['**Document bureautique avec macros**', 'Macro exécutée si l’utilisateur l’active ; elle lance un interpréteur ou télécharge un fichier', 'Texte de la macro, URL, noms et chemins de fichiers, commandes appelées'],
+              ['**PDF**', 'Liens, scripts intégrés, exploitation d’une vulnérabilité du lecteur', 'Liens, objets intégrés, structure inhabituelle'],
+              ['**Script (PowerShell, JavaScript, shell)**', 'Code lisible mais souvent masqué (encodage, concaténation de chaînes)', 'Commande décodée, adresses, fichiers déposés'],
+              ['**Archive ou raccourci**', 'Le fichier ouvert lance en réalité un programme', 'Cible réelle du raccourci, contenu de l’archive, noms trompeurs'],
+            ],
+          },
+          { t: 'def', term: 'Encodage et obfuscation', text: 'Un script malveillant masque souvent sa commande par un encodage réversible (par exemple Base64, option `-enc` de PowerShell) ou par des découpages de chaînes. Ce n’est **pas du chiffrement** : le décoder, dans un environnement isolé et sans l’exécuter, révèle ce qu’il fait.' },
+          { t: 'list', items: ['**Ne pas activer** les macros ni ouvrir le document sur un poste ordinaire.', '**Extraire** le contenu actif (macros, scripts, liens) avec des outils d’analyse statique, en environnement isolé.', '**Décoder** sans exécuter : lire la commande, repérer les adresses et les fichiers visés.', '**Rattacher** les comportements à ATT&CK (exécution par script, hameçonnage) et produire les indicateurs.'] },
+          {
+            t: 'example',
+            title: 'Du document à l’indicateur',
+            blocks: [
+              { t: 'p', text: 'Un document `commande-mars.docm` contient une macro qui lance `powershell -enc …`. Décodée en environnement isolé, la commande télécharge un fichier depuis `maj-service.example` et l’écrit dans `%APPDATA%`. On en tire trois indicateurs : l’empreinte du document, le domaine et le chemin de dépôt.' },
+              { t: 'p', text: 'Côté prévention : bloquer les macros des documents d’origine externe, rechercher le même document dans les courriels reçus, bloquer le domaine et surveiller le chemin sur le parc.' },
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: 'Ne collez jamais le contenu d’un échantillon ou d’un document sensible dans un service public sans avoir mesuré la divulgation : on interroge par l’empreinte.' },
+        ],
+      },
+      {
+        id: 'rapport',
+        title: 'Rapport, partage et cadre légal',
+        blocks: [
+          { t: 'p', text: 'Une analyse ne sert que si ses résultats sont **documentés**, **partagés avec discernement** et obtenus dans le **respect du droit**.' },
+          {
+            t: 'table',
+            head: ['Partie du rapport', 'Contenu'],
+            rows: [
+              ['**Échantillon**', 'Nom, taille, empreinte, origine, date de collecte, chaîne de conservation'],
+              ['**Méthode**', 'Environnement, outils et versions, ordre des analyses (statique, dynamique)'],
+              ['**Comportement**', 'Fichiers, persistance, communications, techniques ATT&CK'],
+              ['**Indicateurs**', 'IOC datés et qualifiés ; règle YARA le cas échéant'],
+              ['**Confiance et limites**', 'Ce qui est établi, ce qui reste hypothèse, ce qui n’a pas pu être observé'],
+              ['**Recommandations**', 'Blocage, recherche dans le parc, correction du vecteur d’entrée'],
+            ],
+          },
+          { t: 'list', items: ['**Qualité des IOC** : un indicateur est daté, contextualisé et accompagné d’un niveau de confiance ; une adresse partagée ou réattribuée ne se bloque pas à l’aveugle.', '**Partage** : selon le marquage TLP, avec le CERT ou l’ISAC ; on partage des indicateurs et des règles, pas l’échantillon armé en clair.', '**Confidentialité** : le rapport ne contient ni données personnelles de victimes ni secrets.'] },
+          { t: 'callout', kind: 'legal', title: 'Cadre légal', text: 'Détenir, étudier et partager des programmes malveillants exige un motif légitime et défensif, une mission documentée, un stockage protégé et une traçabilité des accès. Créer ou diffuser un maliciel, ou accéder sans autorisation à l’infrastructure d’un attaquant, est illégal. En cas de doute, on consulte le service juridique avant d’agir.' },
+          { t: 'callout', kind: 'tip', text: 'Un bon rapport permet à une autre équipe de refaire la détection sans avoir à analyser de nouveau l’échantillon.' },
+        ],
+      },
     ],
     useCases: [
       'Réponse à incident : analyser le binaire déposé par un attaquant pour produire des IOC et contenir la propagation.',
@@ -138,25 +189,18 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Pendant une réponse à incident, vous récupérez un binaire déposé par l’attaquant sur un serveur. Vous devez l’analyser pour détecter sa présence ailleurs et contenir l’incident.' }],
       steps: ['Décrire la préparation de l’environnement et la manipulation de l’échantillon.', 'Décrire l’ordre des analyses (statique puis dynamique) et les précautions.', 'Indiquer les livrables défensifs attendus.'],
     },
+    {
+      id: 'document-piege',
+      kind: 'analysis',
+      title: 'Analyse : un document avec macro reçu par courriel',
+      context: [
+        { t: 'p', text: 'Un salarié signale un courriel « Bon de commande » avec une pièce jointe. Analyse statique, en environnement isolé, sans activer les macros :' },
+        { t: 'code', lang: 'text', code: 'Nom          : bon-de-commande.docm\nEmpreinte    : inconnue des services de réputation\nMacros       : une macro AutoOpen\nContenu macro (extrait) : lance powershell.exe avec -w hidden -enc <chaîne Base64>\nChaîne décodée (lecture seule) : télécharge http://maj-service.example/a.bin vers %APPDATA%\\upd.exe puis le lance\nCourriel     : expéditeur externe, domaine enregistré il y a 3 jours' },
+      ],
+      steps: ['Dire si le document est malveillant et pourquoi, sans l’avoir exécuté.', 'Lister les indicateurs à transmettre au SOC et les techniques ATT&CK associées.', 'Proposer les mesures de recherche, de blocage et de prévention.'],
+    },
   ],
-  questions: [
-    { id: 'ami-q1', type: 'single', difficulty: 1, skills: ['j-mw-role'], prompt: 'Dans un cadre défensif, quels sont les objectifs de l’analyse de maliciels ?', options: [{ id: 'a', text: 'Comprendre, détecter et contenir ; pas créer ni diffuser' }, { id: 'b', text: 'Reproduire le maliciel pour le réutiliser' }, { id: 'c', text: 'Le diffuser à d’autres machines pour tester' }, { id: 'd', text: 'Le vendre' }] },
-    { id: 'ami-q2', type: 'truefalse', difficulty: 2, skills: ['j-mw-role'], prompt: 'Un échantillon de maliciel étant une preuve, on en fait une copie de travail et on préserve l’original, comme pour toute preuve.' },
-    { id: 'ami-q3', type: 'multi', difficulty: 2, skills: ['j-mw-role'], prompt: 'À quelles questions d’investigation l’analyse d’un échantillon aide-t-elle à répondre ?', options: [{ id: 'a', text: 'Qu’a fait le maliciel sur la machine ?' }, { id: 'b', text: 'D’autres machines sont-elles touchées ?' }, { id: 'c', text: 'Comment contenir la propagation ?' }, { id: 'd', text: 'Quelle est la météo du jour ?' }] },
-    { id: 'ami-q4', type: 'single', difficulty: 2, skills: ['j-mw-env'], prompt: 'Pourquoi analyser un maliciel dans une machine virtuelle isolée avec instantanés ?', options: [{ id: 'a', text: 'Pour éviter toute contamination du réseau et revenir à un état propre après chaque test' }, { id: 'b', text: 'Pour accélérer l’exécution du maliciel' }, { id: 'c', text: 'Parce que les maliciels ne fonctionnent qu’en machine virtuelle' }, { id: 'd', text: 'Pour partager la machine avec les utilisateurs' }] },
-    { id: 'ami-q5', type: 'truefalse', difficulty: 2, skills: ['j-mw-env'], prompt: 'L’absence de comportement malveillant observé en bac à sable prouve toujours que le fichier est inoffensif.' },
-    { id: 'ami-q6', type: 'multi', difficulty: 3, skills: ['j-mw-env'], prompt: 'Quelles précautions encadrent un environnement d’analyse de maliciels ?', options: [{ id: 'a', text: 'Réseau isolé ou coupé, sans accès à l’entreprise' }, { id: 'b', text: 'Aucune donnée ni identifiant réel sur la machine' }, { id: 'c', text: 'Échantillon conservé dans une archive chiffrée et non exécuté par accident' }, { id: 'd', text: 'Connecter la machine au réseau de production pour plus de réalisme' }] },
-    { id: 'ami-q7', type: 'single', difficulty: 2, skills: ['j-mw-statique'], prompt: 'Qu’est-ce que l’analyse statique d’un fichier ?', options: [{ id: 'a', text: 'L’examiner sans l’exécuter (empreinte, type, chaînes, imports)' }, { id: 'b', text: 'L’exécuter et observer son comportement' }, { id: 'c', text: 'Le laisser contacter son serveur' }, { id: 'd', text: 'Le recompiler' }] },
-    { id: 'ami-q8', type: 'single', difficulty: 2, skills: ['j-mw-statique'], prompt: 'Pourquoi interroger les services de réputation par l’empreinte plutôt qu’en téléversant le fichier ?', options: [{ id: 'a', text: 'Pour ne pas divulguer un contenu potentiellement sensible ni alerter l’attaquant' }, { id: 'b', text: 'Parce que le téléversement est payant' }, { id: 'c', text: 'Parce que l’empreinte est plus lente' }, { id: 'd', text: 'Il n’y a aucune différence' }] },
-    { id: 'ami-q9', type: 'truefalse', difficulty: 2, skills: ['j-mw-statique'], prompt: 'Un fichier nommé « facture.pdf.exe » dont le type réel est un exécutable est un signal d’alerte lors du triage.' },
-    { id: 'ami-q10', type: 'short', difficulty: 2, skills: ['j-mw-statique'], prompt: 'Comment appelle-t-on la compression ou le chiffrement du contenu d’un exécutable qui cache son vrai code ? (un mot)', placeholder: 'empa…' },
-    { id: 'ami-q11', type: 'single', difficulty: 2, skills: ['j-mw-dynamique'], prompt: 'Que cherche-t-on à produire par l’analyse comportementale d’un échantillon ?', options: [{ id: 'a', text: 'Des indicateurs de compromission (fichiers, persistance, domaines contactés) réutilisables pour la détection' }, { id: 'b', text: 'Une copie fonctionnelle du maliciel' }, { id: 'c', text: 'Un accès au serveur de l’attaquant' }, { id: 'd', text: 'Rien d’exploitable' }] },
-    { id: 'ami-q12', type: 'truefalse', difficulty: 2, skills: ['j-mw-dynamique'], prompt: 'Pendant l’analyse dynamique, on laisse l’échantillon joindre réellement son serveur de commande pour plus de réalisme.' },
-    { id: 'ami-q13', type: 'short', difficulty: 2, skills: ['j-mw-dynamique'], prompt: 'Quel sigle désigne un élément observable (empreinte, domaine, clé) permettant de repérer une compromission ?', placeholder: 'sigle' },
-    { id: 'ami-q14', type: 'single', difficulty: 2, skills: ['j-mw-dynamique'], prompt: 'À quel référentiel rattache-t-on les comportements observés pour repérer les détections manquantes ?', options: [{ id: 'a', text: 'MITRE ATT&CK' }, { id: 'b', text: 'Le RGPD' }, { id: 'c', text: 'La norme ISO 9001' }, { id: 'd', text: 'Le protocole DHCP' }] },
-    { id: 'ami-q15', type: 'open', difficulty: 3, skills: ['j-mw-dynamique', 'j-mw-statique'], prompt: 'Décrivez comment transformer l’analyse d’un échantillon en capacité de détection réutilisable pour le SOC.' },
-    { id: 'ami-q16', type: 'open', difficulty: 3, skills: ['j-mw-env', 'j-mw-role'], prompt: 'Un collègue veut analyser une pièce jointe suspecte directement sur son poste de travail « pour aller vite ». Expliquez les risques et la bonne démarche.' },
-  ],
+  questions,
   resources: [
     { title: 'Guide to Malware Incident Prevention and Handling (SP 800-83)', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/83/r1/final' },
     { title: 'YARA documentation', source: 'VirusTotal / projet YARA', url: 'https://yara.readthedocs.io/' },

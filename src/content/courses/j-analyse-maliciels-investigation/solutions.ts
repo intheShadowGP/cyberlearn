@@ -17,5 +17,23 @@ export const solutions: CourseSolutions = {
         { t: 'list', items: ['Livrables défensifs : IOC (empreinte, domaines, chemins, persistance) transmis au SOC pour recherche et blocage, règle YARA pour les variantes, rattachement MITRE ATT&CK, rapport et recommandations de remédiation, puis vérification des détections.'] },
       ],
     },
+    'document-piege': {
+      blocks: [
+        { t: 'p', text: 'Le document est **très probablement malveillant**, sans qu’il soit nécessaire de l’exécuter : une macro `AutoOpen` (exécution dès l’ouverture), un interpréteur lancé en fenêtre cachée avec une commande **encodée**, une chaîne décodée qui télécharge puis lance un exécutable depuis un domaine inconnu, et un courriel d’un expéditeur externe dont le domaine a été créé trois jours plus tôt.' },
+        {
+          t: 'table',
+          head: ['Indicateur', 'Valeur', 'Usage'],
+          rows: [
+            ['Empreinte du document', 'SHA-256 du `.docm`', 'Recherche dans les courriels reçus et sur les postes'],
+            ['Domaine', '`maj-service.example`', 'Blocage DNS et proxy, recherche dans les journaux'],
+            ['URL', '`http://maj-service.example/a.bin`', 'Blocage et recherche des requêtes déjà émises'],
+            ['Chemin de dépôt', '`%APPDATA%\\upd.exe`', 'Recherche sur les postes (EDR), règle de détection'],
+            ['Expéditeur et domaine', 'Adresse et domaine récent', 'Blocage et recherche d’autres destinataires'],
+          ],
+        },
+        { t: 'p', text: '**Techniques ATT&CK** associées : hameçonnage avec pièce jointe (accès initial), exécution par macro et interpréteur de commandes, fichier ou commande obfusqué (contournement des défenses), téléchargement d’un outil depuis l’extérieur.' },
+        { t: 'list', items: ['**Recherche** : le même document ou expéditeur dans la messagerie (supprimer les messages restants), connexions vers le domaine dans les journaux proxy et DNS, présence de `upd.exe` et d’une persistance éventuelle sur les postes ; vérifier si d’autres personnes ont ouvert le document.', '**Blocage** : domaine et URL, empreintes, expéditeur ; isoler les postes qui ont contacté le domaine.', '**Prévention** : bloquer les macros des documents d’origine externe, activer les protections de la messagerie (analyse des pièces jointes), sensibiliser au signalement.', '**Rapport** : consigner empreinte, comportement lu, indicateurs et confiance ; partager les indicateurs selon le TLP sans diffuser le document.'] },
+      ],
+    },
   },
 };

@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (28 migrés) + 40 cours à créer (16 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 23 cours à créer et 17 cours existants à migrer.
+Total : 45 cours existants (29 migrés) + 40 cours à créer (16 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 23 cours à créer et 16 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -117,3 +117,4 @@ Total : 45 cours existants (28 migrés) + 40 cours à créer (16 créés) = 85 c
 | `i-detection-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
 | `j-forensique-principes` | ✔ 40 | ✔ 40 | ✔ |
 | `j-memoire-artefacts-linux` | ✔ 40 | ✔ 40 | ✔ |
+| `j-analyse-maliciels-investigation` | ✔ 40 | ✔ 40 | ✔ |
