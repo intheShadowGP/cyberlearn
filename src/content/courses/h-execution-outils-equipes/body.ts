@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'h-execution-outils-equipes',
@@ -107,6 +108,54 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'La valeur d’un test n’est pas « avoir réussi à entrer » mais la liste des correctifs et des détections à mettre en place. L’approche Purple Team transforme directement chaque constat offensif en amélioration de la défense.' },
         ],
       },
+      {
+        id: 'surfaces',
+        title: 'Autres surfaces : API, cloud et conteneurs',
+        blocks: [
+          { t: 'p', text: 'Les systèmes modernes exposent bien plus que des pages web : des **API**, des **services cloud**, des **conteneurs**. Ces surfaces se testent dans le même cadre autorisé, et leurs faiblesses se corrigent par la configuration et les droits plus que par des correctifs de code. Comme pour le reste du cours, on les présente par leur **défense**.' },
+          {
+            t: 'table',
+            head: ['Surface', 'Ce que le test évalue', 'Durcissement (défense)'],
+            rows: [
+              ['**API**', 'Contrôle d’accès par objet et par fonction, validation des entrées, limitation de débit, exposition excessive de données', 'Autorisation côté serveur, authentification de chaque appel, schémas de validation, limites (module F)'],
+              ['**Stockage et services cloud**', 'Stockage d’objets accessible publiquement, services exposés par erreur, journaux désactivés', 'Accès privé par défaut, revue de configuration continue, journalisation'],
+              ['**Identités et droits cloud (IAM)**', 'Droits trop larges, clés d’accès anciennes ou exposées, rôles qui permettent de s’élever', 'Moindre privilège, jetons de courte durée, rotation, séparation des rôles'],
+              ['**Conteneurs et orchestrateurs**', 'Images obsolètes ou contenant des secrets, conteneurs privilégiés, interface d’administration exposée', 'Images minimales et analysées, exécution sans privilèges, API d’orchestration non exposée'],
+            ],
+          },
+          { t: 'def', term: 'CSPM (Cloud Security Posture Management)', text: 'Outils qui comparent en continu la configuration d’un environnement cloud à des règles de sécurité (stockage public, journalisation absente, droits excessifs) et signalent les écarts. Ils transforment la revue de configuration en contrôle permanent.' },
+          { t: 'list', items: ['**Le cloud est une responsabilité partagée** : le fournisseur sécurise l’infrastructure, le client ses configurations, ses droits et ses données.', '**Avant de tester**, vérifier la politique du fournisseur (activités interdites, notification préalable) et inscrire ses limites dans les RoE.', '**Les identités priment** : dans le cloud, un compte ou une clé exposés valent un accès réseau.', '**Corriger par la configuration** : refus par défaut, droits minimaux, analyse automatique des images et des modèles de déploiement.'] },
+          { t: 'callout', kind: 'tip', text: 'Un constat cloud se rédige comme les autres : la ressource, la mauvaise configuration, l’impact et la correction précise (la règle ou la politique à modifier).' },
+        ],
+      },
+      {
+        id: 'mesure',
+        title: 'Mesurer, rapporter et suivre la remédiation',
+        blocks: [
+          { t: 'p', text: 'Un exercice qui ne se mesure pas ne s’améliore pas. La valeur d’une démarche Purple Team tient à des **indicateurs** et à un **suivi** des correctifs, pas à l’anecdote d’une intrusion réussie.' },
+          {
+            t: 'table',
+            head: ['Indicateur', 'Ce qu’il mesure', 'Usage'],
+            rows: [
+              ['**Taux de détection**', 'Part des techniques rejouées que le SOC a détectées', 'Mesurer la couverture, cibler les lacunes'],
+              ['**Délai de détection**', 'Temps entre l’action offensive et l’alerte', 'Évaluer la rapidité de la veille'],
+              ['**Délai de réponse**', 'Temps entre l’alerte et le confinement', 'Évaluer la réaction des équipes'],
+              ['**Couverture ATT&CK**', 'Techniques du référentiel testées et détectées', 'Piloter l’effort de détection'],
+              ['**Constats corrigés**', 'Part des constats traités dans les délais, puis retestés', 'Suivre la remédiation'],
+            ],
+          },
+          { t: 'def', term: 'MITRE ATT&CK', text: 'Référentiel public de techniques d’adversaires, organisé par tactiques. Dans un exercice Purple Team, chaque technique rejouée est rattachée à son identifiant, ce qui permet de suivre la couverture de détection et de comparer les exercices dans le temps.' },
+          {
+            t: 'example',
+            title: 'Une fiche d’exercice Purple Team',
+            blocks: [
+              { t: 'list', items: ['**Technique** : exécution d’un interpréteur de commandes par un document bureautique (identifiant ATT&CK correspondant).', '**Résultat** : non détectée à la première exécution ; détectée après création d’une règle sur la chaîne de processus.', '**Délai de détection** : 4 minutes après ajustement.', '**Actions** : règle ajoutée (propriétaire : SOC), durcissement de la suite bureautique (propriétaire : équipe poste), retest dans 30 jours.'] },
+            ],
+          },
+          { t: 'list', items: ['**Rapport** : scénario, techniques rejouées, résultats de détection, actions correctives avec responsables et dates.', '**Retest** : chaque constat corrigé est rejoué pour confirmer qu’il est bien résolu.', '**Automatisation** : des outils de simulation d’attaque permettent de rejouer régulièrement les techniques validées.', '**Éthique et cadre** : chaque rejeu reste dans le périmètre, annoncé et journalisé.'] },
+          { t: 'callout', kind: 'key', text: 'Un exercice réussi n’est pas celui où tout est détecté du premier coup, mais celui qui révèle des lacunes et en corrige assez pour que la prochaine itération le démontre.' },
+        ],
+      },
     ],
     useCases: [
       'Exécution d’un test d’intrusion web autorisé : usage d’un proxy d’interception pour vérifier le contrôle d’accès, puis recommandations.',
@@ -162,25 +211,15 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'À l’issue d’un test, l’équipe offensive a démontré plusieurs techniques (accès initial, élévation, déplacement latéral) que le SOC n’a pas détectées. La direction veut en tirer des améliorations.' }],
       steps: ['Expliquer ce qu’apporte une démarche Purple Team ici.', 'Proposer comment transformer chaque technique non détectée en détection.', 'Indiquer les mesures de durcissement complémentaires.'],
     },
+    {
+      id: 'exercice-purple',
+      kind: 'case',
+      title: 'Cas pratique : concevoir un exercice Purple Team sur un scénario de rançongiciel',
+      context: [{ t: 'p', text: 'La direction veut vérifier que le SOC détecte les étapes d’une attaque par rançongiciel : accès initial par courriel piégé, exécution sur un poste, vol d’identifiants, déplacement vers un serveur de fichiers, suppression des sauvegardes puis chiffrement. L’exercice se déroule dans un environnement de recette autorisé, sans chiffrer de vraies données.' }],
+      steps: ['Choisir les techniques à rejouer, les rattacher à ATT&CK et définir ce qui est simulé et ce qui est exclu.', 'Définir les indicateurs et la fiche de résultat de chaque technique.', 'Décrire le suivi : actions correctives, responsables, retest, rapport à la direction.'],
+    },
   ],
-  questions: [
-    { id: 'heo-q1', type: 'single', difficulty: 2, skills: ['h-exec-web'], prompt: 'Où la phase d’exploitation d’un test d’intrusion peut-elle se dérouler ?', options: [{ id: 'a', text: 'Uniquement sur un périmètre autorisé par écrit ou sur des cibles d’entraînement prévues pour cela' }, { id: 'b', text: 'Sur n’importe quel système accessible' }, { id: 'c', text: 'Sur les systèmes des concurrents' }, { id: 'd', text: 'Sur tout site public, sans autorisation' }] },
-    { id: 'heo-q2', type: 'truefalse', difficulty: 2, skills: ['h-cibles'], prompt: 'Un test Active Directory vise, dans une optique défensive, à identifier et fermer les chemins d’élévation menant à l’administration du domaine.' },
-    { id: 'heo-q3', type: 'single', difficulty: 2, skills: ['h-exec-web'], prompt: 'À quoi sert un proxy d’interception (Burp Suite, OWASP ZAP) dans un test autorisé ?', options: [{ id: 'a', text: 'Observer et modifier les requêtes pour vérifier que le serveur ne fait pas confiance aux données du client' }, { id: 'b', text: 'Chiffrer le disque' }, { id: 'c', text: 'Attribuer des adresses IP' }, { id: 'd', text: 'Remplacer le serveur DNS' }] },
-    { id: 'heo-q4', type: 'single', difficulty: 2, skills: ['h-exec-web'], prompt: 'Quelle défense rend une injection SQL (détectable avec sqlmap) impossible ?', options: [{ id: 'a', text: 'Les requêtes paramétrées' }, { id: 'b', text: 'Un mot de passe plus long' }, { id: 'c', text: 'Changer le port du serveur' }, { id: 'd', text: 'Désactiver le HTTPS' }] },
-    { id: 'heo-q5', type: 'multi', difficulty: 2, skills: ['h-exec-web'], prompt: 'Quels outils servent au test d’applications web ?', options: [{ id: 'a', text: 'Burp Suite et OWASP ZAP (proxys d’interception)' }, { id: 'b', text: 'Gobuster et FFUF (découverte de contenu)' }, { id: 'c', text: 'Nikto (configuration web)' }, { id: 'd', text: 'Un tableur de bureautique' }] },
-    { id: 'heo-q6', type: 'single', difficulty: 2, skills: ['h-outils-reseau-mdp'], prompt: 'Que neutralise le fait de maintenir un système à jour, vis-à-vis d’un cadriciel comme Metasploit ?', options: [{ id: 'a', text: 'Les modules qui exploitent des vulnérabilités connues déjà corrigées ne s’appliquent plus' }, { id: 'b', text: 'Le réseau devient plus rapide' }, { id: 'c', text: 'Les mots de passe s’allongent' }, { id: 'd', text: 'Le chiffrement est désactivé' }] },
-    { id: 'heo-q7', type: 'single', difficulty: 2, skills: ['h-outils-reseau-mdp'], prompt: 'Quelles défenses répondent à un outil qui teste la résistance des authentifications aux essais répétés (type Hydra) ?', options: [{ id: 'a', text: 'Limitation des tentatives, verrouillage et MFA' }, { id: 'b', text: 'Un écran plus grand' }, { id: 'c', text: 'Supprimer la journalisation' }, { id: 'd', text: 'Ouvrir tous les ports' }] },
-    { id: 'heo-q8', type: 'truefalse', difficulty: 2, skills: ['h-outils-reseau-mdp'], prompt: 'Un audit de mots de passe autorisé évalue leur robustesse à partir d’empreintes obtenues légalement, pour renforcer les pratiques — ce n’est pas un vol de comptes.' },
-    { id: 'heo-q9', type: 'multi', difficulty: 3, skills: ['h-outils-reseau-mdp'], prompt: 'Quelles mesures réduisent l’efficacité d’un audit de mots de passe par cassage hors ligne (John the Ripper, Hashcat) ?', options: [{ id: 'a', text: 'Un hachage lent et salé (voir module E)' }, { id: 'b', text: 'Des politiques imposant des mots de passe robustes' }, { id: 'c', text: 'La MFA, qui réduit la valeur d’un mot de passe seul' }, { id: 'd', text: 'Stocker les mots de passe en clair' }] },
-    { id: 'heo-q10', type: 'single', difficulty: 3, skills: ['h-cibles'], prompt: 'Qu’évalue un test Active Directory, du point de vue défensif ?', options: [{ id: 'a', text: 'Les chemins menant d’un compte ordinaire à l’administration du domaine, pour les fermer' }, { id: 'b', text: 'La vitesse du réseau' }, { id: 'c', text: 'La taille des disques' }, { id: 'd', text: 'La couleur de l’interface' }] },
-    { id: 'heo-q11', type: 'multi', difficulty: 2, skills: ['h-cibles'], prompt: 'Quelles mesures durcissent une infrastructure face aux tests AD et Wi-Fi ?', options: [{ id: 'a', text: 'Modèle en tiers, moindre privilège et LAPS pour Active Directory' }, { id: 'b', text: 'WPA2/WPA3-Entreprise et 802.1X pour le Wi-Fi' }, { id: 'c', text: 'Détection des points d’accès Wi-Fi pirates' }, { id: 'd', text: 'Partager le mot de passe Wi-Fi de l’entreprise publiquement' }] },
-    { id: 'heo-q12', type: 'single', difficulty: 3, skills: ['h-post-equipes'], prompt: 'Quelles contre-mesures limitent l’impact d’une post-exploitation (accès obtenu sur une machine) ?', options: [{ id: 'a', text: 'Segmentation, moindre privilège, détection (EDR) et journalisation' }, { id: 'b', text: 'Augmenter la luminosité de l’écran' }, { id: 'c', text: 'Désactiver l’antivirus' }, { id: 'd', text: 'Donner les droits d’administration à tous' }] },
-    { id: 'heo-q13', type: 'single', difficulty: 2, skills: ['h-post-equipes'], prompt: 'Contre le pivoting (propagation d’un segment réseau à un autre), quelle mesure est la plus efficace ?', options: [{ id: 'a', text: 'La micro-segmentation et le filtrage inter-zones' }, { id: 'b', text: 'Un mot de passe plus long' }, { id: 'c', text: 'Un écran de veille' }, { id: 'd', text: 'Supprimer les journaux' }] },
-    { id: 'heo-q14', type: 'single', difficulty: 2, skills: ['h-post-equipes'], prompt: 'Quelle est la différence entre Red Team et Purple Team ?', options: [{ id: 'a', text: 'La Red Team simule un adversaire pour tester la détection ; la Purple Team fait collaborer rouge et bleu pour améliorer directement la détection' }, { id: 'b', text: 'La Red Team ne teste que le Wi-Fi' }, { id: 'c', text: 'La Purple Team ne fait que de la reconnaissance' }, { id: 'd', text: 'Ce sont deux noms du même exercice' }] },
-    { id: 'heo-q15', type: 'open', difficulty: 3, skills: ['h-post-equipes', 'h-exec-web'], prompt: 'Expliquez pourquoi, dans une optique défensive, la vraie valeur d’un test d’intrusion réside dans les correctifs et les détections produits, et le rôle de la démarche Purple Team.' },
-    { id: 'heo-q16', type: 'open', difficulty: 3, skills: ['h-outils-reseau-mdp', 'h-exec-web'], prompt: 'Un responsable demande pourquoi il faut connaître les outils offensifs pour défendre. Répondez en vous appuyant sur le lien entre chaque outil et sa défense.' },
-  ],
+  questions,
   resources: [
     { title: 'Technical Guide to Information Security Testing and Assessment (SP 800-115)', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/115/final' },
     { title: 'Web Security Testing Guide (WSTG)', source: 'OWASP', url: 'https://owasp.org/www-project-web-security-testing-guide/' },

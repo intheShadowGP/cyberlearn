@@ -33,5 +33,23 @@ export const solutions: CourseSolutions = {
         { t: 'p', text: 'Durcissement complémentaire : segmentation et micro-segmentation, moindre privilège, correctifs à jour, MFA, et réduction de la surface exposée. Le résultat de l’exercice est une liste de détections ajoutées et de mesures appliquées, rattachées à MITRE ATT&CK pour suivre la couverture.' },
       ],
     },
+    'exercice-purple': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Étape du scénario', 'Technique ATT&CK (famille)', 'Ce qui est simulé', 'Détection attendue'],
+          rows: [
+            ['Accès initial', 'Hameçonnage avec pièce jointe', 'Courriel de test avec un document inoffensif', 'Alerte passerelle de messagerie, exécution depuis la suite bureautique'],
+            ['Exécution', 'Interpréteur de commandes et de scripts', 'Lancement d’un interpréteur par le document', 'Règle sur la chaîne de processus (EDR)'],
+            ['Vol d’identifiants', 'Accès aux identifiants du système', 'Lecture simulée sur un poste de test', 'Alerte sur l’accès à la mémoire du processus d’authentification'],
+            ['Déplacement latéral', 'Services distants', 'Connexion vers un serveur de fichiers de test', 'Connexions inter-segments inhabituelles, journaux d’authentification'],
+            ['Inhibition de la restauration', 'Suppression des copies et sauvegardes', 'Tentative sur des sauvegardes factices', 'Alerte sur les commandes de suppression de copies'],
+            ['Impact', 'Chiffrement de données', 'Chiffrement d’un dossier de fichiers factices uniquement', 'Détection du chiffrement massif, confinement du poste'],
+          ],
+        },
+        { t: 'list', items: ['**Exclus** : vraies données, services de production, déni de service, tout ce qui n’est pas dans les RoE.', '**Fiche par technique** : résultat (détectée ou non), délai de détection et de réponse, règle créée ou ajustée, propriétaire, date de retest.', '**Indicateurs globaux** : taux de détection, délais médians, couverture des techniques du scénario.', '**Suivi** : actions correctives (règles, durcissement, sauvegardes isolées), retest sous 30 jours, présentation à la direction avec l’évolution des indicateurs.'] },
+        { t: 'p', text: 'Les sauvegardes isolées et immuables, le moindre privilège et la segmentation sont les mesures de durcissement qui limitent réellement l’impact d’un rançongiciel : la détection gagne du temps, elles évitent la catastrophe.' },
+      ],
+    },
   },
 };
