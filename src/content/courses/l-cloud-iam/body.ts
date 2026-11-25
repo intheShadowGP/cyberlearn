@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'l-cloud-iam',
@@ -61,6 +62,55 @@ export const body: CourseBody = {
           { t: 'p', text: "L'**Infrastructure as Code** (Terraform, Bicep, CloudFormation) permet de vérifier ces règles **avant** le déploiement, avec des analyseurs (Checkov, tfsec) dans la chaîne d'intégration continue." },
         ],
       },
+      {
+        id: 'federation',
+        title: 'Identités humaines et applicatives : SSO, fédération et identités temporaires',
+        blocks: [
+          { t: 'p', text: 'Gérer des utilisateurs un par un dans chaque cloud multiplie les comptes, les mots de passe et les oublis lors des départs. La bonne pratique est de **centraliser** les identités chez un fournisseur d’identité et de donner au cloud des **identités temporaires**.' },
+          {
+            t: 'table',
+            head: ['Besoin', 'Mécanisme', 'Avantage'],
+            rows: [
+              ['**Personnes** (administrateurs, développeurs)', 'SSO par **SAML** ou **OIDC**, MFA, rôles par fonction', 'Un compte contrôlé, révocable en un point, MFA imposée'],
+              ['**Applications** dans le cloud', 'Rôles attachés aux instances ou aux fonctions, identités managées', 'Pas de clé à stocker'],
+              ['**CI/CD**', 'Fédération **OIDC** : la plateforme prouve son identité et obtient des identifiants temporaires', 'Aucune clé statique dans la CI'],
+              ['**Tiers** (prestataire)', 'Rôle inter-comptes avec relation de confiance limitée et identifiant externe', 'Accès borné, journalisé, révocable'],
+            ],
+          },
+          { t: 'def', term: 'Identité temporaire', text: 'Identifiants à durée de vie courte délivrés par un service de jetons après assomption d’un rôle. Même copiés ou volés, ils expirent rapidement, contrairement à une clé d’accès statique valable tant qu’elle n’est pas révoquée.' },
+          { t: 'def', term: 'Plafond de permissions', text: 'Politique de contrôle de service (SCP) ou limite de permissions : elle ne donne aucun droit mais borne ce que les politiques d’identité peuvent accorder. Elle protège même si un administrateur d’un compte accorde trop.' },
+          { t: 'list', items: ['**Séparer les comptes** (production, développement, sécurité, journalisation) pour borner l’impact d’une compromission.', '**Compte d’accès d’urgence (« break-glass »)** : identifiants conservés séparément, chaque usage déclenche une alerte et fait l’objet d’une revue.', '**Revue des droits** : supprimer les identités inutilisées, retirer les permissions non utilisées (Access Analyzer).', '**Compte racine** : MFA matérielle, aucune clé, usage exceptionnel.'] },
+          { t: 'callout', kind: 'key', text: 'La question à se poser pour chaque accès est : « quelle est la durée de vie de ce qui permet de l’exercer ? ». Plus elle est courte, plus la compromission coûte cher à l’attaquant.' },
+        ],
+      },
+      {
+        id: 'reponse',
+        title: 'Journalisation, investigation et réponse dans le cloud',
+        blocks: [
+          { t: 'p', text: 'Les journaux d’API sont la **mémoire** du compte cloud. Sans eux, on ne sait ni qui a rendu un compartiment public, ni quelle clé a servi, ni jusqu’où l’attaquant est allé. Leur configuration se décide **avant** l’incident.' },
+          {
+            t: 'table',
+            head: ['Événement à surveiller', 'Pourquoi'],
+            rows: [
+              ['Connexion avec le **compte racine**', 'Ce compte doit rester inutilisé'],
+              ['Création de clé d’accès ou de nouvel utilisateur', 'Persistance fréquente de l’attaquant'],
+              ['Modification d’une politique IAM, ajout de droits', 'Élévation de privilèges'],
+              ['Désactivation ou suppression de la journalisation', 'Dissimulation des traces'],
+              ['Changement de politique d’un stockage vers le public', 'Fuite de données'],
+              ['Création de ressources de calcul inhabituelles ou dans une région inhabituelle', 'Abus de ressources, extension de l’accès'],
+            ],
+          },
+          { t: 'list', items: ['**Centraliser et protéger** les journaux dans un compte séparé, en écriture seule, avec rétention suffisante.', '**Alerter** sur les événements critiques ci-dessus.', '**Préserver avant d’agir** : exporter les journaux, faire un instantané des ressources, calculer des empreintes.', '**Contenir** : révoquer les sessions et les clés, isoler par les règles réseau plutôt que supprimer.', '**Évaluer les obligations** : une violation de données personnelles se notifie à la CNIL sous 72 h ; le client reste responsable de ses configurations.'] },
+          {
+            t: 'example',
+            title: 'Une clé d’accès publiée par erreur',
+            blocks: [
+              { t: 'p', text: 'Un développeur publie une clé d’accès dans un dépôt public. Quelques heures plus tard, une alerte signale la création de grandes machines virtuelles dans une région inhabituelle. Les journaux montrent que la clé a servi depuis une adresse inconnue.' },
+              { t: 'p', text: 'La réponse : révoquer la clé, isoler les ressources créées sans les supprimer, exporter les journaux, rechercher d’autres actions (nouvelles clés, changements de politique) et faire pivoter les secrets accessibles. La cause racine est corrigée par la fédération OIDC et l’analyse des secrets en CI.' },
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Revue d’une politique IAM avant sa mise en production.',
@@ -104,25 +154,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une start-up vous donne un accès en lecture à son compte cloud : 3 développeurs utilisent chacun un utilisateur IAM avec des clés d’accès et la politique AdministratorAccess ; le compte racine n’a pas de MFA ; un compartiment « backups » est public « pour que le prestataire puisse récupérer les sauvegardes ».' }],
       steps: ['Classer les constats par gravité.', 'Proposer une architecture d’accès cible.', 'Proposer une solution pour le prestataire sans compartiment public.'],
     },
+    {
+      id: 'analyse-journal-cloud',
+      kind: 'analysis',
+      title: 'Analyse : un extrait de journal d’API suspect',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure (UTC)  Événement                         Identité                   Source             Région\n02:11:05     ConsoleLogin (succès, sans MFA)    utilisateur « d.martin »   198.51.100.77      eu-west-3\n02:13:40     CreateAccessKey                    utilisateur « d.martin »   198.51.100.77      eu-west-3\n02:15:12     AttachUserPolicy (AdministratorAccess)  utilisateur « d.martin »  198.51.100.77   eu-west-3\n02:17:30     StopLogging (CloudTrail « trail-main »)  utilisateur « d.martin »  198.51.100.77  eu-west-3\n02:22:08     RunInstances (24 instances de grande taille)  clé créée à 02:13  203.0.113.9   ap-southeast-2\n02:40:51     PutBucketPolicy (« export-rh-2025 » : Principal *)  clé créée à 02:13  203.0.113.9  eu-west-3' },
+      ],
+      steps: ['Décrire l’enchaînement des actions et ce qu’il révèle.', 'Dire ce que l’on préserve et dans quel ordre, puis les actions de confinement.', 'Proposer les mesures qui auraient évité ou détecté l’incident.'],
+    },
   ],
-  questions: [
-    { id: 'cl-q1', type: 'single', difficulty: 1, skills: ['l-shared'], prompt: 'En SaaS, qui est responsable de la gestion des comptes utilisateurs et de leurs droits ?', options: [{ id: 'a', text: 'Le fournisseur SaaS uniquement' }, { id: 'b', text: 'Le client' }, { id: 'c', text: 'Le fournisseur d’accès à Internet' }, { id: 'd', text: 'Personne' }] },
-    { id: 'cl-q2', type: 'truefalse', difficulty: 1, skills: ['l-shared'], prompt: 'En IaaS, l’application des correctifs du système d’exploitation des machines virtuelles relève du client.' },
-    { id: 'cl-q3', type: 'short', difficulty: 2, skills: ['l-shared'], prompt: 'Quelle qualification de l’ANSSI s’applique aux offres cloud de confiance ?' },
-    { id: 'cl-q4', type: 'single', difficulty: 2, skills: ['l-iam'], prompt: 'Une politique contient un Allow sur `s3:*` et un Deny sur `s3:DeleteObject` pour la même ressource. La suppression est :', options: [{ id: 'a', text: 'Autorisée, car Allow s3:* couvre tout' }, { id: 'b', text: 'Refusée, car le refus explicite l’emporte' }, { id: 'c', text: 'Autorisée une fois sur deux' }, { id: 'd', text: 'Soumise à validation manuelle' }] },
-    { id: 'cl-q5', type: 'truefalse', difficulty: 1, skills: ['l-iam'], prompt: 'En l’absence de toute déclaration correspondante, une action IAM est refusée par défaut.' },
-    { id: 'cl-q6', type: 'multi', difficulty: 3, skills: ['l-iam'], prompt: 'Quelles permissions permettent souvent une élévation de privilèges dans un compte cloud ?', options: [{ id: 'a', text: '`iam:AttachUserPolicy`' }, { id: 'b', text: '`iam:PassRole` combinée à la création de ressources de calcul' }, { id: 'c', text: '`s3:GetObject` sur un compartiment de journaux' }, { id: 'd', text: '`iam:CreateAccessKey` sur d’autres utilisateurs' }] },
-    { id: 'cl-q7', type: 'short', difficulty: 2, skills: ['l-iam'], prompt: 'Quel effet IAM a toujours priorité lorsqu’il correspond à une requête ? (en anglais)' },
-    { id: 'cl-q8', type: 'single', difficulty: 2, skills: ['l-storage'], prompt: 'Que signifie `"Principal": "*"` dans la politique d’un compartiment de stockage ?', options: [{ id: 'a', text: 'Tous les administrateurs du compte' }, { id: 'b', text: 'N’importe qui, y compris anonymement sur Internet' }, { id: 'c', text: 'Le compte racine' }, { id: 'd', text: 'Aucun principal' }] },
-    { id: 'cl-q9', type: 'multi', difficulty: 2, skills: ['l-storage'], prompt: 'Quelles pratiques améliorent la gestion des secrets dans le cloud ?', options: [{ id: 'a', text: 'Coffre-fort de secrets avec rotation' }, { id: 'b', text: 'Fédération OIDC entre la CI et le cloud' }, { id: 'c', text: 'Clés d’accès dans un fichier .env versionné' }, { id: 'd', text: 'Rôles attachés aux instances plutôt que des clés statiques' }] },
-    { id: 'cl-q10', type: 'truefalse', difficulty: 2, skills: ['l-storage'], prompt: 'Le chiffrement au repos d’un compartiment empêche sa lecture par un internaute si le compartiment est public.' },
-    { id: 'cl-q11', type: 'single', difficulty: 2, skills: ['l-posture'], prompt: 'Que fait un outil CSPM ?', options: [{ id: 'a', text: 'Il chiffre les données' }, { id: 'b', text: 'Il évalue en continu les configurations cloud par rapport à des référentiels et signale les écarts' }, { id: 'c', text: 'Il remplace le pare-feu' }, { id: 'd', text: 'Il gère la facturation' }] },
-    { id: 'cl-q12', type: 'multi', difficulty: 2, skills: ['l-posture'], prompt: 'Lesquelles de ces configurations sont des écarts à corriger ?', options: [{ id: 'a', text: 'Compte racine sans MFA' }, { id: 'b', text: 'Groupe de sécurité ouvrant le port 22 à 0.0.0.0/0' }, { id: 'c', text: 'Journalisation des API désactivée dans une région' }, { id: 'd', text: 'Rôle applicatif limité à GetObject sur un préfixe précis' }] },
-    { id: 'cl-q13', type: 'short', difficulty: 2, skills: ['l-posture'], prompt: 'Quel service AWS journalise les appels d’API d’un compte ?' },
-    { id: 'cl-q14', type: 'open', difficulty: 3, skills: ['l-iam', 'l-posture'], prompt: 'Un développeur demande `AdministratorAccess` pour déployer une fonction serverless. Proposez une alternative respectant le moindre privilège et expliquez votre démarche.' },
-    { id: 'cl-q15', type: 'open', difficulty: 3, skills: ['l-storage', 'l-shared'], prompt: 'Un prestataire doit récupérer chaque nuit les sauvegardes d’un compartiment. Proposez une solution sans rendre le compartiment public.' },
-    { id: 'cl-q16', type: 'single', difficulty: 2, skills: ['l-posture', 'l-storage'], prompt: 'Comment détecter une mauvaise configuration de stockage avant même son déploiement ?', options: [{ id: 'a', text: 'En analysant le code Terraform dans la CI (Checkov, tfsec)' }, { id: 'b', text: 'En attendant le rapport mensuel de facturation' }, { id: 'c', text: 'En désactivant les journaux' }, { id: 'd', text: 'C’est impossible' }] },
-  ],
+  questions,
   resources: [
     { title: 'Référentiel SecNumCloud', source: 'ANSSI', url: 'https://cyber.gouv.fr/secnumcloud' },
     { title: 'Policy evaluation logic', source: 'AWS Documentation', url: 'https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html' },

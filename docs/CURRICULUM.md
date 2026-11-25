@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 66 |
-| Questions de cours (avec correction) | 2287 |
+| Questions de cours (avec correction) | 2311 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -95,7 +95,7 @@
 | Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 115 min | 7 | 40 | 3 | 4 |
 | Rétro-ingénierie défensive : binaires, désassemblage, débogage et outils (`k-retro-ingenierie-defensive`) | K | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Menaces avancées : campagnes, rançongiciels, chaîne d’approvisionnement et analyse à grande échelle (`k-malware-avance`) | K | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
-| Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
+| Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 4 |
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 90 min | 3 | 16 | 2 | 4 |
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 95 min | 4 | 16 | 2 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
