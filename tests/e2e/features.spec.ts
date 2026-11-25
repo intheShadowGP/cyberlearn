@@ -236,7 +236,9 @@ test('filtres du catalogue et des laboratoires', async ({ page }) => {
   await page.getByLabel('Niveau').selectOption('3');
   await expect(page.locator('.card-grid > li')).toHaveCount(3);
   await page.goto('./#/catalogue?q=kubernetes');
-  await expect(page.locator('.card-grid > li')).toHaveCount(1);
+  // Le cours de forensique Linux (module J) traite aussi de Kubernetes depuis la phase 5 : deux résultats.
+  await expect(page.locator('.card-grid > li')).toHaveCount(2);
+  await expect(page.locator('.card-grid > li').filter({ hasText: 'Kubernetes' }).first()).toBeVisible();
   expect(all).toBeGreaterThanOrEqual(22);
   await page.goto('./#/laboratoires');
   await expect(page.locator('.card-grid > li').filter({ hasText: 'sous-réseaux' })).toHaveCount(1);

@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 63 |
-| Questions de cours (avec correction) | 2119 |
+| Cours complets | 64 |
+| Questions de cours (avec correction) | 2159 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -31,7 +31,7 @@
 | G. Programmation et sécurité du code | 4 | 1, 2, 3, 4 | 23 / 23 |
 | H. Sécurité offensive et pentest | 4 | 1, 2, 3, 4 | 34 / 34 |
 | I. Défense et SOC | 4 | 1, 2, 3, 4 | 26 / 26 |
-| J. Forensique numérique | 4 | 1, 2, 3 | 17 / 17 |
+| J. Forensique numérique | 5 | 1, 2, 3, 4 | 17 / 17 |
 | K. Malware et reverse engineering | 2 | 2, 3 | 22 / 22 |
 | L. Sécurité Cloud | 4 | 2, 3 | 23 / 23 |
 | M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
@@ -90,6 +90,7 @@
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 115 min | 7 | 40 | 3 | 4 |
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
+| Forensique avancée : pilotage d’investigation, cloud, supports flash et expertise (`j-forensique-avancee`) | J | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Rétro-ingénierie défensive : binaires, désassemblage, débogage et outils (`k-retro-ingenierie-defensive`) | K | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
