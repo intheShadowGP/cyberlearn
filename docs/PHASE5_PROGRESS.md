@@ -55,7 +55,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | F Web | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | G Code | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | H Pentest | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
-| I SOC | ➕ | ✔ | ✔ | ➕ |
+| I SOC | ✔ (nouveau) | ✔ | ✔ | ➕ |
 | J Forensique | ➕ | ✔ | ✔ ×2 | ➕ |
 | K Malware | ➕ | ✔ | ✔ | ➕ |
 | L Cloud | ➕ | ✔ | ✔ ×3 | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (26 migrés) + 40 cours à créer (14 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 25 cours à créer et 19 cours existants à migrer.
+Total : 45 cours existants (26 migrés) + 40 cours à créer (15 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 24 cours à créer et 19 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -113,3 +113,4 @@ Total : 45 cours existants (26 migrés) + 40 cours à créer (14 créés) = 85 c
 | `h-pentest-avance` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
 | `i-soc-detection` | ✔ 40 | ✔ 40 | ✔ |
 | `i-threat-hunting` | ✔ 40 | ✔ 40 | ✔ |
+| `i-soc-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |

@@ -42,6 +42,7 @@ export const VERIFICATION_EN: Record<string, { versions: string[]; evolving: str
   'h-pentest-avance': { versions: ['TIBER-EU framework (ECB)', 'MITRE ATT&CK', 'MITRE emulation plans', 'NIST SP 800-115'], evolving: ['ATT&CK version', 'Regulatory requirements (TLPT, DORA)', 'Features of the graph-analysis tools mentioned'] },
   'h-pentest-methodologie': { versions: ['PASSI framework (ANSSI)', 'OWASP WSTG', 'NIST SP 800-115', 'CVSS v4.0'], evolving: ['CVSS version', 'CISA KEV catalog'] },
   'h-execution-outils-equipes': { versions: ['NIST SP 800-115', 'OWASP WSTG', 'PASSI framework (ANSSI)', 'MITRE ATT&CK', 'OWASP Password Storage Cheat Sheet'], evolving: ['Versions and features of testing tools', 'ATT&CK techniques and associated detections'] },
+  'i-soc-initiation': { versions: ['ANSSI IT hygiene guide', 'NIST SP 800-61 Rev. 3', 'GDPR, Article 33'], evolving: ['Notification obligations (NIS2, transposition)', 'Features of SIEM and EDR tools'] },
   'i-soc-detection': { versions: ['MITRE ATT&CK', 'Sigma', 'NIST SP 800-61 Rev. 3'], evolving: ['ATT&CK techniques (identifiers revised with each version)'] },
   'i-threat-hunting': { versions: ['TLP 2.0 (FIRST)', 'Pyramid of Pain (D. Bianco, 2013)', 'MITRE ATT&CK (T1053.005, T1136.001)', 'STIX 2.1', 'Zeek and Suricata'], evolving: ['Features of XDR, NDR and SOAR platforms', 'TLS fingerprints (JA3, JA4)'] },
   'j-forensique-principes': { versions: ['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], evolving: ['Windows artifacts depending on system versions'] },
