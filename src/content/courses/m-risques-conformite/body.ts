@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'm-risques-conformite',
@@ -76,6 +77,56 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: "Ces textes engagent la responsabilité des dirigeants (NIS2 prévoit leur formation et des sanctions). Les montants et délais exacts évoluent avec les transpositions et actes délégués : se référer aux textes officiels et aux autorités (ANSSI, CNIL, ACPR)." },
         ],
       },
+      {
+        id: 'pilotage',
+        title: 'Politique, rôles et pilotage du système de management',
+        blocks: [
+          { t: 'p', text: 'Une analyse de risques et des mesures ne tiennent que si elles sont **portées** : une politique approuvée par la direction, des rôles clairs, des indicateurs suivis et une revue régulière. C’est ce qui transforme des actions isolées en système de management.' },
+          {
+            t: 'table',
+            head: ['Élément', 'Contenu', 'Responsable'],
+            rows: [
+              ['**Politique de sécurité**', 'Objectifs, périmètre, principes, obligations de chacun', 'Approuvée par la direction'],
+              ['**Rôles et responsabilités**', 'RSSI, propriétaires d’actifs, délégué à la protection des données, correspondants métiers', 'Direction, RSSI'],
+              ['**Indicateurs**', 'Mesures reliées à des objectifs : délai de correction, taux de formation, écarts d’audit', 'RSSI'],
+              ['**Audit interne**', 'Vérification de conformité avant l’audit externe', 'Auditeurs indépendants de l’audité'],
+              ['**Revue de direction**', 'Examen des résultats, décisions d’amélioration et de ressources', 'Direction'],
+            ],
+          },
+          { t: 'def', term: 'RSSI', text: 'Responsable de la sécurité des systèmes d’information : il définit et fait appliquer la politique, suit les risques et les indicateurs, et **rend compte à la direction**. Il ne remplace ni les équipes techniques ni le juridique.' },
+          { t: 'def', term: 'PDCA', text: 'Cycle d’amélioration continue : **planifier** (politique, risques, objectifs), **déployer** (mesures), **contrôler** (indicateurs, audits), **améliorer** (actions correctives). Il structure le fonctionnement de l’ISO 27001.' },
+          { t: 'list', items: ['**Mesurable** : un indicateur sans cible ne guide aucune décision.', '**Utile** : on mesure ce qui sert à décider (délai de correction), pas ce qui est facile à compter.', '**Revu** : la politique est revue au moins une fois par an et à chaque changement majeur.'] },
+          { t: 'callout', kind: 'key', text: 'La sécurité d’une organisation dépend moins de la sophistication de ses outils que de la **clarté des responsabilités** et de la régularité du pilotage.' },
+        ],
+      },
+      {
+        id: 'continuite',
+        title: 'Continuité d’activité et gestion de crise',
+        blocks: [
+          { t: 'p', text: 'Malgré les mesures préventives, un incident majeur peut survenir : rançongiciel, incendie, panne d’un prestataire. La **continuité** prépare l’organisation à maintenir l’essentiel de son activité, à reprendre rapidement et à communiquer pendant la crise.' },
+          {
+            t: 'table',
+            head: ['Notion', 'Rôle', 'Exemple'],
+            rows: [
+              ['**BIA** (bilan d’impact)', 'Fixer pour chaque processus la durée d’interruption (RTO) et la perte de données (RPO) admissibles', 'Facturation : RTO 24 h, RPO 4 h'],
+              ['**PCA** (continuité)', 'Maintenir les activités essentielles, souvent en mode dégradé', 'Procédures manuelles de secours'],
+              ['**PRA** (reprise)', 'Rétablir les systèmes après un sinistre', 'Restauration sur un site de secours'],
+              ['**Gestion de crise**', 'Décider, coordonner et communiquer', 'Cellule de crise, communication aux clients et aux autorités'],
+              ['**Exercices**', 'Vérifier que les plans fonctionnent', 'Exercice sur table, test de restauration'],
+            ],
+          },
+          { t: 'def', term: 'RPO et RTO', text: 'Le **RTO** (Recovery Time Objective) est la durée maximale d’interruption admissible ; le **RPO** (Recovery Point Objective) est l’ancienneté maximale des données restaurées, donc la fréquence minimale de sauvegarde.' },
+          {
+            t: 'example',
+            title: 'De l’objectif à la solution',
+            blocks: [
+              { t: 'p', text: 'Le BIA indique que la facturation doit reprendre en 24 heures avec au plus 4 heures de données perdues. Cela impose une sauvegarde au moins toutes les 4 heures, une restauration testée en moins de 24 heures et une copie hors ligne : le coût de la solution découle directement de l’objectif fixé avec les métiers.' },
+            ],
+          },
+          { t: 'list', ordered: true, items: ['**Détecter et qualifier** l’incident, activer la cellule de crise.', '**Contenir** et préserver les preuves.', '**Communiquer** : direction, clients, autorités selon les obligations (CNIL, autorité NIS2).', '**Reprendre** selon les priorités du BIA.', '**Tirer les enseignements** et mettre à jour les plans.'] },
+          { t: 'callout', kind: 'warn', text: 'Un plan jamais testé donne une fausse assurance. Les sauvegardes doivent être **hors ligne ou immuables** et leur restauration éprouvée.' },
+        ],
+      },
     ],
     useCases: [
       'RSSI : présenter à la direction une cartographie des risques et obtenir l’arbitrage budgétaire.',
@@ -119,25 +170,26 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un fabricant de dispositifs médicaux de 400 salariés pense être concerné par NIS2. Il n’a ni analyse de risques formalisée, ni procédure de notification d’incident, ni inventaire de ses fournisseurs critiques.' }],
       steps: ['Indiquer comment vérifier s’il est concerné.', 'Lister les chantiers prioritaires.', 'Préciser le rôle attendu de la direction.'],
     },
+    {
+      id: 'bia-reprise',
+      kind: 'case',
+      title: 'Cas pratique : du bilan d’impact au plan de reprise',
+      context: [
+        { t: 'p', text: 'Une PME de distribution de 120 personnes a identifié ses trois processus principaux :' },
+        {
+          t: 'table',
+          head: ['Processus', 'Interruption admissible', 'Perte de données admissible', 'Sauvegarde actuelle'],
+          rows: [
+            ['Prise de commandes en ligne', '4 heures', '15 minutes', 'Quotidienne, sur un disque branché en permanence'],
+            ['Facturation', '24 heures', '4 heures', 'Quotidienne, sur le même disque'],
+            ['Paie', '5 jours', '1 jour', 'Hebdomadaire, sur le même disque'],
+          ],
+        },
+      ],
+      steps: ['Indiquer ce qui ne satisfait pas les objectifs et pourquoi.', 'Proposer l’ordre de redémarrage et les mesures de sauvegarde adaptées.', 'Décrire un exercice permettant de vérifier le plan.'],
+    },
   ],
-  questions: [
-    { id: 'gov-q1', type: 'single', difficulty: 1, skills: ['m-risk'], prompt: 'Comment estime-t-on généralement un risque ?', options: [{ id: 'a', text: 'Par le nombre de vulnérabilités détectées' }, { id: 'b', text: 'Par la combinaison de la vraisemblance et de la gravité' }, { id: 'c', text: 'Par le budget sécurité' }, { id: 'd', text: 'Par le nombre de salariés' }] },
-    { id: 'gov-q2', type: 'multi', difficulty: 1, skills: ['m-risk'], prompt: 'Quelles options de traitement du risque existent ?', options: [{ id: 'a', text: 'Réduire' }, { id: 'b', text: 'Transférer' }, { id: 'c', text: 'Ignorer sans décision' }, { id: 'd', text: 'Accepter formellement' }, { id: 'e', text: 'Éviter' }] },
-    { id: 'gov-q3', type: 'truefalse', difficulty: 2, skills: ['m-risk'], prompt: 'Souscrire une assurance cyber transfère entièrement la responsabilité d’un incident à l’assureur.' },
-    { id: 'gov-q4', type: 'short', difficulty: 2, skills: ['m-risk'], prompt: 'Comment appelle-t-on le risque qui subsiste après l’application des mesures de traitement ? (deux mots)' },
-    { id: 'gov-q5', type: 'single', difficulty: 2, skills: ['m-smsi'], prompt: 'Quelle norme est certifiable et définit les exigences d’un SMSI ?', options: [{ id: 'a', text: 'ISO/IEC 27001' }, { id: 'b', text: 'ISO/IEC 27002' }, { id: 'c', text: 'ISO/IEC 27005' }, { id: 'd', text: 'NIST CSF' }] },
-    { id: 'gov-q6', type: 'short', difficulty: 2, skills: ['m-smsi'], prompt: 'Quel document ISO 27001 liste les mesures de l’annexe A en justifiant leur inclusion ou leur exclusion ? (trois mots)' },
-    { id: 'gov-q7', type: 'truefalse', difficulty: 2, skills: ['m-smsi'], prompt: 'Un fournisseur certifié ISO 27001 garantit que tous ses services et sites sont couverts par la certification.' },
-    { id: 'gov-q8', type: 'single', difficulty: 2, skills: ['m-smsi'], prompt: 'Quelle fonction a été ajoutée dans la version 2.0 du NIST Cybersecurity Framework ?', options: [{ id: 'a', text: 'Gouverner (Govern)' }, { id: 'b', text: 'Détecter (Detect)' }, { id: 'c', text: 'Protéger (Protect)' }, { id: 'd', text: 'Rétablir (Recover)' }] },
-    { id: 'gov-q9', type: 'single', difficulty: 2, skills: ['m-ebios'], prompt: 'Quel organisme publie la méthode EBIOS Risk Manager ?', options: [{ id: 'a', text: 'La CNIL' }, { id: 'b', text: 'L’ANSSI' }, { id: 'c', text: 'L’ISO' }, { id: 'd', text: 'L’ENISA' }] },
-    { id: 'gov-q10', type: 'multi', difficulty: 2, skills: ['m-ebios'], prompt: 'Quels éléments sont étudiés dans les ateliers d’EBIOS RM ?', options: [{ id: 'a', text: 'Les valeurs métier et événements redoutés' }, { id: 'b', text: 'Les sources de risque et leurs objectifs visés' }, { id: 'c', text: 'Les chemins d’attaque passant par l’écosystème' }, { id: 'd', text: 'Le choix de la marque des pare-feu' }] },
-    { id: 'gov-q11', type: 'short', difficulty: 2, skills: ['m-ebios'], prompt: 'Quel sigle anglais désigne la durée maximale d’interruption admissible d’un processus ?' },
-    { id: 'gov-q12', type: 'single', difficulty: 2, skills: ['m-regl'], prompt: 'Sous quel délai une violation de données personnelles doit-elle, en principe, être notifiée à la CNIL ?', options: [{ id: 'a', text: '24 heures' }, { id: 'b', text: '72 heures' }, { id: 'c', text: '15 jours' }, { id: 'd', text: '1 mois' }] },
-    { id: 'gov-q13', type: 'multi', difficulty: 2, skills: ['m-regl'], prompt: 'Associez correctement : quelles affirmations sont exactes ?', options: [{ id: 'a', text: 'DORA concerne principalement le secteur financier' }, { id: 'b', text: 'Le Cyber Resilience Act vise les fabricants de produits comportant des éléments numériques' }, { id: 'c', text: 'NIS2 ne s’applique qu’aux entreprises de plus de 10 000 salariés' }, { id: 'd', text: 'NIS2 engage la responsabilité des organes de direction' }] },
-    { id: 'gov-q14', type: 'open', difficulty: 3, skills: ['m-risk', 'm-ebios'], prompt: 'Cotez et traitez le scénario « fraude au faux virement par usurpation du dirigeant » pour une PME de 120 personnes, en justifiant vraisemblance, gravité et mesures.' },
-    { id: 'gov-q15', type: 'open', difficulty: 3, skills: ['m-regl', 'm-smsi'], prompt: 'Une entreprise vous demande si la certification ISO 27001 suffit à démontrer sa conformité à NIS2. Que répondez-vous ?' },
-    { id: 'gov-q16', type: 'truefalse', difficulty: 1, skills: ['m-ebios', 'm-risk'], prompt: 'Un plan de reprise d’activité qui n’a jamais été testé donne une assurance limitée sur la capacité réelle de reprise.' },
-  ],
+  questions,
   resources: [
     { title: 'Guide EBIOS Risk Manager', source: 'ANSSI', url: 'https://cyber.gouv.fr/la-methode-ebios-risk-manager' },
     { title: 'NIST Cybersecurity Framework 2.0', source: 'NIST', url: 'https://www.nist.gov/cyberframework' },

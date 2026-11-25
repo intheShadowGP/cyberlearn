@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 68 |
-| Questions de cours (avec correction) | 2463 |
+| Questions de cours (avec correction) | 2487 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -101,7 +101,7 @@
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Architecture cloud sécurisée : zones d’atterrissage, politiques en code, identités et détection (`l-cloud-avance`) | L | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
-| Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 90 min | 4 | 16 | 2 | 4 |
+| Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 125 min | 6 | 40 | 3 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 85 min | 3 | 16 | 2 | 4 |
