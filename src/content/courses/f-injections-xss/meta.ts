@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['F-sql-injection', 'F-nosql-injection', 'F-xss', 'F-csp', 'F-owasp-top-10', 'F-security-headers', 'F-architecture-http'],
   title: 'Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger',
   level: 2,
-  durationMin: 90,
+  durationMin: 115,
   summary:
     "Comprendre pourquoi mélanger données et code crée des injections, reconnaître les injections SQL et les XSS (réfléchie, stockée, DOM), et appliquer les corrections : requêtes paramétrées, encodage contextuel, CSP.",
   objectives: [
@@ -15,6 +15,8 @@ export const meta: CourseMeta = {
     'Distinguer XSS réfléchie, stockée et basée sur le DOM.',
     'Corriger avec des requêtes paramétrées et un encodage de sortie contextuel.',
     'Configurer une politique CSP comme défense en profondeur.',
+    'Reconnaître les autres injections (commande, NoSQL, gabarit, en-têtes) et les corriger par une séparation structurelle.',
+    'Détecter une tentative d’injection dans les journaux et organiser une défense en profondeur.',
   ],
   prerequisites: [],
   prerequisiteKnowledge: ['Fonctionnement général d’une requête HTTP (URL, paramètres, formulaire)', 'Lecture d’un code simple (JavaScript ou Python)'],
@@ -23,8 +25,10 @@ export const meta: CourseMeta = {
     { id: 'f-sqli', label: 'Injection SQL : détection et correction', level: 2 },
     { id: 'f-xss', label: 'XSS : types, impact et correction', level: 2 },
     { id: 'f-csp', label: 'CSP et en-têtes de sécurité', level: 2 },
+    { id: 'f-inj-autres', label: 'Injections de commande, NoSQL et gabarit', level: 2 },
+    { id: 'f-inj-defense', label: 'Détection et défense en profondeur', level: 2 },
   ],
-  sectionCount: 4,
-  questionCount: 16,
-  quizSize: 8,
+  sectionCount: 6,
+  questionCount: 40,
+  quizSize: 10,
 };

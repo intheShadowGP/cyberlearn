@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'f-injections-xss',
@@ -75,6 +76,63 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'Tester ces injections sur un site sans autorisation écrite est une infraction. Pratiquez sur le laboratoire simulé de la plateforme ou sur des applications volontairement vulnérables installées chez vous (OWASP Juice Shop, DVWA).' },
         ],
       },
+      {
+        id: 'autres',
+        title: 'Autres injections : commande, NoSQL, gabarits, en-têtes',
+        blocks: [
+          { t: 'p', text: 'Le principe est identique pour tous les interpréteurs : dès qu’une valeur de l’utilisateur est **concaténée** dans un texte qui sera interprété, elle peut en modifier la structure. Seule la syntaxe change.' },
+          {
+            t: 'table',
+            head: ['Injection', 'Exemple de charge', 'Correction'],
+            rows: [
+              ['**Commande système**', '`8.8.8.8; cat /etc/passwd` dans un paramètre passé à `ping`', 'Appel sans shell avec liste d’arguments, liste blanche de valeurs'],
+              ['**NoSQL**', '`{"login": "admin", "password": {"$ne": null}}` : l’opérateur remplace la valeur attendue', 'Forcer le type chaîne, refuser les objets et opérateurs venant du client'],
+              ['**Gabarit côté serveur (SSTI)**', '`{{7*7}}` renvoie `49` : l’entrée est interprétée par le moteur de gabarits', 'Passer les données comme **variables** du gabarit, jamais dans son texte'],
+              ['**LDAP / XPath**', '`*)(uid=*))(|(uid=*` dans un filtre de recherche', 'Échappement spécifique à l’interpréteur ou requêtes paramétrées'],
+              ['**En-tête HTTP (CRLF)**', 'Retour à la ligne dans une valeur recopiée dans un en-tête', 'Refuser les caractères CR et LF ; API du framework pour les redirections'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Injection de commande et correction',
+            blocks: [
+              { t: 'code', lang: 'python', caption: 'Vulnérable : le shell interprète la saisie', code: 'import os\n\ndef ping(hote):\n    os.system("ping -c 1 " + hote)   # hote = "8.8.8.8; id" exécute aussi « id »' },
+              { t: 'code', lang: 'python', caption: 'Corrigé : pas de shell, arguments séparés, valeur contrôlée', code: 'import ipaddress, subprocess\n\ndef ping(hote):\n    adresse = ipaddress.ip_address(hote)          # lève une exception si ce n’est pas une IP\n    subprocess.run(["ping", "-c", "1", str(adresse)], check=True, timeout=5)' },
+            ],
+          },
+          { t: 'def', term: 'Injection de gabarit (SSTI)', text: 'Vulnérabilité où l’entrée de l’utilisateur est insérée dans le **texte même** du gabarit avant son rendu. Le moteur l’évalue comme une expression, ce qui peut aller jusqu’à l’exécution de code sur le serveur.' },
+          { t: 'callout', kind: 'warn', text: 'Un ORM ne protège que tant qu’on utilise ses fonctions paramétrées : les requêtes brutes (`raw`, `execute`, `$where`) restent injectables si on y concatène une valeur.' },
+        ],
+      },
+      {
+        id: 'defense',
+        title: 'Détecter, tester et défendre en profondeur',
+        blocks: [
+          { t: 'def', term: 'Défense en profondeur', text: 'Superposition de mesures indépendantes pour que l’échec de l’une ne suffise pas à compromettre le système. Elle **complète** la correction du code, elle ne la remplace pas.' },
+          {
+            t: 'table',
+            head: ['Couche', 'Mesure', 'Ce qu’elle limite'],
+            rows: [
+              ['Code', 'Requêtes paramétrées, encodage contextuel, validation côté serveur', 'La cause de l’injection'],
+              ['Revue et tests', 'Revue de code, analyse statique (SAST), tests dynamiques (DAST), tests d’intrusion autorisés', 'Les failles qui passent entre les mailles du développement'],
+              ['Base de données', 'Compte applicatif aux droits minimaux, pas de droit d’administration, pas d’accès aux fichiers', 'L’impact d’une injection SQL réussie'],
+              ['Navigateur', 'CSP stricte, cookies `HttpOnly`, `Secure`, `SameSite`', 'L’impact d’une XSS'],
+              ['Réseau', 'Pare-feu applicatif (WAF) réglé et surveillé', 'Les attaques connues, le temps de corriger : **pas** une correction'],
+              ['Exploitation', 'Journaux, alertes sur erreurs SQL répétées, motifs `UNION`, `SLEEP`, `<script>`', 'Le temps de détection'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Lire une ligne de journal suspecte',
+            blocks: [
+              { t: 'code', lang: 'text', code: '203.0.113.9 "GET /produits?id=1%20UNION%20SELECT%20null,version()--" 200 4821\n203.0.113.9 "GET /produits?id=1%20AND%20SLEEP(5)--" 200 912 (durée 5,1 s)' },
+              { t: 'p', text: 'Le décodage de l’URL révèle `UNION SELECT` puis `SLEEP(5)` : un attaquant teste une injection par UNION puis une injection temporelle. Réponses 200 de taille inhabituelle et durée de 5 secondes : la requête a bien été interprétée. Il faut corriger le paramètre, vérifier ce qui a été lu et regarder les autres requêtes de la même adresse.' },
+            ],
+          },
+          { t: 'list', items: ['**Messages d’erreur génériques** pour l’utilisateur, détails seulement dans les journaux : une erreur SQL affichée aide l’attaquant.', '**Tests de non-régression** : ajouter un test qui rejoue la charge d’attaque après chaque correction.', '**Dépendances à jour** : une bibliothèque vulnérable (analyse de composition logicielle) réintroduit une injection.', '**Mode Report-Only** de la CSP pour mesurer avant de bloquer.'] },
+          { t: 'callout', kind: 'tip', text: 'Un WAF peut gagner quelques jours le temps de corriger, mais il se contourne (encodages, variantes). Corrigez toujours la cause dans le code.' },
+        ],
+      },
     ],
     useCases: [
       'Revue de code : repérer toute requête SQL construite par concaténation et tout usage d’innerHTML avec des données.',
@@ -120,25 +178,17 @@ export const body: CourseBody = {
       ],
       steps: ['Pour chaque ligne, dire si elle est vulnérable et à quel type de XSS.', 'Proposer une correction pour chaque ligne vulnérable.'],
     },
+    {
+      id: 'revue-injections',
+      kind: 'analysis',
+      title: 'Revue de code : quatre autres injections',
+      context: [
+        { t: 'code', lang: 'python', code: '# 1 : exécution d’un diagnostic réseau\nos.system("traceroute " + request.args["hote"])\n\n# 2 : API de connexion (MongoDB)\nuser = db.users.find_one({"login": req.json["login"], "mdp": req.json["mdp"]})\n\n# 3 : page d’accueil personnalisée (Flask)\nreturn render_template_string("<h1>Bonjour " + nom + "</h1>")\n\n# 4 : tri choisi par l’utilisateur\ncur.execute("SELECT * FROM produits ORDER BY " + request.args["tri"])' },
+      ],
+      steps: ['Nommer l’injection de chaque extrait et décrire une charge d’attaque.', 'Écrire la correction de chaque extrait.', 'Proposer une mesure de détection ou de limitation d’impact pour l’ensemble.'],
+    },
   ],
-  questions: [
-    { id: 'web-q1', type: 'single', difficulty: 1, skills: ['f-inj-cause'], prompt: 'Quelle est la cause commune à toutes les injections ?', options: [{ id: 'a', text: 'Un chiffrement trop faible' }, { id: 'b', text: 'Une donnée non fiable interprétée comme du code par un autre composant' }, { id: 'c', text: 'Un mot de passe trop court' }, { id: 'd', text: 'Un serveur non mis à jour' }] },
-    { id: 'web-q2', type: 'truefalse', difficulty: 1, skills: ['f-inj-cause'], prompt: 'Valider les saisies en JavaScript dans le navigateur suffit à se protéger des injections.' },
-    { id: 'web-q3', type: 'multi', difficulty: 2, skills: ['f-inj-cause'], prompt: 'Quelles sources de données doivent être considérées comme non fiables ?', options: [{ id: 'a', text: 'Les en-têtes HTTP envoyés par le client (User-Agent, Referer)' }, { id: 'b', text: 'Les cookies' }, { id: 'c', text: 'Les réponses d’une API tierce' }, { id: 'd', text: 'Une constante définie dans le code source de l’application' }] },
-    { id: 'web-q4', type: 'single', difficulty: 2, skills: ['f-sqli'], prompt: 'Dans une requête `… WHERE login = \'` + saisie + `\' AND …`, quel identifiant contourne la vérification du mot de passe ?', options: [{ id: 'a', text: '`admin`' }, { id: 'b', text: "`admin' -- `" }, { id: 'c', text: '`<script>admin</script>`' }, { id: 'd', text: '`admin%00`' }] },
-    { id: 'web-q5', type: 'short', difficulty: 1, skills: ['f-sqli'], prompt: 'Comment appelle-t-on les requêtes SQL dont les valeurs sont transmises séparément du texte de la requête ? (deux mots)' },
-    { id: 'web-q6', type: 'truefalse', difficulty: 2, skills: ['f-sqli'], prompt: 'Un nom de colonne utilisé dans un ORDER BY peut être transmis comme paramètre lié d’une requête préparée.' },
-    { id: 'web-q7', type: 'single', difficulty: 3, skills: ['f-sqli'], prompt: 'La page met systématiquement 5 secondes de plus à répondre quand on ajoute `\' AND SLEEP(5) -- ` au paramètre. De quoi s’agit-il ?', options: [{ id: 'a', text: 'D’une injection SQL aveugle temporelle' }, { id: 'b', text: 'D’une XSS stockée' }, { id: 'c', text: 'D’une attaque par déni de service réseau' }, { id: 'd', text: 'D’un comportement normal de cache' }] },
-    { id: 'web-q8', type: 'single', difficulty: 2, skills: ['f-xss'], prompt: '`el.innerHTML = location.hash.slice(1)` est vulnérable à quel type de XSS ?', options: [{ id: 'a', text: 'Réfléchie côté serveur' }, { id: 'b', text: 'Stockée' }, { id: 'c', text: 'Basée sur le DOM' }, { id: 'd', text: 'Aucune' }] },
-    { id: 'web-q9', type: 'multi', difficulty: 2, skills: ['f-xss'], prompt: 'Que peut faire un script injecté par XSS dans la page de la victime ?', options: [{ id: 'a', text: 'Lire le contenu de la page et les données affichées' }, { id: 'b', text: 'Envoyer des requêtes au site au nom de la victime' }, { id: 'c', text: 'Lire un cookie marqué HttpOnly via document.cookie' }, { id: 'd', text: 'Afficher un faux formulaire de connexion sur le vrai domaine' }] },
-    { id: 'web-q10', type: 'short', difficulty: 1, skills: ['f-xss'], prompt: 'Quelle propriété DOM faut-il utiliser à la place d’innerHTML pour insérer du texte sans l’interpréter ?' },
-    { id: 'web-q11', type: 'truefalse', difficulty: 2, skills: ['f-xss', 'f-inj-cause'], prompt: 'Encoder les caractères HTML (`<`, `>`, `&`) suffit à sécuriser une valeur insérée dans l’attribut `href` d’un lien.' },
-    { id: 'web-q12', type: 'single', difficulty: 2, skills: ['f-csp'], prompt: 'Quelle directive CSP annule l’essentiel de la protection contre les XSS si elle figure dans script-src ?', options: [{ id: 'a', text: "`'self'`" }, { id: 'b', text: "`'unsafe-inline'`" }, { id: 'c', text: "`'none'`" }, { id: 'd', text: '`https:` limité à un domaine précis' }] },
-    { id: 'web-q13', type: 'multi', difficulty: 2, skills: ['f-csp'], prompt: 'Quelles mesures réduisent l’impact d’une XSS ?', options: [{ id: 'a', text: "Une CSP sans 'unsafe-inline'" }, { id: 'b', text: 'Des cookies de session HttpOnly' }, { id: 'c', text: 'L’encodage Base64 des réponses' }, { id: 'd', text: 'L’utilisation de nonces pour les rares scripts inline nécessaires' }] },
-    { id: 'web-q14', type: 'open', difficulty: 3, skills: ['f-sqli', 'f-inj-cause'], prompt: 'Un développeur propose de corriger une injection SQL en remplaçant chaque apostrophe par deux apostrophes. Expliquez pourquoi ce n’est pas satisfaisant et ce que vous recommandez.' },
-    { id: 'web-q15', type: 'open', difficulty: 3, skills: ['f-csp', 'f-xss'], prompt: 'Vous devez déployer une CSP stricte sur une application existante qui contient de nombreux scripts inline. Décrivez votre démarche pour ne pas casser la production.' },
-    { id: 'web-q16', type: 'single', difficulty: 2, skills: ['f-csp', 'f-xss'], prompt: 'Quelle directive CSP protège contre le détournement de clic (clickjacking) ?', options: [{ id: 'a', text: '`script-src`' }, { id: 'b', text: '`frame-ancestors`' }, { id: 'c', text: '`img-src`' }, { id: 'd', text: '`connect-src`' }] },
-  ],
+  questions,
   resources: [
     { title: 'OWASP Top 10', source: 'OWASP', url: 'https://owasp.org/www-project-top-ten/' },
     { title: 'SQL Injection Prevention Cheat Sheet', source: 'OWASP', url: 'https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html' },
