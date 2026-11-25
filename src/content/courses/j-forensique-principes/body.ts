@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'j-forensique-principes',
@@ -85,6 +86,55 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: "Un horodatage Unix (epoch) compte les secondes depuis le 1er janvier 1970 UTC : `1770712915` correspond au 10 février 2026 à 08:41:55 UTC." },
         ],
       },
+      {
+        id: 'memoire',
+        title: 'Analyser une image de mémoire vive',
+        blocks: [
+          { t: 'p', text: 'La mémoire vive contient ce que le disque ne montre pas : les processus **en cours**, leurs lignes de commande, les connexions réseau ouvertes, les modules chargés, parfois des clés de chiffrement. Elle disparaît à l’extinction : c’est la première preuve à acquérir.' },
+          {
+            t: 'table',
+            head: ['Ce qu’on examine', 'Question posée', 'Signal d’alerte'],
+            rows: [
+              ['**Liste et arbre des processus**', 'Qui a lancé quoi ?', 'Une application bureautique parente d’un interpréteur de commandes'],
+              ['**Balayage des structures**', 'Un processus échappe-t-il à la liste active ?', 'Présent dans le balayage, absent de la liste : processus terminé ou dissimulé'],
+              ['**Lignes de commande**', 'Avec quels arguments ?', 'Commande encodée, chemin dans un répertoire utilisateur ou temporaire'],
+              ['**Connexions réseau**', 'Avec qui le système communique-t-il ?', 'Destination inattendue, processus sans raison de communiquer'],
+              ['**Modules et code injecté**', 'Du code a-t-il été chargé dans un autre processus ?', 'Région mémoire exécutable sans fichier correspondant'],
+            ],
+          },
+          { t: 'list', items: ['**Support externe** : l’image est écrite sur un disque propre, jamais sur le disque examiné ; l’empreinte est calculée aussitôt.', '**Outil documenté** : nom, version, commandes et heure sont consignés ; l’outil modifie lui-même la mémoire, ce qu’on mentionne.', '**Croisement** : un indice en mémoire se confirme par le disque, les journaux ou le réseau.', '**Prudence** : un processus inhabituel n’est pas forcément malveillant ; on décrit, on vérifie, on conclut.'] },
+          {
+            t: 'example',
+            title: 'Lecture d’un arbre de processus',
+            blocks: [
+              { t: 'p', text: 'Dans une image mémoire, `explorer.exe` lance `winword.exe`, qui lance `powershell.exe` avec une longue commande encodée, qui ouvre une connexion vers une adresse externe inconnue. Chaque maillon est cohérent avec l’ouverture d’un document piégé.' },
+              { t: 'p', text: 'Lecture : l’enchaînement est suspect, mais il reste à le confirmer : le document ouvert (artefacts disque, courriel), la commande décodée, la destination (journaux réseau) et d’autres hôtes touchés.' },
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: 'Acquérir la mémoire modifie la mémoire : on le sait, on le documente et on choisit un outil reconnu, lancé depuis un support externe.' },
+        ],
+      },
+      {
+        id: 'rapport',
+        title: 'Rapport, valeur probante et cadre légal',
+        blocks: [
+          { t: 'p', text: 'Une investigation ne vaut que par ce qu’on peut en démontrer et en défendre. Le rapport est le produit final : il doit être **clair**, **étayé** et **contestable** (c’est-à-dire vérifiable par un tiers).' },
+          {
+            t: 'table',
+            head: ['Partie', 'Contenu'],
+            rows: [
+              ['**Mission et périmètre**', 'Question posée, supports concernés, limites'],
+              ['**Méthode**', 'Outils et versions, commandes, empreintes, chaîne de conservation'],
+              ['**Constats**', 'Faits observés, chacun rattaché à une preuve référencée'],
+              ['**Interprétation**', 'Ce qu’on en déduit, avec un **niveau de confiance** et les hypothèses alternatives'],
+              ['**Limites**', 'Ce qu’on n’a pas pu vérifier, les sources manquantes'],
+            ],
+          },
+          { t: 'list', items: ['**Faits et interprétation séparés** : le lecteur doit voir ce qui est constaté et ce qui est déduit.', '**Niveau de confiance** : conclusion appuyée par plusieurs sources concordantes, ou par un seul indice.', '**Reproductibilité** : un tiers, avec la même copie et la même méthode, retrouve les mêmes résultats.', '**Neutralité** : l’enquêteur établit des faits ; la responsabilité juridique n’est pas son rôle.'] },
+          { t: 'callout', kind: 'legal', title: 'Cadre légal', text: 'Une enquête interne se fait dans le respect du droit du travail, de la charte informatique et du RGPD : finalité légitime, information préalable, proportionnalité, protection des échanges personnels, accès limités et tracés. Une enquête judiciaire suit les règles de la procédure pénale. Dans le doute, on consulte le service juridique avant d’examiner des données de personnes.' },
+          { t: 'list', items: ['**Minimisation** : on ne copie et ne cite que ce que la mission justifie.', '**Conservation** : la copie de travail est conservée ou détruite selon la politique et la loi, et ce choix est consigné.', '**Confidentialité** : le rapport n’est transmis qu’aux personnes habilitées.'] },
+        ],
+      },
     ],
     useCases: [
       'Réponse à incident : déterminer le vecteur initial et la date de compromission pour borner le périmètre.',
@@ -128,25 +178,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Vous arrivez sur le bureau d’un comptable dont le portable (allumé, session ouverte, disque chiffré BitLocker) a été signalé par l’EDR. Vous disposez d’une clé USB d’outils, d’un disque externe et d’un bloqueur d’écriture.' }],
       steps: ['Lister vos actions dans l’ordre.', 'Préciser ce que vous documentez à chaque étape.', 'Indiquer quand et comment l’ordinateur sera éteint.'],
     },
+    {
+      id: 'lire-memoire',
+      kind: 'analysis',
+      title: 'Analyse : lire l’arbre des processus d’une image mémoire',
+      context: [
+        { t: 'code', lang: 'text', code: 'PID   PPID  Nom              Origine          Ligne de commande (extrait)\n 612   584  explorer.exe     liste active     C:\\Windows\\explorer.exe\n3120   612  winword.exe      liste active     "WINWORD.EXE" /n "C:\\Users\\a.roche\\Downloads\\facture-0312.docm"\n3344  3120  powershell.exe   liste active     powershell -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0A…\n3790  3344  svchost32.exe    balayage seul    (processus terminé)\n\nConnexions : PID 3790 -> 198.51.100.44:443 (ESTABLISHED à la capture)' },
+      ],
+      steps: ['Décrire l’enchaînement des processus et ce qui est suspect.', 'Dire pourquoi `svchost32.exe` n’apparaît que dans le balayage et ce que cela suggère.', 'Lister les vérifications à faire sur le disque, les journaux et le réseau, puis les actions de confinement.'],
+    },
   ],
-  questions: [
-    { id: 'for-q1', type: 'single', difficulty: 1, skills: ['j-principes'], prompt: 'Selon l’ordre de volatilité, que faut-il collecter en premier ?', options: [{ id: 'a', text: 'Le disque dur' }, { id: 'b', text: 'La mémoire vive' }, { id: 'c', text: 'Les sauvegardes sur bande' }, { id: 'd', text: 'Les journaux archivés' }] },
-    { id: 'for-q2', type: 'truefalse', difficulty: 1, skills: ['j-principes'], prompt: 'L’analyse doit être réalisée sur une copie de la preuve, l’original étant conservé sous scellé.' },
-    { id: 'for-q3', type: 'short', difficulty: 1, skills: ['j-principes'], prompt: 'Quelle RFC décrit les lignes directrices de collecte et l’ordre de volatilité ? (numéro)' },
-    { id: 'for-q4', type: 'single', difficulty: 2, skills: ['j-preuve'], prompt: 'Comment démontrer qu’une image disque n’a pas été modifiée depuis son acquisition ?', options: [{ id: 'a', text: 'En vérifiant sa taille' }, { id: 'b', text: 'En comparant son empreinte SHA-256 à celle calculée lors de l’acquisition' }, { id: 'c', text: 'En l’ouvrant avec l’explorateur de fichiers' }, { id: 'd', text: 'En la compressant' }] },
-    { id: 'for-q5', type: 'multi', difficulty: 2, skills: ['j-preuve'], prompt: 'Quelles informations doivent figurer dans la chaîne de conservation ?', options: [{ id: 'a', text: 'Qui a collecté la preuve, quand et comment' }, { id: 'b', text: 'Chaque transfert de garde avec date et motif' }, { id: 'c', text: 'L’empreinte de l’image' }, { id: 'd', text: 'L’avis personnel de l’enquêteur sur la culpabilité' }] },
-    { id: 'for-q6', type: 'truefalse', difficulty: 2, skills: ['j-preuve'], prompt: 'Brancher un disque saisi sur un poste Windows sans bloqueur d’écriture peut modifier des métadonnées de la preuve.' },
-    { id: 'for-q7', type: 'single', difficulty: 2, skills: ['j-artefacts'], prompt: 'Quel artefact Windows prouve qu’un programme a été exécuté, avec ses dernières dates d’exécution ?', options: [{ id: 'a', text: 'Le Prefetch' }, { id: 'b', text: 'Le fichier hosts' }, { id: 'c', text: 'La corbeille' }, { id: 'd', text: 'Le fond d’écran' }] },
-    { id: 'for-q8', type: 'short', difficulty: 2, skills: ['j-artefacts'], prompt: 'Quel outil libre est la référence pour analyser une image de mémoire vive ?' },
-    { id: 'for-q9', type: 'multi', difficulty: 2, skills: ['j-artefacts'], prompt: 'Quels artefacts peuvent révéler un mécanisme de persistance sous Windows ?', options: [{ id: 'a', text: 'Les clés de registre Run' }, { id: 'b', text: 'L’événement 7045 (installation d’un service)' }, { id: 'c', text: 'Les tâches planifiées' }, { id: 'd', text: 'La résolution de l’écran' }] },
-    { id: 'for-q10', type: 'single', difficulty: 3, skills: ['j-artefacts', 'j-timeline'], prompt: 'Un exécutable a une date de création $STANDARD_INFORMATION en 2023, mais une date de création $FILE_NAME de la semaine dernière. Que suspectez-vous ?', options: [{ id: 'a', text: 'Une erreur de disque' }, { id: 'b', text: 'Une manipulation des horodatages (timestomping)' }, { id: 'c', text: 'Une mise à jour Windows' }, { id: 'd', text: 'Un fichier compressé' }] },
-    { id: 'for-q11', type: 'truefalse', difficulty: 2, skills: ['j-timeline'], prompt: 'Un journal en heure de Paris (hiver) indiquant 10:00 et un journal en UTC indiquant 09:00 décrivent le même instant.' },
-    { id: 'for-q12', type: 'short', difficulty: 2, skills: ['j-timeline'], prompt: 'Dans quel référentiel horaire faut-il normaliser tous les horodatages d’une chronologie ? (sigle)' },
-    { id: 'for-q13', type: 'open', difficulty: 3, skills: ['j-principes', 'j-preuve'], prompt: 'Décrivez, dans l’ordre, la collecte sur un portable allumé dont le disque est chiffré par BitLocker, en justifiant chaque étape.' },
-    { id: 'for-q14', type: 'single', difficulty: 2, skills: ['j-timeline'], prompt: 'Que représente l’horodatage Unix `0` ?', options: [{ id: 'a', text: 'Le 1er janvier 1900 à minuit, heure locale' }, { id: 'b', text: 'Le 1er janvier 1970 à 00:00:00 UTC' }, { id: 'c', text: 'La date d’installation du système' }, { id: 'd', text: 'Le 1er janvier 1601 UTC' }] },
-    { id: 'for-q15', type: 'open', difficulty: 3, skills: ['j-timeline', 'j-artefacts'], prompt: 'Votre chronologie présente un trou de trois heures dans les journaux de sécurité d’un serveur, pendant la période suspecte. Quelles hypothèses formulez-vous et comment les vérifiez-vous ?' },
-    { id: 'for-q16', type: 'multi', difficulty: 2, skills: ['j-preuve', 'j-principes'], prompt: 'Quelles pratiques renforcent la valeur probante d’une investigation ?', options: [{ id: 'a', text: 'Documenter chaque action horodatée, y compris les siennes' }, { id: 'b', text: 'Croiser plusieurs sources indépendantes' }, { id: 'c', text: 'Supprimer les fichiers non pertinents de l’image pour gagner de la place' }, { id: 'd', text: 'Utiliser des outils et méthodes reproductibles' }] },
-  ],
+  questions,
   resources: [
     { title: 'RFC 3227 — Guidelines for Evidence Collection and Archiving', source: 'IETF', url: 'https://www.rfc-editor.org/rfc/rfc3227' },
     { title: 'NIST SP 800-86 — Integrating Forensic Techniques into Incident Response', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/86/final' },
