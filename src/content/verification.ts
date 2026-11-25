@@ -67,6 +67,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'j-forensique-principes': sheet(['RFC 3227', 'NIST SP 800-86', 'Volatility 3'], ['Artefacts Windows selon les versions du système']),
   'j-memoire-artefacts-linux': sheet(['Volatility 3', 'The Sleuth Kit et Autopsy', 'NIST SP 800-86', 'MITRE ATT&CK (T1070.006)', 'plaso'], ['Noms et options des plugins Volatility 3', 'Emplacements des journaux selon les distributions']),
   'j-analyse-maliciels-investigation': sheet(['NIST SP 800-83 Rév. 1', 'YARA', 'MITRE ATT&CK', 'TLP 2.0 (FIRST)'], ['Techniques d’évasion d’analyse des maliciels', 'Services de réputation et bacs à sable']),
+  'k-malware-initiation': sheet(['Guide d’hygiène informatique (ANSSI)', 'NIST SP 800-83 Rév. 1', 'MITRE ATT&CK'], ['Familles et campagnes actives de logiciels malveillants', 'Fonctionnalités des protections (macros, EDR)']),
   'k-malware-analyse': sheet(['YARA', 'MITRE ATT&CK — Software'], ['Familles de malwares et tendances (CERT-FR)']),
   'k-retro-ingenierie-defensive': sheet(['Ghidra (NSA)', 'PE Format (Microsoft Learn)', 'ELF (refspecs)', 'NIST SP 800-83 Rév. 1', 'Secure the Windows boot process (Microsoft)'], ['Fonctionnalités des outils de rétro-ingénierie selon les versions', 'Techniques d’évasion d’analyse']),
   'l-cloud-iam': sheet(['Logique d’évaluation IAM AWS', 'SecNumCloud', 'CIS Foundations Benchmarks'], ['Services et noms de produits des fournisseurs cloud']),
