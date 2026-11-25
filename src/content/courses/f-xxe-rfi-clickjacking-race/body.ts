@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'f-xxe-rfi-clickjacking-race',
@@ -70,6 +71,64 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'Tester une application sans autorisation est illégal, même sans intention de nuire. Un test de sécurité se fait dans un périmètre défini par écrit (voir le cours sur la méthodologie de pentest) ou sur des environnements d’entraînement conçus pour cela.' },
         ],
       },
+      {
+        id: 'televersement',
+        title: 'Téléversement de fichiers et désérialisation',
+        blocks: [
+          { t: 'p', text: 'Deux fonctionnalités banales font entrer des **octets contrôlés par l’utilisateur** dans le serveur : le téléversement d’un fichier (avatar, justificatif) et la reconstitution d’objets à partir de données reçues (cookie, message, fichier de session). Mal traitées, elles conduisent à l’exécution de code.' },
+          {
+            t: 'table',
+            head: ['Risque', 'Mécanisme', 'Parade'],
+            rows: [
+              ['**Exécution d’un script téléversé**', 'Un fichier `.php` ou `.jsp` déposé dans un répertoire servi et exécuté par le serveur', 'Stocker **hors de la racine web** (ou sur un stockage d’objets), jamais en exécution'],
+              ['**Contournement de contrôle**', '`shell.php.jpg`, double extension, type MIME envoyé par le client falsifié', 'Liste blanche d’extensions, vérification du **contenu réel** (signature du fichier), renommage aléatoire'],
+              ['**Nom de fichier piégé**', '`../../config` dans le nom envoyé : traversée de répertoires', 'Ignorer le nom du client, générer le sien'],
+              ['**Fichier actif**', 'SVG ou HTML contenant un script : XSS stockée', 'Servir avec un type forcé et un en-tête `Content-Disposition`, domaine séparé, CSP'],
+              ['**Épuisement de ressources**', 'Fichier énorme, archive qui se décompresse en gigaoctets', 'Limites de taille et de nombre, quotas, analyse en bac à sable'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Enregistrer un avatar de façon sûre',
+            blocks: [
+              { t: 'code', lang: 'python', code: 'import secrets\n\nAUTORISEES = {"jpeg": ".jpg", "png": ".png"}\n\ndef enregistrer_avatar(fichier):\n    contenu = fichier.read(2_000_001)\n    if len(contenu) > 2_000_000:\n        raise Refus("fichier trop gros")\n    type_reel = detecter_format(contenu)       # signature des premiers octets, pas le nom\n    if type_reel not in AUTORISEES:\n        raise Refus("format non autorisé")\n    nom = secrets.token_hex(16) + AUTORISEES[type_reel]   # nom choisi par le serveur\n    ecrire(f"/srv/avatars/{nom}", contenu)        # hors de la racine web\n    return nom' },
+            ],
+          },
+          { t: 'def', term: 'Désérialisation non sûre', text: 'Reconstruire un objet à partir de données non fiables avec un mécanisme qui peut **instancier des classes arbitraires** ou appeler du code pendant la reconstruction (`pickle` en Python, `ObjectInputStream` en Java, `unserialize` en PHP, `BinaryFormatter` en .NET). Une charge fabriquée déclenche l’exécution de code **avant** que l’application n’examine l’objet obtenu.' },
+          { t: 'list', items: ['**Ne jamais désérialiser** des données non fiables avec un format qui exécute du code.', 'Échanger des données dans un **format simple** (JSON) validé par un schéma ; les objets sont reconstruits par l’application, pas par le format.', 'Si la sérialisation native est inévitable, **signer** (HMAC) les données et vérifier la signature avant toute désérialisation, avec une liste blanche de classes.', 'Garder les bibliothèques à jour : de nombreuses chaînes d’exploitation visent des composants connus.'] },
+          { t: 'callout', kind: 'warn', text: 'Un cookie contenant un objet sérialisé (préférences, panier) et lu avec `pickle.loads` offre à l’utilisateur l’exécution de code sur le serveur : il contrôle le contenu du cookie.' },
+        ],
+      },
+      {
+        id: 'logique',
+        title: 'Logique métier et restitution des résultats',
+        blocks: [
+          { t: 'p', text: 'Certaines failles n’ont aucune signature technique : l’application fait exactement ce qu’elle a été programmée à faire, mais dans un enchaînement que personne n’avait prévu. Les scanners ne les trouvent pas : elles se découvrent par la compréhension du métier et par des **cas d’abus**.' },
+          { t: 'def', term: 'Faille de logique métier', text: 'Défaut dans les règles de gestion d’une application (ordre des étapes, calcul d’un prix, droits associés à un état) qui permet d’obtenir un avantage non prévu en utilisant des fonctions **légitimes** de manière détournée.' },
+          {
+            t: 'table',
+            head: ['Cas d’abus', 'Faille', 'Parade'],
+            rows: [
+              ['Le prix est envoyé par le navigateur dans le formulaire de paiement', 'Confiance dans une donnée contrôlée par le client', 'Recalculer prix, remises et totaux côté serveur'],
+              ['Passer directement à l’étape « confirmation » sans payer', 'Parcours non imposé par le serveur', 'Machine à états côté serveur : chaque étape vérifie les précédentes'],
+              ['Quantité `-1` : le total diminue, la ligne devient un crédit', 'Absence de bornes sur les valeurs', 'Validation des plages et des signes'],
+              ['Remboursement demandé plusieurs fois pour une même commande', 'Opération non idempotente', 'Statut de commande vérifié et modifié de façon atomique'],
+              ['Création de nombreux comptes pour cumuler un bonus de parrainage', 'Absence de limite par personne', 'Limites, détection d’abus, vérification d’identité'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Un cas d’abus devenu test',
+            blocks: [
+              { t: 'code', lang: 'text', code: 'Cas d’abus : ajouter au panier « -3 articles à 10 € » puis payer\nAttendu     : refus (quantité invalide)\nObservé     : total = 70 € au lieu de 100 €, réduction non prévue\n\nTest        : POST /panier {"article": 12, "quantite": -3}  →  422' },
+            ],
+          },
+          { t: 'p', text: 'Un test n’a de valeur que s’il aboutit à une **restitution** exploitable. Chaque constat est décrit de façon à être reproduit et corrigé, et sa gravité est évaluée de façon homogène.' },
+          { t: 'def', term: 'CVSS', text: 'Système de notation qui exprime la **gravité technique** d’une vulnérabilité sur une échelle de 0 à 10, à partir de critères (vecteur d’attaque, complexité, privilèges requis, impact sur la confidentialité, l’intégrité et la disponibilité). Il est complété par le contexte métier pour prioriser.' },
+          { t: 'list', items: ['**Fiche de constat** : titre, description, étapes de reproduction, preuve, impact, gravité (CVSS), correction proposée.', '**Priorisation** : gravité technique, exposition, valeur des données, facilité d’exploitation.', '**Confidentialité** : le rapport décrit des failles non corrigées ; il est diffusé à un cercle restreint, sans données réelles inutiles ni mots de passe en clair.', '**Contre-vérification** après correction, avec le test d’origine.'] },
+          { t: 'callout', kind: 'tip', text: 'Écrire le cas d’abus avant de coder la fonction (« et si l’utilisateur envoie… ? ») coûte quelques minutes ; le découvrir en production coûte beaucoup plus cher.' },
+        ],
+      },
     ],
     useCases: [
       'Revue d’un service qui importe des fichiers XML : vérifier que l’analyseur refuse les entités externes.',
@@ -116,25 +175,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un site de commerce constate qu’un code de réduction « à usage unique » a été appliqué plusieurs fois sur une même commande. Les journaux montrent une rafale de requêtes identiques envoyées en moins de 50 ms.' }],
       steps: ['Expliquer le mécanisme de l’attaque.', 'Proposer une correction atomique au niveau applicatif et au niveau base de données.', 'Indiquer comment détecter ce type d’abus.'],
     },
+    {
+      id: 'revue-upload',
+      kind: 'analysis',
+      title: 'Revue de code : téléversement et préférences sérialisées',
+      context: [
+        { t: 'code', lang: 'python', code: '# 1 : téléversement d’un avatar\n@app.post("/avatar")\ndef avatar():\n    f = request.files["fichier"]\n    if f.filename.endswith(".jpg"):\n        f.save("/var/www/html/images/" + f.filename)\n        return "ok"\n\n# 2 : lecture des préférences de l’utilisateur\nprefs = pickle.loads(base64.b64decode(request.cookies["prefs"]))\n\n# 3 : commande du panier\ntotal = sum(l["prix"] * l["quantite"] for l in request.json["lignes"])' },
+      ],
+      steps: ['Nommer la vulnérabilité de chaque extrait et décrire une attaque.', 'Écrire la correction de chaque extrait.', 'Proposer un cas d’abus à transformer en test automatisé pour l’extrait 3.'],
+    },
   ],
-  questions: [
-    { id: 'xrc-q1', type: 'single', difficulty: 2, skills: ['f-xxe-rfi'], prompt: 'Qu’est-ce qui rend une attaque XXE possible ?', options: [{ id: 'a', text: 'Un analyseur XML qui résout les entités externes sur du XML fourni par l’utilisateur' }, { id: 'b', text: 'Un mot de passe trop court' }, { id: 'c', text: 'L’absence de HTTPS' }, { id: 'd', text: 'Un cookie sans l’attribut Secure' }] },
-    { id: 'xrc-q2', type: 'multi', difficulty: 3, skills: ['f-xxe-rfi'], prompt: 'Quels impacts une XXE peut-elle avoir selon la configuration ?', options: [{ id: 'a', text: 'Lecture de fichiers du serveur' }, { id: 'b', text: 'Requêtes vers des services internes (forme de SSRF)' }, { id: 'c', text: 'Déni de service par expansion d’entités' }, { id: 'd', text: 'Augmentation de la vitesse du serveur' }] },
-    { id: 'xrc-q3', type: 'single', difficulty: 2, skills: ['f-xxe-rfi'], prompt: 'Quelle est la correction de référence contre XXE ?', options: [{ id: 'a', text: 'Désactiver la résolution des entités externes et des DTD dans l’analyseur XML' }, { id: 'b', text: 'Allonger les mots de passe' }, { id: 'c', text: 'Changer le port du serveur' }, { id: 'd', text: 'Mettre le site en HTTP' }] },
-    { id: 'xrc-q4', type: 'single', difficulty: 2, skills: ['f-xxe-rfi'], prompt: 'Quelle différence entre LFI et RFI ?', options: [{ id: 'a', text: 'La LFI inclut un fichier du serveur, la RFI un fichier depuis une URL externe' }, { id: 'b', text: 'La LFI concerne IPv6, la RFI IPv4' }, { id: 'c', text: 'La LFI chiffre les fichiers, la RFI les signe' }, { id: 'd', text: 'Il n’y a aucune différence' }] },
-    { id: 'xrc-q5', type: 'truefalse', difficulty: 2, skills: ['f-xxe-rfi'], prompt: 'Construire le chemin d’un fichier à inclure à partir d’un paramètre fourni par l’utilisateur, sans contrôle, est une cause d’inclusion de fichier.' },
-    { id: 'xrc-q6', type: 'short', difficulty: 2, skills: ['f-xxe-rfi'], prompt: 'Quelle approche, plus sûre qu’une validation de chemin, associe chaque valeur attendue à une ressource connue ? (deux ou trois mots)', placeholder: 'table de …' },
-    { id: 'xrc-q7', type: 'single', difficulty: 2, skills: ['f-clickjacking'], prompt: 'En quoi consiste le clickjacking ?', options: [{ id: 'a', text: 'Superposer la vraie application, dans un cadre invisible, à une page leurre pour détourner les clics de la victime' }, { id: 'b', text: 'Deviner le mot de passe par force brute' }, { id: 'c', text: 'Injecter du SQL dans un formulaire' }, { id: 'd', text: 'Chiffrer les fichiers de la victime' }] },
-    { id: 'xrc-q8', type: 'short', difficulty: 2, skills: ['f-clickjacking'], prompt: 'Quelle directive de la CSP indique quels sites peuvent afficher la page dans un cadre (iframe) ?', placeholder: 'frame-…' },
-    { id: 'xrc-q9', type: 'multi', difficulty: 2, skills: ['f-clickjacking'], prompt: 'Quelles mesures protègent du clickjacking ?', options: [{ id: 'a', text: '`Content-Security-Policy: frame-ancestors \'none\'`' }, { id: 'b', text: '`X-Frame-Options: DENY` pour les anciens navigateurs' }, { id: 'c', text: 'Exiger une confirmation explicite des actions sensibles' }, { id: 'd', text: 'Désactiver le HTTPS' }] },
-    { id: 'xrc-q10', type: 'open', difficulty: 3, skills: ['f-race'], prompt: 'Expliquez ce qu’est une condition de course de type TOCTOU dans une application web et donnez un exemple où elle permet de contourner une limite.' },
-    { id: 'xrc-q11', type: 'truefalse', difficulty: 2, skills: ['f-race'], prompt: 'Vérifier puis agir en deux étapes non atomiques peut être contourné en envoyant plusieurs requêtes exactement en même temps.' },
-    { id: 'xrc-q12', type: 'multi', difficulty: 3, skills: ['f-race'], prompt: 'Quelles corrections rendent sûre une limite « à usage unique » ?', options: [{ id: 'a', text: 'Une contrainte d’unicité en base de données' }, { id: 'b', text: 'Une mise à jour conditionnelle atomique (`UPDATE … WHERE non_utilisé`)' }, { id: 'c', text: 'Un verrou ou une transaction couvrant vérification et action' }, { id: 'd', text: 'Afficher un message « une seule fois, merci »' }] },
-    { id: 'xrc-q13', type: 'single', difficulty: 2, skills: ['f-methodo-test'], prompt: 'À quoi sert le guide de test OWASP (WSTG) ?', options: [{ id: 'a', text: 'À tester une application de façon structurée, par catégories, sur une cible autorisée' }, { id: 'b', text: 'À chiffrer les cookies' }, { id: 'c', text: 'À remplacer le pare-feu' }, { id: 'd', text: 'À générer des mots de passe' }] },
-    { id: 'xrc-q14', type: 'truefalse', difficulty: 1, skills: ['f-methodo-test'], prompt: 'Tester la sécurité d’une application sans autorisation écrite est acceptable tant qu’on n’a pas l’intention de nuire.' },
-    { id: 'xrc-q15', type: 'single', difficulty: 2, skills: ['f-methodo-test'], prompt: 'Quelle est la différence entre l’OWASP ASVS et le WSTG ?', options: [{ id: 'a', text: 'L’ASVS liste les exigences à vérifier, le WSTG décrit comment les tester' }, { id: 'b', text: 'L’ASVS est un pare-feu, le WSTG un antivirus' }, { id: 'c', text: 'Ils sont identiques' }, { id: 'd', text: 'L’ASVS ne concerne que le réseau' }] },
-    { id: 'xrc-q16', type: 'open', difficulty: 3, skills: ['f-methodo-test', 'f-xxe-rfi'], prompt: 'On vous confie le test de sécurité d’une application interne de recette. Décrivez votre démarche méthodique et les précautions de cadre (autorisation, périmètre, données).' },
-  ],
+  questions,
   resources: [
     { title: 'XML External Entity Prevention Cheat Sheet', source: 'OWASP', url: 'https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html' },
     { title: 'File Upload / Path Traversal & LFI (Testing Guide)', source: 'OWASP', url: 'https://owasp.org/www-project-web-security-testing-guide/' },

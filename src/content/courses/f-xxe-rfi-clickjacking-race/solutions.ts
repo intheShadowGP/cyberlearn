@@ -24,5 +24,20 @@ export const solutions: CourseSolutions = {
         { t: 'callout', kind: 'tip', text: 'Détection : repérer les rafales de requêtes identiques en un temps très court sur un même compte ou une même ressource ; une limite de débit par compte et par action réduit la fenêtre, sans remplacer l’atomicité.' },
       ],
     },
+    'revue-upload': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Extrait', 'Vulnérabilité', 'Attaque'],
+          rows: [
+            ['1', '**Téléversement non sûr** : contrôle de l’extension seule, nom du client conservé, dépôt dans la racine web', 'Envoi de `x.php.jpg` ou `../../x.jpg` ; un script ou un fichier piégé devient accessible et parfois exécuté'],
+            ['2', '**Désérialisation non sûre** (`pickle` sur un cookie)', 'L’utilisateur fabrique un cookie dont le chargement exécute du code sur le serveur'],
+            ['3', '**Logique métier** : prix et quantités fournis par le client', 'Prix modifié, quantité négative : total réduit ou crédit inattendu'],
+          ],
+        },
+        { t: 'list', items: ['Extrait 1 : liste blanche d’extensions **et** vérification du contenu réel, nom aléatoire choisi par le serveur, stockage hors de la racine web, limites de taille.', 'Extrait 2 : remplacer `pickle` par un cookie signé contenant du JSON validé par un schéma, ou stocker les préférences côté serveur avec un identifiant de session.', 'Extrait 3 : recalculer le prix côté serveur à partir du catalogue, imposer `quantite >= 1` et un maximum.'] },
+        { t: 'code', lang: 'text', caption: 'Cas d’abus pour l’extrait 3', code: 'POST /panier {"lignes": [{"article": 12, "prix": 0.01, "quantite": 1}]}   → le prix client est ignoré\nPOST /panier {"lignes": [{"article": 12, "quantite": -3}]}                → 422' },
+      ],
+    },
   },
 };

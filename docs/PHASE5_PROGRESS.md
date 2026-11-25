@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (19 migrés) + 40 cours à créer (8 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 31 cours à créer et 26 cours existants à migrer.
+Total : 45 cours existants (20 migrés) + 40 cours à créer (8 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 31 cours à créer et 25 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -100,3 +100,4 @@ Total : 45 cours existants (19 migrés) + 40 cours à créer (8 créés) = 85 co
 | `e-crypto-appliquee-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
 | `f-injections-xss` | ✔ 40 | ✔ 40 | ✔ (injections de commande, NoSQL et gabarit ; détection et défense en profondeur ; revue de quatre autres injections) |
 | `f-acces-sessions-ssrf` | ✔ 40 | ✔ 40 | ✔ (MFA, OAuth 2.0 et OpenID Connect ; détection et limitation des abus ; revue d’une intégration OAuth) |
+| `f-xxe-rfi-clickjacking-race` | ✔ 40 | ✔ 40 | ✔ (téléversement et désérialisation ; logique métier et restitution des constats ; revue de code d’un téléversement) |
