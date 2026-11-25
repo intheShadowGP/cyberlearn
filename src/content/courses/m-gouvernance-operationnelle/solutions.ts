@@ -26,5 +26,22 @@ export const solutions: CourseSolutions = {
         { t: 'p', text: 'Pendant le contrat : revue trimestrielle des comptes de l’infogérant, analyse des journaux du bastion, revue annuelle de sécurité, suivi des engagements de correction, exercice commun de gestion d’incident.' },
       ],
     },
+    'revue-comptes': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Rang', 'Compte', 'Risque', 'Action'],
+          rows: [
+            ['1', 'a.martin', 'Compte d’une personne partie utilisé hier depuis l’extérieur : compromission probable', 'Désactiver immédiatement, examiner l’activité récente, traiter comme un incident, faire pivoter les secrets accessibles'],
+            ['2', 'admin-partage', 'Compte d’administration partagé : aucune traçabilité', 'Remplacer par des comptes nominatifs, changer le mot de passe, activer l’authentification renforcée'],
+            ['3', 'svc-sauvegarde', 'Droits d’administration sans propriétaire', 'Désigner un propriétaire, réduire les droits au nécessaire, tracer son usage'],
+            ['4', 'j.leroy', 'Accumulation de droits depuis la mutation', 'Retirer les droits de la comptabilité, valider le profil logistique avec le responsable'],
+            ['5', 'p.durand', 'Compte de stagiaire non désactivé, inactif', 'Désactiver puis supprimer après le délai de conservation'],
+          ],
+        },
+        { t: 'list', items: ['**Départs** : liste de contrôle signée, désactivation automatique à la date de fin de contrat ou de stage depuis l’annuaire RH.', '**Mutations** : revue des droits à la date de mutation, retrait des anciens avant ajout des nouveaux.', '**Comptes de service** : propriétaire obligatoire, revue annuelle.', '**Revue trimestrielle** des comptes à privilèges, validée par les responsables, avec compte rendu daté.'] },
+        { t: 'p', text: 'Le cas de a.martin impose de traiter l’événement comme un incident : l’usage d’un compte d’une personne partie suggère un vol d’identifiants ou un accès conservé indûment.' },
+      ],
+    },
   },
 };

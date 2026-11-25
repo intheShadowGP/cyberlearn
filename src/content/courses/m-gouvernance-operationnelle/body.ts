@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'm-gouvernance-operationnelle',
@@ -111,6 +112,48 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Préparer un audit, c’est surtout conserver les preuves au fil de l’eau : comptes rendus de revues d’accès, rapports de scans, tickets de correctifs, résultats d’exercices. Les reconstituer la veille de l’audit est coûteux et peu convaincant.' },
         ],
       },
+      {
+        id: 'acces',
+        title: 'Gestion des accès et mouvements du personnel',
+        blocks: [
+          { t: 'p', text: 'Les droits d’accès suivent les personnes tout au long de leur parcours : arrivée, changement de poste, absence prolongée, départ. Sans processus, ils s’accumulent et des comptes oubliés restent actifs : ce sont des portes d’entrée classiques.' },
+          {
+            t: 'table',
+            head: ['Événement', 'Action de sécurité', 'Preuve'],
+            rows: [
+              ['**Arrivée**', 'Création des comptes sur demande validée, droits du profil du poste', 'Ticket de demande et de validation'],
+              ['**Mutation**', 'Ajout des droits du nouveau poste et **retrait** des anciens', 'Revue des droits à la date de mutation'],
+              ['**Absence longue**', 'Suspension ou restriction des accès', 'Ticket de suspension'],
+              ['**Départ**', 'Retrait des accès le jour même, récupération du matériel', 'Liste de contrôle de départ signée'],
+              ['**Revue périodique**', 'Les responsables valident les droits de leur équipe, surtout les comptes à privilèges', 'Compte rendu daté et validé'],
+            ],
+          },
+          { t: 'def', term: 'Accumulation de droits (privilege creep)', text: 'Phénomène par lequel une personne conserve les droits de ses postes successifs et cumule des accès qu’aucun poste ne justifie. La revue lors des mutations et la revue périodique le corrigent.' },
+          { t: 'def', term: 'Compte à privilèges', text: 'Compte disposant de droits d’administration. Sa compromission donne un contrôle étendu : on limite leur nombre, on exige une authentification renforcée, on sépare les comptes d’administration des comptes de bureautique et on journalise leurs actions.' },
+          { t: 'callout', kind: 'warn', text: 'Les comptes partagés détruisent la traçabilité : impossible de savoir qui a fait quoi. Chaque personne a un compte nominatif ; les comptes de service ont un propriétaire identifié.' },
+        ],
+      },
+      {
+        id: 'incidents',
+        title: 'Gestion des incidents et retour d’expérience',
+        blocks: [
+          { t: 'p', text: 'Malgré les mesures préventives, des incidents surviennent. Ce qui distingue les organisations, c’est la rapidité avec laquelle elles les **détectent**, les **contiennent** et en **tirent des enseignements**. Le NIST SP 800-61 décrit un cycle de gestion des incidents que la plupart des organisations reprennent.' },
+          {
+            t: 'table',
+            head: ['Phase', 'Contenu', 'Exemple'],
+            rows: [
+              ['**Préparation**', 'Procédures, rôles, contacts, outils de journalisation', 'Annuaire de crise, procédure de signalement'],
+              ['**Détection et analyse**', 'Qualifier l’alerte, estimer le périmètre et la gravité', 'Corrélation de journaux, fiche d’incident'],
+              ['**Confinement**', 'Limiter la propagation sans détruire les preuves', 'Isolement réseau, désactivation de comptes'],
+              ['**Éradication et rétablissement**', 'Supprimer la cause, restaurer les services', 'Reconstruction de postes, rotation de secrets'],
+              ['**Retour d’expérience**', 'Identifier les causes et les améliorations', 'Réunion sans recherche de coupable, plan d’action'],
+            ],
+          },
+          { t: 'def', term: 'Retour d’expérience', text: 'Analyse conduite après l’incident pour comprendre les causes profondes, les défauts de détection et de réponse, et décider d’actions d’amélioration suivies. Elle ne cherche pas de coupable : une culture de sanction pousse à cacher les erreurs.' },
+          { t: 'list', items: ['**Registre des incidents** : même les incidents mineurs sont consignés (chronologie, actifs concernés, décisions) pour repérer les tendances et prouver le traitement.', '**Escalade** : la direction est informée dès qu’un incident est significatif, pas seulement à la fin.', '**Notifications** : selon le cas, la CNIL (violation de données), l’autorité NIS2, les clients ou l’assureur.'] },
+          { t: 'callout', kind: 'tip', text: 'Les preuves se conservent : journaux, copies de disque, messages. Effacer les traces « pour nettoyer » empêche de comprendre et de prouver.' },
+        ],
+      },
     ],
     useCases: [
       'Lancement d’un programme de sécurité dans une PME : inventaire automatisé, classification simple, cycle mensuel de correctifs, puis CIS Controls IG1.',
@@ -167,25 +210,27 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Votre entreprise confie l’administration de ses serveurs à un infogérant, avec un accès à distance permanent et des droits d’administrateur. Les serveurs hébergent des données clients.' }],
       steps: ['Lister les éléments à évaluer avant la signature.', 'Proposer cinq clauses contractuelles de sécurité.', 'Décrire les contrôles à mettre en place pendant le contrat.'],
     },
+    {
+      id: 'revue-comptes',
+      kind: 'analysis',
+      title: 'Analyse : une revue des comptes après un départ',
+      context: [
+        {
+          t: 'table',
+          head: ['Compte', 'Situation', 'Dernière connexion'],
+          rows: [
+            ['a.martin', 'Comptable parti il y a 4 mois', 'Hier, depuis une adresse extérieure'],
+            ['svc-sauvegarde', 'Compte de service sans propriétaire connu, droits d’administration', 'Quotidienne'],
+            ['j.leroy', 'Muté de la comptabilité à la logistique il y a 8 mois, droits des deux postes', 'Hier, depuis le poste de logistique'],
+            ['admin-partage', 'Compte administrateur utilisé par trois personnes', 'Hier'],
+            ['p.durand', 'Stagiaire dont le stage a pris fin il y a 2 semaines', 'Il y a 2 semaines'],
+          ],
+        },
+      ],
+      steps: ['Classer ces comptes par urgence de traitement en justifiant.', 'Indiquer l’action de correction pour chacun.', 'Proposer les changements de processus pour éviter que cela se reproduise.'],
+    },
   ],
-  questions: [
-    { id: 'gop-q1', type: 'single', difficulty: 1, skills: ['m-actifs'], prompt: 'Pourquoi l’inventaire des actifs figure-t-il en tête des CIS Controls ?', options: [{ id: 'a', text: 'Sans savoir ce que l’on possède, on ne peut ni corriger, ni surveiller, ni protéger ces actifs' }, { id: 'b', text: 'Parce qu’il remplace l’antivirus' }, { id: 'c', text: 'Parce qu’il est exigé par tous les assureurs' }, { id: 'd', text: 'Parce qu’il chiffre les données' }] },
-    { id: 'gop-q2', type: 'multi', difficulty: 2, skills: ['m-actifs'], prompt: 'Quelles informations rendent un inventaire des actifs utile à la sécurité ?', options: [{ id: 'a', text: 'Le propriétaire métier et le responsable technique' }, { id: 'b', text: 'La criticité et l’exposition de l’actif' }, { id: 'c', text: 'Les logiciels installés et leurs versions' }, { id: 'd', text: 'La couleur du boîtier' }] },
-    { id: 'gop-q3', type: 'truefalse', difficulty: 2, skills: ['m-actifs'], prompt: 'C’est à la DSI seule de fixer le niveau de classification des données métier.' },
-    { id: 'gop-q4', type: 'short', difficulty: 1, skills: ['m-actifs'], prompt: 'Comment appelle-t-on les ressources informatiques utilisées sans être connues ni validées par la DSI ? (deux mots en anglais)' },
-    { id: 'gop-q5', type: 'single', difficulty: 2, skills: ['m-vulns'], prompt: 'Deux vulnérabilités ont le même score CVSS. L’une est exploitée activement et touche un serveur exposé sur Internet, l’autre non. Que faire ?', options: [{ id: 'a', text: 'Traiter en priorité celle qui est exploitée activement sur l’actif exposé' }, { id: 'b', text: 'Les traiter dans l’ordre alphabétique' }, { id: 'c', text: 'Attendre le prochain cycle trimestriel pour les deux' }, { id: 'd', text: 'Ignorer les deux, puisqu’elles ont le même score' }] },
-    { id: 'gop-q6', type: 'multi', difficulty: 2, skills: ['m-vulns'], prompt: 'Quelles sont les étapes du cycle de gestion des vulnérabilités ?', options: [{ id: 'a', text: 'Découvrir' }, { id: 'b', text: 'Prioriser' }, { id: 'c', text: 'Traiter (corriger, atténuer ou accepter)' }, { id: 'd', text: 'Supprimer le rapport après lecture' }] },
-    { id: 'gop-q7', type: 'truefalse', difficulty: 2, skills: ['m-vulns'], prompt: 'L’acceptation d’un risque lié à une vulnérabilité non corrigée doit être décidée par le propriétaire de l’actif, avec une date de réexamen.' },
-    { id: 'gop-q8', type: 'short', difficulty: 2, skills: ['m-vulns'], prompt: 'Quel sigle désigne le catalogue de la CISA qui recense les vulnérabilités exploitées activement ?', placeholder: 'sigle' },
-    { id: 'gop-q9', type: 'single', difficulty: 2, skills: ['m-tiers'], prompt: 'Une entreprise confie le traitement de ses données clients à un prestataire. Que devient sa responsabilité ?', options: [{ id: 'a', text: 'Elle reste responsable et doit encadrer et contrôler le prestataire' }, { id: 'b', text: 'Elle est entièrement transférée au prestataire' }, { id: 'c', text: 'Elle disparaît si le prestataire est certifié' }, { id: 'd', text: 'Elle ne concerne que les données papier' }] },
-    { id: 'gop-q10', type: 'multi', difficulty: 2, skills: ['m-tiers'], prompt: 'Quelles clauses sont pertinentes dans un contrat avec un infogérant ?', options: [{ id: 'a', text: 'Notification des incidents de sécurité dans un délai fixé' }, { id: 'b', text: 'Droit d’audit' }, { id: 'c', text: 'Encadrement de la sous-traitance et réversibilité' }, { id: 'd', text: 'Interdiction pour le client de demander des preuves de sécurité' }] },
-    { id: 'gop-q11', type: 'truefalse', difficulty: 1, skills: ['m-tiers'], prompt: 'En fin de contrat, il faut retirer les accès du fournisseur et obtenir la restitution ou la destruction attestée des données.' },
-    { id: 'gop-q12', type: 'open', difficulty: 3, skills: ['m-tiers', 'm-actifs'], prompt: 'Expliquez comment classer vos fournisseurs par niveau de risque et ce que ce classement change dans leur évaluation et leur suivi.' },
-    { id: 'gop-q13', type: 'single', difficulty: 2, skills: ['m-pilotage'], prompt: 'Quel indicateur reflète le mieux l’efficacité d’un programme de sensibilisation à l’hameçonnage ?', options: [{ id: 'a', text: 'Le taux de signalement des courriels d’exercice et le délai de signalement' }, { id: 'b', text: 'Le nombre de diapositives présentées' }, { id: 'c', text: 'Le nombre d’affiches imprimées' }, { id: 'd', text: 'La durée de la formation annuelle' }] },
-    { id: 'gop-q14', type: 'single', difficulty: 2, skills: ['m-pilotage'], prompt: 'Combien de mesures compte le guide d’hygiène informatique de l’ANSSI ?', options: [{ id: 'a', text: '42' }, { id: 'b', text: '10' }, { id: 'c', text: '93' }, { id: 'd', text: '114' }] },
-    { id: 'gop-q15', type: 'open', difficulty: 3, skills: ['m-pilotage', 'm-vulns'], prompt: 'Un audit ISO 27001 a lieu dans six mois. Décrivez comment organiser dès maintenant la collecte des preuves pour la gestion des vulnérabilités et la revue des accès.' },
-    { id: 'gop-q16', type: 'truefalse', difficulty: 2, skills: ['m-pilotage'], prompt: 'Une personne qui signale avoir cliqué sur un lien d’hameçonnage doit être sanctionnée pour décourager les erreurs.' },
-  ],
+  questions,
   resources: [
     { title: 'CIS Critical Security Controls', source: 'Center for Internet Security', url: 'https://www.cisecurity.org/controls' },
     { title: 'Guide d’hygiène informatique', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/guide-dhygiene-informatique' },
