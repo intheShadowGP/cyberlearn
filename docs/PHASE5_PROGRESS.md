@@ -51,7 +51,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | B Réseaux | ✔ | ✔ ×3 | ✔ | ✔ |
 | C Linux | ✔ | ✔ (migré) | ✔ (migré) | ✔ (nouveau) |
 | D Windows | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
-| E Cryptographie | ✔ (nouveau) | ✔ | ✔ | ➕ |
+| E Cryptographie | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | F Web | ➕ | ✔ | ✔ ×2 | ➕ |
 | G Code | ➕ | ✔ | ✔ | ➕ |
 | H Pentest | ➕ | ✔ | ✔ | ➕ |
@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (17 migrés) + 40 cours à créer (7 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 32 cours à créer et 28 cours existants à migrer.
+Total : 45 cours existants (17 migrés) + 40 cours à créer (8 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 31 cours à créer et 28 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -97,3 +97,4 @@ Total : 45 cours existants (17 migrés) + 40 cours à créer (7 créés) = 85 co
 | `e-hachage-mots-de-passe` | ✔ 40 | ✔ 40 | ✔ (collision, poivre, mots de passe et attaques en ligne, dérivation de clés et aléa) |
 | `e-chiffrement-tls-pki` | ✔ 40 | ✔ 40 | ✔ (nonce, ECDHE, DV, HSTS, mTLS, section données au repos) |
 | `e-crypto-fondamentaux` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
+| `e-crypto-appliquee-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |

@@ -1,0 +1,45 @@
+import type { CourseMeta } from '../../types';
+
+export const meta: CourseMeta = {
+  id: 'e-crypto-appliquee-avancee',
+  module: 'E',
+  topics: [
+    'E-chiffrement-symetrique',
+    'E-chiffrement-asymetrique',
+    'E-ecc',
+    'E-rsa',
+    'E-signatures-numeriques',
+    'E-hmac',
+    'E-echange-de-cles',
+    'E-perfect-forward-secrecy',
+    'E-gestion-des-secrets',
+    'E-cryptographie-post-quantique',
+    'E-erreurs-d-implementation-cryptographique',
+  ],
+  title: 'Cryptographie appliquée avancée : protocoles, implémentation, clés et transition post-quantique',
+  level: 4,
+  durationMin: 150,
+  summary:
+    'Évaluer et concevoir une protection cryptographique de bout en bout : dimensionner la sécurité face à un attaquant donné, analyser les protocoles authentifiés et les jetons, repérer les attaques d’implémentation, organiser les clés (hiérarchie, HSM, cérémonie, partage de secret), piloter l’agilité et la migration post-quantique, et situer les primitives avancées (homomorphe, preuves à divulgation nulle, calcul multipartite).',
+  objectives: [
+    'Dimensionner une protection selon le modèle d’attaquant, le niveau de sécurité visé et la durée de confidentialité (raisonnement de Mosca, « enregistrer maintenant, déchiffrer plus tard »).',
+    'Analyser un protocole authentifié (TLS 1.3, Noise, Signal, jetons JWT) : authentification, confidentialité persistante, rejeu, confusion d’algorithme.',
+    'Reconnaître et corriger les attaques d’implémentation : oracles de remplissage, comparaisons non constantes, réutilisation de nonce, aléa faible, fuites par compression.',
+    'Concevoir la gestion des clés : hiérarchie, chiffrement d’enveloppe, HSM, cérémonie de clés, partage de secret de Shamir, destruction cryptographique.',
+    'Conduire un inventaire et une migration cryptographique : agilité, échange hybride, standards post-quantiques (FIPS 203, 204 et 205).',
+    'Situer les primitives avancées (chiffrement homomorphe, preuves à divulgation nulle, calcul multipartite) et leurs limites.',
+  ],
+  prerequisites: ['e-chiffrement-tls-pki'],
+  prerequisiteKnowledge: ['Chiffrement authentifié, RSA, courbes elliptiques, certificats et TLS 1.3 (e-chiffrement-tls-pki)', 'Hachage, HMAC et dérivation de clés (e-hachage-mots-de-passe)'],
+  skills: [
+    { id: 'e-exp-menace', label: 'Modèle d’attaquant et dimensionnement de la sécurité', level: 4 },
+    { id: 'e-exp-protocoles', label: 'Protocoles authentifiés et jetons', level: 4 },
+    { id: 'e-exp-implementation', label: 'Attaques d’implémentation et parades', level: 4 },
+    { id: 'e-exp-cles', label: 'Gestion avancée des clés', level: 4 },
+    { id: 'e-exp-agilite', label: 'Agilité cryptographique et transition post-quantique', level: 4 },
+    { id: 'e-exp-avancees', label: 'Primitives avancées et leurs limites', level: 4 },
+  ],
+  sectionCount: 6,
+  questionCount: 40,
+  quizSize: 12,
+};
