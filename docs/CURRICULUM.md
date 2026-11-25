@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 68 |
-| Questions de cours (avec correction) | 2511 |
+| Cours complets | 69 |
+| Questions de cours (avec correction) | 2551 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -34,7 +34,7 @@
 | J. Forensique numérique | 5 | 1, 2, 3, 4 | 17 / 17 |
 | K. Malware et reverse engineering | 4 | 1, 2, 3, 4 | 22 / 22 |
 | L. Sécurité Cloud | 6 | 1, 2, 3, 4 | 23 / 23 |
-| M. Gouvernance et conformité | 2 | 2 | 24 / 24 |
+| M. Gouvernance et conformité | 3 | 1, 2 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 3 | 2, 3 | 21 / 21 |
 | O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
 | P. Sécurité avancée et recherche | 2 | 4 | 18 / 18 |
@@ -101,6 +101,7 @@
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Architecture cloud sécurisée : zones d’atterrissage, politiques en code, identités et détection (`l-cloud-avance`) | L | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
+| La gouvernance de la sécurité pour débutants : risques, règles et bons réflexes (`m-gouvernance-initiation`) | M | 1 · Débutant | 90 min | 6 | 40 | 3 | 3 |
 | Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 125 min | 6 | 40 | 3 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 125 min | 7 | 40 | 3 | 5 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
