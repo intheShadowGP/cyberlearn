@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (15 migrés) + 40 cours à créer (6 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 33 cours à créer et 30 cours existants à migrer.
+Total : 45 cours existants (16 migrés) + 40 cours à créer (6 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 33 cours à créer et 29 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -94,3 +94,4 @@ Total : 45 cours existants (15 migrés) + 40 cours à créer (6 créés) = 85 co
 | `d-ad-authentification` | ✔ 40 | ✔ 40 | ✔ (forêt, OU, pré-authentification, silver ticket, DCSync, délégation, section chemins d’attaque) |
 | `d-windows-fondamentaux` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `d-windows-defense-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
+| `e-hachage-mots-de-passe` | ✔ 40 | ✔ 40 | ✔ (collision, poivre, mots de passe et attaques en ligne, dérivation de clés et aléa) |
