@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'l-devsecops-pipeline',
@@ -72,6 +73,48 @@ export const body: CourseBody = {
           { t: 'list', items: ['Fichiers d’état Terraform : ils contiennent souvent des secrets en clair ; les stocker chiffrés, avec accès restreint.', 'Détection de dérive : comparer l’infrastructure réelle au code pour repérer les modifications manuelles.'] },
         ],
       },
+      {
+        id: 'gouvernance',
+        title: 'Gouverner les vulnérabilités : priorités, exceptions et VEX',
+        blocks: [
+          { t: 'p', text: 'Un pipeline qui détecte beaucoup produit vite des centaines d’alertes. Sans règle de tri, les équipes s’épuisent ou ignorent tout. La **gouvernance** décide ce qui bloque une livraison, ce qui se corrige sous un délai, et ce qui peut être accepté pour un temps.' },
+          { t: 'def', term: 'Priorisation par le risque', text: 'On combine la **gravité** (score CVSS), l’**exploitation** connue (catalogues comme le KEV de la CISA, probabilité EPSS), l’**exposition** du composant (accessible depuis Internet ou non) et la **criticité** de l’application. Une faille moyenne exploitée sur un service exposé passe avant une faille critique non atteignable.' },
+          {
+            t: 'table',
+            head: ['Situation', 'Décision type', 'Délai indicatif'],
+            rows: [
+              ['Faille exploitée activement, composant exposé', 'Bloquer la livraison, corriger ou isoler', 'Immédiat à quelques jours'],
+              ['Gravité élevée, non exploitée, composant interne', 'Corriger dans le cycle normal', 'Quelques semaines'],
+              ['Gravité faible, composant non atteignable', 'Documenter avec une déclaration VEX', 'Revue périodique'],
+              ['Correction impossible à court terme', 'Exception datée avec mesure compensatoire', 'Jusqu’à l’échéance fixée'],
+            ],
+          },
+          { t: 'def', term: 'VEX', text: 'Une déclaration VEX (Vulnerability Exploitability eXchange) accompagne un SBOM et indique, pour une vulnérabilité donnée, si le produit est **affecté**, **non affecté** ou **corrigé**. Elle évite de corriger ou de signaler ce qui n’est pas atteignable.' },
+          { t: 'list', items: ['**Une exception** précise : la justification, le propriétaire, la mesure compensatoire, la date d’expiration.', '**Des indicateurs** simples : délai moyen de correction par gravité, nombre d’exceptions échues, part des dépôts couverts.', '**Un blocage mesuré** : seules les règles à forte confiance et à fort impact bloquent ; le reste informe.'] },
+          { t: 'callout', kind: 'warn', text: 'Une exception sans propriétaire ni échéance devient une dette invisible. Une alerte supprimée sans trace fait perdre à la fois la preuve et la décision.' },
+        ],
+      },
+      {
+        id: 'incident',
+        title: 'Incident sur la chaîne de livraison : détecter et répondre',
+        blocks: [
+          { t: 'p', text: 'Le pipeline détient des secrets, produit ce que les clients exécutent et peut modifier la production : c’est une cible de choix. Il faut donc le **journaliser**, **repérer** les comportements anormaux et savoir **répondre** quand un secret, un runner ou une dépendance est compromis.' },
+          {
+            t: 'table',
+            head: ['Signal', 'Pourquoi c’est suspect', 'Où le voir'],
+            rows: [
+              ['Modification d’un workflow par un compte inhabituel', 'Prise de contrôle du pipeline ou étape ajoutée', 'Historique de la forge, journal d’audit'],
+              ['Job qui télécharge puis exécute un script externe', 'Chargement de code non contrôlé', 'Journaux de build'],
+              ['Connexion sortante inattendue depuis un runner', 'Exfiltration de secrets', 'Journaux réseau du runner'],
+              ['Utilisation d’un secret de déploiement hors pipeline', 'Secret volé réutilisé', 'Journaux du fournisseur cloud'],
+              ['Artefact publié sans provenance ou sans signature valide', 'Contournement du circuit de livraison', 'Registre, vérification à l’admission'],
+            ],
+          },
+          { t: 'list', ordered: true, items: ['**Contenir** : révoquer les secrets accessibles au pipeline, suspendre les déploiements, isoler le runner.', '**Préserver** : journaux de build, historique de la forge, attestations de provenance, empreintes des artefacts.', '**Mesurer** : quels builds ont tourné pendant la période, quels artefacts ont été publiés, quels secrets étaient disponibles.', '**Reconstruire** sur un environnement sain depuis un état connu, puis vérifier les artefacts.', '**Communiquer** : versions touchées, empreintes vérifiables, mesures à prendre côté clients.'] },
+          { t: 'def', term: 'Runner éphémère', text: 'Machine d’exécution créée pour un seul job puis détruite. Elle ne conserve ni cache ni secret d’un job à l’autre : une compromission ne persiste pas.' },
+          { t: 'callout', kind: 'warn', text: 'Reconstruire sur le runner compromis ou effacer les journaux de build détruit les preuves et peut laisser l’attaquant en place.' },
+        ],
+      },
     ],
     useCases: [
       'Mettre en place un pipeline qui bloque la fusion en cas de secret détecté ou de vulnérabilité critique exploitée.',
@@ -116,25 +159,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une équipe de 6 développeurs livre une API Node.js conteneurisée sur Kubernetes, avec infrastructure en Terraform. Aucun contrôle de sécurité automatisé n’existe aujourd’hui.' }],
       steps: ['Ordonner les contrôles à introduire et leur mode (bloquant ou informatif).', 'Indiquer comment gérer les secrets de déploiement.', 'Définir les indicateurs de suivi.'],
     },
+    {
+      id: 'incident-ci',
+      kind: 'analysis',
+      title: 'Analyse : un pipeline compromis par un script de dépendance',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure (UTC)  Source                    Événement\n09:12        forge                     demande de fusion #482 ouverte par un nouveau compte (modifie package.json)\n09:14        job « tests »             npm install (et non npm ci) ; script postinstall d’une dépendance ajoutée\n09:14        runner partagé            connexion sortante vers 203.0.113.50:443 (12 Ko)\n09:31        cloud                     utilisation de la clé de déploiement depuis une adresse extérieure au pipeline\n09:33        cloud                     création d’un utilisateur « svc-backup » avec droits d’administration\n\nLe workflow utilise pull_request_target, un runner partagé et une clé de déploiement stockée comme secret du dépôt.' },
+      ],
+      steps: ['Reconstituer l’enchaînement et les erreurs de conception du pipeline.', 'Indiquer ce qu’on préserve et les actions de confinement, dans l’ordre.', 'Proposer les mesures qui auraient évité ou détecté l’incident.'],
+    },
   ],
-  questions: [
-    { id: 'dso-q1', type: 'single', difficulty: 1, skills: ['l-dso-pipeline'], prompt: 'Quel contrôle analyse les dépendances tierces pour détecter des vulnérabilités connues ?', options: [{ id: 'a', text: 'SAST' }, { id: 'b', text: 'SCA' }, { id: 'c', text: 'DAST' }, { id: 'd', text: 'Un pare-feu applicatif' }] },
-    { id: 'dso-q2', type: 'truefalse', difficulty: 1, skills: ['l-dso-pipeline'], prompt: 'Le DAST teste l’application en fonctionnement, alors que le SAST analyse le code sans l’exécuter.' },
-    { id: 'dso-q3', type: 'multi', difficulty: 2, skills: ['l-dso-pipeline'], prompt: 'Quels contrôles peuvent détecter un problème avant tout déploiement ?', options: [{ id: 'a', text: 'Analyse des secrets' }, { id: 'b', text: 'Analyse de l’IaC (Terraform)' }, { id: 'c', text: 'SAST' }, { id: 'd', text: 'Supervision des journaux de production' }] },
-    { id: 'dso-q4', type: 'short', difficulty: 2, skills: ['l-dso-supply'], prompt: 'Quel sigle désigne l’inventaire normalisé des composants d’un logiciel ?' },
-    { id: 'dso-q5', type: 'single', difficulty: 2, skills: ['l-dso-supply'], prompt: 'Un attaquant publie sur le registre public un paquet portant le nom d’une bibliothèque interne de l’entreprise. Comment s’appelle cette attaque ?', options: [{ id: 'a', text: 'Typosquatting' }, { id: 'b', text: 'Confusion de dépendances' }, { id: 'c', text: 'Injection SQL' }, { id: 'd', text: 'Hameçonnage' }] },
-    { id: 'dso-q6', type: 'truefalse', difficulty: 2, skills: ['l-dso-supply'], prompt: 'Avec un fichier de verrouillage et `npm ci`, une nouvelle version publiée d’une dépendance est automatiquement intégrée au prochain build.' },
-    { id: 'dso-q7', type: 'multi', difficulty: 3, skills: ['l-dso-supply'], prompt: 'Quelles mesures réduisent le risque de compromission par une dépendance ?', options: [{ id: 'a', text: 'Revue des nouvelles dépendances' }, { id: 'b', text: 'Versions figées par un fichier de verrouillage' }, { id: 'c', text: 'Accepter automatiquement toute mise à jour majeure' }, { id: 'd', text: 'Registre interne ou miroir approuvé' }] },
-    { id: 'dso-q8', type: 'short', difficulty: 3, skills: ['l-dso-supply'], prompt: 'Quel cadre définit des niveaux d’exigence de provenance pour les artefacts logiciels ? (sigle)' },
-    { id: 'dso-q9', type: 'single', difficulty: 2, skills: ['l-dso-ci'], prompt: 'Pourquoi épingler une action tierce par empreinte de commit plutôt que par étiquette `@v4` ?', options: [{ id: 'a', text: 'Pour accélérer le build' }, { id: 'b', text: 'Parce qu’une étiquette peut être déplacée vers un autre code, éventuellement malveillant' }, { id: 'c', text: 'Parce que les étiquettes sont interdites' }, { id: 'd', text: 'Pour réduire la taille du dépôt' }] },
-        { id: 'dso-q10', type: 'truefalse', difficulty: 2, skills: ['l-dso-ci'], prompt: 'Un secret a été poussé par erreur sur la branche principale d’un dépôt distant. Le supprimer dans un nouveau commit, quelques minutes plus tard, suffit à le protéger.' },
-    { id: 'dso-q11', type: 'multi', difficulty: 3, skills: ['l-dso-ci'], prompt: 'Quelles pratiques durcissent un workflow de CI ?', options: [{ id: 'a', text: 'Permissions `contents: read` par défaut' }, { id: 'b', text: 'Fédération OIDC vers le cloud' }, { id: 'c', text: '`permissions: write-all` pour éviter les erreurs' }, { id: 'd', text: 'Environnement protégé avec approbation pour la production' }] },
-    { id: 'dso-q12', type: 'short', difficulty: 2, skills: ['l-dso-ci'], prompt: 'Quelle commande npm installe les dépendances en respectant strictement le fichier de verrouillage ?' },
-    { id: 'dso-q13', type: 'single', difficulty: 2, skills: ['l-dso-pipeline', 'l-dso-ci'], prompt: 'Un analyseur Terraform signale `cidr_blocks = ["0.0.0.0/0"]` sur le port 22. Quelle est la bonne réaction ?', options: [{ id: 'a', text: 'Ignorer : le serveur a un mot de passe' }, { id: 'b', text: 'Corriger dans le code en limitant la source au VPN ou au bastion, puis redéployer' }, { id: 'c', text: 'Corriger à la main dans la console cloud' }, { id: 'd', text: 'Désactiver l’analyseur' }] },
-    { id: 'dso-q14', type: 'open', difficulty: 3, skills: ['l-dso-ci', 'l-dso-supply'], prompt: 'Analysez le workflow `pull_request_target` avec `write-all`, une action épinglée sur `@main` et une clé AWS en variable d’environnement : risques, scénario d’attaque et correction.' },
-    { id: 'dso-q15', type: 'open', difficulty: 3, skills: ['l-dso-pipeline', 'l-dso-supply'], prompt: 'Proposez l’ordre d’introduction des contrôles de sécurité dans le pipeline d’une équipe qui n’en a aucun, en précisant le mode bloquant ou informatif de chacun.' },
-    { id: 'dso-q16', type: 'single', difficulty: 1, skills: ['l-dso-pipeline', 'l-dso-ci'], prompt: 'Où les secrets détectés dans un dépôt doivent-ils être recherchés ?', options: [{ id: 'a', text: 'Uniquement dans la dernière version des fichiers' }, { id: 'b', text: 'Dans le code et dans tout l’historique Git' }, { id: 'c', text: 'Uniquement dans les fichiers .env' }, { id: 'd', text: 'Nulle part, les forges les masquent' }] },
-  ],
+  questions,
   resources: [
     { title: 'SLSA — Supply-chain Levels for Software Artifacts', source: 'OpenSSF', url: 'https://slsa.dev/' },
     { title: 'Security hardening for GitHub Actions', source: 'GitHub Docs', url: 'https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions' },

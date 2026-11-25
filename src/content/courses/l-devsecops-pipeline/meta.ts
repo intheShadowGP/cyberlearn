@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['L-ci-cd', 'L-devsecops', 'L-infrastructure-as-code', 'L-terraform', 'L-secrets-management', 'G-supply-chain-security', 'G-software-composition-analysis', 'G-gestion-des-dependances', 'G-static-application-security-testing', 'G-dynamic-application-security-testing'],
   title: 'DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle',
   level: 3,
-  durationMin: 95,
+  durationMin: 130,
   summary:
     "Intégrer la sécurité à chaque étape du cycle de livraison : contrôles automatisés (SAST, SCA, analyse de secrets et d'IaC, DAST), durcissement des pipelines CI/CD, gestion des secrets, signature et provenance des artefacts.",
   objectives: [
@@ -15,6 +15,8 @@ export const meta: CourseMeta = {
     'Durcir un workflow d’intégration continue (permissions, actions tierces, secrets).',
     'Analyser une configuration d’Infrastructure as Code avant déploiement.',
     'Décrire SBOM, signature et provenance des artefacts (SLSA).',
+    'Prioriser les vulnérabilités par le risque (gravité, exploitation, exposition, criticité) et gérer les exceptions et déclarations VEX.',
+    'Détecter une compromission de la chaîne de livraison et y répondre sans détruire les preuves.',
   ],
   prerequisites: ['l-cloud-iam'],
   prerequisiteKnowledge: ['Utilisation de Git', 'Notions de build et de dépendances logicielles'],
@@ -22,8 +24,10 @@ export const meta: CourseMeta = {
     { id: 'l-dso-pipeline', label: 'Contrôles de sécurité dans le pipeline', level: 2 },
     { id: 'l-dso-supply', label: 'Chaîne d’approvisionnement logicielle', level: 3 },
     { id: 'l-dso-ci', label: 'Durcissement CI/CD et secrets', level: 3 },
+    { id: 'l-dso-gouv', label: 'Gouvernance et priorisation des vulnérabilités', level: 3 },
+    { id: 'l-dso-incident', label: 'Détection et réponse sur la chaîne de livraison', level: 3 },
   ],
-  sectionCount: 4,
-  questionCount: 16,
-  quizSize: 8,
+  sectionCount: 6,
+  questionCount: 40,
+  quizSize: 10,
 };
