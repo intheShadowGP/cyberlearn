@@ -50,7 +50,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | A Fondamentaux | ✔ ×2 (banques 40 + anglais) | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) |
 | B Réseaux | ✔ | ✔ ×3 | ✔ | ✔ |
 | C Linux | ✔ | ✔ (migré) | ✔ (migré) | ✔ (nouveau) |
-| D Windows | ➕ | ✔ | ✔ ×2 | ➕ |
+| D Windows | ✔ (nouveau) | ✔ | ✔ ×2 | ➕ |
 | E Cryptographie | ➕ | ✔ | ✔ | ➕ |
 | F Web | ➕ | ✔ | ✔ ×2 | ➕ |
 | G Code | ➕ | ✔ | ✔ | ➕ |
@@ -67,7 +67,7 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
 Total : 45 cours existants (15 migrés) + 40 cours à créer (5 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 35 cours à créer et 30 cours existants à migrer.
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 34 cours à créer et 30 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -92,3 +92,4 @@ Total : 45 cours existants (15 migrés) + 40 cours à créer (5 créés) = 85 co
 | `d-windows-poste-durcissement` | ✔ 40 | ✔ 40 | ✔ (LAPS, AMSI, profils du pare-feu, section persistance) |
 | `d-windows-server-pki-durcissement` | ✔ 40 | ✔ 40 | ✔ (SRV, PKI à deux niveaux, mappage fort, tiering, section reprise) |
 | `d-ad-authentification` | ✔ 40 | ✔ 40 | ✔ (forêt, OU, pré-authentification, silver ticket, DCSync, délégation, section chemins d’attaque) |
+| `d-windows-fondamentaux` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |

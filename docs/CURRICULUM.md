@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 50 |
-| Questions de cours (avec correction) | 1264 |
+| Cours complets | 51 |
+| Questions de cours (avec correction) | 1304 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -25,7 +25,7 @@
 | A. Fondamentaux de l'informatique | 5 | 1, 2, 3, 4 | 16 / 16 |
 | B. Réseaux informatiques | 6 | 1, 2, 3, 4 | 36 / 36 |
 | C. Linux | 4 | 1, 2, 3, 4 | 22 / 22 |
-| D. Windows et Windows Server | 3 | 2, 3 | 25 / 25 |
+| D. Windows et Windows Server | 4 | 1, 2, 3 | 25 / 25 |
 | E. Cryptographie | 2 | 2, 3 | 22 / 22 |
 | F. Sécurité Web | 3 | 2, 3 | 27 / 27 |
 | G. Programmation et sécurité du code | 2 | 2, 3 | 23 / 23 |
@@ -60,6 +60,7 @@
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 6 | 40 | 3 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 6 | 40 | 3 | 5 |
 | Linux avancé : durcissement du noyau, intégrité, chaîne d’approvisionnement et investigation (`c-linux-securite-avancee`) | C | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
+| Windows : bien comprendre son poste, ses comptes et ses protections (`d-windows-fondamentaux`) | D | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 7 |
 | Active Directory : Kerberos, NTLM et attaques sur l’authentification (`d-ad-authentification`) | D | 3 · Avancé | 125 min | 6 | 40 | 3 | 5 |
 | Windows Server : services d’infrastructure, PKI et durcissement (`d-windows-server-pki-durcissement`) | D | 3 · Avancé | 130 min | 6 | 40 | 3 | 6 |
