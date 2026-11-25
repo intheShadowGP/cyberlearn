@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'g-vulnerabilites-memoire',
@@ -79,6 +80,57 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'L’exploitation de ces vulnérabilités ne doit être pratiquée que sur ses propres programmes ou des environnements d’entraînement (CTF, machines volontairement vulnérables).' },
         ],
       },
+      {
+        id: 'tas',
+        title: 'Le tas : débordement, use-after-free et exploitation',
+        blocks: [
+          { t: 'p', text: 'Sur le tas, l’**allocateur** découpe la mémoire en blocs, dont il garde des **métadonnées** (taille, liens vers les blocs libres) à côté des données. Des objets de natures différentes se retrouvent côte à côte : une écriture hors limites sur l’un atteint son voisin.' },
+          {
+            t: 'table',
+            head: ['Classe', 'Mécanisme', 'Conséquence possible', 'Parade'],
+            rows: [
+              ['**Débordement de tas**', 'Écriture au-delà d’un bloc alloué', 'Écrasement d’un pointeur de fonction ou des métadonnées voisines', 'Copies bornées, tailles vérifiées, allocateur durci'],
+              ['**Use-after-free**', 'Utilisation d’un pointeur après `free`', 'La zone réallouée contient des données choisies par l’attaquant', 'Propriété claire, `NULL` après libération, ASan'],
+              ['**Double free**', 'Deux `free` du même bloc', 'Corruption de la liste des blocs libres', 'Un seul propriétaire, vérifications de l’allocateur'],
+              ['**Confusion de type**', 'Un objet est lu comme un autre type', 'Lecture ou écriture avec une disposition mémoire inattendue', 'Types explicites, contrôles de conversion'],
+              ['**Lecture hors limites**', 'Lecture au-delà d’un bloc', 'Fuite d’information (clés, pointeurs)', 'Contrôle des longueurs, sanitizers'],
+            ],
+          },
+          { t: 'code', lang: 'c', caption: 'Un pointeur de fonction voisin d’un tampon', code: 'struct requete {\n    char nom[32];\n    void (*traiter)(struct requete *);   /* juste après le tampon */\n};\n\n/* Si « nom » reçoit plus de 32 octets, l’excédent écrase « traiter » :\n   l’appel suivant à r->traiter(r) saute à l’adresse choisie par l’attaquant. */' },
+          { t: 'def', term: 'Confusion de type', text: 'Un programme interprète une zone mémoire comme un type qu’elle n’est pas (conversion invalide, objet libéré puis réalloué sous un autre type). Les champs sont alors lus ou écrits à de mauvais emplacements : c’est un grand classique des vulnérabilités de navigateurs et de machines virtuelles.' },
+          { t: 'def', term: 'Pulvérisation du tas (heap spraying)', text: 'Technique qui remplit le tas d’objets choisis pour que des données contrôlées se trouvent à une adresse prévisible, ce qui aide à exploiter un use-after-free ou un débordement malgré la randomisation des adresses.' },
+          { t: 'list', items: ['**Propriété claire** : chaque allocation a un seul propriétaire, qui la libère exactement une fois.', '**Allocateur durci** (par exemple Scudo, `hardened_malloc`) : détection des double free, protection des métadonnées, randomisation des blocs.', '**Étiquetage mémoire matériel** (ARM MTE) : le processeur compare une étiquette de pointeur à celle du bloc et détecte débordements et use-after-free à faible coût.', '**Tests sous ASan** et fuzzing des entrées qui pilotent des allocations.'] },
+          { t: 'callout', kind: 'warn', text: 'Mettre un pointeur à `NULL` après `free` protège de cette copie du pointeur, mais pas des autres copies qui subsistent ailleurs : la règle de propriété est la vraie protection.' },
+        ],
+      },
+      {
+        id: 'langages',
+        title: 'C++ moderne, Rust et migration vers des langages sûrs',
+        blocks: [
+          { t: 'p', text: 'La façon la plus efficace d’éliminer une classe de vulnérabilités est de **rendre l’erreur impossible** plutôt que de la chercher. Des langages et des pratiques le font, à des degrés divers.' },
+          {
+            t: 'table',
+            head: ['Langage', 'Mécanisme de sécurité mémoire', 'Limites'],
+            rows: [
+              ['**C++ moderne**', 'RAII, `unique_ptr`, `shared_ptr`, `std::vector`, `std::string`, `std::span`, `.at()` pour des accès vérifiés', 'Compatible avec le C : les pointeurs bruts et `new` / `delete` restent possibles'],
+              ['**Rust**', 'Propriété et emprunts vérifiés à la **compilation** ; accès aux tableaux vérifiés ; pas de use-after-free en code sûr', 'Les blocs `unsafe` et les interfaces avec le C doivent être audités'],
+              ['**Go**', 'Vérification des limites et ramasse-miettes', '`unsafe` et `cgo` sortent de la protection ; concurrence non sûre sur certains types'],
+              ['**Java, C#**', 'Machine virtuelle, limites vérifiées, gestion automatique de la mémoire', 'Interfaces natives (JNI, P/Invoke) et bibliothèques en C'],
+            ],
+          },
+          { t: 'def', term: 'RAII', text: 'Idiome C++ où une ressource (mémoire, fichier, verrou) est liée à la durée de vie d’un objet : elle est libérée automatiquement à la sortie de sa portée, même en cas d’exception. Il supprime les oublis de `free` et la plupart des fuites.' },
+          { t: 'def', term: 'Propriété et emprunt (Rust)', text: 'Chaque valeur a un propriétaire unique ; on peut la prêter en lecture (plusieurs emprunts) ou en écriture (un seul à la fois). Le compilateur refuse le code où une référence survivrait à la valeur ou où deux écritures coexisteraient : use-after-free et courses de données sont rejetés à la compilation.' },
+          {
+            t: 'example',
+            title: 'Rendre l’erreur impossible ou visible',
+            blocks: [
+              { t: 'code', lang: 'cpp', code: '#include <vector>\n#include <memory>\n\nstd::vector<int> v(10);\nint x = v.at(12);                          // lève std::out_of_range, ne lit pas hors limites\n\nauto s = std::make_unique<Session>();       // libérée automatiquement à la sortie de portée\n// pas de new / delete explicites, pas de free oublié' },
+            ],
+          },
+          { t: 'list', items: ['**Nouveau code** dans un langage sûr pour la mémoire, surtout pour les analyseurs de formats et de protocoles exposés.', '**Code existant** : migrer d’abord les composants les plus exposés et les plus bogués, composant par composant, avec des interfaces étroites et validées.', '**`unsafe` minimal**, isolé dans de petits modules relus, avec tests et sanitizers.', '**Le reste en C** garde le durcissement, ASan, UBSan et le fuzzing.'] },
+          { t: 'callout', kind: 'key', text: 'Les agences de cybersécurité (CISA, NSA, FBI et partenaires) recommandent de publier une feuille de route vers des langages sûrs pour la mémoire : la migration est une décision d’organisation autant que technique.' },
+        ],
+      },
     ],
     useCases: [
       'Revue de code d’un composant C exposé au réseau (analyseur de protocole, firmware).',
@@ -122,25 +174,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un avis signale un débordement de pile dans un service compilé sans PIE, avec canari, avec NX, sur un système où l’ASLR est activé pour les bibliothèques.' }],
       steps: ['Indiquer ce que chaque protection empêche.', 'Expliquer pourquoi l’absence de PIE affaiblit l’ASLR.', 'Conclure sur la priorité de correction.'],
     },
+    {
+      id: 'revue-tas',
+      kind: 'analysis',
+      title: 'Revue de code : un lecteur de messages en C',
+      context: [
+        { t: 'code', lang: 'c', code: 'struct msg {\n    char nom[32];\n    void (*rappel)(struct msg *);\n};\n\nstruct msg *lire(int fd) {\n    unsigned int n;\n    read(fd, &n, sizeof n);\n    struct msg *m = malloc(sizeof *m);\n    read(fd, m->nom, n);                  /* n fourni par le client */\n    m->rappel = traiter;\n    return m;\n}\n\nstruct msg *lire_lot(int fd, unsigned int nb) {\n    return malloc(nb * sizeof(struct msg));   /* nb fourni par le client */\n}\n\nvoid fermer(struct msg *m) {\n    free(m);\n    if (m->nom[0] == \'#\') journaliser(m->nom);   /* après free */\n    free(m);\n}\n\nvoid afficher(const char *saisie) { printf(saisie); }' },
+      ],
+      steps: ['Nommer la vulnérabilité de chaque fonction et ce qu’un attaquant peut obtenir.', 'Réécrire les fonctions de façon sûre.', 'Proposer la compilation durcie, les tests et la stratégie de langage qui réduiraient ces risques à long terme.'],
+    },
   ],
-  questions: [
-    { id: 'mem-q1', type: 'single', difficulty: 1, skills: ['g-mem-layout'], prompt: 'Où sont stockées les variables locales d’une fonction C ?', options: [{ id: 'a', text: 'Sur le tas' }, { id: 'b', text: 'Sur la pile' }, { id: 'c', text: 'Dans le segment de code' }, { id: 'd', text: 'Dans le registre d’instruction' }] },
-    { id: 'mem-q2', type: 'truefalse', difficulty: 1, skills: ['g-mem-layout'], prompt: 'La mémoire allouée par malloc doit être libérée explicitement par le programmeur.' },
-    { id: 'mem-q3', type: 'short', difficulty: 2, skills: ['g-mem-layout', 'g-mem-vulns'], prompt: 'Quelle donnée de la pile un débordement de tampon cherche-t-il typiquement à écraser pour détourner l’exécution ? (trois mots)' },
-    { id: 'mem-q4', type: 'single', difficulty: 2, skills: ['g-mem-vulns'], prompt: 'Quelle vulnérabilité contient `printf(buffer_utilisateur);` ?', options: [{ id: 'a', text: 'Use-after-free' }, { id: 'b', text: 'Chaîne de format' }, { id: 'c', text: 'Injection SQL' }, { id: 'd', text: 'Dépassement d’entier' }] },
-    { id: 'mem-q5', type: 'single', difficulty: 3, skills: ['g-mem-vulns'], prompt: '`char *p = malloc(n * 16);` avec `n` fourni par l’utilisateur, suivi d’une boucle écrivant `n` blocs de 16 octets. Quel est le risque principal ?', options: [{ id: 'a', text: 'Aucun, malloc vérifie la taille' }, { id: 'b', text: 'Un dépassement d’entier dans la multiplication menant à une allocation trop petite puis à un débordement de tas' }, { id: 'c', text: 'Une chaîne de format' }, { id: 'd', text: 'Une fuite de descripteur de fichier' }] },
-    { id: 'mem-q6', type: 'multi', difficulty: 2, skills: ['g-mem-vulns'], prompt: 'Lesquelles de ces fonctions C sont à proscrire ou à surveiller particulièrement en revue de code ?', options: [{ id: 'a', text: '`gets`' }, { id: 'b', text: '`strcpy`' }, { id: 'c', text: '`snprintf` avec `sizeof` de la destination' }, { id: 'd', text: '`sprintf`' }] },
-    { id: 'mem-q7', type: 'truefalse', difficulty: 2, skills: ['g-mem-vulns'], prompt: 'Utiliser un pointeur après l’avoir passé à free est sans danger tant que le programme ne plante pas.' },
-    { id: 'mem-q8', type: 'single', difficulty: 2, skills: ['g-mem-protect'], prompt: 'Quelle protection rend la pile et le tas non exécutables ?', options: [{ id: 'a', text: 'ASLR' }, { id: 'b', text: 'NX / DEP' }, { id: 'c', text: 'Canari de pile' }, { id: 'd', text: 'FORTIFY_SOURCE' }] },
-    { id: 'mem-q9', type: 'short', difficulty: 2, skills: ['g-mem-protect'], prompt: 'Quel sigle désigne la randomisation des adresses mémoire à chaque exécution ?' },
-    { id: 'mem-q10', type: 'truefalse', difficulty: 3, skills: ['g-mem-protect'], prompt: 'Un binaire protégé par canari, NX et ASLR n’a plus besoin d’être corrigé en cas de débordement de pile.' },
-    { id: 'mem-q11', type: 'multi', difficulty: 3, skills: ['g-mem-protect'], prompt: 'Comment un attaquant tente-t-il généralement de contourner NX et ASLR ?', options: [{ id: 'a', text: 'En réutilisant du code existant (ROP)' }, { id: 'b', text: 'En exploitant une fuite d’information révélant des adresses' }, { id: 'c', text: 'En désactivant l’ASLR à distance par une requête HTTP' }, { id: 'd', text: 'En ciblant un module chargé à adresse fixe (sans PIE)' }] },
-    { id: 'mem-q12', type: 'single', difficulty: 2, skills: ['g-secure-code'], prompt: 'Quel outil détecte, pendant l’exécution des tests, les débordements et use-after-free ?', options: [{ id: 'a', text: 'AddressSanitizer (ASan)' }, { id: 'b', text: 'Un pare-feu applicatif' }, { id: 'c', text: 'gzip' }, { id: 'd', text: 'Un antivirus' }] },
-    { id: 'mem-q13', type: 'short', difficulty: 2, skills: ['g-secure-code'], prompt: 'Quelle option de GCC active l’avertissement sur les appels printf dont le format n’est pas littéral ? (option -W…)' },
-    { id: 'mem-q14', type: 'open', difficulty: 3, skills: ['g-mem-vulns', 'g-secure-code'], prompt: 'Expliquez à un développeur pourquoi remplacer `strcpy(dst, src)` par `strncpy(dst, src, sizeof dst)` n’est pas une correction complète et proposez une meilleure solution.' },
-    { id: 'mem-q15', type: 'open', difficulty: 3, skills: ['g-secure-code', 'g-mem-protect'], prompt: 'Vous êtes responsable sécurité d’un projet C de 200 000 lignes exposé au réseau. Proposez un plan en cinq mesures pour réduire durablement le risque de vulnérabilités mémoire.' },
-    { id: 'mem-q16', type: 'multi', difficulty: 2, skills: ['g-secure-code', 'g-mem-layout'], prompt: 'Quels langages offrent la sécurité mémoire par défaut (hors blocs explicitement non sûrs) ?', options: [{ id: 'a', text: 'Rust' }, { id: 'b', text: 'C' }, { id: 'c', text: 'Go' }, { id: 'd', text: 'Java' }] },
-  ],
+  questions,
   resources: [
     { title: 'The Case for Memory Safe Roadmaps', source: 'CISA, NSA, FBI et agences partenaires', url: 'https://www.cisa.gov/resources-tools/resources/case-memory-safe-roadmaps' },
     { title: 'SEI CERT C Coding Standard', source: 'Carnegie Mellon University', url: 'https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard' },
