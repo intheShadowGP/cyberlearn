@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 54 |
-| Questions de cours (avec correction) | 1496 |
+| Questions de cours (avec correction) | 1520 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -70,7 +70,7 @@
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 140 min | 6 | 40 | 3 | 7 |
 | Cryptographie appliquée avancée : protocoles, implémentation, clés et transition post-quantique (`e-crypto-appliquee-avancee`) | E | 4 · Expert | 150 min | 6 | 40 | 3 | 6 |
 | Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 6 | 40 | 3 | 4 |
-| Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 100 min | 5 | 16 | 2 | 6 |
+| Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 6 |
 | Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 90 min | 5 | 16 | 2 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 100 min | 5 | 16 | 2 | 4 |

@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'f-acces-sessions-ssrf',
@@ -92,6 +93,63 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: 'Transformer chaque défaut trouvé en test automatisé (par exemple : « l’utilisateur A reçoit 404 sur la facture de B ») empêche sa réapparition lors d’une évolution du code.' },
         ],
       },
+      {
+        id: 'authentification',
+        title: 'Authentification moderne : MFA, OAuth 2.0 et OpenID Connect',
+        blocks: [
+          { t: 'p', text: 'Un mot de passe seul ne suffit plus : hameçonnage, bourrage d’identifiants et fuites le rendent insuffisant. L’authentification multifacteur (MFA) ajoute un second élément, mais tous les facteurs ne se valent pas face à un attaquant qui interpose un faux site.' },
+          {
+            t: 'table',
+            head: ['Facteur', 'Résistance à l’hameçonnage', 'Remarque'],
+            rows: [
+              ['Code par SMS ou courriel', 'Faible', 'Saisi sur un faux site, il est rejoué aussitôt ; échange de carte SIM'],
+              ['Code temporel (TOTP)', 'Moyenne', 'Rejouable en temps réel par un site relais'],
+              ['Notification à valider', 'Moyenne', 'Exposée à la **fatigue MFA** : l’utilisateur finit par accepter'],
+              ['Clé FIDO2 / WebAuthn (passkey)', 'Forte', 'La signature est **liée au nom de domaine** : un faux site ne reçoit rien d’exploitable'],
+            ],
+          },
+          { t: 'def', term: 'OAuth 2.0 et OpenID Connect', text: '**OAuth 2.0** permet à une application d’obtenir un accès délégué (un jeton d’accès) aux ressources d’un utilisateur sans connaître son mot de passe. **OpenID Connect** s’ajoute pour **authentifier** l’utilisateur : il fournit un jeton d’identité signé (JWT) décrivant qui s’est connecté.' },
+          { t: 'list', items: ['**Flux par code d’autorisation avec PKCE** : le code renvoyé ne sert qu’à celui qui détient le secret généré au départ ; le flux implicite (jeton dans l’URL) est abandonné.', '**`redirect_uri` comparée exactement** à une liste enregistrée : toute correspondance partielle permet de détourner le code vers l’attaquant.', '**`state`** lié à la session du navigateur pour empêcher un CSRF sur le flux ; **`nonce`** pour lier le jeton d’identité à la requête.', '**Jeton d’identité** : vérifier la signature, l’émetteur (`iss`), le destinataire (`aud`), l’expiration (`exp`) et le `nonce` avant de s’en servir.', '**Scopes minimaux** et jetons d’accès à durée de vie courte.'] },
+          {
+            t: 'example',
+            title: 'Une redirect_uri trop permissive',
+            blocks: [
+              { t: 'code', lang: 'text', code: 'Enregistrée  : https://app.exemple/*\nAttaque      : …/authorize?redirect_uri=https://app.exemple/../../attaquant.example/collecte\n\nEnregistrée  : préfixe « https://app.exemple »\nAttaque      : redirect_uri=https://app.exemple.attaquant.example/callback' },
+              { t: 'p', text: 'Un joker ou une comparaison de préfixe laisse l’attaquant recevoir le code d’autorisation, puis le jeton. La comparaison doit être **exacte**, caractère pour caractère.' },
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: 'Se connecter avec le jeton d’identité sans vérifier sa signature, son audience ou son expiration revient à croire n’importe quel jeton fabriqué par un attaquant.' },
+        ],
+      },
+      {
+        id: 'detection',
+        title: 'Détecter et limiter les abus',
+        blocks: [
+          { t: 'p', text: 'Les failles de contrôle d’accès et d’authentification laissent des traces dans les journaux, à condition d’avoir décidé **quoi enregistrer** et **quoi surveiller**. Détecter tôt une énumération réduit fortement l’impact d’une IDOR.' },
+          { t: 'def', term: 'Limitation de débit', text: 'Plafonnement du nombre de requêtes acceptées par compte, par adresse ou par jeton sur une période. Elle freine l’énumération d’identifiants, la force brute et le bourrage d’identifiants ; elle s’accompagne de réponses uniformes pour ne pas révéler d’information.' },
+          {
+            t: 'table',
+            head: ['Signal dans les journaux', 'Interprétation probable', 'Réponse'],
+            rows: [
+              ['Une adresse ou un compte parcourt des identifiants **séquentiels** avec de nombreux 403 ou 404', 'Énumération (IDOR)', 'Alerte, blocage temporaire, revue de la route'],
+              ['Un compte standard appelle des routes d’administration', 'Tentative d’élévation verticale', 'Alerte, vérification des droits de la route'],
+              ['Nombreux échecs de connexion sur des comptes différents depuis une même adresse', 'Pulvérisation de mots de passe', 'Limitation de débit, MFA, blocage'],
+              ['Connexion réussie depuis un pays ou un appareil inhabituel juste après des échecs', 'Compte compromis', 'Réauthentification, révocation des sessions'],
+              ['Requêtes du serveur vers des adresses internes ou `169.254.169.254`', 'SSRF', 'Filtrage en sortie, alerte immédiate'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Reconnaître une énumération',
+            blocks: [
+              { t: 'code', lang: 'text', code: '198.51.100.7  client=17  GET /api/clients/18/factures  403\n198.51.100.7  client=17  GET /api/clients/19/factures  403\n198.51.100.7  client=17  GET /api/clients/20/factures  200   ← route non protégée\n198.51.100.7  client=17  GET /api/clients/21/factures  200' },
+              { t: 'p', text: 'Un même client enchaîne des identifiants qui se suivent : après deux refus, deux réponses 200 indiquent qu’une route est mal protégée. La réponse consiste à corriger la route, vérifier tout ce qui a été lu par ce compte et prévenir les personnes concernées si des données personnelles ont été exposées.' },
+            ],
+          },
+          { t: 'list', items: ['**Journaliser** : qui (compte), quoi (objet, action), quand, depuis où, et le résultat, y compris les refus.', '**Ne jamais journaliser** de mots de passe, de jetons de session ni de données sensibles en clair.', '**Alerter** sur les motifs ci-dessus et conserver les journaux de façon centralisée, à l’abri de la modification.', '**Tester** : un test automatisé par faille corrigée, rejoué à chaque évolution.'] },
+          { t: 'callout', kind: 'tip', text: 'La journalisation des refus d’accès est souvent absente alors qu’elle est la meilleure source de détection des attaques sur le contrôle d’accès.' },
+        ],
+      },
     ],
     useCases: [
       'Audit d’une API de facturation : tester chaque route avec plusieurs comptes pour détecter IDOR et élévation verticale.',
@@ -138,25 +196,18 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une mutuelle fait développer un espace client (consultation des remboursements, modification du RIB, messagerie avec un conseiller). Vous rédigez la partie sécurité du cahier des charges.' }],
       steps: ['Choisir le niveau ASVS visé et le justifier.', 'Rédiger six exigences testables couvrant sessions, contrôle d’accès et CSRF.', 'Indiquer comment chaque exigence sera vérifiée.'],
     },
+    {
+      id: 'revue-oauth',
+      kind: 'analysis',
+      title: 'Revue d’une intégration de connexion OAuth / OpenID Connect',
+      context: [
+        { t: 'p', text: 'Une application web permet la connexion avec un fournisseur d’identité. Éléments relevés lors d’une revue de code :' },
+        { t: 'code', lang: 'text', code: '1. redirect_uri enregistrée chez le fournisseur : https://app.exemple/*\n2. Requête d’autorisation : response_type=token (jeton dans le fragment de l’URL)\n3. Aucun paramètre state, aucun PKCE\n4. Callback : id = decoder(id_token); compte = trouver(id.email); ouvrir_session(compte)\n   (la signature, iss, aud et exp du jeton ne sont pas vérifiés)\n5. La session est ouverte avec l’identifiant de session déjà présent dans le navigateur' },
+      ],
+      steps: ['Nommer la faiblesse de chaque point et l’attaque qu’elle permet.', 'Décrire la configuration correcte du flux (type de flux, redirect_uri, state, PKCE, validation du jeton).', 'Proposer deux tests automatisés et une surveillance dans les journaux.'],
+    },
   ],
-  questions: [
-    { id: 'acc-q1', type: 'single', difficulty: 1, skills: ['f-access'], prompt: 'Un client accède à la facture d’un autre en remplaçant `1043` par `1044` dans l’URL. De quelle vulnérabilité s’agit-il ?', options: [{ id: 'a', text: 'Une IDOR (contrôle d’accès horizontal défaillant)' }, { id: 'b', text: 'Une injection SQL' }, { id: 'c', text: 'Un XSS réfléchi' }, { id: 'd', text: 'Une SSRF' }] },
-    { id: 'acc-q2', type: 'truefalse', difficulty: 2, skills: ['f-access'], prompt: 'Remplacer les identifiants numériques par des UUID aléatoires suffit à corriger une IDOR.' },
-    { id: 'acc-q3', type: 'multi', difficulty: 2, skills: ['f-access'], prompt: 'Quelles mesures corrigent ou préviennent les défauts de contrôle d’accès ?', options: [{ id: 'a', text: 'Vérifier côté serveur, à chaque requête, que l’objet appartient à l’utilisateur' }, { id: 'b', text: 'Refuser par défaut toute route sans règle d’autorisation explicite' }, { id: 'c', text: 'Masquer les boutons d’administration pour les utilisateurs standard' }, { id: 'd', text: 'Limiter les champs modifiables à une liste explicite' }] },
-    { id: 'acc-q4', type: 'open', difficulty: 3, skills: ['f-access', 'f-csrf-cors'], prompt: 'Décrivez comment vous testeriez le contrôle d’accès d’une application de gestion de dossiers comportant des rôles « agent » et « superviseur ».' },
-    { id: 'acc-q5', type: 'single', difficulty: 2, skills: ['f-session'], prompt: 'Quel attribut empêche le JavaScript de la page de lire un cookie de session ?', options: [{ id: 'a', text: '`HttpOnly`' }, { id: 'b', text: '`Secure`' }, { id: 'c', text: '`Path=/`' }, { id: 'd', text: '`Max-Age`' }] },
-    { id: 'acc-q6', type: 'short', difficulty: 2, skills: ['f-session'], prompt: 'Quel préfixe de nom de cookie impose `Secure`, `Path=/` et l’absence d’attribut `Domain` ?', placeholder: '__…-' },
-    { id: 'acc-q7', type: 'truefalse', difficulty: 2, skills: ['f-session'], prompt: 'Pour prévenir la fixation de session, il faut générer un nouvel identifiant de session au moment de l’authentification.' },
-    { id: 'acc-q8', type: 'multi', difficulty: 2, skills: ['f-session'], prompt: 'Quelles pratiques renforcent l’authentification d’une application web ?', options: [{ id: 'a', text: 'Même message d’erreur pour un compte inconnu et un mot de passe incorrect' }, { id: 'b', text: 'Limitation des tentatives et authentification multifacteur' }, { id: 'c', text: 'Jeton de réinitialisation de mot de passe aléatoire, à usage unique et de courte durée' }, { id: 'd', text: 'Envoi du mot de passe en clair par courriel après inscription' }] },
-    { id: 'acc-q9', type: 'single', difficulty: 2, skills: ['f-csrf-cors'], prompt: 'Pourquoi une attaque CSRF fonctionne-t-elle sans que l’attaquant connaisse le cookie de la victime ?', options: [{ id: 'a', text: 'Le navigateur joint automatiquement les cookies du site cible à la requête, même déclenchée depuis une autre page' }, { id: 'b', text: 'L’attaquant devine le cookie par force brute' }, { id: 'c', text: 'Le serveur envoie le cookie à tous les sites' }, { id: 'd', text: 'CORS transmet le cookie à l’attaquant' }] },
-    { id: 'acc-q10', type: 'truefalse', difficulty: 3, skills: ['f-csrf-cors'], prompt: 'Une politique CORS restrictive suffit à protéger une application contre le CSRF.' },
-    { id: 'acc-q11', type: 'multi', difficulty: 3, skills: ['f-csrf-cors'], prompt: 'Quelles configurations CORS sont dangereuses pour une API qui utilise des cookies de session ?', options: [{ id: 'a', text: 'Refléter l’en-tête `Origin` reçu avec `Access-Control-Allow-Credentials: true`' }, { id: 'b', text: 'Accepter toute origine qui contient le nom du domaine (`exemple.fr.attaquant.example` passe)' }, { id: 'c', text: 'Autoriser l’origine `null` avec les identifiants' }, { id: 'd', text: 'Une liste fixe contenant uniquement l’origine du front-end officiel' }] },
-    { id: 'acc-q12', type: 'short', difficulty: 2, skills: ['f-csrf-cors'], prompt: 'Quelle valeur de l’attribut SameSite empêche l’envoi du cookie sur toute requête intersite, y compris la navigation par lien ?' },
-    { id: 'acc-q13', type: 'single', difficulty: 2, skills: ['f-ssrf'], prompt: 'Une fonction « aperçu de lien » renvoie le contenu de `http://169.254.169.254/latest/meta-data/`. Quel est le risque principal ?', options: [{ id: 'a', text: 'Le vol d’identifiants temporaires du cloud via le service de métadonnées de l’instance' }, { id: 'b', text: 'Un ralentissement du site' }, { id: 'c', text: 'Une erreur d’affichage CSS' }, { id: 'd', text: 'Aucun : cette adresse n’est pas routable' }] },
-    { id: 'acc-q14', type: 'multi', difficulty: 3, skills: ['f-ssrf'], prompt: 'Quelles défenses sont efficaces contre la SSRF ?', options: [{ id: 'a', text: 'Liste d’autorisation des domaines et du schéma `https`' }, { id: 'b', text: 'Vérifier l’adresse IP résolue, puis se connecter à cette même adresse' }, { id: 'c', text: 'Filtrage réseau en sortie du serveur' }, { id: 'd', text: 'Refuser uniquement la chaîne « 127.0.0.1 » dans l’URL' }] },
-    { id: 'acc-q15', type: 'open', difficulty: 3, skills: ['f-ssrf', 'f-access'], prompt: 'Une route `GET /telecharger?fichier=rapport.pdf` lit le fichier dans `/srv/rapports/`. Expliquez la vulnérabilité possible et proposez deux corrections, de la plus sûre à la moins sûre.' },
-    { id: 'acc-q16', type: 'single', difficulty: 2, skills: ['f-ssrf', 'f-session'], prompt: 'À quoi sert principalement l’OWASP ASVS ?', options: [{ id: 'a', text: 'À définir des exigences de sécurité vérifiables par niveau, pour la conception et l’audit' }, { id: 'b', text: 'À scanner automatiquement les vulnérabilités d’un site' }, { id: 'c', text: 'À chiffrer les cookies' }, { id: 'd', text: 'À remplacer un pare-feu applicatif' }] },
-  ],
+  questions,
   resources: [
     { title: 'OWASP Top 10', source: 'OWASP', url: 'https://owasp.org/www-project-top-ten/' },
     { title: 'OWASP API Security Top 10', source: 'OWASP', url: 'https://owasp.org/www-project-api-security/' },

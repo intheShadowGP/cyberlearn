@@ -36,5 +36,22 @@ export const solutions: CourseSolutions = {
         },
       ],
     },
+    'revue-oauth': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Point', 'Faiblesse', 'Attaque'],
+          rows: [
+            ['1', '`redirect_uri` avec joker', 'L’attaquant redirige le code ou le jeton vers un chemin ou un domaine qu’il contrôle et se connecte à la place de la victime'],
+            ['2', 'Flux implicite (`response_type=token`)', 'Le jeton figure dans l’URL : fuite par l’historique, le Referer ou un script tiers'],
+            ['3', 'Pas de `state`, pas de PKCE', 'CSRF de connexion (la victime est connectée au compte de l’attaquant) et interception du code d’autorisation'],
+            ['4', 'Jeton d’identité accepté sans vérification', 'N’importe quel jeton forgé, même d’un autre émetteur ou expiré, ouvre le compte de son choix'],
+            ['5', 'Identifiant de session conservé après authentification', 'Fixation de session : l’identifiant imposé avant la connexion devient authentifié'],
+          ],
+        },
+        { t: 'list', items: ['Flux par **code d’autorisation avec PKCE**, `redirect_uri` enregistrée et comparée **exactement**, `state` lié à la session, `nonce` dans la requête.', 'Validation du jeton d’identité : signature (clés publiées par le fournisseur), `iss`, `aud`, `exp`, `nonce` ; correspondance du compte sur l’identifiant stable (`sub`) plutôt que sur le seul courriel.', 'Nouvel identifiant de session à l’ouverture de session ; scopes minimaux.'] },
+        { t: 'p', text: 'Tests : un test qui rejette une `redirect_uri` différente d’un seul caractère, et un test qui rejette un jeton d’identité dont la signature, l’audience ou l’expiration est altérée. Surveillance : alertes sur les échecs de validation de jeton et sur les `redirect_uri` inattendues.' },
+      ],
+    },
   },
 };
