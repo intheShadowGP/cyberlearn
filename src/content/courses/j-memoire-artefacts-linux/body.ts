@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'j-memoire-artefacts-linux',
@@ -77,6 +78,48 @@ export const body: CourseBody = {
           { t: 'def', term: 'Point d’ancrage', text: 'Événement daté avec certitude, à partir duquel on oriente la recherche. Par exemple : la première connexion SSH réussie depuis l’adresse de l’attaquant, attestée à la fois par `auth.log` et par le pare-feu.' },
         ],
       },
+      {
+        id: 'conteneurs',
+        title: 'Conteneurs, Kubernetes et machines virtuelles dans le cloud',
+        blocks: [
+          { t: 'p', text: 'Les serveurs modernes exécutent souvent des **conteneurs** ou vivent dans le **cloud**. Les principes de la forensique restent les mêmes (préserver, vérifier, dater, recouper), mais les traces sont plus éphémères : un conteneur supprimé emporte avec lui ses couches et, par défaut, ses journaux.' },
+          {
+            t: 'table',
+            head: ['Environnement', 'Où se trouvent les traces', 'Précaution'],
+            rows: [
+              ['**Hôte Docker**', '`/var/lib/docker` (images, couches overlay2, volumes, journaux JSON de chaque conteneur) ; `docker inspect` (montages, privilèges, variables)', 'Capturer l’état d’un conteneur en cours **avant** de l’arrêter ou de le supprimer'],
+              ['**Kubernetes**', 'Journal d’audit de l’API (qui a fait quoi), journaux des pods, événements du cluster, journaux des nœuds', 'Activer l’audit et exporter les journaux hors du cluster'],
+              ['**Machine virtuelle cloud**', 'Instantané (snapshot) du volume, journaux de la plateforme (activité des comptes, appels d’API), journaux de flux réseau', 'Isoler par les règles réseau et faire un instantané plutôt que supprimer l’instance'],
+              ['**Services managés**', 'Journaux d’audit du fournisseur, journaux d’accès aux objets de stockage', 'Vérifier la rétention proposée par le fournisseur et le modèle de responsabilité partagée'],
+            ],
+          },
+          { t: 'code', lang: 'bash', caption: 'Préserver l’état d’un conteneur suspect avant intervention', code: '# Configuration complète : montages, privilèges, réseau, variables\ndocker inspect conteneur-web > inspect.json\n\n# Journaux du conteneur\ndocker logs --timestamps conteneur-web > logs.txt\n\n# Processus en cours dans le conteneur\ndocker top conteneur-web > top.txt\n\n# Copie du système de fichiers du conteneur\ndocker export conteneur-web -o conteneur-web.tar\n\n# Empreintes de tous les éléments collectés\nsha256sum inspect.json logs.txt top.txt conteneur-web.tar > empreintes.txt' },
+          { t: 'list', items: ['**Privilèges** : un conteneur « privilégié » ou qui monte la socket du moteur donne un accès quasi complet à l’hôte : c’est un point à vérifier en priorité.', '**Éphémère** : les conteneurs sont recréés par l’orchestrateur ; sans journalisation externe, les traces s’effacent.', '**Compte cloud** : les journaux d’activité de la plateforme montrent les créations de ressources et les changements de droits.'] },
+          { t: 'callout', kind: 'key', text: 'Dans le cloud et les conteneurs, la rétention des journaux se décide **avant** l’incident : un journal qui n’a pas été conservé ne peut pas être récupéré.' },
+        ],
+      },
+      {
+        id: 'integrite',
+        title: 'Intégrité d’un système Linux et détection des modifications',
+        blocks: [
+          { t: 'p', text: 'Un attaquant qui prend le contrôle d’un serveur Linux modifie rarement le système au hasard : il remplace un binaire, ajoute un compte, charge une bibliothèque, installe une tâche. Comparer le système à un **état de référence** révèle ces changements.' },
+          {
+            t: 'table',
+            head: ['Contrôle', 'Commande ou emplacement', 'Ce qu’il révèle'],
+            rows: [
+              ['Intégrité des paquets', '`debsums -c` (Debian, Ubuntu), `rpm -Va` (Red Hat)', 'Binaire ou bibliothèque système modifié ou remplacé'],
+              ['Fichiers récents', '`find / -xdev -newermt "2026-10-02" ! -newermt "2026-10-04"`', 'Fichiers modifiés pendant la fenêtre d’incident'],
+              ['Droits spéciaux', '`find / -perm -4000 -type f` (SUID)', 'Exécutable SUID ajouté, notamment dans un répertoire temporaire'],
+              ['Comptes', '`/etc/passwd`, `/etc/shadow`, `/etc/sudoers.d/`', 'Compte ajouté, UID 0 supplémentaire, droits sudo accordés'],
+              ['Chargement forcé', '`/etc/ld.so.preload`', 'Bibliothèque injectée dans tous les processus (technique de rootkit)'],
+              ['Modules noyau', '`lsmod`, `/lib/modules/`', 'Module inconnu ou non signé'],
+            ],
+          },
+          { t: 'def', term: 'Base d’intégrité', text: 'Instantané des empreintes et attributs des fichiers d’un système sain (par exemple avec AIDE), comparé régulièrement à l’état courant. Tout écart non expliqué est un indice. Elle doit être stockée hors du serveur pour ne pas être modifiée par un attaquant.' },
+          { t: 'list', items: ['**Extraire, ne pas exécuter** : on copie le fichier suspect depuis l’image montée en lecture seule et on l’analyse dans un environnement isolé.', '**Comparer à la source** : on télécharge le paquet officiel de la même version et on compare les empreintes.', '**Dater** : `ctime` et `crtime` donnent la date réelle du changement, contrairement à `mtime` qu’on peut remettre à une date ancienne.', '**Rechercher en cascade** : un binaire modifié mène à la bibliothèque qui le charge, puis à la tâche qui le lance.'] },
+          { t: 'callout', kind: 'warn', text: 'Un écart d’intégrité n’est pas toujours malveillant (fichier de configuration modifié par l’administrateur, mise à jour). Il se qualifie par le contexte et la date, jamais par la seule différence d’empreinte.' },
+        ],
+      },
     ],
     useCases: [
       'Investigation d’un serveur web Linux compromis : point d’entrée, commandes exécutées, persistance, données touchées.',
@@ -126,25 +169,18 @@ export const body: CourseBody = {
       ],
       steps: ['Construire la chronologie des faits en UTC (le serveur est en UTC).', 'Identifier le point d’entrée, la persistance et les tentatives de dissimulation.', 'Lister les vérifications et les mesures de remédiation.'],
     },
+    {
+      id: 'conteneur-compromis',
+      kind: 'case',
+      title: 'Cas pratique : un conteneur exposé est soupçonné d’être compromis',
+      context: [
+        { t: 'p', text: 'Une alerte signale des connexions sortantes inhabituelles depuis l’hôte `docker-prod-02`. Observations :' },
+        { t: 'code', lang: 'text', code: 'docker ps : conteneur « web-api » (image registre-interne/web-api:4.2), démarré il y a 11 jours\ndocker inspect web-api : Privileged = true ; montage /var/run/docker.sock:/var/run/docker.sock\ndocker logs web-api (extrait) : « GET /health 200 » toutes les 30 s ; 2026-10-02 03:12:08 « POST /upload 200 » ; 03:12:41 « GET /uploads/x.php?c=… 200 »\ndocker diff web-api : A /var/www/uploads/x.php ; A /tmp/.cache/agent\nHôte : nouveau conteneur « agent-sync » créé à 03:20:15, image inconnue, réseau hôte\nJournal d’audit cloud : clé d’accès du compte « ci-deploy » utilisée à 03:27 depuis une adresse inconnue' },
+      ],
+      steps: ['Construire la chronologie et identifier le point d’entrée, l’élévation et la persistance.', 'Indiquer, dans l’ordre, ce que vous préservez avant toute action sur l’hôte et le conteneur.', 'Proposer le confinement, l’éradication et les mesures de durcissement.'],
+    },
   ],
-  questions: [
-    { id: 'jfm-q1', type: 'single', difficulty: 2, skills: ['j-mem-volatility'], prompt: 'Un processus apparaît dans `windows.psscan` mais pas dans `windows.pslist`. Quelle interprétation est juste ?', options: [{ id: 'a', text: 'Le processus est terminé (sa structure subsiste en mémoire) ou il a été délié de la liste du noyau pour se cacher' }, { id: 'b', text: 'L’image mémoire est forcément corrompue' }, { id: 'c', text: '`psscan` invente des processus fictifs' }, { id: 'd', text: 'Le processus tourne sur une autre machine' }] },
-    { id: 'jfm-q2', type: 'short', difficulty: 2, skills: ['j-mem-volatility'], prompt: 'Quel plugin Volatility 3 pour Windows signale les régions mémoire exécutables non adossées à un fichier, typiques d’une injection de code ? (donnez le nom complet du plugin)', placeholder: 'windows.…' },
-    { id: 'jfm-q3', type: 'truefalse', difficulty: 2, skills: ['j-mem-volatility'], prompt: 'Toute région signalée par `malfind` prouve à elle seule la présence d’un malware.' },
-    { id: 'jfm-q4', type: 'multi', difficulty: 2, skills: ['j-mem-volatility', 'j-chronologie'], prompt: 'Quelles informations l’analyse mémoire peut-elle apporter, alors que le disque ne les contient pas toujours ?', options: [{ id: 'a', text: 'Les connexions réseau ouvertes au moment de l’acquisition' }, { id: 'b', text: 'Le code d’un malware exécuté uniquement en mémoire' }, { id: 'c', text: 'Les lignes de commande des processus en cours' }, { id: 'd', text: 'L’historique complet des fichiers supprimés depuis l’installation' }] },
-    { id: 'jfm-q5', type: 'single', difficulty: 2, skills: ['j-fs-tsk'], prompt: 'Quelle commande de The Sleuth Kit affiche la table des partitions d’une image et leur décalage de départ ?', options: [{ id: 'a', text: '`mmls`' }, { id: 'b', text: '`icat`' }, { id: 'c', text: '`mactime`' }, { id: 'd', text: '`istat`' }] },
-    { id: 'jfm-q6', type: 'short', difficulty: 2, skills: ['j-fs-tsk'], prompt: 'Quelle commande de The Sleuth Kit extrait le contenu d’un fichier à partir de son numéro d’inode ?' },
-    { id: 'jfm-q7', type: 'truefalse', difficulty: 1, skills: ['j-fs-tsk'], prompt: 'Un fichier supprimé peut souvent être récupéré tant que ses blocs de données n’ont pas été réutilisés.' },
-    { id: 'jfm-q8', type: 'multi', difficulty: 3, skills: ['j-fs-tsk', 'j-chronologie'], prompt: 'Sur NTFS, quels constats évoquent une falsification d’horodatage ?', options: [{ id: 'a', text: 'Date de création `$STANDARD_INFORMATION` antérieure à celle de `$FILE_NAME`' }, { id: 'b', text: 'Horodatages `$STANDARD_INFORMATION` dont les fractions de seconde valent exactement zéro' }, { id: 'c', text: 'Date de modification postérieure à la date de création' }, { id: 'd', text: 'Exécutable daté de 2019 dans un dossier créé hier, avec un `$FILE_NAME` daté d’hier' }] },
-    { id: 'jfm-q9', type: 'single', difficulty: 2, skills: ['j-artefacts-linux'], prompt: 'Sur un serveur RHEL, dans quel fichier trouve-t-on habituellement les authentifications SSH ?', options: [{ id: 'a', text: '`/var/log/secure`' }, { id: 'b', text: '`/var/log/auth.log`' }, { id: 'c', text: '`/etc/ssh/sshd_config`' }, { id: 'd', text: '`/var/log/dpkg.log`' }] },
-    { id: 'jfm-q10', type: 'multi', difficulty: 2, skills: ['j-artefacts-linux'], prompt: 'Quels emplacements sont des mécanismes de persistance à vérifier sur un serveur Linux compromis ?', options: [{ id: 'a', text: '`/etc/cron.d/` et `/var/spool/cron/`' }, { id: 'b', text: '`/etc/systemd/system/`' }, { id: 'c', text: '`~/.ssh/authorized_keys`' }, { id: 'd', text: '`/usr/share/doc/`' }] },
-    { id: 'jfm-q11', type: 'truefalse', difficulty: 2, skills: ['j-artefacts-linux'], prompt: 'Un fichier `.bash_history` lié symboliquement à `/dev/null` est un indice possible de dissimulation volontaire.' },
-    { id: 'jfm-q12', type: 'open', difficulty: 3, skills: ['j-artefacts-linux', 'j-chronologie'], prompt: 'Vous analysez l’image d’un serveur Linux compromis. Décrivez dans quel ordre vous rechercheriez le point d’entrée, les actions de l’attaquant et sa persistance, et quels artefacts vous consulteriez pour chacun.' },
-    { id: 'jfm-q13', type: 'single', difficulty: 2, skills: ['j-chronologie'], prompt: 'Pourquoi faut-il convertir toutes les sources en UTC avant de construire une chronologie ?', options: [{ id: 'a', text: 'Pour éviter que des sources en heures locales différentes inversent l’ordre réel des événements' }, { id: 'b', text: 'Parce que les outils refusent les heures locales' }, { id: 'c', text: 'Pour réduire la taille du fichier' }, { id: 'd', text: 'Parce que l’UTC chiffre les horodatages' }] },
-    { id: 'jfm-q14', type: 'short', difficulty: 2, skills: ['j-chronologie'], prompt: 'Quelle commande de The Sleuth Kit transforme un fichier « body » produit par `fls -m` en chronologie triée ?' },
-    { id: 'jfm-q15', type: 'open', difficulty: 3, skills: ['j-chronologie', 'j-fs-tsk'], prompt: 'Sur un serveur ext4, un binaire système affiche un `mtime` de 2021 et un `ctime` de la nuit de l’incident. Que peut-on en conclure et comment le vérifier ?' },
-    { id: 'jfm-q16', type: 'single', difficulty: 1, skills: ['j-mem-volatility', 'j-fs-tsk'], prompt: 'Sur quoi l’analyse doit-elle toujours porter ?', options: [{ id: 'a', text: 'Sur une copie dont l’empreinte a été vérifiée, montée en lecture seule' }, { id: 'b', text: 'Directement sur le disque original, pour gagner du temps' }, { id: 'c', text: 'Sur le système en cours d’exécution, après redémarrage' }, { id: 'd', text: 'Sur une copie modifiée pour retirer les fichiers inutiles' }] },
-  ],
+  questions,
   resources: [
     { title: 'Volatility 3 documentation', source: 'Volatility Foundation', url: 'https://volatility3.readthedocs.io/' },
     { title: 'The Sleuth Kit', source: 'Brian Carrier / Basis Technology', url: 'https://www.sleuthkit.org/sleuthkit/' },

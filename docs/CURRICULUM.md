@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 62 |
-| Questions de cours (avec correction) | 2031 |
+| Questions de cours (avec correction) | 2055 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -88,7 +88,7 @@
 | Ingénierie de détection avancée et pilotage d’un SOC (`i-detection-avancee`) | I | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 115 min | 7 | 40 | 3 | 4 |
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
-| Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
+| Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 85 min | 5 | 16 | 2 | 4 |
 | Rétro-ingénierie défensive : binaires, désassemblage, débogage et outils (`k-retro-ingenierie-defensive`) | K | 3 · Avancé | 100 min | 5 | 16 | 2 | 5 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 85 min | 4 | 16 | 2 | 4 |
