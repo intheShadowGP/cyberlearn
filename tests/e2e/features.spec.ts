@@ -232,7 +232,8 @@ test('filtres du catalogue et des laboratoires', async ({ page }) => {
   await expect(page.locator('.card-grid > li').first()).toBeVisible();
   const all = await page.locator('.card-grid > li').count();
   await page.getByLabel('Discipline', { exact: true }).selectOption('L');
-  await expect(page.locator('.card-grid > li')).toHaveCount(4);
+  // Module L : 4 cours historiques (1 de niveau 2, 3 de niveau 3) + un cours débutant (niveau 1) et un cours expert (niveau 4) ajoutés en phase 5.
+  await expect(page.locator('.card-grid > li')).toHaveCount(6);
   await page.getByLabel('Niveau').selectOption('3');
   await expect(page.locator('.card-grid > li')).toHaveCount(3);
   await page.goto('./#/catalogue?q=kubernetes');
