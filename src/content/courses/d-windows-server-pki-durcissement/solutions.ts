@@ -17,6 +17,14 @@ export const solutions: CourseSolutions = {
         { t: 'p', text: 'Côté autorité émettrice : surveiller les émissions (volume, modèles sensibles, demandeurs inhabituels), vérifier périodiquement les droits d’inscription des modèles, et s’assurer que la révocation (CRL/OCSP) est publiée et joignable.' },
       ],
     },
+    'reprise-ad': {
+      blocks: [
+        { t: 'p', text: 'La sauvegarde hors ligne est **utilisable avec précaution** : elle est saine si elle date d’**avant** l’intrusion, or l’attaquant avait les droits d’administration depuis au moins dix jours et la sauvegarde a trois semaines : elle précède donc l’intrusion. Mais elle ne contient pas les changements légitimes des trois dernières semaines (comptes, groupes, certificats), qu’il faudra reconstituer ou comparer avec les journaux.' },
+        { t: 'list', ordered: true, items: ['**Contenir** : isoler le réseau touché, couper les comptes d’administration compromis ; **préserver** journaux, copies et empreintes avant toute réinstallation.', '**Restaurer** le contrôleur de domaine depuis la sauvegarde hors ligne dans un environnement isolé, puis reconstruire les autres contrôleurs à partir de lui ; réinstaller les serveurs à partir de supports sains.', '**Réinitialiser les secrets** : mots de passe des comptes privilégiés et de service, double réinitialisation de `krbtgt`, secrets de la PKI ; remettre en état les groupes privilégiés.', '**Vérifier la PKI** (modèles, droits d’inscription, certificats émis depuis la date d’intrusion) ; révoquer et réémettre ce qui est douteux.'] },
+        { t: 'list', items: ['Mesures préventives : sauvegardes isolées (hors ligne ou immuables) avec des comptes et des accès **séparés** de l’administration du domaine, règle 3-2-1, tests de restauration réguliers.', 'Séparation des niveaux d’administration, surveillance des accès aux sauvegardes et des groupes privilégiés, plan de reprise écrit et répété chaque année.'] },
+        { t: 'callout', kind: 'warn', text: 'Ne pas redémarrer l’annuaire restauré sur le réseau de production avant d’avoir réinitialisé les secrets : l’attaquant réutiliserait aussitôt ceux qu’il a copiés.' },
+      ],
+    },
     'durcir-dc': {
       blocks: [
         { t: 'list', items: ['Durcissement : Server Core, rôles limités au contrôleur de domaine et au DNS, référence CIS/Microsoft par GPO, pare-feu actif, administration via un poste et un réseau dédiés, comptes du niveau le plus élevé non partagés, LAPS pour l’administrateur local, correctifs rapides.', 'DNS : zone intégrée à AD, mises à jour dynamiques sécurisées uniquement, transferts de zone restreints aux serveurs DNS légitimes, journalisation et surveillance des modifications.'] },

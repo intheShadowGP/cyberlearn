@@ -6,7 +6,7 @@ export const meta: CourseMeta = {
   topics: ['D-dns-windows', 'D-dhcp-windows', 'D-pki', 'D-certificats', 'D-securisation-de-windows-server'],
   title: 'Windows Server : services d’infrastructure, PKI et durcissement',
   level: 3,
-  durationMin: 95,
+  durationMin: 130,
   summary:
     'Sécuriser les rôles d’infrastructure Windows (DNS et DHCP intégrés au domaine), comprendre une PKI d’entreprise (AD CS), maîtriser le cycle de vie et les erreurs de configuration des certificats, et durcir un serveur Windows.',
   objectives: [
@@ -15,6 +15,7 @@ export const meta: CourseMeta = {
     'Expliquer le cycle de vie d’un certificat et repérer les configurations dangereuses à auditer.',
     'Appliquer un socle de durcissement à un serveur Windows (rôles minimaux, Server Core, références CIS).',
     'Mettre en place supervision et sauvegarde de l’état système.',
+    'Préparer la reprise après une compromission d’Active Directory : sauvegardes isolées, secrets à réinitialiser, vérification de la PKI.',
   ],
   prerequisites: ['d-windows-poste-durcissement'],
   prerequisiteKnowledge: ['Comptes, NTFS, journalisation Windows (cours d-windows-poste-durcissement)', 'Active Directory, Kerberos (cours d-ad-authentification)'],
@@ -23,8 +24,9 @@ export const meta: CourseMeta = {
     { id: 'd-pki', label: 'PKI d’entreprise (AD CS)', level: 3 },
     { id: 'd-certificats', label: 'Cycle de vie et sécurité des certificats', level: 3 },
     { id: 'd-srv-hardening', label: 'Durcissement de Windows Server', level: 3 },
+    { id: 'd-srv-supervision', label: 'Supervision, sauvegarde et reprise', level: 3 },
   ],
-  sectionCount: 5,
-  questionCount: 16,
-  quizSize: 8,
+  sectionCount: 6,
+  questionCount: 40,
+  quizSize: 10,
 };
