@@ -19,6 +19,23 @@ export const solutions: CourseSolutions = {
         { t: 'callout', kind: 'warn', text: 'L’accès à LSASS sept secondes après l’ouverture du document impose de considérer les identifiants de l’utilisatrice, et de tout compte connecté sur ce poste, comme compromis : isolement du poste et réinitialisation des mots de passe.' },
       ],
     },
+    'chasse-persistance': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Entrée', 'Verdict', 'Raison'],
+          rows: [
+            ['Tâche \\Microsoft\\Windows\\UpdateCheck', '**Suspecte**', 'Nom imitant Windows, mais binaire dans `C:\\Users\\Public`, dossier modifiable par tous, exécuté en SYSTEM ; créée en pleine nuit'],
+            ['Service WinUpdateSvc', '**Suspect**', 'Démarrage automatique en SYSTEM d’un exécutable situé dans un dossier modifiable ; les services légitimes sont sous `C:\\Windows` ou `C:\\Program Files`'],
+            ['Run HKLM OneDriveSync', 'Légitime', 'Chemin sous `C:\\Program Files`, programme signé et attendu'],
+            ['Dossier Démarrage', 'Rien à signaler', 'Vide'],
+          ],
+        },
+        { t: 'list', items: ['Ordre d’action : isoler le poste, collecter ce qui sert à l’analyse (copie et empreinte de `upd.exe` et `svc.exe`, configuration de la tâche et du service, journaux), puis **désactiver** la tâche et le service avant de supprimer les binaires, sinon ils se relancent.', 'Rechercher d’autres points d’entrée et la source de l’intrusion ; considérer comme exposés les comptes qui ont ouvert une session sur le poste.'] },
+        { t: 'list', items: ['Journaux : Sysmon 1, 11 et 13 autour de la création des fichiers, 4698 (création de la tâche), 7045 (installation du service), 4688 et 4624 pour l’origine de la connexion.', 'Détection durable : alerte sur la création d’une tâche ou d’un service dont le binaire est hors de `C:\\Windows` et `C:\\Program Files`, et inventaire régulier des points de démarrage.'] },
+        { t: 'callout', kind: 'tip', text: 'La récidive après nettoyage est le signe classique d’une persistance oubliée : on cherche d’abord comment le programme revient, puis on le retire de tous ses points d’entrée.' },
+      ],
+    },
     'plan-durcissement': {
       blocks: [
         {

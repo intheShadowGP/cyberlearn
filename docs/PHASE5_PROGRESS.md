@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (12 migrés) + 40 cours à créer (5 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 35 cours à créer et 33 cours existants à migrer.
+Total : 45 cours existants (13 migrés) + 40 cours à créer (5 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 35 cours à créer et 32 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -89,3 +89,4 @@ Total : 45 cours existants (12 migrés) + 40 cours à créer (5 créés) = 85 co
 | `c-linux-permissions` | ✔ 40 | ✔ 40 | ✔ (diagnostic d’un refus d’accès, umask, capacités, sudoers.d, SSH sans verrouillage) |
 | `c-systemd-journaux-confinement` | ✔ 40 | ✔ 40 | ✔ (persistance et chronologie, auid, journald persistant, nft -c, AmbientCapabilities) |
 | `c-linux-securite-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
+| `d-windows-poste-durcissement` | ✔ 40 | ✔ 40 | ✔ (LAPS, AMSI, profils du pare-feu, section persistance) |

@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'd-windows-poste-durcissement',
@@ -21,6 +22,8 @@ export const body: CourseBody = {
               ['Mémoire de LSASS lisible par un processus administrateur', 'Vol d’empreintes et de tickets (Mimikatz)', 'Protection LSA (RunAsPPL), Credential Guard'],
             ],
           },
+          { t: 'def', term: 'Windows LAPS', text: 'Fonction qui donne à chaque poste un mot de passe d’**administrateur local aléatoire**, renouvelé automatiquement et stocké dans l’annuaire (Active Directory ou Entra ID) à l’usage des seuls ayants droit. Un poste compromis ne donne plus accès aux autres.' },
+          { t: 'def', term: 'Protection LSA et Credential Guard', text: 'Le processus **LSASS** conserve en mémoire des secrets d’authentification. La protection LSA (RunAsPPL) empêche un processus non approuvé de le lire ; **Credential Guard** place ces secrets dans un conteneur isolé par virtualisation. Les deux compliquent le vol d’identifiants, de même qu’éviter les ouvertures de session privilégiées sur les postes ordinaires.' },
           { t: 'callout', kind: 'key', text: 'Retirer les droits d’administration local aux utilisateurs est, à elle seule, l’une des mesures les plus efficaces : beaucoup de techniques d’attaque sur le poste supposent ces droits.' },
         ],
       },
@@ -36,6 +39,7 @@ export const body: CourseBody = {
             head: ['Code', 'Signification'],
             rows: [['F', 'Contrôle total'], ['M', 'Modification (lecture, écriture, suppression)'], ['RX', 'Lecture et exécution'], ['(OI) / (CI)', 'Héritage vers les fichiers / vers les sous-dossiers'], ['/inheritance:r', 'Supprime les permissions héritées du parent']],
           },
+          { t: 'callout', kind: 'warn', text: 'Le même raisonnement vaut pour les **chemins des services et des tâches** : si un programme lancé en SYSTEM se trouve dans un dossier que les utilisateurs peuvent modifier, un utilisateur peut le remplacer et obtenir les droits du compte du service.' },
           { t: 'def', term: 'Refus explicite', text: 'Une ACE de refus l’emporte sur une autorisation de même niveau. Les refus se gèrent difficilement : on préfère ne pas accorder le droit plutôt que de le refuser ensuite.' },
         ],
       },
@@ -56,6 +60,8 @@ export const body: CourseBody = {
               ['Suppression du moteur PowerShell 2.0', 'Cette ancienne version ne connaît pas la journalisation des blocs de script : un attaquant peut l’invoquer pour échapper aux traces'],
             ],
           },
+          { t: 'def', term: 'AMSI', text: 'Interface d’analyse anti-programmes malveillants : PowerShell, Office et d’autres applications soumettent à Defender (ou à un autre antimalware) le contenu d’un script ou d’une macro **juste avant son exécution**, y compris après désobfuscation en mémoire. Elle compense l’absence de fichier d’une attaque exécutée en mémoire.' },
+          { t: 'p', text: 'Un attaquant peut lancer `powershell -version 2` : l’ancien moteur ignore à la fois l’AMSI et la journalisation des blocs de script. Retirer cette fonctionnalité Windows des postes ferme cette voie de rétrogradation.' },
           {
             t: 'example',
             title: 'Ce que révèle l’événement 4104',
@@ -71,6 +77,16 @@ export const body: CourseBody = {
         title: 'Protections intégrées : Defender, pare-feu, BitLocker',
         blocks: [
           { t: 'list', items: ['**Microsoft Defender Antivirus** avec la **protection contre les falsifications** activée : un processus, même administrateur, ne peut plus désactiver la protection en temps réel.', '**Règles de réduction de la surface d’attaque (ASR)** : par exemple, empêcher les applications Office de créer des processus enfants, bloquer le vol d’identifiants dans `lsass.exe`, bloquer le contenu exécutable reçu par courriel. Elles se déploient d’abord en mode **audit**, puis en mode **blocage**.', '**Pare-feu Windows** : trois profils (domaine, privé, public). Le profil public s’applique sur un réseau inconnu et doit refuser toutes les connexions entrantes.', '**BitLocker** : chiffrement du disque, clé protégée par le TPM.'] },
+          {
+            t: 'table',
+            head: ['Profil du pare-feu', 'S’applique à', 'Réglage attendu'],
+            rows: [
+              ['**Domaine**', 'Réseau où le poste a joint son contrôleur de domaine', 'Règles de l’entreprise, entrant filtré'],
+              ['**Privé**', 'Réseau jugé de confiance (domicile)', 'Entrant filtré, partage limité'],
+              ['**Public**', 'Réseau inconnu (café, hôtel, gare)', 'Aucune connexion entrante, partage et découverte désactivés'],
+            ],
+          },
+          { t: 'p', text: 'Par défaut, le pare-feu Windows bloque le trafic entrant non sollicité et **autorise le trafic sortant** : un filtrage sortant strict est possible, mais demande une politique de règles précise.' },
           { t: 'def', term: 'TPM (module de plateforme sécurisée)', text: 'Composant qui stocke des clés et ne les libère que si la chaîne de démarrage mesurée n’a pas été modifiée. Avec BitLocker en mode **TPM seul**, le disque se déverrouille automatiquement au démarrage ; en mode **TPM + code PIN**, il faut en plus un code, ce qui protège mieux un portable volé contre certaines attaques physiques.' },
           { t: 'callout', kind: 'tip', text: 'La clé de récupération BitLocker doit être sauvegardée dans l’annuaire (Active Directory ou Entra ID) **avant** le chiffrement : sans elle, une mise à jour du micrologiciel ou un changement de carte mère peut rendre les données irrécupérables.' },
         ],
@@ -95,8 +111,50 @@ export const body: CourseBody = {
               ['22', 'Requête DNS', 'Domaines contactés par chaque processus'],
             ],
           },
+          {
+            t: 'table',
+            caption: 'Événements Windows à connaître',
+            head: ['ID', 'Journal', 'Signification'],
+            rows: [
+              ['4624 / 4625', 'Sécurité', 'Ouverture de session réussie / échouée (le type précise interactive, réseau, RDP)'],
+              ['4688', 'Sécurité', 'Création de processus (avec la ligne de commande si l’audit est activé)'],
+              ['4698', 'Sécurité', 'Création d’une tâche planifiée'],
+              ['4104', 'PowerShell/Operational', 'Bloc de script exécuté, après désobfuscation'],
+              ['7045', 'Système', 'Installation d’un service'],
+              ['1102', 'Sécurité', 'Effacement du journal de sécurité'],
+            ],
+          },
           { t: 'def', term: 'Configuration Sysmon', text: 'Fichier XML qui indique quoi inclure et exclure. Sans filtrage, Sysmon produit un volume ingérable ; on part d’une configuration communautaire maintenue, puis on l’adapte à son parc.' },
           { t: 'callout', kind: 'key', text: 'Des journaux qui restent sur le poste ne servent qu’après coup, et peuvent être effacés (événement 1102 côté journal de sécurité). Ils doivent être collectés en continu (Windows Event Forwarding ou agent du SIEM).' },
+        ],
+      },
+      {
+        id: 'persistance',
+        title: 'Repérer la persistance sur un poste',
+        blocks: [
+          { t: 'p', text: 'Une fois dans un poste, l’attaquant veut y **rester** après un redémarrage ou une déconnexion : c’est la **persistance**. Les mécanismes sont peu nombreux et se contrôlent : savoir où chercher permet de nettoyer un poste sans que le problème revienne.' },
+          {
+            t: 'table',
+            head: ['Emplacement', 'Exemple', 'Comment le lister'],
+            rows: [
+              ['Clés `Run` et `RunOnce` du registre', 'Un programme lancé à chaque ouverture de session', '`reg query`, Autoruns, Sysmon 13'],
+              ['Dossier Démarrage', 'Un raccourci ou un script déposé dans le profil', 'Explorateur, Autoruns, Sysmon 11'],
+              ['Tâches planifiées', 'Une tâche SYSTEM lancée au démarrage ou toutes les heures', '`schtasks /query /fo LIST /v`, événement 4698'],
+              ['Services', 'Un service à démarrage automatique pointant vers un binaire étranger', '`sc qc nom`, événement 7045'],
+              ['Abonnements WMI permanents', 'Un déclencheur qui exécute du code sur un événement', 'Autoruns, Sysmon 19 à 21'],
+            ],
+          },
+          { t: 'code', lang: 'text', caption: 'Quelques vérifications de base', code: 'schtasks /query /fo LIST /v\nsc qc WinUpdateSvc\nreg query HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\nautorunsc -a * -s -h    :: tout, avec la signature et l’empreinte' },
+          { t: 'def', term: 'Autoruns', text: 'Outil Sysinternals qui recense **tous** les emplacements de démarrage automatique (registre, tâches, services, pilotes, WMI…), vérifie la signature des fichiers et en calcule l’empreinte. Sa version en ligne de commande (`autorunsc`) s’intègre à un script de collecte.' },
+          { t: 'def', term: 'Abonnement WMI permanent', text: 'Association (filtre, consommateur et liaison) enregistrée dans le **dépôt WMI** : un code s’exécute lorsqu’un événement se produit. Absente des clés `Run` et des tâches, elle échappe aux contrôles habituels : on la cherche avec Autoruns ou avec les événements Sysmon 19 à 21.' },
+          {
+            t: 'example',
+            title: 'Un service qui ne ressemble pas à ceux de Windows',
+            blocks: [
+              { t: 'p', text: 'Le service « WinUpdateSvc » démarre automatiquement `C:\\Users\\Public\\svc.exe` avec le compte SYSTEM. Les services légitimes résident dans `C:\\Windows` ou `C:\\Program Files`, protégés en écriture : un binaire dans un dossier modifiable par tous, sous un nom qui imite Windows, est l’indice d’une installation par un attaquant.' },
+            ],
+          },
+          { t: 'callout', kind: 'warn', title: 'Supprimer le fichier ne suffit pas', text: 'Si l’on supprime le programme mais pas la tâche, la clé ou le service qui le lance, la persistance reste : elle échoue en boucle ou relance un autre composant. On **désactive d’abord la persistance**, on collecte ce qui sert à l’analyse, puis on supprime, et on recherche les autres points d’entrée. En cas de doute sur l’étendue, on réinstalle le poste à partir d’un support sain.' },
         ],
       },
     ],
@@ -104,6 +162,7 @@ export const body: CourseBody = {
       'Projet de durcissement d’un parc : comptes standard, LAPS, règles ASR en audit puis en blocage, BitLocker avec sauvegarde de la clé dans l’annuaire.',
       'SOC : déployer Sysmon et la journalisation PowerShell pour pouvoir détecter les chaînes « Office → PowerShell → téléchargement ».',
       'Audit de poste : lister les dossiers modifiables par les utilisateurs et exécutés par des comptes privilégiés.',
+      'Chasse à la persistance après un incident : tâches planifiées, services, clés Run et abonnements WMI, avec Autoruns et Sysmon.',
     ],
     commonMistakes: [
       'Laisser les utilisateurs administrateurs locaux « pour éviter les tickets ».',
@@ -111,6 +170,8 @@ export const body: CourseBody = {
       'Activer les règles ASR directement en blocage sans phase d’audit, puis tout désactiver face aux faux positifs.',
       'Chiffrer avec BitLocker sans sauvegarder la clé de récupération.',
       'Déployer Sysmon sans configuration de filtrage, puis ne plus exploiter les journaux faute de pouvoir les lire.',
+      'Supprimer le fichier malveillant sans retirer la tâche, le service ou la clé qui le relance.',
+      'Laisser un programme lancé en SYSTEM dans un dossier modifiable par les utilisateurs.',
     ],
     bestPractices: [
       'Compte standard au quotidien, compte d’administration distinct, mot de passe d’administrateur local unique (LAPS).',
@@ -118,6 +179,8 @@ export const body: CourseBody = {
       'Journalisation des blocs de script PowerShell, mode de langage restreint via le contrôle des applications, suppression de PowerShell 2.0.',
       'Defender avec protection contre les falsifications, règles ASR, pare-feu actif sur les trois profils.',
       'Sysmon avec une configuration maintenue, audit 4688 avec ligne de commande, collecte centrale des journaux.',
+      'Inventaire régulier des points de démarrage (Autoruns) et alerte sur la création de tâches (4698) et de services (7045).',
+      'Retrait de PowerShell 2.0 et contrôle de l’exécution en mémoire par l’AMSI, associée à la journalisation 4104.',
     ],
     keyPoints: [
       'Le jeton d’accès porte l’identité ; l’UAC sépare jeton filtré et jeton complet.',
@@ -125,6 +188,7 @@ export const body: CourseBody = {
       'La stratégie d’exécution PowerShell n’est pas une barrière de sécurité ; l’événement 4104 montre le code réel.',
       'ASR, protection contre les falsifications, pare-feu par profil, BitLocker avec TPM : déjà présents, à activer.',
       'Sysmon : 1 processus, 3 réseau, 10 accès à un processus, 22 DNS.',
+      'Persistance : Run, dossier Démarrage, tâches, services, WMI ; on retire d’abord le mécanisme, puis le fichier.',
     ],
   },
   practice: [
@@ -145,29 +209,24 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une PME de 300 postes Windows 11 gérés par Active Directory : utilisateurs administrateurs locaux, même mot de passe d’administrateur partout, aucun chiffrement des portables, journaux non collectés.' }],
       steps: ['Proposer les mesures par ordre de priorité.', 'Pour chaque mesure, indiquer comment la déployer sans bloquer l’activité.', 'Proposer un indicateur qui montre que la mesure est en place.'],
     },
+    {
+      id: 'chasse-persistance',
+      kind: 'analysis',
+      title: 'Analyser les points de démarrage d’un poste suspect',
+      context: [
+        { t: 'p', text: 'Extrait d’un inventaire de démarrage (Autoruns) d’un poste qui se recontamine après nettoyage :' },
+        { t: 'code', lang: 'text', code: 'Tâche   \\Microsoft\\Windows\\UpdateCheck   SYSTEM    C:\\Users\\Public\\upd.exe     (créée à 03:12)\nRun     HKLM  OneDriveSync               Utilisateur  "C:\\Program Files\\Microsoft OneDrive\\OneDrive.exe" /background\nService WinUpdateSvc  démarrage auto      SYSTEM    C:\\Users\\Public\\svc.exe\nDémarrage (dossier) : vide' },
+      ],
+      steps: ['Identifier les entrées suspectes et celles qui semblent légitimes, en justifiant.', 'Indiquer dans quel ordre agir et ce qu’il faut collecter avant de supprimer.', 'Proposer les journaux à consulter et une détection durable.'],
+    },
   ],
-  questions: [
-    { id: 'wpo-q1', type: 'single', difficulty: 1, skills: ['d-win-acces'], prompt: 'Pourquoi un utilisateur ne devrait-il pas travailler au quotidien avec un compte administrateur local ?', options: [{ id: 'a', text: 'Un programme malveillant lancé par l’utilisateur peut obtenir les droits d’administration et désactiver les protections' }, { id: 'b', text: 'Le poste démarre plus lentement' }, { id: 'c', text: 'Les administrateurs ne peuvent pas utiliser Office' }, { id: 'd', text: 'Windows refuse de créer plus d’un administrateur' }] },
-    { id: 'wpo-q2', type: 'truefalse', difficulty: 2, skills: ['d-win-acces'], prompt: 'Microsoft considère l’UAC comme une frontière de sécurité : contourner l’UAC est donc toujours traité comme une vulnérabilité critique.' },
-    { id: 'wpo-q3', type: 'short', difficulty: 2, skills: ['d-win-acces'], prompt: 'Dans une sortie `icacls`, quelle abréviation désigne le contrôle total ?' },
-    { id: 'wpo-q4', type: 'multi', difficulty: 2, skills: ['d-win-acces'], prompt: 'Une tâche planifiée exécute en SYSTEM `C:\\Outils\\maj.ps1`, et `icacls C:\\Outils` montre `BUILTIN\\Utilisateurs:(OI)(CI)(M)`. Quelles affirmations sont exactes ?', options: [{ id: 'a', text: 'Tout utilisateur peut modifier le script et faire exécuter son code en SYSTEM' }, { id: 'b', text: '(OI)(CI) signifie que la permission s’hérite aux fichiers et sous-dossiers' }, { id: 'c', text: 'Le risque disparaît si le script est signé, même sans vérification de signature' }, { id: 'd', text: 'Il faut retirer la modification aux utilisateurs et ne leur laisser au plus que RX' }] },
-    { id: 'wpo-q5', type: 'single', difficulty: 2, skills: ['d-win-powershell'], prompt: 'Que vaut la stratégie d’exécution PowerShell `Restricted` face à un attaquant ?', options: [{ id: 'a', text: 'Peu de chose : elle se contourne par exemple avec `-ExecutionPolicy Bypass` ; elle sert surtout à éviter les exécutions accidentelles' }, { id: 'b', text: 'Elle bloque toute exécution de code PowerShell, y compris en ligne de commande' }, { id: 'c', text: 'Elle chiffre les scripts' }, { id: 'd', text: 'Elle n’autorise que les scripts signés par Microsoft, sans exception possible' }] },
-    { id: 'wpo-q6', type: 'short', difficulty: 2, skills: ['d-win-powershell'], prompt: 'Quel est l’identifiant de l’événement qui enregistre les blocs de script PowerShell exécutés ?', placeholder: 'numéro' },
-    { id: 'wpo-q7', type: 'truefalse', difficulty: 2, skills: ['d-win-powershell'], prompt: 'Une commande PowerShell encodée en Base64 (`-enc`) apparaît en clair dans l’événement de journalisation des blocs de script.' },
-    { id: 'wpo-q8', type: 'multi', difficulty: 3, skills: ['d-win-powershell'], prompt: 'Quelles mesures réduisent réellement l’usage malveillant de PowerShell ?', options: [{ id: 'a', text: 'Mode de langage restreint imposé par le contrôle des applications (App Control for Business ou AppLocker)' }, { id: 'b', text: 'Suppression du moteur PowerShell 2.0' }, { id: 'c', text: 'Renommer `powershell.exe`' }, { id: 'd', text: 'Journalisation des blocs de script collectée par le SIEM' }] },
-    { id: 'wpo-q9', type: 'single', difficulty: 2, skills: ['d-win-protections'], prompt: 'Que garantit la protection contre les falsifications de Microsoft Defender ?', options: [{ id: 'a', text: 'Les réglages de protection, comme la protection en temps réel, ne peuvent pas être désactivés par un processus local, même administrateur' }, { id: 'b', text: 'Les fichiers du poste sont chiffrés' }, { id: 'c', text: 'Les courriels sont signés' }, { id: 'd', text: 'Le pare-feu bloque tout le trafic sortant' }] },
-    { id: 'wpo-q10', type: 'truefalse', difficulty: 1, skills: ['d-win-protections'], prompt: 'Il est recommandé de déployer les règles de réduction de la surface d’attaque d’abord en mode audit, puis en mode blocage.' },
-    { id: 'wpo-q11', type: 'multi', difficulty: 2, skills: ['d-win-protections'], prompt: 'Concernant BitLocker, quelles affirmations sont exactes ?', options: [{ id: 'a', text: 'En mode TPM seul, le disque se déverrouille automatiquement si la chaîne de démarrage est intacte' }, { id: 'b', text: 'Le mode TPM + code PIN protège mieux un portable volé contre certaines attaques physiques' }, { id: 'c', text: 'La clé de récupération doit être sauvegardée avant le chiffrement, par exemple dans l’annuaire' }, { id: 'd', text: 'BitLocker protège les fichiers contre un malware qui s’exécute pendant que la session est ouverte' }] },
-    { id: 'wpo-q12', type: 'open', difficulty: 3, skills: ['d-win-protections', 'd-win-acces'], prompt: 'Un utilisateur nomade se connecte au Wi-Fi d’un hôtel. Expliquez quelles protections intégrées de Windows le protègent et comment elles doivent être réglées.' },
-    { id: 'wpo-q13', type: 'single', difficulty: 2, skills: ['d-win-journaux'], prompt: 'Quel événement Sysmon signale l’ouverture d’un autre processus, utile pour repérer un accès à `lsass.exe` ?', options: [{ id: 'a', text: 'ID 10 (accès à un processus)' }, { id: 'b', text: 'ID 22 (requête DNS)' }, { id: 'c', text: 'ID 11 (création de fichier)' }, { id: 'd', text: 'ID 3 (connexion réseau)' }] },
-    { id: 'wpo-q14', type: 'short', difficulty: 2, skills: ['d-win-journaux'], prompt: 'Quel identifiant d’événement Sysmon correspond à la création d’un processus ?', placeholder: 'numéro' },
-    { id: 'wpo-q15', type: 'open', difficulty: 3, skills: ['d-win-journaux', 'd-win-powershell'], prompt: 'Votre SOC ne voit rien de ce qui se passe sur les postes. Proposez une configuration de journalisation minimale mais utile, et expliquez ce qu’elle permettra de détecter.' },
-    { id: 'wpo-q16', type: 'single', difficulty: 2, skills: ['d-win-journaux'], prompt: 'Pourquoi faut-il une configuration de filtrage pour Sysmon ?', options: [{ id: 'a', text: 'Sans filtrage, le volume d’événements devient ingérable et noie les signaux utiles' }, { id: 'b', text: 'Sysmon refuse de démarrer sans fichier de configuration' }, { id: 'c', text: 'La configuration chiffre les événements' }, { id: 'd', text: 'Elle remplace l’antivirus' }] },
-  ],
+  questions,
   resources: [
     { title: 'About Execution Policies', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies' },
     { title: 'Attack surface reduction rules reference', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/defender-endpoint/attack-surface-reduction-rules-reference' },
     { title: 'Sysmon', source: 'Microsoft Sysinternals', url: 'https://learn.microsoft.com/sysinternals/downloads/sysmon' },
+    { title: 'Autoruns', source: 'Microsoft Sysinternals', url: 'https://learn.microsoft.com/sysinternals/downloads/autoruns' },
+    { title: 'Antimalware Scan Interface (AMSI)', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/windows/win32/amsi/antimalware-scan-interface-portal' },
     { title: 'BitLocker overview', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/windows/security/operating-system-security/data-protection/bitlocker/' },
     { title: 'Recommandations relatives à l’administration sécurisée des SI', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/recommandations-relatives-ladministration-securisee-des-si' },
   ],
