@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1636 |
+| Mots de leçon, médiane (FR) | 1644 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 34 |
+| Cours de moins de 1 500 mots (FR) | 30 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -26,7 +26,7 @@
 | `a-virtualisation-conteneurs` | A | 2 | 6 | 1639 | 1514 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 33 % | 5 |
 | `a-compilation-memoire-execution` | A | 3 | 6 | 1584 | 1430 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 26 % | 5 |
 | `a-isolation-confiance-plateforme` | A | 4 | 6 | 1734 | 1527 | 2 | 0 | 4 | 4 | 40 | U23 M5 VF6 C3 O3 | 21 % | 5 |
-| `b-osi-tcpip` | B | 1 | 5 | 1251 | 1170 | 2 | 0 | 4 | 4 | 40 | U21 C5 VF7 M5 O2 | 27 % | 5 |
+| `b-osi-tcpip` | B | 1 | 7 | 1644 | 1540 | 2 | 0 | 4 | 4 | 40 | U21 C5 VF7 M5 O2 | 27 % | 5 |
 | `b-ipv4-subnetting` | B | 2 | 6 | 1481 | 1364 | 3 | 1 | 4 | 3 | 40 | U21 C6 M4 VF6 O3 | 68 % | 5 |
 | `b-commutation-vlan-ipv6` | B | 2 | 5 | 1722 | 1525 | 2 | 0 | 5 | 5 | 40 | U23 VF7 C4 M4 O2 | 37 % | 5 |
 | `b-routage-dns-dhcp-nat` | B | 2 | 6 | 2331 | 2112 | 3 | 0 | 5 | 5 | 40 | U17 C6 VF8 M6 O3 | 100 % | 5 |
@@ -58,7 +58,7 @@
 | `h-pentest-methodologie` | H | 2 | 7 | 1485 | 1374 | 3 | 1 | 4 | 4 | 40 | U19 VF7 M5 C6 O3 | 100 % | 6 |
 | `h-execution-outils-equipes` | H | 3 | 7 | 2005 | 1825 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 O3 C4 | 100 % | 6 |
 | `h-pentest-avance` | H | 4 | 6 | 1868 | 1649 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `i-soc-initiation` | I | 1 | 6 | 1290 | 1161 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
+| `i-soc-initiation` | I | 1 | 8 | 1694 | 1535 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
 | `i-soc-detection` | I | 2 | 6 | 1766 | 1586 | 3 | 1 | 4 | 4 | 40 | U21 M6 C5 VF6 O2 | 100 % | 6 |
 | `i-threat-hunting` | I | 3 | 7 | 1817 | 1584 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `i-detection-avancee` | I | 4 | 6 | 1682 | 1489 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
@@ -82,12 +82,12 @@
 | `m-gouvernance-operationnelle` | M | 2 | 7 | 1675 | 1444 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `m-ebios-pratique` | M | 3 | 6 | 1432 | 1273 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `m-gouvernance-avancee` | M | 4 | 6 | 1607 | 1413 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
-| `n-ot-iot-initiation` | N | 1 | 6 | 1187 | 1014 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `n-ot-iot-initiation` | N | 1 | 8 | 1605 | 1379 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `n-ics-modbus` | N | 2 | 7 | 1875 | 1666 | 3 | 1 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 5 |
 | `n-iot-firmware` | N | 3 | 5 | 1277 | 1118 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `n-automobile-profinet` | N | 3 | 7 | 1747 | 1498 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 O2 C5 | 100 % | 6 |
 | `n-ot-securite-avancee` | N | 4 | 6 | 1517 | 1325 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
-| `o-identite-initiation` | O | 1 | 6 | 1252 | 1076 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `o-identite-initiation` | O | 1 | 8 | 1654 | 1414 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `o-acces-pratique` | O | 2 | 6 | 1383 | 1200 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `o-comptes-privileges-pam` | O | 3 | 7 | 1678 | 1434 | 3 | 0 | 4 | 4 | 40 | M6 U20 VF7 C5 O2 | 100 % | 6 |
 | `o-identite-mfa-oauth` | O | 3 | 6 | 1393 | 1204 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |

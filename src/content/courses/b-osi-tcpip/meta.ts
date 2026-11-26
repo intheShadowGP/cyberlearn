@@ -25,7 +25,7 @@ export const meta: CourseMeta = {
     { id: 'b-osi-secu', label: 'Attaques et défenses par couche', level: 1 },
     { id: 'b-osi-diag', label: 'Diagnostic couche par couche', level: 1 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

@@ -124,6 +124,46 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'In industry, you do not “cut everything” by reflex: you decide with those who know the process.' },
         ],
       },
+      {
+        id: 'niveaux-purdue',
+        title: "Reading how an industrial site is organized: the Purdue model levels",
+        blocks: [
+          { t: 'p', text: "To understand where to place a protection, you need to know **where each device sits**. The Purdue model, adopted in the IEC 62443 standard, arranges an industrial site in levels, from the physical process up to the enterprise information system." },
+          {
+            t: 'table',
+            caption: "Simplified Purdue model levels",
+            head: ["Level", "Content", "Example"],
+            rows: [
+              ["0", "Physical process: sensors and actuators", "Level probe, valve, motor"],
+              ["1", "Basic control", "Programmable logic controller (PLC)"],
+              ["2", "Local supervision", "Operator screen (HMI), area SCADA station"],
+              ["3", "Site operations", "Supervision and production data servers"],
+              ["3.5", "Industrial demilitarized zone (DMZ)", "Relay servers, gateways, remote-access bastion"],
+              ["4 and 5", "Business IT and enterprise", "Email, ERP, Internet access"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "The rule to remember: flows between business IT (levels 4 and 5) and the field (levels 0 to 3) go **through the DMZ**, never directly. The closer a device is to the process, the more isolated it must be and the more limited its access." },
+          { t: 'p', text: "This reading also helps reason about impact: a level 5 outage interrupts invoicing; a level 1 outage interrupts production and can have physical consequences." },
+        ],
+      },
+      {
+        id: 'camera-ip',
+        title: "Scenario: a connected camera in a workshop",
+        blocks: [
+          { t: 'p', text: "A maintenance manager installs an IP camera in a workshop, plugged into the production network “to go faster”. It works immediately. Yet this simple object combines the typical weaknesses of IoT." },
+          {
+            t: 'table',
+            head: ["Weakness", "Risk", "Simple measure"],
+            rows: [
+              ["Factory username and password kept", "Takeover by any scan: the Mirai botnet (2016) exploited precisely default credentials", "Change credentials at installation"],
+              ["Firmware never updated", "Known vulnerabilities can be exploited", "Schedule updates and follow vendor advisories"],
+              ["Internet access enabled by default", "Direct exposure of the device", "Disable remote access and unneeded port forwarding"],
+              ["Plugged into the production network", "An attacker can pivot to the PLCs", "Place it in a separate network (VLAN) with limited flows"],
+            ],
+          },
+          { t: 'list', items: ["**Inventory** the device: who owns it, where it is, which version it runs.", "**Isolate**: a network dedicated to connected objects, with no access to PLCs.", "**Harden**: credentials changed, unneeded services disabled.", "**Monitor**: alert if the object contacts an unusual destination."] },
+        ],
+      },
     ],
     useCases: [
       'Understand why operations teams refuse a security scan in the middle of production.',
@@ -131,6 +171,8 @@ export const body: CourseBody = {
       'React correctly to an unusual alarm or a suspicious USB stick.',
     ],
     commonMistakes: [
+      "Plugging a connected object directly into the production network without inventorying or separating it.",
+      "Assuming a device “that works” no longer needs tracking or updating.",
       'Applying IT practices (scan, restart) to OT without operations’ agreement.',
       'Leaving a permanent remote access for a supplier.',
       'Keeping the factory password of a connected object.',
@@ -145,6 +187,8 @@ export const body: CourseBody = {
       'Report quickly and decide the reactions with operations.',
     ],
     keyPoints: [
+      "Purdue model: from 0 (process) to 5 (enterprise), with a DMZ between the field and business IT.",
+      "A connected object is handled in four moves: inventory, isolate, harden, monitor.",
       'OT: safety of people and availability first.',
       'Historic protocols (Modbus) do not authenticate: security comes from architecture.',
       'A connected object is a computer: unique password, updates, no direct exposure.',

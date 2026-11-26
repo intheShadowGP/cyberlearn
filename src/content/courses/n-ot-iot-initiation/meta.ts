@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'n-ini-protection', label: 'Mesures de protection simples', level: 1 },
     { id: 'n-ini-reflexes', label: 'Bons réflexes face à une anomalie', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

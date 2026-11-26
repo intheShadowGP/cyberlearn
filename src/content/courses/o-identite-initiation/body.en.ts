@@ -124,6 +124,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Reporting quickly beats hiding a mistake: each minute saved limits what the attacker can do.' },
         ],
       },
+      {
+        id: 'choix-mfa',
+        title: "Which MFA method to choose?",
+        blocks: [
+          { t: 'p', text: "Not all two-factor methods are equal. They differ mainly in their **resistance to phishing**: an attacker who fools you on a fake site can often relay a code you type, but not a cryptographic proof bound to the real site." },
+          {
+            t: 'table',
+            caption: "Common methods, from the weakest to the strongest",
+            head: ["Method", "Strength", "Main weakness"],
+            rows: [
+              ["Code sent by SMS", "Simple, no app needed", "SIM swapping, interception, code relayed on a fake site"],
+              ["App-generated code (TOTP)", "Works offline, independent of the carrier", "Can be typed on a fake site and relayed in real time"],
+              ["Approval notification (push)", "Very convenient", "Fatigue: the attacker sends repeated requests until the user accepts"],
+              ["Security key or passkey (FIDO2)", "Proof bound to the legitimate site: **phishing-resistant**", "Losing the key: plan a backup key and a recovery procedure"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "A weak method is better **than no MFA at all**. Start by enabling whatever is available on your most important accounts, then move up in strength when the service allows it." },
+        ],
+      },
+      {
+        id: 'audit-comptes',
+        title: "Scenario: taking stock of your own accounts",
+        blocks: [
+          { t: 'p', text: "One well-spent hour beats a year of good intentions. Here is a five-step method to apply to your personal accounts, then your work accounts (within your organization’s rules)." },
+          { t: 'list', ordered: true, items: ["**List** the important accounts: main email, bank, administration, online storage, social networks.", "**Start with email**: it is what resets every other password. Long, unique password, MFA enabled.", "**Adopt a password manager** to have a different password per account without memorizing them.", "**Check access**: connected devices, open sessions, applications allowed to access the account; remove what you do not recognize.", "**Check recovery**: phone number and backup address up to date, backup codes printed or stored away from the device."] },
+          { t: 'callout', kind: 'warn', text: "If an account shows up in a data breach, change its password **and** that of any other account that shared the same one. Reuse turns a leak into a domino effect." },
+        ],
+      },
     ],
     useCases: [
       'Choose and memorize solid passwords with a manager, and enable MFA on your mailbox.',
@@ -131,6 +159,8 @@ export const body: CourseBody = {
       'React correctly when a validation notification arrives without you having signed in.',
     ],
     commonMistakes: [
+      "Protecting the bank with MFA but leaving the recovery email unprotected.",
+      "Approving a sign-in notification you did not trigger “to make it stop”.",
       'Reusing the same password on several services.',
       'Accepting a validation notification to make the requests stop.',
       'Sharing an account within a team.',
@@ -145,6 +175,8 @@ export const body: CourseBody = {
       'Quick reporting of any suspicious account.',
     ],
     keyPoints: [
+      "Email is the key to all other accounts: protect it first.",
+      "Security keys and passkeys resist phishing; SMS and push notifications are more fragile.",
       'Authentication proves who you are, authorization decides what you can do.',
       'A password must be long, unique and protected by a second factor.',
       'Security keys and passkeys resist phishing.',

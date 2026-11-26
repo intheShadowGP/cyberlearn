@@ -129,6 +129,37 @@ export const body: CourseBody = {
           { t: 'list', items: ['**Report** to management and the security officer rather than acting alone beyond your mission.', '**Do not take justice into your own hands**: we do not retaliate against the attacker.', '**Respect the privacy** of the people whose traces we read.'] },
         ],
       },
+      {
+        id: 'journal-force-brute',
+        title: "Reading a log: recognizing a brute-force attack",
+        blocks: [
+          { t: 'p', text: "An analyst reads logs every day. A classic example: the excerpt below from a Linux server exposed to the Internet. The addresses are reserved for documentation." },
+          { t: 'code', lang: "text", caption: "Excerpt of /var/log/auth.log", code: "Nov 26 02:14:07 srv sshd[2210]: Failed password for invalid user admin from 203.0.113.50 port 51122 ssh2\nNov 26 02:14:09 srv sshd[2212]: Failed password for invalid user test from 203.0.113.50 port 51130 ssh2\nNov 26 02:14:11 srv sshd[2214]: Failed password for root from 203.0.113.50 port 51138 ssh2\nNov 26 02:15:31 srv sshd[2250]: Accepted password for deploy from 203.0.113.50 port 51890 ssh2" },
+          { t: 'list', items: ["**Frequency**: three failures in five seconds, a pace no human can reach: a tool is automatically trying username and password pairs.", "**Usernames**: `invalid user admin` and `test` are account names that do not exist: the attacker is guessing.", "**Source**: a single address, `203.0.113.50`, to correlate with other logs.", "**Last line**: an `Accepted password` from the same address, after the failures, points to a **possible compromise** of the `deploy` account."] },
+          { t: 'code', lang: "bash", caption: "Counting failures per source address", code: "grep \"Failed password\" /var/log/auth.log | awk '{print $(NF-3)}' | sort | uniq -c | sort -rn | head" },
+          { t: 'callout', kind: 'tip', text: "On Windows, the same events are 4625 (failed logon) and 4624 (successful logon). A series of 4625 followed by a 4624 for the same account tells the same story." },
+        ],
+      },
+      {
+        id: 'qualifier-une-alerte',
+        title: "Qualifying an alert: true or false positive, and what to record",
+        blocks: [
+          { t: 'p', text: "An alert is not a certainty: it is a **hypothesis to verify**. The analyst’s job is to confirm or dismiss it, then leave a trail the next person can use." },
+          {
+            t: 'table',
+            head: ["Question", "Why it matters"],
+            rows: [
+              ["What exactly does the alert say, and which rule triggered it?", "Understand what was detected, and what was not"],
+              ["Who or what is concerned (account, machine, service) and how critical is it?", "The same alert is not equally urgent on a test workstation and on a domain controller"],
+              ["Is there a legitimate explanation (maintenance, planned test)?", "Dismiss a **false positive** without wasting time"],
+              ["Do other sources confirm it (other logs, EDR, firewall)?", "A single clue is fragile; several concordant ones are convincing"],
+              ["Should it be escalated?", "If doubt remains or impact is possible, hand over rather than decide alone"],
+            ],
+          },
+          { t: 'list', ordered: true, items: ["**Collect** the context: timestamp, sources, accounts, addresses.", "**Verify** by cross-checking with at least one other source.", "**Decide**: false positive (close with the reason), true positive (open an incident), doubt (escalate).", "**Record** in the ticket: finding, evidence consulted, decision and its reason, next action."] },
+          { t: 'callout', kind: 'key', text: "A clear ticket is written for **someone else at three in the morning**: it must let them understand what was done without calling you." },
+        ],
+      },
     ],
     useCases: [
       'L1 analyst: triage abnormal sign-in alerts every day.',
@@ -136,6 +167,8 @@ export const body: CourseBody = {
       'Head of a small department: know what to do in the first minutes of an incident.',
     ],
     commonMistakes: [
+      "Closing an alert as a “false positive” without recording the reason or the evidence consulted.",
+      "Relying on a single log without cross-checking a second source.",
       'Closing an alert without noting why.',
       'Immediately powering off a suspicious machine and losing the traces in memory.',
       'Believing that the absence of an alert proves there is no attack.',
@@ -150,6 +183,8 @@ export const body: CourseBody = {
       'Prepare procedures, contacts and offline backups in advance.',
     ],
     keyPoints: [
+      "An alert is a hypothesis: collect, verify, decide, record.",
+      "Repeated failures then a success from the same source: possible compromise to handle first.",
       'The SOC monitors, detects, qualifies and coordinates the response.',
       'A log answers when, where, who, from where and what.',
       'SIEM: collection and correlation; EDR: agent on the endpoint; SOAR: automation.',

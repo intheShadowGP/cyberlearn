@@ -132,6 +132,48 @@ export const body: CourseBody = {
           },
         ],
       },
+      {
+        id: 'commandes-couches',
+        title: "Basic commands: tying each tool to its layer",
+        blocks: [
+          { t: 'p', text: "A good diagnostic reflex is knowing **which layer** a command queries. When `ping` answers but the website will not open, the problem is no longer at the network level: you must move up to transport or application." },
+          {
+            t: 'table',
+            head: ["Command", "What it checks", "Main layer"],
+            rows: [
+              ["`ip addr` (Linux), `ipconfig` (Windows)", "IP address, mask, gateway of the machine", "Network (3)"],
+              ["`ip neigh` (Linux), `arp -a`", "IP-to-MAC address mappings on the local network", "Data link (2)"],
+              ["`ping`", "Reachability of a host (ICMP)", "Network (3)"],
+              ["`traceroute` (Linux), `tracert` (Windows)", "Path taken and routers crossed", "Network (3)"],
+              ["`nslookup`, `dig`", "Resolution of a name to an address (DNS)", "Application (7)"],
+              ["`ss -tn` (Linux), `netstat -an`", "Established TCP connections and listening ports", "Transport (4)"],
+              ["`curl -v https://example.org`", "TCP connection, TLS negotiation and HTTP response", "Transport to application (4 to 7)"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "A four-command diagnosis (bottom to top)", code: "ip addr                      # 1. do I have an address and a gateway?\nping -c 3 192.168.1.1        # 2. does the gateway answer?\nnslookup example.org         # 3. is the name resolved?\ncurl -v https://example.org  # 4. does the service answer?" },
+          { t: 'callout', kind: 'tip', text: "If step 2 succeeds and step 3 fails, the fault is on the **DNS** side, not the cable or the gateway. Climbing the layers one by one avoids looking in the wrong place." },
+        ],
+      },
+      {
+        id: 'lire-capture',
+        title: "Reading a capture: a TCP exchange in a few lines",
+        blocks: [
+          { t: 'p', text: "A packet analyzer such as `tcpdump` or Wireshark shows each packet with its **TCP flags**. Knowing how to read them lets you recognize a normal connection, a closed port or a scan." },
+          { t: 'code', lang: "text", caption: "Connection establishment (three-way handshake), documentation addresses", code: "10:02:01.001 IP 192.0.2.20.51514 > 203.0.113.10.443: Flags [S],  seq 100,          win 64240\n10:02:01.020 IP 203.0.113.10.443 > 192.0.2.20.51514: Flags [S.], seq 500, ack 101, win 65535\n10:02:01.020 IP 192.0.2.20.51514 > 203.0.113.10.443: Flags [.],  ack 501,          win 64240" },
+          {
+            t: 'table',
+            head: ["Flag shown", "Meaning", "Remember"],
+            rows: [
+              ["`[S]`", "SYN: request to open", "First packet of a connection"],
+              ["`[S.]`", "SYN and ACK: the server accepts", "The port is open and reachable"],
+              ["`[.]`", "ACK only: acknowledgment", "End of the handshake, then data exchange"],
+              ["`[F.]`", "FIN: orderly close", "Normal end of a session"],
+              ["`[R.]`", "RST: refusal or abrupt cut", "Closed port, or connection rejected"],
+            ],
+          },
+          { t: 'p', text: "In the example, the client (ephemeral port 51514) contacts port 443 of the server: `[S]`, then `[S.]` in reply, then `[.]`: the connection is established. If the answer to the `[S]` were an `[R.]`, the port would be **closed**; if no answer came back, a firewall would probably be **filtering** the traffic. Many `[S]` packets to many different ports from one source is the signature of a **port scan**." },
+        ],
+      },
     ],
     useCases: [
       'Analyzing an IDS alert: knowing that a “SYN flood” belongs to layer 4 immediately points to the right logs (firewall, load balancer).',
@@ -139,6 +181,8 @@ export const body: CourseBody = {
       'Troubleshooting: going up the layers (physical link? ARP? route? open port? application?) to locate an outage methodically.',
     ],
     commonMistakes: [
+      "Concluding “the network is down” because a page will not open, without separately testing the address, gateway, DNS then service.",
+      "Confusing a closed port (RST answer) with a filtered port (no answer).",
       'Confusing the MAC address (layer 2, local) with the IP address (layer 3, routable).',
       'Thinking that blocking ICMP “secures” a network: it also breaks MTU discovery and diagnostics, without stopping a determined attacker.',
       'Believing that an open port 443 necessarily means legitimate HTTPS traffic: any protocol can use it.',
@@ -151,6 +195,8 @@ export const body: CourseBody = {
       'Filter outbound as well as inbound: a compromised workstation must not be able to reach any port on the Internet.',
     ],
     keyPoints: [
+      "Diagnose bottom to top, tying each command to its layer.",
+      "TCP flags: S, S., . to open; F. to close; R. to refuse.",
       'OSI: 7 reference layers; TCP/IP: 4 layers used in practice.',
       'Frame / MAC (2), packet / IP (3), segment / port (4).',
       'TCP is connection-oriented (SYN, SYN-ACK, ACK); UDP is connectionless.',

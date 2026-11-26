@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'o-ini-federation', label: 'SSO et autorisations d’applications', level: 1 },
     { id: 'o-ini-reflexes', label: 'Bons réflexes face à un compte piraté', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

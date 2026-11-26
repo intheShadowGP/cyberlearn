@@ -132,6 +132,48 @@ export const body: CourseBody = {
           },
         ],
       },
+      {
+        id: 'commandes-couches',
+        title: "Commandes de base : rattacher chaque outil à sa couche",
+        blocks: [
+          { t: 'p', text: "Un bon réflexe de diagnostic consiste à savoir **quelle couche** une commande interroge. Quand `ping` répond mais que le site web ne s’ouvre pas, le problème n’est plus au niveau du réseau : il faut remonter vers le transport ou l’application." },
+          {
+            t: 'table',
+            head: ["Commande", "Ce qu’elle vérifie", "Couche principale"],
+            rows: [
+              ["`ip addr` (Linux), `ipconfig` (Windows)", "Adresse IP, masque, passerelle de la machine", "Réseau (3)"],
+              ["`ip neigh` (Linux), `arp -a`", "Correspondances adresse IP et adresse MAC du réseau local", "Liaison (2)"],
+              ["`ping`", "Joignabilité d’une machine (ICMP)", "Réseau (3)"],
+              ["`traceroute` (Linux), `tracert` (Windows)", "Chemin emprunté et routeurs traversés", "Réseau (3)"],
+              ["`nslookup`, `dig`", "Résolution d’un nom en adresse (DNS)", "Application (7)"],
+              ["`ss -tn` (Linux), `netstat -an`", "Connexions TCP établies et ports en écoute", "Transport (4)"],
+              ["`curl -v https://exemple.org`", "Connexion TCP, négociation TLS et réponse HTTP", "Transport à application (4 à 7)"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Un diagnostic en quatre commandes (de bas en haut)", code: "ip addr                      # 1. ai-je une adresse et une passerelle ?\nping -c 3 192.168.1.1        # 2. la passerelle répond-elle ?\nnslookup exemple.org         # 3. le nom est-il résolu ?\ncurl -v https://exemple.org  # 4. le service répond-il ?" },
+          { t: 'callout', kind: 'tip', text: "Si l’étape 2 réussit et que l’étape 3 échoue, la panne est du côté **DNS**, pas du câble ni de la passerelle. Remonter les couches une par une évite de chercher au mauvais endroit." },
+        ],
+      },
+      {
+        id: 'lire-capture',
+        title: "Lire une capture : un échange TCP en quelques lignes",
+        blocks: [
+          { t: 'p', text: "Un analyseur de paquets comme `tcpdump` ou Wireshark affiche chaque paquet avec ses **drapeaux TCP**. Savoir les lire permet de reconnaître une connexion normale, un port fermé ou un balayage." },
+          { t: 'code', lang: "text", caption: "Établissement d’une connexion (poignée de main en trois temps), adresses de documentation", code: "10:02:01.001 IP 192.0.2.20.51514 > 203.0.113.10.443: Flags [S],  seq 100,          win 64240\n10:02:01.020 IP 203.0.113.10.443 > 192.0.2.20.51514: Flags [S.], seq 500, ack 101, win 65535\n10:02:01.020 IP 192.0.2.20.51514 > 203.0.113.10.443: Flags [.],  ack 501,          win 64240" },
+          {
+            t: 'table',
+            head: ["Drapeau affiché", "Signification", "À retenir"],
+            rows: [
+              ["`[S]`", "SYN : demande d’ouverture", "Premier paquet d’une connexion"],
+              ["`[S.]`", "SYN et ACK : le serveur accepte", "Le port est ouvert et joignable"],
+              ["`[.]`", "ACK seul : accusé de réception", "Fin de la poignée de main, puis échanges de données"],
+              ["`[F.]`", "FIN : fermeture ordonnée", "Fin normale d’une session"],
+              ["`[R.]`", "RST : refus ou coupure brutale", "Port fermé, ou connexion rejetée"],
+            ],
+          },
+          { t: 'p', text: "Dans l’exemple, le client (port éphémère 51514) contacte le port 443 du serveur : `[S]`, puis `[S.]` en réponse, puis `[.]` : la connexion est établie. Si la réponse au `[S]` était un `[R.]`, le port serait **fermé** ; si aucune réponse ne revenait, un pare-feu **filtrerait** probablement le trafic. Un grand nombre de `[S]` vers de nombreux ports différents, venant d’une même source, est la signature d’un **balayage de ports**." },
+        ],
+      },
     ],
     useCases: [
       "Analyse d'une alerte IDS : savoir qu'un « SYN flood » relève de la couche 4 oriente immédiatement vers les bons journaux (pare-feu, équilibreur).",
@@ -139,6 +181,8 @@ export const body: CourseBody = {
       "Dépannage : remonter les couches (lien physique ? ARP ? route ? port ouvert ? application ?) pour localiser une panne méthodiquement.",
     ],
     commonMistakes: [
+      "Conclure que « le réseau est en panne » parce qu’une page ne s’ouvre pas, sans tester séparément l’adresse, la passerelle, le DNS puis le service.",
+      "Confondre un port fermé (réponse RST) et un port filtré (aucune réponse).",
       'Confondre adresse MAC (couche 2, locale) et adresse IP (couche 3, routable).',
       "Penser que bloquer ICMP « sécurise » un réseau : cela casse aussi la découverte de MTU et le diagnostic, sans arrêter un attaquant déterminé.",
       'Croire qu’un port 443 ouvert implique forcément du trafic HTTPS légitime : n’importe quel protocole peut l’utiliser.',
@@ -151,6 +195,8 @@ export const body: CourseBody = {
       'Filtrer en sortie aussi bien qu’en entrée : un poste compromis ne doit pas pouvoir joindre n’importe quel port sur Internet.',
     ],
     keyPoints: [
+      "Diagnostiquer de bas en haut, en rattachant chaque commande à sa couche.",
+      "Drapeaux TCP : S, S., . pour ouvrir ; F. pour fermer ; R. pour refuser.",
       'OSI : 7 couches de référence ; TCP/IP : 4 couches utilisées en pratique.',
       'Trame / MAC (2), paquet / IP (3), segment / port (4).',
       'TCP est orienté connexion (SYN, SYN-ACK, ACK) ; UDP est sans connexion.',

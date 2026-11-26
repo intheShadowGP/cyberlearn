@@ -124,6 +124,46 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'En industrie, on ne « coupe pas tout » par réflexe : on décide avec ceux qui connaissent le procédé.' },
         ],
       },
+      {
+        id: 'niveaux-purdue',
+        title: "Lire l’organisation d’un site industriel : les niveaux du modèle de Purdue",
+        blocks: [
+          { t: 'p', text: "Pour comprendre où placer une protection, il faut savoir **où se trouve chaque équipement**. Le modèle de Purdue, repris dans la norme IEC 62443, range un site industriel en niveaux, du procédé physique jusqu’au système d’information de l’entreprise." },
+          {
+            t: 'table',
+            caption: "Niveaux simplifiés du modèle de Purdue",
+            head: ["Niveau", "Contenu", "Exemple"],
+            rows: [
+              ["0", "Procédé physique : capteurs et actionneurs", "Sonde de niveau, vanne, moteur"],
+              ["1", "Contrôle de base", "Automate programmable (PLC)"],
+              ["2", "Supervision locale", "Écran opérateur (IHM), poste SCADA de zone"],
+              ["3", "Exploitation du site", "Serveurs de supervision et de données de production"],
+              ["3.5", "Zone démilitarisée (DMZ) industrielle", "Serveurs relais, passerelles, bastion d’accès distant"],
+              ["4 et 5", "Informatique de gestion et entreprise", "Messagerie, ERP, accès Internet"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "La règle à retenir : les flux entre l’informatique de gestion (niveaux 4 et 5) et le terrain (niveaux 0 à 3) passent **par la DMZ**, jamais en direct. Plus un équipement est proche du procédé, plus il doit être isolé et ses accès limités." },
+          { t: 'p', text: "Cette lecture sert aussi à raisonner sur l’impact : une panne au niveau 5 interrompt la facturation ; une panne au niveau 1 interrompt la production et peut avoir des conséquences physiques." },
+        ],
+      },
+      {
+        id: 'camera-ip',
+        title: "Mise en situation : une caméra connectée dans un atelier",
+        blocks: [
+          { t: 'p', text: "Un responsable de maintenance installe une caméra IP dans un atelier, branchée sur le réseau de production « pour aller plus vite ». Elle fonctionne immédiatement. Pourtant, ce simple objet cumule les faiblesses typiques de l’IoT." },
+          {
+            t: 'table',
+            head: ["Faiblesse", "Risque", "Mesure simple"],
+            rows: [
+              ["Identifiant et mot de passe d’usine conservés", "Prise de contrôle par n’importe quel scan : le botnet Mirai (2016) exploitait précisément des identifiants par défaut", "Changer les identifiants dès l’installation"],
+              ["Micrologiciel jamais mis à jour", "Vulnérabilités connues exploitables", "Planifier les mises à jour et suivre les avis du constructeur"],
+              ["Accès depuis Internet activé par défaut", "Exposition directe de l’équipement", "Désactiver l’accès à distance et les redirections de ports inutiles"],
+              ["Branchée sur le réseau de production", "Rebond d’un attaquant vers les automates", "La placer dans un réseau séparé (VLAN) avec des flux limités"],
+            ],
+          },
+          { t: 'list', items: ["**Inventorier** l’équipement : qui en est responsable, où il se trouve, quelle version il exécute.", "**Isoler** : un réseau dédié aux objets connectés, sans accès aux automates.", "**Durcir** : identifiants changés, services inutiles désactivés.", "**Surveiller** : alerte si l’objet contacte une destination inhabituelle."] },
+        ],
+      },
     ],
     useCases: [
       'Comprendre pourquoi les équipes d’exploitation refusent un scan de sécurité en pleine production.',
@@ -131,6 +171,8 @@ export const body: CourseBody = {
       'Réagir correctement face à une alarme inhabituelle ou à une clé USB suspecte.',
     ],
     commonMistakes: [
+      "Brancher un objet connecté directement sur le réseau de production sans l’inventorier ni le séparer.",
+      "Considérer qu’un équipement « qui fonctionne » n’a plus besoin d’être suivi ou mis à jour.",
       'Appliquer à l’OT des pratiques IT (scan, redémarrage) sans l’accord de l’exploitation.',
       'Laisser un accès à distance permanent pour un fournisseur.',
       'Garder le mot de passe d’usine d’un objet connecté.',
@@ -145,6 +187,8 @@ export const body: CourseBody = {
       'Signaler vite et décider des réactions avec l’exploitation.',
     ],
     keyPoints: [
+      "Modèle de Purdue : de 0 (procédé) à 5 (entreprise), avec une DMZ entre le terrain et la gestion.",
+      "Un objet connecté se traite en quatre gestes : inventorier, isoler, durcir, surveiller.",
       'OT : sûreté des personnes et disponibilité d’abord.',
       'Les protocoles historiques (Modbus) n’authentifient pas : la sécurité vient de l’architecture.',
       'Un objet connecté est un ordinateur : mot de passe unique, mises à jour, pas d’exposition directe.',

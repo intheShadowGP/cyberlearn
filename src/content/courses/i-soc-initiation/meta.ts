@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'i-ini-incident', label: 'Phases et réflexes d’un incident', level: 1 },
     { id: 'i-ini-cadre', label: 'Cadre, confidentialité et éthique', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

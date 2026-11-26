@@ -124,6 +124,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Signaler rapidement vaut mieux que cacher une erreur : chaque minute gagnée limite ce que l’attaquant peut faire.' },
         ],
       },
+      {
+        id: 'choix-mfa',
+        title: "Quelle méthode de MFA choisir ?",
+        blocks: [
+          { t: 'p', text: "Toutes les méthodes de double authentification ne se valent pas. Elles se distinguent surtout par leur **résistance à l’hameçonnage** : un attaquant qui vous trompe sur un faux site peut souvent relayer un code que vous tapez, mais pas une preuve cryptographique liée au vrai site." },
+          {
+            t: 'table',
+            caption: "Méthodes courantes, de la plus fragile à la plus robuste",
+            head: ["Méthode", "Atout", "Faiblesse principale"],
+            rows: [
+              ["Code reçu par SMS", "Simple, sans application", "Détournement de carte SIM, interception, code relayé sur un faux site"],
+              ["Code d’une application (TOTP)", "Fonctionne hors ligne, indépendant de l’opérateur", "Peut être saisi sur un faux site et relayé en temps réel"],
+              ["Notification à valider (push)", "Très pratique", "Fatigue : l’attaquant multiplie les demandes jusqu’à ce que l’utilisateur accepte"],
+              ["Clé de sécurité ou clé d’accès (FIDO2, passkey)", "Preuve liée au site légitime : **résistante à l’hameçonnage**", "Perte de la clé : prévoir une clé de secours et une procédure de récupération"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Une méthode faible vaut mieux **que pas de MFA du tout**. Commencez par activer ce qui est disponible sur vos comptes les plus importants, puis montez en robustesse quand le service le permet." },
+        ],
+      },
+      {
+        id: 'audit-comptes',
+        title: "Mise en situation : faire le point sur ses propres comptes",
+        blocks: [
+          { t: 'p', text: "Une heure bien employée vaut mieux qu’un an de bonnes intentions. Voici une méthode en cinq étapes, à appliquer à vos comptes personnels puis professionnels (dans le respect des règles de votre organisation)." },
+          { t: 'list', ordered: true, items: ["**Lister** les comptes importants : courriel principal, banque, administration, stockage en ligne, réseaux sociaux.", "**Commencer par le courriel** : c’est lui qui sert à réinitialiser tous les autres mots de passe. Mot de passe long et unique, MFA activée.", "**Adopter un gestionnaire de mots de passe** pour avoir un mot de passe différent par compte sans avoir à les retenir.", "**Vérifier les accès** : appareils connectés, sessions ouvertes, applications autorisées à accéder au compte ; supprimer ce que vous ne reconnaissez pas.", "**Contrôler la récupération** : numéro de téléphone et adresse de secours à jour, codes de secours imprimés ou rangés hors de l’appareil."] },
+          { t: 'callout', kind: 'warn', text: "Si un compte apparaît dans une fuite de données, changez son mot de passe **et** celui de tout autre compte qui en partageait un identique. La réutilisation transforme une fuite en effet domino." },
+        ],
+      },
     ],
     useCases: [
       'Choisir et mémoriser des mots de passe solides avec un gestionnaire, et activer la MFA sur sa messagerie.',
@@ -131,6 +159,8 @@ export const body: CourseBody = {
       'Réagir correctement quand une notification de validation arrive sans qu’on se soit connecté.',
     ],
     commonMistakes: [
+      "Protéger la banque par MFA mais laisser le courriel de récupération sans protection.",
+      "Accepter une notification de connexion que l’on n’a pas déclenchée « pour qu’elle s’arrête ».",
       'Réutiliser le même mot de passe sur plusieurs services.',
       'Accepter une notification de validation pour faire cesser les demandes.',
       'Partager un compte au sein d’une équipe.',
@@ -145,6 +175,8 @@ export const body: CourseBody = {
       'Signalement rapide de tout compte suspect.',
     ],
     keyPoints: [
+      "Le courriel est la clé de tous les autres comptes : le protéger en premier.",
+      "Les clés de sécurité et clés d’accès résistent à l’hameçonnage ; SMS et notifications sont plus fragiles.",
       'L’authentification prouve qui l’on est, l’autorisation décide de ce que l’on peut faire.',
       'Un mot de passe doit être long, unique et protégé par un second facteur.',
       'Les clés de sécurité et passkeys résistent à l’hameçonnage.',

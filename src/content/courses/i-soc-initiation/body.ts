@@ -129,6 +129,37 @@ export const body: CourseBody = {
           { t: 'list', items: ['**Signaler** à la hiérarchie et au responsable de la sécurité plutôt que d’agir seul au-delà de sa mission.', '**Ne pas se faire justice** : on ne riposte pas contre l’attaquant.', '**Respecter la vie privée** des personnes dont on lit les traces.'] },
         ],
       },
+      {
+        id: 'journal-force-brute',
+        title: "Lire un journal : reconnaître une attaque par force brute",
+        blocks: [
+          { t: 'p', text: "Un analyste lit des journaux tous les jours. Un exemple classique : l’extrait ci-dessous d’un serveur Linux exposé à Internet. Les adresses sont des adresses réservées à la documentation." },
+          { t: 'code', lang: "text", caption: "Extrait de /var/log/auth.log", code: "Nov 26 02:14:07 srv sshd[2210]: Failed password for invalid user admin from 203.0.113.50 port 51122 ssh2\nNov 26 02:14:09 srv sshd[2212]: Failed password for invalid user test from 203.0.113.50 port 51130 ssh2\nNov 26 02:14:11 srv sshd[2214]: Failed password for root from 203.0.113.50 port 51138 ssh2\nNov 26 02:15:31 srv sshd[2250]: Accepted password for deploy from 203.0.113.50 port 51890 ssh2" },
+          { t: 'list', items: ["**Fréquence** : trois échecs en cinq secondes, cadence humainement impossible : un outil automatique essaie des couples identifiant et mot de passe.", "**Identifiants** : `invalid user admin` et `test` sont des noms de comptes qui n’existent pas : l’attaquant devine.", "**Source** : une seule adresse, `203.0.113.50`, à rapprocher d’autres journaux.", "**Dernière ligne** : un `Accepted password` depuis la même adresse, après les échecs, indique une **possible compromission** du compte `deploy`."] },
+          { t: 'code', lang: "bash", caption: "Compter les échecs par adresse source", code: "grep \"Failed password\" /var/log/auth.log | awk '{print $(NF-3)}' | sort | uniq -c | sort -rn | head" },
+          { t: 'callout', kind: 'tip', text: "Sous Windows, les mêmes événements s’appellent 4625 (échec d’ouverture de session) et 4624 (ouverture réussie). Une série de 4625 suivie d’un 4624 pour le même compte raconte la même histoire." },
+        ],
+      },
+      {
+        id: 'qualifier-une-alerte',
+        title: "Qualifier une alerte : vrai ou faux positif, et que consigner",
+        blocks: [
+          { t: 'p', text: "Une alerte n’est pas une certitude : c’est une **hypothèse à vérifier**. Le travail de l’analyste consiste à la confirmer ou l’écarter, puis à laisser une trace exploitable par la personne suivante." },
+          {
+            t: 'table',
+            head: ["Question", "Pourquoi elle compte"],
+            rows: [
+              ["Que dit exactement l’alerte, et quelle règle l’a déclenchée ?", "Comprendre ce qui a été détecté, et ce qui ne l’a pas été"],
+              ["Qui ou quoi est concerné (compte, machine, service) et quelle est sa criticité ?", "Une même alerte n’a pas la même urgence sur un poste de test et sur un contrôleur de domaine"],
+              ["Y a-t-il une explication légitime (maintenance, test planifié) ?", "Écarter un **faux positif** sans perdre de temps"],
+              ["D’autres sources confirment-elles (autres journaux, EDR, pare-feu) ?", "Un seul indice est fragile ; plusieurs, concordants, sont convaincants"],
+              ["Faut-il escalader ?", "Si le doute persiste ou si l’impact est possible, passer la main plutôt que décider seul"],
+            ],
+          },
+          { t: 'list', ordered: true, items: ["**Collecter** le contexte : horodatage, sources, comptes, adresses.", "**Vérifier** par recoupement avec au moins une autre source.", "**Décider** : faux positif (clôturer avec la raison), vrai positif (ouvrir un incident), doute (escalader).", "**Consigner** dans le ticket : constat, preuves consultées, décision et son motif, prochaine action."] },
+          { t: 'callout', kind: 'key', text: "Un ticket clair est écrit pour **quelqu’un d’autre à trois heures du matin** : il doit permettre de comprendre ce qui a été fait sans vous appeler." },
+        ],
+      },
     ],
     useCases: [
       'Analyste N1 : trier chaque jour les alertes de connexion anormale.',
@@ -136,6 +167,8 @@ export const body: CourseBody = {
       'Responsable d’un petit service : savoir quoi faire dans les premières minutes d’un incident.',
     ],
     commonMistakes: [
+      "Clôturer une alerte comme « faux positif » sans consigner la raison ni les preuves consultées.",
+      "Se fier à un seul journal sans recouper avec une seconde source.",
       'Clore une alerte sans noter pourquoi.',
       'Éteindre immédiatement une machine suspecte et perdre les traces en mémoire.',
       'Croire qu’une absence d’alerte prouve qu’il n’y a pas d’attaque.',
@@ -150,6 +183,8 @@ export const body: CourseBody = {
       'Préparer à l’avance procédures, contacts et sauvegardes hors ligne.',
     ],
     keyPoints: [
+      "Une alerte est une hypothèse : collecter, vérifier, décider, consigner.",
+      "Échecs répétés puis succès depuis la même source : compromission possible à traiter en priorité.",
       'Le SOC surveille, détecte, qualifie et coordonne la réponse.',
       'Un journal répond à quand, où, qui, d’où et quoi.',
       'SIEM : collecte et corrélation ; EDR : agent sur le poste ; SOAR : automatisation.',
