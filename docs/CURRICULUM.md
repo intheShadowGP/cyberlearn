@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 25 |
+| Laboratoires | 29 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -146,6 +146,7 @@
 | Chasse à la persistance sur un poste Windows (Sysmon) (`windows-persistence-lab`) | windows | 2 | a-systemes-fondamentaux, k-malware-analyse |
 | Chasse dans auth.log : force brute SSH (`log-hunt-lab`) | soc | 2 | i-soc-detection |
 | Chronologie multi-sources d’une infection (`timeline-lab`) | forensic | 2 | j-forensique-principes |
+| Construire un plan de révision à partir d’un diagnostic (`revision-plan-lab`) | grc | 2 | r-preparation-fondamentaux, r-preparation-pratique |
 | Évaluateur de politiques IAM (`iam-policy-lab`) | cloud | 2 | l-cloud-iam |
 | Évaluer un assistant d’IA avec un jeu de tests (`assistant-eval-lab`) | ia | 2 | q-ia-pratique, q-securite-llm |
 | Injection SQL sur une page de connexion (simulation) (`sqli-lab`) | web | 2 | f-injections-xss |
@@ -155,11 +156,14 @@
 | Triage statique d’un échantillon suspect (`static-triage-lab`) | malware | 2 | k-malware-analyse, k-malware-initiation |
 | Analyse d’une configuration TLS et d’une chaîne de certificats (`tls-inspection-lab`) | crypto | 3 | e-chiffrement-tls-pki |
 | Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
+| Prioriser les constats d’un test d’intrusion (`findings-prioritization-lab`) | web | 3 | h-pentest-methodologie |
+| Revoir un manifeste Kubernetes avant déploiement (`k8s-manifest-lab`) | cloud | 3 | l-conteneurs-kubernetes, l-devsecops-pipeline |
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
 | Sécurité d’un flux OAuth 2.0 : configuration d’un client (`oauth-flow-lab`) | web | 3 | o-identite-mfa-oauth |
 | Trier les plantages d’une campagne de fuzzing (`crash-triage-lab`) | prog | 3 | p-fuzzing-recherche, g-vulnerabilites-memoire |
 | Auditer une politique d’accès Zero Trust (`zero-trust-policy-lab`) | cloud | 4 | o-identite-avancee, o-identite-mfa-oauth |
 | Ingénierie de détection : composer une règle sans faux positifs (expert) (`detection-engineering-lab`) | soc | 4 | i-threat-hunting, i-soc-detection |
+| Trier les vulnérabilités d’un inventaire de composants (SBOM) (`sbom-triage-lab`) | prog | 4 | l-devsecops-pipeline |
 
 ## Parcours
 
