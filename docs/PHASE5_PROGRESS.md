@@ -59,15 +59,15 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | J Forensique | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | K Malware | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | L Cloud | ✔ (nouveau) | ✔ | ✔ ×3 | ✔ (nouveau) |
-| M Gouvernance | ➕ | ✔ ×2 | ➕ | ➕ |
+| M Gouvernance | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) | ✔ (nouveau) |
 | N OT / IoT | ➕ | ✔ | ✔ ×2 | ➕ |
 | O Identité | ➕ | ➕ | ✔ ×2 | ➕ |
 | P Recherche | ➕ | ➕ | ➕ | ✔ ×2 |
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (37 migrés) + 40 cours à créer (23 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 16 cours à créer et 8 cours existants à migrer.
+Total : 45 cours existants (37 migrés) + 40 cours à créer (25 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 14 cours à créer et 8 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -133,3 +133,5 @@ Total : 45 cours existants (37 migrés) + 40 cours à créer (23 créés) = 85 c
 | `m-risques-conformite` | ✔ 40 | ✔ 40 | ✔ |
 | `m-gouvernance-operationnelle` | ✔ 40 | ✔ 40 | ✔ |
 | `m-gouvernance-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
+| `m-gouvernance-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
+| `m-ebios-pratique` (nouveau, niveau 3) | ✔ 40 | ✔ 40 | ✔ |
