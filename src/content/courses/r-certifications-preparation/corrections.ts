@@ -87,7 +87,12 @@ export const corrections: CourseCorrections = {
     "cert-q10": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le rappel actif (se tester) et l’espacement des révisions sont parmi les techniques d’apprentissage les mieux étayées par la recherche en sciences cognitives."
+      "explanation": "Le rappel actif (se tester) et l’espacement des révisions sont parmi les techniques d’apprentissage les mieux étayées par la recherche en sciences cognitives.",
+      "whyWrong": {
+        "b": "Relire des notes la veille favorise une familiarité trompeuse, pas la mémorisation durable.",
+        "d": "Surligner puis relire une fois est une méthode passive, peu efficace.",
+        "a": "Regarder des vidéos accélérées est passif et ne mobilise pas le rappel."
+      }
     },
     "cert-q11": {
       "type": "truefalse",
@@ -147,22 +152,42 @@ export const corrections: CourseCorrections = {
     "cert-q17": {
       "type": "single",
       "correct": "b",
-      "explanation": "L’OSCP (Offensive Security Certified Professional) est délivrée par OffSec, à l’issue du cours PEN-200 et d’un examen pratique."
+      "explanation": "L’OSCP (Offensive Security Certified Professional) est délivrée par OffSec, à l’issue du cours PEN-200 et d’un examen pratique.",
+      "whyWrong": {
+        "a": "L’ISC2 délivre notamment le CISSP.",
+        "d": "CompTIA délivre notamment Security+.",
+        "c": "Cisco délivre notamment le CCNA."
+      }
     },
     "cert-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "Le CISSP est délivré par l’ISC2, qui propose aussi ISC2 CC en entrée de gamme. L’ISACA délivre en revanche le CISM et le CISA."
+      "explanation": "Le CISSP est délivré par l’ISC2, qui propose aussi ISC2 CC en entrée de gamme. L’ISACA délivre en revanche le CISM et le CISA.",
+      "whyWrong": {
+        "b": "L’ISACA délivre le CISM et le CISA, pas le CISSP.",
+        "d": "CompTIA délivre notamment Security+.",
+        "c": "EC-Council délivre notamment le CEH."
+      }
     },
     "cert-q19": {
       "type": "single",
       "correct": "d",
-      "explanation": "Un examen pratique (OSCP, PNPT) place le candidat dans un environnement à compromettre ou analyser et se conclut par un rapport. Un QCM (Security+, CISSP, ISC2 CC) valide l’étendue des connaissances. Les deux sont complémentaires."
+      "explanation": "Un examen pratique (OSCP, PNPT) place le candidat dans un environnement à compromettre ou analyser et se conclut par un rapport. Un QCM (Security+, CISSP, ISC2 CC) valide l’étendue des connaissances. Les deux sont complémentaires.",
+      "whyWrong": {
+        "b": "C’est l’inverse : le QCM n’est pas un examen de gestes.",
+        "a": "Les deux formats ne valident pas les mêmes compétences.",
+        "c": "Le rapport écrit est en général demandé aux examens pratiques, pas aux QCM."
+      }
     },
     "cert-q20": {
       "type": "single",
       "correct": "c",
-      "explanation": "Les certifications neutres (CompTIA, ISC2…) valident des connaissances applicables quel que soit le produit. Les certifications d’éditeur ou de constructeur (Cisco CCNA, par exemple) valident la maîtrise d’un écosystème précis."
+      "explanation": "Les certifications neutres (CompTIA, ISC2…) valident des connaissances applicables quel que soit le produit. Les certifications d’éditeur ou de constructeur (Cisco CCNA, par exemple) valident la maîtrise d’un écosystème précis.",
+      "whyWrong": {
+        "d": "La gratuité n’a rien à voir avec la neutralité vis-à-vis des éditeurs.",
+        "a": "La neutralité ne dit rien de la date d’expiration.",
+        "b": "La neutralité ne garantit pas une reconnaissance universelle."
+      }
     },
     "cert-q21": {
       "type": "truefalse",
@@ -172,12 +197,22 @@ export const corrections: CourseCorrections = {
     "cert-q22": {
       "type": "single",
       "correct": "b",
-      "explanation": "Le CISM, délivré par l’ISACA, s’adresse aux responsables de la sécurité de l’information. eJPT est une certification pratique d’entrée en pentest, Network+ concerne les réseaux et GCIA l’analyse d’intrusions."
+      "explanation": "Le CISM, délivré par l’ISACA, s’adresse aux responsables de la sécurité de l’information. eJPT est une certification pratique d’entrée en pentest, Network+ concerne les réseaux et GCIA l’analyse d’intrusions.",
+      "whyWrong": {
+        "a": "L’eJPT est une certification pratique d’entrée en pentest.",
+        "d": "Network+ concerne les réseaux.",
+        "c": "GCIA concerne l’analyse d’intrusion, pas le management."
+      }
     },
     "cert-q23": {
       "type": "single",
       "correct": "c",
-      "explanation": "GIAC (Global Information Assurance Certification) regroupe de nombreuses certifications spécialisées, notamment défensives : GCIH (gestion d’incidents) et GCIA (analyse d’intrusions)."
+      "explanation": "GIAC (Global Information Assurance Certification) regroupe de nombreuses certifications spécialisées, notamment défensives : GCIH (gestion d’incidents) et GCIA (analyse d’intrusions).",
+      "whyWrong": {
+        "d": "L’ISACA délivre notamment le CISM et le CISA.",
+        "b": "CompTIA délivre notamment Security+.",
+        "a": "Cisco délivre notamment le CCNA."
+      }
     },
     "cert-q24": {
       "type": "multi",
@@ -195,12 +230,22 @@ export const corrections: CourseCorrections = {
     "cert-q25": {
       "type": "single",
       "correct": "a",
-      "explanation": "Un poste d’analyste SOC se construit sur des bases réseau et système solides, une certification fondamentale puis une certification de détection. L’OSCP est offensif et le CISSP exige de l’expérience."
+      "explanation": "Un poste d’analyste SOC se construit sur des bases réseau et système solides, une certification fondamentale puis une certification de détection. L’OSCP est offensif et le CISSP exige de l’expérience.",
+      "whyWrong": {
+        "c": "Commencer par l’OSCP sans les bases est un parcours peu cohérent pour un poste de SOC.",
+        "d": "Le CISSP suppose de l’expérience et vise plutôt la gouvernance.",
+        "b": "Sans certification ni bases, le plan reste trop étroit."
+      }
     },
     "cert-q26": {
       "type": "single",
       "correct": "d",
-      "explanation": "Le pentest applicatif s’appuie sur la sécurité web, la sécurité du code et la méthodologie de pentest (modules F, G, H), avec une progression pratique eJPT puis OSCP."
+      "explanation": "Le pentest applicatif s’appuie sur la sécurité web, la sécurité du code et la méthodologie de pentest (modules F, G, H), avec une progression pratique eJPT puis OSCP.",
+      "whyWrong": {
+        "a": "La gouvernance et la conformité ne préparent pas au pentest applicatif.",
+        "c": "Les réseaux et le routage sont utiles mais ne ciblent pas le pentest applicatif.",
+        "b": "La forensique et le malware visent d’autres métiers."
+      }
     },
     "cert-q27": {
       "type": "truefalse",
@@ -210,7 +255,12 @@ export const corrections: CourseCorrections = {
     "cert-q28": {
       "type": "single",
       "correct": "a",
-      "explanation": "La régularité compte plus que l’intensité : 5 à 8 heures par semaine valent mieux que des sessions marathon irrégulières, qui produisent une mémorisation fragile."
+      "explanation": "La régularité compte plus que l’intensité : 5 à 8 heures par semaine valent mieux que des sessions marathon irrégulières, qui produisent une mémorisation fragile.",
+      "whyWrong": {
+        "c": "Un marathon de dernière minute favorise l’oubli.",
+        "d": "Trente minutes par mois est trop faible pour progresser.",
+        "b": "Sans planification, on laisse la préparation au hasard."
+      }
     },
     "cert-q29": {
       "type": "short",
@@ -231,12 +281,22 @@ export const corrections: CourseCorrections = {
     "cert-q31": {
       "type": "single",
       "correct": "b",
-      "explanation": "Un examen blanc en conditions réelles révèle les lacunes et entraîne à gérer le temps. Il ne reproduit pas les questions officielles et ne délivre aucune attestation."
+      "explanation": "Un examen blanc en conditions réelles révèle les lacunes et entraîne à gérer le temps. Il ne reproduit pas les questions officielles et ne délivre aucune attestation.",
+      "whyWrong": {
+        "d": "Un examen blanc ne donne pas les questions de l’examen officiel.",
+        "a": "Il ne dispense pas de réviser ensuite.",
+        "c": "Il n’ouvre droit à aucune attestation de l’organisme."
+      }
     },
     "cert-q32": {
       "type": "single",
       "correct": "d",
-      "explanation": "L’analyse des erreurs transforme l’examen blanc en outil d’apprentissage : on identifie les notions manquantes, puis on les retravaille en laboratoire et par rappel actif."
+      "explanation": "L’analyse des erreurs transforme l’examen blanc en outil d’apprentissage : on identifie les notions manquantes, puis on les retravaille en laboratoire et par rappel actif.",
+      "whyWrong": {
+        "a": "Repasser le même examen mesure la mémoire des réponses, pas la compréhension.",
+        "b": "Ne regarder que le score fait perdre l’information utile.",
+        "c": "Réviser seulement ce qui est acquis laisse les lacunes intactes."
+      }
     },
     "cert-q33": {
       "type": "multi",
@@ -259,7 +319,12 @@ export const corrections: CourseCorrections = {
     "cert-q35": {
       "type": "single",
       "correct": "c",
-      "explanation": "La plupart des organismes exigent des crédits de formation continue sur la durée de validité (trois ans pour les certifications CompTIA, par exemple) pour maintenir le titre actif."
+      "explanation": "La plupart des organismes exigent des crédits de formation continue sur la durée de validité (trois ans pour les certifications CompTIA, par exemple) pour maintenir le titre actif.",
+      "whyWrong": {
+        "a": "La validité à vie sans condition est rare et ne correspond pas à ce renouvellement.",
+        "d": "Repasser l’examen complet chaque mois n’est pas le principe.",
+        "b": "Une certification ne se transmet pas à un collègue."
+      }
     },
     "cert-q36": {
       "type": "truefalse",
@@ -269,7 +334,12 @@ export const corrections: CourseCorrections = {
     "cert-q37": {
       "type": "single",
       "correct": "d",
-      "explanation": "L’ISO/IEC 17024 encadre la certification de personnes (impartialité, évaluation, maintien de la certification). L’ISO/IEC 27001 spécifie le SMSI et l’ISO 19011 donne des lignes directrices d’audit : ce sont d’autres normes."
+      "explanation": "L’ISO/IEC 17024 encadre la certification de personnes (impartialité, évaluation, maintien de la certification). L’ISO/IEC 27001 spécifie le SMSI et l’ISO 19011 donne des lignes directrices d’audit : ce sont d’autres normes.",
+      "whyWrong": {
+        "a": "Cette description correspond à l’ISO/IEC 27001.",
+        "c": "Cette description correspond à l’ISO 19011.",
+        "b": "La norme ne définit pas le contenu technique des examens."
+      }
     },
     "cert-q38": {
       "type": "multi",
@@ -287,7 +357,12 @@ export const corrections: CourseCorrections = {
     "cert-q39": {
       "type": "single",
       "correct": "c",
-      "explanation": "Réussir un QCM ne prouve pas la capacité d’exécuter les tâches attendues. La pratique en laboratoire consolide les notions et prépare aux entretiens et aux mises en situation."
+      "explanation": "Réussir un QCM ne prouve pas la capacité d’exécuter les tâches attendues. La pratique en laboratoire consolide les notions et prépare aux entretiens et aux mises en situation.",
+      "whyWrong": {
+        "a": "Une certification n’est pas révoquée automatiquement pour ce motif.",
+        "d": "Réussir un examen n’interdit pas de s’inscrire à d’autres.",
+        "b": "Le référentiel n’est pas retiré au titulaire."
+      }
     },
     "cert-q40": {
       "type": "open",
@@ -310,7 +385,12 @@ export const corrections: CourseCorrections = {
     "cert-q42": {
       "type": "single",
       "correct": "b",
-      "explanation": "La CCNA valide la maîtrise de réseaux construits avec des équipements Cisco. Le CISM relève du management, la PNPT du pentest et GCIH de la gestion d’incidents."
+      "explanation": "La CCNA valide la maîtrise de réseaux construits avec des équipements Cisco. Le CISM relève du management, la PNPT du pentest et GCIH de la gestion d’incidents.",
+      "whyWrong": {
+        "a": "Le CISM relève du management de la sécurité.",
+        "d": "La PNPT relève du pentest.",
+        "c": "GCIH relève de la gestion d’incidents."
+      }
     },
     "cert-q43": {
       "type": "truefalse",
@@ -320,7 +400,12 @@ export const corrections: CourseCorrections = {
     "cert-q44": {
       "type": "single",
       "correct": "a",
-      "explanation": "Le portfolio apporte des preuves vérifiables de pratique, que les recruteurs consultent en complément des certifications. Il ne remplace ni l’examen ni le CV."
+      "explanation": "Le portfolio apporte des preuves vérifiables de pratique, que les recruteurs consultent en complément des certifications. Il ne remplace ni l’examen ni le CV.",
+      "whyWrong": {
+        "d": "Un portfolio ne remplace pas l’examen d’une certification.",
+        "b": "Un portfolio ne dispense pas de fournir un CV.",
+        "c": "Les organismes certificateurs n’exigent pas tous un portfolio."
+      }
     },
     "cert-q45": {
       "type": "multi",
@@ -338,7 +423,12 @@ export const corrections: CourseCorrections = {
     "cert-q46": {
       "type": "single",
       "correct": "d",
-      "explanation": "Le statut « Associate of ISC2 » est accordé à qui réussit l’examen sans avoir encore l’expérience professionnelle exigée ; il a un délai pour la compléter et obtenir le titre complet."
+      "explanation": "Le statut « Associate of ISC2 » est accordé à qui réussit l’examen sans avoir encore l’expérience professionnelle exigée ; il a un délai pour la compléter et obtenir le titre complet.",
+      "whyWrong": {
+        "c": "Associate of ISC2 ne désigne pas un salarié de l’organisme.",
+        "a": "Ce statut ne correspond pas à un échec à l’examen.",
+        "b": "Ce n’est pas une certification ISO de gouvernance."
+      }
     }
   },
 };

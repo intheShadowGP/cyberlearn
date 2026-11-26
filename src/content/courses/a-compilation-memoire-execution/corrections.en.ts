@@ -7,17 +7,32 @@ export const corrections: CourseCorrections = {
     "exec-q1": {
       "type": "single",
       "correct": "a",
-      "explanation": "The preprocessor handles directives, the compiler produces assembly, the assembler produces an object file, then the linker joins the object files and libraries into an executable."
+      "explanation": "The preprocessor handles directives, the compiler produces assembly, the assembler produces an object file, then the linker joins the object files and libraries into an executable.",
+      "whyWrong": {
+        "d": "The preprocessor acts first, not last.",
+        "c": "The assembler comes after the compiler, not before the preprocessor.",
+        "b": "The linker closes the chain: it needs the object files already produced."
+      }
     },
     "exec-q2": {
       "type": "single",
       "correct": "d",
-      "explanation": "The linker resolves references between object files and libraries, then produces the final executable file."
+      "explanation": "The linker resolves references between object files and libraries, then produces the final executable file.",
+      "whyWrong": {
+        "a": "Source code is not written in natural language; the linker works on already compiled code.",
+        "c": "Encrypting a program is not its job.",
+        "b": "Monitoring system calls is a tracing tool’s job, not the linker’s."
+      }
     },
     "exec-q3": {
       "type": "single",
       "correct": "c",
-      "explanation": "Assembly writes each machine instruction as a mnemonic (`mov`, `add`, `call`…). It depends on the processor architecture, hence its variants (x86-64, ARM)."
+      "explanation": "Assembly writes each machine instruction as a mnemonic (`mov`, `add`, `call`…). It depends on the processor architecture, hence its variants (x86-64, ARM).",
+      "whyWrong": {
+        "b": "Assembly is low level and depends on the processor.",
+        "a": "It is not a compression format.",
+        "d": "It is not a network protocol."
+      }
     },
     "exec-q4": {
       "type": "truefalse",
@@ -27,7 +42,12 @@ export const corrections: CourseCorrections = {
     "exec-q5": {
       "type": "single",
       "correct": "b",
-      "explanation": "Static linking produces a self-contained but larger executable, which must be recompiled to fix a library. Dynamic linking shares libraries (.so, .dll) and lets them be fixed without recompiling."
+      "explanation": "Static linking produces a self-contained but larger executable, which must be recompiled to fix a library. Dynamic linking shares libraries (.so, .dll) and lets them be fixed without recompiling.",
+      "whyWrong": {
+        "c": "That is the opposite of both definitions.",
+        "a": "Encryption and compression do not define linking.",
+        "d": "The difference is real: executable size, library updates, dependencies."
+      }
     },
     "exec-q6": {
       "type": "multi",
@@ -67,17 +87,32 @@ export const corrections: CourseCorrections = {
     "exec-q10": {
       "type": "single",
       "correct": "b",
-      "explanation": "The first four bytes are the ELF signature: 7F followed by the ASCII codes of E, L, F. Windows (PE) starts with “MZ” (4D 5A)."
+      "explanation": "The first four bytes are the ELF signature: 7F followed by the ASCII codes of E, L, F. Windows (PE) starts with “MZ” (4D 5A).",
+      "whyWrong": {
+        "d": "The Windows PE format starts with “MZ”, not 7F 45 4C 46.",
+        "a": "A ZIP archive starts with “PK”.",
+        "c": "A PNG starts with 89 50 4E 47."
+      }
     },
     "exec-q11": {
       "type": "single",
       "correct": "a",
-      "explanation": "The .text section contains the code (read and execute). .data contains initialized variables, .bss uninitialized variables and .rodata read-only constants."
+      "explanation": "The .text section contains the code (read and execute). .data contains initialized variables, .bss uninitialized variables and .rodata read-only constants.",
+      "whyWrong": {
+        "b": ".bss holds uninitialized variables, not code.",
+        "c": ".rodata holds read-only constants.",
+        "d": ".data holds initialized variables."
+      }
     },
     "exec-q12": {
       "type": "single",
       "correct": "d",
-      "explanation": "The import table indicates, library by library, the functions called (files, network, encryption…). It is a valuable clue about the capabilities of an unknown program."
+      "explanation": "The import table indicates, library by library, the functions called (files, network, encryption…). It is a valuable clue about the capabilities of an unknown program.",
+      "whyWrong": {
+        "c": "The import table contains no secrets.",
+        "a": "It does not list the network addresses contacted.",
+        "b": "It does not keep a history of versions."
+      }
     },
     "exec-q13": {
       "type": "truefalse",
@@ -87,7 +122,12 @@ export const corrections: CourseCorrections = {
     "exec-q14": {
       "type": "single",
       "correct": "c",
-      "explanation": "The kernel and the dynamic loader prepare the process: mapping segments, loading libraries, resolving symbols, then jumping to the program’s entry point."
+      "explanation": "The kernel and the dynamic loader prepare the process: mapping segments, loading libraries, resolving symbols, then jumping to the program’s entry point.",
+      "whyWrong": {
+        "d": "The compiler acts before execution, when the program is built.",
+        "b": "The firewall filters the network; it does not load programs.",
+        "a": "The scheduler chooses when a process runs, not how it is loaded."
+      }
     },
     "exec-q15": {
       "type": "multi",
@@ -114,12 +154,22 @@ export const corrections: CourseCorrections = {
     "exec-q17": {
       "type": "single",
       "correct": "b",
-      "explanation": "At each function call, a frame is pushed: local variables, parameters, return address. It disappears when the function ends."
+      "explanation": "At each function call, a frame is pushed: local variables, parameters, return address. It disappears when the function ends.",
+      "whyWrong": {
+        "a": "The heap is for dynamic allocations, not call frames.",
+        "c": "The .text section holds code, not local variables.",
+        "d": "The disk is permanent storage, unrelated to stack frames."
+      }
     },
     "exec-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "In C, nothing prevents writing beyond an array. Neighboring data (variables, return address) is then overwritten, which can change the behavior of the program."
+      "explanation": "In C, nothing prevents writing beyond an array. Neighboring data (variables, return address) is then overwritten, which can change the behavior of the program.",
+      "whyWrong": {
+        "b": "Filling the disk is another situation, with no overwriting of neighboring data.",
+        "c": "Sending too many packets describes a network denial of service.",
+        "d": "Opening too many files exhausts resources, with no memory overflow."
+      }
     },
     "exec-q19": {
       "type": "single",
@@ -137,7 +187,12 @@ export const corrections: CourseCorrections = {
     "exec-q21": {
       "type": "single",
       "correct": "c",
-      "explanation": "After being freed, the area can be reassigned to something else. A pointer still held by the program then reads or writes data that no longer belongs to it, which is exploitable."
+      "explanation": "After being freed, the area can be reassigned to something else. A pointer still held by the program then reads or writes data that no longer belongs to it, which is exploitable.",
+      "whyWrong": {
+        "a": "Freeing the same area twice is another flaw, the double free.",
+        "b": "This error has nothing to do with licenses.",
+        "d": "It is about memory, not saving work."
+      }
     },
     "exec-q22": {
       "type": "short",
@@ -161,17 +216,32 @@ export const corrections: CourseCorrections = {
     "exec-q24": {
       "type": "single",
       "correct": "a",
-      "explanation": "C and C++ give full control of memory, at the price of having no safeguards. Memory-safe languages (Rust, Go, Java, C#) check accesses or impose usage rules."
+      "explanation": "C and C++ give full control of memory, at the price of having no safeguards. Memory-safe languages (Rust, Go, Java, C#) check accesses or impose usage rules.",
+      "whyWrong": {
+        "d": "C and C++ are compiled, not interpreted; the cause is the lack of bounds checking.",
+        "c": "These languages use both the stack and the heap.",
+        "b": "They run on recent as well as older processors."
+      }
     },
     "exec-q25": {
       "type": "single",
       "correct": "d",
-      "explanation": "The compiler inserts a secret value before the return address. An overflow modifies it; the check fails when the function exits and the program stops before the hijacking."
+      "explanation": "The compiler inserts a secret value before the return address. An overflow modifies it; the check fails when the function exits and the program stops before the hijacking.",
+      "whyWrong": {
+        "a": "The canary is not a password and is not checked at startup.",
+        "b": "It does not monitor the network.",
+        "c": "It does not log system calls."
+      }
     },
     "exec-q26": {
       "type": "single",
       "correct": "b",
-      "explanation": "NX forbids executing instructions located in data pages. Code injected into the stack or the heap can no longer run directly."
+      "explanation": "NX forbids executing instructions located in data pages. Code injected into the stack or the heap can no longer run directly.",
+      "whyWrong": {
+        "c": "Phishing is handled by awareness and filtering, not by NX.",
+        "d": "Eavesdropping is handled by encryption.",
+        "a": "Server saturation is handled by rate limiting, not by NX."
+      }
     },
     "exec-q27": {
       "type": "truefalse",
@@ -181,7 +251,12 @@ export const corrections: CourseCorrections = {
     "exec-q28": {
       "type": "single",
       "correct": "a",
-      "explanation": "In ROP, the attacker chains small pieces of legitimate code that end with a return. No new code is injected, so NX does not stop it: hence the value of ASLR and control-flow protections."
+      "explanation": "In ROP, the attacker chains small pieces of legitimate code that end with a return. No new code is injected, so NX does not stop it: hence the value of ASLR and control-flow protections.",
+      "whyWrong": {
+        "c": "SQL injection targets a database.",
+        "b": "Phishing is an attack by deception, unrelated to memory.",
+        "d": "Distributed denial of service targets availability."
+      }
     },
     "exec-q29": {
       "type": "multi",
@@ -199,7 +274,12 @@ export const corrections: CourseCorrections = {
     "exec-q30": {
       "type": "single",
       "correct": "c",
-      "explanation": "Rust guarantees memory safety through its ownership and borrowing system, outside `unsafe` blocks. Go, Java and C# achieve it through run-time checks. C, C++ and assembly leave this task to the programmer."
+      "explanation": "Rust guarantees memory safety through its ownership and borrowing system, outside `unsafe` blocks. Go, Java and C# achieve it through run-time checks. C, C++ and assembly leave this task to the programmer.",
+      "whyWrong": {
+        "a": "C imposes no bounds checking.",
+        "b": "C++ inherits C’s memory risks.",
+        "d": "Assembly leaves everything to the programmer."
+      }
     },
     "exec-q31": {
       "type": "truefalse",
@@ -219,17 +299,32 @@ export const corrections: CourseCorrections = {
     "exec-q33": {
       "type": "single",
       "correct": "b",
-      "explanation": "`strings` displays the text present in a binary (messages, addresses, file names, URLs). It is often the first step of a static analysis, without running the program."
+      "explanation": "`strings` displays the text present in a binary (messages, addresses, file names, URLs). It is often the first step of a static analysis, without running the program.",
+      "whyWrong": {
+        "a": "Running in a sandbox is dynamic analysis.",
+        "c": "`strings` removes no symbols.",
+        "d": "`strings` recompiles nothing."
+      }
     },
     "exec-q34": {
       "type": "single",
       "correct": "d",
-      "explanation": "Static analysis examines the file: signature, strings, imports, sections, disassembly. It is safe because the code does not run, but it struggles with protected or packed binaries."
+      "explanation": "Static analysis examines the file: signature, strings, imports, sections, disassembly. It is safe because the code does not run, but it struggles with protected or packed binaries.",
+      "whyWrong": {
+        "a": "Running in a monitored environment is dynamic analysis.",
+        "c": "Recompiling is not an analysis.",
+        "b": "Comparing two versions is a differential analysis."
+      }
     },
     "exec-q35": {
       "type": "single",
       "correct": "d",
-      "explanation": "Dynamic analysis runs the program in an isolated environment and observes its actions: files, registry, network, created processes. It reveals what the code really does, at the risk of running it."
+      "explanation": "Dynamic analysis runs the program in an isolated environment and observes its actions: files, registry, network, created processes. It reveals what the code really does, at the risk of running it.",
+      "whyWrong": {
+        "c": "Reading strings without launching the program is static analysis.",
+        "a": "Checking a signature does not suffice to observe behavior.",
+        "b": "Comparing a hash to a list checks the file’s identity, not its behavior."
+      }
     },
     "exec-q36": {
       "type": "truefalse",
@@ -239,7 +334,12 @@ export const corrections: CourseCorrections = {
     "exec-q37": {
       "type": "single",
       "correct": "b",
-      "explanation": "`strace` displays each system call with its arguments and result: opened files, network connections, started processes. It is the equivalent of a “film” of the program’s interactions with the kernel."
+      "explanation": "`strace` displays each system call with its arguments and result: opened files, network connections, started processes. It is the equivalent of a “film” of the program’s interactions with the kernel.",
+      "whyWrong": {
+        "d": "`ping` tests network reachability.",
+        "c": "`tar` archives files.",
+        "a": "`chmod` changes permissions."
+      }
     },
     "exec-q38": {
       "type": "short",

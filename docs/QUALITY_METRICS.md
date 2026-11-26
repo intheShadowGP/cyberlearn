@@ -14,21 +14,21 @@
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 36 |
 | Cours sans aucune ressource externe HTTPS | 0 |
-| Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 94 % |
+| Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 100 % |
 | Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 29 |
 
 ## Par cours
 
 | Cours | Mod. | Niv. | Sections | Mots FR | Mots EN | Exercices | dont labo | Ress. | HTTPS | Questions | Types (U unique, M multiple, VF, C courte, O ouverte) | Pourquoi faux | Compétences |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `a-fichiers-programmes-ligne-commande` | A | 1 | 5 | 1759 | 1631 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M5 O3 | 44 % | 5 |
-| `a-systemes-fondamentaux` | A | 1 | 8 | 1793 | 1604 | 2 | 0 | 3 | 2 | 43 | U21 VF8 M5 C6 O3 | 77 % | 5 |
-| `a-virtualisation-conteneurs` | A | 2 | 6 | 1639 | 1514 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 33 % | 5 |
-| `a-compilation-memoire-execution` | A | 3 | 6 | 1584 | 1430 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 26 % | 5 |
-| `a-isolation-confiance-plateforme` | A | 4 | 6 | 1734 | 1527 | 2 | 0 | 4 | 4 | 40 | U23 M5 VF6 C3 O3 | 21 % | 5 |
-| `b-osi-tcpip` | B | 1 | 7 | 1644 | 1540 | 2 | 0 | 4 | 4 | 44 | U24 C6 VF7 M5 O2 | 34 % | 5 |
-| `b-ipv4-subnetting` | B | 2 | 8 | 1891 | 1740 | 3 | 1 | 4 | 3 | 44 | U24 C7 M4 VF6 O3 | 71 % | 5 |
-| `b-commutation-vlan-ipv6` | B | 2 | 5 | 1722 | 1525 | 2 | 0 | 5 | 5 | 40 | U23 VF7 C4 M4 O2 | 37 % | 5 |
+| `a-fichiers-programmes-ligne-commande` | A | 1 | 5 | 1759 | 1631 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M5 O3 | 100 % | 5 |
+| `a-systemes-fondamentaux` | A | 1 | 8 | 1793 | 1604 | 2 | 0 | 3 | 2 | 43 | U21 VF8 M5 C6 O3 | 100 % | 5 |
+| `a-virtualisation-conteneurs` | A | 2 | 6 | 1639 | 1514 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 100 % | 5 |
+| `a-compilation-memoire-execution` | A | 3 | 6 | 1584 | 1430 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 100 % | 5 |
+| `a-isolation-confiance-plateforme` | A | 4 | 6 | 1734 | 1527 | 2 | 0 | 4 | 4 | 40 | U23 M5 VF6 C3 O3 | 100 % | 5 |
+| `b-osi-tcpip` | B | 1 | 7 | 1644 | 1540 | 2 | 0 | 4 | 4 | 44 | U24 C6 VF7 M5 O2 | 100 % | 5 |
+| `b-ipv4-subnetting` | B | 2 | 8 | 1891 | 1740 | 3 | 1 | 4 | 3 | 44 | U24 C7 M4 VF6 O3 | 100 % | 5 |
+| `b-commutation-vlan-ipv6` | B | 2 | 5 | 1722 | 1525 | 2 | 0 | 5 | 5 | 40 | U23 VF7 C4 M4 O2 | 100 % | 5 |
 | `b-routage-dns-dhcp-nat` | B | 2 | 6 | 2331 | 2112 | 3 | 1 | 5 | 5 | 40 | U17 C6 VF8 M6 O3 | 100 % | 5 |
 | `b-perimetre-vpn-wifi` | B | 3 | 5 | 2033 | 1826 | 3 | 1 | 5 | 5 | 40 | U17 VF9 M6 C5 O3 | 100 % | 5 |
 | `b-defense-reseau-avancee` | B | 4 | 6 | 2454 | 2152 | 3 | 0 | 5 | 5 | 40 | U18 VF7 C5 M6 O4 | 100 % | 6 |
@@ -102,7 +102,7 @@
 | `q-ia-defense-ml` | Q | 3 | 7 | 1669 | 1432 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `q-securite-llm` | Q | 3 | 8 | 1785 | 1535 | 3 | 0 | 4 | 4 | 43 | U23 VF7 C5 M6 O2 | 100 % | 5 |
 | `q-securite-ia-avancee` | Q | 4 | 5 | 1406 | 1245 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `r-certifications-preparation` | R | 1 | 4 | 1107 | 1007 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 36 % | 4 |
+| `r-certifications-preparation` | R | 1 | 4 | 1107 | 1007 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 100 % | 4 |
 | `r-preparation-fondamentaux` | R | 2 | 5 | 1149 | 1038 | 3 | 1 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `r-preparation-pratique` | R | 3 | 5 | 1213 | 1073 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `r-certifications-expertes` | R | 4 | 5 | 1268 | 1118 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |

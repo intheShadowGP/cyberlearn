@@ -58,6 +58,8 @@ describe.each([['fr'], ['en']] as const)('banques de questions (%s)', (lang) => 
         if (LETTER_REFS.test(q.p) || ('o' in q && q.o.some((o) => LETTER_REFS.test(o)))) errors.push(`${at(q.id)} : renvoi à l’ordre des réponses interdit`);
         if (q.t === 'multi' && (q.k < 2 || q.k >= q.o.length || q.o.length < 4 || q.o.length > 6)) errors.push(`${at(q.id)} : QCM multiple mal formé (k=${q.k}, ${q.o.length} options)`);
         if (q.t === 'single' && (q.o.length < 4 || q.o.length > 5)) errors.push(`${at(q.id)} : un QCM à réponse unique doit avoir 4 ou 5 options`);
+        if (q.t === 'single' && Object.keys(q.w ?? {}).length === 0) errors.push(`${at(q.id)} : au moins une mauvaise réponse doit être expliquée (« pourquoi c’est faux »)`);
+        if (q.t === 'multi' && Object.keys(q.w ?? {}).length === 0) errors.push(`${at(q.id)} : au moins une mauvaise réponse doit être expliquée`);
         if ('o' in q && new Set(q.o.map((o) => normalizeShort(o))).size !== q.o.length) errors.push(`${at(q.id)} : options dupliquées`);
         if (q.t === 'short' && q.a.length === 0) errors.push(`${at(q.id)} : aucune réponse acceptée`);
       }

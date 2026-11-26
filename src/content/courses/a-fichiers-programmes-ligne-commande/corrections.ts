@@ -16,7 +16,12 @@ export const corrections: CourseCorrections = {
     "fpc-q2": {
       "type": "single",
       "correct": "a",
-      "explanation": "Un chemin absolu (`/etc/hosts`, `C:\\Windows`) désigne le même fichier quel que soit l’endroit d’où on le lit, car il part de la racine. Un chemin relatif dépend du répertoire courant."
+      "explanation": "Un chemin absolu (`/etc/hosts`, `C:\\Windows`) désigne le même fichier quel que soit l’endroit d’où on le lit, car il part de la racine. Un chemin relatif dépend du répertoire courant.",
+      "whyWrong": {
+        "b": "Un chemin qui part du répertoire courant est un chemin relatif.",
+        "c": "Un chemin ne se définit pas par ses caractères.",
+        "d": "Un chemin absolu désigne un emplacement local, pas un site distant."
+      }
     },
     "fpc-q3": {
       "type": "truefalse",
@@ -42,7 +47,12 @@ export const corrections: CourseCorrections = {
     "fpc-q18": {
       "type": "single",
       "correct": "c",
-      "explanation": "Ouvrir un lien symbolique revient à ouvrir sa cible. Un lien mal contrôlé peut rediriger un programme privilégié vers un fichier sensible, d’où l’attention portée à leur traitement."
+      "explanation": "Ouvrir un lien symbolique revient à ouvrir sa cible. Un lien mal contrôlé peut rediriger un programme privilégié vers un fichier sensible, d’où l’attention portée à leur traitement.",
+      "whyWrong": {
+        "d": "Une copie complète est un fichier distinct, pas un lien.",
+        "b": "Un lien symbolique n’a aucun rapport avec la compression ou un mot de passe.",
+        "a": "Un lien symbolique fonctionne dans tout le système de fichiers, pas uniquement dans le navigateur."
+      }
     },
     "fpc-q19": {
       "type": "multi",
@@ -83,12 +93,22 @@ export const corrections: CourseCorrections = {
     "fpc-q5": {
       "type": "single",
       "correct": "a",
-      "explanation": "Un compilateur produit un exécutable une fois pour toutes ; un interpréteur lit le code source et l’exécute au fur et à mesure. Certains langages combinent les deux (bytecode et machine virtuelle)."
+      "explanation": "Un compilateur produit un exécutable une fois pour toutes ; un interpréteur lit le code source et l’exécute au fur et à mesure. Certains langages combinent les deux (bytecode et machine virtuelle).",
+      "whyWrong": {
+        "b": "Aucune des deux ne dépend d’un serveur distant.",
+        "d": "Les deux concernent du code, pas des textes ou des images.",
+        "c": "Les deux notions sont différentes : traduction préalable ou lecture à chaque exécution."
+      }
     },
     "fpc-q22": {
       "type": "single",
       "correct": "c",
-      "explanation": "C, C++, Go et Rust sont compilés en code machine. Python, Ruby et PHP sont habituellement interprétés (avec des étapes de compilation interne en bytecode pour certains)."
+      "explanation": "C, C++, Go et Rust sont compilés en code machine. Python, Ruby et PHP sont habituellement interprétés (avec des étapes de compilation interne en bytecode pour certains).",
+      "whyWrong": {
+        "d": "Python est habituellement interprété.",
+        "b": "Ruby est habituellement interprété.",
+        "a": "PHP est habituellement interprété."
+      }
     },
     "fpc-q6": {
       "type": "multi",
@@ -106,7 +126,12 @@ export const corrections: CourseCorrections = {
     "fpc-q23": {
       "type": "single",
       "correct": "b",
-      "explanation": "Java et C# compilent en un format intermédiaire (bytecode) que la machine virtuelle exécute. Cela rend le programme portable d’un système à l’autre."
+      "explanation": "Java et C# compilent en un format intermédiaire (bytecode) que la machine virtuelle exécute. Cela rend le programme portable d’un système à l’autre.",
+      "whyWrong": {
+        "a": "Java est bien compilé en bytecode : ce n’est pas une pure interprétation.",
+        "d": "Le bytecode n’est pas du code machine direct ; il passe par une machine virtuelle.",
+        "c": "Le noyau n’exécute pas seul le bytecode."
+      }
     },
     "fpc-q24": {
       "type": "truefalse",
@@ -116,7 +141,12 @@ export const corrections: CourseCorrections = {
     "fpc-q25": {
       "type": "single",
       "correct": "b",
-      "explanation": "L’empreinte change dès qu’un octet change. En la recalculant après téléchargement et en la comparant à celle de l’éditeur (obtenue par un canal de confiance), on détecte une altération."
+      "explanation": "L’empreinte change dès qu’un octet change. En la recalculant après téléchargement et en la comparant à celle de l’éditeur (obtenue par un canal de confiance), on détecte une altération.",
+      "whyWrong": {
+        "d": "L’empreinte ne change rien à la vitesse du téléchargement.",
+        "a": "Une empreinte ne chiffre rien.",
+        "c": "L’empreinte ne renseigne pas sur le langage utilisé."
+      }
     },
     "fpc-q26": {
       "type": "short",
@@ -131,12 +161,22 @@ export const corrections: CourseCorrections = {
     "fpc-q27": {
       "type": "single",
       "correct": "a",
-      "explanation": "En compromettant un maillon que beaucoup d’autres logiciels utilisent, l’attaquant atteint tous leurs utilisateurs. Elle se combat par l’inventaire, l’épinglage des versions et la vérification des sources."
+      "explanation": "En compromettant un maillon que beaucoup d’autres logiciels utilisent, l’attaquant atteint tous leurs utilisateurs. Elle se combat par l’inventaire, l’épinglage des versions et la vérification des sources.",
+      "whyWrong": {
+        "d": "Le déni de service vise la disponibilité d’un site, pas le code livré.",
+        "b": "Le hameçonnage trompe un utilisateur par courrier.",
+        "c": "La force brute essaie des mots de passe, sans lien avec une bibliothèque piégée."
+      }
     },
     "fpc-q8": {
       "type": "single",
       "correct": "d",
-      "explanation": "Le client (navigateur, application) envoie des requêtes ; le serveur les traite et répond. Les contrôles essentiels se font donc côté serveur."
+      "explanation": "Le client (navigateur, application) envoie des requêtes ; le serveur les traite et répond. Les contrôles essentiels se font donc côté serveur.",
+      "whyWrong": {
+        "c": "Le client envoie la requête ; il ne la traite pas.",
+        "a": "Le câble transporte les données, il ne les traite pas.",
+        "b": "L’utilisateur agit sur le client, pas sur le traitement des requêtes."
+      }
     },
     "fpc-q9": {
       "type": "truefalse",
@@ -154,17 +194,32 @@ export const corrections: CourseCorrections = {
     "fpc-q28": {
       "type": "single",
       "correct": "c",
-      "explanation": "Chaque couche ne parle qu’à sa voisine : la présentation parle à la logique métier, qui parle à l’accès aux données. Le navigateur ne doit jamais accéder directement à la base."
+      "explanation": "Chaque couche ne parle qu’à sa voisine : la présentation parle à la logique métier, qui parle à l’accès aux données. Le navigateur ne doit jamais accéder directement à la base.",
+      "whyWrong": {
+        "d": "La présentation ne parle pas directement à la base de données.",
+        "a": "Le navigateur ne doit jamais accéder directement à la base.",
+        "b": "Le réseau local transporte les échanges, il ne constitue pas une couche applicative."
+      }
     },
     "fpc-q29": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le serveur ne doit jamais utiliser une valeur sensible fournie par le client : il la relit dans sa propre base. La vérification côté navigateur ne protège pas."
+      "explanation": "Le serveur ne doit jamais utiliser une valeur sensible fournie par le client : il la relit dans sa propre base. La vérification côté navigateur ne protège pas.",
+      "whyWrong": {
+        "b": "Faire confiance au prix reçu permettrait de payer 1 € au lieu de 100 €.",
+        "d": "Masquer le prix dans le formulaire ne le protège pas : le client peut le modifier.",
+        "a": "Le navigateur est contrôlé par l’utilisateur ; on ne lui délègue pas le calcul du prix."
+      }
     },
     "fpc-q30": {
       "type": "single",
       "correct": "b",
-      "explanation": "Une API (interface de programmation) expose des fonctions, souvent par le réseau. Chaque point d’accès exposé est une porte d’entrée qu’il faut authentifier, valider et surveiller."
+      "explanation": "Une API (interface de programmation) expose des fonctions, souvent par le réseau. Chaque point d’accès exposé est une porte d’entrée qu’il faut authentifier, valider et surveiller.",
+      "whyWrong": {
+        "a": "Un virus par pièce jointe n’est pas une API.",
+        "c": "Une API n’est pas un langage de programmation réservé aux navigateurs.",
+        "d": "Une API n’est pas un composant matériel."
+      }
     },
     "fpc-q31": {
       "type": "multi",
@@ -197,7 +252,12 @@ export const corrections: CourseCorrections = {
     "fpc-q12": {
       "type": "single",
       "correct": "a",
-      "explanation": "Une boucle (`pour`, `tant que`) répète un bloc d’instructions, par exemple pour traiter chaque ligne d’un fichier ou chaque élément d’une liste."
+      "explanation": "Une boucle (`pour`, `tant que`) répète un bloc d’instructions, par exemple pour traiter chaque ligne d’un fichier ou chaque élément d’une liste.",
+      "whyWrong": {
+        "d": "Stocker une valeur nommée correspond à une variable.",
+        "c": "Éteindre la machine n’est pas le rôle d’une boucle.",
+        "b": "Une boucle ne chiffre rien par elle-même."
+      }
     },
     "fpc-q13": {
       "type": "multi",
@@ -225,7 +285,12 @@ export const corrections: CourseCorrections = {
     "fpc-q34": {
       "type": "single",
       "correct": "d",
-      "explanation": "Un dictionnaire retrouve une valeur à partir de sa clé (par exemple un nom d’utilisateur associé à ses droits). Une liste est une suite ordonnée accessible par position."
+      "explanation": "Un dictionnaire retrouve une valeur à partir de sa clé (par exemple un nom d’utilisateur associé à ses droits). Une liste est une suite ordonnée accessible par position.",
+      "whyWrong": {
+        "c": "Une liste est une suite ordonnée accessible par position.",
+        "a": "Une boucle répète des instructions.",
+        "b": "Une condition choisit une branche d’exécution."
+      }
     },
     "fpc-q35": {
       "type": "truefalse",
@@ -261,7 +326,12 @@ export const corrections: CourseCorrections = {
     "fpc-q39": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le shell (Bash, PowerShell) lit les commandes tapées, les interprète et lance les programmes correspondants. Il permet aussi d’écrire des scripts."
+      "explanation": "Le shell (Bash, PowerShell) lit les commandes tapées, les interprète et lance les programmes correspondants. Il permet aussi d’écrire des scripts.",
+      "whyWrong": {
+        "d": "Un shell ne chiffre pas les fichiers du disque.",
+        "a": "L’affichage des pages web relève du navigateur.",
+        "b": "La gestion de l’alimentation relève du système d’exploitation."
+      }
     },
     "fpc-q14": {
       "type": "truefalse",

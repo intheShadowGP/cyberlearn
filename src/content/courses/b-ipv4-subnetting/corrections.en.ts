@@ -147,7 +147,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "/24 matches 24 bits set to 1, that is three complete bytes: 255.255.255.0. It is the most common local network mask."
+      "explanation": "/24 matches 24 bits set to 1, that is three complete bytes: 255.255.255.0. It is the most common local network mask.",
+      "whyWrong": {
+        "d": "255.255.0.0 corresponds to a /16.",
+        "b": "255.0.0.0 corresponds to a /8.",
+        "c": "255.255.255.128 corresponds to a /25."
+      }
     },
     "ipv4-q19": {
       "type": "single",
@@ -202,7 +207,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q25": {
       "type": "single",
       "correct": "a",
-      "explanation": "The block size of a /26 is 64: .192 to .255. Hosts .200 and .230 are both in 10.0.0.192/26 and communicate directly."
+      "explanation": "The block size of a /26 is 64: .192 to .255. Hosts .200 and .230 are both in 10.0.0.192/26 and communicate directly.",
+      "whyWrong": {
+        "c": "Both addresses are in the same block of 64: 192 to 255.",
+        "b": "The address .230 is a host address; the broadcast of this block is .255.",
+        "d": "The gateway plays no part in deciding whether two hosts share a subnet."
+      }
     },
     "ipv4-q26": {
       "type": "truefalse",
@@ -212,7 +222,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q27": {
       "type": "single",
       "correct": "c",
-      "explanation": "From /24 to /27, 3 network bits are added: 2³ = 8 subnets of 32 addresses (.0, .32, .64, .96, .128, .160, .192, .224)."
+      "explanation": "From /24 to /27, 3 network bits are added: 2³ = 8 subnets of 32 addresses (.0, .32, .64, .96, .128, .160, .192, .224).",
+      "whyWrong": {
+        "b": "A /24 holds 8 /27 subnets, not 4: 4 would match /26 subnets.",
+        "a": "16 would match /28 subnets.",
+        "d": "32 would match /29 subnets."
+      }
     },
     "ipv4-q28": {
       "type": "multi",
@@ -230,7 +245,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q29": {
       "type": "single",
       "correct": "b",
-      "explanation": "The whole 127.0.0.0/8 block is reserved for loopback: the traffic is never sent over the network. Services listening only on 127.0.0.1 are not reachable from the outside."
+      "explanation": "The whole 127.0.0.0/8 block is reserved for loopback: the traffic is never sent over the network. Services listening only on 127.0.0.1 are not reachable from the outside.",
+      "whyWrong": {
+        "c": "The default gateway is an address on the local network, not 127.0.0.1.",
+        "d": "A subnet’s broadcast is its last address.",
+        "a": "127.0.0.1 is not a public address."
+      }
     },
     "ipv4-q30": {
       "type": "single",
@@ -243,7 +263,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q31": {
       "type": "single",
       "correct": "d",
-      "explanation": "RFC 6598 reserves 100.64.0.0/10 for carriers that share public addresses between customers (CGNAT). This range is neither private in the sense of RFC 1918, nor public."
+      "explanation": "RFC 6598 reserves 100.64.0.0/10 for carriers that share public addresses between customers (CGNAT). This range is neither private in the sense of RFC 1918, nor public.",
+      "whyWrong": {
+        "c": "The link-local range without DHCP uses 169.254.0.0/16.",
+        "b": "Multicast uses 224.0.0.0/4.",
+        "a": "The loopback uses 127.0.0.0/8."
+      }
     },
     "ipv4-q32": {
       "type": "truefalse",
@@ -253,12 +278,22 @@ export const corrections: CourseCorrections = {
     "ipv4-q33": {
       "type": "single",
       "correct": "a",
-      "explanation": "In a flat network, all workstations and servers see each other and share the same broadcast domain (ARP, discovery). A compromised workstation can directly reach the others, with no filtering point."
+      "explanation": "In a flat network, all workstations and servers see each other and share the same broadcast domain (ARP, discovery). A compromised workstation can directly reach the others, with no filtering point.",
+      "whyWrong": {
+        "c": "A flat network does not forbid routing to the outside.",
+        "d": "A flat network does not prevent DHCP address assignment.",
+        "b": "A flat network does not require encrypting every frame."
+      }
     },
     "ipv4-q34": {
       "type": "single",
       "correct": "b",
-      "explanation": "A /16 covers 65,536 addresses, against 256 for a /24. A prefix mistake considerably widens the allowed perimeter: each prefix in a rule must be reread or checked by a tool."
+      "explanation": "A /16 covers 65,536 addresses, against 256 for a /24. A prefix mistake considerably widens the allowed perimeter: each prefix in a rule must be reread or checked by a tool.",
+      "whyWrong": {
+        "d": "The rule allows more traffic; it does not block it.",
+        "c": "An access rule does not encrypt anything.",
+        "a": "No priority limits the broad rule: the whole /16 is covered."
+      }
     },
     "ipv4-q35": {
       "type": "truefalse",
@@ -268,7 +303,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q36": {
       "type": "single",
       "correct": "d",
-      "explanation": "Aligning subnet, VLAN and security zone makes the policy readable: flows between zones go through a filtering point and each rule applies to a subnet."
+      "explanation": "Aligning subnet, VLAN and security zone makes the policy readable: flows between zones go through a filtering point and each rule applies to a subnet.",
+      "whyWrong": {
+        "a": "A single subnet removes any separation.",
+        "b": "One VLAN per workstation is unmanageable and has no zone logic.",
+        "c": "Splitting by protocol does not reflect trust zones."
+      }
     },
     "ipv4-q37": {
       "type": "multi",

@@ -51,7 +51,12 @@ export const corrections: CourseCorrections = {
     "osi-q6": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le client envoie SYN, le serveur répond SYN-ACK, le client confirme par ACK : la connexion est établie des deux côtés avec des numéros de séquence synchronisés."
+      "explanation": "Le client envoie SYN, le serveur répond SYN-ACK, le client confirme par ACK : la connexion est établie des deux côtés avec des numéros de séquence synchronisés.",
+      "whyWrong": {
+        "b": "FIN sert à fermer la connexion, pas à l’ouvrir.",
+        "d": "HELLO et DATA ne font pas partie de la poignée de main TCP.",
+        "a": "RST et FIN ne servent pas à établir une connexion."
+      }
     },
     "osi-q7": {
       "type": "short",
@@ -63,7 +68,12 @@ export const corrections: CourseCorrections = {
     "osi-q8": {
       "type": "single",
       "correct": "d",
-      "explanation": "ARP associe une adresse IP à une adresse MAC sur le réseau local. Falsifier ces associations est une attaque de couche 2, qui permet par exemple de se placer entre un poste et sa passerelle."
+      "explanation": "ARP associe une adresse IP à une adresse MAC sur le réseau local. Falsifier ces associations est une attaque de couche 2, qui permet par exemple de se placer entre un poste et sa passerelle.",
+      "whyWrong": {
+        "a": "ARP n’est pas un protocole de transport.",
+        "c": "Les attaques de couche 7 visent les applications, pas ARP.",
+        "b": "La couche 1 est physique : ARP n’en relève pas."
+      }
     },
     "osi-q9": {
       "type": "truefalse",
@@ -85,7 +95,12 @@ export const corrections: CourseCorrections = {
     "osi-q11": {
       "type": "single",
       "correct": "b",
-      "explanation": "En descendant la pile, chaque couche ajoute son en-tête : d’abord TCP (couche 4), puis IP (couche 3), enfin Ethernet (couche 2). Le récepteur les retire dans l’ordre inverse."
+      "explanation": "En descendant la pile, chaque couche ajoute son en-tête : d’abord TCP (couche 4), puis IP (couche 3), enfin Ethernet (couche 2). Le récepteur les retire dans l’ordre inverse.",
+      "whyWrong": {
+        "c": "TCP est ajouté avant IP, qui l’enveloppe ensuite.",
+        "d": "Ethernet est ajouté en dernier, et non en premier.",
+        "a": "IP enveloppe le segment TCP avant la trame Ethernet."
+      }
     },
     "osi-q12": {
       "type": "open",
@@ -122,22 +137,42 @@ export const corrections: CourseCorrections = {
     "osi-q16": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le routeur compare l’adresse IP de destination à sa table de routage. Il ne lit ni les ports (rôle d’un pare-feu) ni les noms de domaine (résolus par le DNS avant l’envoi)."
+      "explanation": "Le routeur compare l’adresse IP de destination à sa table de routage. Il ne lit ni les ports (rôle d’un pare-feu) ni les noms de domaine (résolus par le DNS avant l’envoi).",
+      "whyWrong": {
+        "d": "L’adresse MAC ne sert qu’à l’intérieur d’un lien local.",
+        "b": "Les ports sont lus par les pare-feu et les hôtes, pas par un routeur.",
+        "a": "Les noms de domaine sont résolus par le DNS avant l’envoi."
+      }
     },
     "osi-q17": {
       "type": "single",
       "correct": "d",
-      "explanation": "La couche présentation traduit les données entre le format de l’application et celui du réseau (encodage, compression, chiffrement). Dans la pratique, TLS et les formats sont gérés par les applications."
+      "explanation": "La couche présentation traduit les données entre le format de l’application et celui du réseau (encodage, compression, chiffrement). Dans la pratique, TLS et les formats sont gérés par les applications.",
+      "whyWrong": {
+        "b": "La couche session gère les dialogues, pas le format des données.",
+        "c": "La couche transport s’occupe de la fiabilité et des ports.",
+        "a": "La couche liaison s’occupe des trames sur un lien local."
+      }
     },
     "osi-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "La couche Internet de TCP/IP correspond à la couche réseau d’OSI : c’est celle d’IP, qui adresse et achemine les paquets de réseau en réseau."
+      "explanation": "La couche Internet de TCP/IP correspond à la couche réseau d’OSI : c’est celle d’IP, qui adresse et achemine les paquets de réseau en réseau.",
+      "whyWrong": {
+        "d": "L’accès réseau correspond aux couches 1 et 2 d’OSI.",
+        "c": "La couche Transport correspond à la couche 4 d’OSI.",
+        "b": "La couche Application regroupe les couches 5 à 7 d’OSI."
+      }
     },
     "osi-q19": {
       "type": "single",
       "correct": "b",
-      "explanation": "Un WAF lit et analyse les requêtes HTTP (URL, paramètres, en-têtes, corps). Il agit donc au niveau de l’application, là où se situent les injections et le XSS."
+      "explanation": "Un WAF lit et analyse les requêtes HTTP (URL, paramètres, en-têtes, corps). Il agit donc au niveau de l’application, là où se situent les injections et le XSS.",
+      "whyWrong": {
+        "c": "La couche 4 filtre selon les ports, ce que fait un pare-feu classique.",
+        "a": "La couche 3 filtre selon les adresses IP.",
+        "d": "La couche 2 concerne les adresses MAC et les trames."
+      }
     },
     "osi-q20": {
       "type": "truefalse",
@@ -147,12 +182,22 @@ export const corrections: CourseCorrections = {
     "osi-q21": {
       "type": "single",
       "correct": "c",
-      "explanation": "La couche session coordonne les dialogues (ouverture, reprise après coupure, fermeture). Dans TCP/IP, ce rôle est assuré par les applications elles-mêmes."
+      "explanation": "La couche session coordonne les dialogues (ouverture, reprise après coupure, fermeture). Dans TCP/IP, ce rôle est assuré par les applications elles-mêmes.",
+      "whyWrong": {
+        "d": "La couche présentation gère le format, pas les dialogues.",
+        "a": "La couche réseau s’occupe de l’adressage et du routage.",
+        "b": "La couche physique transporte les bits."
+      }
     },
     "osi-q22": {
       "type": "single",
       "correct": "d",
-      "explanation": "La couche liaison transmet des trames, qui encapsulent un paquet IP avec les adresses MAC source et destination et une somme de contrôle."
+      "explanation": "La couche liaison transmet des trames, qui encapsulent un paquet IP avec les adresses MAC source et destination et une somme de contrôle.",
+      "whyWrong": {
+        "b": "Le paquet est l’unité de la couche 3.",
+        "a": "Le segment est l’unité de la couche 4 pour TCP.",
+        "c": "Le message applicatif est l’unité de la couche 7."
+      }
     },
     "osi-q23": {
       "type": "short",
@@ -164,12 +209,22 @@ export const corrections: CourseCorrections = {
     "osi-q24": {
       "type": "single",
       "correct": "a",
-      "explanation": "Quand la destination est hors du réseau local, l’hôte envoie la trame à la passerelle par défaut (un routeur), dont il connaît l’adresse MAC grâce à ARP. Le routeur transmet ensuite le paquet."
+      "explanation": "Quand la destination est hors du réseau local, l’hôte envoie la trame à la passerelle par défaut (un routeur), dont il connaît l’adresse MAC grâce à ARP. Le routeur transmet ensuite le paquet.",
+      "whyWrong": {
+        "b": "L’attribution des adresses relève du serveur DHCP.",
+        "c": "La traduction des noms relève du DNS.",
+        "d": "La passerelle ne chiffre pas le trafic."
+      }
     },
     "osi-q25": {
       "type": "single",
       "correct": "b",
-      "explanation": "L’adresse MAC n’a de sens que sur un lien. À chaque routeur, la trame est reconstruite avec de nouvelles adresses MAC (celles du saut suivant), tandis que les adresses IP source et destination restent inchangées."
+      "explanation": "L’adresse MAC n’a de sens que sur un lien. À chaque routeur, la trame est reconstruite avec de nouvelles adresses MAC (celles du saut suivant), tandis que les adresses IP source et destination restent inchangées.",
+      "whyWrong": {
+        "c": "L’adresse MAC change à chaque saut ; elle ne reste pas identique.",
+        "a": "Un numéro de port est un champ distinct, qui ne remplace pas l’adresse MAC.",
+        "d": "L’adresse MAC n’est pas chiffrée par le routeur."
+      }
     },
     "osi-q26": {
       "type": "multi",
@@ -187,7 +242,12 @@ export const corrections: CourseCorrections = {
     "osi-q27": {
       "type": "single",
       "correct": "a",
-      "explanation": "Chaque routeur décrémente le TTL ; à zéro, le paquet est détruit et un message ICMP « TTL expiré » est renvoyé. `traceroute` exploite ce mécanisme pour découvrir chaque routeur du chemin."
+      "explanation": "Chaque routeur décrémente le TTL ; à zéro, le paquet est détruit et un message ICMP « TTL expiré » est renvoyé. `traceroute` exploite ce mécanisme pour découvrir chaque routeur du chemin.",
+      "whyWrong": {
+        "d": "Le TTL ne fixe pas un débit.",
+        "b": "Le TTL n’identifie pas une application.",
+        "c": "Le TTL ne chiffre rien."
+      }
     },
     "osi-q28": {
       "type": "truefalse",
@@ -197,7 +257,12 @@ export const corrections: CourseCorrections = {
     "osi-q29": {
       "type": "single",
       "correct": "d",
-      "explanation": "Une requête DNS et sa réponse tiennent dans un datagramme : la poignée de main TCP serait un surcoût. TCP/53 est utilisé quand la réponse est volumineuse ou pour les transferts de zone."
+      "explanation": "Une requête DNS et sa réponse tiennent dans un datagramme : la poignée de main TCP serait un surcoût. TCP/53 est utilisé quand la réponse est volumineuse ou pour les transferts de zone.",
+      "whyWrong": {
+        "c": "UDP ne garantit ni l’ordre ni la livraison.",
+        "a": "UDP ne chiffre pas les requêtes.",
+        "b": "UDP n’authentifie pas le serveur."
+      }
     },
     "osi-q30": {
       "type": "short",
@@ -210,7 +275,12 @@ export const corrections: CourseCorrections = {
     "osi-q31": {
       "type": "single",
       "correct": "c",
-      "explanation": "Un port ouvert répond SYN-ACK ; un port fermé répond RST. Un port filtré par un pare-feu ne répond souvent pas du tout, ce qui permet de distinguer les trois états."
+      "explanation": "Un port ouvert répond SYN-ACK ; un port fermé répond RST. Un port filtré par un pare-feu ne répond souvent pas du tout, ce qui permet de distinguer les trois états.",
+      "whyWrong": {
+        "b": "SYN-ACK est la réponse d’un port ouvert.",
+        "d": "FIN-ACK ne répond pas à un SYN sur un port fermé.",
+        "a": "Un port fermé ne renvoie pas de SYN."
+      }
     },
     "osi-q32": {
       "type": "multi",
@@ -233,12 +303,22 @@ export const corrections: CourseCorrections = {
     "osi-q34": {
       "type": "single",
       "correct": "b",
-      "explanation": "Le SYN flood remplit la file des connexions « à moitié ouvertes » : le serveur n’accepte plus de nouveaux clients légitimes. Les SYN cookies et la limitation de débit en réduisent l’effet."
+      "explanation": "Le SYN flood remplit la file des connexions « à moitié ouvertes » : le serveur n’accepte plus de nouveaux clients légitimes. Les SYN cookies et la limitation de débit en réduisent l’effet.",
+      "whyWrong": {
+        "a": "L’ARP spoofing falsifie des associations IP-MAC sur le réseau local.",
+        "c": "Le saut de VLAN contourne la segmentation.",
+        "d": "L’injection SQL vise une base de données."
+      }
     },
     "osi-q35": {
       "type": "single",
       "correct": "d",
-      "explanation": "L’inspection ARP dynamique (DAI) vérifie que les réponses ARP correspondent aux associations légitimes (souvent apprises par DHCP snooping) et rejette les autres. Elle agit à la couche 2, là où a lieu l’attaque."
+      "explanation": "L’inspection ARP dynamique (DAI) vérifie que les réponses ARP correspondent aux associations légitimes (souvent apprises par DHCP snooping) et rejette les autres. Elle agit à la couche 2, là où a lieu l’attaque.",
+      "whyWrong": {
+        "c": "Les SYN cookies protègent contre le SYN flood.",
+        "b": "Un WAF protège une application web, pas la résolution ARP.",
+        "a": "Bloquer ICMP n’empêche pas l’empoisonnement ARP."
+      }
     },
     "osi-q36": {
       "type": "truefalse",
@@ -248,17 +328,32 @@ export const corrections: CourseCorrections = {
     "osi-q37": {
       "type": "single",
       "correct": "c",
-      "explanation": "On part du bas : lien physique, adressage et ARP, route, port, puis application. Cette méthode localise la couche en cause sans modifier au hasard ce qui fonctionne."
+      "explanation": "On part du bas : lien physique, adressage et ARP, route, port, puis application. Cette méthode localise la couche en cause sans modifier au hasard ce qui fonctionne.",
+      "whyWrong": {
+        "a": "Réinstaller le navigateur sans diagnostic fait perdre du temps.",
+        "b": "Redémarrer le DNS de l’entreprise perturbe tout le monde sans preuve de cause.",
+        "d": "Tout autoriser sur le pare-feu fragilise la sécurité sans identifier la panne."
+      }
     },
     "osi-q38": {
       "type": "single",
       "correct": "a",
-      "explanation": "`ping` envoie des requêtes ICMP echo et mesure les réponses. Un échec ne prouve pas la panne : un pare-feu peut bloquer ICMP, d’où l’intérêt de combiner plusieurs tests."
+      "explanation": "`ping` envoie des requêtes ICMP echo et mesure les réponses. Un échec ne prouve pas la panne : un pare-feu peut bloquer ICMP, d’où l’intérêt de combiner plusieurs tests.",
+      "whyWrong": {
+        "b": "`arp` affiche la table des voisins locaux.",
+        "d": "`ssh` ouvre une session distante.",
+        "c": "`nslookup` interroge le DNS."
+      }
     },
     "osi-q39": {
       "type": "single",
       "correct": "c",
-      "explanation": "traceroute envoie des paquets avec un TTL de 1, 2, 3… Chaque routeur qui détruit un paquet répond par un message ICMP « TTL expiré », ce qui révèle les sauts successifs."
+      "explanation": "traceroute envoie des paquets avec un TTL de 1, 2, 3… Chaque routeur qui détruit un paquet répond par un message ICMP « TTL expiré », ce qui révèle les sauts successifs.",
+      "whyWrong": {
+        "a": "`ping` teste l’accessibilité, mais n’affiche pas les sauts.",
+        "d": "`nslookup` interroge le DNS.",
+        "b": "`netstat` liste les connexions locales."
+      }
     },
     "osi-q40": {
       "type": "multi",

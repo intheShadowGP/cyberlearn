@@ -147,7 +147,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "/24 correspond à 24 bits à 1, soit trois octets complets : 255.255.255.0. C’est le masque de réseau local le plus courant."
+      "explanation": "/24 correspond à 24 bits à 1, soit trois octets complets : 255.255.255.0. C’est le masque de réseau local le plus courant.",
+      "whyWrong": {
+        "d": "255.255.0.0 correspond à un /16.",
+        "b": "255.0.0.0 correspond à un /8.",
+        "c": "255.255.255.128 correspond à un /25."
+      }
     },
     "ipv4-q19": {
       "type": "single",
@@ -202,7 +207,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q25": {
       "type": "single",
       "correct": "a",
-      "explanation": "La taille de bloc d’un /26 est 64 : .192 à .255. Les hôtes .200 et .230 sont tous deux dans 10.0.0.192/26 et communiquent directement."
+      "explanation": "La taille de bloc d’un /26 est 64 : .192 à .255. Les hôtes .200 et .230 sont tous deux dans 10.0.0.192/26 et communiquent directement.",
+      "whyWrong": {
+        "c": "Les deux adresses sont dans le même bloc de 64 : 192 à 255.",
+        "b": "L’adresse .230 est une adresse d’hôte ; la diffusion de ce bloc est .255.",
+        "d": "La passerelle n’intervient pas pour décider si deux hôtes sont dans le même sous-réseau."
+      }
     },
     "ipv4-q26": {
       "type": "truefalse",
@@ -212,7 +222,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q27": {
       "type": "single",
       "correct": "c",
-      "explanation": "De /24 à /27, on ajoute 3 bits de réseau : 2³ = 8 sous-réseaux de 32 adresses (.0, .32, .64, .96, .128, .160, .192, .224)."
+      "explanation": "De /24 à /27, on ajoute 3 bits de réseau : 2³ = 8 sous-réseaux de 32 adresses (.0, .32, .64, .96, .128, .160, .192, .224).",
+      "whyWrong": {
+        "b": "Un /24 contient 8 sous-réseaux /27, pas 4 : 4 correspondrait à des /26.",
+        "a": "16 correspondrait à des /28.",
+        "d": "32 correspondrait à des /29."
+      }
     },
     "ipv4-q28": {
       "type": "multi",
@@ -230,7 +245,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q29": {
       "type": "single",
       "correct": "b",
-      "explanation": "Tout le bloc 127.0.0.0/8 est réservé à la boucle locale : le trafic n’est jamais envoyé sur le réseau. Les services écoutant uniquement sur 127.0.0.1 ne sont pas joignables de l’extérieur."
+      "explanation": "Tout le bloc 127.0.0.0/8 est réservé à la boucle locale : le trafic n’est jamais envoyé sur le réseau. Les services écoutant uniquement sur 127.0.0.1 ne sont pas joignables de l’extérieur.",
+      "whyWrong": {
+        "c": "La passerelle par défaut est une adresse du réseau local, pas 127.0.0.1.",
+        "d": "La diffusion d’un sous-réseau est sa dernière adresse.",
+        "a": "127.0.0.1 n’est pas une adresse publique."
+      }
     },
     "ipv4-q30": {
       "type": "single",
@@ -243,7 +263,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q31": {
       "type": "single",
       "correct": "d",
-      "explanation": "La RFC 6598 réserve 100.64.0.0/10 aux opérateurs qui partagent des adresses publiques entre clients (CGNAT). Cette plage n’est ni privée au sens de la RFC 1918, ni publique."
+      "explanation": "La RFC 6598 réserve 100.64.0.0/10 aux opérateurs qui partagent des adresses publiques entre clients (CGNAT). Cette plage n’est ni privée au sens de la RFC 1918, ni publique.",
+      "whyWrong": {
+        "c": "Le lien local sans DHCP utilise 169.254.0.0/16.",
+        "b": "La multidiffusion utilise 224.0.0.0/4.",
+        "a": "La boucle locale utilise 127.0.0.0/8."
+      }
     },
     "ipv4-q32": {
       "type": "truefalse",
@@ -253,12 +278,22 @@ export const corrections: CourseCorrections = {
     "ipv4-q33": {
       "type": "single",
       "correct": "a",
-      "explanation": "Dans un réseau plat, tous les postes et serveurs se voient et partagent le même domaine de diffusion (ARP, découverte). Un poste compromis peut atteindre directement les autres, sans point de filtrage."
+      "explanation": "Dans un réseau plat, tous les postes et serveurs se voient et partagent le même domaine de diffusion (ARP, découverte). Un poste compromis peut atteindre directement les autres, sans point de filtrage.",
+      "whyWrong": {
+        "c": "Un réseau plat n’interdit pas le routage vers l’extérieur.",
+        "d": "Un réseau plat n’empêche pas l’attribution d’adresses par DHCP.",
+        "b": "Un réseau plat n’impose pas de chiffrer chaque trame."
+      }
     },
     "ipv4-q34": {
       "type": "single",
       "correct": "b",
-      "explanation": "Un /16 couvre 65 536 adresses, contre 256 pour un /24. Une erreur de préfixe élargit considérablement le périmètre autorisé : chaque préfixe d’une règle doit être relu ou vérifié par un outil."
+      "explanation": "Un /16 couvre 65 536 adresses, contre 256 pour un /24. Une erreur de préfixe élargit considérablement le périmètre autorisé : chaque préfixe d’une règle doit être relu ou vérifié par un outil.",
+      "whyWrong": {
+        "d": "La règle autorise plus de trafic, elle ne le bloque pas.",
+        "c": "Une règle d’accès n’a pas pour effet de chiffrer.",
+        "a": "Aucune priorité ne limite la règle large : tout le /16 est couvert."
+      }
     },
     "ipv4-q35": {
       "type": "truefalse",
@@ -268,7 +303,12 @@ export const corrections: CourseCorrections = {
     "ipv4-q36": {
       "type": "single",
       "correct": "d",
-      "explanation": "Aligner sous-réseau, VLAN et zone de sécurité rend la politique lisible : les flux entre zones passent par un point de filtrage et chaque règle porte sur un sous-réseau."
+      "explanation": "Aligner sous-réseau, VLAN et zone de sécurité rend la politique lisible : les flux entre zones passent par un point de filtrage et chaque règle porte sur un sous-réseau.",
+      "whyWrong": {
+        "a": "Un seul sous-réseau supprime toute séparation.",
+        "b": "Un VLAN par poste est ingérable et sans cohérence de zone.",
+        "c": "Découper par protocole ne reflète pas les zones de confiance."
+      }
     },
     "ipv4-q37": {
       "type": "multi",

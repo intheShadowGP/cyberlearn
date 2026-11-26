@@ -34,7 +34,12 @@ export const corrections: CourseCorrections = {
     "afund-q17": {
       "type": "single",
       "correct": "c",
-      "explanation": "The processor reads the instructions in memory and executes them one by one. RAM holds them, storage keeps them without power, the network card does not execute the program."
+      "explanation": "The processor reads the instructions in memory and executes them one by one. RAM holds them, storage keeps them without power, the network card does not execute the program.",
+      "whyWrong": {
+        "d": "The disk keeps data; it does not execute it.",
+        "b": "Main memory holds instructions; it does not execute them.",
+        "a": "The network card exchanges data without executing programs."
+      }
     },
     "afund-q18": {
       "type": "single",
@@ -143,7 +148,12 @@ export const corrections: CourseCorrections = {
     "afund-q4": {
       "type": "single",
       "correct": "a",
-      "explanation": "The firmware, stored on the motherboard, initializes the hardware then looks for a bootloader. The kernel, the antivirus and the session come afterwards."
+      "explanation": "The firmware, stored on the motherboard, initializes the hardware then looks for a bootloader. The kernel, the antivirus and the session come afterwards.",
+      "whyWrong": {
+        "c": "The kernel is loaded after the firmware.",
+        "d": "The antivirus is software launched by the system, much later.",
+        "b": "The user session opens once the system has started."
+      }
     },
     "afund-q5": {
       "type": "short",
@@ -160,7 +170,12 @@ export const corrections: CourseCorrections = {
     "afund-q30": {
       "type": "single",
       "correct": "c",
-      "explanation": "The firmware starts and finds the bootloader; the bootloader loads the kernel; the kernel starts the first process (systemd on Linux, smss.exe then wininit.exe on Windows)."
+      "explanation": "The firmware starts and finds the bootloader; the bootloader loads the kernel; the kernel starts the first process (systemd on Linux, smss.exe then wininit.exe on Windows).",
+      "whyWrong": {
+        "d": "The kernel cannot start before the firmware.",
+        "a": "The bootloader does not precede the firmware, which finds and launches it.",
+        "b": "The first process is launched by the kernel, not before it."
+      }
     },
     "afund-q31": {
       "type": "single",
@@ -208,7 +223,12 @@ export const corrections: CourseCorrections = {
     "afund-q7": {
       "type": "single",
       "correct": "b",
-      "explanation": "Applications do not access the hardware: they call the kernel through system calls (open, read, write…) and the kernel checks their rights before acting."
+      "explanation": "Applications do not access the hardware: they call the kernel through system calls (open, read, write…) and the kernel checks their rights before acting.",
+      "whyWrong": {
+        "d": "An application is not allowed to access the disk controller directly.",
+        "a": "An application does not modify the kernel’s process table.",
+        "c": "The firmware does not take part in an application reading a file."
+      }
     },
     "afund-q8": {
       "type": "multi",
@@ -234,7 +254,12 @@ export const corrections: CourseCorrections = {
     "afund-q9": {
       "type": "single",
       "correct": "d",
-      "explanation": "A word processor has no reason to start a command interpreter then PowerShell with an encoded command. This is the classic signature of a malicious macro, which EDRs watch for."
+      "explanation": "A word processor has no reason to start a command interpreter then PowerShell with an encoded command. This is the classic signature of a malicious macro, which EDRs watch for.",
+      "whyWrong": {
+        "a": "An update does not launch an encoded PowerShell command.",
+        "b": "A spell checker does not need a command interpreter.",
+        "c": "Printing does not start an encoded command."
+      }
     },
     "afund-q35": {
       "type": "truefalse",
@@ -277,7 +302,12 @@ export const corrections: CourseCorrections = {
     "afund-q40": {
       "type": "single",
       "correct": "b",
-      "explanation": "The processor’s memory management unit (MMU) applies the translation tables that the kernel builds for each process. This is also where rights (read, write, execute) are checked."
+      "explanation": "The processor’s memory management unit (MMU) applies the translation tables that the kernel builds for each process. This is also where rights (read, write, execute) are checked.",
+      "whyWrong": {
+        "c": "The disk controller does not translate memory addresses.",
+        "d": "The network card does not manage process memory.",
+        "a": "The screen takes no part in address translation."
+      }
     },
     "afund-q10": {
       "type": "short",

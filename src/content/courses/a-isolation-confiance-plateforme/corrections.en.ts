@@ -7,12 +7,22 @@ export const corrections: CourseCorrections = {
     "tcb-q1": {
       "type": "single",
       "correct": "b",
-      "explanation": "The TCB gathers the hardware, firmware and software we must trust for the security policy to be respected. What is not part of it cannot, in theory, violate it."
+      "explanation": "The TCB gathers the hardware, firmware and software we must trust for the security policy to be respected. What is not part of it cannot, in theory, violate it.",
+      "whyWrong": {
+        "a": "The TCB also includes components from other vendors: origin does not define it.",
+        "d": "Users are not TCB components, even if they administer the system.",
+        "c": "Off-site backups relate to continuity, not to the TCB."
+      }
     },
     "tcb-q2": {
       "type": "single",
       "correct": "a",
-      "explanation": "Every line of code in the TCB can contain a flaw that invalidates it. A reduced TCB can be reread, tested and, in extreme cases, proved: this is the principle of the microkernel and of minimal architectures."
+      "explanation": "Every line of code in the TCB can contain a flaw that invalidates it. A reduced TCB can be reread, tested and, in extreme cases, proved: this is the principle of the microkernel and of minimal architectures.",
+      "whyWrong": {
+        "d": "TCB size has no guaranteed link with boot speed.",
+        "b": "No system is free of vulnerabilities: a small TCB has fewer, not none.",
+        "c": "Updates remain necessary whatever the size of the TCB."
+      }
     },
     "tcb-q3": {
       "type": "multi",
@@ -35,7 +45,12 @@ export const corrections: CourseCorrections = {
     "tcb-q5": {
       "type": "single",
       "correct": "c",
-      "explanation": "In a microkernel, drivers, file systems and network stacks are isolated services in user space. A flaw in a driver does not automatically give control of the whole system."
+      "explanation": "In a microkernel, drivers, file systems and network stacks are isolated services in user space. A flaw in a driver does not automatically give control of the whole system.",
+      "whyWrong": {
+        "a": "That is the opposite idea: a monolithic kernel.",
+        "d": "A microkernel shares memory with services through controlled messages, not through a dedicated processor.",
+        "b": "A hypervisor isolates virtual machines; it does not replace a system’s kernel."
+      }
     },
     "tcb-q6": {
       "type": "short",
@@ -62,22 +77,42 @@ export const corrections: CourseCorrections = {
     "tcb-q9": {
       "type": "single",
       "correct": "d",
-      "explanation": "In classic Unix permissions (DAC), a file’s owner decides who accesses it. In MAC (SELinux, AppArmor), a policy defined by the security administrator applies even to the owner."
+      "explanation": "In classic Unix permissions (DAC), a file’s owner decides who accesses it. In MAC (SELinux, AppArmor), a policy defined by the security administrator applies even to the owner.",
+      "whyWrong": {
+        "b": "It is the other way around: DAC lets the owner decide.",
+        "a": "Both models concern access rights, not networks or disks.",
+        "c": "Neither DAC nor MAC encrypts or compresses data."
+      }
     },
     "tcb-q10": {
       "type": "single",
       "correct": "a",
-      "explanation": "SELinux associates types with processes and objects and applies a central policy. AppArmor follows a similar approach through profiles. NTFS is a file system, DHCP and LDAP are protocols."
+      "explanation": "SELinux associates types with processes and objects and applies a central policy. AppArmor follows a similar approach through profiles. NTFS is a file system, DHCP and LDAP are protocols.",
+      "whyWrong": {
+        "b": "NTFS is a file system; its ACLs belong to discretionary control.",
+        "d": "DHCP hands out IP addresses; it does not control access.",
+        "c": "LDAP is a directory: it stores identities, it does not enforce a mandatory policy."
+      }
     },
     "tcb-q11": {
       "type": "single",
       "correct": "c",
-      "explanation": "Bell-LaPadula protects the confidentiality of classified information: a subject does not read above its level and does not write to a lower level, which prevents leaks. Biba is its dual for integrity."
+      "explanation": "Bell-LaPadula protects the confidentiality of classified information: a subject does not read above its level and does not write to a lower level, which prevents leaks. Biba is its dual for integrity.",
+      "whyWrong": {
+        "b": "That formula describes Biba, which protects integrity.",
+        "a": "Redundancy relates to availability, not to Bell-LaPadula.",
+        "d": "Digital signatures provide authenticity, a different goal."
+      }
     },
     "tcb-q12": {
       "type": "single",
       "correct": "b",
-      "explanation": "Biba prevents a trusted piece of data from being corrupted by a less reliable source: no read down, no write up. It is the dual of Bell-LaPadula."
+      "explanation": "Biba prevents a trusted piece of data from being corrupted by a less reliable source: no read down, no write up. It is the dual of Bell-LaPadula.",
+      "whyWrong": {
+        "a": "Confidentiality is the goal of Bell-LaPadula, not of Biba.",
+        "d": "Availability is not addressed by Biba.",
+        "c": "Non-repudiation relates to signatures and evidence, not to Biba."
+      }
     },
     "tcb-q13": {
       "type": "truefalse",
@@ -87,7 +122,12 @@ export const corrections: CourseCorrections = {
     "tcb-q14": {
       "type": "single",
       "correct": "d",
-      "explanation": "In a capability model, whoever holds the reference can use it, and one cannot be fabricated. This avoids the “confused deputy” problem and naturally applies least privilege."
+      "explanation": "In a capability model, whoever holds the reference can use it, and one cannot be fabricated. This avoids the “confused deputy” problem and naturally applies least privilege.",
+      "whyWrong": {
+        "a": "A username identifies a person; a capability rests on the reference held.",
+        "c": "The caller’s IP address is not the basis of authorization in this model.",
+        "b": "Group membership characterizes list-based access control, not capabilities."
+      }
     },
     "tcb-q15": {
       "type": "multi",
@@ -112,17 +152,32 @@ export const corrections: CourseCorrections = {
     "tcb-q17": {
       "type": "single",
       "correct": "a",
-      "explanation": "Trust is built in layers: each step verifies the next. The first one (root of trust) cannot be verified by anyone: it must be physically protected and kept minimal, for example an unmodifiable processor memory."
+      "explanation": "Trust is built in layers: each step verifies the next. The first one (root of trust) cannot be verified by anyone: it must be physically protected and kept minimal, for example an unmodifiable processor memory.",
+      "whyWrong": {
+        "c": "The main account of a system is a privileged account, not a hardware root of trust.",
+        "b": "The root folder is a file system notion, unrelated to trust.",
+        "d": "A site certificate relies on an authority but is not the platform’s root of trust."
+      }
     },
     "tcb-q18": {
       "type": "single",
       "correct": "b",
-      "explanation": "Secure Boot verifies signatures and refuses to run what is not authorized. Measured boot records hashes in the TPM, which then let a third party (attestation) or the system decide whether the state is acceptable."
+      "explanation": "Secure Boot verifies signatures and refuses to run what is not authorized. Measured boot records hashes in the TPM, which then let a third party (attestation) or the system decide whether the state is acceptable.",
+      "whyWrong": {
+        "a": "That is the opposite of the two functions.",
+        "d": "Neither concerns the network or storage as such.",
+        "c": "They are complementary: one blocks, the other measures."
+      }
     },
     "tcb-q19": {
       "type": "single",
       "correct": "c",
-      "explanation": "The TPM’s PCRs hold cumulative hashes of the components that booted. They cannot be freely written: they can only be “extended” by adding a new measurement."
+      "explanation": "The TPM’s PCRs hold cumulative hashes of the components that booted. They cannot be freely written: they can only be “extended” by adding a new measurement.",
+      "whyWrong": {
+        "d": "The Windows registry is a modifiable software component, not a trusted measurement store.",
+        "a": "A password file is modifiable; PCRs can only be “extended”.",
+        "b": "The processor cache is volatile and unrelated to the TPM."
+      }
     },
     "tcb-q20": {
       "type": "truefalse",
@@ -132,12 +187,22 @@ export const corrections: CourseCorrections = {
     "tcb-q21": {
       "type": "single",
       "correct": "b",
-      "explanation": "The TPM signs the measurements (a “quote”) with an attestation key. The verifier compares the values with the expected ones and decides whether to grant secrets or network access."
+      "explanation": "The TPM signs the measurements (a “quote”) with an attestation key. The verifier compares the values with the expected ones and decides whether to grant secrets or network access.",
+      "whyWrong": {
+        "d": "Encrypting exchanges is the job of TLS, not attestation.",
+        "c": "The fingerprint relates to biometric authentication.",
+        "a": "Updating firmware is a different operation."
+      }
     },
     "tcb-q22": {
       "type": "single",
       "correct": "d",
-      "explanation": "A signed but vulnerable component stays accepted as long as its signature is not revoked. The defense is revocation (dbx list, updates), complemented by measured boot. A known example is BlackLotus (2023)."
+      "explanation": "A signed but vulnerable component stays accepted as long as its signature is not revoked. The defense is revocation (dbx list, updates), complemented by measured boot. A known example is BlackLotus (2023).",
+      "whyWrong": {
+        "a": "Disabling the antivirus does not stop the bootkit; it lowers protection.",
+        "b": "Allowing any removable media widens the attack surface.",
+        "c": "Removing the firmware password removes a protection."
+      }
     },
     "tcb-q23": {
       "type": "short",
@@ -162,17 +227,32 @@ export const corrections: CourseCorrections = {
     "tcb-q25": {
       "type": "single",
       "correct": "a",
-      "explanation": "Without an IOMMU, a PCIe or Thunderbolt device can read and write all memory through DMA, bypassing the kernel. The IOMMU restricts, like an MMU for devices, the memory areas each one can reach."
+      "explanation": "Without an IOMMU, a PCIe or Thunderbolt device can read and write all memory through DMA, bypassing the kernel. The IOMMU restricts, like an MMU for devices, the memory areas each one can reach.",
+      "whyWrong": {
+        "c": "Phishing is handled by awareness and mail filtering.",
+        "d": "SQL injections are handled in application code.",
+        "b": "ARP spoofing is handled on the local network, not by the IOMMU."
+      }
     },
     "tcb-q26": {
       "type": "single",
       "correct": "c",
-      "explanation": "SMEP (Supervisor Mode Execution Prevention) forbids the kernel from executing a page marked “user”. It blocks the classic exploitation where a kernel flaw redirects execution to code the attacker placed in their own process. SMAP does the same for data accesses."
+      "explanation": "SMEP (Supervisor Mode Execution Prevention) forbids the kernel from executing a page marked “user”. It blocks the classic exploitation where a kernel flaw redirects execution to code the attacker placed in their own process. SMAP does the same for data accesses.",
+      "whyWrong": {
+        "d": "SMEP does not encrypt; memory encryption relies on other technologies.",
+        "b": "SMEP does not block system calls, which remain possible.",
+        "a": "SMEP has nothing to do with network throughput."
+      }
     },
     "tcb-q27": {
       "type": "single",
       "correct": "a",
-      "explanation": "The processor executes instructions ahead of time that will be cancelled, but their effects on the caches remain and can be measured. Fixes combine firmware, system and software, often with a performance cost."
+      "explanation": "The processor executes instructions ahead of time that will be cancelled, but their effects on the caches remain and can be measured. Fixes combine firmware, system and software, often with a performance cost.",
+      "whyWrong": {
+        "c": "Spectre does not target a network protocol but how the processor works.",
+        "d": "Router passwords are a configuration matter, not Spectre.",
+        "b": "Wireless encryption is not at stake: Spectre acts on the processor."
+      }
     },
     "tcb-q28": {
       "type": "truefalse",
@@ -182,7 +262,12 @@ export const corrections: CourseCorrections = {
     "tcb-q29": {
       "type": "single",
       "correct": "b",
-      "explanation": "Modern browsers confine each site in a process with restricted rights (sandbox). An engine flaw compromises that process, not the whole browser, unless it is chained with a sandbox escape."
+      "explanation": "Modern browsers confine each site in a process with restricted rights (sandbox). An engine flaw compromises that process, not the whole browser, unless it is chained with a sandbox escape.",
+      "whyWrong": {
+        "a": "A shared process extends the impact of a flaw to all tabs.",
+        "d": "Loading all sites in the same page removes isolation between them.",
+        "c": "Running the engine inside the kernel would give a flaw maximum access."
+      }
     },
     "tcb-q30": {
       "type": "multi",
@@ -216,17 +301,32 @@ export const corrections: CourseCorrections = {
     "tcb-q33": {
       "type": "single",
       "correct": "d",
-      "explanation": "Reducing each component’s rights limits the impact of a compromise. It is one of the eight design principles of Saltzer and Schroeder (1975)."
+      "explanation": "Reducing each component’s rights limits the impact of a compromise. It is one of the eight design principles of Saltzer and Schroeder (1975).",
+      "whyWrong": {
+        "a": "Giving all rights everywhere is the opposite of least privilege.",
+        "b": "Permanent rights accumulate; the principle asks to review them.",
+        "c": "Seniority is not a criterion of need."
+      }
     },
     "tcb-q34": {
       "type": "single",
       "correct": "c",
-      "explanation": "A check that can be avoided, or whose decision is cached without precautions, can be bypassed. The reference monitor must intervene at every access, including after a change of rights."
+      "explanation": "A check that can be avoided, or whose decision is cached without precautions, can be bypassed. The reference monitor must intervene at every access, including after a change of rights.",
+      "whyWrong": {
+        "a": "A single check per session leaves later accesses uncontrolled.",
+        "b": "Local accesses must be checked as much as remote ones.",
+        "d": "A check left to the user’s choice can be avoided."
+      }
     },
     "tcb-q35": {
       "type": "single",
       "correct": "d",
-      "explanation": "An allow list fails safe: if a rule is forgotten, access remains denied. A deny list fails by opening access."
+      "explanation": "An allow list fails safe: if a rule is forgotten, access remains denied. A deny list fails by opening access.",
+      "whyWrong": {
+        "a": "Allowing everything by default is the opposite of the principle.",
+        "b": "Filtering only administrators does not protect other accounts.",
+        "c": "Logging without blocking refuses no access."
+      }
     },
     "tcb-q36": {
       "type": "truefalse",
@@ -236,7 +336,12 @@ export const corrections: CourseCorrections = {
     "tcb-q37": {
       "type": "single",
       "correct": "c",
-      "explanation": "The threat model specifies the assets, the assumed attackers, their capabilities and the trust boundaries. It guides architecture choices: the defense is not the same against a curious user and against a hosting provider’s administrator."
+      "explanation": "The threat model specifies the assets, the assumed attackers, their capabilities and the trust boundaries. It guides architecture choices: the defense is not the same against a curious user and against a hosting provider’s administrator.",
+      "whyWrong": {
+        "d": "The list of employees belongs to physical access control, not the threat model.",
+        "a": "Acquisition cost is a budget matter, not a threat analysis.",
+        "b": "The recovery plan covers the aftermath of a disaster, not threat identification."
+      }
     },
     "tcb-q38": {
       "type": "multi",
@@ -253,7 +358,12 @@ export const corrections: CourseCorrections = {
     "tcb-q39": {
       "type": "single",
       "correct": "b",
-      "explanation": "Customers do not trust each other: the boundary must be strong (VM), the network segmented, the secrets protected and the platform attestable. The combination reduces the impact of an isolated compromise."
+      "explanation": "Customers do not trust each other: the boundary must be strong (VM), the network segmented, the secrets protected and the platform attestable. The combination reduces the impact of an isolated compromise.",
+      "whyWrong": {
+        "c": "A shared container and a single service account make customers share the fate of a compromise.",
+        "a": "A single unsegmented server spreads an incident to all customers.",
+        "d": "A shared workstation does not offer the isolation expected of a multi-tenant platform."
+      }
     },
     "tcb-q40": {
       "type": "open",

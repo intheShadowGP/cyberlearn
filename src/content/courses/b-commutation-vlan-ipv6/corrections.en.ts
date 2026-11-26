@@ -16,7 +16,12 @@ export const corrections: CourseCorrections = {
     "cvi-q2": {
       "type": "single",
       "correct": "d",
-      "explanation": "An unknown destination causes flooding on all ports except the arrival one. This is normal, but it is also what an attacker tries to provoke by flooding the MAC table."
+      "explanation": "An unknown destination causes flooding on all ports except the arrival one. This is normal, but it is also what an attacker tries to provoke by flooding the MAC table.",
+      "whyWrong": {
+        "b": "A switch does not silently destroy a frame with an unknown destination.",
+        "c": "It does not send an error message to the sender.",
+        "a": "It does not store the frame: it floods it immediately."
+      }
     },
     "cvi-q3": {
       "type": "truefalse",
@@ -34,7 +39,12 @@ export const corrections: CourseCorrections = {
     "cvi-q5": {
       "type": "single",
       "correct": "b",
-      "explanation": "A trunk carries several VLANs over a single link: the 802.1Q tag (12-bit VID) tells which VLAN each frame belongs to. Only the native VLAN travels untagged."
+      "explanation": "A trunk carries several VLANs over a single link: the 802.1Q tag (12-bit VID) tells which VLAN each frame belongs to. Only the native VLAN travels untagged.",
+      "whyWrong": {
+        "a": "A trunk carries several VLANs and uses tags.",
+        "d": "A trunk is not limited to broadcast.",
+        "c": "A trunk is not reserved for IPv6 management packets."
+      }
     },
     "cvi-q6": {
       "type": "short",
@@ -73,7 +83,12 @@ export const corrections: CourseCorrections = {
     "cvi-q10": {
       "type": "single",
       "correct": "c",
-      "explanation": "Port security limits the number of MAC addresses learned per port, and can also pin them. It counters table flooding and rogue plug-ins."
+      "explanation": "Port security limits the number of MAC addresses learned per port, and can also pin them. It counters table flooding and rogue plug-ins.",
+      "whyWrong": {
+        "b": "NAT translates addresses on a router; it does not limit MACs per port.",
+        "d": "OSPF is a routing protocol, unrelated to access ports.",
+        "a": "A reverse proxy relays application traffic."
+      }
     },
     "cvi-q11": {
       "type": "multi",
@@ -107,7 +122,12 @@ export const corrections: CourseCorrections = {
     "cvi-q14": {
       "type": "single",
       "correct": "c",
-      "explanation": "Routers periodically announce the network prefix through Router Advertisements (ICMPv6). The machine combines it with its own interface identifier to form its address, with no server."
+      "explanation": "Routers periodically announce the network prefix through Router Advertisements (ICMPv6). The machine combines it with its own interface identifier to form its address, with no server.",
+      "whyWrong": {
+        "d": "ARP belongs to IPv4; IPv6 uses NDP.",
+        "b": "A DHCPv4 lease concerns IPv4 addressing.",
+        "a": "A reverse DNS query resolves an address into a name; it does not build one."
+      }
     },
     "cvi-q15": {
       "type": "truefalse",
@@ -127,12 +147,22 @@ export const corrections: CourseCorrections = {
     "cvi-q17": {
       "type": "single",
       "correct": "b",
-      "explanation": "A hub repeats every signal on all ports; a switch uses its MAC address table to forward only to the relevant port, which limits eavesdropping and improves performance."
+      "explanation": "A hub repeats every signal on all ports; a switch uses its MAC address table to forward only to the relevant port, which limits eavesdropping and improves performance.",
+      "whyWrong": {
+        "d": "Routing between IP networks is the router’s job, not the hub’s.",
+        "a": "Filtering by TCP port is a firewall’s job.",
+        "c": "A hub does not encrypt frames."
+      }
     },
     "cvi-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "Layer 2 broadcasts do not cross a router: each router interface delimits a broadcast domain. A switch without VLANs forwards broadcasts to all its ports."
+      "explanation": "Layer 2 broadcasts do not cross a router: each router interface delimits a broadcast domain. A switch without VLANs forwards broadcasts to all its ports.",
+      "whyWrong": {
+        "c": "A switch without VLANs forwards broadcasts on all its ports.",
+        "b": "A repeater extends the signal without separating domains.",
+        "d": "A hub repeats everything on all ports."
+      }
     },
     "cvi-q19": {
       "type": "truefalse",
@@ -142,7 +172,12 @@ export const corrections: CourseCorrections = {
     "cvi-q20": {
       "type": "single",
       "correct": "a",
-      "explanation": "Without protection, a layer 2 loop makes broadcasts circulate endlessly and paralyzes the network. STP blocks redundant links and only reactivates them on a failure."
+      "explanation": "Without protection, a layer 2 loop makes broadcasts circulate endlessly and paralyzes the network. STP blocks redundant links and only reactivates them on a failure.",
+      "whyWrong": {
+        "b": "DHCP assigns addresses; it does not prevent loops.",
+        "d": "NTP synchronizes time.",
+        "c": "ARP resolves IP addresses to MACs."
+      }
     },
     "cvi-q21": {
       "type": "single",
@@ -168,17 +203,32 @@ export const corrections: CourseCorrections = {
     "cvi-q23": {
       "type": "single",
       "correct": "c",
-      "explanation": "Each VLAN is a separate IP network: only a router, layer 3 switch or firewall can link them. This is where the filtering policy between zones is applied."
+      "explanation": "Each VLAN is a separate IP network: only a router, layer 3 switch or firewall can link them. This is where the filtering policy between zones is applied.",
+      "whyWrong": {
+        "d": "Merging VLANs is the opposite of inter-VLAN routing.",
+        "b": "Inter-VLAN routing encrypts nothing.",
+        "a": "It is not used to enlarge the MAC table."
+      }
     },
     "cvi-q24": {
       "type": "single",
       "correct": "d",
-      "explanation": "The VID fits in 12 bits (0 to 4095), but 0 and 4095 are reserved: the usable VLANs go from 1 to 4094."
+      "explanation": "The VID fits in 12 bits (0 to 4095), but 0 and 4095 are reserved: the usable VLANs go from 1 to 4094.",
+      "whyWrong": {
+        "b": "Identifiers 0 and 4095 are reserved.",
+        "c": "The VID field allows more than 1024 identifiers.",
+        "a": "The VID field is 12 bits, not 16."
+      }
     },
     "cvi-q25": {
       "type": "single",
       "correct": "d",
-      "explanation": "An access port connects an end device to a single VLAN: the switch adds or removes the tag internally. Frames therefore leave without a tag toward the workstation."
+      "explanation": "An access port connects an end device to a single VLAN: the switch adds or removes the tag internally. Frames therefore leave without a tag toward the workstation.",
+      "whyWrong": {
+        "c": "A tag carrying all VLANs describes a trunk, not an access port.",
+        "b": "802.1X is access control; it does not encrypt frames.",
+        "a": "An access port carries all kinds of traffic, not only broadcast."
+      }
     },
     "cvi-q26": {
       "type": "truefalse",
@@ -188,12 +238,22 @@ export const corrections: CourseCorrections = {
     "cvi-q27": {
       "type": "single",
       "correct": "b",
-      "explanation": "The switch removes the first tag (that of the native VLAN) and forwards the frame with the second, which sends it into another VLAN. A dedicated, unused native VLAN neutralizes the attack."
+      "explanation": "The switch removes the first tag (that of the native VLAN) and forwards the frame with the second, which sends it into another VLAN. A dedicated, unused native VLAN neutralizes the attack.",
+      "whyWrong": {
+        "a": "MAC table flooding is another attack, without a double tag.",
+        "c": "ARP spoofing does not rely on the native VLAN.",
+        "d": "DHCP pool exhaustion is an attack on address assignment."
+      }
     },
     "cvi-q28": {
       "type": "single",
       "correct": "c",
-      "explanation": "DHCP snooping distinguishes trusted ports (toward the real server) from untrusted ports (users). Offers coming from an untrusted port are rejected: a rogue DHCP server can no longer answer."
+      "explanation": "DHCP snooping distinguishes trusted ports (toward the real server) from untrusted ports (users). Offers coming from an untrusted port are rejected: a rogue DHCP server can no longer answer.",
+      "whyWrong": {
+        "d": "Port security limits MAC addresses per port.",
+        "a": "Spanning Tree prevents loops.",
+        "b": "DNSSEC authenticates DNS answers."
+      }
     },
     "cvi-q29": {
       "type": "truefalse",
@@ -203,12 +263,22 @@ export const corrections: CourseCorrections = {
     "cvi-q30": {
       "type": "single",
       "correct": "a",
-      "explanation": "User ports must be explicitly configured as access ports, with automatic trunk negotiation disabled: the workstation can no longer get a link that carries all the VLANs."
+      "explanation": "User ports must be explicitly configured as access ports, with automatic trunk negotiation disabled: the workstation can no longer get a link that carries all the VLANs.",
+      "whyWrong": {
+        "d": "NAT does not control a port’s mode.",
+        "c": "Doubling cables does not change trunk negotiation.",
+        "b": "Renaming the default VLAN does not change trunk negotiation."
+      }
     },
     "cvi-q31": {
       "type": "single",
       "correct": "b",
-      "explanation": "802.1X requires a device to authenticate (certificate or credentials) before the port is opened. Port security complementarily limits MAC addresses, but does not authenticate."
+      "explanation": "802.1X requires a device to authenticate (certificate or credentials) before the port is opened. Port security complementarily limits MAC addresses, but does not authenticate.",
+      "whyWrong": {
+        "d": "Changing the native VLAN does not authenticate the device.",
+        "a": "NDP is IPv6’s neighbor protocol, not an access control.",
+        "c": "A /30 mask does not control who plugs in."
+      }
     },
     "cvi-q32": {
       "type": "single",
@@ -238,7 +308,12 @@ export const corrections: CourseCorrections = {
     "cvi-q35": {
       "type": "single",
       "correct": "c",
-      "explanation": "IPv6 no longer has broadcast: groups are addressed through multicast (for example `ff02::1` for all nodes on the link). This avoids disturbing machines that are not concerned."
+      "explanation": "IPv6 no longer has broadcast: groups are addressed through multicast (for example `ff02::1` for all nodes on the link). This avoids disturbing machines that are not concerned.",
+      "whyWrong": {
+        "a": "Broadcast no longer exists in IPv6.",
+        "d": "DHCP assigns addresses; it does not replace broadcast.",
+        "b": "NAT is not tied to broadcast."
+      }
     },
     "cvi-q36": {
       "type": "short",
@@ -256,12 +331,22 @@ export const corrections: CourseCorrections = {
     "cvi-q38": {
       "type": "single",
       "correct": "b",
-      "explanation": "RA Guard rejects Router Advertisements received on a user port: a workstation can no longer pretend to be the router. DHCP snooping and BPDU Guard target other protocols."
+      "explanation": "RA Guard rejects Router Advertisements received on a user port: a workstation can no longer pretend to be the router. DHCP snooping and BPDU Guard target other protocols.",
+      "whyWrong": {
+        "a": "BPDU Guard protects against Spanning Tree BPDUs on access ports.",
+        "d": "DHCP snooping filters DHCP replies.",
+        "c": "Port security limits MAC addresses."
+      }
     },
     "cvi-q39": {
       "type": "single",
       "correct": "a",
-      "explanation": "In IPv6, routers do not fragment: MTU discovery relies on ICMPv6 (Packet Too Big). NDP and SLAAC also depend on it. Filtering is therefore done type by type, rather than blocking everything."
+      "explanation": "In IPv6, routers do not fragment: MTU discovery relies on ICMPv6 (Packet Too Big). NDP and SLAAC also depend on it. Filtering is therefore done type by type, rather than blocking everything.",
+      "whyWrong": {
+        "c": "ICMPv6 encrypts nothing.",
+        "b": "ICMPv6 does not replace TCP.",
+        "d": "Blocking it would disrupt far more than `ping`."
+      }
     },
     "cvi-q40": {
       "type": "multi",

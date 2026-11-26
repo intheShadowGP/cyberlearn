@@ -1,7 +1,6 @@
-# Feuille de route « CyberAcadémie 9,2 » — suivi de reprise
+8,5Mesuré le 2026-11-27 : 39 laboratoires, 18 disciplines sur 18 couvertes, 12/16/7/4 par niveau, 68 cours sur 85 (80 %) reliés par la liste des cours liés, 36 cours avec un exercice lié. Les deux ancrages « ≥ 8 » et « ≥ 9 » (quantitatifs) sont atteints ; plafond non utilisé à fond car aucun laboratoire n’a été relu par un praticien ni vu à l’œil dans un navigateur avant ce jour |7,5Ancrage ≥ 8 partiellement atteint : 77 cours sur 85 (91 %) à 1 500 mots ou plus (seuil 80 % : atteint), mais 32 sur 85 (38 %) à 1 800 mots ou plus (seuil 60 % : non atteint) ; pas de relecture tierce. Relèvement limité à +0,5 (progression réelle, plafond de 8 non franchi) |# Feuille de route « CyberAcadémie 9,2 » — suivi de reprise
 
-Branche de travail : `improvement/project-9-2` (créée depuis `main` = `c1233a4`). Rien n’est fusionné ni publié.
-Les commits sont locaux, en français, sans signature. Toute publication (push, fusion dans `main`) exige la validation du propriétaire.
+Branche de travail : `improvement/project-9-2` (créée depuis `main` = `c1233a4`). Le 2026-11-26, sur demande explicite du propriétaire, la branche a été fusionnée dans `main` (avance rapide, `91c6588`, version V1.6.2) et poussée. Les commits sont en français, sans signature. Toute nouvelle publication sur `main` reste soumise à la demande du propriétaire.
 
 Légende des preuves : **V** vérifié (commande exécutée dans cette session) · **D** déclaré (document du dépôt, non revérifié) · **E** estimé · **N** non vérifié.
 
@@ -70,7 +69,31 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Laboratoires pratiques | 12 | 6,0 | 6,0 | 9,0 | — |
 | Fiabilité pédagogique | 8 | 6,5 | 6,5 | 9,0 | Un doublon avéré corrigé et des garde-fous ajoutés, mais aucun critère d’ancrage (§1 bis) n’est franchi : pas de relèvement |
 
-**Note globale actuelle : 7,40 / 10. L’objectif de 9,2 n’est pas atteint et ne peut pas l’être sans travail de fond sur les cours, les laboratoires et une relecture tierce.**
+**Note globale actuelle : 7,78 / 10** (calcul : 740 + 0,5 × 16 + 2,5 × 12 = 778 ; réévaluation du 2026-11-27 après audit, voir §3 bis). **L’objectif de 9,2 n’est pas atteint** : il manque la profondeur des leçons, la fiabilité (faits à la source, relecture tierce) et l’organisation mesurée.
+
+## 3 bis. Audit de reprise du 2026-11-27 (état réel)
+
+Méthode : relecture de cette feuille de route, mesures régénérées (`docs/QUALITY_METRICS.md`, `docs/CURRICULUM.md`), exécution des suites (283 tests unitaires, 50 tests e2e Chromium, typage, lint, build, `npm audit`), puis parcours réel de 19 routes dans le navigateur (version ordinateur et mobile 375 px).
+
+| Contrôle | Résultat |
+| --- | --- |
+| Tests unitaires, typage, lint, build | 283 tests, 0 erreur (V) |
+| e2e Chromium (dont axe WCAG 2.2 AA, deux thèmes, anglais sans texte français) | 50 sur 50 (V) |
+| `npm audit` | 0 vulnérabilité (V) |
+| Erreurs de console sur 19 routes | 0 (V) |
+| Défilement horizontal en 375 px sur 11 pages | aucun (V) |
+| Boutons ou liens sans nom accessible, images sans `alt` | aucun (V) |
+| Cibles tactiles de moins de 24 px | cases et boutons radio de 17 px (dans des libellés cliquables, à confirmer) ; liens en ligne dans le texte (exemptés) (V) |
+| Bundle principal | **725 ko (203 ko gzip)**, en hausse depuis 680 ko ; **306 ko de sources de `meta.ts` et `meta.en.ts` des 85 cours chargés dès le départ**, y compris l’anglais pour un lecteur francophone (V, analyse de carte de source) |
+| Taille du DOM | glossaire ≈ 5 700 nœuds, compétences ≈ 5 600, catalogue ≈ 2 100 (V) : au-dessus du seuil habituel d’alerte (1 400) |
+| Lighthouse | non exécutable ici (N) |
+| Faits vérifiés à la source | 6 lignes de `docs/FACT-CHECK.md` vérifiées ou vérifiées en partie le 2026-11-26 ; le reste reste non vérifié (V) |
+| Questions à choix avec « pourquoi c’est faux » | 94 % en moyenne à l’audit ; **corrigé le même jour : 100 %** (≥ 1 mauvaise réponse expliquée pour chaque question à choix, 142 explications de questions ajoutées en FR et EN dans 9 cours, garde-fou ajouté dans `bank-quality.test.ts`). Limite : environ 155 questions n’expliquent encore qu’une partie des mauvaises réponses (V) |
+| Cours à 1 800 mots ou plus / à 1 500 mots ou plus | 32 sur 85 (38 %) / 77 sur 85 (91 %) ; médiane 1 740 ; 5 cours sous 1 300 mots (V) |
+| Cours avec au moins 3 exercices | 78 sur 85 (V) |
+| Paires de questions quasi identiques | 29 (similarité ≥ 0,5), non revues une à une (V) |
+
+Points d’amélioration retenus, par ordre : (1) compléter les « pourquoi c’est faux » des 9 cours concernés (ancrage fiabilité) ; (2) alléger le bundle principal en chargeant les textes anglais à la demande ; (3) paginer ou virtualiser le glossaire et le tableau des compétences ; (4) approfondir les 8 cours sous 1 500 mots avec un relecteur spécialiste ; (5) relecture tierce et vérification des faits restants.
 
 ## 4. Constats de l’audit initial (priorisés)
 

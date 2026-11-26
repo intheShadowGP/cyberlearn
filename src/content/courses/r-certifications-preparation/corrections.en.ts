@@ -87,7 +87,12 @@ export const corrections: CourseCorrections = {
     "cert-q10": {
       "type": "single",
       "correct": "c",
-      "explanation": "Active recall (testing yourself) and spaced reviews are among the learning techniques best supported by cognitive science research."
+      "explanation": "Active recall (testing yourself) and spaced reviews are among the learning techniques best supported by cognitive science research.",
+      "whyWrong": {
+        "b": "Rereading notes the night before gives a misleading familiarity, not lasting memory.",
+        "d": "Highlighting then rereading once is a passive, weakly effective method.",
+        "a": "Watching sped-up videos is passive and does not trigger recall."
+      }
     },
     "cert-q11": {
       "type": "truefalse",
@@ -146,22 +151,42 @@ export const corrections: CourseCorrections = {
     "cert-q17": {
       "type": "single",
       "correct": "b",
-      "explanation": "The OSCP (Offensive Security Certified Professional) is issued by OffSec, following the PEN-200 course and a practical exam."
+      "explanation": "The OSCP (Offensive Security Certified Professional) is issued by OffSec, following the PEN-200 course and a practical exam.",
+      "whyWrong": {
+        "a": "ISC2 issues the CISSP among others.",
+        "d": "CompTIA issues Security+ among others.",
+        "c": "Cisco issues the CCNA among others."
+      }
     },
     "cert-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "The CISSP is issued by ISC2, which also offers ISC2 CC at entry level. ISACA, on the other hand, issues the CISM and the CISA."
+      "explanation": "The CISSP is issued by ISC2, which also offers ISC2 CC at entry level. ISACA, on the other hand, issues the CISM and the CISA.",
+      "whyWrong": {
+        "b": "ISACA issues the CISM and CISA, not the CISSP.",
+        "d": "CompTIA issues Security+ among others.",
+        "c": "EC-Council issues the CEH among others."
+      }
     },
     "cert-q19": {
       "type": "single",
       "correct": "d",
-      "explanation": "A practical exam (OSCP, PNPT) puts the candidate in an environment to compromise or analyze and ends with a report. A multiple-choice exam (Security+, CISSP, ISC2 CC) validates the breadth of knowledge. The two are complementary."
+      "explanation": "A practical exam (OSCP, PNPT) puts the candidate in an environment to compromise or analyze and ends with a report. A multiple-choice exam (Security+, CISSP, ISC2 CC) validates the breadth of knowledge. The two are complementary.",
+      "whyWrong": {
+        "b": "It is the other way around: the multiple-choice test is not a hands-on exam.",
+        "a": "The two formats do not validate the same skills.",
+        "c": "A written report is usually required in practical exams, not in multiple-choice tests."
+      }
     },
     "cert-q20": {
       "type": "single",
       "correct": "c",
-      "explanation": "Vendor-neutral certifications (CompTIA, ISC2…) validate knowledge that applies whatever the product. Vendor or manufacturer certifications (Cisco CCNA, for example) validate mastery of a specific ecosystem."
+      "explanation": "Vendor-neutral certifications (CompTIA, ISC2…) validate knowledge that applies whatever the product. Vendor or manufacturer certifications (Cisco CCNA, for example) validate mastery of a specific ecosystem.",
+      "whyWrong": {
+        "d": "Being free has nothing to do with vendor neutrality.",
+        "a": "Neutrality says nothing about an expiry date.",
+        "b": "Neutrality does not guarantee universal recognition."
+      }
     },
     "cert-q21": {
       "type": "truefalse",
@@ -171,12 +196,22 @@ export const corrections: CourseCorrections = {
     "cert-q22": {
       "type": "single",
       "correct": "b",
-      "explanation": "The CISM, issued by ISACA, is aimed at information security managers. eJPT is a practical entry-level penetration testing certification, Network+ covers networking and GCIA intrusion analysis."
+      "explanation": "The CISM, issued by ISACA, is aimed at information security managers. eJPT is a practical entry-level penetration testing certification, Network+ covers networking and GCIA intrusion analysis.",
+      "whyWrong": {
+        "a": "eJPT is an entry-level hands-on pentest certification.",
+        "d": "Network+ concerns networking.",
+        "c": "GCIA concerns intrusion analysis, not management."
+      }
     },
     "cert-q23": {
       "type": "single",
       "correct": "c",
-      "explanation": "GIAC (Global Information Assurance Certification) groups many specialized certifications, notably defensive ones: GCIH (incident handling) and GCIA (intrusion analysis)."
+      "explanation": "GIAC (Global Information Assurance Certification) groups many specialized certifications, notably defensive ones: GCIH (incident handling) and GCIA (intrusion analysis).",
+      "whyWrong": {
+        "d": "ISACA issues the CISM and CISA, among others.",
+        "b": "CompTIA issues Security+ among others.",
+        "a": "Cisco issues the CCNA among others."
+      }
     },
     "cert-q24": {
       "type": "multi",
@@ -194,12 +229,22 @@ export const corrections: CourseCorrections = {
     "cert-q25": {
       "type": "single",
       "correct": "a",
-      "explanation": "A SOC analyst career is built on solid networking and systems foundations, a foundational certification, then a detection certification. The OSCP is offensive and the CISSP requires experience."
+      "explanation": "A SOC analyst career is built on solid networking and systems foundations, a foundational certification, then a detection certification. The OSCP is offensive and the CISSP requires experience.",
+      "whyWrong": {
+        "c": "Starting with the OSCP without the basics is a poorly coherent path for a SOC role.",
+        "d": "The CISSP assumes experience and is aimed at governance.",
+        "b": "Without certification or basics, the plan remains too narrow."
+      }
     },
     "cert-q26": {
       "type": "single",
       "correct": "d",
-      "explanation": "Application pentesting relies on web security, code security and pentest methodology (modules F, G, H), with a hands-on progression of eJPT then OSCP."
+      "explanation": "Application pentesting relies on web security, code security and pentest methodology (modules F, G, H), with a hands-on progression of eJPT then OSCP.",
+      "whyWrong": {
+        "a": "Governance and compliance do not prepare for application pentesting.",
+        "c": "Networking and routing are useful but do not target application pentesting.",
+        "b": "Forensics and malware aim at other jobs."
+      }
     },
     "cert-q27": {
       "type": "truefalse",
@@ -209,7 +254,12 @@ export const corrections: CourseCorrections = {
     "cert-q28": {
       "type": "single",
       "correct": "a",
-      "explanation": "Regularity matters more than intensity: 5 to 8 hours per week beats irregular marathon sessions, which produce fragile memorization."
+      "explanation": "Regularity matters more than intensity: 5 to 8 hours per week beats irregular marathon sessions, which produce fragile memorization.",
+      "whyWrong": {
+        "c": "A last-minute marathon encourages forgetting.",
+        "d": "Thirty minutes a month is too little to progress.",
+        "b": "Without planning, preparation is left to chance."
+      }
     },
     "cert-q29": {
       "type": "short",
@@ -232,12 +282,22 @@ export const corrections: CourseCorrections = {
     "cert-q31": {
       "type": "single",
       "correct": "b",
-      "explanation": "A mock exam under real conditions reveals gaps and trains time management. It does not reproduce the official questions and does not deliver any attestation."
+      "explanation": "A mock exam under real conditions reveals gaps and trains time management. It does not reproduce the official questions and does not deliver any attestation.",
+      "whyWrong": {
+        "d": "A mock exam does not give the questions of the official exam.",
+        "a": "It does not remove the need to study afterwards.",
+        "c": "It gives no certificate from the certifying body."
+      }
     },
     "cert-q32": {
       "type": "single",
       "correct": "d",
-      "explanation": "Error analysis turns the mock exam into a learning tool: you identify the missing concepts, then rework them in labs and through active recall."
+      "explanation": "Error analysis turns the mock exam into a learning tool: you identify the missing concepts, then rework them in labs and through active recall.",
+      "whyWrong": {
+        "a": "Retaking the same exam tests memory of the answers, not understanding.",
+        "b": "Looking only at the score loses the useful information.",
+        "c": "Revising only what is already known leaves the gaps untouched."
+      }
     },
     "cert-q33": {
       "type": "multi",
@@ -260,7 +320,12 @@ export const corrections: CourseCorrections = {
     "cert-q35": {
       "type": "single",
       "correct": "c",
-      "explanation": "Most bodies require continuing education credits over the validity period (three years for CompTIA certifications, for example) to keep the credential active."
+      "explanation": "Most bodies require continuing education credits over the validity period (three years for CompTIA certifications, for example) to keep the credential active.",
+      "whyWrong": {
+        "a": "Lifetime validity with no condition is rare and is not what this renewal means.",
+        "d": "Retaking the full exam every month is not the principle.",
+        "b": "A certification cannot be passed on to a colleague."
+      }
     },
     "cert-q36": {
       "type": "truefalse",
@@ -270,7 +335,12 @@ export const corrections: CourseCorrections = {
     "cert-q37": {
       "type": "single",
       "correct": "d",
-      "explanation": "ISO/IEC 17024 governs the certification of persons (impartiality, assessment, maintenance of certification). ISO/IEC 27001 specifies the ISMS and ISO 19011 gives audit guidelines: those are other standards."
+      "explanation": "ISO/IEC 17024 governs the certification of persons (impartiality, assessment, maintenance of certification). ISO/IEC 27001 specifies the ISMS and ISO 19011 gives audit guidelines: those are other standards.",
+      "whyWrong": {
+        "a": "That description matches ISO/IEC 27001.",
+        "c": "That description matches ISO 19011.",
+        "b": "The standard does not define the technical content of exams."
+      }
     },
     "cert-q38": {
       "type": "multi",
@@ -288,7 +358,12 @@ export const corrections: CourseCorrections = {
     "cert-q39": {
       "type": "single",
       "correct": "c",
-      "explanation": "Passing a multiple-choice exam does not prove the ability to carry out the expected tasks. Lab practice consolidates concepts and prepares for interviews and scenario-based tests."
+      "explanation": "Passing a multiple-choice exam does not prove the ability to carry out the expected tasks. Lab practice consolidates concepts and prepares for interviews and scenario-based tests.",
+      "whyWrong": {
+        "a": "A certification is not automatically revoked for this reason.",
+        "d": "Passing an exam does not prevent registering for others.",
+        "b": "The reference material is not withdrawn from the holder."
+      }
     },
     "cert-q40": {
       "type": "open",
@@ -311,7 +386,12 @@ export const corrections: CourseCorrections = {
     "cert-q42": {
       "type": "single",
       "correct": "b",
-      "explanation": "The CCNA validates mastery of networks built with Cisco equipment. The CISM is about management, the PNPT about pentesting and GCIH about incident handling."
+      "explanation": "The CCNA validates mastery of networks built with Cisco equipment. The CISM is about management, the PNPT about pentesting and GCIH about incident handling.",
+      "whyWrong": {
+        "a": "The CISM concerns security management.",
+        "d": "The PNPT concerns pentesting.",
+        "c": "GCIH concerns incident handling."
+      }
     },
     "cert-q43": {
       "type": "truefalse",
@@ -321,7 +401,12 @@ export const corrections: CourseCorrections = {
     "cert-q44": {
       "type": "single",
       "correct": "a",
-      "explanation": "A portfolio provides verifiable evidence of practice, which recruiters review alongside certifications. It replaces neither the exam nor the résumé."
+      "explanation": "A portfolio provides verifiable evidence of practice, which recruiters review alongside certifications. It replaces neither the exam nor the résumé.",
+      "whyWrong": {
+        "d": "A portfolio does not replace a certification exam.",
+        "b": "A portfolio does not remove the need for a CV.",
+        "c": "Not all certifying bodies require a portfolio."
+      }
     },
     "cert-q45": {
       "type": "multi",
@@ -339,7 +424,12 @@ export const corrections: CourseCorrections = {
     "cert-q46": {
       "type": "single",
       "correct": "d",
-      "explanation": "The “Associate of ISC2” status is granted to someone who passes the exam without yet having the required professional experience; they have a period of time to complete it and obtain the full credential."
+      "explanation": "The “Associate of ISC2” status is granted to someone who passes the exam without yet having the required professional experience; they have a period of time to complete it and obtain the full credential.",
+      "whyWrong": {
+        "c": "Associate of ISC2 does not designate an employee of the organization.",
+        "a": "This status does not mean the exam was failed.",
+        "b": "It is not an ISO governance certification."
+      }
     }
   },
 };

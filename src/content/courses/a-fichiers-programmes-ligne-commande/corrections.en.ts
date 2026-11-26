@@ -16,7 +16,12 @@ export const corrections: CourseCorrections = {
     "fpc-q2": {
       "type": "single",
       "correct": "a",
-      "explanation": "An absolute path (`/etc/hosts`, `C:\\Windows`) designates the same file wherever it is read from, because it starts from the root. A relative path depends on the current directory."
+      "explanation": "An absolute path (`/etc/hosts`, `C:\\Windows`) designates the same file wherever it is read from, because it starts from the root. A relative path depends on the current directory.",
+      "whyWrong": {
+        "b": "A path that starts from the current directory is a relative path.",
+        "c": "A path is not defined by its characters.",
+        "d": "An absolute path designates a local location, not a remote site."
+      }
     },
     "fpc-q3": {
       "type": "truefalse",
@@ -42,7 +47,12 @@ export const corrections: CourseCorrections = {
     "fpc-q18": {
       "type": "single",
       "correct": "c",
-      "explanation": "Opening a symbolic link amounts to opening its target. A poorly controlled link can redirect a privileged program to a sensitive file, hence the attention paid to how they are handled."
+      "explanation": "Opening a symbolic link amounts to opening its target. A poorly controlled link can redirect a privileged program to a sensitive file, hence the attention paid to how they are handled.",
+      "whyWrong": {
+        "d": "A full copy is a separate file, not a link.",
+        "b": "A symbolic link has nothing to do with compression or a password.",
+        "a": "A symbolic link works across the whole file system, not only in the browser."
+      }
     },
     "fpc-q19": {
       "type": "multi",
@@ -83,12 +93,22 @@ export const corrections: CourseCorrections = {
     "fpc-q5": {
       "type": "single",
       "correct": "a",
-      "explanation": "A compiler produces an executable once and for all; an interpreter reads the source code and executes it as it goes. Some languages combine both (bytecode and virtual machine)."
+      "explanation": "A compiler produces an executable once and for all; an interpreter reads the source code and executes it as it goes. Some languages combine both (bytecode and virtual machine).",
+      "whyWrong": {
+        "b": "Neither depends on a remote server.",
+        "d": "Both concern code, not texts or images.",
+        "c": "The two notions differ: prior translation or reading at each run."
+      }
     },
     "fpc-q22": {
       "type": "single",
       "correct": "c",
-      "explanation": "C, C++, Go and Rust are compiled to machine code. Python, Ruby and PHP are usually interpreted (with internal compilation to bytecode for some)."
+      "explanation": "C, C++, Go and Rust are compiled to machine code. Python, Ruby and PHP are usually interpreted (with internal compilation to bytecode for some).",
+      "whyWrong": {
+        "d": "Python is usually interpreted.",
+        "b": "Ruby is usually interpreted.",
+        "a": "PHP is usually interpreted."
+      }
     },
     "fpc-q6": {
       "type": "multi",
@@ -106,7 +126,12 @@ export const corrections: CourseCorrections = {
     "fpc-q23": {
       "type": "single",
       "correct": "b",
-      "explanation": "Java and C# compile to an intermediate format (bytecode) that the virtual machine runs. This makes the program portable from one system to another."
+      "explanation": "Java and C# compile to an intermediate format (bytecode) that the virtual machine runs. This makes the program portable from one system to another.",
+      "whyWrong": {
+        "a": "Java is indeed compiled to bytecode: it is not pure interpretation.",
+        "d": "Bytecode is not direct machine code; it goes through a virtual machine.",
+        "c": "The kernel does not run bytecode on its own."
+      }
     },
     "fpc-q24": {
       "type": "truefalse",
@@ -116,7 +141,12 @@ export const corrections: CourseCorrections = {
     "fpc-q25": {
       "type": "single",
       "correct": "b",
-      "explanation": "The hash changes as soon as one byte changes. By recomputing it after the download and comparing it with the vendor’s (obtained through a trusted channel), an alteration is detected."
+      "explanation": "The hash changes as soon as one byte changes. By recomputing it after the download and comparing it with the vendor’s (obtained through a trusted channel), an alteration is detected.",
+      "whyWrong": {
+        "d": "The hash does not change download speed.",
+        "a": "A hash encrypts nothing.",
+        "c": "The hash does not tell which language was used."
+      }
     },
     "fpc-q26": {
       "type": "short",
@@ -129,12 +159,22 @@ export const corrections: CourseCorrections = {
     "fpc-q27": {
       "type": "single",
       "correct": "a",
-      "explanation": "By compromising a link that many other software products use, the attacker reaches all their users. It is fought with inventory, version pinning and source verification."
+      "explanation": "By compromising a link that many other software products use, the attacker reaches all their users. It is fought with inventory, version pinning and source verification.",
+      "whyWrong": {
+        "d": "Denial of service targets a site’s availability, not the delivered code.",
+        "b": "Phishing deceives a user by email.",
+        "c": "Brute force tries passwords, unrelated to a trojanized library."
+      }
     },
     "fpc-q8": {
       "type": "single",
       "correct": "d",
-      "explanation": "The client (browser, application) sends requests; the server processes them and answers. The essential checks are therefore done on the server side."
+      "explanation": "The client (browser, application) sends requests; the server processes them and answers. The essential checks are therefore done on the server side.",
+      "whyWrong": {
+        "c": "The client sends the request; it does not process it.",
+        "a": "The cable carries data; it does not process it.",
+        "b": "The user acts on the client, not on request processing."
+      }
     },
     "fpc-q9": {
       "type": "truefalse",
@@ -152,17 +192,32 @@ export const corrections: CourseCorrections = {
     "fpc-q28": {
       "type": "single",
       "correct": "c",
-      "explanation": "Each layer only talks to its neighbor: presentation talks to business logic, which talks to data access. The browser must never access the database directly."
+      "explanation": "Each layer only talks to its neighbor: presentation talks to business logic, which talks to data access. The browser must never access the database directly.",
+      "whyWrong": {
+        "d": "The presentation layer does not talk directly to the database.",
+        "a": "The browser must never access the database directly.",
+        "b": "The local network carries exchanges; it is not an application layer."
+      }
     },
     "fpc-q29": {
       "type": "single",
       "correct": "c",
-      "explanation": "The server must never use a sensitive value provided by the client: it reads it again from its own database. A check in the browser does not protect."
+      "explanation": "The server must never use a sensitive value provided by the client: it reads it again from its own database. A check in the browser does not protect.",
+      "whyWrong": {
+        "b": "Trusting the received price would allow paying €1 instead of €100.",
+        "d": "Hiding the price in the form does not protect it: the client can change it.",
+        "a": "The browser is controlled by the user; price calculation is not delegated to it."
+      }
     },
     "fpc-q30": {
       "type": "single",
       "correct": "b",
-      "explanation": "An API (application programming interface) exposes functions, often over the network. Each exposed access point is an entry door that must be authenticated, validated and monitored."
+      "explanation": "An API (application programming interface) exposes functions, often over the network. Each exposed access point is an entry door that must be authenticated, validated and monitored.",
+      "whyWrong": {
+        "a": "A virus spread through attachments is not an API.",
+        "c": "An API is not a programming language reserved for browsers.",
+        "d": "An API is not a hardware component."
+      }
     },
     "fpc-q31": {
       "type": "multi",
@@ -195,7 +250,12 @@ export const corrections: CourseCorrections = {
     "fpc-q12": {
       "type": "single",
       "correct": "a",
-      "explanation": "A loop (`for`, `while`) repeats a block of instructions, for example to process each line of a file or each item of a list."
+      "explanation": "A loop (`for`, `while`) repeats a block of instructions, for example to process each line of a file or each item of a list.",
+      "whyWrong": {
+        "d": "Storing a named value corresponds to a variable.",
+        "c": "Shutting down the machine is not the role of a loop.",
+        "b": "A loop encrypts nothing by itself."
+      }
     },
     "fpc-q13": {
       "type": "multi",
@@ -223,7 +283,12 @@ export const corrections: CourseCorrections = {
     "fpc-q34": {
       "type": "single",
       "correct": "d",
-      "explanation": "A dictionary retrieves a value from its key (for example a username associated with their rights). A list is an ordered sequence accessed by position."
+      "explanation": "A dictionary retrieves a value from its key (for example a username associated with their rights). A list is an ordered sequence accessed by position.",
+      "whyWrong": {
+        "c": "A list is an ordered sequence accessed by position.",
+        "a": "A loop repeats instructions.",
+        "b": "A condition chooses an execution branch."
+      }
     },
     "fpc-q35": {
       "type": "truefalse",
@@ -258,7 +323,12 @@ export const corrections: CourseCorrections = {
     "fpc-q39": {
       "type": "single",
       "correct": "c",
-      "explanation": "The shell (Bash, PowerShell) reads the typed commands, interprets them and starts the matching programs. It also lets you write scripts."
+      "explanation": "The shell (Bash, PowerShell) reads the typed commands, interprets them and starts the matching programs. It also lets you write scripts.",
+      "whyWrong": {
+        "d": "A shell does not encrypt the disk’s files.",
+        "a": "Displaying web pages is the browser’s job.",
+        "b": "Power management is the operating system’s job."
+      }
     },
     "fpc-q14": {
       "type": "truefalse",

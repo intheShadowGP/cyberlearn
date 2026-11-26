@@ -7,12 +7,22 @@ export const corrections: CourseCorrections = {
     "tcb-q1": {
       "type": "single",
       "correct": "b",
-      "explanation": "La TCB regroupe le matériel, le micrologiciel et les logiciels auxquels on doit faire confiance pour que la politique de sécurité soit respectée. Ce qui n’en fait pas partie ne peut pas, en théorie, la violer."
+      "explanation": "La TCB regroupe le matériel, le micrologiciel et les logiciels auxquels on doit faire confiance pour que la politique de sécurité soit respectée. Ce qui n’en fait pas partie ne peut pas, en théorie, la violer.",
+      "whyWrong": {
+        "a": "La TCB inclut aussi les composants d’autres fournisseurs : l’origine ne la définit pas.",
+        "d": "Les utilisateurs ne sont pas des composants de la TCB, même s’ils administrent.",
+        "c": "Les sauvegardes hors site relèvent de la continuité, pas de la TCB."
+      }
     },
     "tcb-q2": {
       "type": "single",
       "correct": "a",
-      "explanation": "Chaque ligne de code de la TCB peut contenir une faille qui l’invalide. Une TCB réduite se relit, se teste et, dans les cas extrêmes, se prouve : c’est le principe du micro-noyau et des architectures minimales."
+      "explanation": "Chaque ligne de code de la TCB peut contenir une faille qui l’invalide. Une TCB réduite se relit, se teste et, dans les cas extrêmes, se prouve : c’est le principe du micro-noyau et des architectures minimales.",
+      "whyWrong": {
+        "d": "La taille de la TCB n’a pas de lien garanti avec la vitesse de démarrage.",
+        "b": "Aucun système n’est exempt de vulnérabilités : une petite TCB en a moins, pas zéro.",
+        "c": "Les mises à jour restent nécessaires, quelle que soit la taille de la TCB."
+      }
     },
     "tcb-q3": {
       "type": "multi",
@@ -35,7 +45,12 @@ export const corrections: CourseCorrections = {
     "tcb-q5": {
       "type": "single",
       "correct": "c",
-      "explanation": "Dans un micro-noyau, les pilotes, les systèmes de fichiers et les piles réseau sont des services isolés en espace utilisateur. Une faille dans un pilote ne donne pas automatiquement le contrôle de tout le système."
+      "explanation": "Dans un micro-noyau, les pilotes, les systèmes de fichiers et les piles réseau sont des services isolés en espace utilisateur. Une faille dans un pilote ne donne pas automatiquement le contrôle de tout le système.",
+      "whyWrong": {
+        "a": "C’est l’idée opposée : celle d’un noyau monolithique.",
+        "d": "Un micro-noyau partage la mémoire avec les services par messages contrôlés, pas par un processeur dédié.",
+        "b": "Un hyperviseur isole des machines virtuelles ; il ne remplace pas le noyau d’un système."
+      }
     },
     "tcb-q6": {
       "type": "short",
@@ -62,22 +77,42 @@ export const corrections: CourseCorrections = {
     "tcb-q9": {
       "type": "single",
       "correct": "d",
-      "explanation": "Dans les permissions Unix classiques (DAC), le propriétaire d’un fichier décide qui y accède. En MAC (SELinux, AppArmor), une politique définie par l’administrateur de sécurité s’applique même au propriétaire."
+      "explanation": "Dans les permissions Unix classiques (DAC), le propriétaire d’un fichier décide qui y accède. En MAC (SELinux, AppArmor), une politique définie par l’administrateur de sécurité s’applique même au propriétaire.",
+      "whyWrong": {
+        "b": "C’est l’inverse : le DAC laisse le propriétaire décider.",
+        "a": "Les deux modèles concernent les droits d’accès, pas les réseaux ni les disques.",
+        "c": "Ni le DAC ni le MAC ne chiffrent ou ne compressent les données."
+      }
     },
     "tcb-q10": {
       "type": "single",
       "correct": "a",
-      "explanation": "SELinux associe des types aux processus et aux objets et applique une politique centrale. AppArmor suit une approche voisine par profils. NTFS est un système de fichiers, DHCP et LDAP des protocoles."
+      "explanation": "SELinux associe des types aux processus et aux objets et applique une politique centrale. AppArmor suit une approche voisine par profils. NTFS est un système de fichiers, DHCP et LDAP des protocoles.",
+      "whyWrong": {
+        "b": "NTFS est un système de fichiers ; ses ACL relèvent du contrôle discrétionnaire.",
+        "d": "DHCP distribue des adresses IP, il ne contrôle pas les accès.",
+        "c": "LDAP est un annuaire : il stocke des identités, il n’impose pas de politique obligatoire."
+      }
     },
     "tcb-q11": {
       "type": "single",
       "correct": "c",
-      "explanation": "Bell-LaPadula protège la confidentialité des informations classifiées : un sujet ne lit pas au-dessus de son niveau et n’écrit pas vers un niveau inférieur, ce qui empêche les fuites. Biba en est le dual pour l’intégrité."
+      "explanation": "Bell-LaPadula protège la confidentialité des informations classifiées : un sujet ne lit pas au-dessus de son niveau et n’écrit pas vers un niveau inférieur, ce qui empêche les fuites. Biba en est le dual pour l’intégrité.",
+      "whyWrong": {
+        "b": "Cette formule décrit Biba, qui protège l’intégrité.",
+        "a": "La redondance relève de la disponibilité, pas de Bell-LaPadula.",
+        "d": "La signature numérique assure l’authenticité, un autre objectif."
+      }
     },
     "tcb-q12": {
       "type": "single",
       "correct": "b",
-      "explanation": "Biba empêche qu’une donnée de confiance soit corrompue par une source moins fiable : pas de lecture vers le bas, pas d’écriture vers le haut. C’est le dual de Bell-LaPadula."
+      "explanation": "Biba empêche qu’une donnée de confiance soit corrompue par une source moins fiable : pas de lecture vers le bas, pas d’écriture vers le haut. C’est le dual de Bell-LaPadula.",
+      "whyWrong": {
+        "a": "La confidentialité est l’objectif de Bell-LaPadula, pas de Biba.",
+        "d": "La disponibilité n’est pas traitée par Biba.",
+        "c": "La non-répudiation relève de la signature et de la preuve, pas de Biba."
+      }
     },
     "tcb-q13": {
       "type": "truefalse",
@@ -87,7 +122,12 @@ export const corrections: CourseCorrections = {
     "tcb-q14": {
       "type": "single",
       "correct": "d",
-      "explanation": "Dans un modèle à capacités, qui détient la référence peut s’en servir, et on ne peut pas en fabriquer. Cela évite le problème du « député confus » et applique naturellement le moindre privilège."
+      "explanation": "Dans un modèle à capacités, qui détient la référence peut s’en servir, et on ne peut pas en fabriquer. Cela évite le problème du « député confus » et applique naturellement le moindre privilège.",
+      "whyWrong": {
+        "a": "Un nom d’utilisateur identifie une personne ; une capacité repose sur la référence détenue.",
+        "c": "L’adresse IP de l’appelant ne fonde pas l’autorisation dans ce modèle.",
+        "b": "L’appartenance à un groupe caractérise un contrôle d’accès par listes, pas les capacités."
+      }
     },
     "tcb-q15": {
       "type": "multi",
@@ -112,17 +152,32 @@ export const corrections: CourseCorrections = {
     "tcb-q17": {
       "type": "single",
       "correct": "a",
-      "explanation": "La confiance se construit par couches : chaque étape vérifie la suivante. La première (racine de confiance) ne peut être vérifiée par personne : elle doit être protégée physiquement et rester minimale, par exemple une mémoire non modifiable du processeur."
+      "explanation": "La confiance se construit par couches : chaque étape vérifie la suivante. La première (racine de confiance) ne peut être vérifiée par personne : elle doit être protégée physiquement et rester minimale, par exemple une mémoire non modifiable du processeur.",
+      "whyWrong": {
+        "c": "Le compte principal d’un système est un compte privilégié, pas une racine de confiance matérielle.",
+        "b": "Le dossier racine est une notion de système de fichiers, sans lien avec la confiance.",
+        "d": "Un certificat de site s’appuie sur une autorité, mais n’est pas la racine de confiance de la plateforme."
+      }
     },
     "tcb-q18": {
       "type": "single",
       "correct": "b",
-      "explanation": "Secure Boot vérifie des signatures et refuse l’exécution de ce qui n’est pas autorisé. Le démarrage mesuré enregistre des empreintes dans le TPM, qui permettent ensuite à un tiers (attestation) ou au système de décider si l’état est acceptable."
+      "explanation": "Secure Boot vérifie des signatures et refuse l’exécution de ce qui n’est pas autorisé. Le démarrage mesuré enregistre des empreintes dans le TPM, qui permettent ensuite à un tiers (attestation) ou au système de décider si l’état est acceptable.",
+      "whyWrong": {
+        "a": "C’est l’inverse des deux fonctions.",
+        "d": "Aucun des deux ne concerne le réseau ni le stockage en tant que tels.",
+        "c": "Ils sont complémentaires : l’un bloque, l’autre mesure."
+      }
     },
     "tcb-q19": {
       "type": "single",
       "correct": "c",
-      "explanation": "Les PCR du TPM contiennent des empreintes cumulées des composants démarrés. On ne peut pas les écrire librement : on ne peut que les « étendre » en y ajoutant une nouvelle mesure."
+      "explanation": "Les PCR du TPM contiennent des empreintes cumulées des composants démarrés. On ne peut pas les écrire librement : on ne peut que les « étendre » en y ajoutant une nouvelle mesure.",
+      "whyWrong": {
+        "d": "Le registre Windows est un composant logiciel modifiable, pas un support de mesures de confiance.",
+        "a": "Un fichier de mots de passe est modifiable ; les PCR ne le sont qu’en « étendant ».",
+        "b": "Le cache du processeur est volatil et sans lien avec le TPM."
+      }
     },
     "tcb-q20": {
       "type": "truefalse",
@@ -132,12 +187,22 @@ export const corrections: CourseCorrections = {
     "tcb-q21": {
       "type": "single",
       "correct": "b",
-      "explanation": "Le TPM signe les mesures (citation, ou « quote ») avec une clé d’attestation. Le vérifieur compare les valeurs aux valeurs attendues et décide d’accorder ou non des secrets ou l’accès au réseau."
+      "explanation": "Le TPM signe les mesures (citation, ou « quote ») avec une clé d’attestation. Le vérifieur compare les valeurs aux valeurs attendues et décide d’accorder ou non des secrets ou l’accès au réseau.",
+      "whyWrong": {
+        "d": "Le chiffrement des échanges relève de TLS, pas de l’attestation.",
+        "c": "L’empreinte digitale relève de l’authentification biométrique.",
+        "a": "La mise à jour du micrologiciel est une autre opération."
+      }
     },
     "tcb-q22": {
       "type": "single",
       "correct": "d",
-      "explanation": "Un composant signé mais vulnérable reste accepté tant que sa signature n’est pas révoquée. La parade est la révocation (liste dbx, mises à jour), complétée par le démarrage mesuré. Un exemple connu est BlackLotus (2023)."
+      "explanation": "Un composant signé mais vulnérable reste accepté tant que sa signature n’est pas révoquée. La parade est la révocation (liste dbx, mises à jour), complétée par le démarrage mesuré. Un exemple connu est BlackLotus (2023).",
+      "whyWrong": {
+        "a": "Désactiver l’antivirus n’empêche pas le bootkit ; cela réduit la protection.",
+        "b": "Autoriser tout support amovible élargit la surface d’attaque.",
+        "c": "Retirer le mot de passe du micrologiciel supprime une protection."
+      }
     },
     "tcb-q23": {
       "type": "short",
@@ -162,17 +227,32 @@ export const corrections: CourseCorrections = {
     "tcb-q25": {
       "type": "single",
       "correct": "a",
-      "explanation": "Sans IOMMU, un périphérique PCIe ou Thunderbolt peut lire et écrire toute la mémoire par DMA, en contournant le noyau. L’IOMMU restreint, comme une MMU pour les périphériques, les zones mémoire accessibles à chacun."
+      "explanation": "Sans IOMMU, un périphérique PCIe ou Thunderbolt peut lire et écrire toute la mémoire par DMA, en contournant le noyau. L’IOMMU restreint, comme une MMU pour les périphériques, les zones mémoire accessibles à chacun.",
+      "whyWrong": {
+        "c": "Le hameçonnage se traite par la sensibilisation et le filtrage du courrier.",
+        "d": "Les injections SQL se traitent dans le code applicatif.",
+        "b": "L’usurpation ARP se traite sur le réseau local, pas par l’IOMMU."
+      }
     },
     "tcb-q26": {
       "type": "single",
       "correct": "c",
-      "explanation": "SMEP (Supervisor Mode Execution Prevention) interdit au noyau d’exécuter une page marquée « utilisateur ». Elle bloque l’exploitation classique où une faille du noyau redirige l’exécution vers du code placé par l’attaquant dans son propre processus. SMAP fait de même pour les accès aux données."
+      "explanation": "SMEP (Supervisor Mode Execution Prevention) interdit au noyau d’exécuter une page marquée « utilisateur ». Elle bloque l’exploitation classique où une faille du noyau redirige l’exécution vers du code placé par l’attaquant dans son propre processus. SMAP fait de même pour les accès aux données.",
+      "whyWrong": {
+        "d": "SMEP n’effectue pas de chiffrement ; le chiffrement mémoire relève d’autres technologies.",
+        "b": "SMEP ne bloque pas les appels système, qui restent possibles.",
+        "a": "SMEP n’a aucun lien avec le débit réseau."
+      }
     },
     "tcb-q27": {
       "type": "single",
       "correct": "a",
-      "explanation": "Le processeur exécute par anticipation des instructions qui seront annulées, mais leurs effets sur les caches subsistent et se mesurent. Les correctifs combinent micrologiciel, système et logiciel, souvent avec un coût de performance."
+      "explanation": "Le processeur exécute par anticipation des instructions qui seront annulées, mais leurs effets sur les caches subsistent et se mesurent. Les correctifs combinent micrologiciel, système et logiciel, souvent avec un coût de performance.",
+      "whyWrong": {
+        "c": "Spectre ne vise pas un protocole réseau mais le fonctionnement du processeur.",
+        "d": "Les mots de passe de routeurs relèvent de la configuration, pas de Spectre.",
+        "b": "Le chiffrement sans fil n’est pas en cause : Spectre agit sur le processeur."
+      }
     },
     "tcb-q28": {
       "type": "truefalse",
@@ -182,7 +262,12 @@ export const corrections: CourseCorrections = {
     "tcb-q29": {
       "type": "single",
       "correct": "b",
-      "explanation": "Les navigateurs modernes confinent chaque site dans un processus au droit restreint (bac à sable). Une faille du moteur compromet ce processus, pas le navigateur entier, à moins d’être enchaînée à une évasion du bac à sable."
+      "explanation": "Les navigateurs modernes confinent chaque site dans un processus au droit restreint (bac à sable). Une faille du moteur compromet ce processus, pas le navigateur entier, à moins d’être enchaînée à une évasion du bac à sable.",
+      "whyWrong": {
+        "a": "Un processus partagé étend l’impact d’une faille à tous les onglets.",
+        "d": "Charger tous les sites dans la même page supprime l’isolation entre eux.",
+        "c": "Exécuter le moteur dans le noyau donnerait à une faille un accès maximal."
+      }
     },
     "tcb-q30": {
       "type": "multi",
@@ -216,17 +301,32 @@ export const corrections: CourseCorrections = {
     "tcb-q33": {
       "type": "single",
       "correct": "d",
-      "explanation": "Réduire les droits de chaque composant limite l’impact d’une compromission. C’est l’un des huit principes de conception de Saltzer et Schroeder (1975)."
+      "explanation": "Réduire les droits de chaque composant limite l’impact d’une compromission. C’est l’un des huit principes de conception de Saltzer et Schroeder (1975).",
+      "whyWrong": {
+        "a": "Donner tous les droits partout est l’inverse du moindre privilège.",
+        "b": "Des droits définitifs s’accumulent ; le principe demande de les revoir.",
+        "c": "L’ancienneté n’est pas un critère de besoin."
+      }
     },
     "tcb-q34": {
       "type": "single",
       "correct": "c",
-      "explanation": "Un contrôle qui peut être évité, ou dont la décision est mise en cache sans précaution, est contournable. Le moniteur de référence doit intervenir à chaque accès, y compris après un changement de droits."
+      "explanation": "Un contrôle qui peut être évité, ou dont la décision est mise en cache sans précaution, est contournable. Le moniteur de référence doit intervenir à chaque accès, y compris après un changement de droits.",
+      "whyWrong": {
+        "a": "Une vérification unique par session laisse des accès non contrôlés ensuite.",
+        "b": "Les accès locaux doivent être vérifiés autant que les accès distants.",
+        "d": "Un contrôle laissé au choix de l’utilisateur peut être évité."
+      }
     },
     "tcb-q35": {
       "type": "single",
       "correct": "d",
-      "explanation": "Une liste d’autorisations (liste blanche) échoue en sécurité : si l’on oublie une règle, l’accès reste refusé. Une liste d’interdictions échoue en ouvrant l’accès."
+      "explanation": "Une liste d’autorisations (liste blanche) échoue en sécurité : si l’on oublie une règle, l’accès reste refusé. Une liste d’interdictions échoue en ouvrant l’accès.",
+      "whyWrong": {
+        "a": "Tout autoriser par défaut est l’opposé du principe.",
+        "b": "Le filtrage des seuls administrateurs ne protège pas les autres comptes.",
+        "c": "Consigner sans bloquer ne refuse aucun accès."
+      }
     },
     "tcb-q36": {
       "type": "truefalse",
@@ -236,7 +336,12 @@ export const corrections: CourseCorrections = {
     "tcb-q37": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le modèle de menace précise les actifs, les attaquants supposés, leurs capacités et les frontières de confiance. Il oriente les choix d’architecture : on ne défend pas de la même façon contre un utilisateur curieux et contre un administrateur d’hébergeur."
+      "explanation": "Le modèle de menace précise les actifs, les attaquants supposés, leurs capacités et les frontières de confiance. Il oriente les choix d’architecture : on ne défend pas de la même façon contre un utilisateur curieux et contre un administrateur d’hébergeur.",
+      "whyWrong": {
+        "d": "La liste des employés relève du contrôle d’accès physique, pas du modèle de menace.",
+        "a": "Le coût d’acquisition est une question budgétaire, pas une analyse de menaces.",
+        "b": "Le plan de reprise traite l’après-sinistre, pas l’identification des menaces."
+      }
     },
     "tcb-q38": {
       "type": "multi",
@@ -253,7 +358,12 @@ export const corrections: CourseCorrections = {
     "tcb-q39": {
       "type": "single",
       "correct": "b",
-      "explanation": "Les clients ne se font pas confiance : la frontière doit être forte (VM), le réseau segmenté, les secrets protégés et la plateforme attestable. La combinaison réduit l’impact d’une compromission isolée."
+      "explanation": "Les clients ne se font pas confiance : la frontière doit être forte (VM), le réseau segmenté, les secrets protégés et la plateforme attestable. La combinaison réduit l’impact d’une compromission isolée.",
+      "whyWrong": {
+        "c": "Un conteneur partagé et un compte de service unique rendent les clients solidaires en cas de compromission.",
+        "a": "Un serveur unique sans segmentation étend un incident à tous les clients.",
+        "d": "Un poste de travail partagé n’offre pas l’isolation attendue d’une plateforme multilocataire."
+      }
     },
     "tcb-q40": {
       "type": "open",

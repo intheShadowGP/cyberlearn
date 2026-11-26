@@ -34,7 +34,12 @@ export const corrections: CourseCorrections = {
     "afund-q17": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le processeur lit les instructions en mémoire et les exécute une à une. La RAM les contient, le stockage les conserve hors tension, la carte réseau n’exécute pas le programme."
+      "explanation": "Le processeur lit les instructions en mémoire et les exécute une à une. La RAM les contient, le stockage les conserve hors tension, la carte réseau n’exécute pas le programme.",
+      "whyWrong": {
+        "d": "Le disque conserve les données ; il ne les exécute pas.",
+        "b": "La mémoire vive contient les instructions ; elle ne les exécute pas.",
+        "a": "La carte réseau échange des données, sans exécuter les programmes."
+      }
     },
     "afund-q18": {
       "type": "single",
@@ -143,7 +148,12 @@ export const corrections: CourseCorrections = {
     "afund-q4": {
       "type": "single",
       "correct": "a",
-      "explanation": "Le firmware, stocké sur la carte mère, initialise le matériel puis cherche un chargeur d’amorçage. Le noyau, l’antivirus et la session arrivent ensuite."
+      "explanation": "Le firmware, stocké sur la carte mère, initialise le matériel puis cherche un chargeur d’amorçage. Le noyau, l’antivirus et la session arrivent ensuite.",
+      "whyWrong": {
+        "c": "Le noyau est chargé après le firmware.",
+        "d": "L’antivirus est un logiciel lancé par le système, bien plus tard.",
+        "b": "La session utilisateur s’ouvre une fois le système démarré."
+      }
     },
     "afund-q5": {
       "type": "short",
@@ -162,7 +172,12 @@ export const corrections: CourseCorrections = {
     "afund-q30": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le firmware démarre et trouve le chargeur ; le chargeur charge le noyau ; le noyau lance le premier processus (systemd sous Linux, smss.exe puis wininit.exe sous Windows)."
+      "explanation": "Le firmware démarre et trouve le chargeur ; le chargeur charge le noyau ; le noyau lance le premier processus (systemd sous Linux, smss.exe puis wininit.exe sous Windows).",
+      "whyWrong": {
+        "d": "Le noyau ne peut pas démarrer avant le firmware.",
+        "a": "Le chargeur ne précède pas le firmware, qui le trouve et le lance.",
+        "b": "Le premier processus est lancé par le noyau, pas avant lui."
+      }
     },
     "afund-q31": {
       "type": "single",
@@ -210,7 +225,12 @@ export const corrections: CourseCorrections = {
     "afund-q7": {
       "type": "single",
       "correct": "b",
-      "explanation": "Les applications n’accèdent pas au matériel : elles appellent le noyau par des appels système (open, read, write…) et le noyau vérifie leurs droits avant d’agir."
+      "explanation": "Les applications n’accèdent pas au matériel : elles appellent le noyau par des appels système (open, read, write…) et le noyau vérifie leurs droits avant d’agir.",
+      "whyWrong": {
+        "d": "Une application n’a pas le droit d’accéder directement au contrôleur de disque.",
+        "a": "Une application ne modifie pas la table des processus du noyau.",
+        "c": "Le firmware n’intervient pas dans la lecture d’un fichier par une application."
+      }
     },
     "afund-q8": {
       "type": "multi",
@@ -236,7 +256,12 @@ export const corrections: CourseCorrections = {
     "afund-q9": {
       "type": "single",
       "correct": "d",
-      "explanation": "Un traitement de texte n’a pas de raison de lancer un interpréteur de commandes puis PowerShell avec une commande encodée. C’est la signature classique d’une macro malveillante, que les EDR surveillent."
+      "explanation": "Un traitement de texte n’a pas de raison de lancer un interpréteur de commandes puis PowerShell avec une commande encodée. C’est la signature classique d’une macro malveillante, que les EDR surveillent.",
+      "whyWrong": {
+        "a": "Une mise à jour ne lance pas une commande PowerShell encodée.",
+        "b": "Un correcteur orthographique n’a pas besoin d’un interpréteur de commandes.",
+        "c": "L’impression ne démarre pas de commande encodée."
+      }
     },
     "afund-q35": {
       "type": "truefalse",
@@ -279,7 +304,12 @@ export const corrections: CourseCorrections = {
     "afund-q40": {
       "type": "single",
       "correct": "b",
-      "explanation": "L’unité de gestion mémoire (MMU) du processeur applique les tables de traduction que le noyau construit pour chaque processus. C’est aussi là que se vérifient les droits (lecture, écriture, exécution)."
+      "explanation": "L’unité de gestion mémoire (MMU) du processeur applique les tables de traduction que le noyau construit pour chaque processus. C’est aussi là que se vérifient les droits (lecture, écriture, exécution).",
+      "whyWrong": {
+        "c": "Le contrôleur de disque ne traduit pas les adresses mémoire.",
+        "d": "La carte réseau ne gère pas la mémoire des processus.",
+        "a": "L’écran ne participe pas à la traduction des adresses."
+      }
     },
     "afund-q10": {
       "type": "short",

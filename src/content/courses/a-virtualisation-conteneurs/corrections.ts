@@ -7,17 +7,32 @@ export const corrections: CourseCorrections = {
     "virt-q1": {
       "type": "single",
       "correct": "a",
-      "explanation": "L’hyperviseur répartit le matériel (processeur, mémoire, disque, réseau) entre plusieurs machines virtuelles et les isole les unes des autres."
+      "explanation": "L’hyperviseur répartit le matériel (processeur, mémoire, disque, réseau) entre plusieurs machines virtuelles et les isole les unes des autres.",
+      "whyWrong": {
+        "d": "Un pare-feu filtre le trafic ; il ne crée pas de machines virtuelles.",
+        "c": "Un antivirus analyse des fichiers ; ce n’est pas un hyperviseur.",
+        "b": "Attribuer des adresses IP est le rôle d’un serveur DHCP."
+      }
     },
     "virt-q2": {
       "type": "single",
       "correct": "b",
-      "explanation": "Un hyperviseur de type 1 (ESXi, Hyper-V, Xen) tourne « à même le métal » ; un type 2 (VirtualBox, VMware Workstation) est un logiciel installé sur un système d’exploitation hôte, qui s’ajoute à la surface d’attaque."
+      "explanation": "Un hyperviseur de type 1 (ESXi, Hyper-V, Xen) tourne « à même le métal » ; un type 2 (VirtualBox, VMware Workstation) est un logiciel installé sur un système d’exploitation hôte, qui s’ajoute à la surface d’attaque.",
+      "whyWrong": {
+        "a": "Les deux types hébergent des systèmes variés ; la différence tient au niveau d’installation.",
+        "c": "Aucun des deux types n’est installé dans le navigateur.",
+        "d": "Les deux types isolent les machines virtuelles."
+      }
     },
     "virt-q3": {
       "type": "single",
       "correct": "c",
-      "explanation": "VirtualBox s’installe comme une application au-dessus d’un système hôte. ESXi et Xen s’exécutent directement sur le matériel, et KVM transforme le noyau Linux en hyperviseur."
+      "explanation": "VirtualBox s’installe comme une application au-dessus d’un système hôte. ESXi et Xen s’exécutent directement sur le matériel, et KVM transforme le noyau Linux en hyperviseur.",
+      "whyWrong": {
+        "a": "ESXi s’exécute directement sur le matériel : c’est un type 1.",
+        "d": "Xen s’exécute directement sur le matériel : c’est un type 1.",
+        "b": "KVM transforme le noyau Linux en hyperviseur ; il est classé en type 1."
+      }
     },
     "virt-q4": {
       "type": "truefalse",
@@ -40,7 +55,12 @@ export const corrections: CourseCorrections = {
     "virt-q6": {
       "type": "single",
       "correct": "d",
-      "explanation": "L’évasion de VM (VM escape) franchit la frontière de l’hyperviseur. Elle est rare mais grave, car elle donne accès à l’hôte et aux autres machines virtuelles. Elle se combat par les correctifs, la réduction des périphériques virtuels exposés et la segmentation."
+      "explanation": "L’évasion de VM (VM escape) franchit la frontière de l’hyperviseur. Elle est rare mais grave, car elle donne accès à l’hôte et aux autres machines virtuelles. Elle se combat par les correctifs, la réduction des périphériques virtuels exposés et la segmentation.",
+      "whyWrong": {
+        "a": "Le hameçonnage trompe un utilisateur ; il ne franchit pas l’hyperviseur.",
+        "b": "Un dépassement de quota n’est pas une attaque d’évasion.",
+        "c": "L’usurpation ARP vise le réseau local."
+      }
     },
     "virt-q7": {
       "type": "truefalse",
@@ -67,7 +87,12 @@ export const corrections: CourseCorrections = {
     "virt-q10": {
       "type": "single",
       "correct": "c",
-      "explanation": "Un conteneur est un ou plusieurs processus isolés par des fonctions du noyau (namespaces, cgroups). Il ne contient pas de noyau : il utilise celui de l’hôte."
+      "explanation": "Un conteneur est un ou plusieurs processus isolés par des fonctions du noyau (namespaces, cgroups). Il ne contient pas de noyau : il utilise celui de l’hôte.",
+      "whyWrong": {
+        "a": "Une machine virtuelle a son propre noyau ; un conteneur partage celui de l’hôte.",
+        "d": "Un conteneur n’est pas un fichier compressé de documents.",
+        "b": "Un conteneur est logiciel, pas un composant matériel."
+      }
     },
     "virt-q11": {
       "type": "single",
@@ -93,7 +118,12 @@ export const corrections: CourseCorrections = {
     "virt-q14": {
       "type": "single",
       "correct": "d",
-      "explanation": "Un namespace donne au processus une vue privée d’une catégorie de ressources (PID, réseau, montages, utilisateurs…). Dans son namespace de PID, le premier processus du conteneur est le PID 1."
+      "explanation": "Un namespace donne au processus une vue privée d’une catégorie de ressources (PID, réseau, montages, utilisateurs…). Dans son namespace de PID, le premier processus du conteneur est le PID 1.",
+      "whyWrong": {
+        "b": "Les cgroups limitent la consommation de ressources ; ils n’en donnent pas une vue privée.",
+        "c": "Le TPM est une puce de sécurité sans lien avec l’isolation des conteneurs.",
+        "a": "Les journaux d’audit enregistrent des événements ; ils n’isolent rien."
+      }
     },
     "virt-q15": {
       "type": "multi",
@@ -125,17 +155,32 @@ export const corrections: CourseCorrections = {
     "virt-q18": {
       "type": "single",
       "correct": "a",
-      "explanation": "Le mode privilégié supprime l’essentiel des protections : capabilities complètes, accès aux périphériques, filtres levés. Un code malveillant y sort facilement du conteneur. Il est à réserver à des cas très rares et maîtrisés."
+      "explanation": "Le mode privilégié supprime l’essentiel des protections : capabilities complètes, accès aux périphériques, filtres levés. Un code malveillant y sort facilement du conteneur. Il est à réserver à des cas très rares et maîtrisés.",
+      "whyWrong": {
+        "b": "`--privileged` ne chiffre pas les échanges avec le registre.",
+        "d": "Limiter le processeur et la mémoire relève des options de ressources, pas de `--privileged`.",
+        "c": "`--privileged` ne coupe pas le réseau."
+      }
     },
     "virt-q19": {
       "type": "single",
       "correct": "b",
-      "explanation": "Qui parle au démon peut lancer un conteneur privilégié montant la racine de l’hôte. Monter le socket équivaut donc à donner les droits root de la machine à tout code qui s’exécute dans le conteneur."
+      "explanation": "Qui parle au démon peut lancer un conteneur privilégié montant la racine de l’hôte. Monter le socket équivaut donc à donner les droits root de la machine à tout code qui s’exécute dans le conteneur.",
+      "whyWrong": {
+        "c": "Le socket donne bien plus qu’un accès en lecture.",
+        "d": "Il ne sert pas à accélérer le réseau.",
+        "a": "Il ne sert pas à ouvrir un tunnel vers le registre."
+      }
     },
     "virt-q20": {
       "type": "single",
       "correct": "c",
-      "explanation": "Plutôt que « tout ou rien », les capabilities (par exemple lier un port inférieur à 1024, configurer le réseau) s’attribuent séparément. On retire celles dont l’application n’a pas besoin (`--cap-drop ALL`, puis ajout au cas par cas)."
+      "explanation": "Plutôt que « tout ou rien », les capabilities (par exemple lier un port inférieur à 1024, configurer le réseau) s’attribuent séparément. On retire celles dont l’application n’a pas besoin (`--cap-drop ALL`, puis ajout au cas par cas).",
+      "whyWrong": {
+        "a": "Les certificats de signature d’images sont une autre notion.",
+        "b": "Les quotas de disque se gèrent à part.",
+        "d": "Les profils de pare-feu filtrent des ports, pas des pouvoirs."
+      }
     },
     "virt-q21": {
       "type": "multi",
@@ -173,22 +218,42 @@ export const corrections: CourseCorrections = {
     "virt-q25": {
       "type": "single",
       "correct": "d",
-      "explanation": "En mode rootless (Podman, Docker rootless), même un attaquant qui sort du conteneur n’obtient que les droits d’un utilisateur ordinaire. Certaines fonctions (ports bas, certains réseaux) sont limitées."
+      "explanation": "En mode rootless (Podman, Docker rootless), même un attaquant qui sort du conteneur n’obtient que les droits d’un utilisateur ordinaire. Certaines fonctions (ports bas, certains réseaux) sont limitées.",
+      "whyWrong": {
+        "b": "Le mode rootless ne retire pas l’accès aux fichiers de l’image.",
+        "a": "Il ne s’occupe ni du chiffrement ni de la signature des images.",
+        "c": "Le noyau de l’hôte n’est jamais remplacé par celui du conteneur."
+      }
     },
     "virt-q26": {
       "type": "single",
       "correct": "a",
-      "explanation": "Une image regroupe l’application et ses dépendances dans des couches empilées, en lecture seule. Chaque conteneur ajoute une couche inscriptible qui disparaît avec lui."
+      "explanation": "Une image regroupe l’application et ses dépendances dans des couches empilées, en lecture seule. Chaque conteneur ajoute une couche inscriptible qui disparaît avec lui.",
+      "whyWrong": {
+        "c": "Une image n’est pas une capture d’écran.",
+        "d": "Une image ne configure pas le pare-feu de l’hôte.",
+        "b": "Une image n’est pas un disque virtuel de machine complète."
+      }
     },
     "virt-q27": {
       "type": "single",
       "correct": "b",
-      "explanation": "Un tag est une étiquette mutable : son propriétaire peut le déplacer vers une autre image. Pour un déploiement reproductible et vérifiable, on référence l’image par son digest."
+      "explanation": "Un tag est une étiquette mutable : son propriétaire peut le déplacer vers une autre image. Pour un déploiement reproductible et vérifiable, on référence l’image par son digest.",
+      "whyWrong": {
+        "d": "Un tag fonctionne hors ligne si l’image est déjà présente ; le défaut est ailleurs.",
+        "c": "Un tag n’impose pas de droits administrateur au registre.",
+        "a": "Un tag ne supprime rien dans les couches."
+      }
     },
     "virt-q28": {
       "type": "single",
       "correct": "c",
-      "explanation": "Le digest est l’empreinte du contenu de l’image : si un seul octet change, il change. Il garantit que l’on déploie exactement l’image que l’on a analysée."
+      "explanation": "Le digest est l’empreinte du contenu de l’image : si un seul octet change, il change. Il garantit que l’on déploie exactement l’image que l’on a analysée.",
+      "whyWrong": {
+        "b": "Le nom de l’auteur ne fait pas partie du digest.",
+        "d": "La date de publication n’est pas ce que le digest désigne.",
+        "a": "L’adresse du registre n’est pas le digest."
+      }
     },
     "virt-q29": {
       "type": "truefalse",
@@ -198,7 +263,12 @@ export const corrections: CourseCorrections = {
     "virt-q30": {
       "type": "single",
       "correct": "d",
-      "explanation": "Une image est distribuée, copiée et analysée : tout ce qu’elle contient est exposé. Les secrets sont fournis à l’exécution par un mécanisme dédié, avec des droits minimaux."
+      "explanation": "Une image est distribuée, copiée et analysée : tout ce qu’elle contient est exposé. Les secrets sont fournis à l’exécution par un mécanisme dédié, avec des droits minimaux.",
+      "whyWrong": {
+        "b": "Un gestionnaire de secrets est une bonne pratique.",
+        "a": "Un volume protégé en lecture seule est une bonne pratique.",
+        "c": "L’injection à l’exécution par l’orchestrateur est une bonne pratique."
+      }
     },
     "virt-q31": {
       "type": "short",
@@ -233,22 +303,42 @@ export const corrections: CourseCorrections = {
     "virt-q34": {
       "type": "single",
       "correct": "b",
-      "explanation": "Un orchestrateur décide où lancer les conteneurs, les redémarre, les met à l’échelle et gère leur réseau. Il ajoute sa propre surface d’attaque (API, droits, secrets) étudiée dans le module L."
+      "explanation": "Un orchestrateur décide où lancer les conteneurs, les redémarre, les met à l’échelle et gère leur réseau. Il ajoute sa propre surface d’attaque (API, droits, secrets) étudiée dans le module L.",
+      "whyWrong": {
+        "d": "Fabriquer les images relève de la construction, pas de l’orchestration.",
+        "a": "Le chiffrement des disques est une fonction du système, pas de l’orchestrateur.",
+        "c": "Un orchestrateur s’appuie sur le noyau Linux ; il ne le remplace pas."
+      }
     },
     "virt-q35": {
       "type": "single",
       "correct": "a",
-      "explanation": "Publier un port ouvre le service sur l’interface du serveur. Sans pare-feu ou liaison explicite à `127.0.0.1`, il devient accessible depuis le réseau. On ne publie que ce qui est nécessaire."
+      "explanation": "Publier un port ouvre le service sur l’interface du serveur. Sans pare-feu ou liaison explicite à `127.0.0.1`, il devient accessible depuis le réseau. On ne publie que ce qui est nécessaire.",
+      "whyWrong": {
+        "d": "Un port publié est joignable depuis l’extérieur de l’hôte.",
+        "c": "Publier un port ne touche pas au système de fichiers.",
+        "b": "Publier un port ne touche pas au registre."
+      }
     },
     "virt-q36": {
       "type": "single",
       "correct": "d",
-      "explanation": "Pour du code non fiable et multi-locataire, la frontière doit être la plus forte possible : VM ou micro-VM (Firecracker, Kata Containers), ou un noyau intercepté comme gVisor."
+      "explanation": "Pour du code non fiable et multi-locataire, la frontière doit être la plus forte possible : VM ou micro-VM (Firecracker, Kata Containers), ou un noyau intercepté comme gVisor.",
+      "whyWrong": {
+        "b": "Un conteneur partagé n’offre pas une frontière assez forte pour du code non fiable.",
+        "c": "Des threads dans un même processus ne s’isolent pas entre eux.",
+        "a": "Un compte commun supprime toute séparation entre clients."
+      }
     },
     "virt-q37": {
       "type": "single",
       "correct": "c",
-      "explanation": "Une VM jetable, sans accès aux données et au réseau de production, restaurée après l’analyse (instantané), limite les dégâts. Certains malwares détectent la virtualisation : l’environnement doit rester discret."
+      "explanation": "Une VM jetable, sans accès aux données et au réseau de production, restaurée après l’analyse (instantané), limite les dégâts. Certains malwares détectent la virtualisation : l’environnement doit rester discret.",
+      "whyWrong": {
+        "d": "Un poste connecté au réseau expose l’entreprise au malware.",
+        "b": "Un conteneur privilégié sur un serveur de production met la production en danger.",
+        "a": "Un dossier partagé propagerait l’échantillon à d’autres machines."
+      }
     },
     "virt-q38": {
       "type": "truefalse",
