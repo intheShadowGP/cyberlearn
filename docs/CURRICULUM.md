@@ -107,7 +107,7 @@
 | EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Gouvernance avancée : quantification des risques, conformité multi-textes, tiers critiques et pilotage par la preuve (`m-gouvernance-avancee`) | M | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | Systèmes industriels et objets connectés pour débutants : comprendre et protéger (`n-ot-iot-initiation`) | N | 1 · Débutant | 90 min | 6 | 40 | 3 | 3 |
-| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 5 | 40 | 3 | 4 |
+| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 7 | 40 | 3 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 5 | 40 | 3 | 4 |
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 5 |
 | Sécurité OT avancée : IEC 62443, architecture, analyse de risques, détection et résilience (`n-ot-securite-avancee`) | N | 4 · Expert | 140 min | 6 | 40 | 3 | 4 |

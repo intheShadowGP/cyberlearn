@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1584 |
+| Mots de leçon, médiane (FR) | 1607 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 38 |
+| Cours de moins de 1 500 mots (FR) | 37 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -83,7 +83,7 @@
 | `m-ebios-pratique` | M | 3 | 6 | 1432 | 1273 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `m-gouvernance-avancee` | M | 4 | 6 | 1607 | 1413 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `n-ot-iot-initiation` | N | 1 | 6 | 1187 | 1014 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `n-ics-modbus` | N | 2 | 5 | 1115 | 988 | 3 | 1 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 5 |
+| `n-ics-modbus` | N | 2 | 7 | 1875 | 1666 | 3 | 1 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 5 |
 | `n-iot-firmware` | N | 3 | 5 | 1277 | 1118 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `n-automobile-profinet` | N | 3 | 7 | 1747 | 1498 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 O2 C5 | 100 % | 6 |
 | `n-ot-securite-avancee` | N | 4 | 6 | 1517 | 1325 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |

@@ -29,6 +29,45 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'modele-donnees',
+        title: 'Le modèle de données Modbus : tables, trames et erreurs',
+        blocks: [
+          { t: 'p', text: "Modbus fonctionne en **client / serveur** (on parlait historiquement de maître et d’esclave) : le client (supervision, passerelle) envoie une requête, le serveur (automate, capteur) répond. Le serveur expose sa mémoire sous **quatre tables**, et le code fonction de la requête dit sur laquelle elle agit." },
+          {
+            t: 'table',
+            caption: 'Les quatre tables de données',
+            head: ['Table', 'Taille', 'Accès', 'Exemple', 'Codes fonction'],
+            rows: [
+              ['Bobines (coils)', '1 bit', 'Lecture et écriture', 'Commande de marche d’une pompe', '0x01 (lire) ; 0x05, 0x0F (écrire)'],
+              ['Entrées discrètes', '1 bit', 'Lecture seule', 'Contact de fin de course', '0x02 (lire)'],
+              ['Registres d’entrée', '16 bits', 'Lecture seule', 'Mesure d’un capteur de niveau', '0x04 (lire)'],
+              ['Registres de maintien (holding)', '16 bits', 'Lecture et écriture', 'Consigne, paramètre de régulation', '0x03 (lire) ; 0x06, 0x10 (écrire)'],
+            ],
+          },
+          { t: 'callout', kind: 'tip', title: 'Piège d’adressage', text: "Beaucoup de documentations constructeur numérotent les registres de maintien à partir de **40001**, alors que la trame transporte l’adresse **0** pour ce même registre. Un décalage de un entre la documentation et la capture est la première cause d’erreur de lecture d’une trame : vérifiez la convention avant de conclure." },
+          {
+            t: 'table',
+            caption: 'Modbus RTU et Modbus TCP',
+            head: ['', 'Modbus RTU', 'Modbus TCP'],
+            rows: [
+              ['Support', 'Liaison série (RS-485, RS-232)', 'Ethernet, TCP, port 502'],
+              ['Structure de la trame', 'Adresse de l’esclave + PDU + contrôle d’erreur CRC-16', 'En-tête MBAP de 7 octets (transaction, protocole, longueur, unité) + PDU'],
+              ['Contrôle d’erreur', 'CRC-16 dans la trame', 'Aucun dans la trame : assuré par TCP (et sans protection contre une modification volontaire)'],
+              ['Identifiant d’unité', 'Adresse de l’esclave sur le bus', 'Sert surtout à désigner un équipement série derrière une passerelle'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Lire une requête, sa réponse et une réponse d’erreur',
+            blocks: [
+              { t: 'code', lang: 'text', code: '# Requête : lire 10 registres de maintien à partir de l’adresse 0\n00 2C  00 00  00 06  01  03  00 00  00 0A\n\n# Réponse : 20 octets de données (10 registres de 2 octets)\n00 2C  00 00  00 17  01  03  14  00 64 00 00 01 F4 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n\n# Réponse d’erreur à une lecture de l’adresse 5000, absente de l’automate\n00 2D  00 00  00 03  01  83  02' },
+              { t: 'p', text: "Dans la réponse, la longueur 0x17 (23) compte l’identifiant d’unité, le code fonction, l’octet de comptage 0x14 (20) et les 20 octets de données. Le premier registre vaut 0x0064 = 100 et le troisième 0x01F4 = 500. La **réponse d’erreur** reprend le code fonction avec le bit de poids fort à 1 (0x03 devient 0x83) suivi d’un **code d’exception** : 01 fonction illégale, 02 adresse de donnée illégale, 03 valeur de donnée illégale. Ici, 0x83 puis 02 : l’automate refuse une lecture à une adresse qu’il n’a pas." },
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "La trame ne dit pas **ce que représente** un registre. Que le registre 16 soit une consigne de débit ou une simple mesure vient de la **cartographie** de l’automate, tenue par l’exploitation. Sans elle, vous pouvez décoder une trame mais pas qualifier une alerte." },
+        ],
+      },
+      {
         id: 'modbus',
         title: 'Modbus : un protocole sans sécurité',
         blocks: [
@@ -48,6 +87,29 @@ export const body: CourseBody = {
           },
           { t: 'p', text: "Des protocoles plus récents intègrent la sécurité : **OPC UA** (authentification, signature et chiffrement), **Modbus/TCP Security** (sur TLS, port 802), DNP3 Secure Authentication. Leur adoption reste progressive en raison de la durée de vie des équipements." },
           { t: 'callout', kind: 'warn', text: "Les attaques Stuxnet (2010), Industroyer (2016, réseau électrique ukrainien) et Triton (2017, systèmes de sûreté) ont démontré que des attaquants savent manipuler directement les protocoles industriels." },
+        ],
+      },
+      {
+        id: 'attaques-modbus',
+        title: 'Ce qu’un attaquant fait avec Modbus, et comment le voir',
+        blocks: [
+          { t: 'p', text: "Comme Modbus n’authentifie personne, un hôte qui atteint le port 502 dispose de trois familles d’actions : **reconnaissance** (lire des registres, énumérer des unités), **manipulation** (écrire une consigne, une bobine de commande) et **déni de service** (rafales de requêtes, valeurs hors plage). La matrice MITRE ATT&CK for ICS les décrit, par exemple sous les noms « Unauthorized Command Message » et « Modify Parameter » (à confronter à la matrice, voir les ressources)." },
+          {
+            t: 'table',
+            caption: 'Actions, traces et détection',
+            head: ['Action', 'Trace dans la capture', 'Effet possible', 'Signal de détection'],
+            rows: [
+              ['Cartographier les équipements', 'Lectures 0x03 ou 0x04 en rafale, adresses successives, depuis une source nouvelle', 'Connaissance de la carte mémoire', 'Source absente de la liste autorisée ; volume inhabituel'],
+              ['Balayer les identifiants d’unité', 'Requêtes avec des identifiants d’unité qui s’incrémentent', 'Découverte des équipements derrière une passerelle', 'Nombre d’identifiants distincts par source'],
+              ['Sonder des adresses', 'Réponses d’erreur 0x83 ou 0x84 avec exception 02 en série', 'Reconnaissance de la carte mémoire', 'Taux de réponses d’exception'],
+              ['Modifier une consigne', 'Écriture 0x06 ou 0x10 depuis un hôte qui n’est pas la supervision', 'Procédé conduit hors de ses limites', 'Écriture hors source autorisée ; valeur hors plage'],
+              ['Forcer une bobine de commande', 'Écriture 0x05 ou 0x0F', 'Arrêt ou démarrage d’un équipement', 'Même règle que pour les registres'],
+            ],
+          },
+          { t: 'p', text: "Le trafic industriel est **très régulier** : la supervision interroge les mêmes automates, aux mêmes adresses, à intervalle fixe. Cette régularité rend efficace la détection par **liste blanche** (qui parle à qui, avec quels codes fonction et sur quelles plages). L’analyse d’une capture existante se fait hors ligne, sans rien envoyer au réseau :" },
+          { t: 'code', lang: 'bash', caption: 'Analyse d’une capture avec tshark (champs à confirmer selon la version de Wireshark)', code: '# Conversations TCP : qui parle à qui\ntshark -r capture.pcap -q -z conv,tcp\n\n# Toutes les requêtes Modbus, avec source, destination, code fonction et adresse\ntshark -r capture.pcap -Y "mbtcp" -T fields -e frame.time -e ip.src -e ip.dst -e modbus.func_code -e modbus.reference_num\n\n# Seulement les écritures (codes 5, 6, 15 et 16)\ntshark -r capture.pcap -Y "modbus.func_code in {5 6 15 16}" -T fields -e frame.time -e ip.src -e ip.dst -e modbus.func_code' },
+          { t: 'code', lang: 'text', caption: 'Pseudo-règle de liste blanche (syntaxe propre à chaque pare-feu industriel)', code: 'AUTORISER  10.2.1.15 -> 10.3.0.0/24  tcp/502  fonctions 0x03 0x04               (supervision : lecture)\nAUTORISER  10.2.1.15 -> 10.3.0.21    tcp/502  fonctions 0x06 0x10  adresses 16-19  (supervision : consigne de la pompe 1)\nREFUSER    toute autre source -> 10.3.0.0/24  tcp/502  journaliser et alerter' },
+          { t: 'callout', kind: 'warn', title: 'Limite du filtrage', text: "Cette liste n’arrête pas une commande malveillante émise **depuis la supervision compromise**, puisque la source est autorisée. D’où trois compléments : contrôle de **cohérence des valeurs** (limites de procédé), alarmes et sécurités **indépendantes** du réseau de contrôle, et supervision des changements de programme." },
         ],
       },
       {
@@ -108,6 +170,8 @@ export const body: CourseBody = {
       'Auditeur : évaluer un site selon la classification ANSSI ou la norme IEC 62443.',
     ],
     commonMistakes: [
+      'Interpréter une trame sans la cartographie des registres de l’automate : le même numéro peut désigner une consigne ou une mesure.',
+      'Confondre l’adresse documentée (40001) et l’adresse transportée dans la trame (0), et se tromper d’un registre.',
       'Lancer un scan réseau actif sur un réseau d’automates en production.',
       'Relier directement le réseau bureautique au réseau de supervision « pour simplifier la maintenance ».',
       'Laisser un accès distant permanent (logiciel de prise en main) pour le fournisseur.',
@@ -121,6 +185,8 @@ export const body: CourseBody = {
       'Coopération étroite entre équipes sécurité, automatismes et sûreté de fonctionnement.',
     ],
     keyPoints: [
+      'Quatre tables de données ; une réponse d’erreur reprend le code fonction avec le bit de poids fort à 1 (0x83) et un code d’exception.',
+      'Une liste blanche (source, code fonction, plage) ne couvre pas une supervision compromise : contrôler aussi la cohérence des valeurs.',
       'OT : la sûreté des personnes et la disponibilité priment.',
       'Modbus TCP (502) : aucune authentification ; codes 0x05, 0x06, 0x0F, 0x10 = écritures.',
       'Modèle de Purdue et IEC 62443 : zones, conduits, DMZ industrielle.',

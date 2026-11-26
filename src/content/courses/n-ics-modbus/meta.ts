@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'n-proto', label: 'Protocoles industriels et filtrage', level: 2 },
     { id: 'n-detection', label: 'Détection et réponse en OT', level: 3 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

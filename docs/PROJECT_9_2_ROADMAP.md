@@ -65,7 +65,7 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Organisation pédagogique | 12 | 8,0 | 8,0 | 9,3 | — |
 | Accessibilité fonctionnelle | 8 | 8,0 | 8,0 | 9,0 | — |
 | Prise en main et onboarding | 7 | 7,5 | 7,5 | 9,0 | — |
-| Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant ; ancrages du §1 bis non franchis (25 cours sur 85 à 1 800 mots ou plus) |
+| Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant ; ancrages du §1 bis non franchis (26 cours sur 85 à 1 800 mots ou plus après le pilote) |
 | Profondeur des programmes | 12 | 7,0 | 7,0 | 9,0 | — |
 | Laboratoires pratiques | 12 | 6,0 | 6,0 | 9,0 | — |
 | Fiabilité pédagogique | 8 | 6,5 | 6,5 | 9,0 | Un doublon avéré corrigé et des garde-fous ajoutés, mais aucun critère d’ancrage (§1 bis) n’est franchi : pas de relèvement |
@@ -107,7 +107,7 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Phase | État |
 | --- | --- |
 | 1 — Audit | Audit initial mesuré (§4). Audit UX/UI manuel, SEO et Lighthouse : **non faits** |
-| 2 — Qualité pédagogique | Mesure en place (`npm run metrics`) ; **aucun cours approfondi encore** |
+| 2 — Qualité pédagogique | Mesure en place (`npm run metrics`) ; **1 cours approfondi (pilote `n-ics-modbus`)** : 1 115 → 1 875 mots FR, 5 → 7 sections, FR et EN ensemble, identifiants de questions inchangés |
 | 3 — Banques de questions | 1 doublon avéré remplacé (`kma-q25` → `kma-q41`) ; relecture qualitative des banques : non faite |
 | 4 — Laboratoires | Non commencée |
 | 5 — Suivi des compétences | Existant et testé (`src/lib/levels.ts` : compétence « acquise » = réussite pondérée ≥ 80 % sur ≥ 3 questions ; recommandations dans `src/lib/recommend.ts`). Rien à reconstruire ; les quatre états « consulté / exercé / évalué / démontré » ne sont pas encore tous distingués dans l’interface |
@@ -126,9 +126,9 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 
 ## 8. Prochaine action précise
 
-Pilote non réalisé dans cette session : le premier cours à approfondir est `n-ics-modbus` (FR et EN ensemble, identifiants de questions conservés), de préférence avant `j-forensique-initiation`. `r-certifications-preparation` est à éviter en pilote : ses faits (organismes, formats, prix) se périment et exigent une vérification datée.
+Pilote `n-ics-modbus` réalisé (voir §6). Prochain cours : `j-forensique-initiation`, puis `q-ia-initiation`. Les questions de `n-ics-modbus` n’ont pas été revues par rapport aux nouvelles sections : à faire (ajouter des questions d’analyse de trame et d’erreurs Modbus, sans toucher aux identifiants existants). `r-certifications-preparation` est à éviter en pilote : ses faits (organismes, formats, prix) se périment et exigent une vérification datée.
 
-1. Approfondir en priorité les 8 cours les plus courts listés au §4.1, un par un, selon la structure du cahier des charges (§6.1) : viser 1 800 à 2 500 mots, des commandes vérifiées, une mise en situation, des erreurs fréquentes concrètes ; puis revoir leur banque (supprimer les questions que la leçon ne prépare pas, sans toucher aux identifiants repris).
+1. Approfondir en priorité les 7 cours restants parmi les plus courts listés au §4.1, un par un, selon la structure du cahier des charges (§6.1) : viser 1 800 à 2 500 mots, des commandes vérifiées, une mise en situation, des erreurs fréquentes concrètes ; puis revoir leur banque (supprimer les questions que la leçon ne prépare pas, sans toucher aux identifiants repris).
 2. Chaque cours approfondi : mettre à jour FR et EN ensemble, `npm run banks`, `npm run metrics`, `npm test`, `npm run build`.
 3. Ajouter des laboratoires pour les disciplines sans laboratoire (K, A, P, Q, R) et des laboratoires de niveau 1, 3 et 4 là où il n’y en a pas (un pentest guidé en environnement isolé pour H), chacun avec barème, indices et corrigé ; commencer par K (analyse statique et mémoire) qui complète les enquêtes défensives existantes.
 4. Mesurer Lighthouse (mobile et ordinateur) sur le site déployé et analyser le bundle principal.

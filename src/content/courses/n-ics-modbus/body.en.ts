@@ -29,6 +29,45 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'modele-donnees',
+        title: 'The Modbus data model: tables, frames and errors',
+        blocks: [
+          { t: 'p', text: "Modbus works as **client / server** (historically master and slave): the client (supervision, gateway) sends a request and the server (PLC, sensor) replies. The server exposes its memory as **four tables**, and the request’s function code says which one it acts on." },
+          {
+            t: 'table',
+            caption: 'The four data tables',
+            head: ['Table', 'Size', 'Access', 'Example', 'Function codes'],
+            rows: [
+              ['Coils', '1 bit', 'Read and write', 'Run command of a pump', '0x01 (read); 0x05, 0x0F (write)'],
+              ['Discrete inputs', '1 bit', 'Read only', 'Limit switch contact', '0x02 (read)'],
+              ['Input registers', '16 bits', 'Read only', 'Reading from a level sensor', '0x04 (read)'],
+              ['Holding registers', '16 bits', 'Read and write', 'Setpoint, control parameter', '0x03 (read); 0x06, 0x10 (write)'],
+            ],
+          },
+          { t: 'callout', kind: 'tip', title: 'Addressing pitfall', text: "Many vendor manuals number holding registers from **40001**, while the frame carries address **0** for that same register. An off-by-one between the manual and the capture is the most common cause of misreading a frame: check the convention before drawing conclusions." },
+          {
+            t: 'table',
+            caption: 'Modbus RTU and Modbus TCP',
+            head: ['', 'Modbus RTU', 'Modbus TCP'],
+            rows: [
+              ['Medium', 'Serial link (RS-485, RS-232)', 'Ethernet, TCP, port 502'],
+              ['Frame structure', 'Slave address + PDU + CRC-16 error check', '7-byte MBAP header (transaction, protocol, length, unit) + PDU'],
+              ['Error checking', 'CRC-16 in the frame', 'None in the frame: left to TCP (and no protection against deliberate modification)'],
+              ['Unit identifier', 'Slave address on the bus', 'Mostly used to address a serial device behind a gateway'],
+            ],
+          },
+          {
+            t: 'example',
+            title: 'Reading a request, its response and an error response',
+            blocks: [
+              { t: 'code', lang: 'text', code: '# Request: read 10 holding registers starting at address 0\n00 2C  00 00  00 06  01  03  00 00  00 0A\n\n# Response: 20 data bytes (10 registers of 2 bytes)\n00 2C  00 00  00 17  01  03  14  00 64 00 00 01 F4 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n\n# Error response to a read of address 5000, which the PLC does not have\n00 2D  00 00  00 03  01  83  02' },
+              { t: 'p', text: "In the response, the length 0x17 (23) counts the unit identifier, the function code, the byte count 0x14 (20) and the 20 data bytes. The first register is 0x0064 = 100 and the third is 0x01F4 = 500. The **error response** repeats the function code with its high bit set (0x03 becomes 0x83) followed by an **exception code**: 01 illegal function, 02 illegal data address, 03 illegal data value. Here 0x83 then 02: the PLC refuses a read at an address it does not have." },
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "The frame does not tell you **what a register means**. Whether register 16 is a flow setpoint or a plain reading comes from the PLC’s **register map**, kept by operations. Without it you can decode a frame but not qualify an alert." },
+        ],
+      },
+      {
         id: 'modbus',
         title: 'Modbus: a protocol with no security',
         blocks: [
@@ -48,6 +87,29 @@ export const body: CourseBody = {
           },
           { t: 'p', text: "Newer protocols build in security: **OPC UA** (authentication, signing and encryption), **Modbus/TCP Security** (over TLS, port 802), DNP3 Secure Authentication. Their adoption remains gradual because of the lifetime of the equipment." },
           { t: 'callout', kind: 'warn', text: "The Stuxnet (2010), Industroyer (2016, Ukrainian power grid) and Triton (2017, safety systems) attacks showed that attackers know how to manipulate industrial protocols directly." },
+        ],
+      },
+      {
+        id: 'attaques-modbus',
+        title: 'What an attacker does with Modbus, and how to see it',
+        blocks: [
+          { t: 'p', text: "Because Modbus authenticates nobody, a host that can reach port 502 has three families of actions: **reconnaissance** (reading registers, enumerating units), **manipulation** (writing a setpoint or a command coil) and **denial of service** (request floods, out-of-range values). The MITRE ATT&CK for ICS matrix describes them, for example as “Unauthorized Command Message” and “Modify Parameter” (check against the matrix, see the resources)." },
+          {
+            t: 'table',
+            caption: 'Actions, traces and detection',
+            head: ['Action', 'Trace in the capture', 'Possible effect', 'Detection signal'],
+            rows: [
+              ['Map the devices', 'Bursts of 0x03 or 0x04 reads over successive addresses, from a new source', 'Knowledge of the memory map', 'Source not in the allowed list; unusual volume'],
+              ['Sweep unit identifiers', 'Requests with incrementing unit identifiers', 'Discovery of devices behind a gateway', 'Number of distinct identifiers per source'],
+              ['Probe addresses', 'Runs of 0x83 or 0x84 error responses with exception 02', 'Reconnaissance of the memory map', 'Rate of exception responses'],
+              ['Change a setpoint', '0x06 or 0x10 write from a host that is not the supervision', 'Process driven outside its limits', 'Write from an unauthorized source; out-of-range value'],
+              ['Force a command coil', '0x05 or 0x0F write', 'Equipment stopped or started', 'Same rule as for registers'],
+            ],
+          },
+          { t: 'p', text: "Industrial traffic is **very regular**: the supervision polls the same PLCs, at the same addresses, at a fixed interval. That regularity makes **allow-list** detection effective (who talks to whom, with which function codes and over which ranges). Analyzing an existing capture is done offline, sending nothing to the network:" },
+          { t: 'code', lang: 'bash', caption: 'Analyzing a capture with tshark (fields to confirm against your Wireshark version)', code: '# TCP conversations: who talks to whom\ntshark -r capture.pcap -q -z conv,tcp\n\n# All Modbus requests, with source, destination, function code and address\ntshark -r capture.pcap -Y "mbtcp" -T fields -e frame.time -e ip.src -e ip.dst -e modbus.func_code -e modbus.reference_num\n\n# Writes only (codes 5, 6, 15 and 16)\ntshark -r capture.pcap -Y "modbus.func_code in {5 6 15 16}" -T fields -e frame.time -e ip.src -e ip.dst -e modbus.func_code' },
+          { t: 'code', lang: 'text', caption: 'Allow-list pseudo-rule (syntax specific to each industrial firewall)', code: 'ALLOW  10.2.1.15 -> 10.3.0.0/24  tcp/502  functions 0x03 0x04               (supervision: read)\nALLOW  10.2.1.15 -> 10.3.0.21    tcp/502  functions 0x06 0x10  addresses 16-19  (supervision: pump 1 setpoint)\nDENY   any other source -> 10.3.0.0/24  tcp/502  log and alert' },
+          { t: 'callout', kind: 'warn', title: 'Limit of filtering', text: "This list does not stop a malicious command sent **from a compromised supervision host**, since that source is allowed. Hence three complements: **value plausibility** checks (process limits), alarms and safety functions **independent** of the control network, and monitoring of program changes." },
         ],
       },
       {
@@ -108,6 +170,8 @@ export const body: CourseBody = {
       'Auditor: assess a site according to the ANSSI classification or the IEC 62443 standard.',
     ],
     commonMistakes: [
+      'Interpreting a frame without the PLC’s register map: the same number can be a setpoint or a reading.',
+      'Confusing the documented address (40001) with the address carried in the frame (0), and picking the wrong register.',
       'Running an active network scan on a production PLC network.',
       'Directly linking the office network to the supervision network “to simplify maintenance”.',
       'Leaving a permanent remote access (remote-control software) for the supplier.',
@@ -121,6 +185,8 @@ export const body: CourseBody = {
       'Close cooperation between security, automation and safety teams.',
     ],
     keyPoints: [
+      'Four data tables; an error response repeats the function code with its high bit set (0x83) and an exception code.',
+      'An allow-list (source, function code, range) does not cover a compromised supervision host: also check value plausibility.',
       'OT: safety of people and availability come first.',
       'Modbus TCP (502): no authentication; codes 0x05, 0x06, 0x0F, 0x10 = writes.',
       'Purdue model and IEC 62443: zones, conduits, industrial DMZ.',
