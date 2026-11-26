@@ -9,6 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Une adresse IPv4 fait 32 bits, écrits en quatre octets en notation décimale pointée. Une adresse IPv6 fait 128 bits.",
       "whyWrong": {
+        "b": "16 bits ne donneraient que 65 536 adresses : une adresse IPv4 compte 4 octets, soit 32 bits.",
+        "c": "64 bits est la taille habituelle du préfixe d’un réseau IPv6, pas d’une adresse IPv4.",
         "a": "128 bits est la taille d’une adresse IPv6."
       }
     },
@@ -17,6 +19,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "/20 = 8 + 8 + 4 bits à 1 : les deux premiers octets valent 255 et le troisième 1111 0000 en binaire, soit 240.",
       "whyWrong": {
+        "c": "255.255.0.0 correspond au préfixe /16.",
         "a": "`255.255.224.0` correspond à /19 (3 bits dans le troisième octet).",
         "d": "`255.255.255.240` correspond à /28."
       }
@@ -71,7 +74,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un /23 laisse 9 bits d’hôtes : 2⁹ − 2 = 510 hôtes utilisables. Un /24 n’offre que 254 hôtes ; un /22 en offrirait 1022, ce qui est plus grand que nécessaire.",
       "whyWrong": {
-        "d": "Un /24 ne contient que 254 hôtes utilisables."
+        "c": "/22 convient aussi, mais il est plus grand : on cherche le plus petit sous-réseau suffisant.",
+        "d": "Un /24 ne contient que 254 hôtes utilisables.",
+        "b": "/25 n’offre que 126 hôtes utilisables : c’est insuffisant pour 500."
       }
     },
     "ipv4-q10": {
@@ -111,7 +116,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le masque /22 est 255.255.252.0 ; son inverse (255.255.255.255 − masque) est 0.0.3.255. Un wildcard à 0 impose la correspondance de ce bit, à 1 il l’ignore.",
       "whyWrong": {
-        "c": "C’est le masque de sous-réseau, non son inverse."
+        "a": "0.0.1.255 est le masque générique d’un /23.",
+        "c": "C’est le masque de sous-réseau, non son inverse.",
+        "d": "0.0.7.255 est le masque générique d’un /21."
       }
     },
     "ipv4-q14": {
@@ -126,7 +133,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un /22 couvre 4 valeurs du troisième octet : de 10.10.0.0 à 10.10.3.255. Seule 10.10.3.200 s’y trouve ; 10.10.4.1 est dans le /22 suivant.",
       "whyWrong": {
-        "b": "10.10.4.1 appartient au réseau 10.10.4.0/22, juste au-dessus du bloc autorisé."
+        "b": "10.10.4.1 appartient au réseau 10.10.4.0/22, juste au-dessus du bloc autorisé.",
+        "c": "10.11.0.1 appartient à un autre bloc : 10.10.0.0/22 ne couvre que 10.10.0.0 à 10.10.3.255.",
+        "a": "10.10.8.10 est hors du /22, dont la dernière adresse est 10.10.3.255."
       }
     },
     "ipv4-q16": {
@@ -160,6 +169,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un /28 laisse 4 bits d’hôtes : 2⁴ = 16 adresses, moins le réseau et la diffusion, soit 14 hôtes utilisables.",
       "whyWrong": {
         "a": "16 est le nombre total d’adresses ; il faut retirer l’adresse réseau et la diffusion.",
+        "b": "30 est le nombre d’hôtes utilisables d’un /27, pas d’un /28.",
         "d": "30 hôtes correspondent à un /27."
       }
     },
@@ -177,7 +187,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un /28 n’offre que 14 hôtes, ce qui est insuffisant. Un /27 en offre 30 : c’est le plus petit sous-réseau convenable. Un /26 (62 hôtes) gaspille de l’espace.",
       "whyWrong": {
         "a": "Un /28 ne contient que 14 hôtes utilisables.",
-        "b": "Un /26 convient mais n’est pas le plus petit possible."
+        "b": "Un /26 convient mais n’est pas le plus petit possible.",
+        "d": "/29 n’offre que 6 hôtes utilisables : c’est insuffisant pour 25."
       }
     },
     "ipv4-q22": {
@@ -185,7 +196,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "/18 = 255.255.192.0 : la coupure est dans le troisième octet, avec une taille de bloc de 64 (0, 64, 128, 192). 77 est entre 64 et 127 : le réseau est 10.1.64.0.",
       "whyWrong": {
-        "c": "Ce serait un /25 ; ici le quatrième octet appartient entièrement à la partie hôte."
+        "b": "10.1.0.0 serait l’adresse réseau d’un /16 ; avec un /18 les blocs font 64 dans le troisième octet.",
+        "c": "Ce serait un /25 ; ici le quatrième octet appartient entièrement à la partie hôte.",
+        "a": "10.1.128.0 commence le bloc suivant (128 à 191) : 77 est dans le bloc 64 à 127."
       }
     },
     "ipv4-q23": {
@@ -201,7 +214,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un /20 a une taille de bloc de 16 dans le troisième octet : le réseau couvre de 172.20.16.0 à 172.20.31.255. La diffusion est .31.255 et la dernière adresse utilisable .31.254.",
       "whyWrong": {
         "c": "172.20.31.255 est l’adresse de diffusion.",
-        "d": "172.20.32.0 appartient au réseau suivant."
+        "d": "172.20.32.0 appartient au réseau suivant.",
+        "a": "172.20.16.254 est la dernière adresse utilisable d’un /24, pas du /20."
       }
     },
     "ipv4-q25": {
@@ -257,7 +271,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "192.0.2.0/24, 198.51.100.0/24 et 203.0.113.0/24 sont réservées à la documentation : on les utilise dans les exemples pour ne jamais citer d’adresses réelles.",
       "whyWrong": {
-        "b": "10.0.0.0/8 est une plage privée (RFC 1918), utilisable sur les réseaux réels."
+        "b": "10.0.0.0/8 est une plage privée (RFC 1918), utilisable sur les réseaux réels.",
+        "c": "192.168.0.0/16 est une plage privée (RFC 1918), pas une plage de documentation.",
+        "d": "169.254.0.0/16 est la plage lien-local, pas une plage de documentation."
       }
     },
     "ipv4-q31": {
@@ -328,7 +344,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un /25 offre 126 hôtes utilisables, suffisant pour 117. Un /26 n’en offre que 62. Un /24 fonctionnerait mais gaspillerait la moitié de l’espace.",
       "whyWrong": {
         "d": "Un /26 ne contient que 62 hôtes.",
-        "a": "Un /24 convient mais n’est pas le plus petit possible."
+        "a": "Un /24 convient mais n’est pas le plus petit possible.",
+        "b": "/27 n’offre que 30 hôtes utilisables : c’est insuffisant pour 117."
       }
     },
     "ipv4-q39": {
@@ -336,7 +353,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le /26 occupe .0 à .63. Le /27 suivant doit commencer sur un multiple de 32 : .64 est le premier possible. Commencer en .63, .65 ou .100 serait mal aligné ou chevaucherait des blocs.",
       "whyWrong": {
-        "c": ".63 est l’adresse de diffusion du /26 précédent."
+        "c": ".63 est l’adresse de diffusion du /26 précédent.",
+        "d": "10.0.0.65 n’est pas aligné sur une frontière de 32 : le /26 occupe jusqu’à .63, le suivant démarre à .64.",
+        "b": "10.0.0.100 n’est pas un début de bloc /27 (multiples de 32 : .64, .96)."
       }
     },
     "ipv4-q40": {

@@ -45,7 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’asymétrique sert à l’échange de clés éphémère (ECDHE) et à la signature qui authentifie le serveur. Le trafic lui-même est chiffré par un algorithme symétrique (AES-GCM, ChaCha20-Poly1305), beaucoup plus rapide.",
       "whyWrong": {
         "c": "Chiffrer le trafic en asymétrique serait des centaines de fois plus lent ; TLS ne le fait pas.",
-        "d": "La compression est une autre fonction, sans rapport."
+        "d": "La compression est une autre fonction, sans rapport.",
+        "b": "La cryptographie asymétrique ne remplace pas le hachage : l’intégrité reste contrôlée par un code d’authentification ou un mode authentifié."
       }
     },
     "crypt-q6": {

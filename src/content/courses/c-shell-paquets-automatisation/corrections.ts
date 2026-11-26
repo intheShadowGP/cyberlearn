@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le noyau arbitre l’accès au matériel et aux ressources et applique les droits ; les programmes de l’espace utilisateur passent par des appels système pour lui demander un service. Cette séparation protège le système des erreurs et des abus des programmes.",
       "whyWrong": {
         "b": "Les documents de l’utilisateur sont des fichiers, stockés par le système de fichiers.",
+        "c": "Le noyau ne se fait pas remplacer par l’espace utilisateur au démarrage.",
         "a": "Les deux niveaux sont distincts et se protègent mutuellement."
       }
     },
@@ -38,7 +39,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le tube connecte la sortie standard d’une commande à l’entrée standard de la suivante, ce qui permet de composer des traitements (`ps -ef | grep nginx | wc -l`).",
       "whyWrong": {
         "d": "Les deux commandes sont liées par les données qui circulent entre elles.",
-        "a": "La redirection des erreurs utilise 2> et non le tube."
+        "a": "La redirection des erreurs utilise 2> et non le tube.",
+        "b": "Le caractère de commentaire est `#`, pas le tube."
       }
     },
     "csh-q5": {
@@ -52,7 +54,8 @@ export const corrections: CourseCorrections = {
       "explanation": "`-e` arrête à la première erreur, `-u` traite comme erreur toute variable non définie, `pipefail` fait échouer un tube si l’un de ses éléments échoue. Le script ne continue plus sur des données fausses.",
       "whyWrong": {
         "d": "Ces options ajoutent des contrôles ; elles n’accélèrent rien.",
-        "b": "Elles ne changent pas l’utilisateur qui exécute le script."
+        "b": "Elles ne changent pas l’utilisateur qui exécute le script.",
+        "c": "`set -euo pipefail` ne supprime aucun fichier."
       }
     },
     "csh-q7": {
@@ -79,7 +82,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le gestionnaire de paquets vérifie la signature des paquets d’un dépôt de confiance avant de les installer. Un `curl | sudo bash` exécute en root un script non vérifié, dont le contenu peut changer à tout moment côté serveur.",
       "whyWrong": {
-        "c": "Les paquets installés restent à mettre à jour, quelle que soit leur source."
+        "b": "La vitesse n’est pas le critère : c’est l’authenticité du code exécuté.",
+        "c": "Les paquets installés restent à mettre à jour, quelle que soit leur source.",
+        "a": "Un script de provenance inconnue exécute du code non vérifié, contrairement au dépôt signé."
       }
     },
     "csh-q10": {
@@ -122,6 +127,7 @@ export const corrections: CourseCorrections = {
       "explanation": "`-P INPUT DROP` fixe la politique par défaut de la chaîne d’entrée à « rejeter » : tout paquet entrant non accepté par une règle explicite est abandonné. On autorise ensuite le strict nécessaire.",
       "whyWrong": {
         "c": "C’est l’effet inverse : tout ce qui n’est pas autorisé est rejeté.",
+        "b": "`-P INPUT DROP` règle la politique de la chaîne d’entrée ; il ne désactive pas le pare-feu.",
         "d": "La chaîne INPUT concerne le trafic entrant, pas le trafic sortant."
       }
     },
@@ -151,6 +157,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le noyau expose beaucoup de ressources (disques, terminaux, tubes, sockets, état du système) comme des fichiers, que l’on ouvre, lit et écrit avec les mêmes outils. Les droits d’accès s’appliquent donc de façon uniforme.",
       "whyWrong": {
         "a": "Le système de fichiers est une arborescence, pas un fichier unique.",
+        "d": "Les programmes ne sont pas des textes interprétés à la lecture : ce sont des fichiers exécutables.",
         "c": "Un fichier peut contenir n’importe quelles données binaires."
       }
     },
@@ -160,7 +167,8 @@ export const corrections: CourseCorrections = {
       "explanation": "/proc n’existe qu’en mémoire : chaque processus y a un répertoire (/proc/<PID>) avec sa ligne de commande, ses fichiers ouverts et sa mémoire. On y lit aussi des informations sur le noyau et le matériel. Il sert à l’inspection d’un système.",
       "whyWrong": {
         "a": "La configuration se trouve dans /etc.",
-        "d": "Les journaux se trouvent sous /var/log."
+        "d": "Les journaux se trouvent sous /var/log.",
+        "b": "Les programmes essentiels du mode de secours se trouvent dans des répertoires comme `/sbin`."
       }
     },
     "csh-q19": {
@@ -174,6 +182,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le noyau lance le PID 1 (en général systemd) une fois démarré. Il démarre les services, adopte les processus orphelins et supervise l’ensemble. Son arrêt provoque celui du système.",
       "whyWrong": {
         "b": "L’ordonnancement est assuré par le noyau lui-même, sans processus dédié visible.",
+        "a": "Le PID 1 ne s’exécute pas à chaque ouverture de session : il démarre au boot.",
         "d": "Le PID 1 ne sert pas à éteindre la machine selon les connexions."
       }
     },
@@ -193,6 +202,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Chaque commande renvoie un code de retour : 0 signifie le succès. `&&` enchaîne sur le succès, `||` sur l’échec, `;` sans condition. Le tube `|` est autre chose : il relie les flux.",
       "whyWrong": {
         "d": "C’est le rôle de `||`.",
+        "c": "Pour lancer en parallèle, on utilise `&`, pas `&&`.",
         "a": "Le chaînage en parallèle utilise `&`."
       }
     },
@@ -210,6 +220,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le shell cherche les commandes dans l’ordre du PATH. Si un répertoire modifiable par un attaquant arrive en premier, un faux `ls` ou `sudo` placé là est exécuté à la place du vrai, avec les droits de celui qui le lance. Les scripts planifiés utilisent des chemins absolus.",
       "whyWrong": {
         "b": "Le shell trouvera toujours les commandes : le risque est qu’il en trouve une fausse.",
+        "a": "Le risque n’est pas la lenteur : c’est l’exécution d’un faux programme.",
         "c": "Le PATH ne vide pas les autres variables."
       }
     },
@@ -231,7 +242,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un dépôt tiers donne à son mainteneur le pouvoir de livrer du code exécuté en root à chaque mise à jour, y compris en remplaçant des paquets de la distribution. On n’en ajoute que pour des raisons précises, depuis des sources de confiance.",
       "whyWrong": {
         "a": "La distribution ne contrôle pas le contenu d’un dépôt tiers.",
-        "b": "Une signature prouve l’origine, pas la bonne foi du mainteneur."
+        "b": "Une signature prouve l’origine, pas la bonne foi du mainteneur.",
+        "c": "Un dépôt tiers n’empêche pas de mettre à jour les paquets de la distribution."
       }
     },
     "csh-q27": {
@@ -245,6 +257,7 @@ export const corrections: CourseCorrections = {
       "explanation": "`rpm -Va` compare chaque fichier installé aux métadonnées du paquet (taille, somme de contrôle, droits, propriétaire) et signale les différences. Un binaire système modifié apparaît : c’est un contrôle d’intégrité utile en investigation.",
       "whyWrong": {
         "c": "Les mises à jour s’installent avec dnf.",
+        "a": "La liste des paquets installés s’obtient avec `rpm -qa`, pas `rpm -Va`.",
         "d": "La vérification de signature concerne l’origine du paquet, pas l’état des fichiers installés."
       }
     },
@@ -264,6 +277,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Une tâche cron ne reprend pas l’environnement de la session : PATH restreint, répertoire courant imprévu. Les chemins absolus garantissent que la bonne commande est lancée, et évitent qu’un programme placé ailleurs soit pris à sa place.",
       "whyWrong": {
         "b": "Cron exécute le script ; c’est son environnement qui diffère.",
+        "d": "La vitesse n’est pas la raison : c’est l’environnement minimal de cron.",
         "a": "Le répertoire courant n’est pas garanti."
       }
     },
@@ -273,7 +287,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Si une exécution dure plus longtemps que l’intervalle, la suivante démarre pendant la première et peut corrompre des données. `flock` prend un verrou : la seconde instance attend ou abandonne. C’est un élément de robustesse d’une automatisation.",
       "whyWrong": {
         "b": "flock ne chiffre rien : il pose un verrou sur un fichier.",
-        "c": "Il ne relance pas : il empêche l’exécution en double."
+        "c": "Il ne relance pas : il empêche l’exécution en double.",
+        "d": "`flock` ne gère pas les droits de modification de la planification."
       }
     },
     "csh-q32": {

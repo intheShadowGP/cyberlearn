@@ -9,6 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An IPv4 address is 32 bits, written as four bytes in dotted decimal notation. An IPv6 address is 128 bits.",
       "whyWrong": {
+        "b": "16 bits would give only 65,536 addresses: an IPv4 address has 4 bytes, i.e. 32 bits.",
+        "c": "64 bits is the usual prefix length of an IPv6 network, not the size of an IPv4 address.",
         "a": "128 bits is the size of an IPv6 address."
       }
     },
@@ -17,6 +19,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "/20 = 8 + 8 + 4 bits set to 1: the first two bytes are 255 and the third is 1111 0000 in binary, that is 240.",
       "whyWrong": {
+        "c": "255.255.0.0 corresponds to the /16 prefix.",
         "a": "`255.255.224.0` matches /19 (3 bits in the third byte).",
         "d": "`255.255.255.240` matches /28."
       }
@@ -71,7 +74,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A /23 leaves 9 host bits: 2⁹ − 2 = 510 usable hosts. A /24 offers only 254 hosts; a /22 would offer 1022, which is larger than needed.",
       "whyWrong": {
-        "d": "A /24 contains only 254 usable hosts."
+        "c": "/22 also fits, but it is larger: we look for the smallest sufficient subnet.",
+        "d": "A /24 contains only 254 usable hosts.",
+        "b": "/25 offers only 126 usable hosts: not enough for 500."
       }
     },
     "ipv4-q10": {
@@ -111,7 +116,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The /22 mask is 255.255.252.0; its inverse (255.255.255.255 − mask) is 0.0.3.255. A wildcard bit of 0 enforces matching on that bit, a bit of 1 ignores it.",
       "whyWrong": {
-        "c": "This is the subnet mask, not its inverse."
+        "a": "0.0.1.255 is the wildcard mask of a /23.",
+        "c": "This is the subnet mask, not its inverse.",
+        "d": "0.0.7.255 is the wildcard mask of a /21."
       }
     },
     "ipv4-q14": {
@@ -126,7 +133,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A /22 covers 4 values of the third byte: from 10.10.0.0 to 10.10.3.255. Only 10.10.3.200 is in it; 10.10.4.1 is in the next /22.",
       "whyWrong": {
-        "b": "10.10.4.1 belongs to the network 10.10.4.0/22, just above the allowed block."
+        "b": "10.10.4.1 belongs to the network 10.10.4.0/22, just above the allowed block.",
+        "c": "10.11.0.1 belongs to another block: 10.10.0.0/22 covers only 10.10.0.0 to 10.10.3.255.",
+        "a": "10.10.8.10 is outside the /22, whose last address is 10.10.3.255."
       }
     },
     "ipv4-q16": {
@@ -160,6 +169,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A /28 leaves 4 host bits: 2⁴ = 16 addresses, minus the network and the broadcast, that is 14 usable hosts.",
       "whyWrong": {
         "a": "16 is the total number of addresses; the network address and the broadcast must be removed.",
+        "b": "30 is the usable host count of a /27, not of a /28.",
         "d": "30 hosts match a /27."
       }
     },
@@ -177,7 +187,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A /28 offers only 14 hosts, which is not enough. A /27 offers 30: it is the smallest suitable subnet. A /26 (62 hosts) wastes space.",
       "whyWrong": {
         "a": "A /28 contains only 14 usable hosts.",
-        "b": "A /26 works but is not the smallest possible."
+        "b": "A /26 works but is not the smallest possible.",
+        "d": "/29 offers only 6 usable hosts: not enough for 25."
       }
     },
     "ipv4-q22": {
@@ -185,7 +196,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "/18 = 255.255.192.0: the cut is in the third byte, with a block size of 64 (0, 64, 128, 192). 77 is between 64 and 127: the network is 10.1.64.0.",
       "whyWrong": {
-        "c": "That would be a /25; here the fourth byte belongs entirely to the host part."
+        "b": "10.1.0.0 would be the network address of a /16; with a /18 the blocks are 64 wide in the third octet.",
+        "c": "That would be a /25; here the fourth byte belongs entirely to the host part.",
+        "a": "10.1.128.0 starts the next block (128 to 191): 77 is in the 64 to 127 block."
       }
     },
     "ipv4-q23": {
@@ -201,7 +214,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A /20 has a block size of 16 in the third byte: the network covers 172.20.16.0 to 172.20.31.255. The broadcast is .31.255 and the last usable address .31.254.",
       "whyWrong": {
         "c": "172.20.31.255 is the broadcast address.",
-        "d": "172.20.32.0 belongs to the next network."
+        "d": "172.20.32.0 belongs to the next network.",
+        "a": "172.20.16.254 is the last usable address of a /24, not of the /20."
       }
     },
     "ipv4-q25": {
@@ -257,7 +271,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "192.0.2.0/24, 198.51.100.0/24 and 203.0.113.0/24 are reserved for documentation: they are used in examples so that real addresses are never cited.",
       "whyWrong": {
-        "b": "10.0.0.0/8 is a private range (RFC 1918), usable on real networks."
+        "b": "10.0.0.0/8 is a private range (RFC 1918), usable on real networks.",
+        "c": "192.168.0.0/16 is a private range (RFC 1918), not a documentation range.",
+        "d": "169.254.0.0/16 is the link-local range, not a documentation range."
       }
     },
     "ipv4-q31": {
@@ -328,7 +344,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A /25 offers 126 usable hosts, enough for 117. A /26 offers only 62. A /24 would work but waste half of the space.",
       "whyWrong": {
         "d": "A /26 contains only 62 hosts.",
-        "a": "A /24 works but is not the smallest possible."
+        "a": "A /24 works but is not the smallest possible.",
+        "b": "/27 offers only 30 usable hosts: not enough for 117."
       }
     },
     "ipv4-q39": {
@@ -336,7 +353,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The /26 occupies .0 to .63. The next /27 must start on a multiple of 32: .64 is the first possible one. Starting at .63, .65 or .100 would be misaligned or overlap blocks.",
       "whyWrong": {
-        "c": ".63 is the broadcast address of the previous /26."
+        "c": ".63 is the broadcast address of the previous /26.",
+        "d": "10.0.0.65 is not aligned on a 32 boundary: the /26 runs up to .63, the next one starts at .64.",
+        "b": "10.0.0.100 is not the start of a /27 block (multiples of 32: .64, .96)."
       }
     },
     "ipv4-q40": {

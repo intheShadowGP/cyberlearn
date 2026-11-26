@@ -9,6 +9,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "SHA-256 produit toujours une empreinte de 256 bits (32 octets, 64 caractères hexadécimaux), quelle que soit la taille de l’entrée. C’est la définition d’une fonction de hachage : sortie de taille fixe.",
       "whyWrong": {
+        "d": "SHA-256 produit 256 bits ; 128 bits correspond à MD5.",
         "a": "La taille de sortie est fixe par construction ; seule l’entrée est de taille quelconque.",
         "b": "SHA-512 produit 512 bits ; SHA-256 en produit 256."
       }
@@ -56,7 +57,8 @@ export const corrections: CourseCorrections = {
       "explanation": "HMAC combine une clé secrète et une fonction de hachage : un attaquant sans la clé ne peut pas produire un code valide. Un simple SHA-256 garantit l’intégrité seulement si l’empreinte elle-même est transmise par un canal de confiance.",
       "whyWrong": {
         "d": "N’importe qui peut recalculer un SHA-256 d’un message modifié : pas d’authenticité.",
-        "a": "Base64 est un encodage sans aucune sécurité."
+        "a": "Base64 est un encodage sans aucune sécurité.",
+        "c": "MD5 sans clé ne prouve pas l’origine et est cassé pour l’intégrité."
       }
     },
     "hash-q7": {
@@ -159,7 +161,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Les entrées sont infiniment nombreuses et les empreintes en nombre fini : des collisions existent forcément. La résistance aux collisions garantit qu’on ne peut pas en trouver en pratique. Si c’est possible (MD5, SHA-1), on peut fabriquer deux documents d’empreinte identique.",
       "whyWrong": {
         "a": "Une fonction de hachage est déterministe : même entrée, même empreinte.",
-        "c": "Une entrée de n’importe quelle taille peut être hachée."
+        "c": "Une entrée de n’importe quelle taille peut être hachée.",
+        "b": "Une collision ne concerne pas un caractère interdit : elle concerne deux entrées de même empreinte."
       }
     },
     "hash-q18": {

@@ -146,7 +146,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le contexte SELinux se compose d’un utilisateur, d’un rôle, d’un type (`httpd_sys_content_t`) et d’un niveau. C’est le type qui détermine ce que le processus du serveur web, étiqueté `httpd_t`, a le droit de lire.",
       "whyWrong": {
-        "c": "system_u est une identité SELinux, pas le propriétaire au sens Unix (ici root)."
+        "a": "`ls -Z` affiche le contexte de sécurité, pas un chiffrement.",
+        "c": "system_u est une identité SELinux, pas le propriétaire au sens Unix (ici root).",
+        "b": "`ls -Z` n’indique pas l’accès en lecture seule : il affiche le contexte SELinux."
       }
     },
     "tcb-q17": {

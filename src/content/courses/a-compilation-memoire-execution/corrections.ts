@@ -82,7 +82,8 @@ export const corrections: CourseCorrections = {
       "explanation": "ELF (Executable and Linkable Format) est le format des exécutables et bibliothèques Linux. PE est celui de Windows, Mach-O celui de macOS, APK celui des applications Android.",
       "whyWrong": {
         "a": "PE est le format des exécutables Windows.",
-        "d": "Mach-O est le format de macOS."
+        "d": "Mach-O est le format de macOS.",
+        "b": "APK est le format des applications Android, pas l’exécutable de la plupart des systèmes Linux."
       }
     },
     "exec-q10": {
@@ -177,7 +178,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "`strcpy` copie jusqu’au caractère nul sans connaître la taille de la destination. Au-delà de 15 caractères plus le terminateur, elle écrase la pile. On utilise des fonctions bornées (`snprintf`, `strlcpy`) et on vérifie les tailles.",
       "whyWrong": {
-        "a": "strcpy ne tronque rien : c’est justement le danger."
+        "c": "Le débordement se produit à l’exécution, côté programme, pas dans le navigateur.",
+        "a": "strcpy ne tronque rien : c’est justement le danger.",
+        "b": "Le débordement de tampon n’a pas d’effet direct sur le réseau local."
       }
     },
     "exec-q20": {

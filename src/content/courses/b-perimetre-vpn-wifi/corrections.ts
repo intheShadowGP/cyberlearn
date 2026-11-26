@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le pare-feu à états tient une table des connexions : une règle autorisant une connexion sortante laisse automatiquement revenir ses réponses, sans ouvrir de règle entrante. Sans état, il faudrait autoriser explicitement le trafic de retour, bien plus risqué.",
       "whyWrong": {
         "c": "Un pare-feu filtre ; le chiffrement relève d’un VPN ou de TLS.",
-        "a": "L’attribution d’adresses est le rôle du DHCP."
+        "a": "L’attribution d’adresses est le rôle du DHCP.",
+        "d": "Le pare-feu à états ne remplace pas le serveur DNS."
       }
     },
     "pvw-q2": {
@@ -18,7 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le reverse proxy se place devant les serveurs publiés : il reçoit les requêtes entrantes, termine le TLS, répartit la charge et héberge souvent un WAF. Le proxy direct, lui, filtre le trafic sortant des clients internes.",
       "whyWrong": {
-        "b": "C’est le rôle du proxy direct, pas du reverse proxy."
+        "b": "C’est le rôle du proxy direct, pas du reverse proxy.",
+        "d": "Filtrer les sites visités par un poste relève d’un agent local ou d’un proxy sortant.",
+        "a": "Un reverse proxy ne se place pas dans le serveur DNS et n’accélère pas la résolution."
       }
     },
     "pvw-q3": {
@@ -43,7 +46,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "L’IDS observe une copie du trafic et alerte, sans pouvoir l’arrêter ; l’IPS est sur le chemin et peut bloquer, au prix d’un risque de faux positif qui coupe du trafic légitime.",
       "whyWrong": {
-        "d": "Ni l’un ni l’autre ne chiffre le trafic : ils l’analysent."
+        "d": "Ni l’un ni l’autre ne chiffre le trafic : ils l’analysent.",
+        "b": "L’IDS et l’IPS ne dépendent pas du type de réseau, Wi-Fi ou filaire.",
+        "c": "Les deux équipements diffèrent : l’un détecte, l’autre peut bloquer."
       }
     },
     "pvw-q6": {
@@ -76,6 +81,7 @@ export const corrections: CourseCorrections = {
       "explanation": "En tunnel complet, tout le trafic du poste traverse le VPN (l’entreprise filtre tout) ; en tunnel scindé, seul le trafic vers l’entreprise l’emprunte, le reste sort directement, ce qui expose davantage le poste.",
       "whyWrong": {
         "c": "Les deux modes chiffrent ce qui passe dans le tunnel.",
+        "a": "Le tunnel complet est chiffré, comme le tunnel scindé.",
         "b": "Le choix a des conséquences de sécurité : visibilité et filtrage du trafic du poste."
       }
     },
@@ -90,7 +96,8 @@ export const corrections: CourseCorrections = {
       "explanation": "WPA3-Personnel remplace l’échange de WPA2 par SAE, qui empêche les attaques par dictionnaire menées hors ligne à partir d’une capture, et impose la protection des trames de gestion.",
       "whyWrong": {
         "d": "WPA3 ne vise pas le débit mais la sécurité de l’authentification.",
-        "b": "Au contraire : WPA3 renforce le chiffrement."
+        "b": "Au contraire : WPA3 renforce le chiffrement.",
+        "a": "WPA3 ne se limite pas à l’adressage IPv6 : il change l’authentification et la protection."
       }
     },
     "pvw-q12": {
@@ -110,6 +117,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La DMZ héberge les services accessibles depuis Internet dans une zone tampon isolée : un serveur public compromis n’atteint pas librement le cœur du réseau.",
       "whyWrong": {
+        "c": "Une DMZ isole des services publiés ; elle n’améliore pas le Wi-Fi.",
+        "a": "Les sauvegardes hors site ne relèvent pas de la DMZ.",
         "b": "Une DMZ se construit avec des pare-feux ; elle ne les remplace pas."
       }
     },
@@ -144,6 +153,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Une politique de refus par défaut ne laisse passer que ce qui a été justifié et ouvert. À l’inverse, tout autoriser sauf une liste d’interdits oblige à prévoir toutes les attaques.",
       "whyWrong": {
         "c": "C’est la logique inverse, qui laisse passer toute attaque non prévue.",
+        "a": "Un pare-feu applique une règle finale, il ne met pas en attente le trafic inconnu.",
         "d": "Un pare-feu ne redirige pas le trafic inconnu vers un serveur de messagerie."
       }
     },
@@ -152,7 +162,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le pare-feu s’arrête à la première règle qui correspond. Une règle générale placée trop haut masque les règles précises qui suivent : l’ordre des règles fait partie de la politique.",
       "whyWrong": {
-        "c": "Le pare-feu ne combine pas les règles : il applique la première qui correspond."
+        "c": "Le pare-feu ne combine pas les règles : il applique la première qui correspond.",
+        "b": "Le pare-feu démarre : il applique la règle placée en tête.",
+        "d": "Une règle « autoriser tout » concerne tous les sens de circulation."
       }
     },
     "pvw-q19": {
@@ -178,6 +190,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un port miroir (SPAN) recopie le trafic d’un ou plusieurs ports vers la sonde ; un TAP, dispositif passif sur le lien, fait de même sans charger le commutateur. L’IDS n’est ainsi pas sur le chemin du trafic.",
       "whyWrong": {
         "a": "Le DNS ne transporte pas le trafic à analyser.",
+        "c": "Une sonde ne dépend pas des postes pour obtenir le trafic : elle copie les flux passifs.",
         "d": "La configuration d’un pare-feu ne contient pas les paquets."
       }
     },
@@ -187,7 +200,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un faux positif est une alerte sans attaque réelle. Un faux négatif est une attaque non détectée, un vrai positif une attaque correctement signalée. Réduire les faux positifs rend les alertes exploitables.",
       "whyWrong": {
         "c": "Un faux négatif est l’inverse : une attaque qui passe sans alerte.",
-        "b": "Un vrai positif correspond à une attaque réellement détectée."
+        "b": "Un vrai positif correspond à une attaque réellement détectée.",
+        "d": "Un rebond n’est pas un terme de détection d’alertes."
       }
     },
     "pvw-q23": {
@@ -220,7 +234,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un VPN site à site relie en permanence deux réseaux, par exemple un siège et une agence, à travers Internet. L’accès individuel d’un télétravailleur relève plutôt d’un VPN d’accès distant.",
       "whyWrong": {
-        "a": "C’est l’accès distant, qui connecte un utilisateur et non deux réseaux."
+        "a": "C’est l’accès distant, qui connecte un utilisateur et non deux réseaux.",
+        "c": "Un VPN site à site ne remplace pas les pare-feux : les sites gardent leur filtrage.",
+        "b": "Deux serveurs dans la même salle n’ont pas besoin de VPN."
       }
     },
     "pvw-q27": {
@@ -228,7 +244,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le VPN ouvre l’accès au réseau interne : un identifiant dérobé par hameçonnage ne doit pas suffire. Le second facteur bloque l’essentiel des intrusions par mot de passe, sans dispenser de mettre à jour la passerelle.",
       "whyWrong": {
-        "d": "Le MFA ne corrige pas une faille du logiciel de la passerelle : les mises à jour restent nécessaires."
+        "a": "L’authentification multifacteur n’accélère pas le chiffrement du tunnel.",
+        "d": "Le MFA ne corrige pas une faille du logiciel de la passerelle : les mises à jour restent nécessaires.",
+        "b": "Elle ne remplace pas la journalisation des connexions."
       }
     },
     "pvw-q28": {
@@ -242,7 +260,8 @@ export const corrections: CourseCorrections = {
       "explanation": "En tunnel scindé, le poste parle en même temps à Internet, sans contrôle de l’entreprise, et au réseau interne par le tunnel. S’il est compromis, un attaquant peut passer par lui pour atteindre l’intérieur.",
       "whyWrong": {
         "c": "Le trafic vers l’entreprise reste chiffré dans le tunnel.",
-        "a": "L’authentification n’est pas affectée par le choix du mode de tunnel."
+        "a": "L’authentification n’est pas affectée par le choix du mode de tunnel.",
+        "b": "Le tunnel scindé n’interrompt pas les mises à jour du poste."
       }
     },
     "pvw-q30": {
@@ -259,7 +278,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Chaque utilisateur a son propre compte : on le désactive sans toucher aux autres, et les journaux montrent qui s’est connecté. Avec un secret partagé, un départ oblige à le changer sur tous les appareils.",
       "whyWrong": {
         "c": "La portée dépend de la radio, pas du mode d’authentification.",
-        "a": "Le chiffrement reste nécessaire : 802.1X ajoute l’authentification."
+        "a": "Le chiffrement reste nécessaire : 802.1X ajoute l’authentification.",
+        "d": "Le 802.1X ne dispense pas de mettre à jour les bornes."
       }
     },
     "pvw-q32": {
@@ -268,6 +288,7 @@ export const corrections: CourseCorrections = {
       "explanation": "L’attaquant diffuse le même nom de réseau avec un signal plus fort : les appareils s’y connectent et le trafic passe par lui. En 802.1X, la parade est de faire vérifier par les clients le certificat du serveur d’authentification.",
       "whyWrong": {
         "b": "Une borne de répartition légitime n’est pas une attaque.",
+        "d": "Un evil twin n’est pas un mode de WPA3.",
         "a": "Un serveur RADIUS de secours est une mesure de disponibilité, sans rapport avec cette attaque."
       }
     },
@@ -302,6 +323,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un serveur exposé est le plus susceptible d’être compromis : on interdit qu’il initie des connexions vers l’interne, hors flux précis et justifiés. Les accès entrants vers le service publié et ceux des postes vers la DMZ sont normaux.",
       "whyWrong": {
         "d": "C’est le flux prévu : le service publié doit être joignable.",
+        "b": "Un poste interne doit pouvoir consulter un service publié en DMZ.",
         "c": "La journalisation est une bonne pratique à conserver."
       }
     },
@@ -310,7 +332,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Qui accède aux interfaces d’administration peut modifier les règles et les routes. On les réserve à des postes d’administration dédiés, souvent via un rebond, hors de portée des postes ordinaires et d’Internet.",
       "whyWrong": {
-        "d": "L’exposition à Internet est l’inverse de ce qu’on cherche pour l’administration."
+        "b": "La zone d’administration n’est pas isolée pour sa bande passante.",
+        "d": "L’exposition à Internet est l’inverse de ce qu’on cherche pour l’administration.",
+        "c": "Les sauvegardes ne sont pas la raison d’isoler la zone d’administration."
       }
     },
     "pvw-q38": {

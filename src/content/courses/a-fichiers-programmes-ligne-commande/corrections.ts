@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le nom est rangé dans un répertoire, les métadonnées décrivent le fichier (taille, propriétaire, droits, dates) et le contenu est réparti en blocs sur le support.",
       "whyWrong": {
         "d": "L’adresse IP relève du réseau, pas du système de fichiers.",
+        "a": "La couleur n’est pas une information conservée par le système de fichiers.",
         "c": "Le processeur et la mémoire sont des composants matériels, pas des attributs de fichier."
       }
     },
@@ -41,6 +42,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les séquences `../` remontent dans l’arborescence : c’est une traversée de répertoires. Le programme doit normaliser le chemin résultant et vérifier qu’il reste dans le dossier autorisé.",
       "whyWrong": {
+        "c": "Un nom de fichier simple reste dans le répertoire prévu.",
+        "a": "Un nom simple avec extension reste dans le répertoire prévu.",
         "b": "Ce nom descend dans un sous-dossier, il ne remonte pas."
       }
     },
@@ -87,6 +90,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le code source est du texte écrit par le développeur. Il est ensuite compilé ou interprété pour être exécuté. Le fichier binaire est le produit de la compilation, pas la source.",
       "whyWrong": {
+        "c": "Le courant électrique n’a aucun rapport avec le code source.",
+        "a": "Un câble réseau n’est pas du code source.",
         "b": "C’est l’exécutable obtenu après compilation, pas le code source."
       }
     },
@@ -302,7 +307,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La saisie est concaténée à une commande : le point-virgule enchaîne une seconde commande qui lit un fichier sensible. Il faut valider la saisie (caractères autorisés) ou éviter l’interpréteur.",
       "whyWrong": {
-        "c": "Le débordement de pile relève d’une erreur de gestion mémoire, absente ici."
+        "c": "Le débordement de pile relève d’une erreur de gestion mémoire, absente ici.",
+        "d": "La perte de paquets est un phénomène réseau, sans lien avec l’exécution de commandes.",
+        "a": "Un dépassement de quota concerne l’espace disque, pas l’exécution de commandes."
       }
     },
     "fpc-q37": {
@@ -353,7 +360,8 @@ export const corrections: CourseCorrections = {
       "explanation": "`cat` lit le fichier, le tube envoie le texte à `grep` qui ne garde que les lignes contenant « Failed », puis `wc -l` compte les lignes restantes. Aucune ligne n’est modifiée ni supprimée.",
       "whyWrong": {
         "d": "Aucune de ces commandes ne modifie le fichier.",
-        "b": "Aucune redirection `>` n’écrit dans un fichier ici."
+        "b": "Aucune redirection `>` n’écrit dans un fichier ici.",
+        "c": "La taille en octets s’obtient avec `wc -c` ou `ls -l`, pas avec cette chaîne qui compte des lignes."
       }
     },
     "fpc-q41": {

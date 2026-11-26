@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "On part du principe qu’un poste, un compte ou un prestataire sera compromis un jour. Les défenses (cloisonnement, droits limités), les détections et les plans de reprise sont alors conçus pour limiter ce que l’attaquant peut faire ensuite, et non pour miser uniquement sur la frontière.",
       "whyWrong": {
         "b": "C’est précisément l’hypothèse inverse, que cette approche abandonne.",
-        "c": "Il ne s’agit pas de couper les connexions externes."
+        "c": "Il ne s’agit pas de couper les connexions externes.",
+        "a": "L’hypothèse de compromission concerne la conception des défenses, pas un budget de remplacement."
       }
     },
     "dwd-q2": {
@@ -70,7 +71,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un administrateur qui travaille depuis un poste ordinaire expose ses secrets aux courriels piégés et aux sites malveillants. Sur une PAW, aucun usage à risque n’existe : un compte privilégié ne s’authentifie que depuis un poste durci et filtré.",
       "whyWrong": {
         "b": "La puissance n’est pas l’objectif : c’est l’isolement.",
-        "d": "Des sessions laissées ouvertes sur un poste partagé affaibliraient l’isolement."
+        "d": "Des sessions laissées ouvertes sur un poste partagé affaibliraient l’isolement.",
+        "a": "Une PAW est un poste d’administration, pas un serveur de sauvegarde."
       }
     },
     "dwd-q9": {
@@ -79,7 +81,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Avec les droits à la demande, un compte n’est privilégié que le temps d’une tâche approuvée : un attaquant qui le compromet entre-temps n’a plus de droit à exploiter. Le processus ajoute justification, approbation et traçabilité.",
       "whyWrong": {
         "d": "Un droit permanent reste disponible en permanence pour un attaquant.",
-        "c": "Un calendrier fixe n’a aucun rapport avec le besoin réel."
+        "c": "Un calendrier fixe n’a aucun rapport avec le besoin réel.",
+        "b": "Le Just-In-Time ne dépend pas du créateur de la ressource : il accorde un droit à la demande."
       }
     },
     "dwd-q10": {

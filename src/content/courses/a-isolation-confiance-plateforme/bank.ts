@@ -61,7 +61,7 @@ export const bank: BankItem[] = [
     ctx: { lang: 'text', code: '-rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 index.html' },
     o: ['Le fichier porte un type SELinux que la politique associe au service web', 'Le fichier est chiffré avec une clé propre au serveur web', 'Le fichier appartient à un utilisateur nommé system_u par propriété classique', 'Le fichier est en lecture seule pour tous les utilisateurs de la machine'],
     e: 'Le contexte SELinux se compose d’un utilisateur, d’un rôle, d’un type (`httpd_sys_content_t`) et d’un niveau. C’est le type qui détermine ce que le processus du serveur web, étiqueté `httpd_t`, a le droit de lire.',
-    w: { 2: 'system_u est une identité SELinux, pas le propriétaire au sens Unix (ici root).' } },
+    w: { 2: 'system_u est une identité SELinux, pas le propriétaire au sens Unix (ici root).', 1: '`ls -Z` affiche le contexte de sécurité, pas un chiffrement.', 3: '`ls -Z` n’indique pas l’accès en lecture seule : il affiche le contexte SELinux.' } },
   { id: 'tcb-q17', t: 'single', d: 1, s: ['a-root'], p: 'Qu’est-ce qu’une racine de confiance (root of trust) ?',
     o: ['Un composant de base, supposé fiable, dont dépend le reste', 'Le compte d’administration principal d’un système Linux', 'Le dossier racine d’un système de fichiers Linux ou Windows', 'Le certificat d’un site web consulté par un navigateur'],
     e: 'La confiance se construit par couches : chaque étape vérifie la suivante. La première (racine de confiance) ne peut être vérifiée par personne : elle doit être protégée physiquement et rester minimale, par exemple une mémoire non modifiable du processeur.',

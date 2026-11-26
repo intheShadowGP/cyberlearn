@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The name is stored in a directory, the metadata describe the file (size, owner, rights, dates) and the content is spread in blocks on the medium.",
       "whyWrong": {
         "d": "The IP address belongs to networking, not to the file system.",
+        "a": "Color is not information kept by the file system.",
         "c": "The processor and the memory are hardware components, not file attributes."
       }
     },
@@ -41,6 +42,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The `../` sequences climb up the tree: this is a path traversal. The program must normalize the resulting path and check that it stays inside the allowed folder.",
       "whyWrong": {
+        "c": "A plain file name stays in the intended directory.",
+        "a": "A plain name with an extension stays in the intended directory.",
         "b": "This name goes down into a subfolder, it does not go up."
       }
     },
@@ -87,6 +90,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Source code is text written by the developer. It is then compiled or interpreted to run. The binary file is the product of compilation, not the source.",
       "whyWrong": {
+        "c": "Electric current has nothing to do with source code.",
+        "a": "A network cable is not source code.",
         "b": "This is the executable obtained after compilation, not the source code."
       }
     },
@@ -300,7 +305,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The input is concatenated to a command: the semicolon chains a second command that reads a sensitive file. The input must be validated (allowed characters) or the interpreter avoided.",
       "whyWrong": {
-        "c": "A stack overflow is a memory-management error, absent here."
+        "c": "A stack overflow is a memory-management error, absent here.",
+        "d": "Packet loss is a network phenomenon, unrelated to executing commands.",
+        "a": "A quota overrun concerns disk space, not command execution."
       }
     },
     "fpc-q37": {
@@ -350,7 +357,8 @@ export const corrections: CourseCorrections = {
       "explanation": "`cat` reads the file, the pipe sends the text to `grep`, which keeps only the lines containing “Failed”, then `wc -l` counts the remaining lines. No line is modified or deleted.",
       "whyWrong": {
         "d": "None of these commands modifies the file.",
-        "b": "No `>` redirection writes to a file here."
+        "b": "No `>` redirection writes to a file here.",
+        "c": "The size in bytes comes from `wc -c` or `ls -l`, not from this chain that counts lines."
       }
     },
     "fpc-q41": {

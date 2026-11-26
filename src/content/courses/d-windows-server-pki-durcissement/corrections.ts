@@ -36,6 +36,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "La racine est le point de confiance de toute la PKI. Maintenue hors ligne, elle ne signe que les autorités intermédiaires et devient très difficile à compromettre, ce qui protège l’ensemble de la chaîne.",
       "whyWrong": {
+        "a": "L’objectif n’est pas l’économie d’énergie : c’est la protection de la racine de confiance.",
         "b": "Elle sert à signer les autorités intermédiaires, lors de leur création et de leur renouvellement.",
         "d": "Ce sont les autorités émettrices, en ligne, qui délivrent les certificats."
       }
@@ -100,6 +101,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Server Core installe moins de composants (pas d’interface graphique) : moins de code exposé, donc moins de vulnérabilités et moins de correctifs à appliquer. L’administration se fait à distance et en PowerShell.",
       "whyWrong": {
         "a": "Server Core n’ajoute pas de protection : il retire des composants.",
+        "c": "Server Core ne chiffre pas le trafic réseau : il réduit le nombre de composants installés.",
         "b": "Il reste soumis aux mises à jour, simplement moins nombreuses."
       }
     },
@@ -165,7 +167,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Sans authentification, un poste ou un appareil quelconque peut inscrire ou remplacer un enregistrement, et ainsi détourner un nom vers une machine qu’il contrôle. La mise à jour sécurisée l’interdit.",
       "whyWrong": {
         "a": "Le risque ne concerne pas la vitesse mais l’intégrité des enregistrements.",
-        "c": "La réplication n’est pas concernée."
+        "c": "La réplication n’est pas concernée.",
+        "b": "Une zone non sécurisée accepte n’importe quel client ; elle ne refuse pas les requêtes des postes non membres."
       }
     },
     "wsp-q19": {
@@ -232,7 +235,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un certificat wildcard est copié sur plusieurs serveurs : la clé est plus exposée, et sa fuite permet à un attaquant de se faire passer pour n’importe quel sous-domaine. On préfère des certificats distincts, à durée courte, quand c’est possible.",
       "whyWrong": {
         "a": "Un wildcard se révoque comme les autres.",
-        "c": "C’est l’inverse : il sert justement sur plusieurs serveurs."
+        "c": "C’est l’inverse : il sert justement sur plusieurs serveurs.",
+        "b": "Un certificat wildcard n’expire pas plus vite que les autres."
       }
     },
     "wsp-q27": {
@@ -241,6 +245,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le SAN liste les identités couvertes : noms DNS pour un serveur, adresse de courriel ou nom d’utilisateur (UPN) pour une personne. Pour un certificat d’authentification, un SAN fourni par le demandeur et accepté par l’autorité permet de se faire passer pour un autre compte.",
       "whyWrong": {
         "b": "La date de fin de validité est un autre champ.",
+        "d": "Le SAN ne chiffre pas la clé privée : il liste les noms pour lesquels le certificat est valide.",
         "a": "Le point de distribution de la révocation est une autre extension."
       }
     },
@@ -267,6 +272,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Avec le mappage fort, le contrôleur de domaine exige que le certificat contienne ou soit associé à l’identifiant de sécurité (SID) du compte. Un certificat obtenu au nom d’un autre utilisateur ne passe plus l’authentification.",
       "whyWrong": {
         "a": "Un renouvellement fréquent ne vérifie pas l’identité.",
+        "d": "Chiffrer le certificat avec le mot de passe de l’utilisateur ne prouve pas qu’il correspond au compte.",
         "c": "Supprimer le nom alternatif ne résout pas la correspondance avec le compte."
       }
     },
@@ -276,7 +282,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un gMSA est un compte de service dont le mot de passe, long et aléatoire, est géré et renouvelé par Active Directory : personne ne le connaît ni ne le saisit. Il supprime les mots de passe de service faibles et jamais changés.",
       "whyWrong": {
         "c": "Le partage d’un compte administrateur est précisément ce qu’on évite.",
-        "a": "Un mot de passe dans un script est une mauvaise pratique."
+        "a": "Un mot de passe dans un script est une mauvaise pratique.",
+        "d": "Un gMSA n’est pas un compte invité : son mot de passe est géré et renouvelé par l’annuaire."
       }
     },
     "wsp-q32": {
@@ -285,7 +292,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Les identifiants d’un compte restent en mémoire sur les machines où il ouvre une session. Séparer les niveaux (contrôleurs de domaine et PKI, serveurs, postes) évite qu’un attaquant qui compromet un poste y récupère un compte de domaine.",
       "whyWrong": {
         "c": "Il s’agit de sécurité, pas de répartition de charge.",
-        "a": "Multiplier les comptes n’est pas l’objectif."
+        "a": "Multiplier les comptes n’est pas l’objectif.",
+        "b": "Le tiering ne limite pas les comptes administrateurs à un lieu géographique."
       }
     },
     "wsp-q33": {
@@ -321,6 +329,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Après une restauration ordinaire, la réplication supprimerait les objets restaurés parce que les autres contrôleurs les croient supprimés. La restauration faisant autorité marque ces objets comme prioritaires et les propage.",
       "whyWrong": {
         "c": "Elle concerne l’annuaire, pas les fichiers des utilisateurs.",
+        "d": "Une restauration faisant autorité ne copie pas la base vers un contrôleur étranger au domaine.",
         "b": "Elle ne réinitialise aucun mot de passe."
       }
     },

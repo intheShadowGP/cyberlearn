@@ -81,7 +81,8 @@ export const corrections: CourseCorrections = {
       "explanation": "ELF (Executable and Linkable Format) is the format of Linux executables and libraries. PE is Windows’s, Mach-O is macOS’s, APK is that of Android applications.",
       "whyWrong": {
         "a": "PE is the format of Windows executables.",
-        "d": "Mach-O is the macOS format."
+        "d": "Mach-O is the macOS format.",
+        "b": "APK is the Android application format, not the executable of most Linux systems."
       }
     },
     "exec-q10": {
@@ -176,7 +177,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "`strcpy` copies until the null character without knowing the size of the destination. Beyond 15 characters plus the terminator, it overwrites the stack. Bounded functions (`snprintf`, `strlcpy`) are used and sizes are checked.",
       "whyWrong": {
-        "a": "strcpy truncates nothing: that is precisely the danger."
+        "c": "The overflow happens at runtime, in the program, not in the browser.",
+        "a": "strcpy truncates nothing: that is precisely the danger.",
+        "b": "A buffer overflow has no direct effect on the local network."
       }
     },
     "exec-q20": {

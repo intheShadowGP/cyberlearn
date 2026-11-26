@@ -32,7 +32,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le TGT est chiffré avec la clé du compte krbtgt, connue uniquement des KDC. Le client ne peut pas le lire ; il le présente au KDC pour obtenir des tickets de service.",
       "whyWrong": {
-        "c": "La clé de l’utilisateur sert à la pré-authentification et à chiffrer la clé de session renvoyée, pas le TGT lui-même."
+        "c": "La clé de l’utilisateur sert à la pré-authentification et à chiffrer la clé de session renvoyée, pas le TGT lui-même.",
+        "d": "Le TGT n’est pas chiffré avec la clé de l’Administrateur du domaine.",
+        "b": "La clé du compte machine ne chiffre pas le TGT : celle-ci appartient au compte krbtgt."
       }
     },
     "ad-q5": {
@@ -41,6 +43,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le ticket de service est chiffré avec la clé du compte associé au SPN. C’est ce qui rend le Kerberoasting possible : l’attaquant obtient légitimement le ticket, puis tente de retrouver hors ligne le mot de passe du compte de service.",
       "whyWrong": {
         "c": "krbtgt chiffre le TGT, pas les tickets de service.",
+        "a": "Le ticket de service n’est pas chiffré avec la clé de l’utilisateur demandeur : il l’est avec celle du compte du service.",
         "d": "Les tickets sont toujours chiffrés."
       }
     },
@@ -84,7 +87,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Avec l’empreinte de krbtgt, un attaquant peut forger un TGT pour n’importe quel compte, avec n’importe quels groupes et une durée arbitraire. Seul le renouvellement (double) du mot de passe de krbtgt invalide ces tickets.",
       "whyWrong": {
         "c": "Un ticket de service obtenu par Kerberoasting est cassé hors ligne, pas forgé.",
-        "d": "Un jeton web n’a aucun lien avec Kerberos."
+        "d": "Un jeton web n’a aucun lien avec Kerberos.",
+        "a": "Un certificat racine relève de la PKI, pas de Kerberos."
       }
     },
     "ad-q11": {
@@ -158,7 +162,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une forêt regroupe un ou plusieurs domaines liés par un schéma commun et des relations d’approbation. La forêt, et non le domaine, constitue la vraie frontière de sécurité : un administrateur de l’un peut, sous conditions, compromettre les autres.",
       "whyWrong": {
         "b": "Un site regroupe des contrôleurs selon leur localisation, ce qui est autre chose.",
-        "a": "Une forêt n’est pas une sauvegarde."
+        "a": "Une forêt n’est pas une sauvegarde.",
+        "d": "Une forêt n’est pas une liste d’utilisateurs : elle regroupe des domaines."
       }
     },
     "ad-q19": {
@@ -167,7 +172,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une OU est un conteneur : on y range des comptes et des ordinateurs, on lui lie des GPO et on y délègue des droits à une équipe. Les droits mal délégués sur une OU sont un chemin d’attaque classique.",
       "whyWrong": {
         "c": "La réplication n’utilise pas les OU pour chiffrer.",
-        "b": "Les empreintes sont stockées dans NTDS.dit."
+        "b": "Les empreintes sont stockées dans NTDS.dit.",
+        "a": "Une approbation entre forêts est une relation distincte, sans lien avec une OU."
       }
     },
     "ad-q20": {
@@ -188,6 +194,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le client envoie un horodatage chiffré avec sa clé : le KDC ne délivre le TGT qu’à celui qui la connaît. Sans pré-authentification (réglage dangereux), n’importe qui peut obtenir une réponse chiffrée avec la clé du compte et la casser hors ligne : c’est l’AS-REP roasting.",
       "whyWrong": {
         "d": "C’est l’authentification mutuelle, une autre notion.",
+        "b": "La pré-authentification Kerberos ne passe pas par TLS : elle repose sur une valeur chiffrée par la clé du client.",
         "a": "La pré-authentification n’est pas un second facteur."
       }
     },
@@ -210,6 +217,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Pour un compte sans pré-authentification, un attaquant obtient une réponse AS-REP chiffrée avec la clé du compte, sans connaître son mot de passe, et la casse hors ligne. On évite l’attaque en exigeant la pré-authentification et en inventoriant ces comptes.",
       "whyWrong": {
         "c": "C’est le Kerberoasting, qui vise les comptes avec SPN.",
+        "d": "La synchronisation d’horloge n’est pas ce que vise l’AS-REP roasting.",
         "a": "Protected Users renforce au contraire les comptes."
       }
     },
@@ -231,7 +239,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Avec la clé d’un compte de service (obtenue par Kerberoasting par exemple), l’attaquant fabrique des tickets acceptés par ce service seul, sans que le DC soit sollicité : très discret. Un golden ticket, lui, est un TGT forgé avec la clé de krbtgt.",
       "whyWrong": {
         "d": "Un TGT se forge avec la clé de krbtgt, pas celle d’un utilisateur.",
-        "c": "L’expiration est vérifiée ; ce n’est pas un type d’attaque."
+        "c": "L’expiration est vérifiée ; ce n’est pas un type d’attaque.",
+        "b": "Un ticket relayé par approbation entre forêts relève d’une autre attaque, pas du silver ticket."
       }
     },
     "ad-q28": {
@@ -285,7 +294,8 @@ export const corrections: CourseCorrections = {
       "explanation": "DCSync utilise le protocole de réplication : un compte disposant des droits de réplication demande à un contrôleur les secrets de n’importe quel compte, sans toucher à son disque. Ces droits sont réservés aux contrôleurs et à quelques comptes de très haut niveau ; tout autre bénéficiaire est une alerte.",
       "whyWrong": {
         "d": "C’est de la synchronisation horaire, sans lien.",
-        "a": "La réplication légitime ne vise pas à extraire des secrets."
+        "a": "La réplication légitime ne vise pas à extraire des secrets.",
+        "b": "DCSync n’est pas un outil de comparaison de GPO : il imite la réplication d’un contrôleur."
       }
     },
     "ad-q34": {
@@ -294,6 +304,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Avec la délégation non contrainte, le serveur garde le TGT de chaque utilisateur qui se connecte : s’il est compromis, l’attaquant réutilise ces TGT, y compris ceux d’administrateurs. On la remplace par une délégation contrainte ou fondée sur les ressources, et on protège les comptes sensibles.",
       "whyWrong": {
         "d": "La pré-authentification est un réglage de compte distinct.",
+        "c": "La délégation non contrainte ne force pas l’usage de NTLM.",
         "b": "Elle ne concerne pas les GPO."
       }
     },
@@ -308,6 +319,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un graphe relie appartenances, droits, sessions et délégations. Il montre qu’un utilisateur ordinaire atteint les Admins du domaine en cinq étapes. Les défenseurs coupent ces chemins avant qu’un attaquant les emprunte ; il ne remplace pas la surveillance.",
       "whyWrong": {
         "d": "Il révèle des faiblesses de configuration ; il ne supervise pas les événements.",
+        "c": "Un graphe de relations ne chiffre aucune approbation : il les cartographie.",
         "a": "Il n’agit pas sur les mots de passe."
       }
     },

@@ -36,6 +36,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The root is the trust anchor of the whole PKI. Kept offline, it signs only the intermediate authorities and becomes very hard to compromise, which protects the entire chain.",
       "whyWrong": {
+        "a": "The goal is not saving energy: it is protecting the root of trust.",
         "b": "It is used to sign the intermediate authorities, at their creation and renewal.",
         "d": "It is the online issuing authorities that deliver the certificates."
       }
@@ -97,6 +98,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Server Core installs fewer components (no graphical interface): less exposed code, therefore fewer vulnerabilities and fewer fixes to apply. Administration is done remotely and in PowerShell.",
       "whyWrong": {
         "a": "Server Core adds no protection: it removes components.",
+        "c": "Server Core does not encrypt network traffic: it reduces the number of installed components.",
         "b": "It is still subject to updates, simply fewer of them."
       }
     },
@@ -162,7 +164,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Without authentication, any workstation or device can register or replace a record, and thus divert a name to a machine it controls. Secure update forbids it.",
       "whyWrong": {
         "a": "The risk concerns not speed but the integrity of the records.",
-        "c": "Replication is not concerned."
+        "c": "Replication is not concerned.",
+        "b": "An unsecured zone accepts any client; it does not refuse requests from non-member machines."
       }
     },
     "wsp-q19": {
@@ -229,7 +232,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A wildcard certificate is copied to several servers: the key is more exposed, and its leak lets an attacker pass for any subdomain. Distinct, short-lived certificates are preferred when possible.",
       "whyWrong": {
         "a": "A wildcard is revoked like the others.",
-        "c": "It is the opposite: it is used precisely on several servers."
+        "c": "It is the opposite: it is used precisely on several servers.",
+        "b": "A wildcard certificate does not expire faster than others."
       }
     },
     "wsp-q27": {
@@ -238,6 +242,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The SAN lists the identities covered: DNS names for a server, email address or user name (UPN) for a person. For an authentication certificate, a SAN supplied by the requester and accepted by the authority lets someone pass for another account.",
       "whyWrong": {
         "b": "The end-of-validity date is another field.",
+        "d": "The SAN does not encrypt the private key: it lists the names the certificate is valid for.",
         "a": "The revocation distribution point is another extension."
       }
     },
@@ -264,6 +269,7 @@ export const corrections: CourseCorrections = {
       "explanation": "With strong mapping, the domain controller requires the certificate to contain, or be associated with, the account’s security identifier (SID). A certificate obtained in another user’s name no longer passes authentication.",
       "whyWrong": {
         "a": "Frequent renewal does not verify identity.",
+        "d": "Encrypting the certificate with the user’s password does not prove it matches the account.",
         "c": "Removing the alternative name does not solve the matching with the account."
       }
     },
@@ -273,7 +279,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A gMSA is a service account whose long, random password is managed and renewed by Active Directory: no one knows or types it. It removes weak, never-changed service passwords.",
       "whyWrong": {
         "c": "Sharing an administrator account is precisely what is avoided.",
-        "a": "A password in a script is a bad practice."
+        "a": "A password in a script is a bad practice.",
+        "d": "A gMSA is not a guest account: its password is managed and rotated by the directory."
       }
     },
     "wsp-q32": {
@@ -282,7 +289,8 @@ export const corrections: CourseCorrections = {
       "explanation": "An account’s credentials remain in memory on the machines where it logs on. Separating the tiers (domain controllers and PKI, servers, workstations) prevents an attacker who compromises a workstation from picking up a domain account there.",
       "whyWrong": {
         "c": "It is about security, not workload distribution.",
-        "a": "Multiplying accounts is not the goal."
+        "a": "Multiplying accounts is not the goal.",
+        "b": "Tiering does not restrict administrator accounts to a geographic location."
       }
     },
     "wsp-q33": {
@@ -318,6 +326,7 @@ export const corrections: CourseCorrections = {
       "explanation": "After an ordinary restore, replication would delete the restored objects because the other controllers believe them deleted. The authoritative restore marks these objects as having priority and propagates them.",
       "whyWrong": {
         "c": "It concerns the directory, not users’ files.",
+        "d": "An authoritative restore does not copy the database to a controller foreign to the domain.",
         "b": "It resets no password."
       }
     },

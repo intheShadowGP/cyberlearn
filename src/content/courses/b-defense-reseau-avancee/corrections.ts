@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un déni de service vise la disponibilité : bande passante, table de connexions, calcul ou base de données sont saturés jusqu’à ce que les utilisateurs légitimes ne soient plus servis. Il ne cherche ni à lire ni à modifier les données.",
       "whyWrong": {
         "d": "Voler des identifiants vise la confidentialité, pas la disponibilité.",
-        "c": "Altérer des données vise l’intégrité."
+        "c": "Altérer des données vise l’intégrité.",
+        "a": "Installer un logiciel espion vise la confidentialité, pas la disponibilité."
       }
     },
     "bdef-q2": {
@@ -19,6 +20,7 @@ export const corrections: CourseCorrections = {
       "explanation": "La requête est petite et porte l’adresse de la victime comme source : le serveur ouvert répond, par un message souvent des dizaines de fois plus gros, à la victime. L’attaquant dépense peu de bande passante et masque son origine.",
       "whyWrong": {
         "d": "Les serveurs journalisent l’adresse usurpée : le but est de diriger les réponses, pas de les cacher.",
+        "b": "L’usurpation ne contourne pas le chiffrement : elle sert à rediriger les réponses.",
         "a": "L’attaquant ne reçoit pas le trafic : c’est la victime qui le reçoit."
       }
     },
@@ -43,7 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le filtrage d’entrée n’accepte que des adresses source attendues sur l’interface. Sans paquets usurpés, les attaques par réflexion ne peuvent plus viser une victime. Il protège les autres autant que celui qui l’applique, d’où la difficulté à le généraliser.",
       "whyWrong": {
         "c": "Il filtre selon l’adresse source ; il ne chiffre rien.",
-        "b": "La limitation de débit est une autre mesure, sans lien avec l’usurpation."
+        "b": "La limitation de débit est une autre mesure, sans lien avec l’usurpation.",
+        "a": "Le filtrage BCP 38 contrôle la source des paquets, pas leur destination privée."
       }
     },
     "bdef-q6": {
@@ -75,7 +78,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le plan de contrôle apprend les routes. Le plan de données fait suivre les paquets selon la table construite, et le plan de gestion sert à administrer l’équipement. Il n’existe pas de plan de sauvegarde.",
       "whyWrong": {
         "c": "Le plan de données transmet les paquets ; il ne construit pas la table.",
-        "d": "Le plan de gestion concerne l’administration (SSH, SNMP)."
+        "d": "Le plan de gestion concerne l’administration (SSH, SNMP).",
+        "b": "Il n’existe pas de plan de sauvegarde dans ce modèle à trois plans."
       }
     },
     "bdef-q9": {
@@ -84,7 +88,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le CoPP protège le processeur : il plafonne le débit du trafic qui lui est destiné (routage, gestion, ICMP). Une inondation dirigée vers le routeur lui-même ne l’empêche plus de maintenir ses sessions de routage.",
       "whyWrong": {
         "c": "Le chiffrement ou l’authentification des sessions relève d’autres mécanismes.",
-        "d": "La répartition de charge est une fonction de routage, pas de protection du plan de contrôle."
+        "d": "La répartition de charge est une fonction de routage, pas de protection du plan de contrôle.",
+        "b": "La sauvegarde de configuration est une tâche de gestion, pas du CoPP."
       }
     },
     "bdef-q10": {
@@ -106,6 +111,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Les voisins directs émettent avec un TTL de 255 et rejettent les paquets dont le TTL est inférieur : un paquet venu de plus loin a forcément traversé un routeur et son TTL a diminué. Cela bloque les tentatives d’injection à distance contre BGP.",
       "whyWrong": {
         "a": "C’est le rôle de l’authentification des sessions, pas du GTSM.",
+        "d": "Le GTSM ne mesure pas la portée vers la destination : il exige un TTL maximal à l’arrivée.",
         "c": "La vérification de l’origine relève de la RPKI et des filtres de préfixes."
       }
     },
@@ -138,6 +144,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un enregistrement de flux résume un échange : adresses et ports source et destination, protocole, octets, paquets, horodatage et durée. Il ne contient pas le contenu, ce qui le rend léger et conservable longtemps.",
       "whyWrong": {
         "b": "Le contenu intégral relève de la capture complète, pas des flux.",
+        "c": "Un enregistrement de flux ne décrit pas les fichiers ni leurs propriétaires.",
         "a": "Les flux ignorent les identifiants et le contenu applicatif."
       }
     },
@@ -147,7 +154,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Les flux sont des résumés : ils occupent bien moins d’espace que les paquets, donc on les garde longtemps. Cela permet de remonter dans le passé pour retrouver une balise ou un mouvement latéral, sans lire le contenu.",
       "whyWrong": {
         "b": "Les flux ne contiennent jamais le contenu.",
-        "a": "Le processus à l’origine s’obtient par les journaux du poste (EDR)."
+        "a": "Le processus à l’origine s’obtient par les journaux du poste (EDR).",
+        "d": "Les flux exigent aussi des équipements configurés pour les exporter."
       }
     },
     "bdef-q17": {
@@ -171,6 +179,7 @@ export const corrections: CourseCorrections = {
       "explanation": "ECH chiffre le ClientHello, donc le SNI : une sonde ne voit plus le nom du site, seulement l’adresse. La supervision s’appuie davantage sur les adresses, les flux, le DNS imposé de l’entreprise et la télémétrie des postes.",
       "whyWrong": {
         "d": "ECH ne rend rien lisible : il masque davantage de métadonnées.",
+        "a": "Avec ECH, le certificat n’est pas envoyé en clair : c’est l’inverse de l’effet décrit.",
         "c": "Les adresses IP restent visibles, elles sont nécessaires au routage."
       }
     },
@@ -197,6 +206,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Sans description du comportement habituel, on ne distingue ni l’anormal ni le simplement rare. La ligne de base permet de régler les seuils : trop bas, ils produisent des faux positifs ; trop hauts, ils laissent passer une activité lente.",
       "whyWrong": {
         "a": "La liste de signatures relève de la détection par signatures.",
+        "b": "Une ligne de base sert à comparer des comportements, pas à déchiffrer des échanges.",
         "c": "La ligne de base ne déchiffre rien : elle décrit l’habituel."
       }
     },
@@ -206,7 +216,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une balise interroge régulièrement son serveur, avec un rythme et un volume très stables : un humain ou une application ordinaire ne produit pas ce motif. Le chiffrement ne le masque pas, car il repose sur la forme du trafic.",
       "whyWrong": {
         "a": "C’est plutôt le profil d’une exfiltration ponctuelle.",
-        "b": "Beaucoup de ports différents évoquent un balayage."
+        "b": "Beaucoup de ports différents évoquent un balayage.",
+        "d": "Une hausse de trafic web à midi est un usage normal, pas une balise."
       }
     },
     "bdef-q24": {
@@ -215,7 +226,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un poste ordinaire parle à quelques serveurs de fichiers. Contacter 200 machines sur SMB avec des échanges minuscules est le motif d’un balayage ou d’une propagation. On isole le poste et on vérifie les machines qui ont répondu.",
       "whyWrong": {
         "b": "Une sauvegarde vise un serveur, avec de gros volumes.",
-        "c": "Une mise à jour part d’un serveur vers les postes, pas l’inverse."
+        "c": "Une mise à jour part d’un serveur vers les postes, pas l’inverse.",
+        "d": "Une consultation normale ne contacte pas 200 machines en une heure."
       }
     },
     "bdef-q25": {
@@ -261,7 +273,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un VPN classique place le poste sur le réseau et donne un accès large. Le ZTNA n’ouvre que l’application demandée, après vérification de l’identité, de l’état de l’appareil et du contexte, et peut couper la session si l’un d’eux change.",
       "whyWrong": {
         "d": "Les deux chiffrent les échanges ; la différence porte sur l’étendue de l’accès.",
-        "c": "Le ZTNA renforce la vérification d’identité au lieu de la supprimer."
+        "c": "Le ZTNA renforce la vérification d’identité au lieu de la supprimer.",
+        "b": "Le ZTNA s’applique aussi aux postes situés hors des locaux."
       }
     },
     "bdef-q30": {
@@ -270,6 +283,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le NAC vérifie l’authentification et la posture de l’appareil. S’il n’est pas conforme, il l’isole dans un VLAN de quarantaine où il ne peut joindre que les ressources de mise à jour, jusqu’à ce qu’il soit corrigé.",
       "whyWrong": {
         "b": "Autoriser un appareil non conforme sur tout le réseau annule l’intérêt du contrôle.",
+        "c": "Un NAC place en quarantaine ; il ne supprime pas le compte de l’utilisateur.",
         "a": "Le NAC contrôle l’accès ; il ne réinstalle pas les systèmes."
       }
     },
@@ -284,6 +298,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le bastion concentre l’authentification multifacteur, l’autorisation et l’enregistrement des sessions d’administration. Les équipements n’acceptent que lui : un poste ordinaire compromis ne peut pas atteindre leurs interfaces.",
       "whyWrong": {
         "a": "Un équipement non joignable reste vulnérable : les mises à jour restent nécessaires.",
+        "d": "Le bastion impose le passage par un point unique, il n’autorise pas les accès directs.",
         "c": "Le bastion ne filtre pas le trafic entre zones : il sécurise l’administration."
       }
     },
@@ -314,7 +329,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Reconstituer une attaque suppose de remettre dans l’ordre des événements issus de pare-feux, serveurs et postes. Si leurs horloges diffèrent, la chronologie est faussée. Une heure cohérente conditionne la corrélation.",
       "whyWrong": {
         "b": "NTP ne modifie pas le débit des échanges.",
-        "a": "La synchronisation de l’heure ne chiffre pas les journaux."
+        "a": "La synchronisation de l’heure ne chiffre pas les journaux.",
+        "d": "La synchronisation d’horloge n’authentifie pas les équipements entre eux."
       }
     },
     "bdef-q36": {
@@ -323,6 +339,7 @@ export const corrections: CourseCorrections = {
       "explanation": "En faisant résoudre un domaine de commande vers une adresse du défenseur, on neutralise l’attaquant et on repère les postes infectés qui tentent de le joindre : ils apparaissent dans les journaux du sinkhole.",
       "whyWrong": {
         "d": "Un résolveur de secours relève de la disponibilité, pas du sinkhole.",
+        "a": "Un sinkhole redirige la résolution ; il ne supprime pas des enregistrements TXT.",
         "b": "Le sinkhole ne supprime pas d’enregistrements : il redirige un nom précis."
       }
     },
@@ -337,6 +354,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le blackholing demande aux routeurs de jeter tout le trafic vers l’adresse attaquée : les autres services sont protégés, mais l’adresse visée est coupée, ce qui revient à donner satisfaction à l’attaquant pour elle. On préfère le nettoyage quand il est disponible.",
       "whyWrong": {
         "c": "Au contraire, le blackholing jette aussi le trafic légitime vers cette adresse.",
+        "d": "Le blackholing n’identifie pas l’attaquant ; il rend la victime injoignable.",
         "b": "C’est le profil d’un centre de nettoyage, pas du blackholing."
       }
     },

@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The OSI reference model has seven layers, from the physical layer (1) to the application layer (7). The more practical TCP/IP model has four.",
       "whyWrong": {
         "a": "Four is the number of layers of the TCP/IP model.",
-        "c": "The TCP/IP model is sometimes presented with five layers, but OSI has seven."
+        "c": "The TCP/IP model is sometimes presented with five layers, but OSI has seven.",
+        "d": "The OSI model has seven layers, not nine."
       }
     },
     "osi-q2": {
@@ -19,7 +20,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A switch reads the frame’s destination MAC address and compares it with its table: this is the data link layer. A router, for its part, decides from the IP address (layer 3).",
       "whyWrong": {
         "b": "A repeater or a hub works at layer 1, without reading addresses.",
-        "c": "This is the level of a router, not of a standard switch."
+        "c": "This is the level of a router, not of a standard switch.",
+        "d": "Layer 7 is the application layer; a standard switch does not decide there."
       }
     },
     "osi-q3": {

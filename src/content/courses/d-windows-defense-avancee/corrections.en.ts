@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "One assumes that a workstation, an account or a contractor will be compromised one day. Defenses (partitioning, limited rights), detections and recovery plans are then designed to limit what the attacker can do next, rather than relying only on the perimeter.",
       "whyWrong": {
         "b": "This is precisely the opposite hypothesis, which this approach abandons.",
-        "c": "It is not about cutting external connections."
+        "c": "It is not about cutting external connections.",
+        "a": "The assume-breach hypothesis concerns designing defenses, not a replacement budget."
       }
     },
     "dwd-q2": {
@@ -68,7 +69,8 @@ export const corrections: CourseCorrections = {
       "explanation": "An administrator who works from an ordinary workstation exposes their secrets to booby-trapped emails and malicious sites. On a PAW, no risky use exists: a privileged account authenticates only from a hardened, filtered workstation.",
       "whyWrong": {
         "b": "Power is not the goal: isolation is.",
-        "d": "Sessions left open on a shared workstation would weaken the isolation."
+        "d": "Sessions left open on a shared workstation would weaken the isolation.",
+        "a": "A PAW is an administration workstation, not a backup server."
       }
     },
     "dwd-q9": {
@@ -77,7 +79,8 @@ export const corrections: CourseCorrections = {
       "explanation": "With just-in-time rights, an account is privileged only for the duration of an approved task: an attacker who compromises it in the meantime has no right left to exploit. The process adds justification, approval and traceability.",
       "whyWrong": {
         "d": "A permanent right remains permanently available to an attacker.",
-        "c": "A fixed schedule has no relation to the real need."
+        "c": "A fixed schedule has no relation to the real need.",
+        "b": "Just-In-Time does not depend on the resource’s creator: it grants a right on demand."
       }
     },
     "dwd-q10": {

@@ -9,7 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La règle de correspondance au préfixe le plus long retient la route la plus spécifique. /8 est plus long que /0, donc le routeur suit 10.0.0.0/8. La route par défaut ne sert que si aucune autre ne correspond.",
       "whyWrong": {
-        "c": "La route par défaut est la moins spécifique : elle n’est utilisée qu’en dernier recours."
+        "c": "La route par défaut est la moins spécifique : elle n’est utilisée qu’en dernier recours.",
+        "d": "La métrique n’intervient qu’entre routes de même préfixe ; le préfixe le plus long l’emporte d’abord.",
+        "a": "Un routeur choisit une seule route pour un paquet, il ne répartit pas au hasard."
       }
     },
     "rdn-q2": {
@@ -31,6 +33,7 @@ export const corrections: CourseCorrections = {
       "explanation": "OSPF est un protocole intérieur (IGP) : il distribue les routes au sein d’une organisation. BGP est le protocole extérieur qui échange l’accessibilité entre systèmes autonomes et forme la table de routage d’Internet.",
       "whyWrong": {
         "c": "Aucun des deux ne chiffre le trafic : ce sont des protocoles de routage.",
+        "b": "BGP fonctionne en IPv4 comme en IPv6, tout comme OSPF (versions OSPFv2 et OSPFv3).",
         "d": "L’attribution d’adresses relève du DHCP, la traduction des noms du DNS."
       }
     },
@@ -59,6 +62,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La résolution descend la hiérarchie : serveurs racine (qui gère .fr ?), serveurs de .fr (qui gère exemple.fr ?), puis serveurs faisant autorité pour exemple.fr (adresse de www).",
       "whyWrong": {
+        "a": "Un résolveur ne part pas du serveur web : il descend depuis la racine.",
         "b": "Le DHCP attribue des adresses ; le pare-feu ne fait pas de résolution de noms.",
         "c": "L’ordre est inversé : on part de la racine, jamais du domaine final."
       }
@@ -93,6 +97,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’échange DHCP suit DORA : Discover (le client cherche), Offer (un serveur propose), Request (le client demande l’offre choisie), Acknowledge (le serveur confirme et fixe le bail).",
       "whyWrong": {
+        "a": "Request n’ouvre pas l’échange : le client commence par Discover.",
+        "b": "Offer ne précède pas Discover : le serveur répond à une demande du client.",
         "d": "Syn, Syn-Ack, Ack et Fin sont des étapes de TCP, sans rapport avec DHCP."
       }
     },
@@ -107,6 +113,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le PAT (translation de ports, ou surcharge) partage une seule adresse publique entre plusieurs machines internes en les distinguant par le port source réécrit. C’est la forme de NAT la plus courante chez les particuliers et en entreprise.",
       "whyWrong": {
         "b": "Le NAT ne chiffre rien : il réécrit seulement des adresses et des ports.",
+        "a": "Ni le PAT ni le NAT n’attribuent de noms de domaine.",
         "c": "Le PAT est surtout employé en IPv4, précisément pour économiser les adresses."
       }
     },
@@ -142,7 +149,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Quand la destination n’est pas dans son réseau local, le poste remet le paquet à sa passerelle par défaut, un routeur, qui se charge de le faire suivre vers le bon réseau.",
       "whyWrong": {
         "d": "La traduction des noms est assurée par le DNS, pas par la passerelle.",
-        "c": "L’attribution des adresses relève du DHCP."
+        "c": "L’attribution des adresses relève du DHCP.",
+        "b": "La passerelle par défaut route les paquets ; elle ne chiffre pas le trafic du poste."
       }
     },
     "rdn-q18": {
@@ -151,6 +159,7 @@ export const corrections: CourseCorrections = {
       "explanation": "À préfixe égal, le routeur départage les sources de routes par leur distance administrative : plus elle est faible, plus la source est jugée fiable. La route statique l’emporte donc ici ; la métrique ne sert qu’entre routes de même source.",
       "whyWrong": {
         "a": "Une route dynamique n’est pas prioritaire par nature : tout dépend de la distance administrative.",
+        "b": "Une seule route est installée dans la table pour un même préfixe, ici la statique.",
         "d": "Un routeur accepte plusieurs sources pour un même préfixe et n’en installe qu’une."
       }
     },
@@ -186,7 +195,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Avec un protocole à états de liens, chaque routeur reçoit la description de tous les liens de sa zone, reconstruit la carte complète et calcule les plus courts chemins. Cela accélère la convergence quand la topologie change.",
       "whyWrong": {
-        "d": "C’est le principe des protocoles à vecteur de distance, pas d’OSPF."
+        "d": "C’est le principe des protocoles à vecteur de distance, pas d’OSPF.",
+        "c": "OSPF calcule ses chemins sur la topologie, pas sur la charge des serveurs finaux.",
+        "a": "OSPF n’exige pas de liens chiffrés ; le chiffrement n’est pas son critère."
       }
     },
     "rdn-q23": {
@@ -200,7 +211,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La correspondance au préfixe le plus long s’applique aussi sur Internet : tout routeur qui reçoit le /24 le préfère au /23 légitime. C’est pourquoi un détournement par un préfixe plus spécifique est redoutable, et pourquoi on filtre les annonces et on valide leur origine (RPKI).",
       "whyWrong": {
         "d": "BGP ne départage pas selon l’ancienneté de l’annonce.",
-        "a": "Rien n’est chiffré dans une annonce de route."
+        "a": "Rien n’est chiffré dans une annonce de route.",
+        "c": "La taille du système autonome ne sert pas de critère de préférence."
       }
     },
     "rdn-q25": {
@@ -240,7 +252,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le résolveur récursif (celui du fournisseur, de l’entreprise ou public) interroge la hiérarchie pour le compte du client et met les réponses en cache. Le serveur faisant autorité détient les enregistrements officiels d’une zone et répond sans interroger d’autres serveurs.",
       "whyWrong": {
         "b": "Les rôles sont inversés dans cette proposition.",
-        "d": "Les deux utilisent UDP et TCP selon la taille et le type d’échange."
+        "d": "Les deux utilisent UDP et TCP selon la taille et le type d’échange.",
+        "a": "Un serveur faisant autorité ne s’installe pas sur les routeurs par principe."
       }
     },
     "rdn-q29": {
@@ -266,6 +279,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Les diffusions DHCP ne franchissent pas les routeurs. Le relais les convertit en messages dirigés vers le serveur, qui peut ainsi servir plusieurs réseaux sans qu’on installe un serveur dans chacun.",
       "whyWrong": {
         "b": "Le relais ne chiffre rien : il transmet les messages au serveur.",
+        "a": "Un relais DHCP ne remplace pas le serveur ; il transmet les requêtes.",
         "c": "La traduction d’adresses est le rôle du NAT."
       }
     },
@@ -274,6 +288,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "L’attaquant envoie de nombreuses requêtes avec de fausses adresses MAC pour épuiser les adresses disponibles. Les clients légitimes n’obtiennent plus de bail, et un serveur pirate peut alors prendre le relais. Le port security et la limitation du débit DHCP par port la contrent.",
       "whyWrong": {
+        "d": "Les baux ne sont pas expirés par l’attaque : le pool d’adresses est épuisé.",
         "c": "Un serveur DHCP ne stocke pas de mots de passe : cette attaque vise sa disponibilité.",
         "a": "La table de routage n’est pas concernée par des requêtes DHCP."
       }
@@ -283,7 +298,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La redirection de port (DNAT) fait suivre les connexions entrantes reçues sur l’adresse publique et un port donné vers un service interne. Elle expose ce service à Internet : il faut donc la filtrer et la limiter au strict nécessaire.",
       "whyWrong": {
-        "b": "C’est la translation de ports des connexions sortantes (PAT), pas la redirection entrante."
+        "b": "C’est la translation de ports des connexions sortantes (PAT), pas la redirection entrante.",
+        "d": "Le DNAT ne change pas le port selon les attaques.",
+        "c": "Le DNAT ne bloque pas les ports : il redirige."
       }
     },
     "rdn-q34": {
@@ -297,7 +314,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Si la connectivité par adresse fonctionne, la couche réseau et la passerelle sont bonnes : seul le passage du nom à l’adresse échoue. On vérifie le serveur DNS configuré, sa joignabilité et sa réponse (nslookup ou dig).",
       "whyWrong": {
         "b": "Sans route par défaut, 8.8.8.8 ne répondrait pas non plus.",
-        "d": "Un câble défectueux couperait toute communication, y compris vers 8.8.8.8."
+        "d": "Un câble défectueux couperait toute communication, y compris vers 8.8.8.8.",
+        "a": "Si le pare-feu bloquait tout le trafic IP, le ping vers 8.8.8.8 échouerait aussi."
       }
     },
     "rdn-q36": {
@@ -306,7 +324,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La plage 169.254.0.0/16 est la plage lien-local d’IPv4 : le poste s’y attribue une adresse quand aucun serveur DHCP ne répond. On vérifie alors le lien, le VLAN, la joignabilité du serveur ou du relais DHCP.",
       "whyWrong": {
         "c": "Cette plage n’est pas routable sur Internet.",
-        "b": "Une adresse statique ne serait pas choisie dans cette plage réservée."
+        "b": "Une adresse statique ne serait pas choisie dans cette plage réservée.",
+        "a": "Un tunnel VPN ne donne pas une adresse en 169.254.0.0/16."
       }
     },
     "rdn-q37": {
@@ -337,6 +356,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un poste qui joint son réseau local mais rien d’autre, même par adresse, n’atteint pas son routeur : passerelle absente, mauvaise ou injoignable. On la lit dans la configuration puis on la teste avec ping.",
       "whyWrong": {
         "d": "Le DNS n’intervient pas quand on joint une destination par son adresse.",
+        "a": "Le certificat TLS n’intervient pas pour joindre une adresse IP au niveau réseau.",
         "c": "Le poste possède déjà une adresse : le pool n’est pas en cause."
       }
     },

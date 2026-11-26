@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "For each frame received, the switch associates the source MAC address with the arrival port in its (CAM) table. Later frames addressed to that address are then sent only to that port.",
       "whyWrong": {
         "d": "DNS resolves names into IP addresses; it plays no part in switching.",
+        "b": "A layer 2 switch learns from MAC addresses, not destination IP addresses.",
         "c": "A switch that flooded everything would be a hub."
       }
     },
@@ -107,7 +108,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An IPv6 address has 128 bits, written as eight groups of four hexadecimal digits. An IPv4 address has only 32.",
       "whyWrong": {
-        "a": "64 bits often corresponds to the network part or to the interface identifier, not to the whole address."
+        "c": "32 bits corresponds to an IPv4 address.",
+        "a": "64 bits often corresponds to the network part or to the interface identifier, not to the whole address.",
+        "b": "256 bits matches no IPv6 address length."
       }
     },
     "cvi-q13": {
@@ -185,6 +188,7 @@ export const corrections: CourseCorrections = {
       "explanation": "BPDU Guard disables an access port that receives STP messages, since no switch should be plugged there. Root Guard, for its part, prevents a link from triggering a new root election.",
       "whyWrong": {
         "d": "DHCP snooping checks DHCP replies, not STP messages.",
+        "a": "Port security limits MAC addresses per port: it does not stop a switch becoming Spanning Tree root.",
         "c": "RA Guard concerns IPv6 router advertisements."
       }
     },
@@ -286,7 +290,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Leading zeros of each group are omitted and a single run of zero groups is replaced by `::`. A second use of `::` would be ambiguous, and `2001:db8:1::` designates another address.",
       "whyWrong": {
         "b": "`::` can only replace one run of groups, not four colons.",
-        "d": "This form has only four groups, without `::`: it is invalid."
+        "d": "This form has only four groups, without `::`: it is invalid.",
+        "a": "`2001:db8:1::` designates another address: the “1” is not at the end."
       }
     },
     "cvi-q33": {
@@ -294,7 +299,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "`::1` is the equivalent of 127.0.0.1. The address `::` is the unspecified address, `fe80::/10` the link-local range and `ff02::1` the multicast group “all nodes on the link”.",
       "whyWrong": {
-        "b": "`::` is the unspecified address used before having an address."
+        "b": "`::` is the unspecified address used before having an address.",
+        "c": "`fe80::1` is a link-local address, not the loopback.",
+        "d": "`ff02::1` is the all-nodes multicast group of the link."
       }
     },
     "cvi-q34": {
@@ -302,7 +309,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "SLAAC builds a 128-bit address with a 64-bit announced prefix and a 64-bit interface identifier: subnets are therefore /64s. A site generally receives a /48 or /56 to split into /64s.",
       "whyWrong": {
-        "a": "A /48 is typically allocated to a site, not to a subnet."
+        "a": "A /48 is typically allocated to a site, not to a subnet.",
+        "b": "/32 is the usual size of an allocation to a provider, not of a SLAAC subnet.",
+        "c": "/128 designates a single address, not a subnet."
       }
     },
     "cvi-q35": {

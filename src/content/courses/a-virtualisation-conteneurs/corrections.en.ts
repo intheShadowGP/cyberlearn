@@ -72,7 +72,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Whoever administers the hypervisor can stop, copy or read the disks of all the VMs. Access must be reserved to a dedicated administration network, with strong authentication and logging.",
       "whyWrong": {
-        "c": "It is not exposed by default; on the contrary, exposing it must be avoided."
+        "d": "A hypervisor console does not store the passwords of the network’s users.",
+        "c": "It is not exposed by default; on the contrary, exposing it must be avoided.",
+        "a": "It has authentication: that is exactly what must be hardened."
       }
     },
     "virt-q9": {
@@ -99,6 +101,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The shared kernel makes containers light and quick to start, but a kernel flaw affects all of them. A VM isolates better, at the price of heavier resources.",
       "whyWrong": {
+        "c": "It is the other way around: the container shares the kernel, the VM embeds its own.",
+        "d": "A container does not require a hypervisor.",
         "b": "A VM can run a system different from the host’s."
       }
     },
@@ -112,7 +116,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Control groups (cgroups) measure and cap resources. They protect against resource exhaustion by a container, whether deliberate (denial of service) or accidental.",
       "whyWrong": {
-        "b": "Namespaces isolate the view of resources, they do not cap them."
+        "b": "Namespaces isolate the view of resources, they do not cap them.",
+        "a": "Secure Boot protects the boot; it does not limit a container’s resources.",
+        "c": "Capabilities split privileges; they do not limit CPU or memory."
       }
     },
     "virt-q14": {
@@ -200,7 +206,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A seccomp profile forbids certain system calls to the kernel, which reduces the kernel attack surface exposed to the container. AppArmor, for its part, restricts access to files, network and capabilities.",
       "whyWrong": {
-        "b": "AppArmor is a mandatory access control: it restricts access to resources, not the list of system calls."
+        "b": "AppArmor is a mandatory access control: it restricts access to resources, not the list of system calls.",
+        "d": "Cgroups limit resources, not system calls.",
+        "a": "DNSSEC authenticates DNS answers."
       }
     },
     "virt-q23": {

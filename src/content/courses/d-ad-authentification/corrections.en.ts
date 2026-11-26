@@ -32,7 +32,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The TGT is encrypted with the krbtgt account’s key, known only to the KDCs. The client cannot read it; it presents it to the KDC to obtain service tickets.",
       "whyWrong": {
-        "c": "The user’s key serves for pre-authentication and to encrypt the session key returned, not the TGT itself."
+        "c": "The user’s key serves for pre-authentication and to encrypt the session key returned, not the TGT itself.",
+        "d": "The TGT is not encrypted with the Domain Administrator’s key.",
+        "b": "The machine account’s key does not encrypt the TGT: that key belongs to the krbtgt account."
       }
     },
     "ad-q5": {
@@ -41,6 +43,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The service ticket is encrypted with the key of the account tied to the SPN. This is what makes Kerberoasting possible: the attacker legitimately obtains the ticket, then tries to recover the service account’s password offline.",
       "whyWrong": {
         "c": "krbtgt encrypts the TGT, not the service tickets.",
+        "a": "The service ticket is not encrypted with the requesting user’s key: it is with the service account’s key.",
         "d": "Tickets are always encrypted."
       }
     },
@@ -84,7 +87,8 @@ export const corrections: CourseCorrections = {
       "explanation": "With krbtgt’s hash, an attacker can forge a TGT for any account, with any groups and an arbitrary duration. Only the (double) renewal of krbtgt’s password invalidates these tickets.",
       "whyWrong": {
         "c": "A service ticket obtained through Kerberoasting is cracked offline, not forged.",
-        "d": "A web token has no link with Kerberos."
+        "d": "A web token has no link with Kerberos.",
+        "a": "A root certificate belongs to the PKI, not to Kerberos."
       }
     },
     "ad-q11": {
@@ -158,7 +162,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A forest groups one or more domains linked by a common schema and trust relationships. The forest, not the domain, is the real security boundary: an administrator of one can, under conditions, compromise the others.",
       "whyWrong": {
         "b": "A site groups controllers by location, which is something else.",
-        "a": "A forest is not a backup."
+        "a": "A forest is not a backup.",
+        "d": "A forest is not a list of users: it groups domains."
       }
     },
     "ad-q19": {
@@ -167,7 +172,8 @@ export const corrections: CourseCorrections = {
       "explanation": "An OU is a container: accounts and computers are placed in it, GPOs are linked to it and rights are delegated to a team on it. Poorly delegated rights on an OU are a classic attack path.",
       "whyWrong": {
         "c": "Replication does not use OUs to encrypt.",
-        "b": "The hashes are stored in NTDS.dit."
+        "b": "The hashes are stored in NTDS.dit.",
+        "a": "A trust between forests is a separate relationship, unrelated to an OU."
       }
     },
     "ad-q20": {
@@ -188,6 +194,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The client sends a timestamp encrypted with its key: the KDC issues the TGT only to whoever knows it. Without pre-authentication (a dangerous setting), anyone can obtain a reply encrypted with the account’s key and crack it offline: this is AS-REP roasting.",
       "whyWrong": {
         "d": "That is mutual authentication, a different notion.",
+        "b": "Kerberos pre-authentication does not go through TLS: it relies on a value encrypted with the client’s key.",
         "a": "Pre-authentication is not a second factor."
       }
     },
@@ -210,6 +217,7 @@ export const corrections: CourseCorrections = {
       "explanation": "For an account without pre-authentication, an attacker obtains an AS-REP reply encrypted with the account’s key, without knowing its password, and cracks it offline. The attack is avoided by requiring pre-authentication and inventorying these accounts.",
       "whyWrong": {
         "c": "That is Kerberoasting, which targets accounts with an SPN.",
+        "d": "Clock synchronization is not what AS-REP roasting targets.",
         "a": "Protected Users strengthens accounts, on the contrary."
       }
     },
@@ -231,7 +239,8 @@ export const corrections: CourseCorrections = {
       "explanation": "With a service account’s key (obtained through Kerberoasting for example), the attacker makes tickets accepted by that service alone, without the DC being involved: very discreet. A golden ticket, for its part, is a TGT forged with krbtgt’s key.",
       "whyWrong": {
         "d": "A TGT is forged with krbtgt’s key, not a user’s.",
-        "c": "Expiry is checked; it is not a type of attack."
+        "c": "Expiry is checked; it is not a type of attack.",
+        "b": "A ticket relayed through a forest trust is another attack, not the silver ticket."
       }
     },
     "ad-q28": {
@@ -285,7 +294,8 @@ export const corrections: CourseCorrections = {
       "explanation": "DCSync uses the replication protocol: an account holding replication rights asks a controller for the secrets of any account, without touching its disk. These rights are reserved for controllers and a few very high-level accounts; any other holder is an alert.",
       "whyWrong": {
         "d": "That is time synchronization, unrelated.",
-        "a": "Legitimate replication does not aim to extract secrets."
+        "a": "Legitimate replication does not aim to extract secrets.",
+        "b": "DCSync is not a GPO comparison tool: it imitates a controller’s replication."
       }
     },
     "ad-q34": {
@@ -294,6 +304,7 @@ export const corrections: CourseCorrections = {
       "explanation": "With unconstrained delegation, the server keeps the TGT of each user who connects: if it is compromised, the attacker reuses these TGTs, administrators’ included. It is replaced by constrained or resource-based delegation, and sensitive accounts are protected.",
       "whyWrong": {
         "d": "Pre-authentication is a separate account setting.",
+        "c": "Unconstrained delegation does not force the use of NTLM.",
         "b": "It does not concern GPOs."
       }
     },
@@ -308,6 +319,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A graph links memberships, rights, sessions and delegations. It shows that an ordinary user reaches Domain Admins in five steps. Defenders cut these paths before an attacker takes them; it does not replace monitoring.",
       "whyWrong": {
         "d": "It reveals configuration weaknesses; it does not monitor events.",
+        "c": "A relationship graph encrypts no trust: it maps them.",
         "a": "It does not act on passwords."
       }
     },

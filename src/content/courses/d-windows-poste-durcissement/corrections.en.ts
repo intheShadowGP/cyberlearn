@@ -45,7 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Microsoft’s documentation states that the execution policy is not a security boundary but a defense in depth: it helps avoid unintentional mistakes. It is bypassed on the command line or by running the script’s content directly.",
       "whyWrong": {
         "d": "Interactive commands and code passed with `-Command` or `-EncodedCommand` are not concerned.",
-        "c": "It encrypts nothing: it decides which script files may be launched."
+        "c": "It encrypts nothing: it decides which script files may be launched.",
+        "a": "The `Restricted` policy has no link to a Microsoft signature; the `AllSigned` policy requires signed scripts."
       }
     },
     "wpo-q6": {
@@ -78,7 +79,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Tamper protection prevents modification of Defender’s security settings by local means (registry, PowerShell, local policy), a classic ransomware step before encryption.",
       "whyWrong": {
         "a": "Encrypting files is BitLocker’s role.",
-        "d": "Email signing has no link with Defender."
+        "d": "Email signing has no link with Defender.",
+        "b": "Tamper protection is not about the firewall: it protects Defender’s settings."
       }
     },
     "wpo-q10": {
@@ -143,6 +145,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Sysmon can record every DLL load, every connection and every registry access. Without exclusions, the volume saturates storage and the SIEM; a maintained configuration keeps the significant events.",
       "whyWrong": {
         "c": "Sysmon starts with a very verbose default configuration.",
+        "a": "Sysmon’s configuration filters events; it does not encrypt them.",
         "b": "Sysmon logs: it blocks nothing and does not replace antivirus protection."
       }
     },
@@ -152,7 +155,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The token carries the process’s identity (SID), groups and privileges. The system compares it with the access control lists of objects (files, registry keys, services) to decide on an authorization.",
       "whyWrong": {
         "d": "No clear-text password is kept in the token.",
-        "c": "Rights are carried by the objects (their ACLs), not by a list in the token."
+        "c": "Rights are carried by the objects (their ACLs), not by a list in the token.",
+        "a": "The access token does not contain the disk encryption key."
       }
     },
     "wpo-q18": {
@@ -160,7 +164,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "With LAPS, each workstation has a random local administrator password, renewed automatically and readable only by authorized people. A compromised workstation no longer gives access to the others: lateral movement through password reuse disappears.",
       "whyWrong": {
-        "b": "This is precisely the situation LAPS removes."
+        "b": "This is precisely the situation LAPS removes.",
+        "a": "Windows LAPS manages the local administrator password; it does not encrypt users’ passwords.",
+        "d": "LAPS has nothing to do with biometrics: it rotates the local administrator password."
       }
     },
     "wpo-q19": {
@@ -185,7 +191,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The attacker avoids bringing detectable programs and uses the system’s tools (PowerShell, WMI, `certutil`, `schtasks`). Blocklists are no longer enough: behaviors are monitored and these tools are logged.",
       "whyWrong": {
-        "b": "It is the opposite: the aim is to bring nothing new."
+        "b": "It is the opposite: the aim is to bring nothing new.",
+        "c": "The expression does not describe an attack without an internal account: it describes using tools already present.",
+        "d": "It does not describe recovering data after ransomware."
       }
     },
     "wpo-q22": {
@@ -204,6 +212,7 @@ export const corrections: CourseCorrections = {
       "explanation": "PowerShell 2.0 knows neither script block logging nor AMSI: by invoking it, an attacker escapes these protections. Hence the removal of this Windows feature from workstations.",
       "whyWrong": {
         "d": "The engine version changes nothing about elevation prompts.",
+        "b": "The `-version 2` parameter does not change the account of execution.",
         "c": "PowerShell does not use a network port of its own."
       }
     },
@@ -234,7 +243,8 @@ export const corrections: CourseCorrections = {
       "explanation": "AMSI lets an application, such as PowerShell or Office, submit content (script, macro) to Defender or another antimalware at the moment it is about to run, including after deobfuscation in memory.",
       "whyWrong": {
         "b": "AMSI has no encryption role.",
-        "a": "Signing is another, unrelated mechanism."
+        "a": "Signing is another, unrelated mechanism.",
+        "c": "AMSI does not forbid execution by script origin: it passes content to the antimalware."
       }
     },
     "wpo-q27": {
@@ -293,7 +303,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Persistence ensures that access survives the program stopping, a restart or a logoff: a `Run` registry key, a scheduled task, a service… It is a tactic distinct from defense evasion.",
       "whyWrong": {
         "d": "That belongs to defense evasion, another tactic.",
-        "c": "A program can be deleted: it is its automatic reinstatement that counts."
+        "c": "A program can be deleted: it is its automatic reinstatement that counts.",
+        "a": "Persistence does not mean the attacker’s connection time: it means keeping access."
       }
     },
     "wpo-q34": {
@@ -324,6 +335,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A WMI subscription (filter, consumer and binding) lives in the WMI repository: a check of `Run` keys or scheduled tasks does not show it. Sysmon (events 19 to 21) and tools such as Autoruns make it possible to find it.",
       "whyWrong": {
+        "c": "A permanent WMI subscription does not encrypt the malware: it triggers it on an event.",
+        "b": "It does not depend on the absence of an antivirus.",
         "d": "WMI persistence remains in the operating system, not in the firmware."
       }
     },

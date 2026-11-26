@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "La RAM est volatile : elle ne conserve ses données que sous tension. Le SSD, le disque dur et la puce du firmware sont des mémoires persistantes.",
       "whyWrong": {
         "b": "Un SSD conserve ses données hors tension.",
+        "a": "Un disque dur mécanique conserve ses données hors tension.",
         "c": "Le firmware est stocké dans une mémoire non volatile, sinon la machine ne pourrait pas démarrer."
       }
     },
@@ -47,6 +48,7 @@ export const corrections: CourseCorrections = {
       "explanation": "La RAM est beaucoup plus lente que le processeur. Les caches gardent à proximité les données et instructions récemment utilisées pour limiter les attentes. Ils sont eux aussi volatils.",
       "whyWrong": {
         "b": "Les caches sont volatils comme la RAM.",
+        "d": "Le cache ne chiffre rien : son rôle est la vitesse d’accès.",
         "c": "Le nombre de cœurs est une caractéristique du processeur, sans rapport avec les caches."
       }
     },
@@ -61,7 +63,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le mot de passe de session n’est vérifié que par le système en fonctionnement. Un disque branché ailleurs est lu directement. Le chiffrement intégral (BitLocker, LUKS) rend les données illisibles sans la clé.",
       "whyWrong": {
         "d": "Le mot de passe de session ne protège pas un disque lu hors du système.",
-        "c": "Aucun mécanisme standard n’efface le disque après des échecs de démarrage."
+        "c": "Aucun mécanisme standard n’efface le disque après des échecs de démarrage.",
+        "a": "Hors du système d’origine, les droits de propriété des fichiers ne s’appliquent plus : sans chiffrement, tout est lisible."
       }
     },
     "afund-q21": {
@@ -88,7 +91,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un octet regroupe 8 bits ; chaque bit a deux états, d’où 2⁸ = 256 combinaisons, de 0 à 255.",
       "whyWrong": {
         "d": "128 valeurs correspondent à 7 bits (jeu ASCII d’origine).",
-        "c": "La valeur 0 existe : il y a bien 256 combinaisons."
+        "c": "La valeur 0 existe : il y a bien 256 combinaisons.",
+        "b": "512 valeurs demanderaient 9 bits ; un octet en compte 8, soit 256 valeurs."
       }
     },
     "afund-q24": {
@@ -97,6 +101,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Quatre bits à 1 valent F en hexadécimal ; l’octet 1111 1111 s’écrit donc FF (soit 255 en décimal).",
       "whyWrong": {
         "d": "F0 correspond à 1111 0000.",
+        "a": "1F correspond à 00011111, et non à 11111111.",
         "c": "80 correspond à 1000 0000, soit 128."
       }
     },
@@ -119,7 +124,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Les majuscules ASCII commencent à 65 (0x41) : A = 65, B = 66… Z = 90 (0x5A). Les minuscules commencent à 97 (0x61).",
       "whyWrong": {
-        "a": "Le « a » minuscule vaut 97, soit 0x61."
+        "a": "Le « a » minuscule vaut 97, soit 0x61.",
+        "b": "B majuscule vaut 0x42 (66 en décimal).",
+        "d": "Z majuscule vaut 0x5A (90 en décimal)."
       }
     },
     "afund-q28": {
@@ -184,7 +191,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le TPM enregistre des mesures (empreintes) des composants démarrés et protège des clés. BitLocker peut ainsi ne libérer la clé du disque que si la chaîne de démarrage n’a pas été modifiée.",
       "whyWrong": {
-        "a": "Un TPM ne précharge rien : c’est un coffre-fort de clés et de mesures."
+        "a": "Un TPM ne précharge rien : c’est un coffre-fort de clés et de mesures.",
+        "c": "Le TPM ne remplace pas le noyau : il stocke des clés et des mesures.",
+        "b": "Le TPM ne fournit pas de connexion réseau."
       }
     },
     "afund-q32": {
@@ -204,7 +213,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Sans la clé, un disque chiffré est illisible, même branché sur une autre machine. Il ne remplace ni l’antivirus ni les protections réseau.",
       "whyWrong": {
-        "a": "Le chiffrement a un coût, il n’accélère pas les accès."
+        "a": "Le chiffrement a un coût, il n’accélère pas les accès.",
+        "c": "Le chiffrement du disque ne détecte pas les malwares : il ne remplace pas l’antivirus.",
+        "d": "Il protège les données au repos, pas contre les attaques réseau."
       }
     },
     "afund-q33": {
@@ -250,7 +261,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un processus possède son espace d’adressage ; ses threads, fils d’exécution internes, partagent cette mémoire. D’où la facilité de communication entre threads et le besoin de synchronisation.",
       "whyWrong": {
-        "c": "Un thread vit dans un processus et hérite de son contexte de sécurité."
+        "c": "Un thread vit dans un processus et hérite de son contexte de sécurité.",
+        "b": "Un thread s’exécute dans un processus, pas dans le firmware.",
+        "d": "Un processus n’est pas un thread terminé : ce sont deux notions différentes."
       }
     },
     "afund-q9": {
@@ -273,7 +286,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Chaque processus a un espace d’adressage virtuel privé. La traduction vers la mémoire physique est contrôlée par le noyau et le matériel, qui empêchent un processus de lire celui d’un autre.",
       "whyWrong": {
-        "b": "La mémoire est virtualisée : chaque processus ne voit que son propre espace."
+        "a": "Le système ne copie pas la mémoire d’un autre processus à la demande.",
+        "b": "La mémoire est virtualisée : chaque processus ne voit que son propre espace.",
+        "d": "Le processeur ne fusionne pas les espaces d’adressage : chaque processus a le sien."
       }
     },
     "afund-q37": {
@@ -328,7 +343,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’élévation de privilèges consiste à obtenir plus de droits sur la même machine. Le mouvement latéral, lui, consiste à passer d’une machine à une autre.",
       "whyWrong": {
-        "a": "Le mouvement latéral change de machine, ici l’attaquant reste sur le même poste."
+        "a": "Le mouvement latéral change de machine, ici l’attaquant reste sur le même poste.",
+        "d": "L’exfiltration consiste à sortir des données, pas à gagner des droits.",
+        "b": "La reconnaissance consiste à collecter des informations, pas à changer de compte."
       }
     },
     "afund-q41": {
@@ -336,7 +353,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le bit SUID fait exécuter le programme avec l’identité de son propriétaire. Utile pour des outils comme passwd, mais dangereux si le programme est vulnérable : c’est un vecteur classique d’élévation de privilèges.",
       "whyWrong": {
-        "c": "C’est justement ce que le bit SUID modifie."
+        "c": "C’est justement ce que le bit SUID modifie.",
+        "b": "Un programme SUID ne s’exécute pas avec le compte invité.",
+        "a": "Un programme SUID n’a pas besoin de sudo : il prend les droits de son propriétaire."
       }
     },
     "afund-q13": {

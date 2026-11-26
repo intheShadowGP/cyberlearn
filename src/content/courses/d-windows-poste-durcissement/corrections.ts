@@ -45,7 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La documentation Microsoft indique que la stratégie d’exécution n’est pas une frontière de sécurité mais une défense en profondeur : elle aide à éviter les erreurs involontaires. Elle se contourne en ligne de commande ou en exécutant directement le contenu du script.",
       "whyWrong": {
         "d": "Les commandes interactives et le code passé avec `-Command` ou `-EncodedCommand` ne sont pas concernés.",
-        "c": "Elle ne chiffre rien : elle décide quels fichiers de script peuvent être lancés."
+        "c": "Elle ne chiffre rien : elle décide quels fichiers de script peuvent être lancés.",
+        "a": "La stratégie `Restricted` n’est pas liée à une signature Microsoft ; la stratégie `AllSigned` exige des scripts signés."
       }
     },
     "wpo-q6": {
@@ -78,7 +79,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La protection contre les falsifications empêche la modification des réglages de sécurité de Defender par des moyens locaux (registre, PowerShell, stratégie locale), une étape classique des rançongiciels avant le chiffrement.",
       "whyWrong": {
         "a": "Le chiffrement des fichiers est le rôle de BitLocker.",
-        "d": "La signature des courriels n’a aucun lien avec Defender."
+        "d": "La signature des courriels n’a aucun lien avec Defender.",
+        "b": "La protection contre les falsifications ne concerne pas le pare-feu : elle protège les réglages de Defender."
       }
     },
     "wpo-q10": {
@@ -143,6 +145,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Sysmon peut enregistrer chaque chargement de DLL, chaque connexion et chaque accès au registre. Sans exclusions, le volume sature le stockage et le SIEM ; une configuration maintenue garde les événements significatifs.",
       "whyWrong": {
         "c": "Sysmon démarre avec une configuration par défaut très verbeuse.",
+        "a": "La configuration de Sysmon filtre les événements ; elle ne les chiffre pas.",
         "b": "Sysmon journalise : il ne bloque rien et ne remplace pas une protection antivirus."
       }
     },
@@ -152,7 +155,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le jeton porte l’identité (SID), les groupes et les privilèges du processus. Le système le compare aux listes de contrôle d’accès des objets (fichiers, clés de registre, services) pour décider d’une autorisation.",
       "whyWrong": {
         "d": "Aucun mot de passe en clair n’est conservé dans le jeton.",
-        "c": "Les droits sont portés par les objets (leurs ACL), pas par une liste dans le jeton."
+        "c": "Les droits sont portés par les objets (leurs ACL), pas par une liste dans le jeton.",
+        "a": "Le jeton d’accès ne contient pas la clé de chiffrement du disque."
       }
     },
     "wpo-q18": {
@@ -160,7 +164,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Avec LAPS, chaque poste a un mot de passe d’administrateur local aléatoire, renouvelé automatiquement et consultable par les seuls ayants droit. Un poste compromis ne donne plus accès aux autres : le mouvement latéral par réutilisation du mot de passe disparaît.",
       "whyWrong": {
-        "b": "C’est justement la situation que LAPS supprime."
+        "b": "C’est justement la situation que LAPS supprime.",
+        "a": "Windows LAPS gère le mot de passe de l’administrateur local ; il ne chiffre pas les mots de passe des utilisateurs.",
+        "d": "LAPS ne concerne pas la biométrie : il renouvelle le mot de passe de l’administrateur local."
       }
     },
     "wpo-q19": {
@@ -185,7 +191,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "L’attaquant évite d’apporter des programmes détectables et se sert des outils du système (PowerShell, WMI, `certutil`, `schtasks`). Les listes de blocage ne suffisent plus : on surveille les comportements et on journalise ces outils.",
       "whyWrong": {
-        "b": "C’est l’inverse : le but est de ne rien apporter de nouveau."
+        "b": "C’est l’inverse : le but est de ne rien apporter de nouveau.",
+        "c": "Cette expression ne désigne pas une attaque sans compte interne : elle désigne l’emploi d’outils déjà présents.",
+        "d": "Elle ne désigne pas la récupération de données après un rançongiciel."
       }
     },
     "wpo-q22": {
@@ -205,6 +213,7 @@ export const corrections: CourseCorrections = {
       "explanation": "PowerShell 2.0 ne connaît ni la journalisation des blocs de script ni l’AMSI : en l’invoquant, un attaquant échappe à ces protections. D’où la suppression de cette fonctionnalité Windows sur les postes.",
       "whyWrong": {
         "d": "La version du moteur ne change rien aux demandes d’élévation.",
+        "b": "Le paramètre `-version 2` ne change pas le compte d’exécution.",
         "c": "PowerShell n’utilise pas de port réseau propre."
       }
     },
@@ -235,7 +244,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’AMSI permet à une application, comme PowerShell ou Office, de soumettre un contenu (script, macro) à Defender ou à un autre antimalware au moment où il va être exécuté, y compris après désobfuscation en mémoire.",
       "whyWrong": {
         "b": "L’AMSI n’a aucun rôle de chiffrement.",
-        "a": "La signature est un autre mécanisme, sans rapport."
+        "a": "La signature est un autre mécanisme, sans rapport.",
+        "c": "L’AMSI n’interdit pas l’exécution selon l’origine du script : il transmet le contenu à l’antimalware."
       }
     },
     "wpo-q27": {
@@ -294,7 +304,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La persistance garantit que l’accès survit à l’arrêt du programme, au redémarrage ou à la déconnexion : clé de registre `Run`, tâche planifiée, service… C’est une tactique distincte de l’évasion de la détection.",
       "whyWrong": {
         "d": "Cela relève de l’évasion de la défense, une autre tactique.",
-        "c": "Un programme peut être supprimé : c’est son rétablissement automatique qui compte."
+        "c": "Un programme peut être supprimé : c’est son rétablissement automatique qui compte.",
+        "a": "La persistance ne désigne pas la durée de connexion de l’attaquant : elle désigne le maintien de son accès."
       }
     },
     "wpo-q34": {
@@ -325,6 +336,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un abonnement WMI (filtre, consommateur et liaison) vit dans le dépôt WMI : un contrôle des clés `Run` ou des tâches planifiées ne le montre pas. Sysmon (événements 19 à 21) et des outils comme Autoruns permettent de le retrouver.",
       "whyWrong": {
+        "c": "L’abonnement WMI permanent ne chiffre pas le programme malveillant : il le déclenche sur un événement.",
+        "b": "Il ne dépend pas de l’absence d’antivirus.",
         "d": "La persistance WMI reste dans le système d’exploitation, pas dans le micrologiciel."
       }
     },

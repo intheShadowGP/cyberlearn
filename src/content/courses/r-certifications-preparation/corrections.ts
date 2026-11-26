@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "ISC2 CC est conçue comme une certification d’entrée, sans expérience requise. Le CISSP et le CISM s’adressent à des profils expérimentés (sécurité et management) ; GCIH est une certification GIAC spécialisée dans la gestion des incidents.",
       "whyWrong": {
         "d": "Le CISSP exige plusieurs années d’expérience pour être pleinement délivré.",
+        "a": "GCIH s’adresse à des professionnels déjà actifs dans la gestion d’incidents.",
         "c": "Le CISM vise la gestion de la sécurité de l’information, avec une expérience de management."
       }
     },
@@ -44,7 +45,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La certification Lead Auditor ISO 27001 forme à la conduite d’audits de SMSI selon les principes de l’ISO 19011 et les exigences applicables aux organismes de certification.",
       "whyWrong": {
-        "b": "Le Lead Implementer forme à la mise en œuvre du SMSI, pas à son audit."
+        "b": "Le Lead Implementer forme à la mise en œuvre du SMSI, pas à son audit.",
+        "d": "Network+ concerne les réseaux, pas l’audit de SMSI.",
+        "c": "CCNA concerne les réseaux Cisco, pas l’audit de SMSI."
       }
     },
     "cert-q6": {
@@ -57,6 +60,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "CySA+ porte sur la détection, l’analyse des menaces et la réponse : cohérent pour un analyste SOC. Les certifications GIAC défensives sont une autre option reconnue.",
       "whyWrong": {
+        "c": "Lead Implementer vise la mise en œuvre d’un SMSI, pas la détection des menaces.",
         "a": "L’OSCP est un examen pratique offensif, orienté test d’intrusion.",
         "b": "Network+ valide les connaissances réseau, utiles mais non centrées sur la détection."
       }

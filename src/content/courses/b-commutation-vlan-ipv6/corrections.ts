@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "À chaque trame reçue, le commutateur associe l’adresse MAC source au port d’arrivée dans sa table (CAM). Les trames suivantes à destination de cette adresse ne sont plus envoyées que sur ce port.",
       "whyWrong": {
         "d": "Le DNS résout des noms en adresses IP ; il n’intervient pas dans la commutation.",
+        "b": "Un commutateur de couche 2 apprend à partir des adresses MAC, pas des adresses IP de destination.",
         "c": "Un commutateur qui diffuserait tout serait un concentrateur (hub)."
       }
     },
@@ -107,7 +108,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Une adresse IPv6 comporte 128 bits, écrits en huit groupes de quatre chiffres hexadécimaux. Une adresse IPv4 n’en compte que 32.",
       "whyWrong": {
-        "a": "64 bits correspond souvent à la partie réseau ou à l’identifiant d’interface, pas à l’adresse entière."
+        "c": "32 bits correspond à une adresse IPv4.",
+        "a": "64 bits correspond souvent à la partie réseau ou à l’identifiant d’interface, pas à l’adresse entière.",
+        "b": "256 bits ne correspond à aucune longueur d’adresse IPv6."
       }
     },
     "cvi-q13": {
@@ -185,6 +188,7 @@ export const corrections: CourseCorrections = {
       "explanation": "BPDU Guard désactive un port d’accès qui reçoit des messages STP, puisqu’aucun commutateur ne devrait y être branché. Root Guard empêche, lui, un lien de provoquer une nouvelle élection de la racine.",
       "whyWrong": {
         "d": "Le DHCP snooping contrôle les réponses DHCP, pas les messages STP.",
+        "a": "Port security limite les adresses MAC par port : il n’empêche pas de devenir racine du Spanning Tree.",
         "c": "RA Guard concerne les annonces de routeur IPv6."
       }
     },
@@ -286,7 +290,8 @@ export const corrections: CourseCorrections = {
       "explanation": "On omet les zéros de tête de chaque groupe et on remplace une seule suite de groupes nuls par `::`. Une seconde utilisation de `::` serait ambiguë, et `2001:db8:1::` désigne une autre adresse.",
       "whyWrong": {
         "b": "Le `::` ne peut remplacer qu’une suite de groupes, pas quatre fois deux-points.",
-        "d": "Cette forme n’a que quatre groupes, sans `::` : elle est invalide."
+        "d": "Cette forme n’a que quatre groupes, sans `::` : elle est invalide.",
+        "a": "`2001:db8:1::` désigne une autre adresse : le « 1 » n’est pas à la fin."
       }
     },
     "cvi-q33": {
@@ -294,7 +299,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "`::1` est l’équivalent de 127.0.0.1. L’adresse `::` est l’adresse non spécifiée, `fe80::/10` le lien-local et `ff02::1` le groupe multicast « tous les nœuds du lien ».",
       "whyWrong": {
-        "b": "`::` est l’adresse non spécifiée utilisée avant d’avoir une adresse."
+        "b": "`::` est l’adresse non spécifiée utilisée avant d’avoir une adresse.",
+        "c": "`fe80::1` est une adresse lien-local, pas l’adresse de bouclage.",
+        "d": "`ff02::1` est le groupe multicast de tous les nœuds du lien."
       }
     },
     "cvi-q34": {
@@ -302,7 +309,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "SLAAC construit une adresse de 128 bits avec un préfixe de 64 bits annoncé et un identifiant d’interface de 64 bits : les sous-réseaux sont donc des /64. Un site reçoit en général un /48 ou un /56 à découper en /64.",
       "whyWrong": {
-        "a": "Un /48 est typiquement alloué à un site, pas à un sous-réseau."
+        "a": "Un /48 est typiquement alloué à un site, pas à un sous-réseau.",
+        "b": "/32 est la taille habituelle d’une allocation à un fournisseur, pas d’un sous-réseau SLAAC.",
+        "c": "/128 désigne une seule adresse, pas un sous-réseau."
       }
     },
     "cvi-q35": {

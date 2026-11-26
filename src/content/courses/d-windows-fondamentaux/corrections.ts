@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le noyau et les pilotes s’exécutent en mode noyau, avec un accès direct au matériel et à toute la mémoire. Les applications et la plupart des services s’exécutent en mode utilisateur, plus limité : elles passent par le noyau pour tout ce qui touche au matériel. Une faille d’un pilote est donc plus grave que celle d’une application.",
       "whyWrong": {
         "b": "C’est l’inverse : le noyau est le niveau le plus privilégié.",
-        "a": "Le mode utilisateur est celui des applications, session ouverte ou non."
+        "a": "Le mode utilisateur est celui des applications, session ouverte ou non.",
+        "d": "Les deux modes sont distincts : le noyau a plus de droits que les applications."
       }
     },
     "dwf-q2": {
@@ -67,7 +68,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le SID est l’identifiant interne d’un compte ou d’un groupe, unique et immuable. Les permissions et les jetons s’appuient sur lui : renommer un compte ne modifie donc pas ses droits, et recréer un compte du même nom ne restitue pas ceux de l’ancien.",
       "whyWrong": {
         "d": "Le mot de passe est stocké à part, sous forme d’empreinte.",
-        "b": "Le nom affiché est modifiable ; le SID ne change pas."
+        "b": "Le nom affiché est modifiable ; le SID ne change pas.",
+        "c": "La validité d’un compte est une autre propriété : le SID est un identifiant."
       }
     },
     "dwf-q9": {
@@ -76,7 +78,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un compte local est défini dans la base du poste (SAM) et n’est valable que sur lui. Un compte de domaine est défini dans l’annuaire Active Directory : il s’authentifie auprès des contrôleurs et peut ouvrir une session sur tout poste du domaine.",
       "whyWrong": {
         "d": "Le niveau de privilège dépend des groupes, pas du type de compte.",
-        "c": "C’est l’inverse : le compte de domaine est utilisable sur de nombreux postes."
+        "c": "C’est l’inverse : le compte de domaine est utilisable sur de nombreux postes.",
+        "a": "Le compte local est géré sur le poste ; celui du domaine l’est de façon centralisée."
       }
     },
     "dwf-q10": {
@@ -191,6 +194,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Les cmdlets suivent la forme Verbe-Nom avec des verbes normalisés (`Get`, `Set`, `New`, `Remove`…). On devine ainsi le nom d’une commande, et `Get-Command` ou `Get-Help` aident à les retrouver.",
       "whyWrong": {
         "a": "L’ordre est inversé : le verbe vient en premier.",
+        "d": "Les cmdlets ne se nomment pas par une lettre et un chiffre.",
         "c": "Les noms ne sont pas abrégés de cette façon."
       }
     },
@@ -200,7 +204,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Dans PowerShell, chaque commande renvoie des objets (avec propriétés et méthodes). On enchaîne `Where-Object`, `Sort-Object`, `Select-Object` sur ces propriétés, sans avoir à découper du texte comme avec cmd.",
       "whyWrong": {
         "a": "C’est le fonctionnement du tube de cmd.",
-        "b": "Il n’y a pas de restriction de ce type."
+        "b": "Il n’y a pas de restriction de ce type.",
+        "c": "Le tube envoie la sortie d’une commande à la suivante, pas vers l’imprimante."
       }
     },
     "dwf-q24": {
@@ -255,7 +260,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Dès qu’un correctif est publié, les failles qu’il corrige deviennent publiques et les attaquants les exploitent contre les postes non à jour. Les mises à jour automatiques réduisent ce délai ; les ignorer laisse des failles connues ouvertes.",
       "whyWrong": {
         "c": "Windows Update ne remplace pas la protection antivirus.",
-        "b": "Les mises à jour de sécurité sont leur raison d’être principale."
+        "b": "Les mises à jour de sécurité sont leur raison d’être principale.",
+        "d": "Les mises à jour concernent tous les postes, qu’ils soient ou non dans un domaine."
       }
     },
     "dwf-q30": {

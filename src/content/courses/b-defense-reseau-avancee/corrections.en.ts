@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A denial of service targets availability: bandwidth, connection table, computation or database are saturated until legitimate users are no longer served. It seeks neither to read nor to modify the data.",
       "whyWrong": {
         "d": "Stealing credentials targets confidentiality, not availability.",
-        "c": "Altering data targets integrity."
+        "c": "Altering data targets integrity.",
+        "a": "Installing spyware targets confidentiality, not availability."
       }
     },
     "bdef-q2": {
@@ -19,6 +20,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The request is small and carries the victim’s address as its source: the open server replies, with a message often dozens of times larger, to the victim. The attacker spends little bandwidth and hides their origin.",
       "whyWrong": {
         "d": "The servers log the spoofed address: the aim is to steer the replies, not to hide them.",
+        "b": "Spoofing does not bypass encryption: it serves to redirect the replies.",
         "a": "The attacker does not receive the traffic: the victim does."
       }
     },
@@ -43,7 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Ingress filtering accepts only the source addresses expected on the interface. Without spoofed packets, reflection attacks can no longer target a victim. It protects others as much as the one who applies it, hence the difficulty of generalizing it.",
       "whyWrong": {
         "c": "It filters by source address; it encrypts nothing.",
-        "b": "Rate limiting is another measure, unrelated to spoofing."
+        "b": "Rate limiting is another measure, unrelated to spoofing.",
+        "a": "BCP 38 filtering checks the source of packets, not private destinations."
       }
     },
     "bdef-q6": {
@@ -75,7 +78,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The control plane learns the routes. The data plane forwards packets according to the table built, and the management plane is used to administer the device. There is no backup plane.",
       "whyWrong": {
         "c": "The data plane forwards packets; it does not build the table.",
-        "d": "The management plane concerns administration (SSH, SNMP)."
+        "d": "The management plane concerns administration (SSH, SNMP).",
+        "b": "There is no backup plane in this three-plane model."
       }
     },
     "bdef-q9": {
@@ -84,7 +88,8 @@ export const corrections: CourseCorrections = {
       "explanation": "CoPP protects the processor: it caps the rate of traffic destined for it (routing, management, ICMP). A flood aimed at the router itself no longer prevents it from maintaining its routing sessions.",
       "whyWrong": {
         "c": "Encrypting or authenticating sessions is the job of other mechanisms.",
-        "d": "Load balancing is a routing function, not protection of the control plane."
+        "d": "Load balancing is a routing function, not protection of the control plane.",
+        "b": "Configuration backup is a management task, not CoPP."
       }
     },
     "bdef-q10": {
@@ -106,6 +111,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Direct neighbors send with a TTL of 255 and reject packets whose TTL is lower: a packet coming from farther away has necessarily crossed a router and its TTL has decreased. This blocks remote injection attempts against BGP.",
       "whyWrong": {
         "a": "That is the role of session authentication, not of GTSM.",
+        "d": "GTSM does not measure reach toward the destination: it requires a maximal TTL on arrival.",
         "c": "Checking the origin is the job of RPKI and prefix filters."
       }
     },
@@ -138,6 +144,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A flow record summarizes an exchange: source and destination addresses and ports, protocol, bytes, packets, timestamp and duration. It does not contain the content, which makes it light and keepable for a long time.",
       "whyWrong": {
         "b": "The complete content belongs to full capture, not to flows.",
+        "c": "A flow record does not describe files or their owners.",
         "a": "Flows ignore credentials and application content."
       }
     },
@@ -147,7 +154,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Flows are summaries: they take up far less space than packets, so they are kept for a long time. This makes it possible to go back in time to find a beacon or lateral movement, without reading the content.",
       "whyWrong": {
         "b": "Flows never contain the content.",
-        "a": "The originating process comes from host logs (EDR)."
+        "a": "The originating process comes from host logs (EDR).",
+        "d": "Flows also require devices configured to export them."
       }
     },
     "bdef-q17": {
@@ -171,6 +179,7 @@ export const corrections: CourseCorrections = {
       "explanation": "ECH encrypts the ClientHello, hence the SNI: a sensor no longer sees the site name, only the address. Monitoring relies more on addresses, flows, the company’s enforced DNS and host telemetry.",
       "whyWrong": {
         "d": "ECH makes nothing readable: it hides more metadata.",
+        "a": "With ECH the certificate is not sent in clear: that is the opposite of the effect described.",
         "c": "IP addresses remain visible, they are needed for routing."
       }
     },
@@ -197,6 +206,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Without a description of usual behavior, one can tell neither the abnormal nor the merely rare. The baseline makes it possible to tune thresholds: too low, they produce false positives; too high, they let slow activity through.",
       "whyWrong": {
         "a": "The signature list belongs to signature-based detection.",
+        "b": "A baseline serves to compare behaviors, not to decrypt exchanges.",
         "c": "The baseline decrypts nothing: it describes the usual."
       }
     },
@@ -206,7 +216,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A beacon polls its server regularly, with a very stable rhythm and volume: a human or an ordinary application does not produce this pattern. Encryption does not hide it, because it rests on the shape of the traffic.",
       "whyWrong": {
         "a": "That is rather the profile of a one-off exfiltration.",
-        "b": "Many different ports suggest a scan."
+        "b": "Many different ports suggest a scan.",
+        "d": "A rise in web traffic at lunchtime is normal use, not a beacon."
       }
     },
     "bdef-q24": {
@@ -215,7 +226,8 @@ export const corrections: CourseCorrections = {
       "explanation": "An ordinary host talks to a few file servers. Contacting 200 machines over SMB with tiny exchanges is the pattern of a scan or a propagation. The host is isolated and the machines that replied are checked.",
       "whyWrong": {
         "b": "A backup targets one server, with large volumes.",
-        "c": "An update goes from a server to the hosts, not the reverse."
+        "c": "An update goes from a server to the hosts, not the reverse.",
+        "d": "Normal browsing does not contact 200 machines in an hour."
       }
     },
     "bdef-q25": {
@@ -261,7 +273,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A classic VPN puts the host on the network and gives broad access. ZTNA opens only the requested application, after verifying identity, device state and context, and can cut the session if one of them changes.",
       "whyWrong": {
         "d": "Both encrypt the exchanges; the difference lies in the extent of access.",
-        "c": "ZTNA strengthens identity verification instead of removing it."
+        "c": "ZTNA strengthens identity verification instead of removing it.",
+        "b": "ZTNA also applies to workstations outside the premises."
       }
     },
     "bdef-q30": {
@@ -270,6 +283,7 @@ export const corrections: CourseCorrections = {
       "explanation": "NAC checks authentication and device posture. If the device is not compliant, it isolates it in a quarantine VLAN where it can reach only the update resources, until it is fixed.",
       "whyWrong": {
         "b": "Allowing a non-compliant device onto the whole network cancels the point of the control.",
+        "c": "A NAC quarantines; it does not delete the user’s account.",
         "a": "NAC controls access; it does not reinstall systems."
       }
     },
@@ -284,6 +298,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The bastion concentrates multifactor authentication, authorization and recording of administration sessions. The devices accept only it: an ordinary compromised host cannot reach their interfaces.",
       "whyWrong": {
         "a": "An unreachable device remains vulnerable: updates are still needed.",
+        "d": "The bastion forces a single point of passage; it does not allow direct access.",
         "c": "The bastion does not filter traffic between zones: it secures administration."
       }
     },
@@ -314,7 +329,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Reconstructing an attack means putting in order events coming from firewalls, servers and hosts. If their clocks differ, the timeline is distorted. Consistent time conditions correlation.",
       "whyWrong": {
         "b": "NTP does not change the throughput of exchanges.",
-        "a": "Time synchronization does not encrypt logs."
+        "a": "Time synchronization does not encrypt logs.",
+        "d": "Clock synchronization does not authenticate devices to each other."
       }
     },
     "bdef-q36": {
@@ -323,6 +339,7 @@ export const corrections: CourseCorrections = {
       "explanation": "By making a command domain resolve to a defender’s address, one neutralizes the attacker and spots the infected hosts that try to reach it: they appear in the sinkhole’s logs.",
       "whyWrong": {
         "d": "A backup resolver is about availability, not the sinkhole.",
+        "a": "A sinkhole redirects resolution; it does not delete TXT records.",
         "b": "The sinkhole does not delete records: it redirects a specific name."
       }
     },
@@ -337,6 +354,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Blackholing asks the routers to discard all traffic to the attacked address: the other services are protected, but the targeted address is cut, which amounts to giving the attacker satisfaction for it. Scrubbing is preferred when available.",
       "whyWrong": {
         "c": "On the contrary, blackholing also discards the legitimate traffic to that address.",
+        "d": "Blackholing does not identify the attacker; it makes the victim unreachable.",
         "b": "That is the profile of a scrubbing center, not of blackholing."
       }
     },

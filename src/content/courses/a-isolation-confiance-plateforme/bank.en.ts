@@ -61,7 +61,7 @@ export const bank: BankItem[] = [
     ctx: { lang: 'text', code: '-rw-r--r--. root root system_u:object_r:httpd_sys_content_t:s0 index.html' },
     o: ['The file has an SELinux type tied to the web service by the policy', 'The file is encrypted with a key specific to the web server process only', 'The file belongs to a user named system_u by classic ownership', 'The file is read-only for all users of the machine'],
     e: 'The SELinux context consists of a user, a role, a type (`httpd_sys_content_t`) and a level. It is the type that determines what the web server process, labeled `httpd_t`, is allowed to read.',
-    w: { 2: 'system_u is an SELinux identity, not the Unix owner (here root).' } },
+    w: { 2: 'system_u is an SELinux identity, not the Unix owner (here root).', 1: '`ls -Z` shows the security context, not encryption.', 3: '`ls -Z` does not indicate read-only access: it shows the SELinux context.' } },
   { id: 'tcb-q17', t: 'single', d: 1, s: ['a-root'], p: 'What is a root of trust?',
     o: ['A basic component, assumed reliable, that the rest relies on', 'The main administration account of a Linux system or server', 'The root folder of a file system', 'The certificate of a website visited by a browser'],
     e: 'Trust is built in layers: each step verifies the next. The first one (root of trust) cannot be verified by anyone: it must be physically protected and kept minimal, for example an unmodifiable processor memory.',

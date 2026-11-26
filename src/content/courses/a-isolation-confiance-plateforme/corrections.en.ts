@@ -146,7 +146,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The SELinux context consists of a user, a role, a type (`httpd_sys_content_t`) and a level. It is the type that determines what the web server process, labeled `httpd_t`, is allowed to read.",
       "whyWrong": {
-        "c": "system_u is an SELinux identity, not the Unix owner (here root)."
+        "a": "`ls -Z` shows the security context, not encryption.",
+        "c": "system_u is an SELinux identity, not the Unix owner (here root).",
+        "b": "`ls -Z` does not indicate read-only access: it shows the SELinux context."
       }
     },
     "tcb-q17": {

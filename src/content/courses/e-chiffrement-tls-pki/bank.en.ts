@@ -21,7 +21,7 @@ export const bank: BankItem[] = [
   { id: 'crypt-q5', t: 'single', d: 2, s: ['e-asym'], p: 'In TLS, what is asymmetric cryptography mainly used for?',
     o: ['Establishing a session key and authenticating the server by signature', 'Encrypting all the application traffic exchanged between the client and the server', 'Compressing the data before it is sent over the network to gain throughput', 'Replacing the hash functions used to check integrity'],
     e: 'Asymmetric is used for the ephemeral key exchange (ECDHE) and for the signature that authenticates the server. The traffic itself is encrypted by a symmetric algorithm (AES-GCM, ChaCha20-Poly1305), much faster.',
-    w: { 1: 'Encrypting traffic asymmetrically would be hundreds of times slower; TLS does not do it.', 2: 'Compression is another function, unrelated.' } },
+    w: { 1: 'Encrypting traffic asymmetrically would be hundreds of times slower; TLS does not do it.', 2: 'Compression is another function, unrelated.', 3: 'Asymmetric cryptography does not replace hashing: integrity is still checked by an authentication code or an authenticated mode.' } },
   { id: 'crypt-q6', t: 'multi', d: 2, s: ['e-asym'], p: 'Which statements about RSA and elliptic curves are correct?', k: 3,
     o: ['A 256-bit elliptic curve key offers security close to a 3,072-bit RSA key', 'OAEP padding is recommended for RSA encryption', 'Ed25519 is a signature algorithm on an elliptic curve', 'A 1,024-bit RSA key remains recommended for new systems'],
     e: 'Elliptic curves offer the same security with much shorter keys; OAEP is the recommended padding for RSA encryption; Ed25519 is a signature on the Edwards25519 curve.',

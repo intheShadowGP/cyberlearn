@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "RAM is volatile: it keeps its data only while powered. The SSD, the hard disk and the firmware chip are persistent memories.",
       "whyWrong": {
         "b": "An SSD keeps its data without power.",
+        "a": "A mechanical hard disk keeps its data without power.",
         "c": "The firmware is stored in non-volatile memory, otherwise the machine could not boot."
       }
     },
@@ -47,6 +48,7 @@ export const corrections: CourseCorrections = {
       "explanation": "RAM is much slower than the processor. Caches keep recently used data and instructions close by to limit waiting. They are volatile too.",
       "whyWrong": {
         "b": "Caches are volatile, like RAM.",
+        "d": "The cache encrypts nothing: its role is access speed.",
         "c": "The number of cores is a characteristic of the processor, unrelated to caches."
       }
     },
@@ -61,7 +63,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The session password is checked only by the running system. A disk plugged in elsewhere is read directly. Full-disk encryption (BitLocker, LUKS) makes the data unreadable without the key.",
       "whyWrong": {
         "d": "The session password does not protect a disk read outside the system.",
-        "c": "No standard mechanism wipes the disk after failed boots."
+        "c": "No standard mechanism wipes the disk after failed boots.",
+        "a": "Outside the original system, file ownership rights no longer apply: without encryption, everything is readable."
       }
     },
     "afund-q21": {
@@ -88,7 +91,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A byte groups 8 bits; each bit has two states, hence 2⁸ = 256 combinations, from 0 to 255.",
       "whyWrong": {
         "d": "128 values correspond to 7 bits (the original ASCII set).",
-        "c": "The value 0 exists: there are indeed 256 combinations."
+        "c": "The value 0 exists: there are indeed 256 combinations.",
+        "b": "512 values would need 9 bits; a byte has 8, i.e. 256 values."
       }
     },
     "afund-q24": {
@@ -97,6 +101,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Four bits set to 1 are F in hexadecimal; the byte 1111 1111 is therefore written FF (255 in decimal).",
       "whyWrong": {
         "d": "F0 corresponds to 1111 0000.",
+        "a": "1F corresponds to 00011111, not 11111111.",
         "c": "80 corresponds to 1000 0000, that is 128."
       }
     },
@@ -119,7 +124,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "ASCII capital letters start at 65 (0x41): A = 65, B = 66… Z = 90 (0x5A). Lowercase letters start at 97 (0x61).",
       "whyWrong": {
-        "a": "Lowercase “a” is 97, that is 0x61."
+        "a": "Lowercase “a” is 97, that is 0x61.",
+        "b": "Uppercase B is 0x42 (66 in decimal).",
+        "d": "Uppercase Z is 0x5A (90 in decimal)."
       }
     },
     "afund-q28": {
@@ -182,7 +189,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The TPM records measurements (hashes) of the components that boot and protects keys. BitLocker can thus release the disk key only if the boot chain has not been modified.",
       "whyWrong": {
-        "a": "A TPM preloads nothing: it is a vault for keys and measurements."
+        "a": "A TPM preloads nothing: it is a vault for keys and measurements.",
+        "c": "The TPM does not replace the kernel: it stores keys and measurements.",
+        "b": "The TPM does not provide a network connection."
       }
     },
     "afund-q32": {
@@ -202,7 +211,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Without the key, an encrypted disk is unreadable, even plugged into another machine. It replaces neither the antivirus nor network protections.",
       "whyWrong": {
-        "a": "Encryption has a cost, it does not speed up access."
+        "a": "Encryption has a cost, it does not speed up access.",
+        "c": "Disk encryption does not detect malware: it does not replace the antivirus.",
+        "d": "It protects data at rest, not against network attacks."
       }
     },
     "afund-q33": {
@@ -248,7 +259,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A process owns its address space; its threads, internal threads of execution, share that memory. Hence easy communication between threads and the need for synchronization.",
       "whyWrong": {
-        "c": "A thread lives inside a process and inherits its security context."
+        "c": "A thread lives inside a process and inherits its security context.",
+        "b": "A thread runs inside a process, not in the firmware.",
+        "d": "A process is not a finished thread: they are two different notions."
       }
     },
     "afund-q9": {
@@ -271,7 +284,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Each process has a private virtual address space. The translation to physical memory is controlled by the kernel and the hardware, which prevent one process from reading another.",
       "whyWrong": {
-        "b": "Memory is virtualized: each process sees only its own space."
+        "a": "The system does not copy another process’s memory on request.",
+        "b": "Memory is virtualized: each process sees only its own space.",
+        "d": "The processor does not merge address spaces: each process has its own."
       }
     },
     "afund-q37": {
@@ -326,7 +341,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Privilege escalation means obtaining more rights on the same machine. Lateral movement, by contrast, means moving from one machine to another.",
       "whyWrong": {
-        "a": "Lateral movement changes machines; here the attacker stays on the same workstation."
+        "a": "Lateral movement changes machines; here the attacker stays on the same workstation.",
+        "d": "Exfiltration means taking data out, not gaining rights.",
+        "b": "Reconnaissance means collecting information, not switching accounts."
       }
     },
     "afund-q41": {
@@ -334,7 +351,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The SUID bit makes the program run with the identity of its owner. Useful for tools such as passwd, but dangerous if the program is vulnerable: a classic privilege-escalation vector.",
       "whyWrong": {
-        "c": "This is exactly what the SUID bit changes."
+        "c": "This is exactly what the SUID bit changes.",
+        "b": "A SUID program does not run as the guest account.",
+        "a": "A SUID program does not need sudo: it takes its owner’s rights."
       }
     },
     "afund-q13": {

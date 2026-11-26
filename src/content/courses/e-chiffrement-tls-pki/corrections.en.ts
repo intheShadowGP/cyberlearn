@@ -45,7 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Asymmetric is used for the ephemeral key exchange (ECDHE) and for the signature that authenticates the server. The traffic itself is encrypted by a symmetric algorithm (AES-GCM, ChaCha20-Poly1305), much faster.",
       "whyWrong": {
         "c": "Encrypting traffic asymmetrically would be hundreds of times slower; TLS does not do it.",
-        "d": "Compression is another function, unrelated."
+        "d": "Compression is another function, unrelated.",
+        "b": "Asymmetric cryptography does not replace hashing: integrity is still checked by an authentication code or an authenticated mode."
       }
     },
     "crypt-q6": {

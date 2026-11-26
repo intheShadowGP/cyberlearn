@@ -88,7 +88,7 @@ Méthode : relecture de cette feuille de route, mesures régénérées (`docs/QU
 | Taille du DOM | glossaire ≈ 5 700 nœuds, compétences ≈ 5 600, catalogue ≈ 2 100 (V) : au-dessus du seuil habituel d’alerte (1 400) |
 | Lighthouse | non exécutable ici (N) |
 | Faits vérifiés à la source | 6 lignes de `docs/FACT-CHECK.md` vérifiées ou vérifiées en partie le 2026-11-26 ; le reste reste non vérifié (V) |
-| Questions à choix avec « pourquoi c’est faux » | 94 % en moyenne à l’audit ; **corrigé le même jour : 100 %** (≥ 1 mauvaise réponse expliquée pour chaque question à choix, 142 explications de questions ajoutées en FR et EN dans 9 cours, garde-fou ajouté dans `bank-quality.test.ts`). Limite : environ 155 questions n’expliquent encore qu’une partie des mauvaises réponses (V) |
+| Questions à choix avec « pourquoi c’est faux » | 94 % en moyenne à l’audit ; **corrigé le même jour : chaque question à réponse unique explique désormais toutes ses mauvaises réponses** (142 questions complétées dans 9 cours, puis 150 questions partielles complétées dans 21 cours, en français et en anglais ; test `bank-quality.test.ts` : nombre d’explications = options − 1 pour les questions à réponse unique, au moins une pour les questions à réponses multiples) (V) |
 | Cours à 1 800 mots ou plus / à 1 500 mots ou plus | 32 sur 85 (38 %) / 77 sur 85 (91 %) ; médiane 1 740 ; 5 cours sous 1 300 mots (V) |
 | Cours avec au moins 3 exercices | 78 sur 85 (V) |
 | Paires de questions quasi identiques | 29 (similarité ≥ 0,5), non revues une à une (V) |

@@ -9,7 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The longest prefix match rule keeps the most specific route. /8 is longer than /0, so the router follows 10.0.0.0/8. The default route is used only if nothing else matches.",
       "whyWrong": {
-        "c": "The default route is the least specific: it is used only as a last resort."
+        "c": "The default route is the least specific: it is used only as a last resort.",
+        "d": "The metric only applies among routes of the same prefix; the longest prefix wins first.",
+        "a": "A router picks one route for a packet; it does not split traffic at random."
       }
     },
     "rdn-q2": {
@@ -31,6 +33,7 @@ export const corrections: CourseCorrections = {
       "explanation": "OSPF is an interior protocol (IGP): it distributes routes within an organization. BGP is the exterior protocol that exchanges reachability between autonomous systems and forms the Internet’s routing table.",
       "whyWrong": {
         "c": "Neither of them encrypts traffic: they are routing protocols.",
+        "b": "BGP works in IPv4 as in IPv6, just like OSPF (OSPFv2 and OSPFv3).",
         "d": "Address assignment is DHCP’s job, name translation is DNS’s."
       }
     },
@@ -59,6 +62,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Resolution goes down the hierarchy: root servers (who manages .fr?), .fr servers (who manages example.fr?), then the authoritative servers for example.fr (address of www).",
       "whyWrong": {
+        "a": "A resolver does not start from the web server: it descends from the root.",
         "b": "DHCP assigns addresses; a firewall does not resolve names.",
         "c": "The order is reversed: one starts from the root, never from the final domain."
       }
@@ -93,6 +97,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The DHCP exchange follows DORA: Discover (the client looks), Offer (a server proposes), Request (the client asks for the chosen offer), Acknowledge (the server confirms and sets the lease).",
       "whyWrong": {
+        "a": "Request does not open the exchange: the client starts with Discover.",
+        "b": "Offer does not precede Discover: the server answers a client request.",
         "d": "Syn, Syn-Ack, Ack and Fin are TCP steps, unrelated to DHCP."
       }
     },
@@ -107,6 +113,7 @@ export const corrections: CourseCorrections = {
       "explanation": "PAT (port address translation, or overload) shares a single public address between several internal machines by telling them apart through the rewritten source port. It is the most common form of NAT at home and in companies.",
       "whyWrong": {
         "b": "NAT encrypts nothing: it only rewrites addresses and ports.",
+        "a": "Neither PAT nor NAT assigns domain names.",
         "c": "PAT is mostly used over IPv4, precisely to save addresses."
       }
     },
@@ -142,7 +149,8 @@ export const corrections: CourseCorrections = {
       "explanation": "When the destination is not on its local network, the host hands the packet to its default gateway, a router, which forwards it towards the right network.",
       "whyWrong": {
         "d": "Name translation is handled by the DNS, not by the gateway.",
-        "c": "Address assignment is DHCP’s job."
+        "c": "Address assignment is DHCP’s job.",
+        "b": "The default gateway routes packets; it does not encrypt the workstation’s traffic."
       }
     },
     "rdn-q18": {
@@ -151,6 +159,7 @@ export const corrections: CourseCorrections = {
       "explanation": "For an equal prefix, the router arbitrates between route sources by their administrative distance: the lower it is, the more reliable the source is judged. The static route therefore wins here; the metric only arbitrates between routes of the same source.",
       "whyWrong": {
         "a": "A dynamic route is not preferred by nature: everything depends on the administrative distance.",
+        "b": "Only one route is installed in the table for a given prefix, here the static one.",
         "d": "A router accepts several sources for the same prefix and installs only one."
       }
     },
@@ -186,7 +195,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "With a link-state protocol, each router receives the description of all the links in its area, rebuilds the complete map and computes the shortest paths. This speeds up convergence when the topology changes.",
       "whyWrong": {
-        "d": "That is the principle of distance-vector protocols, not of OSPF."
+        "d": "That is the principle of distance-vector protocols, not of OSPF.",
+        "c": "OSPF computes paths over the topology, not over the load of end servers.",
+        "a": "OSPF does not require encrypted links; encryption is not its criterion."
       }
     },
     "rdn-q23": {
@@ -200,7 +211,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Longest prefix matching also applies on the Internet: any router that receives the /24 prefers it to the legitimate /23. That is why a hijacking through a more specific prefix is formidable, and why announcements are filtered and their origin validated (RPKI).",
       "whyWrong": {
         "d": "BGP does not arbitrate by how recent an announcement is.",
-        "a": "Nothing is encrypted or signed in a route announcement without RPKI."
+        "a": "Nothing is encrypted or signed in a route announcement without RPKI.",
+        "c": "The size of the autonomous system is not a preference criterion."
       }
     },
     "rdn-q25": {
@@ -238,7 +250,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The recursive resolver (the provider’s, the company’s or a public one) queries the hierarchy on behalf of the client and caches the answers. The authoritative server holds a zone’s official records and answers without querying other servers.",
       "whyWrong": {
         "b": "The roles are reversed in this proposal.",
-        "d": "Both use UDP and TCP depending on the size and type of exchange."
+        "d": "Both use UDP and TCP depending on the size and type of exchange.",
+        "a": "An authoritative server is not installed on routers by principle."
       }
     },
     "rdn-q29": {
@@ -264,6 +277,7 @@ export const corrections: CourseCorrections = {
       "explanation": "DHCP broadcasts do not cross routers. The relay converts them into messages sent to the server, which can thus serve several networks without installing a server in each.",
       "whyWrong": {
         "b": "The relay encrypts nothing: it forwards the messages to the server.",
+        "a": "A DHCP relay does not replace the server; it forwards requests.",
         "c": "Address translation is NAT’s role."
       }
     },
@@ -272,6 +286,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The attacker sends many requests with fake MAC addresses to exhaust the available addresses. Legitimate clients no longer get a lease, and a rogue server can then take over. Port security and per-port DHCP rate limiting counter it.",
       "whyWrong": {
+        "d": "Leases are not expired by the attack: the address pool is exhausted.",
         "c": "A DHCP server does not store passwords: this attack targets its availability.",
         "a": "The routing table is not affected by DHCP requests."
       }
@@ -281,7 +296,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Port forwarding (DNAT) passes the inbound connections received on the public address and a given port to an internal service. It exposes that service to the Internet: it must therefore be filtered and limited to the strict minimum.",
       "whyWrong": {
-        "b": "That is the translation of outgoing connections’ ports (PAT), not inbound forwarding."
+        "b": "That is the translation of outgoing connections’ ports (PAT), not inbound forwarding.",
+        "d": "DNAT does not change a port according to attacks.",
+        "c": "DNAT does not block ports: it redirects."
       }
     },
     "rdn-q34": {
@@ -295,7 +312,8 @@ export const corrections: CourseCorrections = {
       "explanation": "If connectivity by address works, the network layer and the gateway are fine: only the step from name to address fails. One checks the configured DNS server, its reachability and its answer (nslookup or dig).",
       "whyWrong": {
         "b": "Without a default route, 8.8.8.8 would not answer either.",
-        "d": "A faulty cable would cut all communication, including towards 8.8.8.8."
+        "d": "A faulty cable would cut all communication, including towards 8.8.8.8.",
+        "a": "If a firewall blocked all IP traffic, the ping to 8.8.8.8 would fail too."
       }
     },
     "rdn-q36": {
@@ -304,7 +322,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The 169.254.0.0/16 range is IPv4’s link-local range: the host assigns itself an address there when no DHCP server answers. One then checks the link, the VLAN and the reachability of the DHCP server or relay.",
       "whyWrong": {
         "c": "This range is not routable on the Internet.",
-        "b": "A static address would not be chosen in this reserved range."
+        "b": "A static address would not be chosen in this reserved range.",
+        "a": "A VPN tunnel does not give an address in 169.254.0.0/16."
       }
     },
     "rdn-q37": {
@@ -335,6 +354,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A host that reaches its local network but nothing else, even by address, is not reaching its router: the gateway is missing, wrong or unreachable. It is read in the configuration then tested with ping.",
       "whyWrong": {
         "d": "The DNS plays no part when a destination is reached by its address.",
+        "a": "The TLS certificate plays no part in reaching an IP address at network level.",
         "c": "The host already has an address: the pool is not at fault."
       }
     },

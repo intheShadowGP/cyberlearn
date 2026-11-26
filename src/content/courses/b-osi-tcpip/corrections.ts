@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le modèle OSI de référence compte sept couches, de la couche physique (1) à la couche application (7). Le modèle TCP/IP, plus pratique, en compte quatre.",
       "whyWrong": {
         "a": "Quatre est le nombre de couches du modèle TCP/IP.",
-        "c": "Le modèle TCP/IP est parfois présenté en cinq couches, mais OSI en compte sept."
+        "c": "Le modèle TCP/IP est parfois présenté en cinq couches, mais OSI en compte sept.",
+        "d": "Le modèle OSI compte sept couches, pas neuf."
       }
     },
     "osi-q2": {
@@ -19,7 +20,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un commutateur lit l’adresse MAC de destination de la trame et la compare à sa table : c’est la couche liaison. Un routeur, lui, décide à partir de l’adresse IP (couche 3).",
       "whyWrong": {
         "b": "Un répéteur ou un hub travaillent en couche 1, sans lire les adresses.",
-        "c": "C’est le niveau d’un routeur, pas d’un commutateur classique."
+        "c": "C’est le niveau d’un routeur, pas d’un commutateur classique.",
+        "d": "La couche 7 est celle des applications ; un commutateur classique n’y décide pas."
       }
     },
     "osi-q3": {

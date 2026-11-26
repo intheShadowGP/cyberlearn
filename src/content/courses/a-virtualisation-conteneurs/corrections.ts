@@ -72,7 +72,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Qui administre l’hyperviseur peut arrêter, copier ou lire les disques de toutes les VM. L’accès doit être réservé à un réseau d’administration dédié, avec authentification forte et journalisation.",
       "whyWrong": {
-        "c": "Elle n’est pas exposée par défaut ; il faut au contraire éviter de l’exposer."
+        "d": "La console d’un hyperviseur ne stocke pas les mots de passe des utilisateurs du réseau.",
+        "c": "Elle n’est pas exposée par défaut ; il faut au contraire éviter de l’exposer.",
+        "a": "Elle dispose d’une authentification : c’est précisément ce qu’il faut durcir."
       }
     },
     "virt-q9": {
@@ -99,6 +101,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le noyau partagé rend les conteneurs légers et rapides à démarrer, mais une faille du noyau les concerne tous. Une VM isole mieux, au prix de ressources plus importantes.",
       "whyWrong": {
+        "c": "C’est l’inverse : le conteneur partage le noyau, la VM embarque le sien.",
+        "d": "Un conteneur ne nécessite pas d’hyperviseur.",
         "b": "Une VM peut exécuter un système différent de celui de l’hôte."
       }
     },
@@ -112,7 +116,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les groupes de contrôle (cgroups) mesurent et plafonnent les ressources. Ils protègent contre l’épuisement des ressources par un conteneur, volontaire (déni de service) ou accidentel.",
       "whyWrong": {
-        "b": "Les namespaces isolent la vue des ressources, ils ne les plafonnent pas."
+        "b": "Les namespaces isolent la vue des ressources, ils ne les plafonnent pas.",
+        "a": "Secure Boot protège le démarrage ; il ne limite pas les ressources d’un conteneur.",
+        "c": "Les capabilities découpent les privilèges ; elles ne limitent pas le processeur ou la mémoire."
       }
     },
     "virt-q14": {
@@ -200,7 +206,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un profil seccomp interdit certains appels système au noyau, ce qui réduit sa surface d’attaque exposée au conteneur. AppArmor, lui, restreint l’accès aux fichiers, au réseau et aux capabilities.",
       "whyWrong": {
-        "b": "AppArmor est un contrôle d’accès obligatoire : il restreint les accès aux ressources, pas la liste des appels système."
+        "b": "AppArmor est un contrôle d’accès obligatoire : il restreint les accès aux ressources, pas la liste des appels système.",
+        "d": "Les cgroups limitent les ressources, pas les appels système.",
+        "a": "DNSSEC authentifie des réponses DNS."
       }
     },
     "virt-q23": {

@@ -10,7 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The kernel and drivers run in kernel mode, with direct access to the hardware and all the memory. Applications and most services run in the more limited user mode: they go through the kernel for anything touching the hardware. A driver flaw is therefore more serious than an application’s.",
       "whyWrong": {
         "b": "It is the opposite: the kernel is the most privileged level.",
-        "a": "User mode is that of applications, session open or not."
+        "a": "User mode is that of applications, session open or not.",
+        "d": "The two modes are distinct: the kernel has more rights than applications."
       }
     },
     "dwf-q2": {
@@ -67,7 +68,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The SID is the internal identifier of an account or group, unique and immutable. Permissions and tokens rely on it: renaming an account therefore does not change its rights, and recreating an account with the same name does not give back those of the old one.",
       "whyWrong": {
         "d": "The password is stored separately, as a hash.",
-        "b": "The displayed name can be changed; the SID does not change."
+        "b": "The displayed name can be changed; the SID does not change.",
+        "c": "An account’s validity is another property: the SID is an identifier."
       }
     },
     "dwf-q9": {
@@ -76,7 +78,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A local account is defined in the workstation’s database (SAM) and is valid only on it. A domain account is defined in the Active Directory directory: it authenticates with the controllers and can log on to any workstation of the domain.",
       "whyWrong": {
         "d": "The privilege level depends on the groups, not on the account type.",
-        "c": "It is the opposite: the domain account is usable on many workstations."
+        "c": "It is the opposite: the domain account is usable on many workstations.",
+        "a": "The local account is managed on the machine; the domain account is managed centrally."
       }
     },
     "dwf-q10": {
@@ -191,6 +194,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Cmdlets follow the Verb-Noun form with standardized verbs (`Get`, `Set`, `New`, `Remove`…). A command’s name can thus be guessed, and `Get-Command` or `Get-Help` help find them.",
       "whyWrong": {
         "a": "The order is reversed: the verb comes first.",
+        "d": "Cmdlets are not named by one letter and a digit.",
         "c": "Names are not abbreviated this way."
       }
     },
@@ -200,7 +204,8 @@ export const corrections: CourseCorrections = {
       "explanation": "In PowerShell, each command returns objects (with properties and methods). `Where-Object`, `Sort-Object`, `Select-Object` are chained on these properties, without having to cut up text as with cmd.",
       "whyWrong": {
         "a": "That is how cmd’s pipe works.",
-        "b": "There is no restriction of this kind."
+        "b": "There is no restriction of this kind.",
+        "c": "The pipe sends one command’s output to the next, not to the printer."
       }
     },
     "dwf-q24": {
@@ -255,7 +260,8 @@ export const corrections: CourseCorrections = {
       "explanation": "As soon as a fix is released, the flaws it corrects become public and attackers exploit them against workstations that are not up to date. Automatic updates shorten this delay; ignoring them leaves known flaws open.",
       "whyWrong": {
         "c": "Windows Update does not replace antivirus protection.",
-        "b": "Security updates are their main reason for being."
+        "b": "Security updates are their main reason for being.",
+        "d": "Updates concern all machines, whether or not they are in a domain."
       }
     },
     "dwf-q30": {

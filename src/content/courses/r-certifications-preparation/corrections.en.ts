@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "ISC2 CC is designed as an entry-level certification with no required experience. CISSP and CISM target experienced profiles (security and management); GCIH is a GIAC certification specialized in incident handling.",
       "whyWrong": {
         "d": "The CISSP requires several years of experience to be fully awarded.",
+        "a": "GCIH is aimed at professionals already active in incident handling.",
         "c": "The CISM targets information security management, with management experience."
       }
     },
@@ -44,7 +45,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The ISO 27001 Lead Auditor certification trains for conducting ISMS audits according to ISO 19011 principles and the requirements applicable to certification bodies.",
       "whyWrong": {
-        "b": "The Lead Implementer trains for implementing the ISMS, not for auditing it."
+        "b": "The Lead Implementer trains for implementing the ISMS, not for auditing it.",
+        "d": "Network+ concerns networking, not ISMS auditing.",
+        "c": "CCNA concerns Cisco networks, not ISMS auditing."
       }
     },
     "cert-q6": {
@@ -57,6 +60,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "CySA+ covers detection, threat analysis and response: consistent for a SOC analyst. Defensive GIAC certifications are another recognized option.",
       "whyWrong": {
+        "c": "Lead Implementer targets implementing an ISMS, not threat detection.",
         "a": "The OSCP is an offensive practical exam, oriented toward penetration testing.",
         "b": "Network+ validates networking knowledge, useful but not centered on detection."
       }

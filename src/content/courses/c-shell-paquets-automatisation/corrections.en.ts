@@ -10,6 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The kernel arbitrates access to hardware and resources and enforces rights; user-space programs go through system calls to ask it for a service. This separation protects the system from programs’ mistakes and abuses.",
       "whyWrong": {
         "b": "The user’s documents are files, stored by the file system.",
+        "c": "User space does not replace the kernel at boot.",
         "a": "The two levels are distinct and protect each other."
       }
     },
@@ -38,7 +39,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The pipe connects one command’s standard output to the next one’s standard input, which makes it possible to compose processing (`ps -ef | grep nginx | wc -l`).",
       "whyWrong": {
         "d": "The two commands are linked by the data flowing between them.",
-        "a": "Redirecting errors uses 2> and not the pipe."
+        "a": "Redirecting errors uses 2> and not the pipe.",
+        "b": "The comment character is `#`, not the pipe."
       }
     },
     "csh-q5": {
@@ -52,7 +54,8 @@ export const corrections: CourseCorrections = {
       "explanation": "`-e` stops at the first error, `-u` treats any undefined variable as an error, `pipefail` makes a pipe fail if one of its elements fails. The script no longer carries on with wrong data.",
       "whyWrong": {
         "d": "These options add checks; they speed nothing up.",
-        "b": "They do not change which user runs the script."
+        "b": "They do not change which user runs the script.",
+        "c": "`set -euo pipefail` deletes no files."
       }
     },
     "csh-q7": {
@@ -79,7 +82,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The package manager verifies the signature of a trusted repository’s packages before installing them. A `curl | sudo bash` runs an unverified script as root, whose content can change at any moment on the server side.",
       "whyWrong": {
-        "c": "Installed packages still need updates, whatever their source."
+        "b": "Speed is not the criterion: it is the authenticity of the code executed.",
+        "c": "Installed packages still need updates, whatever their source.",
+        "a": "A script of unknown origin runs unverified code, unlike the signed repository."
       }
     },
     "csh-q10": {
@@ -122,6 +127,7 @@ export const corrections: CourseCorrections = {
       "explanation": "`-P INPUT DROP` sets the default policy of the inbound chain to “reject”: any inbound packet not accepted by an explicit rule is dropped. The strict minimum is then allowed.",
       "whyWrong": {
         "c": "It is the opposite effect: whatever is not allowed is rejected.",
+        "b": "`-P INPUT DROP` sets the policy of the input chain; it does not disable the firewall.",
         "d": "The INPUT chain concerns inbound traffic, not outbound."
       }
     },
@@ -151,6 +157,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The kernel exposes many resources (disks, terminals, pipes, sockets, system state) as files, opened, read and written with the same tools. Access rights therefore apply uniformly.",
       "whyWrong": {
         "a": "The file system is a tree, not a single file.",
+        "d": "Programs are not text interpreted on read: they are executable files.",
         "c": "A file can contain any binary data."
       }
     },
@@ -160,7 +167,8 @@ export const corrections: CourseCorrections = {
       "explanation": "/proc exists only in memory: each process has a directory there (/proc/<PID>) with its command line, its open files and its memory. Information about the kernel and hardware is also read there. It serves to inspect a system.",
       "whyWrong": {
         "a": "Configuration lives in /etc.",
-        "d": "Logs live under /var/log."
+        "d": "Logs live under /var/log.",
+        "b": "The essential programs for recovery mode live in directories such as `/sbin`."
       }
     },
     "csh-q19": {
@@ -174,6 +182,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The kernel launches PID 1 (usually systemd) once started. It starts the services, adopts orphaned processes and supervises the whole. Its termination brings the system down.",
       "whyWrong": {
         "b": "Scheduling is done by the kernel itself, with no visible dedicated process.",
+        "a": "PID 1 does not run at each session login: it starts at boot.",
         "d": "PID 1 does not serve to power the machine off according to connections."
       }
     },
@@ -193,6 +202,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Each command returns an exit code: 0 means success. `&&` chains on success, `||` on failure, `;` unconditionally. The pipe `|` is something else: it links the streams.",
       "whyWrong": {
         "d": "That is the role of `||`.",
+        "c": "To run in parallel you use `&`, not `&&`.",
         "a": "Running in parallel uses `&`."
       }
     },
@@ -210,6 +220,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The shell looks for commands in PATH order. If a directory an attacker can modify comes first, a fake `ls` or `sudo` placed there runs in place of the real one, with the rights of whoever launches it. Scheduled scripts use absolute paths.",
       "whyWrong": {
         "b": "The shell will always find commands: the risk is that it finds a fake one.",
+        "a": "The risk is not slowness: it is the execution of a fake program.",
         "c": "PATH does not empty the other variables."
       }
     },
@@ -231,7 +242,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A third-party repository gives its maintainer the power to deliver code run as root at each update, including by replacing distribution packages. One adds it only for specific reasons, from trusted sources.",
       "whyWrong": {
         "a": "The distribution does not control a third-party repository’s content.",
-        "b": "A signature proves the origin, not the maintainer’s good faith."
+        "b": "A signature proves the origin, not the maintainer’s good faith.",
+        "c": "A third-party repository does not prevent updating the distribution’s packages."
       }
     },
     "csh-q27": {
@@ -245,6 +257,7 @@ export const corrections: CourseCorrections = {
       "explanation": "`rpm -Va` compares each installed file with the package metadata (size, checksum, permissions, owner) and reports the differences. A modified system binary shows up: a useful integrity check in an investigation.",
       "whyWrong": {
         "c": "Updates are installed with dnf.",
+        "a": "The list of installed packages comes from `rpm -qa`, not `rpm -Va`.",
         "d": "Signature checking concerns the package’s origin, not the installed files’ state."
       }
     },
@@ -264,6 +277,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A cron task does not take over the session’s environment: restricted PATH, unpredictable current directory. Absolute paths guarantee that the right command is run, and prevent a program placed elsewhere from being taken in its place.",
       "whyWrong": {
         "b": "Cron runs the script; it is its environment that differs.",
+        "d": "Speed is not the reason: it is cron’s minimal environment.",
         "a": "The current directory is not guaranteed."
       }
     },
@@ -273,7 +287,8 @@ export const corrections: CourseCorrections = {
       "explanation": "If a run lasts longer than the interval, the next one starts during the first and can corrupt data. `flock` takes a lock: the second instance waits or gives up. It is an element of an automation’s robustness.",
       "whyWrong": {
         "b": "flock encrypts nothing: it places a lock on a file.",
-        "c": "It does not relaunch: it prevents a double run."
+        "c": "It does not relaunch: it prevents a double run.",
+        "d": "`flock` does not manage who can edit the schedule."
       }
     },
     "csh-q32": {

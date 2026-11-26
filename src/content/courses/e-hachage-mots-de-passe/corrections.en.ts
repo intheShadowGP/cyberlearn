@@ -9,6 +9,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "SHA-256 always produces a 256-bit fingerprint (32 bytes, 64 hexadecimal characters), whatever the input size. This is the definition of a hash function: fixed-size output.",
       "whyWrong": {
+        "d": "SHA-256 produces 256 bits; 128 bits corresponds to MD5.",
         "a": "The output size is fixed by construction; only the input is of any size.",
         "b": "SHA-512 produces 512 bits; SHA-256 produces 256."
       }
@@ -55,7 +56,8 @@ export const corrections: CourseCorrections = {
       "explanation": "HMAC combines a secret key and a hash function: an attacker without the key cannot produce a valid code. A plain SHA-256 guarantees integrity only if the fingerprint itself is sent through a trusted channel.",
       "whyWrong": {
         "d": "Anyone can recompute a SHA-256 of a modified message: no authenticity.",
-        "a": "Base64 is an encoding with no security at all."
+        "a": "Base64 is an encoding with no security at all.",
+        "c": "MD5 without a key does not prove origin and is broken for integrity."
       }
     },
     "hash-q7": {
@@ -158,7 +160,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Inputs are infinitely many and fingerprints finite in number: collisions necessarily exist. Collision resistance guarantees that none can be found in practice. If it is possible (MD5, SHA-1), two documents with an identical fingerprint can be crafted.",
       "whyWrong": {
         "a": "A hash function is deterministic: same input, same fingerprint.",
-        "c": "An input of any size can be hashed."
+        "c": "An input of any size can be hashed.",
+        "b": "A collision is not about a forbidden character: it is about two inputs with the same hash."
       }
     },
     "hash-q18": {
