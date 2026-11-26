@@ -116,6 +116,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'The less sensitive data a model has seen, the less it can return: minimization is the first confidentiality measure.' },
         ],
       },
+      {
+        id: 'red-team-ia',
+        title: "Organizing an adversarial evaluation of an AI system",
+        blocks: [
+          { t: 'p', text: "An adversarial evaluation (“red teaming”) tries to make the system fail as an attacker would, but within an authorized framework. It is not a handful of clever prompts: it follows a written plan, sets a scope and measures results. The goal is to document what works, what fails and how easily, in order to prioritize fixes." },
+          {
+            t: 'table',
+            head: ["Step", "Content", "Deliverable"],
+            rows: [
+              ["Scoping", "System tested, data and tools accessible, prohibitions, written authorization", "Engagement letter and rules"],
+              ["Scenarios", "Relevant threats: data leakage, tool hijacking, prohibited content", "Prioritized scenario catalog"],
+              ["Execution", "Reproducible trials, inputs and outputs recorded", "Trial log"],
+              ["Measurement", "Attack success rate per scenario, severity", "Results table"],
+              ["Reporting", "Findings, evidence, proposed fixes, retest", "Report and remediation plan"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Since AI systems behave variably, repeat each trial several times and measure a **success rate**, not a single result." },
+        ],
+      },
+      {
+        id: 'surveillance-ia',
+        title: "Monitoring an AI system in production",
+        blocks: [
+          { t: 'p', text: "An AI system’s security does not end at go-live. Real usage differs from tests, attackers adapt and the model’s behavior can change with its data or updates. Continuous monitoring relies on usable logs, indicators chosen in advance and a response process: without it, an alert is useless." },
+          { t: 'list', items: ["**Log** requests, responses and tool calls, protecting those logs (they contain sensitive data) and limiting their retention.", "**Measure indicators**: abnormal refusal rate, unusual request length, out-of-norm tool calls, negative user feedback.", "**Detect drift**: a quality drop or behavior change after a model update.", "**Plan a kill switch**: be able to disable a tool or the whole assistant quickly in case of abuse.", "**Review regularly** the threat model in light of observed incidents."] },
+          { t: 'callout', kind: 'tip', text: "Define in advance **who** receives the alert and **what decision** it triggers: an alert without an owner stays a dead letter." },
+        ],
+      },
     ],
     useCases: [
       'Audit the supply chain of an AI system before it goes into production.',

@@ -65,11 +65,11 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Accessibilité fonctionnelle | 8 | 8,0 | 8,0 | 9,0 | — |
 | Prise en main et onboarding | 7 | 7,5 | 7,5 | 9,0 | — |
 | Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant ; ancrages du §1 bis non franchis (32 cours sur 85 à 1 800 mots ou plus, 77 sur 85 à 1 500 mots ou plus après les lots d’approfondissement ; l’ancrage « note ≥ 8 » exige 60 % et 80 % à 1 500 mots : non atteint, donc note inchangée) |
-| Profondeur des programmes | 12 | 7,0 | 7,0 | 9,0 | — |
+| Profondeur des programmes | 12 | 7,0 | 7,5 | 9,0 | Minimum des leçons passé de 1 107 à 1 517 mots, médiane de 1 584 à 1 747, plus aucun cours sous 1 300 mots (V, `docs/QUALITY_METRICS.md`) ; l’ancrage « ≥ 8 » exige aussi une médiane ≥ 1 800 : non atteint, relèvement limité à +0,5 |
 | Laboratoires pratiques | 12 | 6,0 | 6,0 | 9,0 | — |
-| Fiabilité pédagogique | 8 | 6,5 | 6,5 | 9,0 | Un doublon avéré corrigé et des garde-fous ajoutés, mais aucun critère d’ancrage (§1 bis) n’est franchi : pas de relèvement |
+| Fiabilité pédagogique | 8 | 6,5 | 7,0 | 9,0 | Toutes les mauvaises réponses des questions à réponse unique sont expliquées (test strict), 6 lignes de `docs/FACT-CHECK.md` vérifiées ou vérifiées en partie ; l’ancrage « ≥ 8 » exige aussi 0 doublon avéré (29 paires similaires non revues une à une) : non atteint, relèvement limité à +0,5 |
 
-**Note globale actuelle : 7,78 / 10** (calcul : 740 + 0,5 × 16 + 2,5 × 12 = 778 ; réévaluation du 2026-11-27 après audit, voir §3 bis). **L’objectif de 9,2 n’est pas atteint** : il manque la profondeur des leçons, la fiabilité (faits à la source, relecture tierce) et l’organisation mesurée.
+**Note globale actuelle : 7,88 / 10** (calcul : 740 + 0,5 × 16 + 0,5 × 12 + 2,5 × 12 + 0,5 × 8 = 788 ; réévaluation du 2026-11-27 après audit et travaux, voir §3 bis). **L’objectif de 9,2 n’est pas atteint** : il manque la profondeur des leçons, la fiabilité (faits à la source, relecture tierce) et l’organisation mesurée.
 
 ## 3 bis. Audit de reprise du 2026-11-27 (état réel)
 
@@ -89,11 +89,13 @@ Méthode : relecture de cette feuille de route, mesures régénérées (`docs/QU
 | Lighthouse | non exécutable ici (N) |
 | Faits vérifiés à la source | 6 lignes de `docs/FACT-CHECK.md` vérifiées ou vérifiées en partie le 2026-11-26 ; le reste reste non vérifié (V) |
 | Questions à choix avec « pourquoi c’est faux » | 94 % en moyenne à l’audit ; **corrigé le même jour : chaque question à réponse unique explique désormais toutes ses mauvaises réponses** (142 questions complétées dans 9 cours, puis 150 questions partielles complétées dans 21 cours, en français et en anglais ; test `bank-quality.test.ts` : nombre d’explications = options − 1 pour les questions à réponse unique, au moins une pour les questions à réponses multiples) (V) |
-| Cours à 1 800 mots ou plus / à 1 500 mots ou plus | 32 sur 85 (38 %) / 77 sur 85 (91 %) ; médiane 1 740 ; 5 cours sous 1 300 mots (V) |
+| Cours à 1 800 mots ou plus / à 1 500 mots ou plus | 32 sur 85 (38 %) / 77 sur 85 (91 %) à l’audit ; **après les 8 derniers cours approfondis le même jour : 33 sur 85 (39 %) / 85 sur 85 (100 %)**, médiane 1 747, minimum 1 517, aucun cours sous 1 300 mots (V) |
 | Cours avec au moins 3 exercices | 78 sur 85 (V) |
 | Paires de questions quasi identiques | 29 (similarité ≥ 0,5), non revues une à une (V) |
 
-Points d’amélioration retenus, par ordre : (1) compléter les « pourquoi c’est faux » des 9 cours concernés (ancrage fiabilité) ; (2) alléger le bundle principal en chargeant les textes anglais à la demande ; (3) paginer ou virtualiser le glossaire et le tableau des compétences ; (4) approfondir les 8 cours sous 1 500 mots avec un relecteur spécialiste ; (5) relecture tierce et vérification des faits restants.
+Suites réalisées le jour même : bundle principal ramené à 577 ko, glossaire en affichage progressif (DOM de 5 700 à 730 nœuds), tableau des compétences à disciplines repliables (DOM de 5 600 à 480 nœuds), toutes les mauvaises réponses des questions à réponse unique expliquées, 8 derniers cours sous 1 500 mots approfondis (contenu méthodologique, non relu par un spécialiste).
+
+Points d’amélioration retenus à l’audit, par ordre : (1) compléter les « pourquoi c’est faux » des 9 cours concernés (ancrage fiabilité) ; (2) alléger le bundle principal en chargeant les textes anglais à la demande ; (3) paginer ou virtualiser le glossaire et le tableau des compétences ; (4) approfondir les 8 cours sous 1 500 mots avec un relecteur spécialiste ; (5) relecture tierce et vérification des faits restants.
 
 ## 4. Constats de l’audit initial (priorisés)
 
@@ -155,7 +157,7 @@ Limites : (1) la durée estimée et les compétences des cours n’ont pas été
 
 ## 8. Prochaine action précise
 
-Pilote et lots d’approfondissement réalisés (voir §7 bis). Reste 8 cours sous 1 500 mots (les quatre `r-*`, trois `p-*` et `q-securite-ia-avancee`, à confier à un relecteur spécialiste). Étape suivante prioritaire : faire relire par un praticien les 25 cours approfondis et leurs questions (faits listés dans `docs/FACT-CHECK.md`), puis traiter les 13 cours restants sous 1 500 mots avec un relecteur spécialiste.
+Pilote et lots d’approfondissement réalisés (voir §7 bis). Les 8 cours qui restaient sous 1 500 mots ont été approfondis le 2026-11-27 (contenu méthodologique, sans fait périssable) ; ils restent à faire relire par un spécialiste. Étape suivante prioritaire : faire relire par un praticien les 25 cours approfondis et leurs questions (faits listés dans `docs/FACT-CHECK.md`), puis traiter les 13 cours restants sous 1 500 mots avec un relecteur spécialiste.
 
 1. Approfondir en priorité les 7 cours restants parmi les plus courts listés au §4.1, un par un, selon la structure du cahier des charges (§6.1) : viser 1 800 à 2 500 mots, des commandes vérifiées, une mise en situation, des erreurs fréquentes concrètes ; puis revoir leur banque (supprimer les questions que la leçon ne prépare pas, sans toucher aux identifiants repris).
 2. Chaque cours approfondi : mettre à jour FR et EN ensemble, `npm run banks`, `npm run metrics`, `npm test`, `npm run build`.

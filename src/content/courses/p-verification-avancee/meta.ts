@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'p-av-firmware', label: 'Revue défensive de micrologiciels et de démarrage', level: 3 },
     { id: 'p-av-distribue', label: 'Systèmes distribués et tolérance aux fautes byzantines', level: 3 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

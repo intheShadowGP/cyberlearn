@@ -117,6 +117,41 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'A certification obtained by memorizing leaked questions proves nothing: it loses employers’ trust and can end a career.' },
         ],
       },
+      {
+        id: 'carnet-erreurs',
+        title: "Keeping an error notebook",
+        blocks: [
+          { t: 'p', text: "The error notebook is the most profitable tool of a preparation. For every missed or guessed question, you note four things: the statement in one line, the correct answer, **the reason for the error** and the rule to remember. The goal is not to copy the lesson but to capture what tripped you personally. Reread regularly, this notebook beats hours of passive rereading." },
+          {
+            t: 'table',
+            caption: "An example notebook line",
+            head: ["Question", "Correct answer", "Cause of the error", "Rule to remember"],
+            rows: [
+              ["Which layer handles MAC addresses?", "Link (layer 2)", "Confused with the network layer", "MAC = link, IP = network: “MAC stays on the local link”"],
+              ["What does a hash do?", "Produces a one-way fingerprint", "I confused it with encryption", "Hash: no key, no way back; encryption: key, reversible"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Reread the notebook **at growing intervals** (next day, one week, one month). An error that comes back three times deserves a separate summary sheet." },
+        ],
+      },
+      {
+        id: 'lire-enonce',
+        title: "Reading a multiple-choice statement: classic traps",
+        blocks: [
+          { t: 'p', text: "Many errors come from reading, not from knowledge. A simple method is to read the full statement, form the answer in your head **before** looking at the options, then eliminate the wrong options rather than hunting for the right one. This habit reduces the influence of well-written distractors." },
+          { t: 'list', items: ["**Words that reverse the meaning**: “except”, “is not”, “least”, “before”. Underline them.", "**Absolutes**: “always”, “never”, “only”. An option containing one is often wrong, since security is rarely absolute.", "**Options that look alike**: two nearly identical options often signal that the right answer is one of them; look for the difference that matters.", "**The question actually asked**: “what is the **first** action?” does not expect the same answer as “what is the **best** long-term measure?”.", "**True but off-topic options**: an accurate statement may not answer the question asked."] },
+          { t: 'callout', kind: 'warn', text: "Change an answer only if you have a **specific reason** (a word reread, a fact recalled), not out of mere doubt: first instincts are often right when the revision was serious." },
+        ],
+      },
+      {
+        id: 'fiche-synthese',
+        title: "Making a useful summary sheet",
+        blocks: [
+          { t: 'p', text: "A summary sheet is not a copied summary: it is an active recall tool. It fits on one page, is built **from memory** then corrected against the lesson, and contains only what remains hard to remember. The more compact the sheet, the more it forces you to prioritize, which is already a form of learning." },
+          { t: 'list', items: ["**A title and a question** at the top: “what is this mechanism for, and against which threat?”.", "**A diagram or a table** rather than sentences: comparisons (for example two protocols) are remembered better in a table.", "**Three to five key points** you can state without looking.", "**A concrete example**: a real situation or a command, to anchor the notion.", "**A classic trap**: the most frequent error on this topic, taken from your error notebook."] },
+          { t: 'callout', kind: 'tip', text: "Test the sheet: hide it and restate it aloud. What you cannot say again is what you need to review." },
+        ],
+      },
     ],
     useCases: [
       'Turn an exam outline into a personal study plan with priorities.',

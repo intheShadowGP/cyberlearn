@@ -25,7 +25,7 @@ export const meta: CourseMeta = {
     { id: 'p-pra-protocoles', label: 'Protocoles et micrologiciels', level: 2 },
     { id: 'p-pra-correction', label: 'Correctifs, non-régression et rapport de vulnérabilité', level: 2 },
   ],
-  sectionCount: 5,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

@@ -75,6 +75,54 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'info', text: 'On CyberAcadémie, mock exams draw questions from all published courses, and the dashboard shows the fragile skills to rework: a good support for spaced repetition.' },
         ],
       },
+      {
+        id: 'plan-semaines',
+        title: "Building an eight-week preparation plan",
+        blocks: [
+          { t: 'p', text: "A realistic plan starts from the exam date and works back to today. It sets a weekly volume you can sustain (regularity matters more than intensity), spreads the domains according to their weight in the exam outline and keeps the last weeks for practice under real conditions. The plan is a steering tool: you revise it every week based on what you have actually learned, not on what you had planned." },
+          {
+            t: 'table',
+            caption: "Example split over eight weeks (adapt to the target exam)",
+            head: ["Weeks", "Goal", "Main activities"],
+            rows: [
+              ["1", "Diagnosis", "Short mock exam to measure the starting point; read the exam outline; list weak domains"],
+              ["2 to 5", "Acquisition", "One domain per week: lesson, diagrams, exercises, lab; summary sheets"],
+              ["6", "Consolidation", "Revisit weak domains; questions grouped by theme; spaced repetition of the sheets"],
+              ["7", "Simulation", "One full mock exam under real conditions (time, no documentation) then detailed error analysis"],
+              ["8", "Sharpening", "Targeted fixes, rest, light rereading; check the logistics for exam day"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Keep a **margin**: a week of delay is normal. A plan with no slack collapses at the first surprise, and giving up is the first cause of failure." },
+        ],
+      },
+      {
+        id: 'analyse-erreurs',
+        title: "Getting the most from a mock exam: classifying errors",
+        blocks: [
+          { t: 'p', text: "A score does not say what to revise. The value of a mock exam comes from analyzing every error, including correct answers given by chance or with hesitation. Each missed question is put in a category, because the fix is not the same depending on the cause." },
+          {
+            t: 'table',
+            head: ["Cause of the error", "Sign", "Fix"],
+            rows: [
+              ["Knowledge gap", "You did not know the notion", "Back to the lesson, summary sheet, new questions on the topic"],
+              ["Confusion between neighboring notions", "You picked a close term (for example two protocols)", "Comparison table, contrasting examples"],
+              ["Reading too fast", "One word (“except”, “most”, “before”) changed the meaning", "Underline key words; reread the statement before answering"],
+              ["Time management", "You rushed the end of the exam", "Timed practice, quick pass over long questions"],
+              ["Hesitation or luck", "Correct answer but uncertainty", "Treat as a gap: redo the question a week later"],
+            ],
+          },
+          { t: 'p', text: "After classifying, group errors by domain: a domain where gaps pile up becomes the priority of the following week. Retaking the same exam is pointless, since it measures memory of the answers; new questions on the same notions are better." },
+        ],
+      },
+      {
+        id: 'promesses-trompeuses',
+        title: "Spotting misleading promises from a training provider",
+        blocks: [
+          { t: 'p', text: "The certification preparation market is competitive, and some offers promise more than they can deliver. A few reflexes keep a critical mind before committing time and money. A serious course presents its syllabus, hours, share of practice and prerequisites; it does not guarantee success, since that depends on the candidate’s work." },
+          { t: 'list', items: ["**A “guaranteed” 100% pass rate**: no course can commit to the result of an exam it does not run.", "**“Real exam questions”**: sharing them is generally forbidden by the certifying bodies’ rules, and exposes you to sanctions.", "**A syllabus with no reference to the official exam outline**: you cannot check that domains and their weight are covered.", "**No practice**: for a hands-on exam, a theory-only course does not prepare for the format.", "**Unverifiable reviews**: favor feedback from identifiable peers and free trials."] },
+          { t: 'callout', kind: 'warn', text: "Before paying, compare the syllabus with the **exam outline published by the certifying body**: it is the only reference that counts." },
+        ],
+      },
     ],
     useCases: [
       'Building a career-change plan toward a SOC analyst position.',

@@ -118,6 +118,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'A system that assumes all its nodes honest breaks as soon as one is compromised: security starts by stating how many faults are tolerated.' },
         ],
       },
+      {
+        id: 'choisir-technique',
+        title: "Choosing the right verification technique",
+        blocks: [
+          { t: 'p', text: "No technique covers all needs: each offers a different level of guarantee for a different cost. The choice depends on what you want to establish and the component’s criticality. Several approaches are often combined: fuzzing quickly finds concrete flaws, static analysis covers widely, symbolic execution explores precise paths and formal proof guarantees properties on a restricted component." },
+          {
+            t: 'table',
+            head: ["Technique", "What it brings", "Main limit"],
+            rows: [
+              ["Tests and fuzzing", "Concrete flaws, inputs that trigger them", "Does not prove the absence of other flaws"],
+              ["Static analysis", "Wide code coverage without execution", "False alarms to sort"],
+              ["Symbolic execution", "Inputs that reach a given path", "Path explosion on large programs"],
+              ["Model checking", "Exhaustive exploration of a finite model", "The model must faithfully represent the system"],
+              ["Formal proof", "Mathematical guarantee of a property", "High cost and the property must be stated carefully"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "A guarantee is worth only the **property verified**: proving a program does not overflow says nothing about its authentication." },
+        ],
+      },
+      {
+        id: 'limites-garanties',
+        title: "What a verification proves, and does not prove",
+        blocks: [
+          { t: 'p', text: "A “verified” result must always be read with its assumptions. The proof covers a **model** or a **specification**, under assumptions about the environment (correct hardware, faithful compiler, attacker limited to certain actions). If one assumption is false, the guarantee no longer applies. A competent auditor therefore first looks at what is **not** covered." },
+          { t: 'list', items: ["**Is the specification right?** A program can perfectly meet an incorrect specification.", "**Does the model represent the real system?** An over-simplified model can hide exactly the dangerous behavior.", "**What assumptions about the attacker?** A proof against an attacker who only listens to the network says nothing about one with physical access.", "**Which part of the system is verified?** A proven library does not protect the application that calls it badly.", "**Is the verification maintained?** A proof on an old version does not cover the code changed since."] },
+          { t: 'callout', kind: 'warn', text: "Beware of absolute wording (“proven secure”): ask **which property**, **under which assumptions** and **on which version**." },
+        ],
+      },
     ],
     useCases: [
       'Choose the analysis method suited to a critical component (protocol, loader, consensus).',

@@ -116,20 +116,20 @@
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 8 | 43 | 3 | 4 |
 | Architecture d’identité avancée : Zero Trust, identités de machines et résilience (`o-identite-avancee`) | O | 4 · Expert | 150 min | 8 | 43 | 3 | 3 |
-| Initiation à la recherche en sécurité : méthode, éthique et premiers concepts (`p-recherche-initiation`) | P | 1 · Débutant | 90 min | 5 | 40 | 3 | 3 |
-| Analyser et corriger des vulnérabilités : classes de défauts, outils et rapport (`p-analyse-pratique`) | P | 2 · Intermédiaire | 120 min | 5 | 40 | 3 | 3 |
-| Analyse avancée : exécution symbolique, vérification de protocoles et micrologiciels (`p-verification-avancee`) | P | 3 · Avancé | 130 min | 5 | 40 | 3 | 3 |
+| Initiation à la recherche en sécurité : méthode, éthique et premiers concepts (`p-recherche-initiation`) | P | 1 · Débutant | 90 min | 7 | 40 | 3 | 3 |
+| Analyser et corriger des vulnérabilités : classes de défauts, outils et rapport (`p-analyse-pratique`) | P | 2 · Intermédiaire | 120 min | 8 | 40 | 3 | 3 |
+| Analyse avancée : exécution symbolique, vérification de protocoles et micrologiciels (`p-verification-avancee`) | P | 3 · Avancé | 130 min | 7 | 40 | 3 | 3 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 4 |
 | Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 5 |
 | L’intelligence artificielle et la cybersécurité pour débutants (`q-ia-initiation`) | Q | 1 · Débutant | 90 min | 7 | 44 | 3 | 3 |
 | Utiliser l’IA en sécurité de façon sûre : demandes, assistants, évaluation et politique d’usage (`q-ia-pratique`) | Q | 2 · Intermédiaire | 120 min | 7 | 43 | 3 | 3 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 135 min | 7 | 40 | 3 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 8 | 43 | 3 | 4 |
-| Sécurité avancée des systèmes d’IA : chaîne d’approvisionnement, agents, robustesse et risque (`q-securite-ia-avancee`) | Q | 4 · Expert | 150 min | 5 | 40 | 3 | 4 |
-| Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 60 min | 4 | 46 | 2 | 4 |
-| Préparer les certifications fondamentales et défensives : plan d’examen, méthode et intégrité (`r-preparation-fondamentaux`) | R | 2 · Intermédiaire | 100 min | 5 | 40 | 3 | 3 |
-| Préparer les examens pratiques : méthode, notes, rapport et éthique (`r-preparation-pratique`) | R | 3 · Avancé | 120 min | 5 | 40 | 3 | 3 |
-| Certifications expertes et gouvernance : CISSP, ISO 27001, GIAC et parcours d’expert (`r-certifications-expertes`) | R | 4 · Expert | 130 min | 5 | 40 | 3 | 3 |
+| Sécurité avancée des systèmes d’IA : chaîne d’approvisionnement, agents, robustesse et risque (`q-securite-ia-avancee`) | Q | 4 · Expert | 150 min | 7 | 40 | 3 | 4 |
+| Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 60 min | 7 | 46 | 2 | 4 |
+| Préparer les certifications fondamentales et défensives : plan d’examen, méthode et intégrité (`r-preparation-fondamentaux`) | R | 2 · Intermédiaire | 100 min | 8 | 40 | 3 | 3 |
+| Préparer les examens pratiques : méthode, notes, rapport et éthique (`r-preparation-pratique`) | R | 3 · Avancé | 120 min | 8 | 40 | 3 | 3 |
+| Certifications expertes et gouvernance : CISSP, ISO 27001, GIAC et parcours d’expert (`r-certifications-expertes`) | R | 4 · Expert | 130 min | 8 | 40 | 3 | 3 |
 
 ## Laboratoires
 

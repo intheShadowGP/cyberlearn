@@ -75,6 +75,54 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'info', text: "Sur CyberAcadémie, les examens blancs tirent les questions de tous les cours publiés, et le tableau de bord indique les compétences fragiles à retravailler : un bon support de répétition espacée." },
         ],
       },
+      {
+        id: 'plan-semaines',
+        title: "Construire un plan de préparation sur huit semaines",
+        blocks: [
+          { t: 'p', text: "Un plan réaliste part de la date de l’examen et remonte vers aujourd’hui. Il fixe un volume hebdomadaire que l’on peut tenir (la régularité compte plus que l’intensité), répartit les domaines selon leur poids dans le plan d’examen et réserve les dernières semaines à l’entraînement en conditions réelles. Le plan est un outil de pilotage : on le révise chaque semaine à partir de ce que l’on a réellement acquis, pas à partir de ce que l’on avait prévu." },
+          {
+            t: 'table',
+            caption: "Exemple de répartition sur huit semaines (à adapter à l’examen visé)",
+            head: ["Semaines", "Objectif", "Activités principales"],
+            rows: [
+              ["1", "Diagnostic", "Examen blanc court pour mesurer le point de départ ; lecture du plan d’examen ; liste des domaines faibles"],
+              ["2 à 5", "Acquisition", "Un domaine par semaine : leçon, schémas, exercices, laboratoire ; fiches de synthèse"],
+              ["6", "Consolidation", "Reprise des domaines faibles ; questions classées par thème ; répétition espacée des fiches"],
+              ["7", "Simulation", "Un examen blanc complet en conditions réelles (durée, pas de documentation) puis analyse détaillée des erreurs"],
+              ["8", "Affûtage", "Corrections ciblées, repos, relecture légère ; vérification de la logistique le jour de l’épreuve"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Gardez une **marge** : une semaine de retard est normale. Un plan sans marge s’effondre au premier imprévu, et l’abandon est la première cause d’échec." },
+        ],
+      },
+      {
+        id: 'analyse-erreurs',
+        title: "Tirer parti d’un examen blanc : classer ses erreurs",
+        blocks: [
+          { t: 'p', text: "Un score ne dit pas quoi réviser. La valeur d’un examen blanc vient de l’analyse de chaque erreur, y compris des bonnes réponses données par hasard ou avec hésitation. On classe chaque question manquée dans une catégorie, car la parade n’est pas la même selon la cause." },
+          {
+            t: 'table',
+            head: ["Cause de l’erreur", "Signe", "Parade"],
+            rows: [
+              ["Lacune de connaissance", "Vous ne connaissiez pas la notion", "Retour à la leçon, fiche de synthèse, nouvelles questions sur le sujet"],
+              ["Confusion entre notions voisines", "Vous avez choisi un terme proche (par exemple deux protocoles)", "Tableau comparatif, exemples contrastés"],
+              ["Lecture trop rapide", "Un mot (« sauf », « le plus », « avant ») a changé le sens", "Souligner les mots-clés ; relire l’énoncé avant de répondre"],
+              ["Gestion du temps", "Vous avez bâclé la fin de l’épreuve", "Entraînement chronométré, passage rapide sur les questions longues"],
+              ["Hésitation ou chance", "Bonne réponse mais incertitude", "À traiter comme une lacune : refaire la question une semaine plus tard"],
+            ],
+          },
+          { t: 'p', text: "Après classement, regroupez les erreurs par domaine : un domaine où se concentrent les lacunes devient la priorité de la semaine suivante. Refaire le même examen n’a pas d’intérêt, car on mesure alors sa mémoire des réponses ; mieux vaut de nouvelles questions sur les mêmes notions." },
+        ],
+      },
+      {
+        id: 'promesses-trompeuses',
+        title: "Repérer les promesses trompeuses d’une formation",
+        blocks: [
+          { t: 'p', text: "Le marché de la préparation aux certifications est concurrentiel, et certaines offres promettent plus qu’elles ne peuvent tenir. Quelques réflexes permettent de garder l’esprit critique avant d’engager du temps et de l’argent. Une formation sérieuse présente son programme, son volume horaire, la part de pratique et les prérequis ; elle ne garantit pas la réussite, car celle-ci dépend du travail du candidat." },
+          { t: 'list', items: ["**Une réussite « garantie » à 100 %** : aucune formation ne peut s’engager sur le résultat d’un examen dont elle n’est pas l’organisme.", "**Des « questions réelles de l’examen »** : leur diffusion est généralement interdite par les règlements des organismes certificateurs, et elles exposent à des sanctions.", "**Un programme sans référence au plan d’examen officiel** : on ne peut pas vérifier que les domaines et leur poids sont couverts.", "**Aucune pratique** : pour un examen pratique, une formation uniquement théorique ne prépare pas au format.", "**Des avis invérifiables** : privilégiez des retours de pairs identifiables et des essais gratuits."] },
+          { t: 'callout', kind: 'warn', text: "Avant de payer, comparez le programme au **plan d’examen publié par l’organisme certificateur** : c’est la seule référence qui fait foi." },
+        ],
+      },
     ],
     useCases: [
       'Construire un plan de reconversion vers un poste d’analyste SOC.',

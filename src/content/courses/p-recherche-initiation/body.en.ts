@@ -115,6 +115,32 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'For a defender, the essential is to follow alerts, fix quickly and prepare migrations (notably post-quantum) for long-lived data.' },
         ],
       },
+      {
+        id: 'hypothese',
+        title: "Stating a testable research hypothesis",
+        blocks: [
+          { t: 'p', text: "Security research starts with a precise question, not a tool. “Is this service secure?” is too vague to test; “Does this service accept an input longer than a thousand characters without rejecting it cleanly?” can be tested. A testable hypothesis states what you observe, under what conditions and what would make it **false**. That last condition separates a scientific approach from a mere search for confirmation." },
+          {
+            t: 'table',
+            head: ["Wording", "Testable?", "Why"],
+            rows: [
+              ["“The protocol is secure”", "No", "No observation could contradict it"],
+              ["“The program crashes if the name field exceeds 256 bytes”", "Yes", "You can send the input and observe the behavior"],
+              ["“An attacker can get the password within 24 hours”", "Yes, if the attacker’s means are specified", "The duration depends on assumed resources: you declare them"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Write the hypothesis **before** the experiment, with the result that would refute it. Otherwise you risk interpreting only the results that suit you." },
+        ],
+      },
+      {
+        id: 'cahier-experiences',
+        title: "Keeping a reproducible experiment notebook",
+        blocks: [
+          { t: 'p', text: "A result you cannot reproduce has no value, either for you or for a vendor you would like to report it to. The experiment notebook records, for each trial, what lets a third party redo exactly the same steps: software versions, configuration, input used, command run, result obtained and date. It is kept as you go, not afterwards." },
+          { t: 'list', items: ["**Environment**: system, versions, build options, hardware or virtual machine used.", "**Input**: the exact file or sequence, with its hash, so that it is identical at each trial.", "**Procedure**: full commands, in order, with parameters.", "**Expected and observed result**: the difference is what you are trying to understand.", "**Next hypothesis**: what this result suggests trying next."] },
+          { t: 'callout', kind: 'tip', text: "Keep the **failures** too: knowing a lead goes nowhere avoids redoing it, and feeds the discussion with the vendor." },
+        ],
+      },
     ],
     useCases: [
       'Read a security advisory published by a vendor and decide what to fix first.',

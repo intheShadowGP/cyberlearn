@@ -117,6 +117,44 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Trust is the currency of the profession: a tester who crosses the line even once loses clients’ trust and the body’s.' },
         ],
       },
+      {
+        id: 'trame-premieres-heures',
+        title: "A working frame for the first hours",
+        blocks: [
+          { t: 'p', text: "On a long practical exam, the first hours decide the rest. Without a frame, you scatter on the first lead you meet. A simple frame forces you to take inventory before acting: what you have, what you know and what remains to discover. It does not replace thinking, it prevents disorderly improvisation." },
+          {
+            t: 'table',
+            caption: "Starting frame (adapt to the exam and its rules)",
+            head: ["Step", "Question to ask", "Trace to keep"],
+            rows: [
+              ["Read the rules and the scope", "What am I allowed to test, with which tools?", "List of targets and prohibitions copied into the notes"],
+              ["Take inventory", "Which hosts, services and accounts are reachable?", "Table of hosts / services / information obtained"],
+              ["Prioritize", "Which lead is the most likely and the cheapest?", "Ordered list with a maximum time per lead"],
+              ["Exploit and verify", "Is the result reproducible?", "Exact commands, results, timestamped screenshots"],
+              ["Step back", "Did I exhaust simple leads before complex ones?", "Note “stuck for X minutes”, switch lead"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Set a **time limit per lead** (for example forty-five minutes). Beyond it, record the state, move on and come back if time allows: sticking to a dead end is the most frequent mistake." },
+        ],
+      },
+      {
+        id: 'debriefer-epreuve',
+        title: "Debriefing an exam: what to record",
+        blocks: [
+          { t: 'p', text: "Whether you passed or not, the debrief turns an exam into progress. It must be written soon, in the following days, while details are fresh. You record facts, not judgments: what was tried, in what order, with what result, and the time spent. The goal is to spot **patterns** (always the same difficulty, always the same delay) rather than an isolated event." },
+          { t: 'list', items: ["**Timeline**: which leads, in what order, how long each; where was time lost?", "**Decisions**: when did you switch leads, and was it too early or too late?", "**Technical gaps**: which tools or notions were missing? Each becomes a targeted lab exercise.", "**Notes and evidence**: were the notes precise enough to write the report without redoing the work?", "**What worked well**: to keep as it is for the next exam."] },
+          { t: 'callout', kind: 'tip', text: "Respect the exam’s confidentiality rules: the personal debrief concerns your **method**, not sharing the content of the tasks, which the rules generally forbid." },
+        ],
+      },
+      {
+        id: 'outils-notes',
+        title: "Preparing your notes and tools environment",
+        blocks: [
+          { t: 'p', text: "On a long exam, time lost looking for a command or finding information again costs dearly. So you should prepare a stable environment in advance, one you know by heart, while respecting the tools and documentation the rules allow. Nothing should be discovered on exam day." },
+          { t: 'list', items: ["**A notes template** ready to fill in: sections per host, a table of credentials found, a list of the commands that worked.", "**A command cheat sheet** sorted by task (enumeration, file transfer, analysis), built during lab practice.", "**Timestamped screenshots**, taken as you go, with an explicit file name.", "**Regular backups** of the notes, so a technical incident does not destroy hours of work.", "**A dry run** of the whole environment the day before, on a practice lab."] },
+          { t: 'callout', kind: 'warn', text: "Check in the rules what is **allowed** (tools, notes, documentation). A forbidden tool used out of habit can get the exam invalidated." },
+        ],
+      },
     ],
     useCases: [
       'Plan the preparation of a hands-on test lasting several hours.',

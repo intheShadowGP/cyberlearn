@@ -116,6 +116,54 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Le responsable sécurité éclaire et recommande ; la direction décide d’accepter le risque résiduel.' },
         ],
       },
+      {
+        id: 'argumenter-direction',
+        title: "Argumenter une décision de sécurité auprès de la direction",
+        blocks: [
+          { t: 'p', text: "Les certifications de management valident la capacité à décider, mais aussi à convaincre. Une direction ne tranche pas sur des détails techniques : elle compare un risque, un coût et un bénéfice pour l’activité. Un bon dossier de décision tient en une page et répond à quatre questions dans cet ordre : quel est le risque, que se passe-t-il s’il se réalise, que propose-t-on et à quel coût, que se passe-t-il si l’on ne fait rien." },
+          {
+            t: 'table',
+            caption: "Structure d’une note de décision",
+            head: ["Rubrique", "Contenu attendu", "Piège à éviter"],
+            rows: [
+              ["Contexte et enjeu", "Le service ou l’activité concernés, exprimés en termes métier", "Un vocabulaire technique que la direction ne peut pas arbitrer"],
+              ["Risque", "Scénario, probabilité et impact estimés, avec les hypothèses", "Une peur vague (« on peut tout perdre ») sans chiffre ni scénario"],
+              ["Options", "Au moins deux solutions, dont « ne rien faire » et une option proportionnée", "Présenter une seule solution comme inévitable"],
+              ["Coût et délai", "Coût de mise en œuvre et d’exploitation, délai, charge pour les équipes", "Oublier le coût récurrent et la charge d’exploitation"],
+              ["Recommandation et risque résiduel", "Choix argumenté, et ce qui reste exposé après la mesure", "Promettre un risque nul"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Un **risque résiduel** assumé par écrit protège autant la direction que le responsable sécurité : la décision est tracée, datée et réexaminée." },
+        ],
+      },
+      {
+        id: 'veille-competences',
+        title: "Entretenir ses compétences sans courir après chaque nouveauté",
+        blocks: [
+          { t: 'p', text: "Une certification expert se maintient, et surtout se mérite dans la durée par l’entretien des compétences. Le piège est de confondre veille et dispersion : suivre dix sources sans en approfondir aucune. Une veille efficace est **bornée et régulière** : quelques sources fiables, un créneau fixe dans la semaine et une sortie concrète (une fiche, un test en laboratoire, une note à l’équipe)." },
+          { t: 'list', items: ["**Choisir peu de sources** : un bulletin d’alertes d’un organisme officiel, un blog technique de référence, une communauté de pairs.", "**Trier selon l’impact** : cette information concerne-t-elle un produit que nous utilisons ? Si non, elle peut attendre.", "**Transformer en action** : une alerte sur une vulnérabilité devient une vérification de nos systèmes, pas seulement une lecture.", "**Pratiquer** : reproduire en laboratoire isolé ce que l’on a lu, afin de le comprendre.", "**Capitaliser** : tenir une base de notes personnelle, utile pour les crédits de formation continue et pour l’évolution de carrière."] },
+          { t: 'callout', kind: 'tip', text: "Les crédits de formation continue valorisent aussi la **transmission** : présenter un retour d’expérience en interne, rédiger un guide ou encadrer un débutant fait progresser autant que suivre une formation." },
+        ],
+      },
+      {
+        id: 'cout-total',
+        title: "Estimer le coût total d’une certification",
+        blocks: [
+          { t: 'p', text: "Le prix de l’examen n’est qu’une partie du coût. Pour décider en connaissance de cause, notamment lorsqu’un employeur finance la démarche, il faut estimer le coût total sur la durée de validité de la certification. Les montants changent : on les relève sur les sites officiels au moment de la décision." },
+          {
+            t: 'table',
+            head: ["Poste de coût", "À vérifier", "Souvent oublié"],
+            rows: [
+              ["Préparation", "Formation, manuels, plateformes de laboratoires, examens blancs", "Le temps de travail personnel, qui a une valeur"],
+              ["Examen", "Frais d’inscription, frais de nouvelle tentative si échec", "Le coût d’un second passage éventuel"],
+              ["Maintien", "Cotisation annuelle, crédits de formation continue à justifier", "La cotisation récurrente sur toute la durée de validité"],
+              ["Déplacement", "Centre d’examen ou surveillance à distance, équipement requis", "Le matériel et la connexion exigés pour un examen surveillé"],
+              ["Opportunité", "Heures détournées d’autres projets ou de la vie personnelle", "L’impact sur la charge de travail courante"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Comparez ce coût à l’**apport attendu** : compétence réellement acquise, reconnaissance par les employeurs visés et exigences des appels d’offres de votre secteur." },
+        ],
+      },
     ],
     useCases: [
       'Choisir entre une certification de management, d’audit ou de spécialité selon un projet professionnel.',

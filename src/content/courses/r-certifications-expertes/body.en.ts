@@ -116,6 +116,54 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'The security manager informs and recommends; management decides to accept the residual risk.' },
         ],
       },
+      {
+        id: 'argumenter-direction',
+        title: "Arguing a security decision to management",
+        blocks: [
+          { t: 'p', text: "Management certifications validate the ability to decide, but also to convince. A leadership team does not rule on technical details: it compares a risk, a cost and a benefit for the business. A good decision file fits on one page and answers four questions in this order: what is the risk, what happens if it occurs, what do we propose and at what cost, what happens if we do nothing." },
+          {
+            t: 'table',
+            caption: "Structure of a decision note",
+            head: ["Heading", "Expected content", "Trap to avoid"],
+            rows: [
+              ["Context and stakes", "The service or activity concerned, in business terms", "Technical vocabulary management cannot arbitrate"],
+              ["Risk", "Scenario, estimated likelihood and impact, with assumptions", "A vague fear (“we could lose everything”) with no figure or scenario"],
+              ["Options", "At least two solutions, including “do nothing” and a proportionate option", "Presenting a single solution as unavoidable"],
+              ["Cost and schedule", "Implementation and running cost, schedule, load on teams", "Forgetting recurring cost and operating load"],
+              ["Recommendation and residual risk", "Argued choice, and what remains exposed after the measure", "Promising zero risk"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "A **residual risk** accepted in writing protects management as much as the security lead: the decision is traced, dated and reviewed." },
+        ],
+      },
+      {
+        id: 'veille-competences',
+        title: "Maintaining skills without chasing every novelty",
+        blocks: [
+          { t: 'p', text: "An expert certification is maintained, and above all earned over time by keeping skills up to date. The trap is to confuse watching with scattering: following ten sources without deepening any. An effective watch is **bounded and regular**: a few reliable sources, a fixed slot in the week and a concrete output (a sheet, a lab test, a note to the team)." },
+          { t: 'list', items: ["**Pick few sources**: an alert bulletin from an official body, a reference technical blog, a community of peers.", "**Sort by impact**: does this information concern a product we use? If not, it can wait.", "**Turn it into action**: a vulnerability alert becomes a check of our systems, not just a reading.", "**Practice**: reproduce in an isolated lab what you read, in order to understand it.", "**Capitalize**: keep a personal notes base, useful for continuing education credits and career progression."] },
+          { t: 'callout', kind: 'tip', text: "Continuing education credits also reward **sharing**: presenting a lessons-learned talk internally, writing a guide or mentoring a beginner helps you grow as much as taking a course." },
+        ],
+      },
+      {
+        id: 'cout-total',
+        title: "Estimating the total cost of a certification",
+        blocks: [
+          { t: 'p', text: "The exam price is only part of the cost. To decide with full knowledge, especially when an employer funds the effort, you must estimate the total cost over the certification’s validity period. Amounts change: you read them on official sites at the time of the decision." },
+          {
+            t: 'table',
+            head: ["Cost item", "To check", "Often forgotten"],
+            rows: [
+              ["Preparation", "Training, manuals, lab platforms, mock exams", "Personal working time, which has value"],
+              ["Exam", "Registration fees, retake fees after a failure", "The cost of a possible second attempt"],
+              ["Maintenance", "Annual fee, continuing education credits to justify", "The recurring fee over the whole validity period"],
+              ["Travel", "Exam center or remote proctoring, required equipment", "The hardware and connection required for a proctored exam"],
+              ["Opportunity", "Hours taken from other projects or personal life", "The impact on current workload"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Compare this cost with the **expected benefit**: skills really gained, recognition by target employers and the requirements of tenders in your sector." },
+        ],
+      },
     ],
     useCases: [
       'Choose between a management, audit or specialty certification according to a career plan.',

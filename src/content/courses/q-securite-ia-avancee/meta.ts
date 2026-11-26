@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'q-adv-risque', label: 'Analyse de risque d’un système d’IA', level: 4 },
     { id: 'q-adv-confidentialite', label: 'Confidentialité des modèles et des données', level: 4 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 12,
 };

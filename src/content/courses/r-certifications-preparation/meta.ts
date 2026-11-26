@@ -24,7 +24,7 @@ export const meta: CourseMeta = {
     { id: 'r-prepa', label: 'Méthode de préparation', level: 1 },
     { id: 'r-valeur', label: 'Valeur et maintien d’une certification', level: 1 },
   ],
-  sectionCount: 4,
+  sectionCount: 7,
   questionCount: 46,
   quizSize: 10,
 };

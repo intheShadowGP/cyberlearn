@@ -44,7 +44,7 @@ export const browse: Record<keyof typeof frBrowse, string> = {
   'skills.notMastered': 'not mastered (< 50%)',
   'skills.unassessed': 'not assessed',
   'skills.show': 'Show',
-  'skills.toggle': 'Show or hide the {n} skills of this discipline',
+  'skills.toggle': 'Expand or collapse the {n} skills of this discipline',
   'skills.all': 'All skills',
   'skills.f.acquired': 'Acquired',
   'skills.f.learning': 'In progress',

@@ -118,6 +118,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Un système qui suppose tous ses nœuds honnêtes casse dès que l’un d’eux est compromis : la sécurité commence par expliciter combien de fautes on tolère.' },
         ],
       },
+      {
+        id: 'choisir-technique',
+        title: "Choisir la bonne technique de vérification",
+        blocks: [
+          { t: 'p', text: "Aucune technique ne couvre tous les besoins : chacune offre un niveau de garantie différent pour un coût différent. Le choix dépend de ce que l’on veut établir et de la criticité du composant. On combine souvent plusieurs approches : le fuzzing trouve vite des défauts concrets, l’analyse statique ratisse large, l’exécution symbolique explore des chemins précis et la preuve formelle garantit des propriétés sur un composant restreint." },
+          {
+            t: 'table',
+            head: ["Technique", "Ce qu’elle apporte", "Limite principale"],
+            rows: [
+              ["Tests et fuzzing", "Défauts concrets, entrées qui les provoquent", "Ne prouve pas l’absence d’autres défauts"],
+              ["Analyse statique", "Large couverture du code sans exécution", "Fausses alertes à trier"],
+              ["Exécution symbolique", "Entrées qui atteignent un chemin donné", "Explosion du nombre de chemins sur de grands programmes"],
+              ["Model checking", "Exploration exhaustive d’un modèle fini", "Le modèle doit représenter fidèlement le système"],
+              ["Preuve formelle", "Garantie mathématique d’une propriété", "Coût élevé et propriété à formuler avec soin"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Une garantie ne vaut que par la **propriété vérifiée** : prouver qu’un programme ne déborde pas ne dit rien sur son authentification." },
+        ],
+      },
+      {
+        id: 'limites-garanties',
+        title: "Ce que prouve, et ne prouve pas, une vérification",
+        blocks: [
+          { t: 'p', text: "Un résultat « vérifié » doit toujours être lu avec ses hypothèses. La preuve porte sur un **modèle** ou une **spécification**, sous des hypothèses sur l’environnement (matériel correct, compilateur fidèle, attaquant limité à certaines actions). Si l’une de ces hypothèses est fausse, la garantie ne s’applique plus. Un auditeur compétent cherche donc d’abord ce qui n’est **pas** couvert." },
+          { t: 'list', items: ["**La spécification est-elle juste ?** Un programme peut respecter parfaitement une spécification incorrecte.", "**Le modèle représente-t-il le système réel ?** Un modèle trop simplifié peut cacher exactement le comportement dangereux.", "**Quelles hypothèses sur l’attaquant ?** Une preuve contre un attaquant qui n’écoute que le réseau ne dit rien d’un attaquant ayant un accès physique.", "**Quelle partie du système est vérifiée ?** Une bibliothèque prouvée ne protège pas l’application qui l’appelle mal.", "**La vérification est-elle maintenue ?** Une preuve sur une ancienne version ne couvre pas le code modifié depuis."] },
+          { t: 'callout', kind: 'warn', text: "Méfiez-vous des formulations absolues (« prouvé sûr ») : demandez **quelle propriété**, **sous quelles hypothèses** et **sur quelle version**." },
+        ],
+      },
     ],
     useCases: [
       'Choisir la méthode d’analyse adaptée à un composant critique (protocole, chargeur, consensus).',

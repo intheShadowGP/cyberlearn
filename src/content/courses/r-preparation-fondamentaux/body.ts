@@ -117,6 +117,41 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Une certification obtenue par mémorisation de questions fuitées ne prouve rien : elle fait perdre la confiance des employeurs et peut mettre fin à une carrière.' },
         ],
       },
+      {
+        id: 'carnet-erreurs',
+        title: "Tenir un carnet d’erreurs",
+        blocks: [
+          { t: 'p', text: "Le carnet d’erreurs est l’outil le plus rentable d’une préparation. Pour chaque question manquée ou devinée, on note quatre éléments : l’énoncé en une ligne, la bonne réponse, **la raison de l’erreur** et la règle à retenir. Le but n’est pas de recopier la leçon, mais de capturer ce qui vous a piégé personnellement. Relu régulièrement, ce carnet remplace avantageusement des heures de relecture passive." },
+          {
+            t: 'table',
+            caption: "Un exemple de ligne de carnet",
+            head: ["Question", "Bonne réponse", "Cause de l’erreur", "Règle à retenir"],
+            rows: [
+              ["Quelle couche gère les adresses MAC ?", "Liaison (couche 2)", "Confusion avec la couche réseau", "MAC = liaison, IP = réseau : « le MAC reste sur le lien local »"],
+              ["Que fait un hachage ?", "Produit une empreinte à sens unique", "J’ai confondu avec le chiffrement", "Hachage : pas de clé, pas de retour ; chiffrement : clé, réversible"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Relisez le carnet **à intervalles croissants** (le lendemain, une semaine, un mois). Une erreur qui revient trois fois mérite une fiche de synthèse à part." },
+        ],
+      },
+      {
+        id: 'lire-enonce',
+        title: "Lire un énoncé de QCM : les pièges classiques",
+        blocks: [
+          { t: 'p', text: "Beaucoup d’erreurs viennent de la lecture, pas de la connaissance. Une méthode simple consiste à lire l’énoncé complet, à formuler mentalement la réponse **avant** de regarder les options, puis à éliminer les options fausses plutôt que de chercher la bonne. Cette habitude réduit l’influence des distracteurs bien rédigés." },
+          { t: 'list', items: ["**Les mots qui inversent le sens** : « sauf », « n’est pas », « le moins », « avant de ». Soulignez-les.", "**Les absolus** : « toujours », « jamais », « seulement ». Une option qui en contient une est souvent fausse, car la sécurité est rarement absolue.", "**Les options qui se ressemblent** : deux options presque identiques signalent souvent que la bonne réponse est l’une des deux ; cherchez la différence qui compte.", "**La question réellement posée** : « quelle est la **première** action ? » n’attend pas la même réponse que « quelle est la **meilleure** mesure à long terme ? ».", "**Les options vraies mais hors sujet** : une affirmation exacte peut ne pas répondre à la question posée."] },
+          { t: 'callout', kind: 'warn', text: "Ne changez de réponse que si vous avez une **raison précise** (un mot relu, un fait rappelé), pas par simple doute : les premières intuitions sont souvent bonnes quand les révisions ont été sérieuses." },
+        ],
+      },
+      {
+        id: 'fiche-synthese',
+        title: "Faire une fiche de synthèse utile",
+        blocks: [
+          { t: 'p', text: "Une fiche de synthèse n’est pas un résumé recopié : c’est un outil de rappel actif. Elle tient sur une page, se construit **de mémoire** puis se corrige avec la leçon, et ne contient que ce qui reste difficile à retenir. Plus la fiche est compacte, plus elle oblige à hiérarchiser, ce qui est déjà une forme d’apprentissage." },
+          { t: 'list', items: ["**Un titre et une question** en tête : « à quoi sert ce mécanisme, et contre quelle menace ? ».", "**Un schéma ou un tableau** plutôt que des phrases : les comparaisons (par exemple deux protocoles) se retiennent mieux en tableau.", "**Trois à cinq points clés** que l’on peut énoncer sans regarder.", "**Un exemple concret** : une situation réelle ou une commande, pour ancrer la notion.", "**Un piège classique** : l’erreur la plus fréquente sur ce sujet, tirée de votre carnet d’erreurs."] },
+          { t: 'callout', kind: 'tip', text: "Testez la fiche : cachez-la et reformulez-la à voix haute. Ce que vous ne savez pas redire est ce qu’il faut revoir." },
+        ],
+      },
     ],
     useCases: [
       'Transformer un plan d’examen en plan d’étude personnel avec priorités.',

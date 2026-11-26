@@ -116,6 +116,41 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: 'La gravité dépend du contexte : un même défaut est critique sur un service exposé à Internet et moindre sur un outil local sans privilèges.' },
         ],
       },
+      {
+        id: 'triage-plantage',
+        title: "Trier un plantage : reproductible, exploitable, sans conséquence ?",
+        blocks: [
+          { t: 'p', text: "Un fuzzer produit souvent des dizaines de plantages, dont beaucoup ont la même cause. Le tri répond à trois questions dans l’ordre : le plantage est-il **reproductible** avec la même entrée, **quelle est sa cause** (la classe de défaut) et **quel est son impact** (déni de service, lecture hors limites, écriture hors limites). On regroupe les plantages par cause avant d’analyser chacun, afin de ne traiter qu’une fois chaque défaut." },
+          {
+            t: 'table',
+            head: ["Observation", "Lecture probable", "Priorité"],
+            rows: [
+              ["Écriture hors des limites d’un tampon", "Défaut de mémoire à fort potentiel d’impact", "Haute"],
+              ["Lecture hors limites avec fuite de données", "Divulgation d’informations possible", "Haute à moyenne"],
+              ["Arrêt propre sur une assertion", "Contrôle interne qui fonctionne, éventuellement déni de service", "Faible à moyenne"],
+              ["Boucle infinie ou consommation de mémoire", "Déni de service", "Selon l’exposition du service"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Réduisez d’abord le **nombre de causes distinctes** : cent plantages issus du même défaut ne forment qu’un seul rapport." },
+        ],
+      },
+      {
+        id: 'minimiser-cas',
+        title: "Minimiser un cas de test",
+        blocks: [
+          { t: 'p', text: "L’entrée qui provoque un plantage est souvent volumineuse et pleine d’éléments inutiles. La **minimisation** consiste à la réduire jusqu’au plus petit contenu qui déclenche toujours le même comportement. Un cas minimal se comprend vite, se joint facilement à un rapport et facilite l’écriture du test de non-régression. La procédure est mécanique : on retire une partie, on relance, et l’on conserve la réduction si le plantage persiste." },
+          { t: 'list', items: ["**Retirer par blocs** d’abord (la moitié, puis le quart), puis octet par octet.", "**Vérifier à chaque étape** que la cause reste la même et non un autre défaut déclenché par la réduction.", "**Remplacer les valeurs complexes** par des valeurs simples quand le défaut le permet.", "**Conserver l’entrée d’origine** à côté du cas minimal, avec son empreinte."] },
+          { t: 'callout', kind: 'tip', text: "De nombreux outils de fuzzing proposent une minimisation automatique ; elle ne dispense pas de **relire** le résultat pour s’assurer qu’il illustre bien le défaut étudié." },
+        ],
+      },
+      {
+        id: 'non-regression',
+        title: "Transformer le défaut en test de non-régression",
+        blocks: [
+          { t: 'p', text: "Corriger ne suffit pas : il faut que le défaut ne revienne pas lors d’une évolution du code. Le cas minimal devient un **test automatique** qui échoue avant la correction et réussit après. Ce test s’ajoute à la suite exécutée à chaque modification du projet. Il matérialise la correction, documente le défaut et protège contre une réintroduction accidentelle." },
+          { t: 'list', items: ["**Écrire le test avant la correction** et constater qu’il échoue pour la bonne raison.", "**Corriger la cause**, pas seulement le symptôme : refuser l’entrée précise ne règle pas la classe de défaut.", "**Chercher les cas voisins** : le même motif existe souvent ailleurs dans le code.", "**Relancer le fuzzing** sur la version corrigée pour vérifier qu’aucun nouveau plantage n’apparaît.", "**Consigner** la correction et le test dans le rapport."] },
+        ],
+      },
     ],
     useCases: [
       'Analyser un plantage signalé par un client et en trouver la cause racine.',

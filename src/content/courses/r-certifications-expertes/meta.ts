@@ -25,7 +25,7 @@ export const meta: CourseMeta = {
     { id: 'r-ce-carriere', label: 'Parcours d’expert, maintien et formation continue', level: 4 },
     { id: 'r-ce-raisonnement', label: 'Décision fondée sur le risque et la proportionnalité', level: 4 },
   ],
-  sectionCount: 5,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 12,
 };

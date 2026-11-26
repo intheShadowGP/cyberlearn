@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1740 |
-| Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 8 |
+| Mots de leçon, médiane (FR) | 1747 |
+| Mots de leçon, minimum / maximum (FR) | 1517 / 2613 |
+| Cours de moins de 1 500 mots (FR) | 0 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 36 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -92,20 +92,20 @@
 | `o-comptes-privileges-pam` | O | 3 | 7 | 1678 | 1434 | 3 | 0 | 4 | 4 | 40 | M6 U20 VF7 C5 O2 | 100 % | 6 |
 | `o-identite-mfa-oauth` | O | 3 | 8 | 1812 | 1575 | 3 | 1 | 4 | 4 | 43 | U22 M6 VF7 C6 O2 | 100 % | 5 |
 | `o-identite-avancee` | O | 4 | 8 | 1799 | 1581 | 3 | 1 | 3 | 3 | 43 | U23 VF7 C5 M6 O2 | 100 % | 6 |
-| `p-recherche-initiation` | P | 1 | 5 | 1330 | 1182 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `p-analyse-pratique` | P | 2 | 5 | 1172 | 1040 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `p-verification-avancee` | P | 3 | 5 | 1307 | 1160 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `p-recherche-initiation` | P | 1 | 7 | 1645 | 1459 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `p-analyse-pratique` | P | 2 | 8 | 1612 | 1432 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `p-verification-avancee` | P | 3 | 7 | 1645 | 1466 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-fuzzing-recherche` | P | 4 | 7 | 1549 | 1413 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `p-materiel-zero-trust-confidentiel` | P | 4 | 7 | 1911 | 1671 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `q-ia-initiation` | Q | 1 | 7 | 1570 | 1378 | 3 | 1 | 3 | 3 | 44 | U23 VF7 C6 M6 O2 | 100 % | 5 |
 | `q-ia-pratique` | Q | 2 | 7 | 1626 | 1453 | 3 | 1 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 5 |
 | `q-ia-defense-ml` | Q | 3 | 7 | 1669 | 1432 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `q-securite-llm` | Q | 3 | 8 | 1785 | 1535 | 3 | 0 | 4 | 4 | 43 | U23 VF7 C5 M6 O2 | 100 % | 5 |
-| `q-securite-ia-avancee` | Q | 4 | 5 | 1406 | 1245 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `r-certifications-preparation` | R | 1 | 4 | 1107 | 1007 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 100 % | 4 |
-| `r-preparation-fondamentaux` | R | 2 | 5 | 1149 | 1038 | 3 | 1 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `r-preparation-pratique` | R | 3 | 5 | 1213 | 1073 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `r-certifications-expertes` | R | 4 | 5 | 1268 | 1118 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `q-securite-ia-avancee` | Q | 4 | 7 | 1743 | 1519 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `r-certifications-preparation` | R | 1 | 7 | 1686 | 1512 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 100 % | 4 |
+| `r-preparation-fondamentaux` | R | 2 | 8 | 1643 | 1490 | 3 | 1 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `r-preparation-pratique` | R | 3 | 8 | 1758 | 1545 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `r-certifications-expertes` | R | 4 | 8 | 1832 | 1609 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 
 ## Questions quasi identiques entre cours (similarité ≥ 0,5)
 

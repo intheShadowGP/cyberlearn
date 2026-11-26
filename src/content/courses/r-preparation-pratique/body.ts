@@ -117,6 +117,44 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'La confiance est la monnaie du métier : un testeur qui franchit une seule fois la limite perd la confiance de ses clients et celle de l’organisme.' },
         ],
       },
+      {
+        id: 'trame-premieres-heures',
+        title: "Une trame de travail pour les premières heures",
+        blocks: [
+          { t: 'p', text: "Sur une épreuve pratique longue, les premières heures décident du reste. Sans trame, on se disperse sur la première piste rencontrée. Une trame simple impose de dresser l’inventaire avant d’agir : ce que l’on a, ce que l’on sait et ce qui reste à découvrir. Elle ne remplace pas la réflexion, elle évite l’improvisation désordonnée." },
+          {
+            t: 'table',
+            caption: "Trame de départ (à adapter à l’épreuve et à son règlement)",
+            head: ["Étape", "Question à se poser", "Trace à conserver"],
+            rows: [
+              ["Lire le règlement et le périmètre", "Qu’ai-je le droit de tester, avec quels outils ?", "Liste des cibles et des interdits recopiée dans les notes"],
+              ["Inventorier", "Quels hôtes, services et comptes sont accessibles ?", "Tableau hôtes / services / informations obtenues"],
+              ["Hiérarchiser", "Quelle piste est la plus probable et la moins coûteuse ?", "Liste ordonnée avec un temps maximal par piste"],
+              ["Exploiter et vérifier", "Le résultat est-il reproductible ?", "Commandes exactes, résultats, captures horodatées"],
+              ["Prendre du recul", "Ai-je épuisé les pistes simples avant les complexes ?", "Note « bloqué depuis X minutes », changement de piste"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Fixez une **limite de temps par piste** (par exemple quarante-cinq minutes). Au-delà, on consigne l’état, on passe à autre chose et on revient si le temps le permet : s’obstiner sur une impasse est l’erreur la plus fréquente." },
+        ],
+      },
+      {
+        id: 'debriefer-epreuve',
+        title: "Débriefer une épreuve : ce qu’il faut consigner",
+        blocks: [
+          { t: 'p', text: "Que l’on ait réussi ou non, le débriefing transforme une épreuve en progrès. Il doit être écrit à chaud, dans les jours qui suivent, tant que les détails sont frais. On y consigne les faits, pas des jugements : ce qui a été tenté, dans quel ordre, avec quel résultat, et le temps passé. L’objectif est de repérer des **schémas** (toujours la même difficulté, toujours le même retard) plutôt qu’un événement isolé." },
+          { t: 'list', items: ["**Chronologie** : quelles pistes, dans quel ordre, combien de temps chacune ; où le temps a-t-il été perdu ?", "**Décisions** : à quel moment a-t-on changé de piste, et était-ce trop tôt ou trop tard ?", "**Lacunes techniques** : quels outils ou notions ont manqué ? Chacune devient un exercice de laboratoire ciblé.", "**Notes et preuves** : les notes étaient-elles assez précises pour rédiger le rapport sans refaire les manipulations ?", "**Ce qui a bien fonctionné** : à conserver tel quel pour la prochaine épreuve."] },
+          { t: 'callout', kind: 'tip', text: "Respectez les règles de confidentialité de l’épreuve : le débriefing personnel porte sur votre **méthode**, pas sur la diffusion du contenu des sujets, qui est en général interdite par le règlement." },
+        ],
+      },
+      {
+        id: 'outils-notes',
+        title: "Préparer son environnement de notes et d’outils",
+        blocks: [
+          { t: 'p', text: "Sur une épreuve longue, le temps perdu à chercher une commande ou à retrouver une information se paie cher. Il faut donc préparer en amont un environnement stable, que l’on connaît par cœur, en respectant les outils et la documentation autorisés par le règlement. Rien ne doit être découvert le jour de l’épreuve." },
+          { t: 'list', items: ["**Un modèle de notes** prêt à remplir : sections par hôte, tableau des identifiants trouvés, liste des commandes qui ont fonctionné.", "**Un aide-mémoire de commandes** classé par tâche (énumération, transfert de fichiers, analyse), construit pendant l’entraînement en laboratoire.", "**Des captures d’écran horodatées**, prises au fil de l’eau, avec un nom de fichier explicite.", "**Une sauvegarde** régulière des notes, pour qu’un incident technique ne détruise pas des heures de travail.", "**Un essai à blanc** de tout l’environnement la veille, sur un laboratoire d’entraînement."] },
+          { t: 'callout', kind: 'warn', text: "Vérifiez dans le règlement ce qui est **autorisé** (outils, notes, documentation). Un outil interdit utilisé par habitude peut entraîner l’invalidation de l’épreuve." },
+        ],
+      },
     ],
     useCases: [
       'Planifier la préparation d’une épreuve pratique de plusieurs heures.',

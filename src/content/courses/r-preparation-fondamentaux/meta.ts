@@ -25,7 +25,7 @@ export const meta: CourseMeta = {
     { id: 'r-pf-examen', label: 'Technique d’examen et gestion du temps', level: 2 },
     { id: 'r-pf-integrite', label: 'Intégrité et maintien de la certification', level: 2 },
   ],
-  sectionCount: 5,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

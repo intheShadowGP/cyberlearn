@@ -42,7 +42,7 @@ export const browse = {
   'skills.notMastered': 'non maîtrisées (< 50 %)',
   'skills.unassessed': 'non évaluées',
   'skills.show': 'Afficher',
-  'skills.toggle': 'Afficher ou masquer les {n} compétences de cette discipline',
+  'skills.toggle': 'Déplier ou replier les {n} compétences de cette discipline',
   'skills.all': 'Toutes les compétences',
   'skills.f.acquired': 'Acquises',
   'skills.f.learning': 'En cours',

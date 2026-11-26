@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'p-ini-divulgation', label: 'Divulgation responsable et cadre légal', level: 1 },
     { id: 'p-ini-horizons', label: 'Quantique, cryptographie avancée et lecture d’une fiche CVE', level: 1 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

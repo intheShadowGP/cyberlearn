@@ -115,6 +115,32 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Pour un défenseur, l’essentiel est de suivre les alertes, de corriger vite et de préparer les migrations (notamment post-quantique) pour les données à longue durée de vie.' },
         ],
       },
+      {
+        id: 'hypothese',
+        title: "Poser une hypothèse de recherche testable",
+        blocks: [
+          { t: 'p', text: "Une recherche en sécurité commence par une question précise, pas par un outil. « Ce service est-il sûr ? » est trop vague pour être testée ; « Ce service accepte-t-il une entrée de plus de mille caractères sans la rejeter proprement ? » peut l’être. Une hypothèse testable indique ce que l’on observe, dans quelles conditions et ce qui la ferait considérer comme **fausse**. Cette dernière condition distingue une démarche scientifique d’une simple recherche de confirmation." },
+          {
+            t: 'table',
+            head: ["Formulation", "Testable ?", "Pourquoi"],
+            rows: [
+              ["« Le protocole est sécurisé »", "Non", "Aucune observation ne pourrait la contredire"],
+              ["« Le programme plante si le champ de nom dépasse 256 octets »", "Oui", "On peut envoyer l’entrée et observer le comportement"],
+              ["« Un attaquant peut obtenir le mot de passe en 24 heures »", "Oui, si les moyens de l’attaquant sont précisés", "La durée dépend des ressources supposées : on les déclare"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Écrivez l’hypothèse **avant** l’expérience, avec le résultat qui l’infirmerait. Sans cela, on risque de n’interpréter que les résultats qui arrangent." },
+        ],
+      },
+      {
+        id: 'cahier-experiences',
+        title: "Tenir un cahier d’expériences reproductible",
+        blocks: [
+          { t: 'p', text: "Un résultat que l’on ne sait pas reproduire n’a pas de valeur, ni pour soi, ni pour un éditeur à qui l’on voudrait le signaler. Le cahier d’expériences consigne, pour chaque essai, ce qui permet à un tiers de refaire exactement la manipulation : versions des logiciels, configuration, entrée utilisée, commande lancée, résultat obtenu et date. Il se tient au fil de l’eau, pas après coup." },
+          { t: 'list', items: ["**Environnement** : système, versions, options de compilation, matériel ou machine virtuelle utilisée.", "**Entrée** : fichier ou séquence exacte, avec son empreinte, pour qu’elle soit identique à chaque essai.", "**Procédure** : commandes complètes, dans l’ordre, avec les paramètres.", "**Résultat attendu et résultat obtenu** : la différence est ce que l’on cherche à comprendre.", "**Hypothèse suivante** : ce que ce résultat suggère d’essayer ensuite."] },
+          { t: 'callout', kind: 'tip', text: "Conservez aussi les **échecs** : savoir qu’une piste ne mène nulle part évite de la refaire, et nourrit la discussion avec l’éditeur." },
+        ],
+      },
     ],
     useCases: [
       'Lire une alerte de sécurité publiée par un éditeur et décider quoi corriger en premier.',

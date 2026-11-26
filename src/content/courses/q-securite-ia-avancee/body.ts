@@ -116,6 +116,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Moins un modèle a vu de données sensibles, moins il peut en restituer : la minimisation est la première mesure de confidentialité.' },
         ],
       },
+      {
+        id: 'red-team-ia',
+        title: "Organiser une évaluation adverse d’un système d’IA",
+        blocks: [
+          { t: 'p', text: "Une évaluation adverse (« red teaming ») cherche à faire échouer le système comme le ferait un attaquant, mais dans un cadre autorisé. Elle ne se résume pas à quelques invites astucieuses : elle suit un plan écrit, fixe un périmètre et mesure des résultats. L’objectif est de documenter ce qui fonctionne, ce qui échoue et la facilité avec laquelle on y parvient, afin de hiérarchiser les corrections." },
+          {
+            t: 'table',
+            head: ["Étape", "Contenu", "Livrable"],
+            rows: [
+              ["Cadrage", "Système testé, données et outils accessibles, interdits, autorisation écrite", "Lettre de mission et règles d’engagement"],
+              ["Scénarios", "Menaces pertinentes : fuite de données, détournement d’outils, contenus interdits", "Catalogue de scénarios priorisés"],
+              ["Exécution", "Essais reproductibles, entrées et sorties consignées", "Journal d’essais"],
+              ["Mesure", "Taux de réussite des attaques par scénario, gravité", "Tableau de résultats"],
+              ["Restitution", "Constats, preuves, corrections proposées, retest", "Rapport et plan de remédiation"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Comme les systèmes d’IA se comportent de façon variable, répétez chaque essai plusieurs fois et mesurez un **taux de réussite**, pas un résultat unique." },
+        ],
+      },
+      {
+        id: 'surveillance-ia',
+        title: "Surveiller un système d’IA en production",
+        blocks: [
+          { t: 'p', text: "La sécurité d’un système d’IA ne s’arrête pas à la mise en service. Les usages réels diffèrent des tests, les attaquants s’adaptent et le comportement du modèle peut évoluer avec ses données ou ses mises à jour. Une surveillance continue repose sur des journaux exploitables, des indicateurs choisis à l’avance et un processus de réaction : sans lui, une alerte ne sert à rien." },
+          { t: 'list', items: ["**Journaliser** les requêtes, les réponses et les appels d’outils, en protégeant ces journaux (ils contiennent des données sensibles) et en limitant leur durée de conservation.", "**Mesurer des indicateurs** : taux de refus anormal, longueur inhabituelle des requêtes, appels d’outils hors norme, retours négatifs des utilisateurs.", "**Détecter les dérives** : une baisse de qualité ou un changement de comportement après une mise à jour du modèle.", "**Prévoir un interrupteur** : pouvoir désactiver un outil ou l’assistant entier rapidement en cas d’abus.", "**Réexaminer régulièrement** le modèle de menace à la lumière des incidents observés."] },
+          { t: 'callout', kind: 'tip', text: "Définissez à l’avance **qui** reçoit l’alerte et **quelle décision** elle déclenche : une alerte sans responsable reste lettre morte." },
+        ],
+      },
     ],
     useCases: [
       'Auditer la chaîne d’approvisionnement d’un système d’IA avant sa mise en production.',

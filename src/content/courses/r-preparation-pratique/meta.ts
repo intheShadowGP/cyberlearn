@@ -25,7 +25,7 @@ export const meta: CourseMeta = {
     { id: 'r-pp-labo', label: 'Entraînement légal en laboratoire isolé', level: 3 },
     { id: 'r-pp-ethique', label: 'Éthique, droit et règles d’examen', level: 3 },
   ],
-  sectionCount: 5,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

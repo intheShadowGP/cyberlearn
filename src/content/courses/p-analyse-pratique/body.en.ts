@@ -116,6 +116,41 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: 'Severity depends on context: the same defect is critical on an Internet-exposed service and lower on a local tool with no privileges.' },
         ],
       },
+      {
+        id: 'triage-plantage',
+        title: "Triaging a crash: reproducible, exploitable, harmless?",
+        blocks: [
+          { t: 'p', text: "A fuzzer often produces dozens of crashes, many sharing the same cause. Triage answers three questions in order: is the crash **reproducible** with the same input, **what is its cause** (the class of flaw) and **what is its impact** (denial of service, out-of-bounds read, out-of-bounds write). Crashes are grouped by cause before analyzing each, so every flaw is handled only once." },
+          {
+            t: 'table',
+            head: ["Observation", "Likely reading", "Priority"],
+            rows: [
+              ["Write outside a buffer’s bounds", "Memory flaw with high impact potential", "High"],
+              ["Out-of-bounds read with data leak", "Possible information disclosure", "High to medium"],
+              ["Clean stop on an assertion", "Internal check working, possibly denial of service", "Low to medium"],
+              ["Infinite loop or memory consumption", "Denial of service", "Depends on the service’s exposure"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "First reduce the **number of distinct causes**: a hundred crashes from the same flaw make a single report." },
+        ],
+      },
+      {
+        id: 'minimiser-cas',
+        title: "Minimizing a test case",
+        blocks: [
+          { t: 'p', text: "The input that causes a crash is often large and full of useless elements. **Minimization** means shrinking it to the smallest content that still triggers the same behavior. A minimal case is quickly understood, easily attached to a report and eases writing the regression test. The procedure is mechanical: remove a part, rerun, and keep the reduction if the crash persists." },
+          { t: 'list', items: ["**Remove by blocks** first (half, then a quarter), then byte by byte.", "**Check at each step** that the cause remains the same and not another flaw triggered by the reduction.", "**Replace complex values** with simple ones when the flaw allows.", "**Keep the original input** next to the minimal case, with its hash."] },
+          { t: 'callout', kind: 'tip', text: "Many fuzzing tools offer automatic minimization; it does not replace **rereading** the result to make sure it illustrates the flaw studied." },
+        ],
+      },
+      {
+        id: 'non-regression',
+        title: "Turning the flaw into a regression test",
+        blocks: [
+          { t: 'p', text: "Fixing is not enough: the flaw must not return when the code evolves. The minimal case becomes an **automated test** that fails before the fix and passes after. This test joins the suite run at every change to the project. It materializes the fix, documents the flaw and protects against accidental reintroduction." },
+          { t: 'list', items: ["**Write the test before the fix** and see that it fails for the right reason.", "**Fix the cause**, not just the symptom: rejecting the exact input does not solve the class of flaw.", "**Look for neighboring cases**: the same pattern often exists elsewhere in the code.", "**Rerun fuzzing** on the fixed version to check that no new crash appears.", "**Record** the fix and the test in the report."] },
+        ],
+      },
     ],
     useCases: [
       'Analyze a crash reported by a customer and find its root cause.',
