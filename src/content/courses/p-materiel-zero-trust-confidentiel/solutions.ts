@@ -25,5 +25,20 @@ export const solutions: CourseSolutions = {
         { t: 'callout', kind: 'warn', text: 'Limite : les enclaves réduisent la surface de confiance mais ne suppriment pas tous les risques (certaines attaques par canaux auxiliaires les ont visées). On les combine avec les autres mesures et on suit les correctifs du fournisseur.' },
       ],
     },
+    'migration-pqc': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Usage', 'Urgence', 'Mesure'],
+          rows: [
+            ['Archives médicales (30 ans)', '**Très élevée** : menace « collecter maintenant, déchiffrer plus tard »', 'Passer l’échange de clés en mode hybride post-quantique, rechiffrer si nécessaire'],
+            ['Mise à jour du micrologiciel (15 ans)', '**Élevée** : la vérification de signature doit durer autant que le produit', 'Intégrer une signature post-quantique ou hybride dès la conception, prévoir l’agilité'],
+            ['Messagerie interne (2 ans)', 'Moyenne', 'Suivre le calendrier des bibliothèques, activer l’hybride quand il est disponible'],
+            ['Certificat du site public (1 an)', 'Faible à court terme', 'Suivre les normes et le calendrier des autorités de certification'],
+          ],
+        },
+        { t: 'list', items: ['**Inventorier** tous les usages de cryptographie asymétrique et leurs durées de confidentialité.', '**Mettre en place** l’agilité cryptographique (paramétrage, bibliothèques à jour, négociation d’algorithme).', '**Tester** une configuration hybride sur un périmètre pilote avant le déploiement.'] },
+      ],
+    },
   },
 };

@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'p-materiel-zero-trust-confidentiel',
@@ -98,6 +99,55 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Ces domaines partagent une même idée : repousser la frontière de ce qu’on peut faire en sécurité (calculer sans voir, se mettre d’accord sans se faire confiance, résister à une machine quantique). Pour le défenseur, l’essentiel est de suivre l’état de l’art et de préparer les migrations, notamment post-quantique.' },
         ],
       },
+      {
+        id: 'attestation',
+        title: 'Attestation à distance, micrologiciels et chaîne d’approvisionnement',
+        blocks: [
+          { t: 'p', text: 'Faire confiance à une machine ne suffit pas : il faut pouvoir **vérifier à distance** son état avant de lui confier un secret, et s’assurer que le matériel et ses mises à jour n’ont pas été altérés en amont.' },
+          {
+            t: 'table',
+            head: ['Étape', 'Rôle', 'Point d’attention'],
+            rows: [
+              ['**Mesure**', 'Le TPM enregistre l’empreinte de chaque étape du démarrage', 'Mesures signées par une clé du composant'],
+              ['**Preuve (evidence)**', 'La machine envoie ses mesures signées au vérificateur', 'Défi aléatoire pour éviter le rejeu'],
+              ['**Vérification**', 'Le vérificateur compare aux valeurs de référence', 'Valeurs de référence tenues à jour à chaque mise à jour'],
+              ['**Décision**', 'Libérer ou refuser l’accès aux secrets', 'Refus par défaut si la mesure est inconnue'],
+            ],
+          },
+          { t: 'def', term: 'Attestation à distance', text: 'Protocole par lequel une machine prouve à un vérificateur, par des mesures signées, dans quel état d’intégrité elle se trouve. Le vérificateur ne confie des secrets qu’à une machine dont l’état correspond à une valeur de référence connue.' },
+          { t: 'def', term: 'Protection contre le retour en arrière', text: 'Mécanisme (compteur de version non réinitialisable, par exemple) qui empêche d’installer une version antérieure d’un micrologiciel, afin qu’un défaut corrigé ne puisse pas être rétabli volontairement.' },
+          { t: 'list', items: ['**Signer et vérifier** chaque mise à jour de micrologiciel avant installation.', '**Empêcher le retour** à une version vulnérable (anti-rollback).', '**Tenir un inventaire** des composants (nomenclature logicielle SBOM, et matérielle) pour réagir à une vulnérabilité d’un composant.', '**Qualifier les fournisseurs** et exiger la traçabilité des composants.'] },
+          { t: 'callout', kind: 'warn', text: 'Une attestation prouve un état à un instant donné : elle ne dit rien de ce qui se passe après. On la renouvelle et on la combine avec la surveillance.' },
+        ],
+      },
+      {
+        id: 'agilite',
+        title: 'Agilité cryptographique et migration post-quantique',
+        blocks: [
+          { t: 'p', text: 'Un ordinateur quantique suffisamment puissant casserait les algorithmes asymétriques actuels (RSA, courbes elliptiques). Les données interceptées aujourd’hui pourraient être déchiffrées demain : c’est la menace « **collecter maintenant, déchiffrer plus tard** ».' },
+          {
+            t: 'table',
+            head: ['Mesure', 'Objectif', 'Remarque'],
+            rows: [
+              ['**Inventaire cryptographique**', 'Connaître algorithmes, longueurs de clés et usages', 'Base de toute migration'],
+              ['**Priorisation par durée de confidentialité**', 'Traiter d’abord les données qui doivent rester secrètes longtemps', 'Plus la durée est longue, plus la migration est urgente'],
+              ['**Mode hybride**', 'Combiner algorithme classique et post-quantique', 'Protège même si l’un des deux est affaibli'],
+              ['**Agilité cryptographique**', 'Changer d’algorithme sans refondre le système', 'Paramétrage, bibliothèques à jour, protocoles négociables'],
+            ],
+          },
+          { t: 'def', term: 'Agilité cryptographique', text: 'Capacité d’un système à remplacer un algorithme ou une longueur de clé par un autre sans refonte majeure, grâce à des interfaces et des protocoles qui négocient les algorithmes.' },
+          { t: 'def', term: 'Échange de clés hybride', text: 'Établissement de clé qui combine un algorithme classique (courbe elliptique) et un algorithme post-quantique : la clé reste sûre tant que l’un des deux résiste.' },
+          {
+            t: 'example',
+            title: 'Prioriser une migration',
+            blocks: [
+              { t: 'p', text: 'Une organisation recense trois usages : des archives médicales à conserver trente ans, des échanges de messagerie interne et un certificat de site web renouvelé chaque année. Les archives et l’échange de clés qui les protège passent en premier ; le certificat annuel suivra le calendrier des normes.' },
+            ],
+          },
+          { t: 'list', items: ['**Inventorier** les usages de cryptographie asymétrique (échange de clés, signatures).', '**Suivre** les normes du NIST (algorithmes ML-KEM et ML-DSA) et les recommandations nationales.', '**Doubler** la longueur des clés symétriques (AES-256) face aux attaques quantiques génériques.', '**Tester** les performances et la compatibilité avant le déploiement.'] },
+          { t: 'callout', kind: 'key', text: 'La migration est un projet de plusieurs années : commencer par l’inventaire et l’agilité coûte peu et évite d’être pris de court.' },
+        ],
+      },
     ],
     useCases: [
       'Conception d’une architecture Zero Trust pour une organisation sans périmètre clair (cloud, télétravail).',
@@ -143,25 +193,26 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Vous devez traiter des données personnelles sensibles sur l’infrastructure d’un fournisseur cloud, sans lui faire pleinement confiance pour l’accès en clair à ces données pendant le calcul.' }],
       steps: ['Rappeler les trois états de la donnée et lequel pose problème ici.', 'Proposer l’usage de l’informatique confidentielle et de l’attestation.', 'Mentionner une limite à garder à l’esprit.'],
     },
+    {
+      id: 'migration-pqc',
+      kind: 'analysis',
+      title: 'Analyse : prioriser une migration post-quantique',
+      context: [
+        {
+          t: 'table',
+          head: ['Usage', 'Algorithme actuel', 'Durée de confidentialité'],
+          rows: [
+            ['Archives médicales chiffrées, conservées', 'Échange de clés RSA-2048', '30 ans'],
+            ['Messagerie interne (TLS)', 'Courbe elliptique P-256', '2 ans'],
+            ['Certificat du site public', 'Signature RSA-2048, renouvelée chaque année', '1 an'],
+            ['Mise à jour de micrologiciel d’un dispositif implanté', 'Signature ECDSA, durée de vie du produit 15 ans', '15 ans'],
+          ],
+        },
+      ],
+      steps: ['Classez les usages par urgence de migration et justifiez.', 'Indiquez le type de mesure adapté à chacun (hybride, agilité, calendrier).', 'Listez les premières actions à engager dès cette année.'],
+    },
   ],
-  questions: [
-    { id: 'mzt-q1', type: 'single', difficulty: 2, skills: ['p-zero-trust'], prompt: 'Quelle est l’idée centrale d’une architecture Zero Trust ?', options: [{ id: 'a', text: 'Ne faire confiance à aucun réseau ni machine par défaut, et vérifier chaque accès en continu' }, { id: 'b', text: 'Faire confiance à tout ce qui est à l’intérieur du réseau' }, { id: 'c', text: 'Supprimer toute authentification pour simplifier' }, { id: 'd', text: 'Chiffrer uniquement les données au repos' }] },
-    { id: 'mzt-q2', type: 'multi', difficulty: 3, skills: ['p-zero-trust'], prompt: 'Quels principes relèvent de Zero Trust ?', options: [{ id: 'a', text: 'Vérifier explicitement l’utilisateur, l’appareil et son état' }, { id: 'b', text: 'Appliquer le moindre privilège et l’accès juste-à-temps' }, { id: 'c', text: 'Supposer la compromission et micro-segmenter' }, { id: 'd', text: 'Accorder des droits permanents larges pour éviter les frictions' }] },
-    { id: 'mzt-q3', type: 'truefalse', difficulty: 2, skills: ['p-zero-trust'], prompt: 'Zero Trust est un produit unique que l’on installe, plutôt qu’une architecture à concevoir.' },
-    { id: 'mzt-q4', type: 'short', difficulty: 2, skills: ['p-zero-trust'], prompt: 'Comment appelle-t-on le découpage fin des accès jusqu’à la charge de travail, qui limite les déplacements latéraux ? (un mot)', placeholder: 'micro-…' },
-    { id: 'mzt-q5', type: 'single', difficulty: 3, skills: ['p-racine'], prompt: 'Quel composant mesure la chaîne de démarrage et ne libère un secret que si l’état mesuré est intègre ?', options: [{ id: 'a', text: 'Le TPM' }, { id: 'b', text: 'Le proxy' }, { id: 'c', text: 'Le pare-feu' }, { id: 'd', text: 'Le routeur' }] },
-    { id: 'mzt-q6', type: 'single', difficulty: 3, skills: ['p-racine'], prompt: 'Que garantit Secure Boot ?', options: [{ id: 'a', text: 'Il vérifie la signature de chaque étape du démarrage pour empêcher l’exécution d’un code non approuvé' }, { id: 'b', text: 'Il chiffre le trafic réseau' }, { id: 'c', text: 'Il accélère le démarrage' }, { id: 'd', text: 'Il attribue les adresses IP' }] },
-    { id: 'mzt-q7', type: 'single', difficulty: 3, skills: ['p-racine'], prompt: 'Qu’est-ce que l’informatique confidentielle vise à protéger ?', options: [{ id: 'a', text: 'Les données en cours de traitement (en mémoire), grâce à des enclaves' }, { id: 'b', text: 'Uniquement les données au repos' }, { id: 'c', text: 'Uniquement les données en transit' }, { id: 'd', text: 'Les câbles réseau' }] },
-    { id: 'mzt-q8', type: 'multi', difficulty: 3, skills: ['p-racine'], prompt: 'Concernant les enclaves (TEE) et l’attestation, quelles affirmations sont exactes ?', options: [{ id: 'a', text: 'Le contenu d’une enclave est protégé même du système d’exploitation de la machine' }, { id: 'b', text: 'L’attestation permet de vérifier à distance quel code s’exécute dans l’enclave' }, { id: 'c', text: 'Les enclaves suppriment tout risque, y compris les canaux auxiliaires' }, { id: 'd', text: 'Une enclave réduit la surface de confiance sans l’annuler' }] },
-    { id: 'mzt-q9', type: 'single', difficulty: 3, skills: ['p-menaces-hw'], prompt: 'Qu’est-ce qu’une attaque par canal auxiliaire ?', options: [{ id: 'a', text: 'Déduire un secret à partir d’une fuite physique indirecte (temps, consommation, émissions)' }, { id: 'b', text: 'Deviner un mot de passe par force brute' }, { id: 'c', text: 'Injecter du SQL' }, { id: 'd', text: 'Envoyer un courriel d’hameçonnage' }] },
-    { id: 'mzt-q10', type: 'open', difficulty: 3, skills: ['p-menaces-hw'], prompt: 'Expliquez, à des fins défensives, le principe d’une fuite par canal auxiliaire temporel lors d’une comparaison de secret, et la contre-mesure.' },
-    { id: 'mzt-q11', type: 'multi', difficulty: 3, skills: ['p-menaces-hw'], prompt: 'Quelles contre-mesures sont associées aux attaques matérielles ?', options: [{ id: 'a', text: 'Implémentations à temps constant et masquage contre les canaux auxiliaires' }, { id: 'b', text: 'Redondance et capteurs contre l’injection de fautes' }, { id: 'c', text: 'Mémoire à correction d’erreurs (ECC) contre Rowhammer' }, { id: 'd', text: 'Désactiver la journalisation' }] },
-    { id: 'mzt-q12', type: 'truefalse', difficulty: 3, skills: ['p-menaces-hw'], prompt: 'Comprendre le principe d’une attaque matérielle pour s’en défendre revient au même que disposer d’un mode opératoire d’attaque prêt à l’emploi.' },
-    { id: 'mzt-q13', type: 'single', difficulty: 3, skills: ['p-horizons'], prompt: 'Qu’est-ce que la tolérance aux fautes byzantines dans un système distribué ?', options: [{ id: 'a', text: 'Fonctionner correctement même si certains participants sont défaillants ou malveillants et envoient des informations contradictoires' }, { id: 'b', text: 'Résister aux coupures de courant uniquement' }, { id: 'c', text: 'Chiffrer les disques' }, { id: 'd', text: 'Accélérer le réseau' }] },
-    { id: 'mzt-q14', type: 'single', difficulty: 3, skills: ['p-horizons'], prompt: 'Que permet le chiffrement homomorphe ?', options: [{ id: 'a', text: 'Effectuer des calculs sur des données chiffrées sans les déchiffrer' }, { id: 'b', text: 'Chiffrer plus vite' }, { id: 'c', text: 'Supprimer le besoin de clés' }, { id: 'd', text: 'Compresser les données' }] },
-    { id: 'mzt-q15', type: 'short', difficulty: 3, skills: ['p-horizons'], prompt: 'Comment appelle-t-on un protocole qui prouve une affirmation sans révéler le secret sous-jacent ? (expression : preuve à …)', placeholder: 'preuve à …' },
-    { id: 'mzt-q16', type: 'open', difficulty: 3, skills: ['p-horizons', 'p-racine'], prompt: 'Une organisation doit protéger des données qui resteront confidentielles 20 ans et seront traitées dans le cloud. Quelles pistes avancées combineriez-vous et pourquoi ?' },
-  ],
+  questions,
   resources: [
     { title: 'Zero Trust Architecture (SP 800-207)', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/207/final' },
     { title: 'Trusted Platform Module (TPM) 2.0 — a brief introduction', source: 'Trusted Computing Group', url: 'https://trustedcomputinggroup.org/resource/trusted-platform-module-tpm-summary/' },
