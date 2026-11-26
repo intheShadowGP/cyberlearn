@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) |
 | R Certifications | ✔ (pilote terminé) | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) |
 
-Total : 45 cours existants (46 migrés) + 40 cours à créer (39 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 0 cours à créer et -1 cours existants à migrer.
+Total : 45 cours existants (45 migrés) + 40 cours à créer (40 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 0 cours à créer et 0 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
