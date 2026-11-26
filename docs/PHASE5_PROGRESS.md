@@ -60,14 +60,14 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | K Malware | ✔ (nouveau) | ✔ | ✔ | ✔ (nouveau) |
 | L Cloud | ✔ (nouveau) | ✔ | ✔ ×3 | ✔ (nouveau) |
 | M Gouvernance | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) | ✔ (nouveau) |
-| N OT / IoT | ➕ | ✔ | ✔ ×2 | ➕ |
+| N OT / IoT | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | O Identité | ➕ | ➕ | ✔ ×2 | ➕ |
 | P Recherche | ➕ | ➕ | ➕ | ✔ ×2 |
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (40 migrés) + 40 cours à créer (26 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 13 cours à créer et 5 cours existants à migrer.
+Total : 45 cours existants (40 migrés) + 40 cours à créer (27 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 12 cours à créer et 5 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -139,3 +139,4 @@ Total : 45 cours existants (40 migrés) + 40 cours à créer (26 créés) = 85 c
 | `n-iot-firmware` | ✔ 40 | ✔ 40 | ✔ |
 | `n-automobile-profinet` | ✔ 40 | ✔ 40 | ✔ |
 | `n-ot-iot-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
+| `n-ot-securite-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
