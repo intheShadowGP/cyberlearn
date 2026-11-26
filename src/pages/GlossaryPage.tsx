@@ -9,6 +9,8 @@ import { normalizeShort } from '../lib/quiz';
 import { usePageTitle } from '../lib/usePageTitle';
 import { useI18n } from '../i18n';
 
+const PAGE = 60;
+
 export default function GlossaryPage() {
   const { t, tp, lang } = useI18n();
   usePageTitle(t('gloss.title'));
@@ -20,6 +22,10 @@ export default function GlossaryPage() {
   const onlyAcronyms = params.get('sigles') === '1';
   const focus = params.get('terme');
   const ids = { q: useId(), c: useId() };
+  // Affichage progressif : la liste complète compte plus de 1 000 notions (DOM lourd).
+  const [pageState, setPageState] = useState({ key: '', limit: PAGE });
+  const filterKey = `${lang}|${q}|${cat}|${onlyAcronyms}`;
+  const baseLimit = pageState.key === filterKey ? pageState.limit : PAGE;
   // Les données ne sont valables que pour la langue pour laquelle elles ont été chargées.
   const entries = loaded?.lang === lang ? loaded.entries : null;
 
@@ -30,11 +36,6 @@ export default function GlossaryPage() {
       alive = false;
     };
   }, [lang]);
-
-  useEffect(() => {
-    if (!focus || !entries) return;
-    document.getElementById(`terme-${focus}`)?.scrollIntoView({ block: 'center' });
-  }, [focus, entries]);
 
   const update = (k: string, v: string) => {
     const n = new URLSearchParams(params);
@@ -51,6 +52,16 @@ export default function GlossaryPage() {
       (!onlyAcronyms || e.acronym) &&
       (!nq || normalizeShort(`${e.term} ${e.definition}`).includes(nq)),
   );
+  const focusIndex = focus ? list.findIndex((e) => e.id === focus) : -1;
+  const limit = Math.max(baseLimit, focusIndex + 1);
+  const showUpTo = (n: number) => setPageState({ key: filterKey, limit: Math.max(limit, n) });
+  const visible = list.slice(0, limit);
+
+  // Le terme ciblé fait partie de la page affichée (voir `limit`) ; on le fait défiler dans la vue.
+  useEffect(() => {
+    if (!focus || !entries) return;
+    document.getElementById(`terme-${focus}`)?.scrollIntoView({ block: 'center' });
+  }, [focus, entries, limit]);
   const letters = [...new Set(list.map((e) => normalizeShort(e.term).charAt(0).toUpperCase()))];
 
   return (
@@ -84,14 +95,19 @@ export default function GlossaryPage() {
           {letters.length > 1 && (
             <nav aria-label={t('gloss.letters')} className="button-row">
               {letters.map((l) => (
-                <a key={l} className="btn btn-small" href={`#lettre-${l}`} onClick={(e) => { e.preventDefault(); document.getElementById(`lettre-${l}`)?.scrollIntoView(); }}>{l}</a>
+                <a key={l} className="btn btn-small" href={`#lettre-${l}`} onClick={(e) => {
+                    e.preventDefault();
+                    const idx = list.findIndex((x) => normalizeShort(x.term).charAt(0).toUpperCase() === l);
+                    if (idx >= limit) showUpTo(idx + 1);
+                    setTimeout(() => document.getElementById(`lettre-${l}`)?.scrollIntoView(), 0);
+                  }}>{l}</a>
               ))}
             </nav>
           )}
           <dl className="glossary">
-            {list.map((e, i) => {
+            {visible.map((e, i) => {
               const letter = normalizeShort(e.term).charAt(0).toUpperCase();
-              const first = i === 0 || normalizeShort(list[i - 1]?.term ?? '').charAt(0).toUpperCase() !== letter;
+              const first = i === 0 || normalizeShort(visible[i - 1]?.term ?? '').charAt(0).toUpperCase() !== letter;
               return (
                 <div key={e.id} id={`terme-${e.id}`} className={`definition ${focus === e.id ? 'focused' : ''}`}>
                   <dt>
@@ -116,6 +132,12 @@ export default function GlossaryPage() {
               );
             })}
           </dl>
+          {list.length > limit && (
+            <div className="button-row">
+              <p role="status" className="muted">{t('gloss.shown', { shown: limit, total: list.length })}</p>
+              <button type="button" className="btn" onClick={() => showUpTo(limit + PAGE)}>{t('gloss.more', { n: Math.min(PAGE, list.length - limit) })}</button>
+            </div>
+          )}
         </>
       )}
     </div>

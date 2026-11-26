@@ -14,6 +14,8 @@ export const browse = {
   'gloss.letters': 'Lettres',
   'gloss.acronym': 'sigle',
   'gloss.definedIn': 'Défini dans :',
+  'gloss.shown': '{shown} notions affichées sur {total}.',
+  'gloss.more': 'Afficher {n} notions de plus',
 
   /* Recherche */
   'search.title': 'Recherche',
@@ -40,6 +42,7 @@ export const browse = {
   'skills.notMastered': 'non maîtrisées (< 50 %)',
   'skills.unassessed': 'non évaluées',
   'skills.show': 'Afficher',
+  'skills.toggle': 'Afficher ou masquer les {n} compétences de cette discipline',
   'skills.all': 'Toutes les compétences',
   'skills.f.acquired': 'Acquises',
   'skills.f.learning': 'En cours',

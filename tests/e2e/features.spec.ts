@@ -28,8 +28,11 @@ test('glossaire : notions extraites des leçons, recherche, sigles, lien vers le
   const errors = watchErrors(page);
   await page.goto('./#/glossaire');
   await expect(page.locator('.glossary .definition').first()).toBeVisible();
+  // Affichage progressif : une première page, puis « Afficher plus ».
+  expect(await page.locator('.glossary .definition').count()).toBe(60);
+  await page.getByRole('button', { name: /Afficher 60 notions de plus/ }).click();
   const total = await page.locator('.glossary .definition').count();
-  expect(total).toBeGreaterThan(60);
+  expect(total).toBe(120);
   await page.getByLabel('Rechercher une notion').fill('krbtgt');
   await expect(page.locator('.glossary .definition')).toHaveCount(1);
   await page.locator('.glossary').getByRole('link', { name: /Active Directory/ }).click();
@@ -37,7 +40,7 @@ test('glossaire : notions extraites des leçons, recherche, sigles, lien vers le
   await page.goto('./#/glossaire?sigles=1');
   const acronyms = await page.locator('.glossary .definition').count();
   expect(acronyms).toBeGreaterThan(5);
-  expect(acronyms).toBeLessThan(total);
+  expect(acronyms).toBeLessThanOrEqual(60);
   await axe(page, 'glossaire');
   expect(errors).toEqual([]);
 });

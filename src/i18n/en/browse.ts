@@ -16,6 +16,8 @@ export const browse: Record<keyof typeof frBrowse, string> = {
   'gloss.letters': 'Letters',
   'gloss.acronym': 'acronym',
   'gloss.definedIn': 'Defined in:',
+  'gloss.shown': '{shown} terms shown out of {total}.',
+  'gloss.more': 'Show {n} more terms',
 
   /* Search */
   'search.title': 'Search',
@@ -42,6 +44,7 @@ export const browse: Record<keyof typeof frBrowse, string> = {
   'skills.notMastered': 'not mastered (< 50%)',
   'skills.unassessed': 'not assessed',
   'skills.show': 'Show',
+  'skills.toggle': 'Show or hide the {n} skills of this discipline',
   'skills.all': 'All skills',
   'skills.f.acquired': 'Acquired',
   'skills.f.learning': 'In progress',

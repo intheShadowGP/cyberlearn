@@ -15,12 +15,17 @@ export default function SkillsPage() {
   usePageTitle(t('nav.skills'));
   const { data } = useSnapshot();
   const [filter, setFilter] = useState<SkillState | ''>('');
+  // Disciplines dépliées par l'utilisateur ; par défaut seule la première est dépliée (DOM allégé).
+  const [userOpen, setUserOpen] = useState<Record<string, boolean>>({});
   const selId = useId();
   const courses = getCourses(lang);
   const statuses = useMemo(() => skillStatuses(courses, data.skills), [courses, data.skills]);
   const counts = { acquired: 0, learning: 0, unassessed: 0 } as Record<SkillState, number>;
   for (const s of statuses) counts[s.state]++;
   const notMastered = statuses.filter((s) => s.state === 'learning' && (s.mastery ?? 0) < 0.5).length;
+  const sections = getModules(lang)
+    .map((m) => ({ m, rows: statuses.filter((s) => getCourse(s.courseId, lang)?.module === m.id && (!filter || s.state === filter)) }))
+    .filter((x) => x.rows.length > 0);
   const labs = getLabs(lang);
   const exams = getExams(lang);
 
@@ -46,13 +51,15 @@ export default function SkillsPage() {
           <option value="unassessed">{t('skills.f.unassessed')}</option>
         </select>
       </div>
-      {getModules(lang).map((m) => {
-        const rows = statuses.filter((s) => getCourse(s.courseId, lang)?.module === m.id && (!filter || s.state === filter));
-        if (!rows.length) return null;
+      {sections.map(({ m, rows }, idx) => {
+        const open = userOpen[m.id] ?? idx === 0;
         return (
           <section key={m.id} aria-labelledby={`sk-${m.id}`}>
-            <h2 id={`sk-${m.id}`} className="h3">{m.id}. {m.title}</h2>
-            <div className="table-wrap">
+            <h2 id={`sk-${m.id}`} className="h3">
+              <button type="button" className="btn btn-small" aria-expanded={open} aria-controls={`sk-body-${m.id}`} aria-label={t('skills.toggle', { n: rows.length })} onClick={() => setUserOpen((o) => ({ ...o, [m.id]: !open }))}>{open ? '▾' : '▸'}</button>{' '}
+              {m.id}. {m.title} <span className="muted">({rows.length})</span>
+            </h2>
+            {open && <div className="table-wrap" id={`sk-body-${m.id}`}>
               <table>
                 <thead>
                   <tr><th scope="col">{t('skills.col.skill')}</th><th scope="col">{t('skills.col.level')}</th><th scope="col">{t('skills.col.state')}</th><th scope="col">{t('skills.col.mastery')}</th><th scope="col">{t('skills.col.assess')}</th></tr>
@@ -77,7 +84,7 @@ export default function SkillsPage() {
                   })}
                 </tbody>
               </table>
-            </div>
+            </div>}
           </section>
         );
       })}
