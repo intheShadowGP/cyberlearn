@@ -1,0 +1,19 @@
+import type { LabCorrections } from '../../content/types';
+
+export const corrections: LabCorrections = {
+  labId: 'static-triage-lab',
+  questions: {
+    'stlab-q1': { type: 'short', accepted: ['update-check.example.net', 'http://update-check.example.net', 'http://update-check.example.net/gate.php'], explanation: 'The string `http://update-check.example.net/gate.php` is a contact address (probable command server). The domain, the full address and the file hash are indicators to record. The domain name is fictional here.' },
+    'stlab-q2': { type: 'single', correct: 'a', explanation: 'The .rsrc section has an entropy of 7.94, close to the maximum of 8, and makes up most of the file: it very probably holds a compressed or encrypted payload, unpacked at runtime. The other sections have usual values for code and data.', whyWrong: { b: '.data entropy is low (3.02): nothing unusual.', c: '.text is at 6.21, a common value for compiled code.', d: '.rdata (4.87) shows no alteration.' } },
+    'stlab-q3': { type: 'multi', correct: ['a', 'b', 'c'], explanation: 'Allocating memory in another process (VirtualAllocEx), writing into it (WriteProcessMemory) then starting a thread (CreateRemoteThread) is the classic code-injection sequence. Each call can be legitimate on its own; it is the set that is suggestive.', whyWrong: { d: 'GetSystemTime reads the time: unrelated to injection.' } },
+    'stlab-q4': { type: 'single', correct: 'c', explanation: 'Writing a value under the `Software\\Microsoft\\Windows\\CurrentVersion\\Run` key makes the program relaunch at every logon. Here, the SvcUpdate value and the `%APPDATA%\\svcupdate\\svc.exe` path go with the RegSetValueExA import.', whyWrong: { a: 'This string is present in every Windows executable.', b: 'GetSystemTime is a common call unrelated to persistence.', d: 'The compilation date tells about origin, not persistence.' } },
+    'stlab-q5': { type: 'truefalse', correct: false, explanation: 'A silent rule only proves it does not recognize the sample. It may be new, modified or obfuscated. Triage guides the analysis, it does not conclude to harmlessness.' },
+    'stlab-q6': { type: 'single', correct: 'b', explanation: 'The static clues (encrypted payload, injection, persistence, outbound contact) justify observing the real behavior, in an isolated environment, with no production network, using a snapshot to roll back. The hash and a copy are kept.', whyWrong: { a: 'Running on a real machine would expose the employee and the network.', c: 'Deleting without a hash or copy destroys the evidence and prevents searching for the same threat elsewhere.', d: 'Unverified indicators can cause wrongful blocks or expose internal data.' } },
+  },
+  debrief: [
+    { t: 'h', text: 'What the triage says' },
+    { t: 'list', items: ['**Identification**: a Windows executable disguised as a PDF invoice (double extension), to record with its SHA-256 hash.', '**Probable hidden payload**: the .rsrc section (entropy 7.94, over 60% of the file) is compressed or encrypted.', '**Possible behaviors**: code injection (VirtualAllocEx, WriteProcessMemory, CreateRemoteThread), outbound contact (WININET), persistence through a Run key and a copy in %APPDATA%.', '**Indicators**: domain `update-check.example.net`, path `%APPDATA%\\svcupdate\\svc.exe`, value `SvcUpdate`, mutex `Global\\{7B2E-91AF}`.'] },
+    { t: 'callout', kind: 'key', title: 'Limits', text: 'Static triage does not say what the sample really does once unpacked. The listed behaviors are hypotheses to confirm through isolated dynamic analysis.' },
+    { t: 'callout', kind: 'tip', title: 'Defensive measures', text: 'Block the domain at DNS and firewall level, search the estate for the Run value and the path, block double extensions and macros at the mail gateway, raise awareness in teams that receive invoices.' },
+  ],
+};

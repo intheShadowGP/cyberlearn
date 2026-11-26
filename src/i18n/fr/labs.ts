@@ -7,6 +7,7 @@ export const labs = {
   'labcat.crypto': 'Cryptographie',
   'labcat.prog': 'Programmation',
   'labcat.forensic': 'Forensique',
+  'labcat.malware': 'Analyse de malware',
   'labcat.soc': 'SOC',
   'labcat.osint': 'OSINT',
   'labcat.cloud': 'Cloud',

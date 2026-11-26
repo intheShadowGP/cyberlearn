@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 18 |
+| Laboratoires | 19 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -148,6 +148,7 @@
 | Mauvaises configurations cloud : repérer et corriger la posture (`cloud-misconfig-lab`) | cloud | 2 | l-cloud-iam, l-multicloud-serverless-hybride |
 | Reconnaissance OSINT d’une entreprise fictive (`osint-lab`) | osint | 2 | h-pentest-methodologie |
 | Trames Modbus suspectes dans une station de pompage (`modbus-lab`) | ics | 2 | n-ics-modbus |
+| Triage statique d’un échantillon suspect (`static-triage-lab`) | malware | 2 | k-malware-analyse, k-malware-initiation |
 | Analyse d’une configuration TLS et d’une chaîne de certificats (`tls-inspection-lab`) | crypto | 3 | e-chiffrement-tls-pki |
 | Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |

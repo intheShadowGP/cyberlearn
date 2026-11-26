@@ -12,7 +12,7 @@
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
 | Cours de moins de 1 500 mots (FR) | 8 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
-| Cours avec au moins un exercice lié à un laboratoire | 12 |
+| Cours avec au moins un exercice lié à un laboratoire | 13 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 94 % |
 | Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 29 |
@@ -68,7 +68,7 @@
 | `j-memoire-artefacts-linux` | J | 3 | 7 | 1642 | 1460 | 3 | 0 | 5 | 5 | 40 | U20 C5 VF7 M6 O2 | 100 % | 6 |
 | `j-forensique-avancee` | J | 4 | 6 | 1896 | 1690 | 3 | 0 | 5 | 5 | 40 | U21 VF6 C5 M6 O2 | 100 % | 6 |
 | `k-malware-initiation` | K | 1 | 8 | 1633 | 1416 | 3 | 0 | 4 | 4 | 44 | U24 VF7 C6 M5 O2 | 100 % | 6 |
-| `k-malware-analyse` | K | 2 | 9 | 1726 | 1526 | 3 | 0 | 4 | 4 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
+| `k-malware-analyse` | K | 2 | 9 | 1726 | 1526 | 3 | 1 | 4 | 4 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
 | `k-retro-ingenierie-defensive` | K | 3 | 7 | 1905 | 1695 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `k-malware-avance` | K | 4 | 6 | 1724 | 1500 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `l-cloud-initiation` | L | 1 | 8 | 1829 | 1595 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
