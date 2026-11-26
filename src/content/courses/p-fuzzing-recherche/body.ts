@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'p-fuzzing-recherche',
@@ -69,6 +70,55 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: "Découvrir une vulnérabilité ne donne pas le droit de l'exploiter sur des systèmes tiers. Pour un service en ligne, toute vérification hors programme autorisé expose à des poursuites." },
         ],
       },
+      {
+        id: 'continu',
+        title: 'Fuzzing continu et intégration à la chaîne de livraison',
+        blocks: [
+          { t: 'p', text: 'Une campagne ponctuelle trouve les défauts du jour, pas ceux que le prochain correctif réintroduira. Le **fuzzing continu** s’intègre à la chaîne de développement : chaque changement de code est testé, les anciens plantages corrigés sont rejoués et la couverture est suivie dans le temps.' },
+          {
+            t: 'table',
+            head: ['Étape', 'Objectif', 'Mise en œuvre'],
+            rows: [
+              ['**Fuzzing court par demande de fusion**', 'Détecter vite une régression évidente', 'Quelques minutes sur le corpus existant, plantage = échec de la validation'],
+              ['**Campagne longue planifiée**', 'Explorer en profondeur', 'Nuit ou week-end, sur une grappe ou OSS-Fuzz / ClusterFuzz'],
+              ['**Rejeu des plantages corrigés**', 'Empêcher le retour d’un défaut', 'Entrées de plantage versionnées dans les tests de non-régression'],
+              ['**Suivi de la couverture**', 'Repérer les zones jamais atteintes', 'Rapport de couverture, nouveaux harnais pour les trous'],
+            ],
+          },
+          { t: 'def', term: 'Corpus de régression', text: 'Ensemble d’entrées (graines utiles et entrées ayant déjà provoqué un plantage corrigé) conservé avec le code. Le rejouer à chaque changement coûte quelques secondes et garantit qu’un défaut corrigé ne revient pas.' },
+          { t: 'def', term: 'Fuzzing continu', text: 'Exécution permanente ou récurrente du fuzzing sur la dernière version du code, avec ouverture automatique de signalements dédupliqués, vérification de la correction et suivi de la couverture.' },
+          { t: 'list', items: ['**Séparer** les exécutions courtes (validation) des campagnes longues (recherche).', '**Mutualiser** et minimiser le corpus : un corpus trop gros ralentit sans apporter de couverture.', '**Automatiser** le triage : déduplication, minimisation, rattachement à un propriétaire.', '**Fixer un délai de correction** selon la gravité et vérifier la correction par rejeu.'] },
+          { t: 'callout', kind: 'tip', text: 'Un plantage trouvé par l’intégration continue doit devenir un test de non-régression permanent : l’entrée qui l’a provoqué rejoint le corpus.' },
+        ],
+      },
+      {
+        id: 'structure',
+        title: 'Fuzzing structuré, différentiel et de protocoles à état',
+        blocks: [
+          { t: 'p', text: 'Les mutations d’octets seules peinent sur les formats très structurés (grammaires, messages imbriqués, protocoles avec état). Des techniques adaptées permettent d’atteindre la logique profonde de l’analyseur.' },
+          {
+            t: 'table',
+            head: ['Technique', 'Principe', 'Cas d’usage'],
+            rows: [
+              ['**Mutation structurée**', 'Muter un arbre ou un message typé plutôt que des octets (libprotobuf-mutator, grammaires)', 'Formats imbriqués, langages, API typées'],
+              ['**Fuzzing différentiel**', 'Fournir la même entrée à plusieurs implémentations et comparer', 'Analyseurs concurrents, bibliothèques cryptographiques'],
+              ['**Protocoles à état**', 'Rejouer des séquences de messages, restaurer un état connu', 'Serveurs de protocole, machines à états'],
+              ['**Harnais par couche**', 'Cibler séparément transport, décodage et logique', 'Piles complexes difficiles à atteindre d’un coup'],
+            ],
+          },
+          { t: 'def', term: 'Fuzzing différentiel', text: 'Technique qui exécute plusieurs implémentations d’une même spécification sur la même entrée et signale les divergences. Elle détecte des erreurs sans plantage : validation de certificats trop permissive, interprétations ambiguës.' },
+          { t: 'def', term: 'Mutation structurée', text: 'Mutation qui conserve la validité syntaxique de l’entrée en opérant sur sa structure (champs, arbre syntaxique) : les entrées atteignent plus vite les couches profondes au lieu d’être rejetées par le premier contrôle.' },
+          {
+            t: 'example',
+            title: 'Une divergence entre deux analyseurs',
+            blocks: [
+              { t: 'p', text: 'Deux bibliothèques de lecture de documents structurés reçoivent la même entrée : l’une la rejette, l’autre l’accepte en ignorant un champ dupliqué. La divergence n’est pas un plantage, mais elle révèle une ambiguïté exploitable si un composant valide et un autre interprète : elle est signalée aux deux projets.' },
+            ],
+          },
+          { t: 'list', items: ['**Valider** le format avant d’entrer dans la logique, pour que les mutations ne soient pas rejetées d’emblée.', '**Isoler l’état** : réinitialiser ou restaurer le serveur entre deux séquences pour garder la reproductibilité.', '**Trier** les divergences : bug de l’une, de l’autre ou ambiguïté de la spécification.'] },
+          { t: 'callout', kind: 'warn', text: 'Une divergence n’est pas toujours une vulnérabilité : elle peut refléter un choix permis par la spécification. Elle doit être analysée avant tout signalement.' },
+        ],
+      },
     ],
     useCases: [
       'Intégrer un fuzzing continu au pipeline d’un analyseur de format de fichier.',
@@ -113,26 +163,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une nuit de fuzzing a produit 2 300 entrées provoquant des plantages : 2 100 « SEGV on unknown address 0x000000000000 » dans `img_get_palette`, 180 « heap-buffer-overflow READ of size 1 » dans `rle_decode`, 20 « heap-use-after-free WRITE » dans `img_free`.' }],
       steps: ['Regrouper les plantages en défauts probables.', 'Prioriser selon la gravité potentielle.', 'Décrire la suite pour le défaut prioritaire.'],
     },
+    {
+      id: 'ci-fuzzing',
+      kind: 'case',
+      title: 'Cas : mettre en place le fuzzing continu d’une bibliothèque',
+      context: [
+        { t: 'p', text: 'Une équipe maintient une bibliothèque de lecture de fichiers d’archive utilisée par plusieurs produits. Elle publie une version par mois et un défaut de mémoire corrigé il y a six mois vient de réapparaître. Elle dispose d’une intégration continue et d’une grappe de calcul disponible la nuit.' },
+      ],
+      steps: ['Décrivez les exécutions de fuzzing à placer dans la validation des changements et celles à planifier.', 'Expliquez comment éviter le retour d’un défaut déjà corrigé.', 'Précisez le traitement automatique d’un plantage trouvé et le délai de correction.', 'Proposez deux indicateurs pour suivre l’efficacité de la démarche.'],
+    },
   ],
-  questions: [
-    { id: 'fz-q1', type: 'single', difficulty: 2, skills: ['p-fuzz'], prompt: 'Qu’est-ce qui distingue un fuzzer guidé par la couverture d’un fuzzer purement aléatoire ?', options: [{ id: 'a', text: 'Il conserve et mute les entrées qui atteignent de nouvelles parties du code' }, { id: 'b', text: 'Il n’exécute pas le programme' }, { id: 'c', text: 'Il nécessite une preuve formelle' }, { id: 'd', text: 'Il ne fonctionne que sur le réseau' }] },
-    { id: 'fz-q2', type: 'truefalse', difficulty: 2, skills: ['p-fuzz'], prompt: 'Sans sanitizer, de nombreuses corruptions mémoire déclenchées par le fuzzer passent inaperçues car elles ne provoquent pas de plantage immédiat.' },
-    { id: 'fz-q3', type: 'short', difficulty: 2, skills: ['p-fuzz'], prompt: 'Quel est le nom de la fonction point d’entrée qu’un harnais libFuzzer doit définir ?' },
-    { id: 'fz-q4', type: 'multi', difficulty: 3, skills: ['p-fuzz', 'p-triage'], prompt: 'Quelles caractéristiques rendent un harnais efficace ?', options: [{ id: 'a', text: 'Exécution rapide, sans accès disque ni réseau' }, { id: 'b', text: 'Déterminisme : la même entrée produit le même comportement' }, { id: 'c', text: 'Un état global qui s’accumule entre les exécutions' }, { id: 'd', text: 'Ciblage de la fonction qui traite les octets non fiables' }] },
-    { id: 'fz-q5', type: 'single', difficulty: 3, skills: ['p-fuzz'], prompt: 'Pourquoi fournir un dictionnaire au fuzzer ?', options: [{ id: 'a', text: 'Pour traduire les messages d’erreur' }, { id: 'b', text: 'Pour l’aider à produire les mots-clés et constantes du format, que des mutations aléatoires trouvent difficilement' }, { id: 'c', text: 'Pour chiffrer le corpus' }, { id: 'd', text: 'Pour réduire la couverture' }] },
-    { id: 'fz-q6', type: 'single', difficulty: 3, skills: ['p-triage'], prompt: 'Lequel de ces défauts est en général le plus grave à traiter en priorité ?', options: [{ id: 'a', text: 'Déréférencement de pointeur nul en lecture' }, { id: 'b', text: 'Heap-use-after-free en écriture' }, { id: 'c', text: 'Dépassement de délai sur une entrée de 10 Mo' }, { id: 'd', text: 'Avertissement de compilation' }] },
-    { id: 'fz-q7', type: 'multi', difficulty: 3, skills: ['p-triage'], prompt: 'Quelles étapes font partie du triage de plantages ?', options: [{ id: 'a', text: 'Reproduction sous sanitizer' }, { id: 'b', text: 'Déduplication par pile d’appels' }, { id: 'c', text: 'Minimisation de l’entrée' }, { id: 'd', text: 'Publication immédiate de toutes les entrées' }] },
-    { id: 'fz-q8', type: 'truefalse', difficulty: 2, skills: ['p-triage', 'p-formal'], prompt: 'Une campagne de fuzzing de plusieurs semaines sans aucun plantage prouve l’absence de vulnérabilités.' },
-    { id: 'fz-q9', type: 'short', difficulty: 3, skills: ['p-triage'], prompt: 'Dans un rapport ASan, quel type d’erreur est indiqué par « WRITE of size 8 … 0 bytes to the right of 8-byte region » sur une zone allouée par malloc ? (terme anglais d’ASan)' },
-    { id: 'fz-q10', type: 'single', difficulty: 3, skills: ['p-formal'], prompt: 'Quel est le principal obstacle de l’exécution symbolique sur les gros programmes ?', options: [{ id: 'a', text: 'L’explosion du nombre de chemins' }, { id: 'b', text: 'L’absence de compilateur' }, { id: 'c', text: 'Le chiffrement des binaires' }, { id: 'd', text: 'La taille de l’écran' }] },
-    { id: 'fz-q11', type: 'truefalse', difficulty: 3, skills: ['p-formal'], prompt: 'Une preuve formelle garantit la sécurité d’un système quelles que soient la spécification et les hypothèses retenues.' },
-    { id: 'fz-q12', type: 'short', difficulty: 3, skills: ['p-formal'], prompt: 'Citez un outil d’analyse formelle de protocoles cryptographiques utilisé notamment pour TLS 1.3.' },
-    { id: 'fz-q13', type: 'multi', difficulty: 2, skills: ['p-disclosure'], prompt: 'Quelles pratiques relèvent de la divulgation coordonnée ?', options: [{ id: 'a', text: 'Signaler par le canal officiel de l’éditeur (security.txt, programme)' }, { id: 'b', text: 'Laisser un délai raisonnable avant publication' }, { id: 'c', text: 'Vendre la vulnérabilité au plus offrant sans prévenir l’éditeur' }, { id: 'd', text: 'Fournir une preuve minimale reproductible' }] },
-    { id: 'fz-q14', type: 'open', difficulty: 3, skills: ['p-fuzz', 'p-triage'], prompt: 'Écrivez (ou décrivez précisément) un harnais libFuzzer pour `img_decode(const uint8_t *buf, size_t len, struct image *out)`, et expliquez pourquoi vous ne ciblez pas `img_load`.' },
-    { id: 'fz-q15', type: 'open', difficulty: 3, skills: ['p-triage', 'p-disclosure'], prompt: 'Pour le lot de 2 300 plantages (2 100 SEGV adresse nulle, 180 lectures hors limites, 20 use-after-free en écriture), proposez la priorisation, la démarche d’analyse et la communication à l’éditeur.' },
-    { id: 'fz-q16', type: 'single', difficulty: 2, skills: ['p-disclosure'], prompt: 'Quel fichier standardisé publié par un site indique comment lui signaler une vulnérabilité ?', options: [{ id: 'a', text: 'robots.txt' }, { id: 'b', text: 'security.txt (/.well-known/security.txt)' }, { id: 'c', text: 'humans.txt' }, { id: 'd', text: 'sitemap.xml' }] },
-    { id: 'fz-q17', type: 'single', difficulty: 3, skills: ['p-triage'], prompt: 'Une campagne de fuzzing de 72 h sous AddressSanitizer ne produit aucun plantage. Que peut-on en conclure ?', options: [{ id: 'a', text: 'Rien quant à l’absence de vulnérabilité : ASan ne détecte que certaines classes de défauts (accès mémoire spatiaux et temporels), pas les bugs de logique ni les lectures non initialisées' }, { id: 'b', text: 'Que le programme est prouvé sûr' }, { id: 'c', text: 'Qu’il ne contient aucun débordement de tampon exploitable' }, { id: 'd', text: 'Qu’il faut désactiver ASan pour trouver des bugs' }] },
-  ],
+  questions,
   resources: [
     { title: 'libFuzzer — a library for coverage-guided fuzz testing', source: 'LLVM', url: 'https://llvm.org/docs/LibFuzzer.html' },
     { title: 'AFL++', source: 'Projet AFLplusplus', url: 'https://aflplus.plus/' },

@@ -15,5 +15,11 @@ export const solutions: CourseSolutions = {
         { t: 'p', text: 'Pour la priorité 1 : minimiser l’entrée, tracer allocation, libération et réutilisation (ASan fournit les trois piles), corriger, ajouter l’entrée au corpus de régression, puis signaler à l’éditeur si la bibliothèque est tierce.' },
       ],
     },
+    'ci-fuzzing': {
+      blocks: [
+        { t: 'list', ordered: true, items: ['**Validation des changements** : fuzzing court (quelques minutes) sur le corpus existant, sous ASan et UBSan ; un plantage fait échouer la validation.', '**Campagne planifiée** : exécutions longues la nuit sur la grappe, avec un corpus mutualisé et minimisé.', '**Non-régression** : toute entrée provoquant un plantage corrigé est ajoutée au corpus de régression, rejoué à chaque changement.', '**Plantage trouvé** : déduplication, minimisation, ouverture automatique d’un signalement rattaché à un propriétaire, délai de correction selon la gravité (urgent pour une écriture hors limites), rejeu pour confirmer la correction.'] },
+        { t: 'list', items: ['**Indicateur 1** : couverture des blocs de code atteints par les harnais, et zones sans harnais.', '**Indicateur 2** : délai entre détection et correction, et nombre de défauts réintroduits (objectif zéro).'] },
+      ],
+    },
   },
 };
