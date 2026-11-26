@@ -134,6 +134,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'N’effacez pas « pour nettoyer » : les traces servent à comprendre l’incident, à en limiter l’étendue et, si nécessaire, à le déclarer.' },
         ],
       },
+      {
+        id: 'matrice-risque',
+        title: "Évaluer un risque : un exemple chiffré",
+        blocks: [
+          { t: 'p', text: "Un risque se mesure par deux questions : **à quel point est-ce probable ?** (vraisemblance) et **à quel point est-ce grave ?** (impact). On leur attribue une note de 1 à 4 et on les multiplie." },
+          {
+            t: 'table',
+            caption: "Trois risques d’une petite association (notes de 1 à 4)",
+            head: ["Risque", "Vraisemblance", "Impact", "Niveau (V × I)", "Décision"],
+            rows: [
+              ["Ordinateur du secrétariat infecté par un rançongiciel, sans sauvegarde récente", "3", "4", "12", "Traiter en priorité : sauvegarde hors ligne testée, mises à jour"],
+              ["Vol d’un téléphone professionnel non chiffré", "3", "3", "9", "Réduire : chiffrement, verrouillage, effacement à distance"],
+              ["Panne prolongée du site web vitrine", "2", "1", "2", "Accepter, en le consignant"],
+            ],
+          },
+          { t: 'p', text: "Le niveau décide de la réponse : **réduire** (mesures de sécurité), **éviter** (abandonner l’activité), **transférer** (assurance, prestataire) ou **accepter** (en connaissance de cause, par la personne qui en assume les conséquences). Un risque accepté doit être **écrit, daté et signé** par un responsable." },
+          { t: 'callout', kind: 'key', text: "Ces notes sont des **jugements argumentés**, pas des mesures exactes. Ce qui compte est de les appliquer de la même façon à tous les risques, pour pouvoir les comparer et les classer." },
+        ],
+      },
+      {
+        id: 'premiers-reflexes-rgpd',
+        title: "Fuite de données personnelles : les premiers réflexes",
+        blocks: [
+          { t: 'p', text: "Quand des données personnelles sont perdues, volées ou envoyées par erreur, le règlement européen sur la protection des données (RGPD) impose des obligations de **notification**. Même sans être juriste, vous devez en connaître l’essentiel pour **alerter vite**." },
+          { t: 'list', ordered: true, items: ["**Alerter** immédiatement la personne désignée (responsable sécurité, délégué à la protection des données) : le temps est compté.", "**Décrire** les faits : quelles données, combien de personnes, quand, comment.", "**Limiter** la fuite : retirer l’accès, rappeler un message, changer un mot de passe.", "**Notifier** : en France, la notification à la CNIL est à faire dans un délai de **72 heures** après la prise de connaissance lorsque la violation présente un risque pour les personnes ; les personnes concernées sont informées si le risque est élevé.", "**Consigner** la violation dans un registre, même si elle n’est finalement pas notifiée."] },
+          { t: 'callout', kind: 'warn', text: "Ne tardez pas à signaler en espérant « régler d’abord le problème » : le délai court dès que l’organisation a connaissance de la violation, et la décision de notifier revient au responsable désigné, pas à la personne qui découvre l’incident." },
+        ],
+      },
     ],
     useCases: [
       'Comprendre pourquoi son organisation impose un mot de passe individuel, un badge personnel et le verrouillage des postes.',
@@ -141,6 +169,8 @@ export const body: CourseBody = {
       'Réagir correctement à un courriel suspect ou à une erreur de manipulation de données.',
     ],
     commonMistakes: [
+      "Mesurer un risque seulement par son impact, sans tenir compte de sa vraisemblance.",
+      "Accepter un risque oralement, sans trace écrite ni responsable identifié.",
       'Penser que la sécurité est uniquement l’affaire du service informatique.',
       'Partager son mot de passe ou prêter son badge « pour rendre service ».',
       'Cliquer par curiosité sur un message urgent sans le vérifier.',
@@ -155,6 +185,8 @@ export const body: CourseBody = {
       'Signaler vite, conserver les traces, tirer les enseignements.',
     ],
     keyPoints: [
+      "Risque = vraisemblance × impact ; quatre réponses : réduire, éviter, transférer, accepter.",
+      "Violation de données personnelles : alerter vite ; notification à l’autorité sous 72 heures si risque.",
       'La sécurité protège la confidentialité, l’intégrité et la disponibilité de l’information.',
       'Un risque se décrit par sa vraisemblance et sa gravité ; on peut le réduire, le transférer, l’éviter ou l’accepter.',
       'Les règles ne valent que si elles sont comprises, applicables et appliquées par tous, direction comprise.',

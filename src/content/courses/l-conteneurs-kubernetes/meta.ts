@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'l-k8s-runtime', label: 'Audit, détection à l’exécution et réponse', level: 3 },
     { id: 'l-k8s-admission', label: 'Registre, signature et admission', level: 3 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

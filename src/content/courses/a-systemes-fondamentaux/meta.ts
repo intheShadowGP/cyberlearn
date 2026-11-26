@@ -29,7 +29,7 @@ export const meta: CourseMeta = {
     { id: 'a-proc', label: 'Noyau, processus et services', level: 1 },
     { id: 'a-priv', label: 'Privilèges et moindre privilège', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

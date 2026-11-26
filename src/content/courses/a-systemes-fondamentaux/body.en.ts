@@ -119,6 +119,48 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'A compromise under a standard account often stays **contained**. The same compromise under an administrator account gives the whole machine. Working day to day without administration rights is one of the most profitable measures.' },
         ],
       },
+      {
+        id: 'hex-exemples',
+        title: "Practice: reading hexadecimal and sizes",
+        blocks: [
+          { t: 'p', text: "Hexadecimal (base 16) condenses bytes: **one hex digit = 4 bits**, so **two digits = one byte**. Moving between bases is a daily skill for reading a memory address, a network frame or a raw file." },
+          {
+            t: 'table',
+            caption: "Conversions to know by heart",
+            head: ["Decimal", "Binary (8 bits)", "Hexadecimal"],
+            rows: [
+              ["10", "0000 1010", "0x0A"],
+              ["15", "0000 1111", "0x0F"],
+              ["16", "0001 0000", "0x10"],
+              ["100", "0110 0100", "0x64"],
+              ["255", "1111 1111", "0xFF"],
+            ],
+          },
+          { t: 'list', items: ["To convert `0x64` to decimal: 6 × 16 + 4 = **100**.", "To convert 200 to hexadecimal: 200 = 12 × 16 + 8, and 12 is written `C`: **0xC8**.", "An IPv4 address such as `192.168.1.10` is written `C0 A8 01 0A`: four bytes.", "ASCII characters: `A` is 0x41, `a` is 0x61, the digit `0` is 0x30."] },
+          { t: 'code', lang: "bash", caption: "Looking at a file’s bytes (Linux)", code: "printf 'Cyber' > test.txt\nxxd test.txt\n# 00000000: 4379 6265 72                                Cyber" },
+          { t: 'p', text: "The output shows the five bytes `43 79 62 65 72` on the left and their character reading on the right. In forensics or malware analysis you read **file headers** this way: a Windows executable starts with `4D 5A` (“MZ”), a ZIP archive with `50 4B` (“PK”)." },
+          { t: 'callout', kind: 'tip', text: "Mind the units: 1 KB = 1,000 bytes in commercial usage, while 1 KiB = 1,024 bytes. System tools sometimes use one, sometimes the other." },
+        ],
+      },
+      {
+        id: 'observer-processus',
+        title: "Observing a machine’s processes",
+        blocks: [
+          { t: 'p', text: "A process is a program **being executed**, with its identifier (PID), its owner and its parent process. Observing them is the first reflex to understand what runs on a machine, or to spot what does not belong." },
+          { t: 'code', lang: "bash", caption: "Listing and inspecting processes", code: "# Linux\nps aux --sort=-%mem | head     # most memory-hungry processes\nps -ef --forest                  # parent / child tree\nss -tlnp                         # listening ports and their processes\n\n# Windows (PowerShell)\nGet-Process | Sort-Object CPU -Descending | Select-Object -First 10\nGet-CimInstance Win32_Process | Select-Object ProcessId, ParentProcessId, Name, CommandLine" },
+          {
+            t: 'table',
+            caption: "What should catch your attention",
+            head: ["Observation", "Why it is suspicious"],
+            rows: [
+              ["A browser or document editor launches a command interpreter", "A document or page should not start `cmd`, `powershell` or `bash`"],
+              ["A process named like a system program but launched from a user or temporary folder", "Imitation of a legitimate program name"],
+              ["A process listening on a port nobody declared", "Unexpected service or backdoor"],
+              ["A process whose parent makes no sense", "Launch order inconsistent with normal operation"],
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Investigation: analyze the process tree to spot an abnormal chain (Word → cmd → PowerShell).',
@@ -126,6 +168,8 @@ export const body: CourseBody = {
       'Incident response: decide to acquire the RAM before powering off a suspicious machine.',
     ],
     commonMistakes: [
+      "Confusing a process name with its identity: only the full path, signature and parent allow a judgment.",
+      "Reading a hexadecimal number as decimal (0x64 is 100, not 64).",
       'Powering off a compromised machine immediately, destroying the evidence held in RAM.',
       'Using an administrator account for daily browsing and email.',
       'Disabling Secure Boot “to make it work” without assessing the risk.',
@@ -138,6 +182,8 @@ export const body: CourseBody = {
       'Encrypt the storage to protect data if the hardware is stolen.',
     ],
     keyPoints: [
+      "Two hex digits = one byte; 0xFF = 255.",
+      "Observe processes, their parent, their path and their listening ports.",
       'RAM is volatile: the evidence held in memory disappears at power-off.',
       'UEFI and Secure Boot protect the boot chain before the operating system.',
       'The kernel is privileged; applications go through system calls.',

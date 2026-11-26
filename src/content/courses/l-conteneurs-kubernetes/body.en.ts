@@ -112,6 +112,44 @@ export const body: CourseBody = {
           },
         ],
       },
+      {
+        id: 'dockerfile-avant-apres',
+        title: "A safer image: Dockerfile before and after",
+        blocks: [
+          { t: 'code', lang: "dockerfile", caption: "Before: risky practices", code: "FROM python:latest\nCOPY . /app\nRUN pip install -r /app/requirements.txt\nENV API_KEY=sk-1234-secret\nCMD [\"python\", \"/app/main.py\"]" },
+          { t: 'code', lang: "dockerfile", caption: "After: pinned image, unprivileged user, no secret", code: "FROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nRUN useradd --system --no-create-home appuser\nUSER appuser\nCMD [\"python\", \"main.py\"]" },
+          {
+            t: 'table',
+            head: ["Change", "Risk reduced"],
+            rows: [
+              ["`python:latest` becomes `python:3.12-slim`", "Unpredictable version from one build to the next; smaller surface with a slim image (you can go further by pinning the image digest)"],
+              ["`ENV API_KEY=...` removed", "A secret written into a layer stays readable in the image by anyone who pulls it: it must be provided at runtime by the platform"],
+              ["`USER appuser`", "Without it the process runs as root in the container: a flaw yields elevated privileges"],
+              ["`requirements.txt` copied before the code", "Better use of the build cache and identifiable dependencies"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'securitycontext',
+        title: "Hardening a pod with securityContext",
+        blocks: [
+          { t: 'p', text: "Kubernetes lets you restrict what a container can do directly in the pod manifest. Here is a common security context for an ordinary web application." },
+          { t: 'code', lang: "yaml", caption: "Excerpt of a deployment manifest", code: "spec:\n  containers:\n    - name: web\n      image: registry.example.org/web:1.4.2\n      securityContext:\n        runAsNonRoot: true\n        allowPrivilegeEscalation: false\n        readOnlyRootFilesystem: true\n        capabilities:\n          drop: [\"ALL\"]\n        seccompProfile:\n          type: RuntimeDefault" },
+          {
+            t: 'table',
+            head: ["Setting", "Effect"],
+            rows: [
+              ["`runAsNonRoot: true`", "Kubernetes refuses to start a container whose user is root"],
+              ["`allowPrivilegeEscalation: false`", "A process cannot gain more rights than its parent (for example through a SUID binary)"],
+              ["`readOnlyRootFilesystem: true`", "The file system is read-only: an attacker cannot drop a tool there (provide a volume for legitimate writes)"],
+              ["`capabilities.drop: [\"ALL\"]`", "Removes all Linux capabilities; add back only those that are needed"],
+              ["`seccompProfile: RuntimeDefault`", "Applies the container engine’s default system-call filter"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "A “privileged” container (`privileged: true`) or one mounted with the container engine socket is equivalent to administrator access on the host machine. These cases must be documented, approved exceptions." },
+        ],
+      },
     ],
     useCases: [
       'Review of an application’s Kubernetes manifests before it goes into production.',
@@ -119,6 +157,8 @@ export const body: CourseBody = {
       'Define the standard base image and the CI controls on an organization’s images.',
     ],
     commonMistakes: [
+      "Using the `latest` tag for a production image.",
+      "Writing a secret in an `ENV` or `ARG` instruction of the Dockerfile.",
       'Considering that a container isolates as strongly as a virtual machine.',
       'Launching privileged containers or mounting the Docker socket “to make it work”.',
       'Copying secrets into an image then deleting them in a later layer.',
@@ -133,6 +173,7 @@ export const body: CourseBody = {
       'Encryption of secrets at rest and external vault.',
     ],
     keyPoints: [
+      "Pinned image, non-root user, no secret in layers; restrictive securityContext by default.",
       'A container shares the host kernel: isolation rests on namespaces, cgroups, capabilities, seccomp.',
       '`privileged`, the Docker socket and `hostPath` open the way to the host.',
       'An image must contain no secret, even deleted in a later layer.',

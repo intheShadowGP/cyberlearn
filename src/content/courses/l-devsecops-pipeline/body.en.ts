@@ -115,6 +115,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'Rebuilding on the compromised runner or erasing the build logs destroys evidence and may leave the attacker in place.' },
         ],
       },
+      {
+        id: 'workflow-sur',
+        title: "A hardened pipeline: workflow example",
+        blocks: [
+          { t: 'p', text: "A pipeline holds secrets and deployment rights: it is a prime target. The following example, written for GitHub Actions, applies four principles: minimal permissions, pinned actions, no secrets displayed, checks before publishing." },
+          { t: 'code', lang: "yaml", caption: "Excerpt of a build workflow (example identifiers)", code: "name: build\non:\n  pull_request:\n  push:\n    branches: [main]\n\npermissions:\n  contents: read            # default permissions reduced to the bare minimum\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@<full-commit-hash>   # pinned by hash\n      - name: Dependencies and tests\n        run: |\n          npm ci\n          npm test\n      - name: Dependency audit\n        run: npm audit --omit=dev" },
+          {
+            t: 'table',
+            head: ["Measure", "Threat covered"],
+            rows: [
+              ["`permissions: contents: read`", "A stolen token or a compromised step cannot modify the repository"],
+              ["Action pinned by **commit hash** and not by a movable tag", "A tag can be moved to malicious code; a hash cannot"],
+              ["`npm ci` instead of `npm install`", "Installation faithful to the lock file, reproducible"],
+              ["Dependency audit on every run", "Known vulnerabilities detected before going to production"],
+              ["Secrets supplied by the platform, never written to logs", "Credential leakage through execution logs"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "Triggers fired by external contributions (for example a pull request from a fork) must **not** have access to secrets: separate workflows that test untrusted code from those that deploy." },
+        ],
+      },
+      {
+        id: 'revue-pipeline',
+        title: "Auditing a pipeline: checklist",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Question", "Expected answer"],
+            rows: [
+              ["Who can change the pipeline definition?", "A restricted group, with mandatory review before merge"],
+              ["Are production branches protected?", "Yes: review required, no direct push, checks passing"],
+              ["Are secrets limited to the step that needs them?", "Yes, and they are rotated after any incident"],
+              ["Are dependencies and images pinned and scanned?", "Yes, with a lock file and a component inventory (SBOM)"],
+              ["Are the artifacts produced signed and traceable?", "Yes, with a link to the commit and the run that produced them"],
+              ["Can the same version be rebuilt identically?", "Yes (reproducible build, or at least frozen inputs)"],
+            ],
+          },
+          { t: 'p', text: "The starting point of an audit is to **read what the pipeline can do**: which secrets it holds, which environments it deploys to, who can change it. A pipeline that deploys to production with administrator rights is more dangerous than the application it builds." },
+        ],
+      },
     ],
     useCases: [
       'Set up a pipeline that blocks the merge when a secret is detected or an exploited critical vulnerability is found.',
@@ -122,6 +161,8 @@ export const body: CourseBody = {
       'Remove all cloud access keys from CI secrets in favor of OIDC federation.',
     ],
     commonMistakes: [
+      "Leaving the pipeline with default write and administration rights.",
+      "Referencing a third-party action by a movable tag (`@v3`, `@main`) in a chain that deploys to production.",
       'Pinning third-party actions by version tag rather than by commit hash.',
       'Giving the workflow token global write rights.',
       'Deleting a committed secret without revoking it.',
@@ -136,6 +177,7 @@ export const body: CourseBody = {
       'IaC analysis before deployment and protection of state files.',
     ],
     keyPoints: [
+      "Minimal permissions, actions pinned by hash, compartmentalized secrets, traceable artifacts.",
       'SAST (code), SCA (dependencies), secrets, IaC, images, DAST (runtime): each covers one angle.',
       'The build chain is a target: secure it like a production system.',
       'Dependency lock, pinned actions, least privilege, OIDC.',

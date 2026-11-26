@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1649 |
+| Mots de leçon, médiane (FR) | 1678 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 26 |
+| Cours de moins de 1 500 mots (FR) | 21 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -22,7 +22,7 @@
 | Cours | Mod. | Niv. | Sections | Mots FR | Mots EN | Exercices | dont labo | Ress. | HTTPS | Questions | Types (U unique, M multiple, VF, C courte, O ouverte) | Pourquoi faux | Compétences |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `a-fichiers-programmes-ligne-commande` | A | 1 | 5 | 1759 | 1631 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M5 O3 | 44 % | 5 |
-| `a-systemes-fondamentaux` | A | 1 | 6 | 1420 | 1276 | 2 | 0 | 3 | 2 | 40 | U19 VF8 M5 C5 O3 | 75 % | 5 |
+| `a-systemes-fondamentaux` | A | 1 | 8 | 1793 | 1604 | 2 | 0 | 3 | 2 | 40 | U19 VF8 M5 C5 O3 | 75 % | 5 |
 | `a-virtualisation-conteneurs` | A | 2 | 6 | 1639 | 1514 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 33 % | 5 |
 | `a-compilation-memoire-execution` | A | 3 | 6 | 1584 | 1430 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 26 % | 5 |
 | `a-isolation-confiance-plateforme` | A | 4 | 6 | 1734 | 1527 | 2 | 0 | 4 | 4 | 40 | U23 M5 VF6 C3 O3 | 21 % | 5 |
@@ -73,11 +73,11 @@
 | `k-malware-avance` | K | 4 | 6 | 1724 | 1500 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `l-cloud-initiation` | L | 1 | 6 | 1437 | 1263 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `l-cloud-iam` | L | 2 | 8 | 1721 | 1447 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
-| `l-conteneurs-kubernetes` | L | 3 | 5 | 1326 | 1164 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
-| `l-devsecops-pipeline` | L | 3 | 6 | 1370 | 1236 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 O2 C5 | 100 % | 5 |
+| `l-conteneurs-kubernetes` | L | 3 | 7 | 1604 | 1417 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
+| `l-devsecops-pipeline` | L | 3 | 8 | 1731 | 1548 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 O2 C5 | 100 % | 5 |
 | `l-multicloud-serverless-hybride` | L | 3 | 7 | 1959 | 1700 | 3 | 0 | 5 | 5 | 40 | U20 C5 O2 VF7 M6 | 100 % | 6 |
 | `l-cloud-avance` | L | 4 | 6 | 1645 | 1417 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
-| `m-gouvernance-initiation` | M | 1 | 6 | 1345 | 1183 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `m-gouvernance-initiation` | M | 1 | 8 | 1729 | 1527 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `m-risques-conformite` | M | 2 | 6 | 1442 | 1258 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `m-gouvernance-operationnelle` | M | 2 | 7 | 1675 | 1444 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `m-ebios-pratique` | M | 3 | 6 | 1432 | 1273 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
@@ -88,7 +88,7 @@
 | `n-automobile-profinet` | N | 3 | 7 | 1747 | 1498 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 O2 C5 | 100 % | 6 |
 | `n-ot-securite-avancee` | N | 4 | 6 | 1517 | 1325 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `o-identite-initiation` | O | 1 | 8 | 1654 | 1414 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `o-acces-pratique` | O | 2 | 6 | 1383 | 1200 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `o-acces-pratique` | O | 2 | 8 | 1769 | 1536 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `o-comptes-privileges-pam` | O | 3 | 7 | 1678 | 1434 | 3 | 0 | 4 | 4 | 40 | M6 U20 VF7 C5 O2 | 100 % | 6 |
 | `o-identite-mfa-oauth` | O | 3 | 6 | 1393 | 1204 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `o-identite-avancee` | O | 4 | 6 | 1436 | 1260 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |

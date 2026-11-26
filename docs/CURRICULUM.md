@@ -46,7 +46,7 @@
 | Cours | Discipline | Niveau | Durée | Sections | Questions | Exercices | Références |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Fichiers, programmes et ligne de commande : le socle avant la sécurité (`a-fichiers-programmes-ligne-commande`) | A | 1 · Débutant | 95 min | 5 | 40 | 3 | 4 |
-| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 90 min | 6 | 40 | 2 | 3 |
+| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 90 min | 8 | 40 | 2 | 3 |
 | Virtualisation et conteneurs : isoler les charges de travail (`a-virtualisation-conteneurs`) | A | 2 · Intermédiaire | 100 min | 6 | 40 | 2 | 4 |
 | Du code au processus : compilation, binaires, mémoire et exécution (`a-compilation-memoire-execution`) | A | 3 · Avancé | 110 min | 6 | 40 | 2 | 4 |
 | Base de confiance, isolation et architecture de sécurité d’une plateforme (`a-isolation-confiance-plateforme`) | A | 4 · Expert | 120 min | 6 | 40 | 2 | 4 |
@@ -97,11 +97,11 @@
 | Menaces avancées : campagnes, rançongiciels, chaîne d’approvisionnement et analyse à grande échelle (`k-malware-avance`) | K | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Le cloud pour débutants : comprendre, utiliser et protéger (`l-cloud-initiation`) | L | 1 · Débutant | 90 min | 6 | 40 | 3 | 3 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 120 min | 8 | 40 | 3 | 4 |
-| Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 130 min | 5 | 40 | 3 | 4 |
-| DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
+| Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 130 min | 7 | 40 | 3 | 4 |
+| DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 8 | 40 | 3 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Architecture cloud sécurisée : zones d’atterrissage, politiques en code, identités et détection (`l-cloud-avance`) | L | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
-| La gouvernance de la sécurité pour débutants : risques, règles et bons réflexes (`m-gouvernance-initiation`) | M | 1 · Débutant | 90 min | 6 | 40 | 3 | 3 |
+| La gouvernance de la sécurité pour débutants : risques, règles et bons réflexes (`m-gouvernance-initiation`) | M | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
 | Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 125 min | 6 | 40 | 3 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 125 min | 7 | 40 | 3 | 5 |
 | EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
@@ -112,7 +112,7 @@
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 5 |
 | Sécurité OT avancée : IEC 62443, architecture, analyse de risques, détection et résilience (`n-ot-securite-avancee`) | N | 4 · Expert | 140 min | 6 | 40 | 3 | 4 |
 | L’identité numérique pour débutants : mots de passe, MFA et droits d’accès (`o-identite-initiation`) | O | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
-| Gérer les accès au quotidien : annuaire, authentification, SSO et autorisations (`o-acces-pratique`) | O | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 3 |
+| Gérer les accès au quotidien : annuaire, authentification, SSO et autorisations (`o-acces-pratique`) | O | 2 · Intermédiaire | 120 min | 8 | 40 | 3 | 3 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 6 | 40 | 3 | 4 |
 | Architecture d’identité avancée : Zero Trust, identités de machines et résilience (`o-identite-avancee`) | O | 4 · Expert | 150 min | 6 | 40 | 3 | 3 |

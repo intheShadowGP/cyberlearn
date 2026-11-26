@@ -115,6 +115,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'Reconstruire sur le runner compromis ou effacer les journaux de build détruit les preuves et peut laisser l’attaquant en place.' },
         ],
       },
+      {
+        id: 'workflow-sur',
+        title: "Un pipeline durci : exemple de workflow",
+        blocks: [
+          { t: 'p', text: "Un pipeline détient des secrets et des droits de déploiement : c’est une cible de choix. L’exemple suivant, écrit pour GitHub Actions, applique quatre principes : droits minimaux, actions épinglées, aucun secret affiché, contrôles avant publication." },
+          { t: 'code', lang: "yaml", caption: "Extrait d’un workflow de construction (identifiants d’exemple)", code: "name: build\non:\n  pull_request:\n  push:\n    branches: [main]\n\npermissions:\n  contents: read            # droits par défaut réduits au strict nécessaire\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@<empreinte-complète-du-commit>   # épinglée par empreinte\n      - name: Dépendances et tests\n        run: |\n          npm ci\n          npm test\n      - name: Audit des dépendances\n        run: npm audit --omit=dev" },
+          {
+            t: 'table',
+            head: ["Mesure", "Menace couverte"],
+            rows: [
+              ["`permissions: contents: read`", "Un jeton volé ou une étape compromise ne peut pas modifier le dépôt"],
+              ["Action épinglée par **empreinte de commit** et non par étiquette mobile", "Une étiquette peut être déplacée vers un code malveillant ; une empreinte ne le peut pas"],
+              ["`npm ci` plutôt que `npm install`", "Installation fidèle au fichier de verrouillage, reproductible"],
+              ["Audit des dépendances à chaque exécution", "Vulnérabilités connues détectées avant la mise en production"],
+              ["Secrets fournis par la plateforme, jamais écrits dans les journaux", "Fuite d’identifiants via les journaux d’exécution"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "Les déclenchements déclenchés par des contributions externes (par exemple une demande de fusion venant d’une copie du dépôt) ne doivent **pas** avoir accès aux secrets : séparez les workflows qui testent du code non fiable de ceux qui déploient." },
+        ],
+      },
+      {
+        id: 'revue-pipeline',
+        title: "Auditer un pipeline : liste de contrôle",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Question", "Réponse attendue"],
+            rows: [
+              ["Qui peut modifier la définition du pipeline ?", "Un ensemble restreint, avec relecture obligatoire avant fusion"],
+              ["Les branches de production sont-elles protégées ?", "Oui : relecture requise, pas de poussée directe, contrôles réussis"],
+              ["Les secrets sont-ils limités à l’étape qui en a besoin ?", "Oui, et ils sont renouvelés après tout incident"],
+              ["Les dépendances et images sont-elles épinglées et analysées ?", "Oui, avec un fichier de verrouillage et un inventaire des composants (SBOM)"],
+              ["Les artefacts produits sont-ils signés et traçables ?", "Oui, avec un lien vers le commit et l’exécution qui les ont produits"],
+              ["Peut-on reconstruire la même version à l’identique ?", "Oui (construction reproductible, ou au minimum entrées figées)"],
+            ],
+          },
+          { t: 'p', text: "Le point de départ d’un audit est de **lire ce que le pipeline peut faire** : quels secrets il détient, vers quels environnements il déploie, qui peut le modifier. Un pipeline qui déploie en production avec des droits d’administration est plus dangereux que l’application qu’il construit." },
+        ],
+      },
     ],
     useCases: [
       'Mettre en place un pipeline qui bloque la fusion en cas de secret détecté ou de vulnérabilité critique exploitée.',
@@ -122,6 +161,8 @@ export const body: CourseBody = {
       'Supprimer toutes les clés d’accès cloud des secrets de CI au profit de la fédération OIDC.',
     ],
     commonMistakes: [
+      "Laisser au pipeline des droits d’écriture et d’administration par défaut.",
+      "Référencer une action tierce par une étiquette mobile (`@v3`, `@main`) dans une chaîne qui déploie en production.",
       'Épingler les actions tierces par étiquette de version plutôt que par empreinte de commit.',
       'Donner au jeton de workflow des droits d’écriture globaux.',
       'Supprimer un secret commité sans le révoquer.',
@@ -136,6 +177,7 @@ export const body: CourseBody = {
       'Analyse de l’IaC avant déploiement et protection des fichiers d’état.',
     ],
     keyPoints: [
+      "Droits minimaux, actions épinglées par empreinte, secrets cloisonnés, artefacts traçables.",
       'SAST (code), SCA (dépendances), secrets, IaC, images, DAST (exécution) : chacun couvre un angle.',
       'La chaîne de construction est une cible : la sécuriser comme un système de production.',
       'Verrou de dépendances, actions épinglées, moindre privilège, OIDC.',

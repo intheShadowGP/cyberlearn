@@ -134,6 +134,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'Do not erase “to clean up”: the traces help to understand the incident, limit its extent and, if necessary, declare it.' },
         ],
       },
+      {
+        id: 'matrice-risque',
+        title: "Assessing a risk: a worked example",
+        blocks: [
+          { t: 'p', text: "A risk is measured with two questions: **how likely is it?** (likelihood) and **how serious is it?** (impact). Each gets a score from 1 to 4 and they are multiplied." },
+          {
+            t: 'table',
+            caption: "Three risks of a small association (scores from 1 to 4)",
+            head: ["Risk", "Likelihood", "Impact", "Level (L × I)", "Decision"],
+            rows: [
+              ["Secretary’s computer infected by ransomware, with no recent backup", "3", "4", "12", "Treat first: tested offline backup, updates"],
+              ["Theft of an unencrypted work phone", "3", "3", "9", "Reduce: encryption, lock, remote wipe"],
+              ["Prolonged outage of the showcase website", "2", "1", "2", "Accept, and record it"],
+            ],
+          },
+          { t: 'p', text: "The level decides the response: **reduce** (security measures), **avoid** (drop the activity), **transfer** (insurance, provider) or **accept** (knowingly, by the person who bears the consequences). An accepted risk must be **written, dated and signed** by a manager." },
+          { t: 'callout', kind: 'key', text: "These scores are **reasoned judgments**, not exact measurements. What matters is applying them the same way to all risks, so they can be compared and ranked." },
+        ],
+      },
+      {
+        id: 'premiers-reflexes-rgpd',
+        title: "Personal data breach: first reflexes",
+        blocks: [
+          { t: 'p', text: "When personal data is lost, stolen or sent by mistake, the European data protection regulation (GDPR) imposes **notification** obligations. Even without being a lawyer, you must know the essentials in order to **raise the alarm quickly**." },
+          { t: 'list', ordered: true, items: ["**Alert** the designated person (security officer, data protection officer) immediately: time is limited.", "**Describe** the facts: which data, how many people, when, how.", "**Contain** the leak: remove access, recall a message, change a password.", "**Notify**: in France, notification to the CNIL must be made within **72 hours** of becoming aware when the breach poses a risk to individuals; the individuals concerned are informed if the risk is high.", "**Record** the breach in a register, even if it is ultimately not notified."] },
+          { t: 'callout', kind: 'warn', text: "Do not delay reporting in the hope of “fixing the problem first”: the clock starts as soon as the organization becomes aware of the breach, and the decision to notify belongs to the designated manager, not to the person who discovers the incident." },
+        ],
+      },
     ],
     useCases: [
       'Understand why your organization requires a personal password, a personal badge and locking workstations.',
@@ -141,6 +169,8 @@ export const body: CourseBody = {
       'React correctly to a suspicious email or to a data handling mistake.',
     ],
     commonMistakes: [
+      "Measuring a risk only by its impact, ignoring its likelihood.",
+      "Accepting a risk verbally, with no written record or identified owner.",
       'Thinking that security is only the IT department’s business.',
       'Sharing your password or lending your badge “to help out”.',
       'Clicking out of curiosity on an urgent message without checking it.',
@@ -155,6 +185,8 @@ export const body: CourseBody = {
       'Report quickly, keep the traces, learn lessons.',
     ],
     keyPoints: [
+      "Risk = likelihood × impact; four responses: reduce, avoid, transfer, accept.",
+      "Personal data breach: alert fast; notify the authority within 72 hours if there is risk.",
       'Security protects the confidentiality, integrity and availability of information.',
       'A risk is described by its likelihood and severity; it can be reduced, transferred, avoided or accepted.',
       'Rules are only worth something if they are understood, applicable and applied by all, management included.',

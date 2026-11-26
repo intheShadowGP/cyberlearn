@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'o-pra-sensibles', label: 'Comptes à privilèges, de service et de prestataires', level: 2 },
     { id: 'o-pra-incident', label: 'Journaux de connexion et réponse à un compte compromis', level: 2 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

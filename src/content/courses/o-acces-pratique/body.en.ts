@@ -134,6 +134,44 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Resetting the password without revoking sessions and tokens leaves access to the attacker.' },
         ],
       },
+      {
+        id: 'arrivee-mobilite-depart',
+        title: "Joiner, mover, leaver: managing the lifecycle in practice",
+        blocks: [
+          { t: 'p', text: "Most excessive rights do not come from an attack but from a **forgotten change of situation**. Three events structure identity management: joiner, mover and leaver." },
+          {
+            t: 'table',
+            head: ["Event", "What to do", "Common drift"],
+            rows: [
+              ["**Joiner**", "Create the account from the HR record, assign the **role** of the position (not a copy of a colleague’s rights), enable MFA", "Rights copied from a colleague, with everything they accumulated"],
+              ["**Mover**", "Remove the rights of the former position **then** add those of the new one", "Adding without ever removing: rights pile up"],
+              ["**Leaver**", "Disable the account on the departure day, revoke sessions, tokens and keys, recover equipment, reassign resources the person owned", "Account left active “just in case”, reachable from outside"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Departure is the riskiest event. **Immediate** disabling followed by deferred deletion (after useful data is transferred) is better than abrupt deletion, which can destroy needed items." },
+          { t: 'p', text: "The source of truth is the **human resources system**: it must trigger the changes, not an email to the help desk. The more automated the process, the fewer the omissions." },
+        ],
+      },
+      {
+        id: 'lire-connexions',
+        title: "Reading Windows sign-in logs: events and logon types",
+        blocks: [
+          { t: 'p', text: "To investigate an account, you start with its sign-ins. On Windows, the most useful security events are **4624** (successful logon), **4625** (failure) and **4634** or **4647** (logoff)." },
+          {
+            t: 'table',
+            caption: "Most common logon types (the “Logon Type” field of event 4624)",
+            head: ["Type", "Name", "Example"],
+            rows: [
+              ["2", "Interactive", "Someone at the keyboard"],
+              ["3", "Network", "Access to a file share"],
+              ["5", "Service", "A service starting under an account"],
+              ["10", "Remote interactive", "Remote Desktop (RDP) connection"],
+            ],
+          },
+          { t: 'code', lang: "powershell", caption: "Looking for an account’s recent failed sign-ins", code: "Get-WinEvent -FilterHashtable @{ LogName = 'Security'; Id = 4625; StartTime = (Get-Date).AddHours(-24) } |\n  Select-Object TimeCreated, @{ n = 'Account'; e = { $_.Properties[5].Value } }, @{ n = 'Source'; e = { $_.Properties[19].Value } } |\n  Sort-Object TimeCreated -Descending | Select-Object -First 20" },
+          { t: 'list', items: ["A series of **4625** on an account followed by a type 3 or 10 **4624** from the same address suggests a **successful brute force**.", "A type 10 **4624** at 3 a.m. for an account that never works remotely is atypical.", "A service account with a type 2 (interactive) **4624** should always be examined: these accounts are not meant to sign in by hand."] },
+        ],
+      },
     ],
     useCases: [
       'Set up automatic disabling of accounts at departure from the HR system.',
@@ -142,6 +180,8 @@ export const body: CourseBody = {
       'Spot a compromised account thanks to sign-in logs and react in the right order.',
     ],
     commonMistakes: [
+      "Creating a new employee by copying a colleague’s rights.",
+      "Disabling an account without revoking its already-issued sessions, tokens and access keys.",
       'Forgetting to remove old rights during a move.',
       'Requiring a monthly password change, which pushes people to weak passwords.',
       'Leaving MFA exceptions with no date or owner.',
@@ -156,6 +196,8 @@ export const body: CourseBody = {
       'Authentication logs preserved and alerts on weak signals.',
     ],
     keyPoints: [
+      "Joiner by role, mover with removal of old rights, leaver with immediate disabling.",
+      "Events 4624 and 4625: read the logon type and the source, not just the result.",
       'An accurate directory and an HR-driven lifecycle are the basis of access.',
       'Password length and screening matter more than frequent changes.',
       'SSO centralizes trust: the identity provider is protected first.',

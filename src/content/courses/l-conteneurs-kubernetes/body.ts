@@ -112,6 +112,44 @@ export const body: CourseBody = {
           },
         ],
       },
+      {
+        id: 'dockerfile-avant-apres',
+        title: "Une image plus sûre : Dockerfile avant et après",
+        blocks: [
+          { t: 'code', lang: "dockerfile", caption: "Avant : pratiques à risque", code: "FROM python:latest\nCOPY . /app\nRUN pip install -r /app/requirements.txt\nENV API_KEY=sk-1234-secret\nCMD [\"python\", \"/app/main.py\"]" },
+          { t: 'code', lang: "dockerfile", caption: "Après : image épinglée, utilisateur non privilégié, aucun secret", code: "FROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nRUN useradd --system --no-create-home appuser\nUSER appuser\nCMD [\"python\", \"main.py\"]" },
+          {
+            t: 'table',
+            head: ["Changement", "Risque réduit"],
+            rows: [
+              ["`python:latest` devient `python:3.12-slim`", "Version imprévisible d’une construction à l’autre ; surface plus petite avec une image allégée (on peut aller plus loin en épinglant le condensat de l’image)"],
+              ["`ENV API_KEY=...` supprimé", "Un secret écrit dans une couche reste lisible dans l’image par quiconque la récupère : il doit être fourni à l’exécution par la plateforme"],
+              ["`USER appuser`", "Sans cela le processus tourne en root dans le conteneur : une faille donne des privilèges élevés"],
+              ["`requirements.txt` copié avant le code", "Meilleur usage du cache de construction et dépendances identifiables"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'securitycontext',
+        title: "Durcir un pod avec securityContext",
+        blocks: [
+          { t: 'p', text: "Kubernetes permet de restreindre ce qu’un conteneur peut faire directement dans le manifeste du pod. Voici un contexte de sécurité courant pour une application web ordinaire." },
+          { t: 'code', lang: "yaml", caption: "Extrait d’un manifeste de déploiement", code: "spec:\n  containers:\n    - name: web\n      image: registre.exemple.org/web:1.4.2\n      securityContext:\n        runAsNonRoot: true\n        allowPrivilegeEscalation: false\n        readOnlyRootFilesystem: true\n        capabilities:\n          drop: [\"ALL\"]\n        seccompProfile:\n          type: RuntimeDefault" },
+          {
+            t: 'table',
+            head: ["Paramètre", "Effet"],
+            rows: [
+              ["`runAsNonRoot: true`", "Kubernetes refuse de démarrer un conteneur dont l’utilisateur est root"],
+              ["`allowPrivilegeEscalation: false`", "Un processus ne peut pas obtenir plus de droits que son parent (par exemple via un binaire SUID)"],
+              ["`readOnlyRootFilesystem: true`", "Le système de fichiers est en lecture seule : un attaquant ne peut pas y déposer d’outil (prévoir un volume pour les écritures légitimes)"],
+              ["`capabilities.drop: [\"ALL\"]`", "Retire toutes les capacités Linux ; on ne rajoute que celles qui sont nécessaires"],
+              ["`seccompProfile: RuntimeDefault`", "Applique le filtre d’appels système par défaut du moteur de conteneurs"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Un conteneur « privilégié » (`privileged: true`) ou monté avec le socket du moteur de conteneurs équivaut à un accès administrateur sur la machine hôte. Ces cas doivent être des exceptions documentées et approuvées." },
+        ],
+      },
     ],
     useCases: [
       'Revue des manifestes Kubernetes d’une application avant sa mise en production.',
@@ -119,6 +157,8 @@ export const body: CourseBody = {
       'Définir l’image de base standard et les contrôles CI des images d’une organisation.',
     ],
     commonMistakes: [
+      "Utiliser l’étiquette `latest` pour une image de production.",
+      "Écrire un secret dans une instruction `ENV` ou `ARG` du Dockerfile.",
       'Considérer qu’un conteneur isole aussi fortement qu’une machine virtuelle.',
       'Lancer des conteneurs privilégiés ou monter le socket Docker « pour que ça marche ».',
       'Copier des secrets dans une image puis les supprimer dans une couche suivante.',
@@ -133,6 +173,7 @@ export const body: CourseBody = {
       'Chiffrement des secrets au repos et coffre externe.',
     ],
     keyPoints: [
+      "Image épinglée, utilisateur non root, aucun secret dans les couches ; securityContext restrictif par défaut.",
       'Un conteneur partage le noyau de l’hôte : l’isolation repose sur namespaces, cgroups, capacités, seccomp.',
       '`privileged`, socket Docker et `hostPath` ouvrent la voie à l’hôte.',
       'Une image ne doit contenir aucun secret, même supprimé dans une couche ultérieure.',

@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'm-ini-humain', label: 'Facteur humain et messages piégés', level: 1 },
     { id: 'm-ini-incident', label: 'Incidents et reprise d’activité', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

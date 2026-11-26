@@ -134,6 +134,44 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Réinitialiser le mot de passe sans révoquer les sessions et les jetons laisse l’accès à l’attaquant.' },
         ],
       },
+      {
+        id: 'arrivee-mobilite-depart',
+        title: "Arrivée, mobilité, départ : gérer le cycle de vie en pratique",
+        blocks: [
+          { t: 'p', text: "La majorité des droits excessifs ne viennent pas d’une attaque mais d’un **changement de situation oublié**. Trois événements structurent la gestion des identités : l’arrivée, la mobilité et le départ." },
+          {
+            t: 'table',
+            head: ["Événement", "Ce qu’il faut faire", "Dérive fréquente"],
+            rows: [
+              ["**Arrivée**", "Créer le compte à partir du dossier RH, attribuer le **rôle** du poste (et non une copie des droits d’un collègue), activer la MFA", "Droits copiés d’un collègue, avec tout ce qu’il a accumulé"],
+              ["**Mobilité**", "Retirer les droits de l’ancien poste **puis** ajouter ceux du nouveau", "Ajouter sans jamais retirer : les droits s’empilent"],
+              ["**Départ**", "Désactiver le compte le jour du départ, révoquer sessions, jetons et clés, récupérer le matériel, réattribuer les ressources dont la personne était propriétaire", "Compte laissé actif « au cas où », accessible depuis l’extérieur"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Le départ est l’événement le plus risqué. Une désactivation **immédiate** puis une suppression différée (après transfert des données utiles) est préférable à une suppression brutale, qui peut détruire des éléments nécessaires." },
+          { t: 'p', text: "La source de vérité est le **système de ressources humaines** : c’est lui qui doit déclencher les changements, et non un courriel au support. Plus le processus est automatisé, moins il y a d’oublis." },
+        ],
+      },
+      {
+        id: 'lire-connexions',
+        title: "Lire les journaux de connexion Windows : événements et types d’ouverture",
+        blocks: [
+          { t: 'p', text: "Pour enquêter sur un compte, on commence par ses ouvertures de session. Sous Windows, les événements de sécurité les plus utiles sont **4624** (ouverture de session réussie), **4625** (échec) et **4634** ou **4647** (fermeture)." },
+          {
+            t: 'table',
+            caption: "Types d’ouverture de session les plus courants (champ « Type d’ouverture de session » de l’événement 4624)",
+            head: ["Type", "Nom", "Exemple"],
+            rows: [
+              ["2", "Interactive", "Quelqu’un devant le clavier"],
+              ["3", "Réseau", "Accès à un partage de fichiers"],
+              ["5", "Service", "Démarrage d’un service sous un compte"],
+              ["10", "Interactive à distance", "Connexion Bureau à distance (RDP)"],
+            ],
+          },
+          { t: 'code', lang: "powershell", caption: "Chercher les échecs de connexion récents d’un compte", code: "Get-WinEvent -FilterHashtable @{ LogName = 'Security'; Id = 4625; StartTime = (Get-Date).AddHours(-24) } |\n  Select-Object TimeCreated, @{ n = 'Compte'; e = { $_.Properties[5].Value } }, @{ n = 'Source'; e = { $_.Properties[19].Value } } |\n  Sort-Object TimeCreated -Descending | Select-Object -First 20" },
+          { t: 'list', items: ["Une série de **4625** sur un compte suivie d’un **4624** de type 3 ou 10 depuis la même adresse évoque une **force brute réussie**.", "Un **4624** de type 10 à 3 heures du matin pour un compte qui ne travaille jamais à distance est atypique.", "Un compte de service avec un **4624** de type 2 (interactif) devrait toujours être examiné : ces comptes ne sont pas censés ouvrir de session à la main."] },
+        ],
+      },
     ],
     useCases: [
       'Mettre en place la désactivation automatique des comptes au départ à partir du système RH.',
@@ -142,6 +180,8 @@ export const body: CourseBody = {
       'Repérer un compte compromis grâce aux journaux de connexion et réagir dans l’ordre.',
     ],
     commonMistakes: [
+      "Créer un nouvel employé en copiant les droits d’un collègue.",
+      "Désactiver un compte sans révoquer ses sessions, jetons et clés d’accès déjà émis.",
       'Oublier de retirer les anciens droits lors d’une mobilité.',
       'Exiger un changement mensuel de mot de passe, qui pousse à des mots de passe faibles.',
       'Laisser des exceptions de MFA sans date ni propriétaire.',
@@ -156,6 +196,8 @@ export const body: CourseBody = {
       'Journaux d’authentification conservés et alertes sur les signaux faibles.',
     ],
     keyPoints: [
+      "Arrivée par rôle, mobilité avec retrait des anciens droits, départ avec désactivation immédiate.",
+      "Événements 4624 et 4625 : lire le type d’ouverture et la source, pas seulement le résultat.",
       'Un annuaire exact et un cycle de vie piloté par les RH sont la base des accès.',
       'La longueur et le contrôle des mots de passe comptent plus que le changement fréquent.',
       'Le SSO centralise la confiance : le fournisseur d’identité se protège en priorité.',

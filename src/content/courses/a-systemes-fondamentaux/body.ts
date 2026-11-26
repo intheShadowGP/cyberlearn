@@ -119,6 +119,48 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: "Une compromission sous un compte standard reste souvent **contenue**. La même compromission sous un compte administrateur donne l'ensemble de la machine. Travailler au quotidien sans droits d'administration est l'une des mesures les plus rentables." },
         ],
       },
+      {
+        id: 'hex-exemples',
+        title: "S’exercer : lire de l’hexadécimal et des tailles",
+        blocks: [
+          { t: 'p', text: "L’hexadécimal (base 16) condense les octets : **un chiffre hexadécimal = 4 bits**, donc **deux chiffres = un octet**. Savoir passer d’une base à l’autre est une compétence quotidienne pour lire une adresse mémoire, une trame réseau ou un fichier brut." },
+          {
+            t: 'table',
+            caption: "Conversions à connaître par cœur",
+            head: ["Décimal", "Binaire (8 bits)", "Hexadécimal"],
+            rows: [
+              ["10", "0000 1010", "0x0A"],
+              ["15", "0000 1111", "0x0F"],
+              ["16", "0001 0000", "0x10"],
+              ["100", "0110 0100", "0x64"],
+              ["255", "1111 1111", "0xFF"],
+            ],
+          },
+          { t: 'list', items: ["Pour convertir `0x64` en décimal : 6 × 16 + 4 = **100**.", "Pour convertir 200 en hexadécimal : 200 = 12 × 16 + 8, et 12 s’écrit `C` : **0xC8**.", "Une adresse IPv4 comme `192.168.1.10` s’écrit `C0 A8 01 0A` : quatre octets.", "Les caractères ASCII : `A` vaut 0x41, `a` vaut 0x61, le chiffre `0` vaut 0x30."] },
+          { t: 'code', lang: "bash", caption: "Observer les octets d’un fichier (Linux)", code: "printf 'Cyber' > test.txt\nxxd test.txt\n# 00000000: 4379 6265 72                                Cyber" },
+          { t: 'p', text: "La sortie montre les cinq octets `43 79 62 65 72` à gauche et leur lecture en caractères à droite. En forensique ou en analyse de malware, on lit ainsi les **en-têtes de fichiers** : un exécutable Windows commence par `4D 5A` (« MZ »), une archive ZIP par `50 4B` (« PK »)." },
+          { t: 'callout', kind: 'tip', text: "Attention aux unités : 1 Ko = 1 000 octets dans le vocabulaire commercial, alors que 1 Kio = 1 024 octets. Les outils système emploient parfois l’une, parfois l’autre." },
+        ],
+      },
+      {
+        id: 'observer-processus',
+        title: "Observer les processus d’une machine",
+        blocks: [
+          { t: 'p', text: "Un processus est un programme **en cours d’exécution**, avec son identifiant (PID), son propriétaire et son processus parent. Les observer est le premier réflexe pour comprendre ce qui tourne sur une machine, ou repérer ce qui n’y a pas sa place." },
+          { t: 'code', lang: "bash", caption: "Lister et inspecter les processus", code: "# Linux\nps aux --sort=-%mem | head     # processus les plus gourmands en mémoire\nps -ef --forest                  # arborescence parent / enfant\nss -tlnp                         # ports en écoute et processus associés\n\n# Windows (PowerShell)\nGet-Process | Sort-Object CPU -Descending | Select-Object -First 10\nGet-CimInstance Win32_Process | Select-Object ProcessId, ParentProcessId, Name, CommandLine" },
+          {
+            t: 'table',
+            caption: "Ce qui doit attirer l’attention",
+            head: ["Observation", "Pourquoi c’est suspect"],
+            rows: [
+              ["Un navigateur ou un éditeur de documents lance un interpréteur de commandes", "Un document ou une page ne devrait pas démarrer `cmd`, `powershell` ou `bash`"],
+              ["Un processus au nom de programme système, mais lancé depuis un dossier utilisateur ou temporaire", "Imitation du nom d’un programme légitime"],
+              ["Un processus à l’écoute sur un port que personne n’a déclaré", "Service inattendu ou porte dérobée"],
+              ["Un processus dont le parent n’a pas de sens", "Ordre de lancement incohérent avec le fonctionnement normal"],
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       "Investigation : analyser l'arbre des processus pour repérer un enchaînement anormal (Word → cmd → PowerShell).",
@@ -126,6 +168,8 @@ export const body: CourseBody = {
       "Réponse à incident : décider d'acquérir la mémoire vive avant d'éteindre une machine suspecte.",
     ],
     commonMistakes: [
+      "Confondre le nom d’un processus avec son identité : seul le chemin complet, la signature et le parent permettent de juger.",
+      "Lire un nombre en hexadécimal comme du décimal (0x64 vaut 100, pas 64).",
       'Éteindre immédiatement une machine compromise, détruisant les preuves en mémoire vive.',
       'Utiliser un compte administrateur pour la navigation et la messagerie au quotidien.',
       'Désactiver Secure Boot « pour que ça marche » sans évaluer le risque.',
@@ -138,6 +182,8 @@ export const body: CourseBody = {
       'Chiffrer le stockage pour protéger les données en cas de vol du matériel.',
     ],
     keyPoints: [
+      "Deux chiffres hexadécimaux = un octet ; 0xFF = 255.",
+      "Observer les processus, leur parent, leur chemin et leurs ports en écoute.",
       'La RAM est volatile : les preuves en mémoire disparaissent à l’extinction.',
       'UEFI et Secure Boot protègent la chaîne de démarrage avant le système d’exploitation.',
       'Le noyau est privilégié ; les applications passent par des appels système.',

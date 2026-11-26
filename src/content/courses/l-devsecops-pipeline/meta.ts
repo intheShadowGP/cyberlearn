@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'l-dso-gouv', label: 'Gouvernance et priorisation des vulnérabilités', level: 3 },
     { id: 'l-dso-incident', label: 'Détection et réponse sur la chaîne de livraison', level: 3 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };
