@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 73 |
-| Questions de cours (avec correction) | 2831 |
+| Cours complets | 74 |
+| Questions de cours (avec correction) | 2871 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -36,7 +36,7 @@
 | L. Sécurité Cloud | 6 | 1, 2, 3, 4 | 23 / 23 |
 | M. Gouvernance et conformité | 5 | 1, 2, 3, 4 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 5 | 1, 2, 3, 4 | 21 / 21 |
-| O. Identité et contrôle d’accès | 2 | 3 | 16 / 16 |
+| O. Identité et contrôle d’accès | 3 | 1, 3 | 16 / 16 |
 | P. Sécurité avancée et recherche | 2 | 4 | 18 / 18 |
 | Q. Intelligence artificielle et cybersécurité | 2 | 3 | 16 / 16 |
 | R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
@@ -111,6 +111,7 @@
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 5 | 40 | 3 | 4 |
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 5 |
 | Sécurité OT avancée : IEC 62443, architecture, analyse de risques, détection et résilience (`n-ot-securite-avancee`) | N | 4 · Expert | 140 min | 6 | 40 | 3 | 4 |
+| L’identité numérique pour débutants : mots de passe, MFA et droits d’accès (`o-identite-initiation`) | O | 1 · Débutant | 90 min | 6 | 40 | 3 | 3 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 6 | 40 | 3 | 4 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 17 | 2 | 4 |
