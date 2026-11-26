@@ -16,7 +16,8 @@
     "test:e2e": "playwright test",
     "lint": "eslint .",
     "inventory": "node scripts/inventory.mjs",
-    "banks": "node scripts/gen-banks.mjs"
+    "banks": "node scripts/gen-banks.mjs",
+    "metrics": "node scripts/metrics.mjs"
   },
   "dependencies": {
     "react": "19.3.1",

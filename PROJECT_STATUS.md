@@ -8,8 +8,8 @@ Document de reprise (section 18 du cahier des charges).
 | --- | --- |
 | 1 — Conception (architecture, modèle de menace, organisation pédagogique) | Terminée |
 | 2 — Socle technique (routing, stockage, PWA, tests) | Terminée |
-| 3 — Plateforme pédagogique (45 cours, évaluations, progression) | Terminée |
-| 4 — Fonctionnalités avancées (12 labos, 11 parcours, glossaire, recherche, révisions, examens, statistiques, gamification, profil) | Terminée |
+| 3 — Plateforme pédagogique (85 cours depuis la phase 5 d’évolution, évaluations, progression) | Terminée |
+| 4 — Fonctionnalités avancées (18 labos, 11 parcours, glossaire, recherche, révisions, examens, statistiques, gamification, profil) | Terminée |
 | 5 — Sécurisation (lint de sécurité, dépendances, CSP, imports, flux de données, actions épinglées) | Terminée |
 | 6 — Audit Fable 5.2 (5 axes) | Audit réalisé, constats corrigés ; voir docs/AUDIT.md (audit 5) |
 | 7 — Finalisation (documentation, build, tests finaux, déploiement) | Terminée ; site publié |
@@ -20,7 +20,7 @@ Voir docs/TESTING.md (traçabilité des 20 contrôles fonctionnels) et docs/CURR
 
 ## Anomalies connues et risques résiduels
 
-- Contenu : les 403 sujets cartographiés sont désormais abordés dans au moins un cours (couverture déclarative 403/403) ; un sujet « abordé » peut ne l’être qu’en une section, la profondeur reste donc inégale. R n’a qu’un cours (mais couvre ses 15 sujets).
+- Contenu : les 403 sujets cartographiés sont désormais abordés dans au moins un cours (couverture déclarative 403/403) ; un sujet « abordé » peut ne l’être qu’en une section, la profondeur reste donc inégale. Chaque discipline compte désormais quatre niveaux (85 cours au total, voir docs/CURRICULUM.md) ; la profondeur des leçons reste inégale (voir docs/QUALITY_METRICS.md).
 - Faits non vérifiés à la source primaire : ISO 27001 annexe A (sources secondaires seulement), événement 7045, plugins Volatility et commandes The Sleuth Kit (voir docs/FACT-CHECK.md).
 - Aucune relecture du contenu par un expert tiers.
 - Firefox non exécutable sur le poste de développement (exécuté en CI).
