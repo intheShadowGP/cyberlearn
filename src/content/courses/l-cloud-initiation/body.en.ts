@@ -124,6 +124,43 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'If **personal data** of customers or colleagues is concerned, also warn the person in charge of data protection: a declaration to the authority may be mandatory within a short time.' },
         ],
       },
+      {
+        id: 'scenario-stockage-public',
+        title: "Scenario: storage made public by mistake",
+        blocks: [
+          { t: 'p', text: "A team creates an online storage space to share a report with a customer. So the customer can open it without an account, someone sets access to “public”. Three weeks later, the report, which contains billing data, appears in a search engine." },
+          {
+            t: 'table',
+            head: ["Question", "Answer"],
+            rows: [
+              ["Who is responsible?", "The **cloud customer**: the provider secures the infrastructure, but access configuration is the responsibility of whoever creates the space"],
+              ["What made the leak possible?", "An overly broad sharing setting, and no automatic control that would have detected it"],
+              ["What to do first?", "Remove public access, then determine **who accessed the data** from the access logs, if logging was enabled"],
+              ["What to ask next?", "Was the data personal? If so, the data breach procedure applies"],
+            ],
+          },
+          { t: 'list', items: ["**Block** public access by default at the account level, and allow only justified exceptions.", "**Share differently**: a time-limited temporary link, or a named invitation.", "**Enable access logging** before storing data there.", "**Alert** automatically on any storage space that becomes public."] },
+          { t: 'callout', kind: 'key', text: "The most common mistake is not a sophisticated attack: it is a misunderstood sharing setting. The right reflex is to ask, before sharing, **“who will be able to access this, without an account, from anywhere?”**." },
+        ],
+      },
+      {
+        id: 'liste-demarrage',
+        title: "The first five settings of a cloud account",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Setting", "Why"],
+            rows: [
+              ["Protect the owner (“root”) account with MFA and stop using it day to day", "This account has every right and cannot be restricted"],
+              ["Create named accounts with limited rights", "Everyone does what they need, and their actions are attributable"],
+              ["Enable logging of administrative actions", "Without logs, it is impossible to investigate after an incident"],
+              ["Block public access to storage by default", "Prevents accidental data exposure"],
+              ["Set a spending alert", "A sudden spend is often the first sign of a hijacked account (cryptocurrency mining)"],
+            ],
+          },
+          { t: 'p', text: "These five settings do not make a secure architecture, but they eliminate the most frequent mistakes for a few minutes of work." },
+        ],
+      },
     ],
     useCases: [
       'Recognize, in the organization, which services are IaaS, PaaS or SaaS and what to configure in them.',
@@ -131,6 +168,8 @@ export const body: CourseBody = {
       'React correctly after publishing a key or sharing a file by mistake.',
     ],
     commonMistakes: [
+      "Setting sharing to “public” to avoid managing accounts.",
+      "Using the owner account for routine tasks.",
       'Thinking that the provider is responsible for the security of everything you put with them.',
       'Using the root account or a shared account for day-to-day work.',
       'Sharing a sensitive file through a link accessible to everyone.',
@@ -145,6 +184,7 @@ export const body: CourseBody = {
       'Quick reporting of any doubt, without erasing the traces.',
     ],
     keyPoints: [
+      "Access configuration is the cloud customer’s responsibility; sharing means deciding who can access without an account.",
       'The cloud is resources rented remotely, billed by use.',
       'IaaS, PaaS, SaaS: the more complete the service, the less you administer, but you keep responsibility for your access and your data.',
       'Most cloud incidents come from customer configuration mistakes.',

@@ -120,6 +120,36 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Changer le mot de passe ne suffit pas : les sessions déjà ouvertes et les jetons de rafraîchissement restent valides tant qu’ils ne sont pas révoqués.' },
         ],
       },
+      {
+        id: 'pkce-exemple',
+        title: "PKCE pas à pas : ce que le client calcule et envoie",
+        blocks: [
+          { t: 'p', text: "PKCE (Proof Key for Code Exchange) protège le flux « authorization code » contre le vol du code d’autorisation. Le principe : le client prouve, au moment d’échanger le code, qu’il est bien **celui qui a lancé la demande**." },
+          { t: 'list', ordered: true, items: ["Le client génère un secret aléatoire à usage unique, le **`code_verifier`**.", "Il calcule `code_challenge = BASE64URL(SHA-256(code_verifier))` et l’envoie dans la demande d’autorisation, avec `code_challenge_method=S256`.", "Le serveur d’autorisation mémorise le `code_challenge` et renvoie un **code** à l’adresse de retour.", "Le client échange ce code contre des jetons en présentant le **`code_verifier`** d’origine.", "Le serveur recalcule l’empreinte et compare : si elle ne correspond pas, il refuse."] },
+          { t: 'code', lang: "text", caption: "Les deux requêtes, simplifiées (valeurs d’exemple)", code: "# 1. Demande d’autorisation (dans le navigateur)\nGET /authorize?response_type=code\n    &client_id=app-web\n    &redirect_uri=https://app.exemple.org/callback\n    &scope=openid profile\n    &state=Zx81qT...                      # lié à la session, vérifié au retour\n    &code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM\n    &code_challenge_method=S256\n\n# 2. Échange du code (du serveur ou de l’application vers le serveur d’autorisation)\nPOST /token\n    grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA\n    &redirect_uri=https://app.exemple.org/callback\n    &client_id=app-web\n    &code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk" },
+          { t: 'p', text: "Un attaquant qui intercepte le code (par une application malveillante ou un journal) ne peut pas l’échanger : il ne connaît pas le `code_verifier`, qui n’a jamais transité dans la demande d’autorisation, et l’empreinte SHA-256 ne s’inverse pas." },
+          { t: 'callout', kind: 'key', text: "PKCE est désormais recommandé pour **tous** les clients, y compris les applications serveur, et pas seulement pour les applications mobiles ou monopages." },
+        ],
+      },
+      {
+        id: 'erreurs-oauth',
+        title: "Erreurs de mise en œuvre à repérer lors d’une revue",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Défaut", "Conséquence", "Correction"],
+            rows: [
+              ["`redirect_uri` comparée partiellement (préfixe, caractères génériques)", "Le code ou le jeton peut être envoyé vers une adresse choisie par l’attaquant", "Comparaison **exacte** avec une liste enregistrée"],
+              ["Paramètre `state` absent ou non vérifié", "Attaque par falsification de requête : l’utilisateur est rattaché au compte de l’attaquant", "Valeur aléatoire liée à la session, vérifiée au retour"],
+              ["Flux implicite (jeton dans l’adresse) encore utilisé", "Jeton exposé dans l’historique, les journaux, l’en-tête `Referer`", "Passer au flux avec code et PKCE"],
+              ["Jetons d’accès à longue durée de vie", "Un jeton volé reste utilisable longtemps", "Courte durée, jetons de rafraîchissement protégés et renouvelés"],
+              ["Droits (`scope`) demandés plus larges que nécessaire", "Impact accru en cas de vol", "Demander le minimum, par ressource"],
+              ["Jeton d’identité accepté sans vérifier signature, émetteur, audience et expiration", "Jeton forgé ou destiné à un autre service accepté", "Valider **toutes** ces propriétés, avec les clés publiques de l’émetteur"],
+            ],
+          },
+          { t: 'p', text: "Lors d’une revue, commencez par l’enregistrement du client chez le fournisseur d’identité : adresses de retour, droits accordés, type de flux. La plupart de ces défauts se voient dans cette seule configuration." },
+        ],
+      },
     ],
     useCases: [
       'Déployer des clés FIDO2 pour tous les administrateurs et des passkeys pour les utilisateurs.',
@@ -128,6 +158,8 @@ export const body: CourseBody = {
       'Remplacer l’accès VPN global par un accès applicatif conditionnel (Zero Trust Network Access).',
     ],
     commonMistakes: [
+      "Valider une adresse de retour par simple préfixe ou par caractère générique.",
+      "Accepter un jeton d’identité après avoir seulement décodé son contenu, sans vérifier sa signature.",
       'Utiliser un jeton d’accès OAuth comme preuve d’identité de l’utilisateur.',
       'Accepter une redirect_uri par préfixe ou par expression régulière permissive.',
       'Omettre la vérification du paramètre state.',
@@ -142,6 +174,7 @@ export const body: CourseBody = {
       'Accès conditionnel fondé sur l’identité, l’appareil et le risque.',
     ],
     keyPoints: [
+      "PKCE : le client prouve qu’il a lancé la demande (verifier, challenge S256) ; redirect_uri exacte et state vérifié.",
       'Seuls les facteurs liés à l’origine (FIDO2, certificats) résistent à l’hameçonnage en temps réel.',
       'OAuth 2.0 autorise ; OpenID Connect authentifie.',
       'PKCE, state et redirect_uri exacte sont indispensables.',

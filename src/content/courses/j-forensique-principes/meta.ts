@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'j-memoire', label: 'Analyse de la mémoire vive', level: 2 },
     { id: 'j-rapport', label: 'Rapport, valeur probante et cadre légal', level: 2 },
   ],
-  sectionCount: 7,
+  sectionCount: 9,
   questionCount: 40,
   quizSize: 10,
 };

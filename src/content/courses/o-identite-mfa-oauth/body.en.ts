@@ -120,6 +120,36 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Changing the password is not enough: sessions already open and refresh tokens remain valid as long as they are not revoked.' },
         ],
       },
+      {
+        id: 'pkce-exemple',
+        title: "PKCE step by step: what the client computes and sends",
+        blocks: [
+          { t: 'p', text: "PKCE (Proof Key for Code Exchange) protects the “authorization code” flow against theft of the authorization code. The principle: when exchanging the code, the client proves it is **the one that started the request**." },
+          { t: 'list', ordered: true, items: ["The client generates a single-use random secret, the **`code_verifier`**.", "It computes `code_challenge = BASE64URL(SHA-256(code_verifier))` and sends it in the authorization request, with `code_challenge_method=S256`.", "The authorization server remembers the `code_challenge` and returns a **code** to the redirect address.", "The client exchanges that code for tokens by presenting the original **`code_verifier`**.", "The server recomputes the hash and compares: if it does not match, it refuses."] },
+          { t: 'code', lang: "text", caption: "The two requests, simplified (example values)", code: "# 1. Authorization request (in the browser)\nGET /authorize?response_type=code\n    &client_id=web-app\n    &redirect_uri=https://app.example.org/callback\n    &scope=openid profile\n    &state=Zx81qT...                      # bound to the session, checked on return\n    &code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM\n    &code_challenge_method=S256\n\n# 2. Code exchange (from the server or app to the authorization server)\nPOST /token\n    grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA\n    &redirect_uri=https://app.example.org/callback\n    &client_id=web-app\n    &code_verifier=dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk" },
+          { t: 'p', text: "An attacker who intercepts the code (through a malicious app or a log) cannot exchange it: they do not know the `code_verifier`, which never traveled in the authorization request, and a SHA-256 hash cannot be inverted." },
+          { t: 'callout', kind: 'key', text: "PKCE is now recommended for **all** clients, including server applications, not only for mobile or single-page applications." },
+        ],
+      },
+      {
+        id: 'erreurs-oauth',
+        title: "Implementation mistakes to spot in a review",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Flaw", "Consequence", "Fix"],
+            rows: [
+              ["`redirect_uri` compared partially (prefix, wildcards)", "The code or token can be sent to an address chosen by the attacker", "**Exact** comparison against a registered list"],
+              ["`state` parameter missing or not checked", "Request-forgery attack: the user is attached to the attacker’s account", "Random value bound to the session, checked on return"],
+              ["Implicit flow (token in the address) still used", "Token exposed in history, logs and the `Referer` header", "Move to the code flow with PKCE"],
+              ["Long-lived access tokens", "A stolen token stays usable for a long time", "Short lifetime, protected and rotated refresh tokens"],
+              ["Requested scopes broader than needed", "Greater impact if stolen", "Request the minimum, per resource"],
+              ["Identity token accepted without checking signature, issuer, audience and expiry", "Forged token, or one meant for another service, accepted", "Validate **all** these properties, with the issuer’s public keys"],
+            ],
+          },
+          { t: 'p', text: "During a review, start with the client registration at the identity provider: redirect addresses, granted rights, flow type. Most of these flaws are visible in that configuration alone." },
+        ],
+      },
     ],
     useCases: [
       'Deploy FIDO2 keys for all administrators and passkeys for users.',
@@ -128,6 +158,8 @@ export const body: CourseBody = {
       'Replace global VPN access with conditional application access (Zero Trust Network Access).',
     ],
     commonMistakes: [
+      "Validating a redirect address by simple prefix or wildcard.",
+      "Accepting an identity token after merely decoding its content, without verifying its signature.",
       'Using an OAuth access token as proof of the user’s identity.',
       'Accepting a redirect_uri by prefix or by a permissive regular expression.',
       'Omitting the verification of the state parameter.',
@@ -142,6 +174,7 @@ export const body: CourseBody = {
       'Conditional access based on identity, device and risk.',
     ],
     keyPoints: [
+      "PKCE: the client proves it started the request (verifier, S256 challenge); exact redirect_uri and verified state.",
       'Only origin-bound factors (FIDO2, certificates) resist real-time phishing.',
       'OAuth 2.0 authorizes; OpenID Connect authenticates.',
       'PKCE, state and exact redirect_uri are indispensable.',

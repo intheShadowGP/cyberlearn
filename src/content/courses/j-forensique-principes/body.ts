@@ -135,6 +135,47 @@ export const body: CourseBody = {
           { t: 'list', items: ['**Minimisation** : on ne copie et ne cite que ce que la mission justifie.', '**Conservation** : la copie de travail est conservée ou détruite selon la politique et la loi, et ce choix est consigné.', '**Confidentialité** : le rapport n’est transmis qu’aux personnes habilitées.'] },
         ],
       },
+      {
+        id: 'cas-chronologie',
+        title: "Étude de cas : reconstituer un incident à partir de trois sources",
+        blocks: [
+          { t: 'p', text: "Un serveur web a hébergé un fichier inattendu. Aucune source ne raconte l’histoire entière : c’est leur **corrélation** qui permet de reconstituer l’enchaînement. Les horodatages ci-dessous sont normalisés en UTC." },
+          {
+            t: 'table',
+            caption: "Chronologie assemblée (adresses de documentation)",
+            head: ["Heure (UTC)", "Source", "Événement"],
+            rows: [
+              ["02:14:07", "Journal du serveur web", "Requête `POST /upload.php` depuis 203.0.113.50"],
+              ["02:14:08", "Système de fichiers", "Création de `/var/www/html/img/cache.php` (date de création du fichier)"],
+              ["02:14:40", "Journal du serveur web", "Requêtes `GET /img/cache.php?c=...` depuis 203.0.113.50"],
+              ["02:15:02", "Journaux système", "Processus `sh` lancé par le compte du serveur web"],
+              ["02:15:30", "Pare-feu", "Connexion sortante du serveur vers 198.51.100.7 sur le port 4444"],
+            ],
+          },
+          { t: 'list', items: ["**Hypothèse** : un fichier a été déposé par le formulaire de téléversement, puis utilisé pour exécuter des commandes.", "**Support** : la création du fichier suit la requête `POST` d’une seconde ; les appels à ce fichier précèdent le lancement du processus `sh`.", "**À vérifier** : le contenu du fichier, l’absence d’autres fichiers déposés, d’autres connexions de la même adresse avant 02:14.", "**À ne pas conclure** : l’identité de l’attaquant. Une adresse n’identifie pas une personne."] },
+          { t: 'code', lang: "bash", caption: "Quelques commandes pour retrouver ces éléments (sur une copie)", code: "grep \"203.0.113.50\" access.log                  # activité de l’adresse dans le journal web\nfind /var/www/html -type f -newermt \"2026-11-26 02:00\" ! -newermt \"2026-11-26 03:00\"   # fichiers créés dans la fenêtre\nstat /var/www/html/img/cache.php                # dates du fichier (modification, changement, accès)" },
+          { t: 'callout', kind: 'warn', text: "Vérifiez toujours le **fuseau horaire et le décalage d’horloge** de chaque source avant de les rapprocher : une heure locale mélangée à de l’UTC peut inverser l’ordre des événements et ruiner la reconstitution." },
+        ],
+      },
+      {
+        id: 'rapport-modele',
+        title: "Structure d’un rapport d’investigation",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Partie", "Contenu", "À éviter"],
+            rows: [
+              ["Synthèse", "Question posée, conclusion principale, niveau de confiance, en une page", "Jargon que le lecteur décisionnaire ne comprend pas"],
+              ["Contexte et périmètre", "Demandeur, autorisation, dates, systèmes concernés", "Omettre ce qui n’a **pas** été examiné"],
+              ["Méthode", "Outils et versions, empreintes des supports, ordre des opérations", "Décrire sans permettre de refaire"],
+              ["Constats", "Faits observés, avec leur source précise (fichier, ligne, horodatage)", "Mélanger faits et interprétations"],
+              ["Analyse", "Hypothèses, éléments pour et contre, chronologie", "Conclure au-delà de ce que les preuves permettent"],
+              ["Limites et recommandations", "Ce qui reste incertain, actions correctives", "Promettre une certitude que les données ne donnent pas"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Séparez systématiquement trois niveaux : **ce qui est constaté**, **ce qui en est déduit**, **ce qui reste hypothétique**. C’est cette discipline qui donne sa valeur probante au rapport." },
+        ],
+      },
     ],
     useCases: [
       'Réponse à incident : déterminer le vecteur initial et la date de compromission pour borner le périmètre.',
@@ -142,6 +183,8 @@ export const body: CourseBody = {
       'Assurance cyber : documenter l’incident pour l’assureur avec une chronologie étayée.',
     ],
     commonMistakes: [
+      "Rapprocher des horodatages sans les ramener au même fuseau horaire.",
+      "Attribuer une action à une personne à partir d’une seule adresse IP.",
       'Analyser directement le disque original au lieu d’une image.',
       'Éteindre une machine chiffrée avant d’avoir acquis la mémoire.',
       'Mélanger des horodatages de fuseaux différents sans les normaliser.',
@@ -156,6 +199,7 @@ export const body: CourseBody = {
       'Croiser au moins deux sources indépendantes avant d’affirmer un fait.',
     ],
     keyPoints: [
+      "Corréler plusieurs sources ; normaliser les horodatages ; séparer constat, déduction et hypothèse.",
       'Ordre de volatilité : mémoire d’abord, archives en dernier.',
       'Empreinte SHA-256 + chaîne de conservation = preuve défendable.',
       'Prefetch prouve l’exécution ; $MFT l’existence ; les journaux le contexte.',

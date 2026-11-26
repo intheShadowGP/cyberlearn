@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'l-ini-erreurs', label: 'Erreurs de configuration courantes', level: 1 },
     { id: 'l-ini-reflexes', label: 'Bons réflexes et signalement', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

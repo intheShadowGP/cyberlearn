@@ -135,6 +135,47 @@ export const body: CourseBody = {
           { t: 'list', items: ['**Minimization**: we copy and quote only what the mission justifies.', '**Retention**: the working copy is kept or destroyed according to policy and law, and this choice is recorded.', '**Confidentiality**: the report is shared only with authorized people.'] },
         ],
       },
+      {
+        id: 'cas-chronologie',
+        title: "Case study: reconstructing an incident from three sources",
+        blocks: [
+          { t: 'p', text: "A web server hosted an unexpected file. No source tells the whole story: it is their **correlation** that lets you reconstruct the sequence. The timestamps below are normalized to UTC." },
+          {
+            t: 'table',
+            caption: "Assembled timeline (documentation addresses)",
+            head: ["Time (UTC)", "Source", "Event"],
+            rows: [
+              ["02:14:07", "Web server log", "`POST /upload.php` request from 203.0.113.50"],
+              ["02:14:08", "File system", "Creation of `/var/www/html/img/cache.php` (file creation date)"],
+              ["02:14:40", "Web server log", "`GET /img/cache.php?c=...` requests from 203.0.113.50"],
+              ["02:15:02", "System logs", "`sh` process launched by the web server account"],
+              ["02:15:30", "Firewall", "Outbound connection from the server to 198.51.100.7 on port 4444"],
+            ],
+          },
+          { t: 'list', items: ["**Hypothesis**: a file was dropped through the upload form, then used to run commands.", "**Support**: the file creation follows the `POST` request by one second; calls to that file precede the `sh` process launch.", "**To verify**: the file contents, the absence of other dropped files, other connections from the same address before 02:14.", "**Not to conclude**: the attacker’s identity. An address does not identify a person."] },
+          { t: 'code', lang: "bash", caption: "A few commands to find these elements (on a copy)", code: "grep \"203.0.113.50\" access.log                  # the address’s activity in the web log\nfind /var/www/html -type f -newermt \"2026-11-26 02:00\" ! -newermt \"2026-11-26 03:00\"   # files created in the window\nstat /var/www/html/img/cache.php                # file dates (modification, change, access)" },
+          { t: 'callout', kind: 'warn', text: "Always check the **time zone and clock drift** of each source before correlating them: local time mixed with UTC can reverse the order of events and ruin the reconstruction." },
+        ],
+      },
+      {
+        id: 'rapport-modele',
+        title: "Structure of an investigation report",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Part", "Content", "To avoid"],
+            rows: [
+              ["Summary", "Question asked, main conclusion, confidence level, on one page", "Jargon the decision-making reader does not understand"],
+              ["Context and scope", "Requester, authorization, dates, systems concerned", "Omitting what was **not** examined"],
+              ["Method", "Tools and versions, media hashes, order of operations", "Describing without allowing the work to be redone"],
+              ["Findings", "Observed facts, with their precise source (file, line, timestamp)", "Mixing facts and interpretations"],
+              ["Analysis", "Hypotheses, evidence for and against, timeline", "Concluding beyond what the evidence allows"],
+              ["Limits and recommendations", "What remains uncertain, corrective actions", "Promising a certainty the data does not give"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Systematically separate three levels: **what is observed**, **what is deduced from it**, **what remains hypothetical**. That discipline gives the report its probative value." },
+        ],
+      },
     ],
     useCases: [
       'Incident response: determine the initial vector and the date of compromise to bound the scope.',
@@ -142,6 +183,8 @@ export const body: CourseBody = {
       'Cyber insurance: document the incident for the insurer with a supported timeline.',
     ],
     commonMistakes: [
+      "Correlating timestamps without bringing them to the same time zone.",
+      "Attributing an action to a person from a single IP address.",
       'Analyzing the original disk directly instead of an image.',
       'Powering off an encrypted machine before acquiring its memory.',
       'Mixing timestamps from different time zones without normalizing them.',
@@ -156,6 +199,7 @@ export const body: CourseBody = {
       'Cross-check at least two independent sources before asserting a fact.',
     ],
     keyPoints: [
+      "Correlate several sources; normalize timestamps; separate observation, deduction and hypothesis.",
       'Order of volatility: memory first, archives last.',
       'SHA-256 hash + chain of custody = defensible evidence.',
       'Prefetch proves execution; $MFT existence; logs the context.',

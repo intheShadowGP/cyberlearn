@@ -124,6 +124,43 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'Si des **données personnelles** de clients ou de collègues sont concernées, prévenez aussi la personne chargée de la protection des données : une déclaration à l’autorité peut être obligatoire dans un délai court.' },
         ],
       },
+      {
+        id: 'scenario-stockage-public',
+        title: "Mise en situation : un stockage devenu public par erreur",
+        blocks: [
+          { t: 'p', text: "Une équipe crée un espace de stockage en ligne pour partager un rapport avec un client. Pour que le client puisse l’ouvrir sans compte, quelqu’un règle l’accès sur « public ». Trois semaines plus tard, le rapport, qui contient des données de facturation, apparaît dans un moteur de recherche." },
+          {
+            t: 'table',
+            head: ["Question", "Réponse"],
+            rows: [
+              ["Qui est responsable ?", "Le **client du cloud** : le fournisseur sécurise l’infrastructure, mais la configuration d’accès est de la responsabilité de celui qui crée l’espace"],
+              ["Qu’est-ce qui a rendu la fuite possible ?", "Un réglage de partage trop large, et l’absence de contrôle automatique qui l’aurait détecté"],
+              ["Que faire en premier ?", "Retirer l’accès public, puis déterminer **qui a accédé aux données** grâce aux journaux d’accès, si la journalisation était activée"],
+              ["Que faut-il se demander ensuite ?", "Les données concernées étaient-elles personnelles ? Si oui, la procédure de violation de données s’applique"],
+            ],
+          },
+          { t: 'list', items: ["**Bloquer par défaut** l’accès public au niveau du compte, et n’autoriser que des exceptions justifiées.", "**Partager autrement** : lien temporaire à durée limitée, ou invitation nominative.", "**Activer la journalisation** des accès avant d’y stocker des données.", "**Alerter** automatiquement sur tout espace de stockage devenu public."] },
+          { t: 'callout', kind: 'key', text: "L’erreur la plus courante n’est pas une attaque sophistiquée : c’est un réglage de partage mal compris. Le bon réflexe est de se demander, avant de partager, **« qui pourra accéder à ceci, sans compte, depuis n’importe où ? »**." },
+        ],
+      },
+      {
+        id: 'liste-demarrage',
+        title: "Les cinq premiers réglages d’un compte cloud",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Réglage", "Pourquoi"],
+            rows: [
+              ["Protéger le compte propriétaire (« root ») par MFA et ne plus l’utiliser au quotidien", "Ce compte a tous les droits et ne peut pas être restreint"],
+              ["Créer des comptes nominatifs avec des droits limités", "Chacun fait ce dont il a besoin, et ses actions sont attribuables"],
+              ["Activer la journalisation des actions d’administration", "Sans journal, impossible d’enquêter après un incident"],
+              ["Bloquer l’accès public aux espaces de stockage par défaut", "Évite l’exposition accidentelle de données"],
+              ["Définir une alerte de dépense", "Une dépense soudaine est souvent le premier signe d’un compte détourné (minage de cryptomonnaie)"],
+            ],
+          },
+          { t: 'p', text: "Ces cinq réglages ne constituent pas une architecture sécurisée, mais ils éliminent les erreurs les plus fréquentes pour quelques minutes de travail." },
+        ],
+      },
     ],
     useCases: [
       'Reconnaître, dans l’organisation, quels services relèvent de l’IaaS, du PaaS ou du SaaS et ce qu’il faut y configurer.',
@@ -131,6 +168,8 @@ export const body: CourseBody = {
       'Réagir correctement après la publication d’une clé ou le partage d’un fichier par erreur.',
     ],
     commonMistakes: [
+      "Régler un partage sur « public » pour éviter de gérer des comptes.",
+      "Utiliser le compte propriétaire pour les tâches courantes.",
       'Penser que le fournisseur est responsable de la sécurité de tout ce qu’on met chez lui.',
       'Utiliser le compte racine ou un compte partagé pour le travail courant.',
       'Partager un fichier sensible par un lien accessible à tous.',
@@ -145,6 +184,7 @@ export const body: CourseBody = {
       'Signalement rapide de tout doute, sans effacer les traces.',
     ],
     keyPoints: [
+      "La configuration d’accès relève du client du cloud ; partager, c’est décider qui peut accéder sans compte.",
       'Le cloud, c’est des ressources louées à distance, facturées à l’usage.',
       'IaaS, PaaS, SaaS : plus le service est complet, moins vous administrez, mais vous gardez la responsabilité de vos accès et de vos données.',
       'La plupart des incidents cloud viennent d’erreurs de configuration du client.',

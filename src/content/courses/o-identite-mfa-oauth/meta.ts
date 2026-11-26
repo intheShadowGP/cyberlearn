@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'o-iga', label: 'Cycle de vie et gouvernance des identités', level: 3 },
     { id: 'o-sessions', label: 'Sessions, jetons et détournement', level: 3 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

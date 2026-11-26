@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1678 |
+| Mots de leçon, médiane (FR) | 1722 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 21 |
+| Cours de moins de 1 500 mots (FR) | 17 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -63,15 +63,15 @@
 | `i-threat-hunting` | I | 3 | 7 | 1817 | 1584 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `i-detection-avancee` | I | 4 | 6 | 1682 | 1489 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `j-forensique-initiation` | J | 1 | 8 | 1649 | 1503 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
-| `j-forensique-principes` | J | 2 | 7 | 1448 | 1320 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
+| `j-forensique-principes` | J | 2 | 9 | 1839 | 1670 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
 | `j-analyse-maliciels-investigation` | J | 3 | 7 | 1854 | 1683 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `j-memoire-artefacts-linux` | J | 3 | 7 | 1642 | 1460 | 3 | 0 | 5 | 5 | 40 | U20 C5 VF7 M6 O2 | 100 % | 6 |
 | `j-forensique-avancee` | J | 4 | 6 | 1896 | 1690 | 3 | 0 | 5 | 5 | 40 | U21 VF6 C5 M6 O2 | 100 % | 6 |
 | `k-malware-initiation` | K | 1 | 8 | 1633 | 1416 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
-| `k-malware-analyse` | K | 2 | 7 | 1378 | 1234 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `k-malware-analyse` | K | 2 | 9 | 1726 | 1526 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `k-retro-ingenierie-defensive` | K | 3 | 7 | 1905 | 1695 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `k-malware-avance` | K | 4 | 6 | 1724 | 1500 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `l-cloud-initiation` | L | 1 | 6 | 1437 | 1263 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `l-cloud-initiation` | L | 1 | 8 | 1829 | 1595 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `l-cloud-iam` | L | 2 | 8 | 1721 | 1447 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
 | `l-conteneurs-kubernetes` | L | 3 | 7 | 1604 | 1417 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `l-devsecops-pipeline` | L | 3 | 8 | 1731 | 1548 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 O2 C5 | 100 % | 5 |
@@ -90,7 +90,7 @@
 | `o-identite-initiation` | O | 1 | 8 | 1654 | 1414 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `o-acces-pratique` | O | 2 | 8 | 1769 | 1536 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `o-comptes-privileges-pam` | O | 3 | 7 | 1678 | 1434 | 3 | 0 | 4 | 4 | 40 | M6 U20 VF7 C5 O2 | 100 % | 6 |
-| `o-identite-mfa-oauth` | O | 3 | 6 | 1393 | 1204 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
+| `o-identite-mfa-oauth` | O | 3 | 8 | 1812 | 1575 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `o-identite-avancee` | O | 4 | 6 | 1436 | 1260 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `p-recherche-initiation` | P | 1 | 5 | 1330 | 1182 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-analyse-pratique` | P | 2 | 5 | 1172 | 1040 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
