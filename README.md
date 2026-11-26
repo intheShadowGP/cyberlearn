@@ -1,6 +1,6 @@
 # CyberAcadémie — V1.4.3
 
-Plateforme d’apprentissage de la cybersécurité, du niveau débutant au niveau expert : cours structurés, laboratoires interactifs exécutés dans le navigateur, évaluations corrigées et expliquées, parcours métiers. Site **statique** (GitHub Pages), **hors ligne** (PWA), **sans compte ni traçage** : la progression reste dans le navigateur.
+Plateforme d’apprentissage de la cybersécurité, du niveau débutant au niveau expert : cours structurés, laboratoires interactifs exécutés dans le navigateur, évaluations corrigées et expliquées, parcours métiers. Site **statique** (GitHub Pages), **hors ligne** (PWA), **sans compte ni traçage** : la progression reste dans le navigateur. Disponible en **français et en anglais**.
 
 > CyberAcadémie ne délivre aucune certification officielle. Les contenus offensifs sont destinés exclusivement à des environnements autorisés.
 
@@ -11,8 +11,8 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | Disciplines cartographiées (modules A à R) | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 403 |
-| Cours complets (structure obligatoire 4.2 vérifiée au build) | 85, au moins un par discipline, niveaux 1 à 4 |
-| Questions de cours (avec correction et explication) | 3406 |
+| Cours complets (structure obligatoire 4.2 vérifiée au build) | 85, quatre niveaux (Débutant, Intermédiaire, Avancé, Expert) dans chacune des 18 disciplines |
+| Questions de cours (avec correction et explication) | 3406, soit une banque de 40 à 60 questions par cours, dans les deux langues |
 | Laboratoires interactifs | 18, couvrant les catégories de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel), du niveau 1 (initiation) au niveau 4 (expert) |
 | Parcours métiers (avec examen final) | 11 |
 | Épreuves de démarche (dossier d’incident multi-sources, questions ordonnées) | 3 |
@@ -23,13 +23,13 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 
 ## Fonctionnalités
 
-- **Onboarding et positionnement** : à la première connexion, choix entre « débutant » (parcours guidé, sans test) et « initié » (test de positionnement de 20 questions, réussite à 14/20). La réussite valide le niveau et active le mode libre ; niveau *déclaré* et niveau *validé* restent distincts. Résultats conservés localement (IndexedDB), (re)passage possible depuis Profil et Compétences.
+- **Onboarding et positionnement** : à la première connexion, choix entre « débutant » (parcours guidé, sans test) et « initié » (test de positionnement de 20 questions tirées dans une banque de 40, réussite à 14/20). La réussite valide le niveau et active le mode libre ; niveau *déclaré* et niveau *validé* restent distincts. Résultats conservés localement (IndexedDB), (re)passage possible depuis Profil et Compétences.
 - **Accueil** : reprise du dernier cours, progression, recommandations, objectifs, disciplines.
 - **Tableau de bord** : progression par discipline, cours en cours et terminés, scores, temps d’étude mesuré et estimé, compétences acquises, points faibles, objectifs.
 - **Formations** : recherche, filtres (discipline, niveau, statut), cartographie complète.
 - **Cours** : présentation, leçon (définitions, schémas, exemples, cas d’usage, erreurs fréquentes, bonnes pratiques, points clés), mise en pratique avec corrigés, questions tirées au hasard (5 types), correction détaillée, évaluation par compétence, validation et déblocage.
 - **Laboratoires** : terminal simulé, analyse de journaux, moteur SQL simulé, calculs Web Crypto réels, décodeur Modbus, évaluateur IAM, revue de code, OSINT, chronologie forensique.
-- **Évaluations** : évaluations transversales (4), examens blancs à temps limité facultatif (2), examens finaux des 11 parcours, tests par discipline lorsque la discipline compte au moins deux cours publiés (modules B, C, D, E, F, G, I, J, L, M, N, O et Q).
+- **Évaluations** : évaluations transversales (4), examens blancs à temps limité facultatif (2), examens finaux des 11 parcours, tests par discipline (les 18 disciplines comptent désormais au moins un cours publié ; chaque test tire dans tous les cours de la discipline).
 - **Épreuves de démarche** : 3 études d’incident multi-sources (intrusion Active Directory, compromission d’application web, reconstruction d’une chronologie forensique) avec un dossier à lire et des questions ordonnées qui évaluent le raisonnement, pas la reconnaissance d’une définition.
 - **Parcours** : objectifs, prérequis, compétences visées, progression ordonnée, laboratoires, examen final, bilan des compétences ; suivi de plusieurs parcours à la fois.
 - **Profil local** : pseudonyme facultatif, XP et rang (sans effet sur le déverrouillage), niveaux, quatre états par cours (consulté, leçon terminée, évaluation réussie, maîtrisé), badges, séries, défis hebdomadaires, historique, résultats.
@@ -38,6 +38,8 @@ Les sujets non couverts apparaissent dans la cartographie comme « à venir », 
 - **Compétences** : acquises, en cours, non maîtrisées, non évaluées, avec maîtrise et évaluations associées.
 - **Niveaux par compétences** : une compétence est acquise à 80 % de réussite sur au moins 3 questions ; un niveau de discipline exige 80 % des compétences publiées de ce niveau et des niveaux inférieurs.
 - **Paramètres** : thème, taille du texte, réduction des animations, statut de positionnement (le mode libre s’obtient en réussissant le test, non par une bascule), données conservées, export/import JSON (format 2 avec empreinte), réinitialisation, suppression complète du profil local.
+- **Français / anglais** : sélecteur dans l’en-tête et dans les paramètres, préférence conservée localement, `<html lang>` mis à jour. Interface, cours, questions, corrections, laboratoires, parcours, examens, glossaire, recherche et test de positionnement existent dans les deux langues, avec les mêmes identifiants : la progression survit à un changement de langue.
+- **Banques de questions** : chaque cours a sa propre banque de 40 à 60 questions (types variés, trois niveaux de difficulté, explications, compétences associées). Les réponses sont réparties de façon reproductible entre les positions et la longueur des options ne trahit pas la bonne réponse (vérifié par des tests).
 - **Documentation** et **confidentialité** intégrées au site.
 
 ## Architecture
@@ -97,9 +99,9 @@ Pour un seul navigateur : `npx playwright test --project=chromium`. Les tests ma
 
 ## Ajouter un cours
 
-1. Créer `src/content/courses/<id>/` avec `meta.ts`, `body.ts`, `corrections.ts`, `solutions.ts` (s’inspirer d’un cours existant).
-2. Référencer les sujets de la cartographie (`src/content/catalog.ts`) couverts.
-3. `npm test` : le validateur indique précisément chaque manquement (sections, exemples, définitions, banque de questions, corrections, compétences évaluées, liens HTTPS…).
+1. Créer `src/content/courses/<id>/` avec `meta.ts`, `body.ts`, `solutions.ts`, la banque `bank.ts` (40 à 60 questions) et leurs versions anglaises `meta.en.ts`, `body.en.ts`, `solutions.en.ts`, `bank.en.ts` (s’inspirer d’un cours existant). Les fichiers `questions[.en].ts` et `corrections[.en].ts` sont **générés** par `npm run banks` : ne pas les modifier à la main.
+2. Référencer les sujets de la cartographie (`src/content/catalog.ts`) couverts, ajouter la fiche de vérification (`verification.ts` et `verification.en.ts`) et, si besoin, le cours dans un parcours (`paths.ts`).
+3. `npm run banks` puis `npm test` : le validateur indique précisément chaque manquement (sections, exemples, définitions, banque de questions, corrections, compétences évaluées, liens HTTPS…).
 
 ## Cahier des charges : éléments déduits
 
@@ -112,7 +114,7 @@ Le cahier des charges reçu était **tronqué** au milieu de la section 7 (« Pa
 
 ## Documentation du dépôt
 
-[ARCHITECTURE](docs/ARCHITECTURE.md) · [SECURITY (modèle de menace)](docs/SECURITY.md) · [PRIVACY](docs/PRIVACY.md) · [CURRICULUM (inventaire)](docs/CURRICULUM.md) · [FACT-CHECK](docs/FACT-CHECK.md) · [TESTING](docs/TESTING.md) · [DEPLOYMENT](docs/DEPLOYMENT.md) · [AUDIT](docs/AUDIT.md) · [PROJECT_STATUS](PROJECT_STATUS.md)
+[ARCHITECTURE](docs/ARCHITECTURE.md) · [I18N (traduction et banques de questions)](docs/I18N.md) · [SECURITY (modèle de menace)](docs/SECURITY.md) · [PRIVACY](docs/PRIVACY.md) · [CURRICULUM (inventaire)](docs/CURRICULUM.md) · [FACT-CHECK](docs/FACT-CHECK.md) · [TESTING](docs/TESTING.md) · [DEPLOYMENT](docs/DEPLOYMENT.md) · [AUDIT](docs/AUDIT.md) · [PHASE5_PROGRESS](docs/PHASE5_PROGRESS.md) · [PROJECT_STATUS](PROJECT_STATUS.md)
 
 ## Licence
 

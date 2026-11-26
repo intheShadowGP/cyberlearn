@@ -36,6 +36,18 @@
 | 19 | Laboratoires interactifs | e2e `tous les laboratoires`, interactions SQLi, terminal ; `labs.test.ts` |
 | 20 | Évaluations cohérentes | e2e examen transversal (20 questions, 20 corrections), examen final de parcours ; `quiz.test.ts` ; test du tirage |
 
+## Phase 5 : traduction et banques de questions
+
+| Contrôle | Test(s) |
+| --- | --- |
+| Banque de 40 à 60 questions par cours, types variés, difficultés, compétences, explications | `src/content/bank-quality.test.ts` |
+| Pas d’indice : réponse la plus longue ≤ 40 % des QCM, longueur relative ≤ 115 %, positions équilibrées, vrai/faux équilibré | `src/content/bank-quality.test.ts` |
+| Parité FR / EN (sections, blocs, tableaux, exercices, ressources, compétences, questions) | `src/content/validate.test.ts`, `src/content/bank-quality.test.ts` |
+| Quatre niveaux par discipline, tous les cours migrés (`PHASE5_COMPLETE`) | `src/content/bank-quality.test.ts` (couverture globale) |
+| Aucun énoncé répété entre cours et laboratoires | `src/content/validate.test.ts` |
+| Banque de positionnement : options équilibrées en FR et EN | `src/lib/positioning.test.ts` |
+| Aucun texte français sur les pages anglaises (toutes les routes, accessibilité axe en anglais) | `tests/e2e/i18n.spec.ts` |
+
 ## Autres catégories
 
 | Catégorie | Tests |

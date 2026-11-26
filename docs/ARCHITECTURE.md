@@ -9,7 +9,7 @@ L’arborescence proposée (section 13) est indicative. Le dépôt sépare de la
 | Indicatif | Emplacement réel | Contenu |
 | --- | --- | --- |
 | `curriculum/`, `modules/` | `src/content/catalog.ts` | Cartographie des 18 disciplines et 403 sujets |
-| `courses/`, `quizzes/` | `src/content/courses/<id>/` | Un dossier par cours : `meta.ts` (catalogue), `body.ts` (leçon, pratique, questions **sans réponses**), `corrections.ts` (chargé à la validation), `solutions.ts` (corrigés d’exercices) |
+| `courses/`, `quizzes/` | `src/content/courses/<id>/` | Un dossier par cours : `meta.ts` (catalogue), `body.ts` (leçon, pratique, questions **sans réponses**), `corrections.ts` (chargé à la validation), `solutions.ts` (corrigés d’exercices), `bank.ts` (banque de 40 à 60 questions, source d’écriture) et les fichiers anglais `*.en.ts`. `questions[.en].ts` et `corrections[.en].ts` sont générés par `npm run banks` |
 | `labs/` | `src/labs/<id>/` | `meta.ts`, `body.ts`, `corrections.ts`, `Lab.tsx` (interface) + logique pure testée (`engine.ts`, `evaluator.ts`…) |
 | `learning-paths/` | `src/content/paths.ts`, `src/content/exams.ts` | 11 parcours, examens finaux, évaluations transversales et examens blancs |
 | `storage/` | `src/lib/db.ts`, `src/lib/progress.ts`, `src/lib/backup.ts` | IndexedDB (schéma versionné v2, migrations), transactions métier, export/import |
@@ -38,6 +38,7 @@ L’arborescence proposée (section 13) est indicative. Le dépôt sépare de la
 
 ## Ajouter du contenu
 
-- Cours : copier un dossier de `src/content/courses/`, puis `node scripts/sync-section-counts.mjs`, `npm test`, `npm run inventory`.
+- Cours : copier un dossier de `src/content/courses/`, écrire `bank.ts` et `bank.en.ts`, lancer `npm run banks`, puis `node scripts/sync-section-counts.mjs`, `npm test`, `npm run inventory` (voir [I18N.md](I18N.md)).
+- Langues : interface dans `src/i18n/{fr,en}/`, contenus localisés par `getCourses(lang)`, `getPaths(lang)`, etc. ; le français est la source, l’anglais est vérifié par des tests de parité.
 - Laboratoire : dossier dans `src/labs/` avec les quatre fichiers ; logique pure dans un module testé.
 - Parcours : ajouter une entrée dans `paths.ts` ; le test vérifie l’ordre des prérequis et la taille de l’examen final.

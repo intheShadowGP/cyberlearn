@@ -3,6 +3,16 @@
 Branche : `phase-5` (rien n’est fusionné dans `main` tant que la livraison n’est pas complète et validée).
 Guide de contribution : [I18N.md](I18N.md).
 
+## Statut
+
+Contenu et intégration **terminés** : 85 cours (quatre niveaux dans chacune des 18 disciplines), 85 banques de 40 à 60 questions avec leur version anglaise, parcours mis à jour, banque de positionnement équilibrée, documentation à jour, `PHASE5_COMPLETE = true`. La fusion dans `main` et la publication restent soumises à la validation humaine.
+
+Points d’attention pour la mise en production :
+
+- les cours migrés ont de nouvelles sections et de nouveaux exercices : les utilisateurs qui les avaient terminés les verront de nouveau « en cours » ;
+- les parcours comptent plus d’étapes (le pourcentage d’avancement d’un parcours déjà suivi peut baisser) ;
+- Firefox n’a pas été exécuté sur le poste de développement (voir docs/TESTING.md).
+
 ## Décisions
 
 - **Banque par cours** de 40 à 60 questions (décision de l’utilisateur), générée à partir de `bank.ts` / `bank.en.ts`.
@@ -39,7 +49,7 @@ Guide de contribution : [I18N.md](I18N.md).
 - [x] Balayage e2e de toutes les routes en anglais sans fuite de français (activé : `PHASE5_COMPLETE = true`)
 - [x] Intégration des nouveaux cours (modules A à R) dans les parcours (`paths.ts`), sans reverrouiller de cours existant
 - [x] Qualité de la banque de positionnement (40 questions) : longueurs des options équilibrées (test de non-régression ajouté)
-- [ ] Documentation utilisateur (README, docs) mise à jour
+- [x] Documentation utilisateur (README, ARCHITECTURE, TESTING, I18N) mise à jour
 
 ### Contenu — 18 disciplines × 4 niveaux
 
