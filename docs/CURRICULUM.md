@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 84 |
-| Questions de cours (avec correction) | 3366 |
+| Cours complets | 85 |
+| Questions de cours (avec correction) | 3406 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
@@ -39,7 +39,7 @@
 | O. Identité et contrôle d’accès | 5 | 1, 2, 3, 4 | 16 / 16 |
 | P. Sécurité avancée et recherche | 5 | 1, 2, 3, 4 | 18 / 18 |
 | Q. Intelligence artificielle et cybersécurité | 5 | 1, 2, 3, 4 | 16 / 16 |
-| R. Méthodologies et certifications | 3 | 1, 2, 3 | 15 / 15 |
+| R. Méthodologies et certifications | 4 | 1, 2, 3, 4 | 15 / 15 |
 
 ## Cours
 
@@ -129,6 +129,7 @@
 | Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 60 min | 4 | 46 | 2 | 4 |
 | Préparer les certifications fondamentales et défensives : plan d’examen, méthode et intégrité (`r-preparation-fondamentaux`) | R | 2 · Intermédiaire | 100 min | 5 | 40 | 3 | 3 |
 | Préparer les examens pratiques : méthode, notes, rapport et éthique (`r-preparation-pratique`) | R | 3 · Avancé | 120 min | 5 | 40 | 3 | 3 |
+| Certifications expertes et gouvernance : CISSP, ISO 27001, GIAC et parcours d’expert (`r-certifications-expertes`) | R | 4 · Expert | 130 min | 5 | 40 | 3 | 3 |
 
 ## Laboratoires
 
