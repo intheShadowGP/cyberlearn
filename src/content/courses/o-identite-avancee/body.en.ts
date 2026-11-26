@@ -211,6 +211,7 @@ export const body: CourseBody = {
     {
       id: 'concevoir-acces',
       kind: 'guided',
+      labId: 'zero-trust-policy-lab',
       title: 'Design a conditional access policy',
       context: [
         { t: 'p', text: 'A services company wants to protect its customer management application (sensitive data). Employees work at the office and remotely, some on personal devices, and partners access it occasionally.' },

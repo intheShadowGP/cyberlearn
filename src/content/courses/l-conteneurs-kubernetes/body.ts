@@ -184,6 +184,7 @@ export const body: CourseBody = {
     {
       id: 'revue-manifeste',
       kind: 'analysis',
+      labId: 'k8s-manifest-lab',
       title: 'Revue d’un manifeste de déploiement',
       context: [{ t: 'code', lang: 'yaml', code: "spec:\n  hostNetwork: true\n  containers:\n    - name: agent\n      image: monregistre/agent:latest\n      securityContext:\n        privileged: true\n      volumeMounts:\n        - name: docker\n          mountPath: /var/run/docker.sock\n  volumes:\n    - name: docker\n      hostPath: { path: /var/run/docker.sock }" }],
       steps: ['Lister chaque risque.', 'Décrire comment un attaquant ayant compromis ce conteneur atteint l’hôte.', 'Proposer une version durcie ou une alternative.'],

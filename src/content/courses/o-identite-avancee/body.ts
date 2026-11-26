@@ -211,6 +211,7 @@ export const body: CourseBody = {
     {
       id: 'concevoir-acces',
       kind: 'guided',
+      labId: 'zero-trust-policy-lab',
       title: 'Concevoir une politique d’accès conditionnel',
       context: [
         { t: 'p', text: 'Une entreprise de services veut protéger son application de gestion des clients (données sensibles). Les salariés travaillent au bureau et à distance, certains avec leur appareil personnel, et des partenaires y accèdent ponctuellement.' },

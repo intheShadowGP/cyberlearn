@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 29 |
+| Laboratoires | 32 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -137,8 +137,10 @@
 | --- | --- | --- | --- |
 | Lire et calculer les permissions Linux (`permissions-lab`) | linux | 1 | c-linux-permissions, a-fichiers-programmes-ligne-commande |
 | Lire l’hexadécimal : identifier un fichier par son en-tête (`hex-header-lab`) | systeme | 1 | a-systemes-fondamentaux, a-fichiers-programmes-ligne-commande |
+| Lire un balayage de ports : que laisser exposé ? (`exposed-ports-lab`) | reseau | 1 | b-osi-tcpip, b-perimetre-vpn-wifi |
 | Robustesse des mots de passe et effet du hachage (initiation) (`password-strength-lab`) | crypto | 1 | e-hachage-mots-de-passe |
 | Trier six courriels : légitime ou piégé ? (`phishing-email-lab`) | soc | 1 | i-soc-initiation, k-malware-initiation |
+| Violation de données : notifier, quand et à qui ? (`breach-deadline-lab`) | grc | 1 | m-gouvernance-initiation, m-risques-conformite |
 | Appréciation des risques : matrice et plan de traitement (`risk-matrix-lab`) | grc | 2 | m-risques-conformite, m-gouvernance-operationnelle |
 | Atelier empreintes, HMAC et dérivation de clés (`hash-lab`) | crypto | 2 | e-hachage-mots-de-passe |
 | Atelier sous-réseaux (`subnet-lab`) | reseau | 2 | b-ipv4-subnetting |
@@ -161,6 +163,7 @@
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
 | Sécurité d’un flux OAuth 2.0 : configuration d’un client (`oauth-flow-lab`) | web | 3 | o-identite-mfa-oauth |
 | Trier les plantages d’une campagne de fuzzing (`crash-triage-lab`) | prog | 3 | p-fuzzing-recherche, g-vulnerabilites-memoire |
+| Auditer les conduits d’un site industriel (`ics-conduit-lab`) | ics | 4 | n-ot-securite-avancee, n-ics-modbus |
 | Auditer une politique d’accès Zero Trust (`zero-trust-policy-lab`) | cloud | 4 | o-identite-avancee, o-identite-mfa-oauth |
 | Ingénierie de détection : composer une règle sans faux positifs (expert) (`detection-engineering-lab`) | soc | 4 | i-threat-hunting, i-soc-detection |
 | Trier les vulnérabilités d’un inventaire de composants (SBOM) (`sbom-triage-lab`) | prog | 4 | l-devsecops-pipeline |

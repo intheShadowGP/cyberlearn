@@ -150,6 +150,7 @@ export const body: CourseBody = {
     {
       id: 'plan-etude',
       kind: 'guided',
+      labId: 'revision-plan-lab',
       title: 'Build a study plan from a diagnosis',
       context: [
         { t: 'p', text: 'You are preparing a foundational certification in twelve weeks, at five hours per week. The official outline has five domains. The diagnosis gives your results by domain: A (30%) 70%, B (20%) 40%, C (20%) 55%, D (15%) 80%, E (15%) 30%.' },

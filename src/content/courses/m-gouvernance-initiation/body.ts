@@ -223,6 +223,7 @@ export const body: CourseBody = {
     {
       id: 'courriel-urgent',
       kind: 'case',
+      labId: 'phishing-email-lab',
       title: 'Cas pratique : un courriel urgent de la direction',
       context: [{ t: 'p', text: 'Une comptable reçoit un courriel qui semble venir du directeur : « Paiement confidentiel à effectuer aujourd’hui, ne le dites à personne, je suis en réunion. » Le message donne un nouveau numéro de compte.' }],
       steps: ['Relever les signes d’alerte.', 'Décrire ce que doit faire la comptable.', 'Proposer une règle d’entreprise qui protège contre ce type de fraude.'],

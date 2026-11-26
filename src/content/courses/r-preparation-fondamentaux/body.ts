@@ -150,6 +150,7 @@ export const body: CourseBody = {
     {
       id: 'plan-etude',
       kind: 'guided',
+      labId: 'revision-plan-lab',
       title: 'Construire un plan d’étude à partir d’un diagnostic',
       context: [
         { t: 'p', text: 'Vous préparez une certification fondamentale dans douze semaines, à raison de cinq heures par semaine. Le plan officiel compte cinq domaines. Le diagnostic donne vos résultats par domaine : A (30 %) 70 %, B (20 %) 40 %, C (20 %) 55 %, D (15 %) 80 %, E (15 %) 30 %.' },

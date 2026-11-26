@@ -12,7 +12,7 @@
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
 | Cours de moins de 1 500 mots (FR) | 8 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
-| Cours avec au moins un exercice lié à un laboratoire | 15 |
+| Cours avec au moins un exercice lié à un laboratoire | 19 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 94 % |
 | Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 29 |
@@ -73,11 +73,11 @@
 | `k-malware-avance` | K | 4 | 6 | 1724 | 1500 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `l-cloud-initiation` | L | 1 | 8 | 1829 | 1595 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
 | `l-cloud-iam` | L | 2 | 8 | 1721 | 1447 | 3 | 1 | 4 | 4 | 44 | U23 VF7 C6 O2 M6 | 100 % | 6 |
-| `l-conteneurs-kubernetes` | L | 3 | 7 | 1604 | 1417 | 3 | 0 | 4 | 4 | 43 | U22 M6 VF7 C6 O2 | 100 % | 5 |
+| `l-conteneurs-kubernetes` | L | 3 | 7 | 1604 | 1417 | 3 | 1 | 4 | 4 | 43 | U22 M6 VF7 C6 O2 | 100 % | 5 |
 | `l-devsecops-pipeline` | L | 3 | 8 | 1731 | 1548 | 3 | 0 | 4 | 4 | 43 | U22 VF7 M6 O2 C6 | 100 % | 5 |
 | `l-multicloud-serverless-hybride` | L | 3 | 7 | 1959 | 1700 | 3 | 0 | 5 | 5 | 40 | U20 C5 O2 VF7 M6 | 100 % | 6 |
 | `l-cloud-avance` | L | 4 | 6 | 1645 | 1417 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
-| `m-gouvernance-initiation` | M | 1 | 8 | 1729 | 1527 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
+| `m-gouvernance-initiation` | M | 1 | 8 | 1729 | 1527 | 3 | 1 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
 | `m-risques-conformite` | M | 2 | 8 | 1749 | 1543 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `m-gouvernance-operationnelle` | M | 2 | 7 | 1675 | 1444 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `m-ebios-pratique` | M | 3 | 8 | 1876 | 1674 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
@@ -91,7 +91,7 @@
 | `o-acces-pratique` | O | 2 | 8 | 1769 | 1536 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
 | `o-comptes-privileges-pam` | O | 3 | 7 | 1678 | 1434 | 3 | 0 | 4 | 4 | 40 | M6 U20 VF7 C5 O2 | 100 % | 6 |
 | `o-identite-mfa-oauth` | O | 3 | 8 | 1812 | 1575 | 3 | 0 | 4 | 4 | 43 | U22 M6 VF7 C6 O2 | 100 % | 5 |
-| `o-identite-avancee` | O | 4 | 8 | 1799 | 1581 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `o-identite-avancee` | O | 4 | 8 | 1799 | 1581 | 3 | 1 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `p-recherche-initiation` | P | 1 | 5 | 1330 | 1182 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-analyse-pratique` | P | 2 | 5 | 1172 | 1040 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-verification-avancee` | P | 3 | 5 | 1307 | 1160 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
@@ -103,7 +103,7 @@
 | `q-securite-llm` | Q | 3 | 8 | 1785 | 1535 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `q-securite-ia-avancee` | Q | 4 | 5 | 1406 | 1245 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `r-certifications-preparation` | R | 1 | 4 | 1107 | 1007 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 36 % | 4 |
-| `r-preparation-fondamentaux` | R | 2 | 5 | 1149 | 1038 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `r-preparation-fondamentaux` | R | 2 | 5 | 1149 | 1038 | 3 | 1 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `r-preparation-pratique` | R | 3 | 5 | 1213 | 1073 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `r-certifications-expertes` | R | 4 | 5 | 1268 | 1118 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 

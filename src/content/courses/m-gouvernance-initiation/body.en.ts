@@ -223,6 +223,7 @@ export const body: CourseBody = {
     {
       id: 'courriel-urgent',
       kind: 'case',
+      labId: 'phishing-email-lab',
       title: 'Case study: an urgent email from management',
       context: [{ t: 'p', text: 'An accountant receives an email that seems to come from the director: “Confidential payment to make today, do not tell anyone, I am in a meeting.” The message gives a new account number.' }],
       steps: ['Spot the warning signs.', 'Describe what the accountant must do.', 'Propose a company rule that protects against this type of fraud.'],
