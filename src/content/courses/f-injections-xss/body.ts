@@ -133,6 +133,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: 'Un WAF peut gagner quelques jours le temps de corriger, mais il se contourne (encodages, variantes). Corrigez toujours la cause dans le code.' },
         ],
       },
+      {
+        id: 'sql-avant-apres',
+        title: "Corriger une injection SQL : le code avant et après",
+        blocks: [
+          { t: 'p', text: "La correction fiable d’une injection SQL n’est pas de « nettoyer » la saisie, mais de **séparer** la requête de ses données grâce aux requêtes paramétrées." },
+          { t: 'code', lang: "python", caption: "Même requête, deux écritures (module sqlite3 de Python)", code: "# Vulnérable : la saisie est concaténée dans la requête\ncur.execute(\"SELECT id FROM users WHERE name = '\" + name + \"' AND pwd_hash = '\" + h + \"'\")\n\n# Corrigé : requête paramétrée, la base reçoit les valeurs séparément\ncur.execute(\"SELECT id FROM users WHERE name = ? AND pwd_hash = ?\", (name, h))" },
+          { t: 'p', text: "Avec la version vulnérable, une saisie `' OR '1'='1' --` dans le champ du nom transforme la condition en une expression toujours vraie, et le commentaire `--` neutralise la suite. Avec la version paramétrée, la même chaîne est cherchée **littéralement** comme nom d’utilisateur : elle ne trouve personne." },
+          {
+            t: 'table',
+            caption: "Ce que les requêtes paramétrées couvrent… et ne couvrent pas",
+            head: ["Situation", "Paramétrage suffisant ?", "Défense à ajouter"],
+            rows: [
+              ["Valeur dans une clause `WHERE`", "Oui", "Droits minimaux du compte de base de données"],
+              ["Nom de table ou de colonne dynamique", "Non : un identifiant ne se paramètre pas", "Liste blanche des valeurs autorisées"],
+              ["Tri dynamique (`ORDER BY`)", "Non", "Liste blanche de colonnes et du sens (`ASC` ou `DESC`)"],
+              ["Requête brute dans un ORM", "Seulement si les paramètres sont utilisés", "Éviter de concaténer, même « juste pour ce cas »"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xss-contexte',
+        title: "XSS : encoder selon l’endroit où la donnée est insérée",
+        blocks: [
+          { t: 'p', text: "Une même donnée ne s’échappe pas de la même façon selon qu’elle est placée dans le texte d’une page, dans un attribut ou dans un script. La défense est donc un **encodage adapté au contexte de sortie**, appliqué au moment d’afficher." },
+          {
+            t: 'table',
+            head: ["Contexte de sortie", "Exemple", "Défense"],
+            rows: [
+              ["Texte HTML", "`<p>` + donnée + `</p>`", "Encoder `&`, `<`, `>`, `\"`, `'` en entités HTML"],
+              ["Valeur d’attribut", "`<input value=\"` + donnée + `\">`", "Encoder les guillemets ; toujours entourer la valeur de guillemets"],
+              ["Adresse (URL)", "`<a href=\"` + donnée + `\">`", "Accepter seulement les schémas `https:` et `http:` ; refuser `javascript:`"],
+              ["Script JavaScript", "`<script>var x = ` + donnée", "Éviter l’insertion directe ; passer par des données sérialisées en JSON"],
+            ],
+          },
+          { t: 'code', lang: "javascript", caption: "Écrire du texte sans qu’il soit interprété comme du HTML", code: "el.innerHTML = saisie;    // dangereux : un <img onerror=...> s’exécute\nel.textContent = saisie;  // sûr : la saisie reste du texte" },
+          { t: 'callout', kind: 'tip', text: "Les bibliothèques d’interface modernes (comme React) encodent par défaut. Le danger revient dès qu’on contourne cette protection, par exemple avec `dangerouslySetInnerHTML` : toute donnée passant par là doit d’abord être assainie par une bibliothèque dédiée." },
+        ],
+      },
     ],
     useCases: [
       'Revue de code : repérer toute requête SQL construite par concaténation et tout usage d’innerHTML avec des données.',
@@ -140,6 +179,8 @@ export const body: CourseBody = {
       'Durcissement : déployer une CSP en mode `Report-Only`, analyser les rapports, puis l’appliquer.',
     ],
     commonMistakes: [
+      "Tenter de bloquer les apostrophes ou le mot « SELECT » au lieu de paramétrer la requête.",
+      "Encoder une fois pour toutes à l’entrée, alors que l’encodage correct dépend du contexte de sortie.",
       'Échapper « à la main » les apostrophes au lieu d’utiliser des requêtes paramétrées.',
       'Valider uniquement côté client (JavaScript) : l’attaquant envoie directement sa requête.',
       'Croire qu’un ORM protège toujours : ses fonctions de requête brute restent injectables.',
@@ -154,6 +195,7 @@ export const body: CourseBody = {
       'Compte de base de données aux droits minimaux pour l’application.',
     ],
     keyPoints: [
+      "SQL : paramétrer ; identifiants dynamiques : liste blanche. XSS : encoder selon le contexte de sortie.",
       'Injection = donnée interprétée comme du code par un autre composant.',
       'SQL : requêtes paramétrées, jamais de concaténation.',
       'XSS : réfléchie, stockée, DOM ; correction par encodage contextuel.',

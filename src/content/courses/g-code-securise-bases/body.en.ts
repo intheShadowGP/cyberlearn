@@ -131,6 +131,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'You practice on your own code, on applications made for it (labs, deliberately vulnerable applications). Testing a third party’s system without authorization is illegal. If you find a flaw by chance, report it to the person in charge without abusing it.' },
         ],
       },
+      {
+        id: 'avant-apres',
+        title: "Two classic flaws, before and after",
+        blocks: [
+          { t: 'p', text: "The most common mistakes come from combining **user text** with a **system action**. Here are two Python cases, with their fixes." },
+          { t: 'code', lang: "python", caption: "Command injection: do not build a command line from input", code: "import os, subprocess, ipaddress\n\n# Vulnerable: “8.8.8.8; cat /etc/passwd” also runs the second command\nos.system(\"ping -c 1 \" + host)\n\n# Fixed: validate the expected type, then pass arguments without a shell\nip = ipaddress.ip_address(host)   # raises an exception if it is not an IP address\nsubprocess.run([\"ping\", \"-c\", \"1\", str(ip)], check=True)" },
+          { t: 'code', lang: "python", caption: "Path traversal: stay inside the allowed folder", code: "from pathlib import Path\n\nBASE = Path(\"/srv/documents\").resolve()\n\n# Vulnerable: “../../etc/passwd” escapes the folder\ncontent = open(\"/srv/documents/\" + name).read()\n\n# Fixed: resolve the final path then check it stays under BASE\ntarget = (BASE / name).resolve()\nif not target.is_relative_to(BASE):\n    raise ValueError(\"path refused\")\ncontent = target.read_text()" },
+          { t: 'callout', kind: 'key', text: "In both cases the fix is not to forbid a few suspicious characters, but to **use an interface that separates data from instruction** (argument list) or to **check the final result** (resolved path)." },
+        ],
+      },
+      {
+        id: 'ranger-secret',
+        title: "Where to keep a secret, and what to do if it leaks",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Location", "Verdict", "Note"],
+            rows: [
+              ["In source code or the repository", "Avoid", "The secret stays in history even after deletion"],
+              ["Versioned configuration file", "Avoid", "Same problem as code"],
+              ["Environment variable injected at deployment", "Acceptable", "Visible to processes and sometimes in diagnostic logs"],
+              ["Platform secrets manager", "Recommended", "Controlled, logged access; rotation possible"],
+            ],
+          },
+          { t: 'p', text: "If a secret was published by mistake, **deleting it from the repository is not enough**: anyone who cloned the repository, any indexing bot and any integration log may already have copied it. The response has four steps:" },
+          { t: 'list', ordered: true, items: ["**Revoke** the secret immediately at the relevant service and generate a new one.", "**Check** the service logs to see whether the old secret was used.", "**Clean** the history if needed, without treating that step as protection.", "**Prevent recurrence**: repository ignore file, automatic secret detection before each commit."] },
+        ],
+      },
     ],
     useCases: [
       'Reviewing a small personal script before sharing it: inputs, secrets, errors, dependencies.',
@@ -139,6 +167,8 @@ export const body: CourseBody = {
       'Setting up a pinned versions file and a regular check of the dependencies.',
     ],
     commonMistakes: [
+      "Building a command, query or path by concatenating with input.",
+      "Deleting a published secret without revoking it.",
       'Thinking that “it works” means “it is safe”.',
       'Trusting an input because it comes “from our form”.',
       'Writing a password or a key in the code, then committing it.',
@@ -155,6 +185,7 @@ export const body: CourseBody = {
       'Practice on authorized targets and report flaws responsibly.',
     ],
     keyPoints: [
+      "Separate data from instruction, check the final result; a published secret is a revoked secret.",
       'A bug hinders normal use; a vulnerability can be exploited: a program can work and be vulnerable.',
       'Every input is untrusted: allowlist, server-side validation, parameterized queries.',
       'A secret is never in the code: environment variable or secrets manager.',

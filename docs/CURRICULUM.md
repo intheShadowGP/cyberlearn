@@ -57,7 +57,7 @@
 | Périmètre réseau : pare-feu, détection, VPN, Wi-Fi et architecture sécurisée (`b-perimetre-vpn-wifi`) | B | 3 · Avancé | 120 min | 5 | 40 | 3 | 5 |
 | Défense réseau avancée : déni de service, plan de contrôle, visibilité et résilience (`b-defense-reseau-avancee`) | B | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Linux au quotidien : architecture, shell Bash, paquets et automatisation (`c-shell-paquets-automatisation`) | C | 1 · Débutant | 110 min | 6 | 40 | 3 | 5 |
-| Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 6 | 40 | 3 | 4 |
+| Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 8 | 40 | 3 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 6 | 40 | 3 | 5 |
 | Linux avancé : durcissement du noyau, intégrité, chaîne d’approvisionnement et investigation (`c-linux-securite-avancee`) | C | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Windows : bien comprendre son poste, ses comptes et ses protections (`d-windows-fondamentaux`) | D | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
@@ -70,11 +70,11 @@
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 140 min | 6 | 40 | 3 | 7 |
 | Cryptographie appliquée avancée : protocoles, implémentation, clés et transition post-quantique (`e-crypto-appliquee-avancee`) | E | 4 · Expert | 150 min | 6 | 40 | 3 | 6 |
 | Sécurité web : comprendre HTTP, les sessions et les grands risques (`f-web-fondamentaux`) | F | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
-| Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 6 | 40 | 3 | 4 |
+| Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 8 | 40 | 3 | 4 |
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 6 |
 | Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Sécurité web avancée : modélisation, protocole, navigateur, API et chaîne logicielle (`f-web-defense-avancee`) | F | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
-| Programmation sécurisée : les bonnes habitudes dès les premiers programmes (`g-code-securise-bases`) | G | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
+| Programmation sécurisée : les bonnes habitudes dès les premiers programmes (`g-code-securise-bases`) | G | 1 · Débutant | 100 min | 8 | 40 | 3 | 5 |
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Sécurité du code avancée : analyse, fuzzing, revue, chaîne de construction et programme de sécurité (`g-code-securise-avance`) | G | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
@@ -96,7 +96,7 @@
 | Rétro-ingénierie défensive : binaires, désassemblage, débogage et outils (`k-retro-ingenierie-defensive`) | K | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Menaces avancées : campagnes, rançongiciels, chaîne d’approvisionnement et analyse à grande échelle (`k-malware-avance`) | K | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Le cloud pour débutants : comprendre, utiliser et protéger (`l-cloud-initiation`) | L | 1 · Débutant | 90 min | 6 | 40 | 3 | 3 |
-| Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 4 |
+| Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 120 min | 8 | 40 | 3 | 4 |
 | Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 130 min | 5 | 40 | 3 | 4 |
 | DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |

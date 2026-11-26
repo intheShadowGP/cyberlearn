@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1644 |
+| Mots de leçon, médiane (FR) | 1649 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 30 |
+| Cours de moins de 1 500 mots (FR) | 26 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -33,7 +33,7 @@
 | `b-perimetre-vpn-wifi` | B | 3 | 5 | 2033 | 1826 | 3 | 0 | 5 | 5 | 40 | U17 VF9 M6 C5 O3 | 100 % | 5 |
 | `b-defense-reseau-avancee` | B | 4 | 6 | 2454 | 2152 | 3 | 0 | 5 | 5 | 40 | U18 VF7 C5 M6 O4 | 100 % | 6 |
 | `c-shell-paquets-automatisation` | C | 1 | 6 | 1997 | 1782 | 3 | 0 | 5 | 5 | 40 | U19 C6 VF7 O3 M5 | 100 % | 5 |
-| `c-linux-permissions` | C | 2 | 6 | 1348 | 1229 | 3 | 1 | 4 | 4 | 40 | C6 U18 VF7 M5 O4 | 100 % | 5 |
+| `c-linux-permissions` | C | 2 | 8 | 1643 | 1491 | 3 | 1 | 4 | 4 | 40 | C6 U18 VF7 M5 O4 | 100 % | 5 |
 | `c-systemd-journaux-confinement` | C | 3 | 6 | 1481 | 1347 | 3 | 0 | 5 | 5 | 40 | U18 VF7 M5 C6 O4 | 100 % | 5 |
 | `c-linux-securite-avancee` | C | 4 | 6 | 2503 | 2240 | 3 | 1 | 7 | 7 | 40 | U18 C5 VF7 M6 O4 | 100 % | 6 |
 | `d-windows-fondamentaux` | D | 1 | 6 | 1736 | 1547 | 3 | 0 | 5 | 5 | 40 | U18 VF8 C7 M5 O2 | 100 % | 6 |
@@ -46,11 +46,11 @@
 | `e-chiffrement-tls-pki` | E | 3 | 6 | 2375 | 2138 | 3 | 0 | 7 | 7 | 40 | U16 VF8 M6 C7 O3 | 100 % | 6 |
 | `e-crypto-appliquee-avancee` | E | 4 | 6 | 2613 | 2344 | 3 | 0 | 6 | 6 | 40 | U19 VF7 M5 C6 O3 | 100 % | 6 |
 | `f-web-fondamentaux` | F | 1 | 6 | 1636 | 1470 | 3 | 0 | 5 | 5 | 40 | U20 C5 VF7 M6 O2 | 100 % | 6 |
-| `f-injections-xss` | F | 2 | 6 | 1279 | 1158 | 3 | 1 | 4 | 4 | 40 | U19 VF7 M6 C5 O3 | 100 % | 6 |
+| `f-injections-xss` | F | 2 | 8 | 1601 | 1444 | 3 | 1 | 4 | 4 | 40 | U19 VF7 M6 C5 O3 | 100 % | 6 |
 | `f-acces-sessions-ssrf` | F | 3 | 7 | 1903 | 1656 | 3 | 0 | 6 | 6 | 40 | U16 VF8 M8 O3 C5 | 100 % | 7 |
 | `f-xxe-rfi-clickjacking-race` | F | 3 | 7 | 1818 | 1594 | 3 | 0 | 5 | 5 | 40 | U17 M6 VF8 C6 O3 | 100 % | 6 |
 | `f-web-defense-avancee` | F | 4 | 6 | 1977 | 1771 | 3 | 0 | 7 | 7 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
-| `g-code-securise-bases` | G | 1 | 6 | 1487 | 1302 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `g-code-securise-bases` | G | 1 | 8 | 1740 | 1518 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `g-code-sur-langages` | G | 2 | 7 | 1746 | 1542 | 3 | 0 | 5 | 5 | 40 | VF7 U18 M6 C6 O3 | 100 % | 6 |
 | `g-vulnerabilites-memoire` | G | 3 | 7 | 1528 | 1377 | 3 | 1 | 4 | 4 | 40 | U18 VF7 C6 M6 O3 | 100 % | 6 |
 | `g-code-securise-avance` | G | 4 | 6 | 1862 | 1627 | 3 | 0 | 7 | 7 | 40 | U21 VF6 C5 M5 O3 | 100 % | 6 |
@@ -72,7 +72,7 @@
 | `k-retro-ingenierie-defensive` | K | 3 | 7 | 1905 | 1695 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `k-malware-avance` | K | 4 | 6 | 1724 | 1500 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `l-cloud-initiation` | L | 1 | 6 | 1437 | 1263 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `l-cloud-iam` | L | 2 | 6 | 1305 | 1100 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
+| `l-cloud-iam` | L | 2 | 8 | 1721 | 1447 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
 | `l-conteneurs-kubernetes` | L | 3 | 5 | 1326 | 1164 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `l-devsecops-pipeline` | L | 3 | 6 | 1370 | 1236 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 O2 C5 | 100 % | 5 |
 | `l-multicloud-serverless-hybride` | L | 3 | 7 | 1959 | 1700 | 3 | 0 | 5 | 5 | 40 | U20 C5 O2 VF7 M6 | 100 % | 6 |

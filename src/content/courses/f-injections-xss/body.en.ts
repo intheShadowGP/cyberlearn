@@ -133,6 +133,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: 'A WAF can buy a few days to fix, but it can be bypassed (encodings, variants). Always fix the cause in the code.' },
         ],
       },
+      {
+        id: 'sql-avant-apres',
+        title: "Fixing a SQL injection: the code before and after",
+        blocks: [
+          { t: 'p', text: "The reliable fix for a SQL injection is not to “clean” the input but to **separate** the query from its data with parameterized queries." },
+          { t: 'code', lang: "python", caption: "Same query, two ways of writing it (Python sqlite3 module)", code: "# Vulnerable: the input is concatenated into the query\ncur.execute(\"SELECT id FROM users WHERE name = '\" + name + \"' AND pwd_hash = '\" + h + \"'\")\n\n# Fixed: parameterized query, the database receives the values separately\ncur.execute(\"SELECT id FROM users WHERE name = ? AND pwd_hash = ?\", (name, h))" },
+          { t: 'p', text: "With the vulnerable version, entering `' OR '1'='1' --` in the name field turns the condition into an always-true expression, and the `--` comment neutralizes the rest. With the parameterized version, the same string is looked up **literally** as a username: it matches nobody." },
+          {
+            t: 'table',
+            caption: "What parameterized queries cover… and do not cover",
+            head: ["Situation", "Is parameterization enough?", "Defense to add"],
+            rows: [
+              ["Value in a `WHERE` clause", "Yes", "Minimal privileges for the database account"],
+              ["Dynamic table or column name", "No: an identifier cannot be parameterized", "Allow-list of permitted values"],
+              ["Dynamic sorting (`ORDER BY`)", "No", "Allow-list of columns and direction (`ASC` or `DESC`)"],
+              ["Raw query in an ORM", "Only if parameters are used", "Avoid concatenating, even “just for this case”"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xss-contexte',
+        title: "XSS: encoding according to where the data is inserted",
+        blocks: [
+          { t: 'p', text: "The same data is not escaped the same way depending on whether it is placed in page text, in an attribute or in a script. The defense is therefore **context-aware output encoding**, applied at display time." },
+          {
+            t: 'table',
+            head: ["Output context", "Example", "Defense"],
+            rows: [
+              ["HTML text", "`<p>` + data + `</p>`", "Encode `&`, `<`, `>`, `\"`, `'` as HTML entities"],
+              ["Attribute value", "`<input value=\"` + data + `\">`", "Encode quotes; always wrap the value in quotes"],
+              ["Address (URL)", "`<a href=\"` + data + `\">`", "Accept only `https:` and `http:` schemes; refuse `javascript:`"],
+              ["JavaScript script", "`<script>var x = ` + data", "Avoid direct insertion; pass data serialized as JSON"],
+            ],
+          },
+          { t: 'code', lang: "javascript", caption: "Writing text without it being interpreted as HTML", code: "el.innerHTML = input;    // dangerous: an <img onerror=...> executes\nel.textContent = input;  // safe: the input stays text" },
+          { t: 'callout', kind: 'tip', text: "Modern UI libraries (such as React) encode by default. The danger returns as soon as that protection is bypassed, for example with `dangerouslySetInnerHTML`: any data going through it must first be sanitized by a dedicated library." },
+        ],
+      },
     ],
     useCases: [
       'Code review: spot any SQL query built by concatenation and any use of innerHTML with data.',
@@ -140,6 +179,8 @@ export const body: CourseBody = {
       'Hardening: deploy a CSP in `Report-Only` mode, analyze the reports, then enforce it.',
     ],
     commonMistakes: [
+      "Trying to block apostrophes or the word “SELECT” instead of parameterizing the query.",
+      "Encoding once at input time, when correct encoding depends on the output context.",
       'Escaping apostrophes “by hand” instead of using parameterized queries.',
       'Validating only on the client side (JavaScript): the attacker sends their request directly.',
       'Believing that an ORM always protects: its raw query functions remain injectable.',
@@ -154,6 +195,7 @@ export const body: CourseBody = {
       'Database account with minimal rights for the application.',
     ],
     keyPoints: [
+      "SQL: parameterize; dynamic identifiers: allow-list. XSS: encode for the output context.",
       'Injection = data interpreted as code by another component.',
       'SQL: parameterized queries, never concatenation.',
       'XSS: reflected, stored, DOM; fixed by contextual encoding.',

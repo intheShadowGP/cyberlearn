@@ -111,6 +111,43 @@ export const body: CourseBody = {
           },
         ],
       },
+      {
+        id: 'lire-politique',
+        title: "Reading an access policy: an annotated example",
+        blocks: [
+          { t: 'p', text: "Cloud providers express permissions as policies, often in JSON. The syntax varies, but the logic is the same: **who** (the identity the policy is attached to), **may or may not** (effect), **what** (actions), **on what** (resources), **under which conditions**. The following example is written in AWS syntax." },
+          { t: 'code', lang: "json", caption: "Read-only access to a storage folder, only with MFA", code: "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": [\"s3:GetObject\"],\n      \"Resource\": \"arn:aws:s3:::rapports-compta/*\",\n      \"Condition\": { \"Bool\": { \"aws:MultiFactorAuthPresent\": \"true\" } }\n    }\n  ]\n}" },
+          { t: 'p', text: "This policy allows **only** reading objects in the `rapports-compta` storage, and only if the user authenticated with a second factor. Anything not explicitly allowed is **denied by default**, and an explicit `Deny` always overrides an `Allow`." },
+          {
+            t: 'table',
+            caption: "Warning signs when reading a policy",
+            head: ["Pattern", "Why it is dangerous", "Fix"],
+            rows: [
+              ["`\"Action\": \"*\"`", "Every action of the service, including deletion and permission changes", "List only the required actions"],
+              ["`\"Resource\": \"*\"`", "Every resource in the account", "Target resources by identifier or prefix"],
+              ["Identity-management rights granted broadly", "A user can grant themselves every right (privilege escalation)", "Reserve this ability for controlled administration accounts"],
+              ["No condition on sensitive access", "No safeguard if a credential is stolen", "Add MFA, address range or time constraints"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'revue-acces',
+        title: "Periodic access review: a simple method",
+        blocks: [
+          { t: 'p', text: "Permissions accumulate: a project ends, someone changes teams, an access key created “temporarily” stays active. A regular review, for example quarterly, brings rights back to what is actually used." },
+          { t: 'list', ordered: true, items: ["**Inventory** human and application identities, with a named owner for each.", "**Spot what is unused**: accounts with no recent sign-in, access keys never used or old (the delay is set in the organization’s policy).", "**Compare granted and used permissions** (providers offer access reports and excess-permission analyses).", "**Remove or reduce**; test the effect with the provider’s policy simulator before changing production.", "**Record** the review: date, decisions, who approved."] },
+          {
+            t: 'table',
+            head: ["Finding", "Risk", "Action"],
+            rows: [
+              ["Access key created years ago, never rotated", "A stolen key stays valid indefinitely", "Rotate, or replace with temporary credentials"],
+              ["Former contractor account still active", "Access by a third party no longer under contract", "Disable immediately then delete"],
+              ["Application given administrator rights to “simplify”", "Its compromise exposes the whole account", "Define a role limited to the actions it performs"],
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Review of an IAM policy before it goes into production.',
@@ -118,6 +155,8 @@ export const body: CourseBody = {
       'Investigating a leak: determine through the API logs who made a bucket public, and when.',
     ],
     commonMistakes: [
+      "Granting `*` on actions and resources “while testing”, then never restricting.",
+      "Never reviewing access: yesterday’s permissions outlive yesterday’s projects.",
       'Thinking the cloud provider is responsible for access configuration.',
       'Granting `*:*` “temporarily” to unblock a developer.',
       'Using the root account for routine administration.',
@@ -132,6 +171,8 @@ export const body: CourseBody = {
       'CSPM and Infrastructure-as-Code analysis before deployment.',
     ],
     keyPoints: [
+      "Policy: effect, actions, resources, conditions; default deny, explicit `Deny` wins.",
+      "Periodic review: inventory, spot unused, reduce, record.",
       'The customer remains responsible for its data and identities, whatever the model.',
       'IAM: implicit deny by default, Allow to authorize, explicit Deny takes priority.',
       '`Principal: *` on storage = public data.',

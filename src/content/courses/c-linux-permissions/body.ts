@@ -115,6 +115,42 @@ export const body: CourseBody = {
           { t: 'list', ordered: true, items: ['Lire le message d’erreur exact et reproduire le problème avec le compte concerné (`sudo -u compte …`).', 'Vérifier l’identité réelle du processus : un service peut tourner sous un autre compte ou groupe après une mise à jour.', 'Examiner tout le chemin avec `namei -l`, puis les ACL avec `getfacl`.', 'Écarter un montage en lecture seule, un disque plein ou un confinement (SELinux, AppArmor, options de l’unité systemd).', 'Corriger au plus juste (propriétaire, groupe, ACL ciblée), jamais par `chmod 777`.'] },
         ],
       },
+      {
+        id: 'umask',
+        title: "Permissions par défaut : le rôle de l’umask",
+        blocks: [
+          { t: 'p', text: "Quand un programme crée un fichier, ses permissions ne sont pas choisies au hasard : le système part d’une base (666 pour un fichier, 777 pour un répertoire) puis **retire** les bits indiqués par l’**umask** du processus." },
+          {
+            t: 'table',
+            head: ["umask", "Fichier créé", "Répertoire créé", "Effet"],
+            rows: [
+              ["`022`", "`644` (rw-r--r--)", "`755` (rwxr-xr-x)", "Lecture ouverte aux autres : valeur courante des distributions"],
+              ["`027`", "`640` (rw-r-----)", "`750` (rwxr-x---)", "Aucun accès pour les « autres »"],
+              ["`077`", "`600` (rw-------)", "`700` (rwx------)", "Accès réservé au propriétaire"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Constater l’effet de l’umask", code: "umask               # affiche la valeur actuelle, par exemple 0022\numask 077           # valable pour ce shell seulement\ntouch secret.txt && mkdir dossier\nls -ld secret.txt dossier   # -rw------- et drwx------" },
+          { t: 'callout', kind: 'tip', text: "Un fichier de clés ou de mots de passe créé avec un umask permissif (par exemple par un script lancé en tâche planifiée) peut être lisible par tout le monde. Fixez l’umask **explicitement** dans les scripts qui manipulent des secrets." },
+        ],
+      },
+      {
+        id: 'audit-find',
+        title: "Auditer les permissions avec find",
+        blocks: [
+          { t: 'p', text: "Un audit de base consiste à chercher les fichiers dont les permissions sortent de l’ordinaire. La commande `find` sait le faire à partir des **bits de permission** eux-mêmes." },
+          { t: 'code', lang: "bash", caption: "Quatre recherches d’audit (à lancer en lecture seule)", code: "# Fichiers SUID (s’exécutent avec les droits de leur propriétaire)\nfind / -xdev -type f -perm -4000 2>/dev/null\n\n# Fichiers SGID\nfind / -xdev -type f -perm -2000 2>/dev/null\n\n# Fichiers modifiables par tout le monde\nfind / -xdev -type f -perm -0002 2>/dev/null\n\n# Fichiers sans propriétaire ou sans groupe (compte supprimé ?)\nfind / -xdev \\( -nouser -o -nogroup \\) 2>/dev/null" },
+          {
+            t: 'table',
+            head: ["Élément de la commande", "Signification"],
+            rows: [
+              ["`-xdev`", "Reste sur le système de fichiers de départ (évite `/proc` et les montages réseau)"],
+              ["`-perm -4000`", "Le bit SUID est positionné (le tiret signifie « tous ces bits au moins »)"],
+              ["`2>/dev/null`", "Masque les erreurs « Permission non accordée »"],
+            ],
+          },
+          { t: 'p', text: "Le résultat n’est pas une liste de fautes : `passwd` et `sudo` sont légitimement SUID. Ce qui compte, c’est l’**écart avec une liste de référence** de la distribution. Un interpréteur, un éditeur ou une copie de `find` en SUID root est une anomalie à traiter immédiatement." },
+        ],
+      },
     ],
     useCases: [
       "Audit de serveur : rechercher les binaires SUID inattendus, les fichiers modifiables par tous et les règles sudo trop larges.",
@@ -123,6 +159,8 @@ export const body: CourseBody = {
       'Dépannage : comprendre pourquoi un service ou un utilisateur n’a plus accès à un fichier après une mise à jour.',
     ],
     commonMistakes: [
+      "Corriger un problème d’accès avec `chmod 777` au lieu de comprendre le propriétaire, le groupe et l’umask.",
+      "Créer un fichier de secrets sans fixer l’umask, puis découvrir qu’il est lisible par tous.",
       '« Corriger » un problème d’accès avec `chmod 777` : n’importe quel utilisateur peut alors modifier ou remplacer le fichier.',
       'Autoriser via sudo des programmes capables de lancer un shell (vim, less, find, python, tar…).',
       'Laisser `PasswordAuthentication yes` sur un serveur exposé à Internet.',
@@ -139,6 +177,8 @@ export const body: CourseBody = {
       'Diagnostiquer d’abord (`id`, `namei -l`, `getfacl`), puis corriger au plus juste.',
     ],
     keyPoints: [
+      "Permissions de création = base (666 ou 777) moins l’umask.",
+      "Audit : find sur les bits SUID, SGID et « écriture pour tous », comparé à une référence.",
       'Permissions : r=4, w=2, x=1 pour propriétaire, groupe, autres.',
       'SUID root + programme détournable = élévation de privilèges.',
       'Une règle sudo qui autorise un programme ouvrant un shell équivaut à root.',

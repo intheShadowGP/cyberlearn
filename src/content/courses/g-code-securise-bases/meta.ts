@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'g-base-revue', label: 'Revue, tests et analyse de code', level: 1 },
     { id: 'g-base-habitudes', label: 'Bonnes habitudes et pratique responsable', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

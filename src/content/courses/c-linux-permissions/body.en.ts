@@ -115,6 +115,42 @@ export const body: CourseBody = {
           { t: 'list', ordered: true, items: ['Read the exact error message and reproduce the problem with the account concerned (`sudo -u account …`).', 'Check the process’s real identity: a service may run under another account or group after an update.', 'Examine the whole path with `namei -l`, then the ACLs with `getfacl`.', 'Rule out a read-only mount, a full disk or a confinement (SELinux, AppArmor, systemd unit options).', 'Fix as narrowly as possible (owner, group, targeted ACL), never with `chmod 777`.'] },
         ],
       },
+      {
+        id: 'umask',
+        title: "Default permissions: the role of umask",
+        blocks: [
+          { t: 'p', text: "When a program creates a file, its permissions are not chosen at random: the system starts from a base (666 for a file, 777 for a directory) and then **removes** the bits listed in the process **umask**." },
+          {
+            t: 'table',
+            head: ["umask", "File created", "Directory created", "Effect"],
+            rows: [
+              ["`022`", "`644` (rw-r--r--)", "`755` (rwxr-xr-x)", "Read open to others: common distribution default"],
+              ["`027`", "`640` (rw-r-----)", "`750` (rwxr-x---)", "No access for “others”"],
+              ["`077`", "`600` (rw-------)", "`700` (rwx------)", "Access reserved to the owner"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Seeing the effect of umask", code: "umask               # shows the current value, for example 0022\numask 077           # applies to this shell only\ntouch secret.txt && mkdir folder\nls -ld secret.txt folder   # -rw------- and drwx------" },
+          { t: 'callout', kind: 'tip', text: "A key or password file created with a permissive umask (for example by a script run as a scheduled task) may be readable by everyone. Set the umask **explicitly** in scripts that handle secrets." },
+        ],
+      },
+      {
+        id: 'audit-find',
+        title: "Auditing permissions with find",
+        blocks: [
+          { t: 'p', text: "A basic audit consists of looking for files whose permissions are out of the ordinary. The `find` command can do it from the **permission bits** themselves." },
+          { t: 'code', lang: "bash", caption: "Four audit searches (run read-only)", code: "# SUID files (run with the rights of their owner)\nfind / -xdev -type f -perm -4000 2>/dev/null\n\n# SGID files\nfind / -xdev -type f -perm -2000 2>/dev/null\n\n# World-writable files\nfind / -xdev -type f -perm -0002 2>/dev/null\n\n# Files with no owner or no group (deleted account?)\nfind / -xdev \\( -nouser -o -nogroup \\) 2>/dev/null" },
+          {
+            t: 'table',
+            head: ["Part of the command", "Meaning"],
+            rows: [
+              ["`-xdev`", "Stays on the starting file system (avoids `/proc` and network mounts)"],
+              ["`-perm -4000`", "The SUID bit is set (the dash means “at least all these bits”)"],
+              ["`2>/dev/null`", "Hides “Permission denied” errors"],
+            ],
+          },
+          { t: 'p', text: "The result is not a list of faults: `passwd` and `sudo` are legitimately SUID. What matters is the **difference from a reference list** for the distribution. An interpreter, an editor or a copy of `find` that is SUID root is an anomaly to handle immediately." },
+        ],
+      },
     ],
     useCases: [
       "Server audit: look for unexpected SUID binaries, world-writable files and overly broad sudo rules.",
@@ -123,6 +159,8 @@ export const body: CourseBody = {
       'Troubleshooting: understand why a service or user no longer has access to a file after an update.',
     ],
     commonMistakes: [
+      "Fixing an access problem with `chmod 777` instead of understanding owner, group and umask.",
+      "Creating a secrets file without setting the umask, then finding it readable by everyone.",
       '“Fixing” an access problem with `chmod 777`: any user can then modify or replace the file.',
       'Allowing through sudo programs able to start a shell (vim, less, find, python, tar…).',
       'Leaving `PasswordAuthentication yes` on a server exposed to the Internet.',
@@ -139,6 +177,8 @@ export const body: CourseBody = {
       'Diagnose first (`id`, `namei -l`, `getfacl`), then fix as narrowly as possible.',
     ],
     keyPoints: [
+      "Creation permissions = base (666 or 777) minus umask.",
+      "Audit: find on SUID, SGID and world-writable bits, compared with a reference.",
       'Permissions: r=4, w=2, x=1 for owner, group, others.',
       'SUID root + a hijackable program = privilege escalation.',
       'A sudo rule that allows a program that opens a shell is equivalent to root.',

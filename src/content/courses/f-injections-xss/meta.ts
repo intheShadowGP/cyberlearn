@@ -28,7 +28,7 @@ export const meta: CourseMeta = {
     { id: 'f-inj-autres', label: 'Injections de commande, NoSQL et gabarit', level: 2 },
     { id: 'f-inj-defense', label: 'Détection et défense en profondeur', level: 2 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

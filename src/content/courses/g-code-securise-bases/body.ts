@@ -131,6 +131,34 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'On s’entraîne sur son propre code, sur des applications faites pour cela (laboratoires, applications volontairement vulnérables). Tester le système d’un tiers sans autorisation est illégal. Si vous trouvez une faille par hasard, signalez-la au responsable sans en abuser.' },
         ],
       },
+      {
+        id: 'avant-apres',
+        title: "Deux défauts classiques, avant et après",
+        blocks: [
+          { t: 'p', text: "Les erreurs les plus courantes viennent de l’assemblage de **texte de l’utilisateur** et d’une **action du système**. Voici deux cas en Python, avec leur correction." },
+          { t: 'code', lang: "python", caption: "Injection de commande : ne pas construire une ligne de commande avec la saisie", code: "import os, subprocess, ipaddress\n\n# Vulnérable : « 8.8.8.8; cat /etc/passwd » exécute aussi la seconde commande\nos.system(\"ping -c 1 \" + host)\n\n# Corrigé : valider le type attendu, puis passer les arguments sans interpréteur\nip = ipaddress.ip_address(host)   # lève une exception si ce n’est pas une adresse IP\nsubprocess.run([\"ping\", \"-c\", \"1\", str(ip)], check=True)" },
+          { t: 'code', lang: "python", caption: "Traversée de répertoire : rester dans le dossier autorisé", code: "from pathlib import Path\n\nBASE = Path(\"/srv/documents\").resolve()\n\n# Vulnérable : « ../../etc/passwd » sort du dossier\ncontenu = open(\"/srv/documents/\" + nom).read()\n\n# Corrigé : résoudre le chemin final puis vérifier qu’il reste sous BASE\ncible = (BASE / nom).resolve()\nif not cible.is_relative_to(BASE):\n    raise ValueError(\"chemin refusé\")\ncontenu = cible.read_text()" },
+          { t: 'callout', kind: 'key', text: "Dans les deux cas, la correction ne consiste pas à interdire quelques caractères suspects, mais à **utiliser une interface qui sépare les données de l’instruction** (liste d’arguments) ou à **vérifier le résultat final** (chemin résolu)." },
+        ],
+      },
+      {
+        id: 'ranger-secret',
+        title: "Où ranger un secret, et que faire s’il fuite ?",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Emplacement", "Verdict", "Remarque"],
+            rows: [
+              ["Dans le code source ou le dépôt", "À proscrire", "Le secret reste dans l’historique même après suppression"],
+              ["Fichier de configuration versionné", "À proscrire", "Même problème que le code"],
+              ["Variable d’environnement injectée au déploiement", "Acceptable", "Visible par les processus et parfois dans les journaux de diagnostic"],
+              ["Gestionnaire de secrets de la plateforme", "Recommandé", "Accès contrôlé, journalisé, rotation possible"],
+            ],
+          },
+          { t: 'p', text: "Si un secret a été publié par erreur, **le supprimer du dépôt ne suffit pas** : toute personne ayant cloné le dépôt, tout robot d’indexation et tout journal d’intégration l’a peut-être déjà copié. La réponse comporte quatre gestes :" },
+          { t: 'list', ordered: true, items: ["**Révoquer** immédiatement le secret chez le service concerné et en générer un nouveau.", "**Vérifier** dans les journaux du service si l’ancien secret a été utilisé.", "**Nettoyer** l’historique si nécessaire, sans considérer cette étape comme une protection.", "**Prévenir la récidive** : fichier d’exclusion du dépôt, détection automatique de secrets avant chaque commit."] },
+        ],
+      },
     ],
     useCases: [
       'Relire un petit script personnel avant de le partager : entrées, secrets, erreurs, dépendances.',
@@ -139,6 +167,8 @@ export const body: CourseBody = {
       'Mettre en place un fichier de versions et une vérification régulière des dépendances.',
     ],
     commonMistakes: [
+      "Construire une commande, une requête ou un chemin par concaténation avec une saisie.",
+      "Supprimer un secret publié sans le révoquer.",
       'Penser que « ça marche » veut dire « c’est sûr ».',
       'Faire confiance à une entrée parce qu’elle vient « de notre formulaire ».',
       'Écrire un mot de passe ou une clé dans le code, puis le commiter.',
@@ -155,6 +185,7 @@ export const body: CourseBody = {
       'S’entraîner sur des cibles autorisées et signaler les failles de façon responsable.',
     ],
     keyPoints: [
+      "Séparer données et instruction, vérifier le résultat final ; un secret publié est un secret révoqué.",
       'Un bogue gêne l’usage normal ; une vulnérabilité s’exploite : un programme peut marcher et être vulnérable.',
       'Toute entrée est non fiable : liste d’autorisation, validation côté serveur, requêtes paramétrées.',
       'Un secret n’est jamais dans le code : variable d’environnement ou gestionnaire de secrets.',

@@ -111,6 +111,43 @@ export const body: CourseBody = {
           },
         ],
       },
+      {
+        id: 'lire-politique',
+        title: "Lire une politique d’accès : un exemple commenté",
+        blocks: [
+          { t: 'p', text: "Les fournisseurs cloud expriment les droits sous forme de politiques, souvent en JSON. La syntaxe varie, mais la logique est la même : **qui** (l’identité à laquelle la politique est attachée), **peut ou ne peut pas** (effet), **quoi** (actions), **sur quoi** (ressources), **sous quelles conditions**. L’exemple suivant est écrit dans la syntaxe d’AWS." },
+          { t: 'code', lang: "json", caption: "Lecture seule d’un dossier de stockage, uniquement avec MFA", code: "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": [\"s3:GetObject\"],\n      \"Resource\": \"arn:aws:s3:::rapports-compta/*\",\n      \"Condition\": { \"Bool\": { \"aws:MultiFactorAuthPresent\": \"true\" } }\n    }\n  ]\n}" },
+          { t: 'p', text: "Cette politique autorise **uniquement** la lecture d’objets du stockage `rapports-compta`, et seulement si l’utilisateur s’est authentifié avec un second facteur. Tout ce qui n’est pas explicitement autorisé est **refusé par défaut**, et un `Deny` explicite l’emporte toujours sur un `Allow`." },
+          {
+            t: 'table',
+            caption: "Signaux d’alerte à la lecture d’une politique",
+            head: ["Motif", "Pourquoi c’est dangereux", "Correction"],
+            rows: [
+              ["`\"Action\": \"*\"`", "Toutes les actions du service, y compris la suppression et la modification des droits", "Lister uniquement les actions nécessaires"],
+              ["`\"Resource\": \"*\"`", "Toutes les ressources du compte", "Cibler les ressources par identifiant ou préfixe"],
+              ["Droits de gestion des identités accordés largement", "Un utilisateur peut s’octroyer tous les droits (élévation de privilèges)", "Réserver cette capacité à des comptes d’administration contrôlés"],
+              ["Aucune condition sur un accès sensible", "Aucun garde-fou si un identifiant est volé", "Ajouter MFA, plage d’adresses ou horaires"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'revue-acces',
+        title: "Revue périodique des accès : une méthode simple",
+        blocks: [
+          { t: 'p', text: "Les droits s’accumulent : un projet se termine, une personne change d’équipe, une clé d’accès créée « temporairement » reste active. Une revue régulière, par exemple trimestrielle, ramène les droits à ce qui est réellement utilisé." },
+          { t: 'list', ordered: true, items: ["**Inventorier** les identités humaines et applicatives, avec un responsable nommé pour chacune.", "**Repérer l’inutilisé** : comptes sans connexion récente, clés d’accès jamais utilisées ou anciennes (le délai se fixe dans la politique de l’organisation).", "**Comparer droits accordés et droits utilisés** (les fournisseurs proposent des rapports d’accès et des analyses de droits excessifs).", "**Retirer ou réduire** ; tester l’effet avec le simulateur de politiques du fournisseur avant de modifier la production.", "**Consigner** la revue : date, décisions, personne qui a validé."] },
+          {
+            t: 'table',
+            head: ["Constat", "Risque", "Action"],
+            rows: [
+              ["Clé d’accès créée il y a plusieurs années, jamais renouvelée", "Une clé volée reste valable indéfiniment", "Renouveler, ou remplacer par des identifiants temporaires"],
+              ["Compte d’un ancien prestataire encore actif", "Accès par un tiers qui n’est plus sous contrat", "Désactiver immédiatement puis supprimer"],
+              ["Application dotée de droits d’administration pour « simplifier »", "Sa compromission donne tout le compte", "Définir un rôle limité aux actions qu’elle exécute"],
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Revue d’une politique IAM avant sa mise en production.',
@@ -118,6 +155,8 @@ export const body: CourseBody = {
       'Investigation d’une fuite : déterminer via les journaux d’API qui a rendu un compartiment public, et quand.',
     ],
     commonMistakes: [
+      "Accorder `*` sur les actions et les ressources « le temps de tester », puis ne jamais restreindre.",
+      "Ne jamais revoir les accès : les droits d’hier survivent aux projets d’hier.",
       'Penser que le fournisseur cloud est responsable de la configuration des accès.',
       'Accorder `*:*` « temporairement » pour débloquer un développeur.',
       'Utiliser le compte racine pour l’administration courante.',
@@ -132,6 +171,8 @@ export const body: CourseBody = {
       'CSPM et analyse de l’Infrastructure as Code avant déploiement.',
     ],
     keyPoints: [
+      "Politique : effet, actions, ressources, conditions ; refus par défaut, `Deny` explicite prioritaire.",
+      "Revue périodique : inventorier, repérer l’inutilisé, réduire, consigner.",
       'Le client reste responsable de ses données et de ses identités, quel que soit le modèle.',
       'IAM : refus implicite par défaut, Allow pour autoriser, Deny explicite prioritaire.',
       '`Principal: *` sur un stockage = données publiques.',

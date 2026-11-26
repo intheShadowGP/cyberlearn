@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'l-federation', label: 'SSO, fédération et identités temporaires', level: 2 },
     { id: 'l-reponse', label: 'Journalisation et réponse dans le cloud', level: 2 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };
