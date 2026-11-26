@@ -33,5 +33,12 @@ export const solutions: CourseSolutions = {
         { t: 'p', text: 'Indicateur : précision et rappel mesurés chaque semaine sur les cas confirmés par les enquêteurs, comparés aux semaines précédentes ; une baisse brutale déclenche une analyse et, si nécessaire, le retour au modèle précédent.' },
       ],
     },
+    'incident-modele': {
+      blocks: [
+        { t: 'p', text: 'Hypothèses : un **empoisonnement** par de faux signalements ou des étiquettes manipulées, entré avec le dernier réentraînement ; une **dérive** (nouvelle campagne d’hameçonnage différente) ; une **régression** liée à un changement de caractéristiques ou de données.' },
+        { t: 'list', ordered: true, items: ['**Revenir** à la version précédente validée du modèle pour rétablir la détection.', '**Geler** le réentraînement automatique et restreindre l’API (limitation, réponses minimales).', '**Comparer** les performances de la version précédente et de la nouvelle sur un jeu de cas confirmés et récents.'] },
+        { t: 'list', items: ['**Examiner** les données ajoutées depuis deux semaines : sources, comptes à l’origine des signalements, distribution des étiquettes.', '**Isoler** et retirer les exemples suspects, puis réentraîner dans un environnement maîtrisé.', '**Renforcer** le contrôle des étiquettes (pondération, vérification), la surveillance de la dérive et la documentation du modèle.'] },
+      ],
+    },
   },
 };

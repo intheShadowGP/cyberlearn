@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'q-ia-defense-ml',
@@ -88,6 +89,47 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'info', text: 'Le NIST AI Risk Management Framework et les recommandations de l’ANSSI sur la sécurité des systèmes d’IA générative proposent des démarches pour gouverner ces risques tout au long du cycle de vie.' },
         ],
       },
+      {
+        id: 'donnees',
+        title: 'Qualité des données, biais et explicabilité',
+        blocks: [
+          { t: 'p', text: 'La performance d’un modèle de détection vient des données plus que de l’algorithme. Des données déséquilibrées, anciennes ou mal étiquetées produisent un modèle qui paraît bon en laboratoire et déçoit en production.' },
+          {
+            t: 'table',
+            head: ['Problème', 'Conséquence', 'Remède'],
+            rows: [
+              ['**Biais de représentation**', 'Le modèle ne voit qu’un type d’exemples (une source, une période)', 'Diversifier les sources, vérifier la représentativité'],
+              ['**Fuite de données**', 'Des exemples de test se retrouvent dans l’entraînement : mesures trop optimistes', 'Séparer strictement, retirer les doublons, découper par date'],
+              ['**Étiquettes erronées**', 'Le modèle apprend des erreurs', 'Critères d’étiquetage écrits, relectures, échantillonnage'],
+              ['**Caractéristiques fragiles**', 'Un attaquant les manipule facilement', 'Choisir des grandeurs difficiles à falsifier'],
+            ],
+          },
+          { t: 'def', term: 'Ingénierie des caractéristiques (feature engineering)', text: 'Choix et construction des grandeurs fournies au modèle. Elle conditionne ce que le modèle peut apprendre et ce qu’un attaquant peut manipuler.' },
+          { t: 'def', term: 'Explicabilité', text: 'Capacité à indiquer pourquoi un modèle a produit une décision (champs ou événements qui ont pesé). Elle permet à l’analyste de vérifier une alerte et de repérer une erreur du modèle.' },
+          { t: 'list', items: ['**Tracer** la provenance et le versionnement des données.', '**Mesurer** sur des données postérieures à celles de l’entraînement.', '**Documenter** les critères d’étiquetage et les limites connues.', '**Exiger** des éléments de preuve avec chaque alerte.'] },
+          { t: 'callout', kind: 'warn', text: 'Une fuite de données entre entraînement et test donne des chiffres flatteurs qui ne se reproduiront pas en production : c’est l’erreur d’évaluation la plus fréquente.' },
+        ],
+      },
+      {
+        id: 'production',
+        title: 'Exploiter un modèle : surveillance et incidents',
+        blocks: [
+          { t: 'p', text: 'Un modèle déployé n’est pas terminé : ses performances évoluent avec les données, il peut être attaqué et il peut régresser après un réentraînement. Son exploitation demande une surveillance et une procédure d’incident.' },
+          {
+            t: 'table',
+            head: ['Élément', 'Objectif', 'Exemple'],
+            rows: [
+              ['**Surveillance des performances**', 'Détecter une baisse de précision ou de rappel', 'Cas confirmés par les enquêteurs, comparés semaine après semaine'],
+              ['**Surveillance de la dérive**', 'Repérer un changement des données', 'Distribution des caractéristiques, volumes inhabituels'],
+              ['**Protection de l’API**', 'Limiter l’extraction et l’inférence', 'Authentification, limitation de débit, réponses minimales'],
+              ['**Retour arrière**', 'Revenir vite à une version saine', 'Version précédente validée, signée et conservée'],
+            ],
+          },
+          { t: 'def', term: 'Incident de modèle', text: 'Dégradation soudaine ou comportement anormal d’un modèle en production : baisse de détection, flot de fausses alertes, empoisonnement suspecté, fuite par l’API. Il se traite comme un incident de sécurité.' },
+          { t: 'list', ordered: true, items: ['**Détecter** la baisse ou l’anomalie par la surveillance.', '**Contenir** : retour à la version précédente validée, restriction de l’API.', '**Analyser** les données récentes et les demandes pour trouver la cause (dérive, empoisonnement, extraction).', '**Corriger** puis réentraîner dans un environnement maîtrisé.', '**Documenter** dans la carte de modèle et ajuster la surveillance.'] },
+          { t: 'callout', kind: 'tip', text: 'Signer les fichiers de modèle et préférer les formats qui ne contiennent que des poids : un modèle est un artefact de production comme un autre.' },
+        ],
+      },
     ],
     useCases: [
       'Choix d’un outil de détection fondé sur l’IA : exiger précision, rappel et taux de faux positifs mesurés sur des données comparables aux siennes.',
@@ -134,25 +176,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une banque entraîne chaque semaine un modèle de détection de fraude sur les transactions de la semaine écoulée, en utilisant les signalements des clients comme étiquettes. Le modèle est exposé par une API interne qui renvoie un score de 0 à 1 avec le détail des facteurs.' }],
       steps: ['Identifier trois menaces contre ce système.', 'Proposer une mesure pour chacune.', 'Proposer un indicateur de surveillance en production.'],
     },
+    {
+      id: 'incident-modele',
+      kind: 'case',
+      title: 'Cas : une baisse brutale de détection',
+      context: [
+        { t: 'p', text: 'Un modèle de détection d’hameçonnage est réentraîné chaque semaine. Deux semaines après le dernier réentraînement, le rappel mesuré sur les cas confirmés tombe de 85 % à 55 %, alors que le volume d’alertes reste stable. Les étiquettes proviennent en partie des signalements des utilisateurs.' },
+      ],
+      steps: ['Formulez deux hypothèses sur la cause (dérive, empoisonnement, régression).', 'Décrivez les actions de confinement, dans l’ordre.', 'Indiquez les vérifications à mener sur les données et la suite à donner.'],
+    },
   ],
-  questions: [
-    { id: 'aiml-q1', type: 'single', difficulty: 1, skills: ['q-ml-bases'], prompt: 'Quel type d’apprentissage utilise des exemples étiquetés « malveillant » ou « légitime » ?', options: [{ id: 'a', text: 'L’apprentissage supervisé' }, { id: 'b', text: 'L’apprentissage non supervisé' }, { id: 'c', text: 'Le chiffrement symétrique' }, { id: 'd', text: 'La compression' }] },
-    { id: 'aiml-q2', type: 'truefalse', difficulty: 2, skills: ['q-ml-bases'], prompt: 'Un modèle peut apprendre une caractéristique sans rapport avec la malveillance si elle distingue par hasard les exemples d’entraînement.' },
-    { id: 'aiml-q3', type: 'short', difficulty: 1, skills: ['q-ml-bases'], prompt: 'Comment appelle-t-on, en anglais, les grandeurs mesurées sur chaque exemple et fournies au modèle ?' },
-    { id: 'aiml-q4', type: 'multi', difficulty: 2, skills: ['q-ml-bases', 'q-ml-soc'], prompt: 'Quels usages relèvent typiquement de l’apprentissage non supervisé en sécurité ?', options: [{ id: 'a', text: 'Repérer un comportement de connexion qui s’écarte de l’habitude' }, { id: 'b', text: 'Regrouper des alertes similaires sans étiquettes' }, { id: 'c', text: 'Détecter un volume de transfert anormal pour un hôte' }, { id: 'd', text: 'Vérifier une signature numérique' }] },
-    { id: 'aiml-q5', type: 'single', difficulty: 2, skills: ['q-ml-eval'], prompt: 'Que mesure la précision d’un détecteur ?', options: [{ id: 'a', text: 'La part des alertes levées qui sont réellement malveillantes' }, { id: 'b', text: 'La part des attaques détectées' }, { id: 'c', text: 'La vitesse d’exécution du modèle' }, { id: 'd', text: 'Le nombre de paramètres du modèle' }] },
-    { id: 'aiml-q6', type: 'truefalse', difficulty: 2, skills: ['q-ml-eval'], prompt: 'Sur un flux où les attaques sont très rares, une exactitude de 99,9 % garantit un bon détecteur.' },
-    { id: 'aiml-q7', type: 'short', difficulty: 2, skills: ['q-ml-eval'], prompt: 'Comment appelle-t-on l’évolution des données réelles par rapport aux données d’entraînement ? (mot anglais)' },
-    { id: 'aiml-q8', type: 'open', difficulty: 3, skills: ['q-ml-eval'], prompt: 'Un détecteur a un rappel de 95 % et un taux de faux positifs de 0,5 %. Votre SIEM reçoit 2 millions d’événements par jour, dont environ 20 malveillants. Calculez l’ordre de grandeur des alertes par jour et commentez.' },
-    { id: 'aiml-q9', type: 'single', difficulty: 2, skills: ['q-ml-soc'], prompt: 'Quelle utilisation de l’IA dans un SOC respecte le principe de l’humain dans la boucle ?', options: [{ id: 'a', text: 'L’IA propose l’isolement d’un serveur avec les éléments qui le justifient, un analyste valide' }, { id: 'b', text: 'L’IA supprime automatiquement les comptes qu’elle juge suspects' }, { id: 'c', text: 'L’IA ferme seule les incidents sans trace' }, { id: 'd', text: 'L’IA modifie les règles du pare-feu de production sans validation' }] },
-    { id: 'aiml-q10', type: 'multi', difficulty: 2, skills: ['q-ml-soc'], prompt: 'Sur quelles tâches l’IA apporte-t-elle le plus de valeur à un SOC ?', options: [{ id: 'a', text: 'Regrouper des alertes liées' }, { id: 'b', text: 'Enrichir et résumer un incident' }, { id: 'c', text: 'Proposer une requête de recherche à partir d’une question' }, { id: 'd', text: 'Décider seule des sanctions contre un salarié' }] },
-    { id: 'aiml-q11', type: 'truefalse', difficulty: 1, skills: ['q-ml-soc'], prompt: 'Une suggestion d’un outil d’IA doit être accompagnée des éléments qui permettent à l’analyste de la vérifier.' },
-    { id: 'aiml-q12', type: 'single', difficulty: 2, skills: ['q-ml-robustesse'], prompt: 'Comment appelle-t-on l’attaque qui consiste à introduire des exemples piégés dans les données d’entraînement ?', options: [{ id: 'a', text: 'L’empoisonnement' }, { id: 'b', text: 'L’évasion' }, { id: 'c', text: 'L’inférence d’appartenance' }, { id: 'd', text: 'Le phishing' }] },
-    { id: 'aiml-q13', type: 'multi', difficulty: 3, skills: ['q-ml-robustesse'], prompt: 'Quelles mesures limitent les risques d’inversion de modèle et d’inférence d’appartenance ?', options: [{ id: 'a', text: 'Ne renvoyer que la décision, sans scores détaillés' }, { id: 'b', text: 'Limiter le nombre de requêtes par client' }, { id: 'c', text: 'Entraîner avec la confidentialité différentielle' }, { id: 'd', text: 'Publier les données d’entraînement pour plus de transparence' }] },
-    { id: 'aiml-q14', type: 'truefalse', difficulty: 2, skills: ['q-ml-robustesse'], prompt: 'Charger un fichier de modèle au format pickle provenant d’une source inconnue peut exécuter du code sur la machine.' },
-    { id: 'aiml-q15', type: 'open', difficulty: 3, skills: ['q-ml-robustesse', 'q-ml-eval'], prompt: 'Un détecteur de logiciels malveillants fondé sur l’apprentissage automatique est contourné par des fichiers légèrement modifiés. Expliquez de quel type d’attaque il s’agit et proposez trois mesures.' },
-    { id: 'aiml-q16', type: 'short', difficulty: 2, skills: ['q-ml-robustesse'], prompt: 'Quel référentiel de MITRE recense les techniques d’attaque contre les systèmes d’IA, sur le modèle d’ATT&CK ?' },
-  ],
+  questions,
   resources: [
     { title: 'MITRE ATLAS', source: 'MITRE', url: 'https://atlas.mitre.org/' },
     { title: 'AI Risk Management Framework', source: 'NIST', url: 'https://www.nist.gov/itl/ai-risk-management-framework' },
