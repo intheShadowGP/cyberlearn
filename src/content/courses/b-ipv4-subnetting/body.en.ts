@@ -142,6 +142,57 @@ export const body: CourseBody = {
           { t: 'list', items: ['Firewall rules expressed by subnets remain readable and auditable.', 'A documented plan lets the SOC immediately detect an “off-plan” address (uninventoried device, spoofing).', 'Flat networks (a single `/16`) maximize the attack surface: wide ARP broadcast, easier lateral movement.', 'A mask error in a rule (`/16` instead of `/24`) can open access to thousands of hosts: reread each prefix.'] },
         ],
       },
+      {
+        id: 'exercices-resolus',
+        title: "Two worked calculations",
+        blocks: [
+          { t: 'p', text: "Method: find the **octet where the split happens**, compute the **block size** (256 minus the mask value in that octet), then place the address in its block." },
+          {
+            t: 'table',
+            caption: "Example 1: 192.168.10.77/26",
+            head: ["Step", "Calculation", "Result"],
+            rows: [
+              ["Mask", "/26 = 8 + 8 + 8 + 2 bits set", "255.255.255.192"],
+              ["Block size (4th octet)", "256 − 192", "64 (networks at 0, 64, 128, 192)"],
+              ["Network", "77 is between 64 and 127", "192.168.10.64"],
+              ["Broadcast", "Last address of the block", "192.168.10.127"],
+              ["Usable hosts", ".65 to .126; 2⁶ − 2", "62 hosts"],
+            ],
+          },
+          {
+            t: 'table',
+            caption: "Example 2: 10.20.37.130/20",
+            head: ["Step", "Calculation", "Result"],
+            rows: [
+              ["Mask", "/20 = 8 + 8 + 4 bits set", "255.255.240.0"],
+              ["Block size (3rd octet)", "256 − 240", "16 (0, 16, 32, 48…)"],
+              ["Network", "37 is between 32 and 47", "10.20.32.0"],
+              ["Broadcast", "Last address of the block", "10.20.47.255"],
+              ["Usable hosts", "10.20.32.1 to 10.20.47.254; 2¹² − 2", "4,094 hosts"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Quick check: the network address is always a **multiple of the block size** in the split octet, and the broadcast is just before the next block. If your result does not satisfy this, the calculation is wrong." },
+        ],
+      },
+      {
+        id: 'vlsm-resolu',
+        title: "A worked VLSM addressing plan",
+        blocks: [
+          { t: 'p', text: "Requirement: split `192.168.50.0/24` for four networks of **100**, **50**, **20** and **2** hosts (a link between two routers). Handle the needs from **largest to smallest**, each time taking the smallest block that fits." },
+          {
+            t: 'table',
+            head: ["Network", "Need", "Chosen mask", "Capacity", "Addresses"],
+            rows: [
+              ["Workstations", "100 hosts", "/25", "126", "192.168.50.0 – 192.168.50.127"],
+              ["Servers", "50 hosts", "/26", "62", "192.168.50.128 – 192.168.50.191"],
+              ["Guests", "20 hosts", "/27", "30", "192.168.50.192 – 192.168.50.223"],
+              ["Router link", "2 hosts", "/30", "2", "192.168.50.224 – 192.168.50.227"],
+            ],
+          },
+          { t: 'p', text: "`192.168.50.228` to `192.168.50.255` remain for future needs. Choosing the smallest block avoids waste, and placing blocks from largest to smallest guarantees they stay **aligned** to their size." },
+          { t: 'callout', kind: 'key', text: "From a security standpoint, a clear addressing plan allows precise firewall rules (one network = one function) and makes an out-of-plan address easy to spot in a log." },
+        ],
+      },
     ],
     useCases: [
       'Writing and auditing firewall rules: checking that a `10.10.0.0/22` rule does not unintentionally include the administration network.',
@@ -150,6 +201,8 @@ export const body: CourseBody = {
       'Authorized pentest: precisely defining the scope in CIDR in the rules of engagement.',
     ],
     commonMistakes: [
+      "Forgetting to subtract the network and broadcast addresses when counting hosts.",
+      "Placing a small block before a large one in VLSM, which misaligns the rest of the plan.",
       'Forgetting to remove the network address and the broadcast in the host count.',
       'Believing that `172.16.0.0/12` stops at `172.16.255.255`: it extends up to `172.31.255.255`.',
       'Allocating a VLSM subnet that does not start on a multiple of its size (for example `10.0.0.100/26`).',
@@ -164,6 +217,7 @@ export const body: CourseBody = {
       'Have every firewall rule prefix reread by a second person or a calculation tool.',
     ],
     keyPoints: [
+      "Block size = 256 minus the mask in the split octet; VLSM: from the largest need to the smallest.",
       'An IPv4 address is 32 bits; the `/n` prefix indicates the network bits.',
       'Block size = 256 − mask value in the cut byte.',
       'Usable hosts = 2^(32 − n) − 2 (except /31 and /32).',

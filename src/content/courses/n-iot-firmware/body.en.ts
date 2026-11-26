@@ -105,6 +105,46 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'The Cyber Resilience Act requires manufacturers to manage vulnerabilities during the support period, with reporting of actively exploited vulnerabilities. Check the application calendars.' },
         ],
       },
+      {
+        id: 'triage-firmware',
+        title: "Firmware triage: from raw image to findings",
+        blocks: [
+          { t: 'p', text: "Firmware analysis is done **only on devices you own or have written authorization to test**, in an isolated environment. It follows a simple sequence: identify, extract, look for common flaws." },
+          { t: 'code', lang: "bash", caption: "Triage of a firmware image (isolated analysis workstation)", code: "sha256sum firmware.bin         # 1. hash: trace the version analyzed\nfile firmware.bin              # 2. content type\nbinwalk firmware.bin           # 3. spot embedded file systems and compressed blocks\nbinwalk -e firmware.bin        # 4. extract into a _firmware.bin.extracted/ folder\n\n# 5. look for common flaws in the extracted file system\ngrep -rIl \"password\" _firmware.bin.extracted/ | head\nfind _firmware.bin.extracted/ -name \"*.pem\" -o -name \"*.key\" -o -name \"shadow\"" },
+          {
+            t: 'table',
+            head: ["Possible finding", "Risk", "Manufacturer remediation"],
+            rows: [
+              ["Username or password written in code or a configuration file", "Access to every unit of the device", "Unique password per device, or mandatory change at first use"],
+              ["Private key or certificate embedded in the image", "Impersonation, decryption of communications", "Keys generated at manufacture, never shared across the series"],
+              ["Debug service (Telnet, open serial port) left active", "Direct administrator access", "Disable in production or protect with authentication"],
+              ["Old open-source components", "Known vulnerabilities", "Component inventory (SBOM) and tracked updates"],
+              ["Unsigned update", "Installation of malicious firmware", "Signature verified by the device before installation"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "If you find a vulnerability in a commercial product, follow **coordinated disclosure**: notify the manufacturer, give them a reasonable time to fix, and do not publish an exploitation procedure beforehand." },
+        ],
+      },
+      {
+        id: 'flotte-inventaire',
+        title: "Managing a fleet of devices: the minimal inventory",
+        blocks: [
+          { t: 'p', text: "You cannot protect what you do not know. For a device fleet, a minimal inventory answers six questions for each device." },
+          {
+            t: 'table',
+            head: ["Information", "Question it answers"],
+            rows: [
+              ["Model, serial number, location", "Which device are we talking about, and where is it?"],
+              ["Firmware version and last update date", "Is it affected by an announced vulnerability?"],
+              ["Owner (team or person)", "Who decides on an update or a shutdown?"],
+              ["Network and allowed flows", "Whom must it talk to, and nothing else?"],
+              ["Credential management method", "How are its passwords or certificates managed?"],
+              ["Manufacturer end-of-support date", "Should its replacement be planned?"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "A device whose manufacturer no longer publishes fixes must be **isolated** (separate network, strictly limited flows) until it is replaced, because its security debt will only grow." },
+        ],
+      },
     ],
     useCases: [
       'Assess the security of a range of IP cameras before buying them for a sensitive site.',
@@ -112,6 +152,8 @@ export const body: CourseBody = {
       'Prepare a product’s compliance with the Cyber Resilience Act.',
     ],
     commonMistakes: [
+      "Analyzing the firmware of a device you neither own nor are authorized to test.",
+      "Keeping an unsupported device in service with no isolation or replacement plan.",
       'Shipping all the devices with the same password or the same private key.',
       'Leaving UART or JTAG active in production.',
       'Accepting unsigned updates or allowing a return to a vulnerable version.',
@@ -126,6 +168,7 @@ export const body: CourseBody = {
       'SBOM, component monitoring and a published disclosure policy.',
     ],
     keyPoints: [
+      "Firmware: identify, extract, look for secrets and debug services; coordinated disclosure; fleet inventory.",
       'Universal credentials, active debug, unsigned firmware: the three major weaknesses.',
       'Firmware analysis: extraction (binwalk), exploration, search for secrets and obsolete components.',
       'Secure boot: each stage verifies the signature of the next from a hardware root.',

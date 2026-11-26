@@ -105,6 +105,46 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'Le Cyber Resilience Act exige des fabricants une gestion des vulnérabilités pendant la période de support, avec signalement des vulnérabilités activement exploitées. Vérifier les calendriers d’application.' },
         ],
       },
+      {
+        id: 'triage-firmware',
+        title: "Triage d’un firmware : de l’image brute aux constats",
+        blocks: [
+          { t: 'p', text: "L’analyse de firmware se pratique **uniquement sur des appareils que l’on possède ou sur lesquels on a une autorisation écrite**, dans un environnement isolé. Elle suit un enchaînement simple : identifier, extraire, chercher les défauts courants." },
+          { t: 'code', lang: "bash", caption: "Triage d’une image de firmware (poste d’analyse isolé)", code: "sha256sum firmware.bin         # 1. empreinte : tracer la version analysée\nfile firmware.bin              # 2. type de contenu\nbinwalk firmware.bin           # 3. repérer les systèmes de fichiers et blocs compressés intégrés\nbinwalk -e firmware.bin        # 4. extraire dans un dossier _firmware.bin.extracted/\n\n# 5. chercher les défauts courants dans le système de fichiers extrait\ngrep -rIl \"password\" _firmware.bin.extracted/ | head\nfind _firmware.bin.extracted/ -name \"*.pem\" -o -name \"*.key\" -o -name \"shadow\"" },
+          {
+            t: 'table',
+            head: ["Constat possible", "Risque", "Remédiation côté fabricant"],
+            rows: [
+              ["Identifiant ou mot de passe écrit dans le code ou un fichier de configuration", "Accès à tous les exemplaires de l’appareil", "Mot de passe unique par appareil, ou changement obligatoire à la première utilisation"],
+              ["Clé privée ou certificat embarqué dans l’image", "Usurpation, déchiffrement des communications", "Clés générées à la fabrication, jamais communes à la série"],
+              ["Service de débogage (Telnet, port série ouvert) laissé actif", "Accès administrateur direct", "Désactiver en production ou protéger par authentification"],
+              ["Composants open source anciens", "Vulnérabilités connues", "Inventaire des composants (SBOM) et mises à jour suivies"],
+              ["Mise à jour non signée", "Installation d’un firmware malveillant", "Signature vérifiée par l’appareil avant installation"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "Si vous trouvez une vulnérabilité dans un produit commercial, suivez une **divulgation coordonnée** : prévenez le fabricant, laissez-lui un délai raisonnable pour corriger, et ne publiez pas de procédure d’exploitation avant." },
+        ],
+      },
+      {
+        id: 'flotte-inventaire',
+        title: "Gérer une flotte d’objets : l’inventaire minimal",
+        blocks: [
+          { t: 'p', text: "On ne protège pas ce qu’on ne connaît pas. Pour une flotte d’objets, un inventaire minimal répond à six questions, pour chaque appareil." },
+          {
+            t: 'table',
+            head: ["Information", "Question à laquelle elle répond"],
+            rows: [
+              ["Modèle, numéro de série, localisation", "De quel appareil parle-t-on, et où est-il ?"],
+              ["Version du firmware et date de dernière mise à jour", "Est-il concerné par une vulnérabilité annoncée ?"],
+              ["Responsable (équipe ou personne)", "Qui décide d’une mise à jour ou d’un arrêt ?"],
+              ["Réseau et flux autorisés", "Avec qui doit-il communiquer, et rien d’autre ?"],
+              ["Mode de gestion des identifiants", "Comment sont gérés ses mots de passe ou certificats ?"],
+              ["Date de fin de support du fabricant", "Faut-il prévoir son remplacement ?"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Un objet dont le fabricant ne publie plus de correctifs doit être **isolé** (réseau séparé, flux strictement limités) en attendant son remplacement, car sa dette de sécurité ne fera que croître." },
+        ],
+      },
     ],
     useCases: [
       'Évaluer la sécurité d’une gamme de caméras IP avant son achat pour un site sensible.',
@@ -112,6 +152,8 @@ export const body: CourseBody = {
       'Préparer la conformité d’un produit au Cyber Resilience Act.',
     ],
     commonMistakes: [
+      "Analyser le firmware d’un appareil dont on n’est ni propriétaire ni autorisé à le tester.",
+      "Garder en service un objet sans support, sans isolation ni plan de remplacement.",
       'Livrer tous les appareils avec le même mot de passe ou la même clé privée.',
       'Laisser l’UART ou le JTAG actifs en production.',
       'Accepter des mises à jour non signées ou permettre le retour à une version vulnérable.',
@@ -126,6 +168,7 @@ export const body: CourseBody = {
       'SBOM, veille des composants et politique de divulgation publiée.',
     ],
     keyPoints: [
+      "Firmware : identifier, extraire, chercher secrets et services de débogage ; divulgation coordonnée ; inventaire de la flotte.",
       'Identifiants universels, débogage actif, firmware non signé : les trois faiblesses majeures.',
       'Analyse de firmware : extraction (binwalk), exploration, recherche de secrets et de composants obsolètes.',
       'Secure boot : chaque étape vérifie la signature de la suivante depuis une racine matérielle.',

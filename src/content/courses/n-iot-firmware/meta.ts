@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'n-iot-reseau', label: 'Communications et réseau des objets', level: 2 },
     { id: 'n-iot-flotte', label: 'Cycle de vie et exploitation d’une flotte', level: 3 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

@@ -142,6 +142,57 @@ export const body: CourseBody = {
           { t: 'list', items: ["Des règles de pare-feu exprimées par sous-réseaux restent lisibles et auditables.", "Un plan documenté permet au SOC de détecter immédiatement une adresse « hors plan » (équipement non inventorié, usurpation).", "Les réseaux plats (`/16` unique) maximisent la surface d'attaque : diffusion ARP étendue, mouvement latéral facilité.", "Une erreur de masque dans une règle (`/16` au lieu de `/24`) peut ouvrir l'accès à des milliers d'hôtes : relire chaque préfixe."] },
         ],
       },
+      {
+        id: 'exercices-resolus',
+        title: "Deux calculs résolus pas à pas",
+        blocks: [
+          { t: 'p', text: "Méthode : repérer l’**octet où se fait la coupure**, calculer la **taille de bloc** (256 moins la valeur du masque dans cet octet), puis placer l’adresse dans son bloc." },
+          {
+            t: 'table',
+            caption: "Exemple 1 : 192.168.10.77/26",
+            head: ["Étape", "Calcul", "Résultat"],
+            rows: [
+              ["Masque", "/26 = 8 + 8 + 8 + 2 bits à 1", "255.255.255.192"],
+              ["Taille de bloc (4e octet)", "256 − 192", "64 (réseaux en 0, 64, 128, 192)"],
+              ["Réseau", "77 est entre 64 et 127", "192.168.10.64"],
+              ["Diffusion", "Dernière adresse du bloc", "192.168.10.127"],
+              ["Hôtes utilisables", ".65 à .126 ; 2⁶ − 2", "62 hôtes"],
+            ],
+          },
+          {
+            t: 'table',
+            caption: "Exemple 2 : 10.20.37.130/20",
+            head: ["Étape", "Calcul", "Résultat"],
+            rows: [
+              ["Masque", "/20 = 8 + 8 + 4 bits à 1", "255.255.240.0"],
+              ["Taille de bloc (3e octet)", "256 − 240", "16 (0, 16, 32, 48…)"],
+              ["Réseau", "37 est entre 32 et 47", "10.20.32.0"],
+              ["Diffusion", "Dernière adresse du bloc", "10.20.47.255"],
+              ["Hôtes utilisables", "10.20.32.1 à 10.20.47.254 ; 2¹² − 2", "4 094 hôtes"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Vérification rapide : l’adresse du réseau est toujours un **multiple de la taille de bloc** dans l’octet de coupure, et la diffusion est juste avant le bloc suivant. Si votre résultat ne respecte pas cela, le calcul est faux." },
+        ],
+      },
+      {
+        id: 'vlsm-resolu',
+        title: "Un plan d’adressage VLSM résolu",
+        blocks: [
+          { t: 'p', text: "Besoin : découper `192.168.50.0/24` pour quatre réseaux de **100**, **50**, **20** et **2** hôtes (liaison entre deux routeurs). On traite les besoins du **plus grand au plus petit**, en prenant à chaque fois le plus petit bloc qui convient." },
+          {
+            t: 'table',
+            head: ["Réseau", "Besoin", "Masque retenu", "Capacité", "Adresses"],
+            rows: [
+              ["Postes", "100 hôtes", "/25", "126", "192.168.50.0 – 192.168.50.127"],
+              ["Serveurs", "50 hôtes", "/26", "62", "192.168.50.128 – 192.168.50.191"],
+              ["Invités", "20 hôtes", "/27", "30", "192.168.50.192 – 192.168.50.223"],
+              ["Liaison routeurs", "2 hôtes", "/30", "2", "192.168.50.224 – 192.168.50.227"],
+            ],
+          },
+          { t: 'p', text: "Il reste `192.168.50.228` à `192.168.50.255` pour des besoins futurs. Le choix du plus petit bloc évite le gaspillage, et placer les blocs du plus grand au plus petit garantit qu’ils restent **alignés** sur leur taille." },
+          { t: 'callout', kind: 'key', text: "Du point de vue de la sécurité, un plan d’adressage clair permet d’écrire des règles de pare-feu précises (un réseau = une fonction) et de repérer vite une adresse hors plan dans un journal." },
+        ],
+      },
     ],
     useCases: [
       "Rédaction et audit de règles de pare-feu : vérifier qu'une règle `10.10.0.0/22` n'englobe pas involontairement le réseau d'administration.",
@@ -150,6 +201,8 @@ export const body: CourseBody = {
       "Pentest autorisé : définir précisément le périmètre (scope) en CIDR dans les règles d'engagement.",
     ],
     commonMistakes: [
+      "Oublier de retirer l’adresse réseau et l’adresse de diffusion en comptant les hôtes.",
+      "Placer un petit bloc avant un grand en VLSM, ce qui désaligne la suite du plan.",
       "Oublier de retirer l'adresse réseau et la diffusion dans le calcul du nombre d'hôtes.",
       "Croire que `172.16.0.0/12` s'arrête à `172.16.255.255` : il s'étend jusqu'à `172.31.255.255`.",
       "Allouer un sous-réseau VLSM qui ne commence pas sur un multiple de sa taille (par exemple `10.0.0.100/26`).",
@@ -164,6 +217,7 @@ export const body: CourseBody = {
       'Faire relire tout préfixe de règle de pare-feu par une seconde personne ou un outil de calcul.',
     ],
     keyPoints: [
+      "Taille de bloc = 256 moins le masque dans l’octet de coupure ; VLSM : du plus grand besoin au plus petit.",
       'Une adresse IPv4 fait 32 bits ; le préfixe `/n` indique les bits réseau.',
       'Taille de bloc = 256 − valeur du masque dans l’octet de coupure.',
       'Hôtes utilisables = 2^(32 − n) − 2 (sauf /31 et /32).',

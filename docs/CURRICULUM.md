@@ -51,7 +51,7 @@
 | Du code au processus : compilation, binaires, mémoire et exécution (`a-compilation-memoire-execution`) | A | 3 · Avancé | 110 min | 6 | 40 | 2 | 4 |
 | Base de confiance, isolation et architecture de sécurité d’une plateforme (`a-isolation-confiance-plateforme`) | A | 4 · Expert | 120 min | 6 | 40 | 2 | 4 |
 | Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 80 min | 7 | 40 | 2 | 4 |
-| Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 95 min | 6 | 40 | 3 | 4 |
+| Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 95 min | 8 | 40 | 3 | 4 |
 | Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage (`b-commutation-vlan-ipv6`) | B | 2 · Intermédiaire | 105 min | 5 | 40 | 2 | 5 |
 | Routage, DNS, DHCP et NAT : acheminer les paquets entre réseaux (`b-routage-dns-dhcp-nat`) | B | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 5 |
 | Périmètre réseau : pare-feu, détection, VPN, Wi-Fi et architecture sécurisée (`b-perimetre-vpn-wifi`) | B | 3 · Avancé | 120 min | 5 | 40 | 3 | 5 |
@@ -79,7 +79,7 @@
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Sécurité du code avancée : analyse, fuzzing, revue, chaîne de construction et programme de sécurité (`g-code-securise-avance`) | G | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Test d’intrusion : initiation, cadre légal et première démarche (`h-pentest-initiation`) | H | 1 · Débutant | 100 min | 6 | 40 | 3 | 6 |
-| Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 4 |
+| Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 9 | 40 | 3 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Exercices adverses avancés : cadrage, émulation d’adversaire, chemins d’attaque et gouvernance (`h-pentest-avance`) | H | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Défense et SOC : initiation aux journaux, aux alertes et aux premiers réflexes (`i-soc-initiation`) | I | 1 · Débutant | 90 min | 8 | 40 | 3 | 4 |
@@ -108,7 +108,7 @@
 | Gouvernance avancée : quantification des risques, conformité multi-textes, tiers critiques et pilotage par la preuve (`m-gouvernance-avancee`) | M | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | Systèmes industriels et objets connectés pour débutants : comprendre et protéger (`n-ot-iot-initiation`) | N | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 7 | 40 | 3 | 4 |
-| Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 5 | 40 | 3 | 4 |
+| Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 4 |
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 5 |
 | Sécurité OT avancée : IEC 62443, architecture, analyse de risques, détection et résilience (`n-ot-securite-avancee`) | N | 4 · Expert | 140 min | 6 | 40 | 3 | 4 |
 | L’identité numérique pour débutants : mots de passe, MFA et droits d’accès (`o-identite-initiation`) | O | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
@@ -122,7 +122,7 @@
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 4 |
 | Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 5 |
 | L’intelligence artificielle et la cybersécurité pour débutants (`q-ia-initiation`) | Q | 1 · Débutant | 90 min | 7 | 40 | 3 | 3 |
-| Utiliser l’IA en sécurité de façon sûre : demandes, assistants, évaluation et politique d’usage (`q-ia-pratique`) | Q | 2 · Intermédiaire | 120 min | 5 | 40 | 3 | 3 |
+| Utiliser l’IA en sécurité de façon sûre : demandes, assistants, évaluation et politique d’usage (`q-ia-pratique`) | Q | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 3 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 135 min | 7 | 40 | 3 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 6 | 40 | 3 | 4 |
 | Sécurité avancée des systèmes d’IA : chaîne d’approvisionnement, agents, robustesse et risque (`q-securite-ia-avancee`) | Q | 4 · Expert | 150 min | 5 | 40 | 3 | 4 |

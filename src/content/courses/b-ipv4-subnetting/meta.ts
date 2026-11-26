@@ -25,7 +25,7 @@ export const meta: CourseMeta = {
     { id: 'b-ipv4-vlsm', label: 'Plan VLSM et agrégation de routes', level: 2 },
     { id: 'b-ipv4-secu', label: 'Adressage et segmentation de sécurité', level: 2 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };
