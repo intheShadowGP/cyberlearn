@@ -11,6 +11,7 @@ export const labs: Record<keyof typeof frLabs, string> = {
   'labcat.forensic': 'Forensics',
   'labcat.malware': 'Malware analysis',
   'labcat.ia': 'AI and security',
+  'labcat.systeme': 'Systems and data',
   'labcat.soc': 'SOC',
   'labcat.osint': 'OSINT',
   'labcat.cloud': 'Cloud',

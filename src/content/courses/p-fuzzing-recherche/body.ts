@@ -159,6 +159,7 @@ export const body: CourseBody = {
     {
       id: 'triage-lot',
       kind: 'analysis',
+      labId: 'crash-triage-lab',
       title: 'Trier un lot de plantages',
       context: [{ t: 'p', text: 'Une nuit de fuzzing a produit 2 300 entrées provoquant des plantages : 2 100 « SEGV on unknown address 0x000000000000 » dans `img_get_palette`, 180 « heap-buffer-overflow READ of size 1 » dans `rle_decode`, 20 « heap-use-after-free WRITE » dans `img_free`.' }],
       steps: ['Regrouper les plantages en défauts probables.', 'Prioriser selon la gravité potentielle.', 'Décrire la suite pour le défaut prioritaire.'],

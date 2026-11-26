@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 20 |
+| Laboratoires | 22 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -135,6 +135,7 @@
 
 | Laboratoire | Catégorie | Niveau | Cours liés |
 | --- | --- | --- | --- |
+| Lire l’hexadécimal : identifier un fichier par son en-tête (`hex-header-lab`) | systeme | 1 | a-systemes-fondamentaux, a-fichiers-programmes-ligne-commande |
 | Robustesse des mots de passe et effet du hachage (initiation) (`password-strength-lab`) | crypto | 1 | e-hachage-mots-de-passe |
 | Appréciation des risques : matrice et plan de traitement (`risk-matrix-lab`) | grc | 2 | m-risques-conformite, m-gouvernance-operationnelle |
 | Atelier empreintes, HMAC et dérivation de clés (`hash-lab`) | crypto | 2 | e-hachage-mots-de-passe |
@@ -154,6 +155,7 @@
 | Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
 | Sécurité d’un flux OAuth 2.0 : configuration d’un client (`oauth-flow-lab`) | web | 3 | o-identite-mfa-oauth |
+| Trier les plantages d’une campagne de fuzzing (`crash-triage-lab`) | prog | 3 | p-fuzzing-recherche, g-vulnerabilites-memoire |
 | Ingénierie de détection : composer une règle sans faux positifs (expert) (`detection-engineering-lab`) | soc | 4 | i-threat-hunting, i-soc-detection |
 
 ## Parcours

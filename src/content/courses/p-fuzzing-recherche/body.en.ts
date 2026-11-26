@@ -159,6 +159,7 @@ export const body: CourseBody = {
     {
       id: 'triage-lot',
       kind: 'analysis',
+      labId: 'crash-triage-lab',
       title: 'Triage a batch of crashes',
       context: [{ t: 'p', text: 'A night of fuzzing produced 2,300 crashing inputs: 2,100 “SEGV on unknown address 0x000000000000” in `img_get_palette`, 180 “heap-buffer-overflow READ of size 1” in `rle_decode`, 20 “heap-use-after-free WRITE” in `img_free`.' }],
       steps: ['Group the crashes into probable defects.', 'Prioritize by potential severity.', 'Describe the next steps for the top-priority defect.'],
