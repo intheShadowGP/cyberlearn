@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 32 |
+| Laboratoires | 36 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -135,9 +135,13 @@
 
 | Laboratoire | Catégorie | Niveau | Cours liés |
 | --- | --- | --- | --- |
+| Auditer les en-têtes de sécurité d’une réponse HTTP (`http-headers-lab`) | web | 1 | f-web-fondamentaux, f-injections-xss |
+| Contrôler une chaîne de conservation (`custody-log-lab`) | forensic | 1 | j-forensique-initiation, j-forensique-principes |
 | Lire et calculer les permissions Linux (`permissions-lab`) | linux | 1 | c-linux-permissions, a-fichiers-programmes-ligne-commande |
 | Lire l’hexadécimal : identifier un fichier par son en-tête (`hex-header-lab`) | systeme | 1 | a-systemes-fondamentaux, a-fichiers-programmes-ligne-commande |
 | Lire un balayage de ports : que laisser exposé ? (`exposed-ports-lab`) | reseau | 1 | b-osi-tcpip, b-perimetre-vpn-wifi |
+| Liste noire ou liste blanche ? Valider une entrée (`input-validation-lab`) | prog | 1 | g-code-securise-bases, f-injections-xss |
+| Que peut-on confier à un assistant d’IA ? (`ai-data-sharing-lab`) | ia | 1 | q-ia-initiation, q-ia-pratique |
 | Robustesse des mots de passe et effet du hachage (initiation) (`password-strength-lab`) | crypto | 1 | e-hachage-mots-de-passe |
 | Trier six courriels : légitime ou piégé ? (`phishing-email-lab`) | soc | 1 | i-soc-initiation, k-malware-initiation |
 | Violation de données : notifier, quand et à qui ? (`breach-deadline-lab`) | grc | 1 | m-gouvernance-initiation, m-risques-conformite |
