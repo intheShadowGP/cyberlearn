@@ -15,7 +15,8 @@ function watchErrors(page: Page): string[] {
 }
 
 /** Mots français courants et lettres accentuées : signes de texte non traduit dans une page anglaise. */
-const FRENCH_WORD = /\b(le|la|les|des|une|vous|votre|vos|pour|avec|dans|sur|est|sont|aucun|aucune|cours|ou|et)\b/i;
+/** Les sigles en capitales (DES, OU…) ne sont pas du français : seules la casse minuscule et l’initiale majuscule comptent. */
+const FRENCH_WORD = /\b(?:[Ll]e|[Ll]a|[Ll]es|[Dd]es|[Uu]ne|[Vv]ous|[Vv]otre|[Vv]os|[Pp]our|[Aa]vec|[Dd]ans|[Ss]ur|[Ee]st|[Ss]ont|[Aa]ucun|[Aa]ucune|[Cc]ours|[Oo]u|[Ee]t)\b/;
 const ACCENT = /[àâçéèêëîïôùûœ]/i;
 /** Noms propres, identifiants et données fictives qui ne se traduisent pas. */
 const KEEP = /Français|CyberAcadémie|Léa|léa|Vélin|Halbyx|Clermont-Ferrand|Offre_emploi_RH|exemple\.fr|facture|rivière|et seq\./gi;

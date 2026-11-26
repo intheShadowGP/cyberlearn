@@ -7,7 +7,7 @@
  * Le passage à `true` rend la couverture obligatoire : il n'est fait qu'une fois tout le contenu livré.
  * L'état d'avancement est suivi dans docs/PHASE5_PROGRESS.md.
  */
-export const PHASE5_COMPLETE = false;
+export const PHASE5_COMPLETE = true;
 
 /** Taille de banque attendue par cours. */
 export const BANK_MIN = 40;
