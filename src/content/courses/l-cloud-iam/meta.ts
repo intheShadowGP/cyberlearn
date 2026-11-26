@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'l-reponse', label: 'Journalisation et réponse dans le cloud', level: 2 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

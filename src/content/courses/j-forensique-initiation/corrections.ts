@@ -382,6 +382,44 @@ export const corrections: CourseCorrections = {
         "La vérification à chaque utilisation est mentionnée."
       ],
       "explanation": "L’empreinte est la preuve mathématique qu’une image n’a pas changé depuis son acquisition."
+    },
+    "jfi-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "On coupe l’accès réseau pour stopper une éventuelle fuite, mais on laisse le poste sous tension : la mémoire vive et les connexions en cours disparaissent à l’extinction et peuvent contenir les meilleures preuves.",
+      "whyWrong": {
+        "c": "L’extinction détruit la mémoire vive et l’état des connexions.",
+        "d": "Un antivirus modifie et supprime des fichiers avant leur collecte.",
+        "a": "Un redémarrage efface la mémoire vive et change l’état du système."
+      }
+    },
+    "jfi-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "On commence par ce qui disparaît le plus vite (mémoire, état du réseau, processus), puis le disque, puis les éléments stables comme les sauvegardes et les journaux distants.",
+      "whyWrong": {
+        "c": "Le disque est plus durable que la mémoire : il passe après.",
+        "a": "C’est l’ordre inverse de la volatilité.",
+        "b": "Les données volatiles se perdent à l’extinction : l’ordre compte."
+      }
+    },
+    "jfi-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Une empreinte identique montre que les données de la copie sont les mêmes que celles de l’original au moment de la mesure. Elle ne dit rien du contenu, de son histoire antérieure ni de l’identité de l’opérateur.",
+      "whyWrong": {
+        "d": "L’empreinte ne mesure pas la dangerosité du contenu.",
+        "b": "Elle ne prouve rien sur ce qui s’est passé avant la mesure.",
+        "a": "Seule la chaîne de conservation documente qui a manipulé quoi."
+      }
+    },
+    "jfi-q44": {
+      "type": "short",
+      "accepted": [
+        "sha256sum",
+        "sha256sum -c"
+      ],
+      "explanation": "`sha256sum -c fichier.sha256` relit les empreintes enregistrées et affiche « OK » pour chaque fichier dont l’empreinte correspond."
     }
   },
 };

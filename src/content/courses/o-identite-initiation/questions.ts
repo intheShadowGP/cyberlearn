@@ -837,5 +837,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "un mot"
+  },
+  {
+    "id": "oii-q41",
+    "prompt": "Quelle méthode de double authentification résiste le mieux à l’hameçonnage ?",
+    "skills": [
+      "o-ini-mfa"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Une clé de sécurité ou une clé d’accès (passkey)"
+      },
+      {
+        "id": "b",
+        "text": "Un code reçu par SMS"
+      },
+      {
+        "id": "c",
+        "text": "Un code d’application saisi à la main"
+      },
+      {
+        "id": "d",
+        "text": "Une notification à valider d’un geste"
+      }
+    ]
+  },
+  {
+    "id": "oii-q42",
+    "prompt": "Vous recevez une notification de connexion que vous n’avez pas déclenchée. Que faire ?",
+    "skills": [
+      "o-ini-reflexes"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "L’accepter puis changer le mot de passe plus tard"
+      },
+      {
+        "id": "b",
+        "text": "L’accepter pour qu’elle cesse"
+      },
+      {
+        "id": "c",
+        "text": "La refuser, puis changer le mot de passe depuis un appareil sain"
+      },
+      {
+        "id": "d",
+        "text": "L’ignorer, c’est probablement une erreur du service"
+      }
+    ]
+  },
+  {
+    "id": "oii-q43",
+    "prompt": "Pourquoi retire-t-on les droits de l’ancien poste lors d’un changement de fonction ?",
+    "skills": [
+      "o-ini-droits"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour punir la personne qui change de poste"
+      },
+      {
+        "id": "b",
+        "text": "Pour éviter l’accumulation de droits devenus inutiles"
+      },
+      {
+        "id": "c",
+        "text": "Pour réduire le nombre de mots de passe"
+      },
+      {
+        "id": "d",
+        "text": "Parce que les droits expirent seuls au bout d’un an"
+      }
+    ]
+  },
+  {
+    "id": "oii-q44",
+    "prompt": "Comment appelle-t-on l’outil qui génère et stocke un mot de passe différent par compte ? (trois mots)",
+    "skills": [
+      "o-ini-mdp"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "trois mots"
   }
 ];

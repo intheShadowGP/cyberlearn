@@ -380,6 +380,44 @@ export const corrections: CourseCorrections = {
         "Verification at each use is mentioned."
       ],
       "explanation": "The hash is the mathematical proof that an image has not changed since its acquisition."
+    },
+    "jfi-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "You cut network access to stop a possible leak, but leave the machine powered: RAM and live connections disappear at shutdown and may hold the best evidence.",
+      "whyWrong": {
+        "c": "Shutting down destroys RAM and the state of connections.",
+        "d": "An antivirus modifies and deletes files before they are collected.",
+        "a": "A reboot erases RAM and changes the system state."
+      }
+    },
+    "jfi-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "You start with what disappears fastest (memory, network state, processes), then the disk, then stable items such as backups and remote logs.",
+      "whyWrong": {
+        "c": "The disk is more durable than memory: it comes after.",
+        "a": "That is the reverse of volatility.",
+        "b": "Volatile data is lost at shutdown: order matters."
+      }
+    },
+    "jfi-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "An identical hash shows the copy’s data is the same as the original’s at the time of measurement. It says nothing about the content, its earlier history or the operator’s identity.",
+      "whyWrong": {
+        "d": "A hash does not measure how dangerous the content is.",
+        "b": "It proves nothing about what happened before the measurement.",
+        "a": "Only the chain of custody documents who handled what."
+      }
+    },
+    "jfi-q44": {
+      "type": "short",
+      "accepted": [
+        "sha256sum",
+        "sha256sum -c"
+      ],
+      "explanation": "`sha256sum -c file.sha256` rereads the recorded hashes and prints “OK” for each file whose hash matches."
     }
   },
 };

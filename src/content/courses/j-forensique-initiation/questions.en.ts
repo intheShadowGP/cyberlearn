@@ -839,5 +839,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 2,
     "type": "open"
+  },
+  {
+    "id": "jfi-q41",
+    "prompt": "A suspect machine is powered on. What is the most appropriate first action before any collection?",
+    "skills": [
+      "j-ini-preuve"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Reboot the machine to get a stable state"
+      },
+      {
+        "id": "b",
+        "text": "Disconnect it from the network while leaving it powered"
+      },
+      {
+        "id": "c",
+        "text": "Switch it off immediately to freeze its state"
+      },
+      {
+        "id": "d",
+        "text": "Run an antivirus to clean it"
+      }
+    ]
+  },
+  {
+    "id": "jfi-q42",
+    "prompt": "In which order is a machine’s data collected, according to the order of volatility?",
+    "skills": [
+      "j-ini-preuve"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Backups, disk, network state, RAM"
+      },
+      {
+        "id": "b",
+        "text": "It does not matter, everything keeps equally well"
+      },
+      {
+        "id": "c",
+        "text": "Disk, RAM, network state, backups"
+      },
+      {
+        "id": "d",
+        "text": "RAM, network state, disk, backups"
+      }
+    ]
+  },
+  {
+    "id": "jfi-q43",
+    "prompt": "What does the same SHA-256 hash computed on the original then on a copy demonstrate?",
+    "skills": [
+      "j-ini-integrite"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "That the copy was made by an authorized person"
+      },
+      {
+        "id": "b",
+        "text": "That the original was never modified before collection"
+      },
+      {
+        "id": "c",
+        "text": "That the copy is identical to the original, bit for bit"
+      },
+      {
+        "id": "d",
+        "text": "That the file contains no malware"
+      }
+    ]
+  },
+  {
+    "id": "jfi-q44",
+    "prompt": "Which Linux command verifies a SHA-256 checksum file (command name only)?",
+    "skills": [
+      "j-ini-integrite"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "command"
   }
 ];

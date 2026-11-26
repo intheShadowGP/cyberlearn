@@ -835,5 +835,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "un mot"
+  },
+  {
+    "id": "qii-q41",
+    "prompt": "Un assistant d’IA vous donne une option de commande très précise que vous ne trouvez pas dans la documentation. Que faire ?",
+    "skills": [
+      "q-ini-limites"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La partager à l’équipe, le détail prouvant sa fiabilité"
+      },
+      {
+        "id": "b",
+        "text": "La lancer si elle ressemble à d’autres options connues"
+      },
+      {
+        "id": "c",
+        "text": "La lancer en production puisqu’elle est détaillée"
+      },
+      {
+        "id": "d",
+        "text": "La considérer comme douteuse et la vérifier à la source"
+      }
+    ]
+  },
+  {
+    "id": "qii-q42",
+    "prompt": "Quelle information peut-on saisir dans un assistant public non approuvé par son organisation ?",
+    "skills": [
+      "q-ini-donnees"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Un contrat à résumer"
+      },
+      {
+        "id": "b",
+        "text": "Une question générale sans donnée interne"
+      },
+      {
+        "id": "c",
+        "text": "La liste des clients à analyser"
+      },
+      {
+        "id": "d",
+        "text": "Un extrait de journal contenant des adresses internes"
+      }
+    ]
+  },
+  {
+    "id": "qii-q43",
+    "prompt": "Pourquoi les messages d’hameçonnage rédigés avec une IA sont-ils plus difficiles à repérer ?",
+    "skills": [
+      "q-ini-menaces"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ils sont sans fautes et adaptés à leur cible"
+      },
+      {
+        "id": "b",
+        "text": "Ils contiennent toujours un virus intégré"
+      },
+      {
+        "id": "c",
+        "text": "Ils sont chiffrés et donc illisibles par les filtres"
+      },
+      {
+        "id": "d",
+        "text": "Ils proviennent forcément d’adresses connues"
+      }
+    ]
+  },
+  {
+    "id": "qii-q44",
+    "prompt": "Comment appelle-t-on le fait, pour une IA, de produire avec assurance une information fausse ? (un mot, anglicisme courant)",
+    "skills": [
+      "q-ini-limites"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "un mot"
   }
 ];

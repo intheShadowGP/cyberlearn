@@ -376,6 +376,45 @@ export const corrections: CourseCorrections = {
         "b": "The deadline is 72 hours.",
         "c": "That is not an obligation."
       }
+    },
+    "cl-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "A wildcard on actions and resources grants every right: compromising the application gives control of the account. List only the necessary actions and resources.",
+      "whyWrong": {
+        "c": "The provider accepts this kind of policy, which is precisely the danger.",
+        "a": "On the contrary, everything is allowed.",
+        "b": "The wildcard covers writes and deletions too."
+      }
+    },
+    "cl-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "An explicit deny always overrides an allow. And anything not explicitly allowed is denied by default.",
+      "whyWrong": {
+        "d": "An `Allow` cannot cancel an explicit `Deny`.",
+        "a": "Nothing is random: the evaluation order is defined.",
+        "c": "Only a condition provides that explicitly; it is not the case here."
+      }
+    },
+    "cl-q43": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "An active account for someone no longer under contract is a useless and exploitable access: it is disabled immediately, before any finer analysis.",
+      "whyWrong": {
+        "d": "Worth examining, but less urgent than an active access with no reason.",
+        "c": "A recently rotated key follows good practice.",
+        "b": "MFA enabled is the expected behavior."
+      }
+    },
+    "cl-q44": {
+      "type": "short",
+      "accepted": [
+        "least privilege",
+        "principle of least privilege",
+        "the principle of least privilege"
+      ],
+      "explanation": "Least privilege limits the impact of a compromise: an identity can only do what its role requires."
     }
   },
 };

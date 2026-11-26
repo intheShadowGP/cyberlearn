@@ -27,6 +27,6 @@ export const meta: CourseMeta = {
     { id: 'q-ini-menaces', label: 'Menaces amplifiées par l’IA', level: 1 },
   ],
   sectionCount: 7,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

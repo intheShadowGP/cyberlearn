@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'j-ini-cadre', label: 'Cadre légal, éthique et premiers réflexes', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

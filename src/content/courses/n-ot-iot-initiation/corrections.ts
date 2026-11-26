@@ -375,6 +375,43 @@ export const corrections: CourseCorrections = {
         "un mode dégradé"
       ],
       "explanation": "Le mode dégradé maintient l’essentiel de la production avec des moyens réduits (pilotage manuel, supervision locale) pendant qu’on traite l’incident."
+    },
+    "noi-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Une action de sécurité ne doit pas mettre des personnes ou l’installation en danger. La disponibilité et l’intégrité viennent ensuite, et la confidentialité souvent en dernier.",
+      "whyWrong": {
+        "c": "En OT, la confidentialité passe souvent après la sûreté et la disponibilité.",
+        "b": "Un correctif appliqué sans précaution peut interrompre le procédé.",
+        "d": "Le coût n’est pas la priorité de la sécurité industrielle."
+      }
+    },
+    "noi-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "La DMZ industrielle est un point de passage contrôlé entre l’informatique de gestion et le terrain : on y filtre et on journalise, sans flux direct vers les automates.",
+      "whyWrong": {
+        "c": "Un réseau plat expose les automates à toute compromission de la bureautique.",
+        "a": "Un Wi-Fi partagé élargit la surface d’attaque.",
+        "b": "Un accès permanent est un chemin d’attaque pérenne."
+      }
+    },
+    "noi-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Les identifiants par défaut sont connus et testés automatiquement sur les objets exposés. C’est ainsi que le botnet Mirai a recruté des centaines de milliers d’objets.",
+      "whyWrong": {
+        "b": "Le matériel n’est pas concerné par ce risque.",
+        "d": "Le stockage n’est pas la conséquence typique.",
+        "a": "La garantie n’est pas le risque de sécurité visé."
+      }
+    },
+    "noi-q44": {
+      "type": "short",
+      "accepted": [
+        "segmentation"
+      ],
+      "explanation": "La segmentation limite la propagation d’une compromission : chaque zone ne communique que par des flux explicitement autorisés."
     }
   },
 };

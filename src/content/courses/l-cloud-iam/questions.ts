@@ -842,5 +842,96 @@ export const questions: Question[] = [
         "text": "La notification à la CNIL sous 72 h"
       }
     ]
+  },
+  {
+    "id": "cl-q41",
+    "prompt": "Une politique d’accès contient `\"Action\": \"*\"` et `\"Resource\": \"*\"` pour une application. Quel est le problème ?",
+    "skills": [
+      "l-iam"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "L’application ne peut plus rien faire"
+      },
+      {
+        "id": "b",
+        "text": "Seules les lectures sont autorisées"
+      },
+      {
+        "id": "c",
+        "text": "La politique est refusée par le fournisseur"
+      },
+      {
+        "id": "d",
+        "text": "L’application reçoit tous les droits sur tout le compte"
+      }
+    ]
+  },
+  {
+    "id": "cl-q42",
+    "prompt": "Une politique contient à la fois un `Allow` et un `Deny` explicite sur la même action. Quel est l’effet ?",
+    "skills": [
+      "l-iam"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le fournisseur choisit au hasard"
+      },
+      {
+        "id": "b",
+        "text": "L’action est refusée"
+      },
+      {
+        "id": "c",
+        "text": "L’action est autorisée seulement avec MFA"
+      },
+      {
+        "id": "d",
+        "text": "L’action est autorisée"
+      }
+    ]
+  },
+  {
+    "id": "cl-q43",
+    "prompt": "Quel constat lors d’une revue d’accès doit être traité en priorité ?",
+    "skills": [
+      "l-posture"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le compte actif d’un ancien prestataire"
+      },
+      {
+        "id": "b",
+        "text": "Un utilisateur avec MFA activée"
+      },
+      {
+        "id": "c",
+        "text": "Une clé d’accès renouvelée la semaine dernière"
+      },
+      {
+        "id": "d",
+        "text": "Un compte jamais connecté depuis la création"
+      }
+    ]
+  },
+  {
+    "id": "cl-q44",
+    "prompt": "Quel nom général porte le principe d’accorder seulement les droits nécessaires ? (trois mots)",
+    "skills": [
+      "l-iam"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "trois mots"
   }
 ];

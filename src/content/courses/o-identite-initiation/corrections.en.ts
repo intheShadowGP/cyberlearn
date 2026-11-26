@@ -377,6 +377,44 @@ export const corrections: CourseCorrections = {
         "phish"
       ],
       "explanation": "Phishing pushes the victim to enter their credentials on a fake site. Factors bound to the legitimate site (passkeys) defeat it."
+    },
+    "oii-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "A security key or passkey binds the proof to the legitimate site: a fake site cannot relay it. Typed codes or notifications can be obtained by trickery.",
+      "whyWrong": {
+        "b": "An SMS code can be relayed or intercepted (SIM swapping).",
+        "c": "A code typed on a fake site can be relayed in real time.",
+        "d": "Notifications are exposed to fatigue: the user eventually approves."
+      }
+    },
+    "oii-q42": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "An untriggered request signals that someone knows your password. You deny, change the password from a clean device and report the event.",
+      "whyWrong": {
+        "b": "Approving gives the attacker access.",
+        "d": "Ignoring leaves the password compromised.",
+        "a": "Approving grants access immediately; a late change does not undo it."
+      }
+    },
+    "oii-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Adding rights without ever removing any makes access grow far beyond need. A compromised account then gives the attacker more power.",
+      "whyWrong": {
+        "a": "It is not a penalty, it is least privilege applied.",
+        "d": "Rights do not expire on their own without an explicit rule.",
+        "c": "The number of passwords is unrelated."
+      }
+    },
+    "oii-q44": {
+      "type": "short",
+      "accepted": [
+        "password manager",
+        "a password manager"
+      ],
+      "explanation": "A password manager lets you have a long, unique password for every account without memorizing them all."
     }
   },
 };

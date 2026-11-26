@@ -374,6 +374,44 @@ export const corrections: CourseCorrections = {
         "l’hameçonnage"
       ],
       "explanation": "L’hameçonnage (phishing) pousse à saisir ses identifiants sur un faux site ; l’IA le rend plus convaincant."
+    },
+    "qii-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Une IA peut inventer des options ou des références avec assurance. Un détail précis n’est pas une preuve : on vérifie dans la documentation officielle et on teste hors production.",
+      "whyWrong": {
+        "c": "Exécuter sans vérifier en production est l’erreur à éviter.",
+        "a": "Le détail d’une réponse ne prouve pas son exactitude.",
+        "b": "Une ressemblance ne garantit pas que l’option existe ou fait ce qu’on croit."
+      }
+    },
+    "qii-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Dans un outil non approuvé, on ne saisit aucune donnée personnelle, confidentielle ou interne. Une question générale, sans élément propre à l’organisation, ne divulgue rien.",
+      "whyWrong": {
+        "d": "Des adresses et noms internes révèlent l’architecture de l’organisation.",
+        "c": "Une liste de clients contient des données personnelles.",
+        "a": "Un contrat est confidentiel par nature."
+      }
+    },
+    "qii-q43": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "L’IA produit des textes soignés, dans la langue de la cible et personnalisés. Les fautes d’orthographe ne sont donc plus un indice fiable : on vérifie l’expéditeur, le lien et la demande.",
+      "whyWrong": {
+        "b": "Le message peut n’être qu’un texte avec un lien, sans pièce infectée.",
+        "d": "L’adresse d’expédition peut être inconnue ou usurpée.",
+        "c": "Un message d’hameçonnage doit être lisible par la victime."
+      }
+    },
+    "qii-q44": {
+      "type": "short",
+      "accepted": [
+        "hallucination",
+        "hallucinations"
+      ],
+      "explanation": "On parle d’hallucination : le modèle génère un texte plausible mais inexact. D’où la nécessité de vérifier les réponses importantes."
     }
   },
 };

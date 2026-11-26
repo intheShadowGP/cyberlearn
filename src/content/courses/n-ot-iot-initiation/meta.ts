@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'n-ini-reflexes', label: 'Bons réflexes face à une anomalie', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

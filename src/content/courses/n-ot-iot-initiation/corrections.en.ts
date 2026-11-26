@@ -373,6 +373,43 @@ export const corrections: CourseCorrections = {
         "a degraded mode"
       ],
       "explanation": "Degraded mode keeps the essentials of production with reduced means (manual control, local supervision) while the incident is dealt with."
+    },
+    "noi-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "A security action must not endanger people or the installation. Availability and integrity come next, and confidentiality is often last.",
+      "whyWrong": {
+        "c": "In OT, confidentiality often ranks after safety and availability.",
+        "b": "A patch applied carelessly can interrupt the process.",
+        "d": "Cost is not the priority of industrial security."
+      }
+    },
+    "noi-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "The industrial DMZ is a controlled crossing point between business IT and the field: you filter and log there, with no direct flow to PLCs.",
+      "whyWrong": {
+        "c": "A flat network exposes PLCs to any compromise of office IT.",
+        "a": "Shared Wi-Fi widens the attack surface.",
+        "b": "Permanent access is a lasting attack path."
+      }
+    },
+    "noi-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Default credentials are known and tried automatically on exposed devices. This is how the Mirai botnet recruited hundreds of thousands of devices.",
+      "whyWrong": {
+        "b": "The hardware is not affected by this risk.",
+        "d": "Storage is not the typical consequence.",
+        "a": "The warranty is not the security risk at stake."
+      }
+    },
+    "noi-q44": {
+      "type": "short",
+      "accepted": [
+        "segmentation"
+      ],
+      "explanation": "Segmentation limits the spread of a compromise: each zone communicates only through explicitly allowed flows."
     }
   },
 };

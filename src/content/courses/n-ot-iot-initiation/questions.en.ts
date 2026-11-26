@@ -837,5 +837,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "two words"
+  },
+  {
+    "id": "noi-q41",
+    "prompt": "In an industrial system, which priority comes before the others?",
+    "skills": [
+      "n-ini-priorites"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The safety of people"
+      },
+      {
+        "id": "b",
+        "text": "The speed of updates"
+      },
+      {
+        "id": "c",
+        "text": "The confidentiality of data"
+      },
+      {
+        "id": "d",
+        "text": "Reducing license costs"
+      }
+    ]
+  },
+  {
+    "id": "noi-q42",
+    "prompt": "Where must exchanges between office IT and an industrial site’s supervision pass?",
+    "skills": [
+      "n-ini-reseaux"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Over a shared Wi-Fi connection"
+      },
+      {
+        "id": "b",
+        "text": "Through the supplier’s permanent remote access"
+      },
+      {
+        "id": "c",
+        "text": "Directly, over a single flat network"
+      },
+      {
+        "id": "d",
+        "text": "Through an industrial demilitarized zone (DMZ)"
+      }
+    ]
+  },
+  {
+    "id": "noi-q43",
+    "prompt": "A connected camera installed with its factory password is exposed on the Internet. What is the main risk?",
+    "skills": [
+      "n-ini-objets"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Loss of the manufacturer’s warranty"
+      },
+      {
+        "id": "b",
+        "text": "Faster wear of the lens"
+      },
+      {
+        "id": "c",
+        "text": "Automated takeover through scanning"
+      },
+      {
+        "id": "d",
+        "text": "Saturation of the storage space"
+      }
+    ]
+  },
+  {
+    "id": "noi-q44",
+    "prompt": "Which word designates splitting a network into zones with controlled flows? (one word)",
+    "skills": [
+      "n-ini-protection"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "one word"
   }
 ];

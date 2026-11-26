@@ -376,6 +376,45 @@ export const corrections: CourseCorrections = {
         "b": "Le délai est de 72 heures.",
         "c": "Cela n’est pas une obligation."
       }
+    },
+    "cl-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Un joker sur les actions et les ressources donne tous les droits : la compromission de l’application donne le contrôle du compte. On liste uniquement les actions et ressources nécessaires.",
+      "whyWrong": {
+        "c": "Le fournisseur accepte ce type de politique, c’est précisément le danger.",
+        "a": "Au contraire, tout est permis.",
+        "b": "Le joker couvre les écritures et les suppressions aussi."
+      }
+    },
+    "cl-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Un refus explicite l’emporte toujours sur une autorisation. Et tout ce qui n’est pas explicitement autorisé est refusé par défaut.",
+      "whyWrong": {
+        "d": "Le `Allow` ne peut pas annuler un `Deny` explicite.",
+        "a": "Il n’y a aucun hasard : l’ordre d’évaluation est défini.",
+        "c": "Seule une condition le prévoit explicitement ; ce n’est pas le cas ici."
+      }
+    },
+    "cl-q43": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Un compte actif d’une personne qui n’est plus sous contrat est un accès inutile et exploitable : on le désactive immédiatement, avant toute analyse plus fine.",
+      "whyWrong": {
+        "d": "À examiner, mais il est moins urgent qu’un accès actif sans raison.",
+        "c": "Une clé récemment renouvelée est conforme à la bonne pratique.",
+        "b": "La MFA activée est le comportement attendu."
+      }
+    },
+    "cl-q44": {
+      "type": "short",
+      "accepted": [
+        "moindre privilège",
+        "principe du moindre privilège",
+        "least privilege"
+      ],
+      "explanation": "Le moindre privilège limite l’impact d’une compromission : une identité ne peut faire que ce que son rôle exige."
     }
   },
 };

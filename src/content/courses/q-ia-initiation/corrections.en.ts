@@ -370,6 +370,44 @@ export const corrections: CourseCorrections = {
         "phishing"
       ],
       "explanation": "Phishing pushes people to enter their credentials on a fake site; AI makes it more convincing."
+    },
+    "qii-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "An AI may invent options or references with confidence. A precise detail is not proof: you check the official documentation and test outside production.",
+      "whyWrong": {
+        "c": "Running without checking in production is the mistake to avoid.",
+        "a": "The detail of an answer does not prove its accuracy.",
+        "b": "A resemblance does not guarantee the option exists or does what you think."
+      }
+    },
+    "qii-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "In an unapproved tool you enter no personal, confidential or internal data. A general question with nothing specific to the organization discloses nothing.",
+      "whyWrong": {
+        "d": "Internal addresses and names reveal the organization’s architecture.",
+        "c": "A customer list contains personal data.",
+        "a": "A contract is confidential by nature."
+      }
+    },
+    "qii-q43": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "AI produces polished texts, in the target’s language and personalized. Spelling mistakes are therefore no longer a reliable clue: you check the sender, the link and the request.",
+      "whyWrong": {
+        "b": "The message may be only text with a link, with no infected attachment.",
+        "d": "The sending address may be unknown or spoofed.",
+        "c": "A phishing message must be readable by the victim."
+      }
+    },
+    "qii-q44": {
+      "type": "short",
+      "accepted": [
+        "hallucination",
+        "hallucinations"
+      ],
+      "explanation": "It is called a hallucination: the model generates plausible but inaccurate text. Hence the need to verify important answers."
     }
   },
 };

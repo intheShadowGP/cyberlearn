@@ -837,5 +837,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "deux mots"
+  },
+  {
+    "id": "noi-q41",
+    "prompt": "Dans un système industriel, quelle priorité passe avant les autres ?",
+    "skills": [
+      "n-ini-priorites"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La sûreté des personnes"
+      },
+      {
+        "id": "b",
+        "text": "La rapidité des mises à jour"
+      },
+      {
+        "id": "c",
+        "text": "La confidentialité des données"
+      },
+      {
+        "id": "d",
+        "text": "La réduction du coût des licences"
+      }
+    ]
+  },
+  {
+    "id": "noi-q42",
+    "prompt": "Où doivent passer les échanges entre la bureautique et la supervision d’un site industriel ?",
+    "skills": [
+      "n-ini-reseaux"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Par une connexion Wi-Fi partagée"
+      },
+      {
+        "id": "b",
+        "text": "Par un accès distant permanent du fournisseur"
+      },
+      {
+        "id": "c",
+        "text": "Directement, par un seul réseau plat"
+      },
+      {
+        "id": "d",
+        "text": "Par une zone démilitarisée (DMZ) industrielle"
+      }
+    ]
+  },
+  {
+    "id": "noi-q43",
+    "prompt": "Une caméra connectée installée avec son mot de passe d’usine est exposée sur Internet. Quel est le risque principal ?",
+    "skills": [
+      "n-ini-objets"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Une perte de la garantie constructeur"
+      },
+      {
+        "id": "b",
+        "text": "Une usure plus rapide de l’objectif"
+      },
+      {
+        "id": "c",
+        "text": "Une prise de contrôle automatisée par balayage"
+      },
+      {
+        "id": "d",
+        "text": "Une saturation de l’espace de stockage"
+      }
+    ]
+  },
+  {
+    "id": "noi-q44",
+    "prompt": "Quel mot désigne la séparation d’un réseau en zones aux flux contrôlés ? (un mot)",
+    "skills": [
+      "n-ini-protection"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "un mot"
   }
 ];

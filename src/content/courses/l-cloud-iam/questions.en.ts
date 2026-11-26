@@ -842,5 +842,96 @@ export const questions: Question[] = [
         "text": "Notification to the CNIL within 72 h"
       }
     ]
+  },
+  {
+    "id": "cl-q41",
+    "prompt": "An access policy contains `\"Action\": \"*\"` and `\"Resource\": \"*\"` for an application. What is the problem?",
+    "skills": [
+      "l-iam"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The application can no longer do anything"
+      },
+      {
+        "id": "b",
+        "text": "Only reads are allowed"
+      },
+      {
+        "id": "c",
+        "text": "The policy is rejected by the provider"
+      },
+      {
+        "id": "d",
+        "text": "The application gets every right on the whole account"
+      }
+    ]
+  },
+  {
+    "id": "cl-q42",
+    "prompt": "A policy contains both an `Allow` and an explicit `Deny` on the same action. What is the effect?",
+    "skills": [
+      "l-iam"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The provider chooses at random"
+      },
+      {
+        "id": "b",
+        "text": "The action is denied"
+      },
+      {
+        "id": "c",
+        "text": "The action is allowed only with MFA"
+      },
+      {
+        "id": "d",
+        "text": "The action is allowed"
+      }
+    ]
+  },
+  {
+    "id": "cl-q43",
+    "prompt": "Which finding in an access review must be handled first?",
+    "skills": [
+      "l-posture"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The active account of a former contractor"
+      },
+      {
+        "id": "b",
+        "text": "A user with MFA enabled"
+      },
+      {
+        "id": "c",
+        "text": "An access key rotated last week"
+      },
+      {
+        "id": "d",
+        "text": "An account never signed in since creation"
+      }
+    ]
+  },
+  {
+    "id": "cl-q44",
+    "prompt": "What is the general name of the principle of granting only the necessary rights? (three words)",
+    "skills": [
+      "l-iam"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "three words"
   }
 ];

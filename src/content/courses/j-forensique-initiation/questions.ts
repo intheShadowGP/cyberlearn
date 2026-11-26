@@ -839,5 +839,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 2,
     "type": "open"
+  },
+  {
+    "id": "jfi-q41",
+    "prompt": "Un poste suspect est allumé. Quel est le premier geste le plus approprié avant toute collecte ?",
+    "skills": [
+      "j-ini-preuve"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Redémarrer le poste pour retrouver un état stable"
+      },
+      {
+        "id": "b",
+        "text": "Le déconnecter du réseau en le laissant sous tension"
+      },
+      {
+        "id": "c",
+        "text": "L’éteindre immédiatement pour figer son état"
+      },
+      {
+        "id": "d",
+        "text": "Lancer un antivirus pour le nettoyer"
+      }
+    ]
+  },
+  {
+    "id": "jfi-q42",
+    "prompt": "Dans quel ordre collecte-t-on les données d’un poste, d’après l’ordre de volatilité ?",
+    "skills": [
+      "j-ini-preuve"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sauvegardes, disque, état du réseau, mémoire vive"
+      },
+      {
+        "id": "b",
+        "text": "Peu importe, tout se conserve de la même façon"
+      },
+      {
+        "id": "c",
+        "text": "Disque, mémoire vive, état du réseau, sauvegardes"
+      },
+      {
+        "id": "d",
+        "text": "Mémoire vive, état du réseau, disque, sauvegardes"
+      }
+    ]
+  },
+  {
+    "id": "jfi-q43",
+    "prompt": "Que démontre la même empreinte SHA-256 calculée sur l’original puis sur une copie ?",
+    "skills": [
+      "j-ini-integrite"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Que la copie a été réalisée par une personne habilitée"
+      },
+      {
+        "id": "b",
+        "text": "Que l’original n’a jamais été modifié avant la collecte"
+      },
+      {
+        "id": "c",
+        "text": "Que la copie est identique à l’original, bit à bit"
+      },
+      {
+        "id": "d",
+        "text": "Que le fichier ne contient aucun logiciel malveillant"
+      }
+    ]
+  },
+  {
+    "id": "jfi-q44",
+    "prompt": "Quelle commande Linux vérifie un fichier de sommes de contrôle SHA-256 (nom de la commande seul) ?",
+    "skills": [
+      "j-ini-integrite"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "commande"
   }
 ];

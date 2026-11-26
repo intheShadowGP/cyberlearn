@@ -835,5 +835,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "one word"
+  },
+  {
+    "id": "qii-q41",
+    "prompt": "An AI assistant gives you a very precise command option that you cannot find in the documentation. What should you do?",
+    "skills": [
+      "q-ini-limites"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Share it with the team, the detail proving it is reliable"
+      },
+      {
+        "id": "b",
+        "text": "Run it if it resembles other known options"
+      },
+      {
+        "id": "c",
+        "text": "Run it in production since it is detailed"
+      },
+      {
+        "id": "d",
+        "text": "Treat it as doubtful and check at the source"
+      }
+    ]
+  },
+  {
+    "id": "qii-q42",
+    "prompt": "What information may be entered into a public assistant not approved by your organization?",
+    "skills": [
+      "q-ini-donnees"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A contract to summarize"
+      },
+      {
+        "id": "b",
+        "text": "A general question with no internal data"
+      },
+      {
+        "id": "c",
+        "text": "The list of customers to analyze"
+      },
+      {
+        "id": "d",
+        "text": "A log excerpt containing internal addresses"
+      }
+    ]
+  },
+  {
+    "id": "qii-q43",
+    "prompt": "Why are phishing messages written with AI harder to spot?",
+    "skills": [
+      "q-ini-menaces"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "They are error-free and tailored to their target"
+      },
+      {
+        "id": "b",
+        "text": "They always contain an embedded virus"
+      },
+      {
+        "id": "c",
+        "text": "They are encrypted and so unreadable by filters"
+      },
+      {
+        "id": "d",
+        "text": "They necessarily come from known addresses"
+      }
+    ]
+  },
+  {
+    "id": "qii-q44",
+    "prompt": "What is it called when an AI confidently produces false information? (one word)",
+    "skills": [
+      "q-ini-limites"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "one word"
   }
 ];

@@ -837,5 +837,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "one word"
+  },
+  {
+    "id": "oii-q41",
+    "prompt": "Which two-factor method best resists phishing?",
+    "skills": [
+      "o-ini-mfa"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A security key or a passkey"
+      },
+      {
+        "id": "b",
+        "text": "A code received by SMS"
+      },
+      {
+        "id": "c",
+        "text": "An app code typed by hand"
+      },
+      {
+        "id": "d",
+        "text": "A notification approved with one tap"
+      }
+    ]
+  },
+  {
+    "id": "oii-q42",
+    "prompt": "You receive a sign-in notification you did not trigger. What should you do?",
+    "skills": [
+      "o-ini-reflexes"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Approve it then change the password later"
+      },
+      {
+        "id": "b",
+        "text": "Approve it to make it stop"
+      },
+      {
+        "id": "c",
+        "text": "Deny it, then change the password from a clean device"
+      },
+      {
+        "id": "d",
+        "text": "Ignore it, it is probably a service error"
+      }
+    ]
+  },
+  {
+    "id": "oii-q43",
+    "prompt": "Why are the rights of the former position removed when someone changes role?",
+    "skills": [
+      "o-ini-droits"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To punish the person changing position"
+      },
+      {
+        "id": "b",
+        "text": "To avoid piling up rights that are no longer needed"
+      },
+      {
+        "id": "c",
+        "text": "To reduce the number of passwords"
+      },
+      {
+        "id": "d",
+        "text": "Because rights expire on their own after a year"
+      }
+    ]
+  },
+  {
+    "id": "oii-q44",
+    "prompt": "What is the tool called that generates and stores a different password per account? (three words)",
+    "skills": [
+      "o-ini-mdp"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "three words"
   }
 ];

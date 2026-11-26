@@ -378,6 +378,44 @@ export const corrections: CourseCorrections = {
         "l’hameçonnage"
       ],
       "explanation": "Le hameçonnage (phishing) pousse la victime à saisir ses identifiants sur un faux site. Les facteurs liés au site légitime (passkeys) le déjouent."
+    },
+    "oii-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Une clé de sécurité ou passkey lie la preuve au site légitime : un faux site ne peut pas la relayer. Les codes saisis ou les notifications peuvent être obtenus par ruse.",
+      "whyWrong": {
+        "b": "Un code SMS peut être relayé ou intercepté (détournement de carte SIM).",
+        "c": "Un code saisi sur un faux site peut être relayé en temps réel.",
+        "d": "Les notifications sont exposées à la fatigue : l’utilisateur finit par accepter."
+      }
+    },
+    "oii-q42": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Une demande non déclenchée signale que quelqu’un connaît votre mot de passe. On refuse, on change le mot de passe depuis un appareil sain et on signale l’événement.",
+      "whyWrong": {
+        "b": "Accepter donne l’accès à l’attaquant.",
+        "d": "Ignorer laisse le mot de passe compromis.",
+        "a": "Accepter donne l’accès immédiatement ; le changement tardif ne l’annule pas."
+      }
+    },
+    "oii-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Ajouter des droits sans jamais en retirer fait croître les accès bien au-delà du besoin. Un compte compromis donne alors plus de pouvoir à l’attaquant.",
+      "whyWrong": {
+        "a": "Ce n’est pas une sanction, c’est l’application du moindre privilège.",
+        "d": "Les droits n’expirent pas seuls sans règle explicite.",
+        "c": "Le nombre de mots de passe n’a pas de rapport."
+      }
+    },
+    "oii-q44": {
+      "type": "short",
+      "accepted": [
+        "gestionnaire de mots de passe",
+        "gestionnaire de mot de passe"
+      ],
+      "explanation": "Un gestionnaire de mots de passe permet d’avoir un mot de passe long et unique pour chaque compte sans avoir à tous les retenir."
     }
   },
 };
