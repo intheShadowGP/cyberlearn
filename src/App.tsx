@@ -1,10 +1,11 @@
-import { lazy, Suspense, type ReactNode } from 'react';
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 import { OnboardingWelcome } from './components/Onboarding';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { useI18n } from './i18n';
+import { useI18n, useLang } from './i18n';
+import { isEnglishTextLoaded, loadEnglishText } from './content/registry';
 
 // HashRouter : les routes vivent après « # », donc aucune réécriture serveur
 // n'est nécessaire sur GitHub Pages, quel que soit le sous-chemin du dépôt.
@@ -30,9 +31,29 @@ const PositioningTestPage = lazy(() => import('./pages/PositioningTestPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const DocumentationPage = lazy(() => import('./pages/DocumentationPage'));
 
+/**
+ * Les textes anglais des métadonnées sont chargés à la demande : tant qu'ils ne sont pas là,
+ * l'interface anglaise n'est pas affichée (aucun texte français ne s'y glisse).
+ */
+function EnglishTextGate({ children }: { children: ReactNode }) {
+  const lang = useLang();
+  const [ready, setReady] = useState(isEnglishTextLoaded());
+  useEffect(() => {
+    if (lang === 'en' && !isEnglishTextLoaded()) {
+      let live = true;
+      void loadEnglishText().then(() => live && setReady(true));
+      return () => { live = false; };
+    }
+    return undefined;
+  }, [lang]);
+  if (lang === 'en' && !(ready || isEnglishTextLoaded())) return <p className="loading" role="status">Loading…</p>;
+  return <>{children}</>;
+}
+
 export function App() {
   const { t } = useI18n();
   return (
+    <EnglishTextGate>
     <HashRouter>
       <Layout>
         <RoutedBoundary>
@@ -67,6 +88,7 @@ export function App() {
         </RoutedBoundary>
       </Layout>
     </HashRouter>
+    </EnglishTextGate>
   );
 }
 

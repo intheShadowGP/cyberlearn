@@ -84,7 +84,7 @@ Méthode : relecture de cette feuille de route, mesures régénérées (`docs/QU
 | Défilement horizontal en 375 px sur 11 pages | aucun (V) |
 | Boutons ou liens sans nom accessible, images sans `alt` | aucun (V) |
 | Cibles tactiles de moins de 24 px | cases et boutons radio de 17 px (dans des libellés cliquables, à confirmer) ; liens en ligne dans le texte (exemptés) (V) |
-| Bundle principal | **725 ko (203 ko gzip)**, en hausse depuis 680 ko ; **306 ko de sources de `meta.ts` et `meta.en.ts` des 85 cours chargés dès le départ**, y compris l’anglais pour un lecteur francophone (V, analyse de carte de source) |
+| Bundle principal | **725 ko (203 ko gzip) à l’audit ; corrigé le même jour : 577 ko (158 ko gzip)**, soit −20 % (−22 % gzip) : les textes anglais des cours et laboratoires (`src/content/englishText.ts`, 149 ko) sont chargés à la demande, via `loadEnglishText` et une barrière dans `App.tsx` ; 50 e2e verts, bascule français → anglais vérifiée dans le navigateur (V) |
 | Taille du DOM | glossaire ≈ 5 700 nœuds, compétences ≈ 5 600, catalogue ≈ 2 100 (V) : au-dessus du seuil habituel d’alerte (1 400) |
 | Lighthouse | non exécutable ici (N) |
 | Faits vérifiés à la source | 6 lignes de `docs/FACT-CHECK.md` vérifiées ou vérifiées en partie le 2026-11-26 ; le reste reste non vérifié (V) |

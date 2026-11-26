@@ -20,7 +20,6 @@ import type {
  */
 
 const courseMetaModules = import.meta.glob<{ meta: CourseMeta }>('./courses/*/meta.ts', { eager: true });
-const courseMetaTextModules = import.meta.glob<{ metaText: CourseMetaText }>('./courses/*/meta.en.ts', { eager: true });
 const courseBodyLoaders = import.meta.glob<{ body: CourseBody }>('./courses/*/body.ts');
 const courseBodyLoadersEn = import.meta.glob<{ body: CourseBody }>('./courses/*/body.en.ts');
 const courseCorrectionLoaders = import.meta.glob<{ corrections: CourseCorrections }>('./courses/*/corrections.ts');
@@ -30,7 +29,6 @@ const courseSolutionLoaders = import.meta.glob<{ solutions: CourseSolutions }>('
 const courseSolutionLoadersEn = import.meta.glob<{ solutions: CourseSolutions }>('./courses/*/solutions.en.ts');
 
 const labMetaModules = import.meta.glob<{ meta: LabMeta }>('../labs/*/meta.ts', { eager: true });
-const labMetaTextModules = import.meta.glob<{ metaText: ActivityMetaText }>('../labs/*/meta.en.ts', { eager: true });
 const labBodyLoaders = import.meta.glob<{ body: LabBody }>('../labs/*/body.ts');
 const labBodyLoadersEn = import.meta.glob<{ body: LabBody }>('../labs/*/body.en.ts');
 const labCorrectionLoaders = import.meta.glob<{ corrections: LabCorrections }>('../labs/*/corrections.ts');
@@ -58,9 +56,29 @@ export const LAB_BY_ID: ReadonlyMap<string, LabMeta> = new Map(LABS.map((l) => [
 
 /* ---------- Métadonnées localisées ---------- */
 
-const metaTextEn = new Map<string, CourseMetaText>(
-  Object.entries(courseMetaTextModules).map(([p, m]) => [dirOf(p), m.metaText]),
-);
+const metaTextEn = new Map<string, CourseMetaText>();
+const labTextEn = new Map<string, ActivityMetaText>();
+let englishTextLoaded = false;
+
+/** Vrai quand les textes anglais des métadonnées sont disponibles (voir loadEnglishText). */
+export function isEnglishTextLoaded(): boolean {
+  return englishTextLoaded;
+}
+
+/**
+ * Charge à la demande les textes anglais des cours et des laboratoires (un seul module).
+ * Doit être attendu avant d'afficher l'interface en anglais ; sans effet si déjà chargé.
+ */
+export async function loadEnglishText(): Promise<void> {
+  if (englishTextLoaded) return;
+  const m = await import('./englishText');
+  m.courseTextEn.forEach((v, k) => metaTextEn.set(k, v));
+  m.labTextEnglish.forEach((v, k) => labTextEn.set(k, v));
+  // Les caches localisés construits avant le chargement seraient incomplets.
+  for (const k of Object.keys(localizedCache)) delete localizedCache[k as Lang];
+  for (const k of Object.keys(localizedLabs)) delete localizedLabs[k as Lang];
+  englishTextLoaded = true;
+}
 
 /** Cours dont le texte anglais existe (le test de parité exige qu'ils soient tous traduits à terme). */
 export function hasEnglishMeta(id: string): boolean {
@@ -138,7 +156,6 @@ export async function loadLabCorrections(id: string, lang: Lang = 'fr'): Promise
   return l ? (await l()).corrections : null;
 }
 
-const labTextEn = new Map<string, ActivityMetaText>(Object.entries(labMetaTextModules).map(([p, m]) => [dirOf(p), m.metaText]));
 const localizedLabs: Partial<Record<Lang, LabMeta[]>> = {};
 
 /** Laboratoires dans la langue demandée (même ordre que LABS). */
@@ -164,14 +181,12 @@ export const __internal = {
   courseBodyLoaders,
   courseCorrectionLoaders,
   courseSolutionLoaders,
-  courseMetaTextModules,
   courseBodyLoadersEn,
   courseCorrectionLoadersEn,
   courseSolutionLoadersEn,
   labMetaModules,
   labBodyLoaders,
   labCorrectionLoaders,
-  labMetaTextModules,
   labBodyLoadersEn,
   labCorrectionLoadersEn,
   dirOf,
