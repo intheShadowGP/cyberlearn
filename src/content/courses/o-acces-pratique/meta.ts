@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'o-pra-incident', label: 'Journaux de connexion et réponse à un compte compromis', level: 2 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

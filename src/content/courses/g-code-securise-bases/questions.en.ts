@@ -837,5 +837,69 @@ export const questions: Question[] = [
     ],
     "difficulty": 3,
     "type": "open"
+  },
+  {
+    "id": "cbs-q41",
+    "prompt": "Which fix is reliable for a system command built from user input?",
+    "skills": [
+      "g-base-entrees"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Convert the input to lowercase before using it"
+      },
+      {
+        "id": "b",
+        "text": "Forbid semicolons in the input only"
+      },
+      {
+        "id": "c",
+        "text": "Wrap the command in quotes and run it as is"
+      },
+      {
+        "id": "d",
+        "text": "Pass an argument list without a shell and validate the type"
+      }
+    ]
+  },
+  {
+    "id": "cbs-q42",
+    "prompt": "A database password was published in a repository. What should you do first?",
+    "skills": [
+      "g-base-secrets"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Wait to see whether it is used"
+      },
+      {
+        "id": "b",
+        "text": "Revoke it and generate a new one"
+      },
+      {
+        "id": "c",
+        "text": "Delete it from the repository and nothing else"
+      },
+      {
+        "id": "d",
+        "text": "Rename the file that contains it"
+      }
+    ]
+  },
+  {
+    "id": "cbs-q43",
+    "prompt": "Which `pathlib` method checks that a path stays under a base folder (method name)?",
+    "skills": [
+      "g-base-entrees"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "method"
   }
 ];

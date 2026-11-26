@@ -839,5 +839,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "un mot"
+  },
+  {
+    "id": "iot-q41",
+    "prompt": "Quelle est la première étape d’un triage de firmware sur un poste d’analyse ?",
+    "skills": [
+      "n-iot-firmware"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Calculer l’empreinte de l’image pour tracer la version"
+      },
+      {
+        "id": "b",
+        "text": "Publier les résultats avant toute analyse"
+      },
+      {
+        "id": "c",
+        "text": "Flasher l’image sur un appareil de production"
+      },
+      {
+        "id": "d",
+        "text": "Supprimer les sections compressées de l’image"
+      }
+    ]
+  },
+  {
+    "id": "iot-q42",
+    "prompt": "Une clé privée identique est embarquée dans tous les exemplaires d’un appareil. Quel est le risque ?",
+    "skills": [
+      "n-iot-vulns"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La clé expire au bout d’un an"
+      },
+      {
+        "id": "b",
+        "text": "Quiconque l’extrait peut usurper tous les appareils de la série"
+      },
+      {
+        "id": "c",
+        "text": "L’appareil devient plus lent à démarrer"
+      },
+      {
+        "id": "d",
+        "text": "Seul l’appareil analysé est concerné"
+      }
+    ]
+  },
+  {
+    "id": "iot-q43",
+    "prompt": "Quel outil libre repère et extrait les systèmes de fichiers intégrés à une image de firmware ? (nom de l’outil)",
+    "skills": [
+      "n-iot-firmware"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "outil"
   }
 ];

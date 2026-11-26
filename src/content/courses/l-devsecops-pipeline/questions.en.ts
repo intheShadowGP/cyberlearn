@@ -839,5 +839,69 @@ export const questions: Question[] = [
         "text": "Affected versions and measures to take"
       }
     ]
+  },
+  {
+    "id": "dso-q41",
+    "prompt": "Why reference a third-party action by its commit hash rather than `@v3`?",
+    "skills": [
+      "l-dso-ci"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tags are forbidden by the platform"
+      },
+      {
+        "id": "b",
+        "text": "The hash speeds up pipeline execution"
+      },
+      {
+        "id": "c",
+        "text": "The hash automatically encrypts the action’s code"
+      },
+      {
+        "id": "d",
+        "text": "A tag can be moved to malicious code"
+      }
+    ]
+  },
+  {
+    "id": "dso-q42",
+    "prompt": "What does the line `permissions: contents: read` limit in a workflow?",
+    "skills": [
+      "l-dso-ci"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The list of available secrets"
+      },
+      {
+        "id": "b",
+        "text": "The pipeline token’s rights to reading the repository only"
+      },
+      {
+        "id": "c",
+        "text": "The maximum duration of the steps"
+      },
+      {
+        "id": "d",
+        "text": "The number of simultaneous workflow runs"
+      }
+    ]
+  },
+  {
+    "id": "dso-q43",
+    "prompt": "Which acronym designates the inventory of a product’s software components (four letters)?",
+    "skills": [
+      "l-dso-supply"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "acronym"
   }
 ];

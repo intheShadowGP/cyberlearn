@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'l-dso-incident', label: 'Détection et réponse sur la chaîne de livraison', level: 3 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

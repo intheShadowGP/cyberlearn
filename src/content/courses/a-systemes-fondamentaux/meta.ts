@@ -30,6 +30,6 @@ export const meta: CourseMeta = {
     { id: 'a-priv', label: 'Privilèges et moindre privilège', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

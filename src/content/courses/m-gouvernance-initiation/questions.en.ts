@@ -837,5 +837,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "acronym"
+  },
+  {
+    "id": "mgi-q41",
+    "prompt": "A risk has a likelihood of 3 and an impact of 4 on a scale of 1 to 4. What is its level (likelihood × impact)?",
+    "skills": [
+      "m-ini-risques"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "16"
+      },
+      {
+        "id": "b",
+        "text": "1"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "7"
+      }
+    ]
+  },
+  {
+    "id": "mgi-q42",
+    "prompt": "Within what time is a personal data breach notified to the supervisory authority when it presents a risk?",
+    "skills": [
+      "m-ini-incident"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "24 hours after it occurred"
+      },
+      {
+        "id": "b",
+        "text": "72 hours after becoming aware of it"
+      },
+      {
+        "id": "c",
+        "text": "No deadline is set"
+      },
+      {
+        "id": "d",
+        "text": "One month after the incident is closed"
+      }
+    ]
+  },
+  {
+    "id": "mgi-q43",
+    "prompt": "Which response to a risk consists of handing it to an insurer or a provider? (one verb)",
+    "skills": [
+      "m-ini-risques"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "verb"
   }
 ];

@@ -373,6 +373,34 @@ export const corrections: CourseCorrections = {
         "a": "No effect on speed.",
         "b": "It removes none."
       }
+    },
+    "k8s-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "`latest` points to the most recently published image: two successive deployments may run different versions. You pin a precise version, or even the image digest.",
+      "whyWrong": {
+        "a": "Startup speed is not the issue.",
+        "c": "The registry does not forbid it: it is a bad practice.",
+        "d": "The tag has no link with the process user."
+      }
+    },
+    "k8s-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "This setting prevents a process from gaining privileges, for example through a SUID binary. It does not govern the network, the file system or the image user.",
+      "whyWrong": {
+        "b": "The network is handled by network policies.",
+        "d": "That is the role of `readOnlyRootFilesystem`.",
+        "c": "That is the role of `runAsNonRoot` and the `USER` instruction."
+      }
+    },
+    "k8s-q43": {
+      "type": "short",
+      "accepted": [
+        "runAsNonRoot",
+        "runasnonroot"
+      ],
+      "explanation": "`runAsNonRoot: true` makes the start of a container whose user is root fail."
     }
   },
 };

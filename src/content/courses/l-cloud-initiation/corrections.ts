@@ -377,6 +377,34 @@ export const corrections: CourseCorrections = {
         "l'anssi"
       ],
       "explanation": "L’ANSSI (Agence nationale de la sécurité des systèmes d’information) publie des guides accessibles à tous et le référentiel SecNumCloud qualifiant les fournisseurs cloud de confiance."
+    },
+    "cin-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "On coupe d’abord l’exposition, puis on cherche qui a accédé aux données grâce aux journaux (s’ils étaient activés). La configuration d’accès relève du client, pas du fournisseur.",
+      "whyWrong": {
+        "d": "Supprimer sans journaux détruit les traces nécessaires à l’enquête.",
+        "b": "Attendre prolonge l’exposition des données.",
+        "a": "La configuration est de la responsabilité du client du cloud."
+      }
+    },
+    "cin-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Même en SaaS, le client reste responsable de ses comptes, de ses droits, de ses données et de la façon dont il partage. Le fournisseur sécurise l’infrastructure et l’application.",
+      "whyWrong": {
+        "c": "Le fournisseur ne gère pas la façon dont le client partage ses données.",
+        "b": "Le navigateur n’intervient pas dans les droits.",
+        "d": "Les droits ne se configurent pas tout seuls."
+      }
+    },
+    "cin-q43": {
+      "type": "short",
+      "accepted": [
+        "MFA",
+        "mfa"
+      ],
+      "explanation": "L’authentification multifacteur protège le compte aux droits illimités : on l’active avant tout autre réglage et on évite de l’utiliser au quotidien."
     }
   },
 };

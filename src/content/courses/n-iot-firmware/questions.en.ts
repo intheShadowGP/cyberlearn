@@ -839,5 +839,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "one word"
+  },
+  {
+    "id": "iot-q41",
+    "prompt": "What is the first step of firmware triage on an analysis workstation?",
+    "skills": [
+      "n-iot-firmware"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Compute the image hash to trace the version"
+      },
+      {
+        "id": "b",
+        "text": "Publish the results before any analysis"
+      },
+      {
+        "id": "c",
+        "text": "Flash the image on a production device"
+      },
+      {
+        "id": "d",
+        "text": "Delete the compressed sections of the image"
+      }
+    ]
+  },
+  {
+    "id": "iot-q42",
+    "prompt": "The same private key is embedded in every unit of a device. What is the risk?",
+    "skills": [
+      "n-iot-vulns"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The key expires after a year"
+      },
+      {
+        "id": "b",
+        "text": "Anyone who extracts it can impersonate every device in the series"
+      },
+      {
+        "id": "c",
+        "text": "The device becomes slower to start"
+      },
+      {
+        "id": "d",
+        "text": "Only the analyzed device is concerned"
+      }
+    ]
+  },
+  {
+    "id": "iot-q43",
+    "prompt": "Which free tool detects and extracts file systems embedded in a firmware image? (tool name)",
+    "skills": [
+      "n-iot-firmware"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "tool"
   }
 ];

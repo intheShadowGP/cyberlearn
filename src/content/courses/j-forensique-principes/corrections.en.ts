@@ -374,6 +374,33 @@ export const corrections: CourseCorrections = {
         "b": "Keeping without a rule violates the storage-limitation principle.",
         "d": "Sharing must be limited to authorized people."
       }
+    },
+    "for-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Mixing local time and UTC, or ignoring clock drift, can reverse events and distort the reconstruction. You bring all sources to the same reference and note the offsets.",
+      "whyWrong": {
+        "a": "Normalization does not change log size.",
+        "c": "It neither encrypts nor hides anything.",
+        "b": "It has no effect on disk reading speed."
+      }
+    },
+    "for-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "The first sentence separates what is observed (creation time) from what is deduced (probable drop through the form). An address or a file is not enough to name a person.",
+      "whyWrong": {
+        "d": "It presents a deduction as an established fact.",
+        "a": "It asserts without evidence or source.",
+        "c": "It attributes an action to a person with no basis."
+      }
+    },
+    "for-q43": {
+      "type": "short",
+      "accepted": [
+        "stat"
+      ],
+      "explanation": "`stat file` shows the mtime, ctime and atime timestamps, useful to place a file on a timeline."
     }
   },
 };

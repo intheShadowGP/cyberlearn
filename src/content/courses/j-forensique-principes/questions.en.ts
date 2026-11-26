@@ -845,5 +845,69 @@ export const questions: Question[] = [
         "text": "It is handed to any colleague"
       }
     ]
+  },
+  {
+    "id": "for-q41",
+    "prompt": "Why normalize timestamps to UTC before building a timeline?",
+    "skills": [
+      "j-timeline"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To reduce the size of the collected logs"
+      },
+      {
+        "id": "b",
+        "text": "To speed up disk analysis"
+      },
+      {
+        "id": "c",
+        "text": "To make the logs unreadable to an attacker"
+      },
+      {
+        "id": "d",
+        "text": "To avoid reversing events coming from different time zones"
+      }
+    ]
+  },
+  {
+    "id": "for-q42",
+    "prompt": "Which sentence in a report correctly distinguishes a fact from a hypothesis?",
+    "skills": [
+      "j-rapport"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "“The file is malicious, it is obvious.”"
+      },
+      {
+        "id": "b",
+        "text": "“The file was created at 02:14:08; it was probably dropped through the form.”"
+      },
+      {
+        "id": "c",
+        "text": "“Everything points to an employee.”"
+      },
+      {
+        "id": "d",
+        "text": "“The attacker dropped the file at 02:14:08.”"
+      }
+    ]
+  },
+  {
+    "id": "for-q43",
+    "prompt": "Which Linux command shows a file’s modification, change and access dates? (command name)",
+    "skills": [
+      "j-timeline"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "command"
   }
 ];

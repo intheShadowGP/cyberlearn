@@ -375,6 +375,34 @@ export const corrections: CourseCorrections = {
         "the anssi"
       ],
       "explanation": "ANSSI (the French national cybersecurity agency) publishes guides open to everyone and the SecNumCloud framework qualifying trusted cloud providers."
+    },
+    "cin-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "You cut the exposure first, then look for who accessed the data through the logs (if enabled). Access configuration is the customer’s responsibility, not the provider’s.",
+      "whyWrong": {
+        "d": "Deleting without logs destroys the traces needed for the investigation.",
+        "b": "Waiting prolongs the data’s exposure.",
+        "a": "Configuration is the cloud customer’s responsibility."
+      }
+    },
+    "cin-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Even in SaaS, the customer remains responsible for their accounts, rights, data and how they share. The provider secures the infrastructure and the application.",
+      "whyWrong": {
+        "c": "The provider does not manage how the customer shares data.",
+        "b": "The browser plays no part in rights.",
+        "d": "Rights do not configure themselves."
+      }
+    },
+    "cin-q43": {
+      "type": "short",
+      "accepted": [
+        "MFA",
+        "mfa"
+      ],
+      "explanation": "Multi-factor authentication protects the account with unlimited rights: enable it before any other setting and avoid using it day to day."
     }
   },
 };

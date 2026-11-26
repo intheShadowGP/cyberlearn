@@ -837,5 +837,69 @@ export const questions: Question[] = [
     ],
     "difficulty": 3,
     "type": "open"
+  },
+  {
+    "id": "cbs-q41",
+    "prompt": "Quelle correction est fiable pour une commande système construite avec une saisie utilisateur ?",
+    "skills": [
+      "g-base-entrees"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Convertir la saisie en minuscules avant de l’utiliser"
+      },
+      {
+        "id": "b",
+        "text": "Interdire les points-virgules dans la saisie uniquement"
+      },
+      {
+        "id": "c",
+        "text": "Placer la commande entre guillemets et la lancer telle quelle"
+      },
+      {
+        "id": "d",
+        "text": "Passer une liste d’arguments sans interpréteur et valider le type"
+      }
+    ]
+  },
+  {
+    "id": "cbs-q42",
+    "prompt": "Un mot de passe de base de données a été publié dans un dépôt. Que faire en premier ?",
+    "skills": [
+      "g-base-secrets"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Attendre de voir s’il est utilisé"
+      },
+      {
+        "id": "b",
+        "text": "Le révoquer et en générer un nouveau"
+      },
+      {
+        "id": "c",
+        "text": "Le supprimer du dépôt et ne rien d’autre"
+      },
+      {
+        "id": "d",
+        "text": "Renommer le fichier qui le contient"
+      }
+    ]
+  },
+  {
+    "id": "cbs-q43",
+    "prompt": "Quelle méthode de `pathlib` vérifie qu’un chemin reste sous un dossier de base (nom de la méthode) ?",
+    "skills": [
+      "g-base-entrees"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "méthode"
   }
 ];

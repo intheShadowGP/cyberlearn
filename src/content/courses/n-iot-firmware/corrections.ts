@@ -377,6 +377,33 @@ export const corrections: CourseCorrections = {
         "la révocation"
       ],
       "explanation": "La révocation invalide un certificat compromis avant sa date de fin. Elle suppose que les appareils et serveurs vérifient les listes de révocation ou un service équivalent."
+    },
+    "iot-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "L’empreinte identifie sans ambiguïté la version analysée. L’analyse se fait sur une copie, dans un environnement isolé, jamais sur un appareil en production.",
+      "whyWrong": {
+        "c": "Flasher une image inconnue en production est dangereux.",
+        "b": "On ne publie rien avant d’avoir analysé et vérifié.",
+        "d": "Supprimer du contenu fausse l’analyse."
+      }
+    },
+    "iot-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Une clé commune à toute la série, extraite d’un seul exemplaire, compromet tous les autres. La remédiation est de générer des clés propres à chaque appareil à la fabrication.",
+      "whyWrong": {
+        "c": "La vitesse n’est pas le risque.",
+        "a": "Une clé n’expire pas d’elle-même sans date de validité prévue.",
+        "d": "Une clé commune concerne toute la série."
+      }
+    },
+    "iot-q43": {
+      "type": "short",
+      "accepted": [
+        "binwalk"
+      ],
+      "explanation": "`binwalk` détecte les signatures de systèmes de fichiers et de blocs compressés ; avec `-e`, il les extrait pour permettre une analyse."
     }
   },
 };

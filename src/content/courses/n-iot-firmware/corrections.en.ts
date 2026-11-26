@@ -373,6 +373,33 @@ export const corrections: CourseCorrections = {
         "the revocation"
       ],
       "explanation": "Revocation invalidates a compromised certificate before its end date. It assumes devices and servers check revocation lists or an equivalent service."
+    },
+    "iot-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "The hash identifies the analyzed version unambiguously. Analysis is done on a copy, in an isolated environment, never on a production device.",
+      "whyWrong": {
+        "c": "Flashing an unknown image in production is dangerous.",
+        "b": "Nothing is published before analyzing and verifying.",
+        "d": "Deleting content distorts the analysis."
+      }
+    },
+    "iot-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "A key common to the whole series, extracted from a single unit, compromises all the others. The remediation is to generate per-device keys at manufacture.",
+      "whyWrong": {
+        "c": "Speed is not the risk.",
+        "a": "A key does not expire on its own without a planned validity date.",
+        "d": "A common key concerns the whole series."
+      }
+    },
+    "iot-q43": {
+      "type": "short",
+      "accepted": [
+        "binwalk"
+      ],
+      "explanation": "`binwalk` detects file system and compressed block signatures; with `-e`, it extracts them to allow analysis."
     }
   },
 };

@@ -373,6 +373,34 @@ export const corrections: CourseCorrections = {
         "a": "Sans effet sur la vitesse.",
         "b": "Elle n’en supprime pas."
       }
+    },
+    "k8s-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "`latest` pointe vers l’image publiée en dernier : deux déploiements successifs peuvent exécuter des versions différentes. On épingle une version précise, voire le condensat de l’image.",
+      "whyWrong": {
+        "a": "La vitesse de démarrage n’est pas en cause.",
+        "c": "Le registre ne l’interdit pas : c’est une mauvaise pratique.",
+        "d": "L’étiquette n’a aucun lien avec l’utilisateur du processus."
+      }
+    },
+    "k8s-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Ce paramètre empêche un processus de gagner des privilèges, par exemple via un binaire SUID. Il ne règle ni le réseau, ni le système de fichiers, ni l’utilisateur de l’image.",
+      "whyWrong": {
+        "b": "Le réseau est géré par des politiques réseau.",
+        "d": "C’est le rôle de `readOnlyRootFilesystem`.",
+        "c": "C’est le rôle de `runAsNonRoot` et de l’instruction `USER`."
+      }
+    },
+    "k8s-q43": {
+      "type": "short",
+      "accepted": [
+        "runAsNonRoot",
+        "runasnonroot"
+      ],
+      "explanation": "`runAsNonRoot: true` fait échouer le démarrage d’un conteneur dont l’utilisateur est root."
     }
   },
 };

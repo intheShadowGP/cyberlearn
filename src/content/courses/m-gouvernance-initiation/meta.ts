@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'm-ini-incident', label: 'Incidents et reprise d’activité', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

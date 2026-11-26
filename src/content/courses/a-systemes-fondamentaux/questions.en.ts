@@ -811,5 +811,69 @@ export const questions: Question[] = [
     ],
     "difficulty": 2,
     "type": "open"
+  },
+  {
+    "id": "afund-q42",
+    "prompt": "A file starts with the bytes `4D 5A`. What does this header suggest?",
+    "skills": [
+      "a-data"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A Windows executable, whatever the extension"
+      },
+      {
+        "id": "b",
+        "text": "A compressed JPEG image"
+      },
+      {
+        "id": "c",
+        "text": "A plain text document in ASCII characters"
+      },
+      {
+        "id": "d",
+        "text": "A ZIP archive, whatever the extension"
+      }
+    ]
+  },
+  {
+    "id": "afund-q43",
+    "prompt": "A Word document launches a command interpreter. Why is that suspicious?",
+    "skills": [
+      "a-proc"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Interpreters never run on Windows"
+      },
+      {
+        "id": "b",
+        "text": "A document always launches an interpreter on opening"
+      },
+      {
+        "id": "c",
+        "text": "It is the normal behavior of a word processor"
+      },
+      {
+        "id": "d",
+        "text": "A document should not start `cmd` or `powershell`"
+      }
+    ]
+  },
+  {
+    "id": "afund-q44",
+    "prompt": "How many bytes do two hexadecimal digits represent? (number)",
+    "skills": [
+      "a-data"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "number"
   }
 ];

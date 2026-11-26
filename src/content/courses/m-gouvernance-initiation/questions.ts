@@ -837,5 +837,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "sigle"
+  },
+  {
+    "id": "mgi-q41",
+    "prompt": "Un risque a une vraisemblance de 3 et un impact de 4 sur une échelle de 1 à 4. Quel est son niveau (vraisemblance × impact) ?",
+    "skills": [
+      "m-ini-risques"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "16"
+      },
+      {
+        "id": "b",
+        "text": "1"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "7"
+      }
+    ]
+  },
+  {
+    "id": "mgi-q42",
+    "prompt": "Dans quel délai notifie-t-on une violation de données personnelles à l’autorité de contrôle quand elle présente un risque ?",
+    "skills": [
+      "m-ini-incident"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "24 heures après sa survenue"
+      },
+      {
+        "id": "b",
+        "text": "72 heures après en avoir pris connaissance"
+      },
+      {
+        "id": "c",
+        "text": "Aucun délai n’est prévu"
+      },
+      {
+        "id": "d",
+        "text": "Un mois après la clôture de l’incident"
+      }
+    ]
+  },
+  {
+    "id": "mgi-q43",
+    "prompt": "Quelle réponse à un risque consiste à le confier à un assureur ou à un prestataire ? (un verbe)",
+    "skills": [
+      "m-ini-risques"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "verbe"
   }
 ];

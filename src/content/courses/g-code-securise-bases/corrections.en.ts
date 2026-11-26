@@ -372,6 +372,34 @@ export const corrections: CourseCorrections = {
         "Dependencies or review by a third party are mentioned."
       ],
       "explanation": "Understanding the code you run is the first security reflex: you cannot protect what you do not understand."
+    },
+    "cbs-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "An argument list passed directly to the program does not go through a shell: the input can no longer add a command. The expected type (IP address, number) is validated too.",
+      "whyWrong": {
+        "b": "Forbidding a few characters leaves other separators possible.",
+        "a": "Case does not change how separators are interpreted.",
+        "c": "Quotes are bypassed by quotes in the input."
+      }
+    },
+    "cbs-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "The secret must be considered known: you revoke it first, then check its use in the logs. Deleting it from the repository does not erase it from history or copies.",
+      "whyWrong": {
+        "c": "History and clones keep the value.",
+        "a": "Waiting leaves a valid secret in third-party hands.",
+        "d": "Renaming does not remove the value from history."
+      }
+    },
+    "cbs-q43": {
+      "type": "short",
+      "accepted": [
+        "is_relative_to",
+        "is_relative_to()"
+      ],
+      "explanation": "After resolving the path with `resolve()`, `is_relative_to(base)` confirms it stays inside the allowed folder and blocks `../`."
     }
   },
 };

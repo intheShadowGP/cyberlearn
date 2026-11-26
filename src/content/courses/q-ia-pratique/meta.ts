@@ -26,6 +26,6 @@ export const meta: CourseMeta = {
     { id: 'q-pra-politique', label: 'Politique d’usage, RGPD et AI Act', level: 2 },
   ],
   sectionCount: 7,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

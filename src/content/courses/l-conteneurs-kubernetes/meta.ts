@@ -27,6 +27,6 @@ export const meta: CourseMeta = {
     { id: 'l-k8s-admission', label: 'Registre, signature et admission', level: 3 },
   ],
   sectionCount: 7,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

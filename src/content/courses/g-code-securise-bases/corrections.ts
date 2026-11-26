@@ -373,6 +373,34 @@ export const corrections: CourseCorrections = {
         "Les dépendances ou la relecture par un tiers sont mentionnées."
       ],
       "explanation": "Comprendre le code que l’on exécute est le premier réflexe de sécurité : on ne peut pas protéger ce qu’on ne comprend pas."
+    },
+    "cbs-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Une liste d’arguments transmise directement au programme ne passe pas par un interpréteur : la saisie ne peut plus ajouter de commande. On valide aussi le type attendu (adresse IP, nombre).",
+      "whyWrong": {
+        "b": "Interdire quelques caractères laisse d’autres séparateurs possibles.",
+        "a": "La casse ne change pas l’interprétation des séparateurs.",
+        "c": "Des guillemets se contournent par des guillemets dans la saisie."
+      }
+    },
+    "cbs-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Le secret doit être considéré comme connu : on le révoque d’abord, puis on vérifie son utilisation dans les journaux. Le supprimer du dépôt ne l’efface pas de l’historique ni des copies.",
+      "whyWrong": {
+        "c": "L’historique et les clones conservent la valeur.",
+        "a": "Attendre laisse un secret valide aux mains de tiers.",
+        "d": "Renommer ne retire pas la valeur de l’historique."
+      }
+    },
+    "cbs-q43": {
+      "type": "short",
+      "accepted": [
+        "is_relative_to",
+        "is_relative_to()"
+      ],
+      "explanation": "Après avoir résolu le chemin avec `resolve()`, `is_relative_to(base)` confirme qu’il reste dans le dossier autorisé et bloque `../`."
     }
   },
 };

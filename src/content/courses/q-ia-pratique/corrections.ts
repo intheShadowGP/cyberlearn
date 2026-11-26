@@ -376,6 +376,36 @@ export const corrections: CourseCorrections = {
         "gdpr"
       ],
       "explanation": "Le RGPD s’applique aux données personnelles traitées par un service d’IA : base légale, information, sous-traitance, minimisation."
+    },
+    "qip-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Le contenu analysé est une donnée, pas une consigne. L’assistant ne doit pas lui obéir, et il est utile qu’il signale la tentative d’injection.",
+      "whyWrong": {
+        "c": "Obéir permettrait à un attaquant de piloter l’assistant.",
+        "a": "Ignorer sans signaler fait perdre un indice d’attaque.",
+        "d": "La politesse n’a aucun effet sur la légitimité de l’instruction."
+      }
+    },
+    "qip-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Les actions sensibles ne s’exécutent pas sur la seule décision d’un assistant : l’humain valide, et l’action est journalisée.",
+      "whyWrong": {
+        "c": "L’urgence ne remplace pas la validation.",
+        "a": "Toute action doit être journalisée.",
+        "b": "L’heure ne remplace pas le contrôle humain."
+      }
+    },
+    "qip-q43": {
+      "type": "short",
+      "accepted": [
+        "jeu de tests",
+        "jeu de test",
+        "tests de non-régression",
+        "non-régression"
+      ],
+      "explanation": "Un jeu de tests versionné est rejoué à chaque changement de modèle, de consigne ou de données ; tout incident réel y devient un nouveau cas."
     }
   },
 };

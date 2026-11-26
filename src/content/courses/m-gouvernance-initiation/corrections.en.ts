@@ -373,6 +373,34 @@ export const corrections: CourseCorrections = {
         "the bcp"
       ],
       "explanation": "The business continuity plan describes how to maintain essential activities during an incident, often in degraded mode."
+    },
+    "mgi-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "The level is the product of the two scores: 3 × 4 = 12. It is used to rank risks and decide the response (reduce, avoid, transfer, accept).",
+      "whyWrong": {
+        "d": "7 is the sum of the two scores, not their product.",
+        "a": "16 would be the maximum, with 4 × 4.",
+        "b": "The level is not 1: both scores are far higher."
+      }
+    },
+    "mgi-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "The GDPR provides for notification within 72 hours of becoming aware of the breach, when it presents a risk to individuals.",
+      "whyWrong": {
+        "a": "The deadline is 72 hours, running from awareness of the breach.",
+        "d": "Waiting for the incident to close far exceeds the deadline.",
+        "c": "A precise deadline is indeed set by the regulation."
+      }
+    },
+    "mgi-q43": {
+      "type": "short",
+      "accepted": [
+        "transfer",
+        "to transfer"
+      ],
+      "explanation": "Transferring a risk means shifting all or part of its consequences to a third party (insurance, provider); overall responsibility stays with the organization."
     }
   },
 };

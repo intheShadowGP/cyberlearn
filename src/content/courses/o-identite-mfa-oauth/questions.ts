@@ -842,5 +842,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "un mot"
+  },
+  {
+    "id": "id-q41",
+    "prompt": "Dans PKCE, quelle valeur est envoyée dans la demande d’autorisation ?",
+    "skills": [
+      "o-oauth"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le `code_verifier` lui-même, en clair"
+      },
+      {
+        "id": "b",
+        "text": "Le `code_challenge`, empreinte du `code_verifier`"
+      },
+      {
+        "id": "c",
+        "text": "Le jeton d’accès futur"
+      },
+      {
+        "id": "d",
+        "text": "Le mot de passe de l’utilisateur"
+      }
+    ]
+  },
+  {
+    "id": "id-q42",
+    "prompt": "Pourquoi la `redirect_uri` doit-elle être comparée de façon exacte à une liste enregistrée ?",
+    "skills": [
+      "o-oauth"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour chiffrer le code d’autorisation"
+      },
+      {
+        "id": "b",
+        "text": "Parce que le navigateur l’exige pour afficher la page"
+      },
+      {
+        "id": "c",
+        "text": "Pour accélérer la redirection du navigateur"
+      },
+      {
+        "id": "d",
+        "text": "Pour que le code ne soit pas envoyé vers une adresse choisie par un attaquant"
+      }
+    ]
+  },
+  {
+    "id": "id-q43",
+    "prompt": "Quel paramètre aléatoire, lié à la session, protège la demande d’autorisation contre la falsification de requête ? (nom du paramètre)",
+    "skills": [
+      "o-oauth"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "paramètre"
   }
 ];

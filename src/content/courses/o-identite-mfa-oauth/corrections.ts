@@ -382,6 +382,33 @@ export const corrections: CourseCorrections = {
         "la révocation"
       ],
       "explanation": "La révocation retire immédiatement la validité d’un jeton, d’une session ou d’un consentement. Elle fait partie de la réponse à un vol de session."
+    },
+    "id-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Seule l’empreinte (`code_challenge`) transite dans la demande. Le `code_verifier` n’est présenté qu’à l’échange du code : un code intercepté est donc inutilisable sans lui.",
+      "whyWrong": {
+        "a": "Le verifier ne doit jamais voyager dans la première requête.",
+        "d": "Le mot de passe n’est jamais transmis au client.",
+        "c": "Le jeton est émis après l’échange du code, pas avant."
+      }
+    },
+    "id-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Une comparaison partielle (préfixe, joker) peut laisser passer une adresse contrôlée par un attaquant, qui recevrait alors le code ou le jeton.",
+      "whyWrong": {
+        "c": "La vitesse n’est pas l’enjeu.",
+        "b": "Le navigateur n’impose rien de tel.",
+        "a": "La comparaison ne chiffre rien."
+      }
+    },
+    "id-q43": {
+      "type": "short",
+      "accepted": [
+        "state"
+      ],
+      "explanation": "Le paramètre `state` est généré par le client, renvoyé inchangé par le serveur d’autorisation et vérifié au retour."
     }
   },
 };

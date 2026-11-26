@@ -378,6 +378,33 @@ export const corrections: CourseCorrections = {
         "spraying"
       ],
       "explanation": "Password spraying spreads attempts over many accounts. It is detected by looking at failures per source rather than per account."
+    },
+    "opr-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "You disable at once to cut access, and delete later after transferring useful data. Abrupt deletion can destroy needed items.",
+      "whyWrong": {
+        "b": "Immediate deletion may destroy data the company needs.",
+        "c": "An active account leaves exploitable access for a month.",
+        "d": "Renaming does not prevent signing in."
+      }
+    },
+    "opr-q42": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Type 10 is a remote interactive session (RDP). A logon at an unusual hour and for an unusual account is a signal to qualify, for example with the source and earlier failures.",
+      "whyWrong": {
+        "a": "A local logon corresponds to type 2.",
+        "d": "A service corresponds to type 5.",
+        "b": "Access to a share corresponds to type 3."
+      }
+    },
+    "opr-q43": {
+      "type": "short",
+      "accepted": [
+        "4625"
+      ],
+      "explanation": "Event 4625 records a failed logon; a series of 4625 followed by a 4624 suggests a successful brute force."
     }
   },
 };

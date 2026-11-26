@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'n-iot-flotte', label: 'Cycle de vie et exploitation d’une flotte', level: 3 },
   ],
   sectionCount: 7,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

@@ -838,5 +838,69 @@ export const questions: Question[] = [
         "text": "Encrypting the image"
       }
     ]
+  },
+  {
+    "id": "k8s-q41",
+    "prompt": "Why avoid the `latest` tag for a production image?",
+    "skills": [
+      "l-k8s-images"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The `latest` image is systematically slower to start than the other ones"
+      },
+      {
+        "id": "b",
+        "text": "The version actually deployed can change without control"
+      },
+      {
+        "id": "c",
+        "text": "The container registry forbids this tag in every production environment"
+      },
+      {
+        "id": "d",
+        "text": "It technically prevents using a non-root user inside the container"
+      }
+    ]
+  },
+  {
+    "id": "k8s-q42",
+    "prompt": "What does `allowPrivilegeEscalation: false` do in a `securityContext`?",
+    "skills": [
+      "l-k8s-cluster"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A process cannot gain more rights than its parent"
+      },
+      {
+        "id": "b",
+        "text": "It forbids the container any network access, inbound and outbound, for good"
+      },
+      {
+        "id": "c",
+        "text": "It permanently removes the root user from the image at build time"
+      },
+      {
+        "id": "d",
+        "text": "It makes the container’s root file system accessible read-only only"
+      }
+    ]
+  },
+  {
+    "id": "k8s-q43",
+    "prompt": "Which `securityContext` parameter refuses to start a container running as root? (parameter name)",
+    "skills": [
+      "l-k8s-cluster"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "parameter"
   }
 ];

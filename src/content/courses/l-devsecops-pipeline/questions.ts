@@ -839,5 +839,69 @@ export const questions: Question[] = [
         "text": "Versions touchées et mesures à prendre"
       }
     ]
+  },
+  {
+    "id": "dso-q41",
+    "prompt": "Pourquoi référence-t-on une action tierce par son empreinte de commit plutôt que par `@v3` ?",
+    "skills": [
+      "l-dso-ci"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Les étiquettes sont interdites par la plateforme"
+      },
+      {
+        "id": "b",
+        "text": "L’empreinte accélère l’exécution du pipeline"
+      },
+      {
+        "id": "c",
+        "text": "L’empreinte chiffre automatiquement le code de l’action"
+      },
+      {
+        "id": "d",
+        "text": "Une étiquette peut être déplacée vers un code malveillant"
+      }
+    ]
+  },
+  {
+    "id": "dso-q42",
+    "prompt": "Que limite la ligne `permissions: contents: read` dans un workflow ?",
+    "skills": [
+      "l-dso-ci"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La liste des secrets disponibles"
+      },
+      {
+        "id": "b",
+        "text": "Les droits du jeton du pipeline à la seule lecture du dépôt"
+      },
+      {
+        "id": "c",
+        "text": "La durée maximale d’exécution des étapes"
+      },
+      {
+        "id": "d",
+        "text": "Le nombre d’exécutions simultanées du workflow"
+      }
+    ]
+  },
+  {
+    "id": "dso-q43",
+    "prompt": "Quel sigle désigne l’inventaire des composants logiciels d’un produit (trois lettres) ?",
+    "skills": [
+      "l-dso-supply"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "sigle"
   }
 ];

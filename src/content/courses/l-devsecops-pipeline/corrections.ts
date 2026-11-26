@@ -376,6 +376,34 @@ export const corrections: CourseCorrections = {
         "b": "Insuffisant.",
         "c": "Sans explication, ils ne peuvent pas agir."
       }
+    },
+    "dso-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Une étiquette de version est modifiable par le propriétaire de l’action (ou un attaquant qui le compromet). Une empreinte de commit désigne un contenu précis qui ne peut pas être remplacé.",
+      "whyWrong": {
+        "b": "Le choix n’a pas d’effet sur la vitesse.",
+        "a": "Les étiquettes sont autorisées ; le problème est leur mobilité.",
+        "c": "L’empreinte identifie le code, elle ne le chiffre pas."
+      }
+    },
+    "dso-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Elle réduit les droits du jeton automatique : une étape compromise ne peut pas modifier le dépôt ni publier. C’est l’application du moindre privilège au pipeline.",
+      "whyWrong": {
+        "d": "Le nombre d’exécutions se règle autrement.",
+        "c": "La durée est un autre paramètre.",
+        "a": "Les secrets se gèrent séparément."
+      }
+    },
+    "dso-q43": {
+      "type": "short",
+      "accepted": [
+        "SBOM",
+        "sbom"
+      ],
+      "explanation": "Un SBOM (Software Bill of Materials) liste les composants et leurs versions, ce qui permet de savoir rapidement si une vulnérabilité annoncée concerne le produit."
     }
   },
 };

@@ -842,5 +842,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "one word"
+  },
+  {
+    "id": "id-q41",
+    "prompt": "In PKCE, which value is sent in the authorization request?",
+    "skills": [
+      "o-oauth"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The `code_verifier` itself, sent in clear text in the URL"
+      },
+      {
+        "id": "b",
+        "text": "The `code_challenge`, a hash of the `code_verifier`"
+      },
+      {
+        "id": "c",
+        "text": "The future access token, issued in advance by the server"
+      },
+      {
+        "id": "d",
+        "text": "The user’s password, forwarded to the client application"
+      }
+    ]
+  },
+  {
+    "id": "id-q42",
+    "prompt": "Why must the `redirect_uri` be compared exactly against a registered list?",
+    "skills": [
+      "o-oauth"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To encrypt the authorization code during the redirect"
+      },
+      {
+        "id": "b",
+        "text": "Because the browser requires an exact match to display the page"
+      },
+      {
+        "id": "c",
+        "text": "To speed up the redirect performed by the user’s browser"
+      },
+      {
+        "id": "d",
+        "text": "So the code is not sent to an address chosen by an attacker"
+      }
+    ]
+  },
+  {
+    "id": "id-q43",
+    "prompt": "Which random, session-bound parameter protects the authorization request against request forgery? (parameter name)",
+    "skills": [
+      "o-oauth"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "parameter"
   }
 ];

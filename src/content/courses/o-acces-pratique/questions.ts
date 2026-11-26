@@ -835,5 +835,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "deux mots"
+  },
+  {
+    "id": "opr-q41",
+    "prompt": "Lors du départ d’un salarié, quelle séquence est la plus sûre pour son compte ?",
+    "skills": [
+      "o-pra-annuaire"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Désactivation immédiate, puis suppression différée"
+      },
+      {
+        "id": "b",
+        "text": "Suppression immédiate de toutes ses données"
+      },
+      {
+        "id": "c",
+        "text": "Laisser le compte actif un mois par précaution"
+      },
+      {
+        "id": "d",
+        "text": "Changer seulement le nom du compte"
+      }
+    ]
+  },
+  {
+    "id": "opr-q42",
+    "prompt": "Un événement 4624 de type 10 apparaît à 3 h pour un compte qui ne travaille jamais à distance. Que suggère-t-il ?",
+    "skills": [
+      "o-pra-incident"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Une ouverture de session locale normale"
+      },
+      {
+        "id": "b",
+        "text": "Un accès à un partage de fichiers"
+      },
+      {
+        "id": "c",
+        "text": "Une connexion Bureau à distance atypique, à investiguer"
+      },
+      {
+        "id": "d",
+        "text": "Le démarrage d’un service sous ce compte"
+      }
+    ]
+  },
+  {
+    "id": "opr-q43",
+    "prompt": "Quel numéro d’événement Windows correspond à un échec d’ouverture de session ? (quatre chiffres)",
+    "skills": [
+      "o-pra-incident"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "numéro"
   }
 ];

@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'g-base-habitudes', label: 'Bonnes habitudes et pratique responsable', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

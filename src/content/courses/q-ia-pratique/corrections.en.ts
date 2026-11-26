@@ -370,6 +370,36 @@ export const corrections: CourseCorrections = {
         "rgpd"
       ],
       "explanation": "GDPR applies to personal data processed by an AI service: legal basis, information, processors, minimization."
+    },
+    "qip-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "The analyzed content is data, not an instruction. The assistant must not obey it, and it is useful for it to report the injection attempt.",
+      "whyWrong": {
+        "c": "Obeying would let an attacker steer the assistant.",
+        "a": "Ignoring without reporting loses a clue of attack.",
+        "d": "Politeness has no effect on the legitimacy of the instruction."
+      }
+    },
+    "qip-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Sensitive actions are not executed on an assistant’s decision alone: a human validates, and the action is logged.",
+      "whyWrong": {
+        "c": "Urgency does not replace validation.",
+        "a": "Every action must be logged.",
+        "b": "The time of day does not replace human control."
+      }
+    },
+    "qip-q43": {
+      "type": "short",
+      "accepted": [
+        "test set",
+        "test suite",
+        "regression tests",
+        "regression test"
+      ],
+      "explanation": "A versioned test set is replayed at every change of model, instructions or data; every real incident becomes a new case."
     }
   },
 };

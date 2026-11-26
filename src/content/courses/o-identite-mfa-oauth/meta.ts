@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'o-sessions', label: 'Sessions, jetons et détournement', level: 3 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

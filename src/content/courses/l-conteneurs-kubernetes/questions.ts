@@ -838,5 +838,69 @@ export const questions: Question[] = [
         "text": "Chiffrer l’image"
       }
     ]
+  },
+  {
+    "id": "k8s-q41",
+    "prompt": "Pourquoi éviter l’étiquette `latest` pour une image de production ?",
+    "skills": [
+      "l-k8s-images"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "L’image `latest` est systématiquement plus lente à démarrer que les autres"
+      },
+      {
+        "id": "b",
+        "text": "La version réellement déployée peut changer sans contrôle"
+      },
+      {
+        "id": "c",
+        "text": "Le registre de conteneurs interdit cette étiquette dans tous les environnements de production"
+      },
+      {
+        "id": "d",
+        "text": "Elle empêche techniquement d’utiliser un utilisateur non root dans le conteneur"
+      }
+    ]
+  },
+  {
+    "id": "k8s-q42",
+    "prompt": "Que fait `allowPrivilegeEscalation: false` dans un `securityContext` ?",
+    "skills": [
+      "l-k8s-cluster"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Un processus ne peut pas obtenir plus de droits que son parent"
+      },
+      {
+        "id": "b",
+        "text": "Il interdit au conteneur tout accès au réseau, entrant comme sortant, de façon définitive"
+      },
+      {
+        "id": "c",
+        "text": "Il retire définitivement l’utilisateur root de l’image au moment de sa construction"
+      },
+      {
+        "id": "d",
+        "text": "Il rend le système de fichiers racine du conteneur accessible en lecture seule uniquement"
+      }
+    ]
+  },
+  {
+    "id": "k8s-q43",
+    "prompt": "Quel paramètre de `securityContext` refuse de démarrer un conteneur qui s’exécute en root ? (nom du paramètre)",
+    "skills": [
+      "l-k8s-cluster"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "paramètre"
   }
 ];

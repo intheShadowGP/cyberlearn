@@ -374,6 +374,33 @@ export const corrections: CourseCorrections = {
         "b": "Une conservation sans règle viole le principe de limitation.",
         "d": "Le partage doit être limité aux personnes habilitées."
       }
+    },
+    "for-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Mélanger heure locale et UTC, ou ignorer un décalage d’horloge, peut inverser des événements et fausser la reconstitution. On ramène toutes les sources au même référentiel et on note les décalages.",
+      "whyWrong": {
+        "a": "La normalisation ne change pas la taille des journaux.",
+        "c": "Elle ne chiffre ni ne masque rien.",
+        "b": "Elle n’a pas d’effet sur la vitesse de lecture d’un disque."
+      }
+    },
+    "for-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "La première phrase sépare ce qui est observé (heure de création) de ce qui est déduit (probable dépôt par le formulaire). Une adresse ou un fichier ne suffit pas à désigner une personne.",
+      "whyWrong": {
+        "d": "Elle présente une déduction comme un fait établi.",
+        "a": "Elle affirme sans preuve ni source.",
+        "c": "Elle attribue une action à une personne sans élément."
+      }
+    },
+    "for-q43": {
+      "type": "short",
+      "accepted": [
+        "stat"
+      ],
+      "explanation": "`stat fichier` affiche les horodatages mtime, ctime et atime, utiles pour placer un fichier dans une chronologie."
     }
   },
 };

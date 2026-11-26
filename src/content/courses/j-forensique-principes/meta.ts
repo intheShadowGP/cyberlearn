@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'j-rapport', label: 'Rapport, valeur probante et cadre légal', level: 2 },
   ],
   sectionCount: 9,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

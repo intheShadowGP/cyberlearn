@@ -316,6 +316,34 @@ export const corrections: CourseCorrections = {
         "Mentions an additional protection: no interactive logon or monitoring."
       ],
       "explanation": "A service account must have just the rights of its task: compromising it must not compromise the domain."
+    },
+    "afund-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "`4D 5A` is the characters “MZ”, the signature of Windows executables. A file name extension can lie; the header is a more reliable clue to the real type.",
+      "whyWrong": {
+        "d": "A ZIP archive starts with `50 4B` (“PK”).",
+        "c": "Plain text has no fixed signature of this kind.",
+        "b": "A JPEG starts with `FF D8`."
+      }
+    },
+    "afund-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "The parent-child relationship is a clue: a word processor has no legitimate reason to start an interpreter, which suggests a macro or an exploit.",
+      "whyWrong": {
+        "b": "It is not normal behavior for a document.",
+        "a": "Interpreters exist and run on Windows.",
+        "c": "It is not the normal behavior of a word processor."
+      }
+    },
+    "afund-q44": {
+      "type": "short",
+      "accepted": [
+        "1",
+        "one"
+      ],
+      "explanation": "One hex digit is 4 bits, so two digits are 8 bits, one byte: `FF` = 255."
     }
   },
 };

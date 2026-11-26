@@ -318,6 +318,34 @@ export const corrections: CourseCorrections = {
         "Mentionne une protection complémentaire : pas de connexion interactive ou surveillance."
       ],
       "explanation": "Un compte de service doit avoir juste les droits de sa tâche : le compromettre ne doit pas compromettre le domaine."
+    },
+    "afund-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "`4D 5A` correspond aux caractères « MZ », signature des exécutables Windows. L’extension d’un nom de fichier peut mentir ; l’en-tête est un indice plus fiable du type réel.",
+      "whyWrong": {
+        "d": "Une archive ZIP commence par `50 4B` (« PK »).",
+        "c": "Du texte brut n’a pas de signature fixe de ce type.",
+        "b": "Un JPEG commence par `FF D8`."
+      }
+    },
+    "afund-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "La relation parent-enfant est un indice : un traitement de texte n’a pas de raison légitime de démarrer un interpréteur, ce qui évoque une macro ou un exploit.",
+      "whyWrong": {
+        "b": "Ce n’est pas un comportement normal d’un document.",
+        "a": "Les interpréteurs existent et s’exécutent sur Windows.",
+        "c": "Ce n’est pas le comportement normal d’un traitement de texte."
+      }
+    },
+    "afund-q44": {
+      "type": "short",
+      "accepted": [
+        "1",
+        "un"
+      ],
+      "explanation": "Un chiffre hexadécimal vaut 4 bits, donc deux chiffres valent 8 bits, soit un octet : `FF` = 255."
     }
   },
 };

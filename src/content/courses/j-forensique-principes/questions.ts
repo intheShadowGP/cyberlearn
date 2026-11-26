@@ -845,5 +845,69 @@ export const questions: Question[] = [
         "text": "Elle est transmise à n’importe quel collègue"
       }
     ]
+  },
+  {
+    "id": "for-q41",
+    "prompt": "Pourquoi normaliser les horodatages en UTC avant de construire une chronologie ?",
+    "skills": [
+      "j-timeline"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour réduire la taille des journaux collectés"
+      },
+      {
+        "id": "b",
+        "text": "Pour accélérer l’analyse des disques"
+      },
+      {
+        "id": "c",
+        "text": "Pour rendre les journaux illisibles par un attaquant"
+      },
+      {
+        "id": "d",
+        "text": "Pour éviter d’inverser l’ordre d’événements venant de fuseaux différents"
+      }
+    ]
+  },
+  {
+    "id": "for-q42",
+    "prompt": "Quelle phrase d’un rapport distingue correctement un fait d’une hypothèse ?",
+    "skills": [
+      "j-rapport"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "« Le fichier est malveillant, c’est évident. »"
+      },
+      {
+        "id": "b",
+        "text": "« Le fichier a été créé à 02:14:08 ; il est probable qu’il ait été déposé par le formulaire. »"
+      },
+      {
+        "id": "c",
+        "text": "« Tout porte à croire que c’est un employé. »"
+      },
+      {
+        "id": "d",
+        "text": "« L’attaquant a déposé le fichier à 02:14:08. »"
+      }
+    ]
+  },
+  {
+    "id": "for-q43",
+    "prompt": "Quelle commande Linux affiche les dates de modification, de changement et d’accès d’un fichier ? (nom de la commande)",
+    "skills": [
+      "j-timeline"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "commande"
   }
 ];

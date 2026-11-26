@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
-| Questions de cours (avec correction) | 3454 |
+| Questions de cours (avec correction) | 3493 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
@@ -46,7 +46,7 @@
 | Cours | Discipline | Niveau | Durée | Sections | Questions | Exercices | Références |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Fichiers, programmes et ligne de commande : le socle avant la sécurité (`a-fichiers-programmes-ligne-commande`) | A | 1 · Débutant | 95 min | 5 | 40 | 3 | 4 |
-| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 90 min | 8 | 40 | 2 | 3 |
+| Ordinateur, système d’exploitation, processus et privilèges (`a-systemes-fondamentaux`) | A | 1 · Débutant | 90 min | 8 | 43 | 2 | 3 |
 | Virtualisation et conteneurs : isoler les charges de travail (`a-virtualisation-conteneurs`) | A | 2 · Intermédiaire | 100 min | 6 | 40 | 2 | 4 |
 | Du code au processus : compilation, binaires, mémoire et exécution (`a-compilation-memoire-execution`) | A | 3 · Avancé | 110 min | 6 | 40 | 2 | 4 |
 | Base de confiance, isolation et architecture de sécurité d’une plateforme (`a-isolation-confiance-plateforme`) | A | 4 · Expert | 120 min | 6 | 40 | 2 | 4 |
@@ -74,12 +74,12 @@
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 6 |
 | Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Sécurité web avancée : modélisation, protocole, navigateur, API et chaîne logicielle (`f-web-defense-avancee`) | F | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
-| Programmation sécurisée : les bonnes habitudes dès les premiers programmes (`g-code-securise-bases`) | G | 1 · Débutant | 100 min | 8 | 40 | 3 | 5 |
+| Programmation sécurisée : les bonnes habitudes dès les premiers programmes (`g-code-securise-bases`) | G | 1 · Débutant | 100 min | 8 | 43 | 3 | 5 |
 | Code sûr au quotidien : Python, JavaScript, TypeScript, Java et scripts (`g-code-sur-langages`) | G | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 5 |
 | Vulnérabilités mémoire : débordements, use-after-free et protections (`g-vulnerabilites-memoire`) | G | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Sécurité du code avancée : analyse, fuzzing, revue, chaîne de construction et programme de sécurité (`g-code-securise-avance`) | G | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Test d’intrusion : initiation, cadre légal et première démarche (`h-pentest-initiation`) | H | 1 · Débutant | 100 min | 6 | 40 | 3 | 6 |
-| Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 9 | 40 | 3 | 4 |
+| Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 9 | 43 | 3 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Exercices adverses avancés : cadrage, émulation d’adversaire, chemins d’attaque et gouvernance (`h-pentest-avance`) | H | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Défense et SOC : initiation aux journaux, aux alertes et aux premiers réflexes (`i-soc-initiation`) | I | 1 · Débutant | 90 min | 8 | 44 | 3 | 4 |
@@ -87,34 +87,34 @@
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Ingénierie de détection avancée et pilotage d’un SOC (`i-detection-avancee`) | I | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Forensique numérique : initiation aux preuves, aux traces et à la chronologie (`j-forensique-initiation`) | J | 1 · Débutant | 95 min | 8 | 44 | 3 | 4 |
-| Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 115 min | 9 | 40 | 3 | 4 |
+| Forensique numérique : preuves, acquisition et chronologie (`j-forensique-principes`) | J | 2 · Intermédiaire | 115 min | 9 | 43 | 3 | 4 |
 | Analyse de maliciels en investigation : triage, environnement isolé et indicateurs (`j-analyse-maliciels-investigation`) | J | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Forensique : analyse mémoire, système de fichiers et artefacts Linux (`j-memoire-artefacts-linux`) | J | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Forensique avancée : pilotage d’investigation, cloud, supports flash et expertise (`j-forensique-avancee`) | J | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Logiciels malveillants : initiation aux familles, aux infections et aux bons réflexes (`k-malware-initiation`) | K | 1 · Débutant | 90 min | 8 | 44 | 3 | 4 |
-| Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 115 min | 9 | 40 | 3 | 4 |
+| Malwares : typologie, analyse statique, dynamique et règles YARA (`k-malware-analyse`) | K | 2 · Intermédiaire | 115 min | 9 | 43 | 3 | 4 |
 | Rétro-ingénierie défensive : binaires, désassemblage, débogage et outils (`k-retro-ingenierie-defensive`) | K | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Menaces avancées : campagnes, rançongiciels, chaîne d’approvisionnement et analyse à grande échelle (`k-malware-avance`) | K | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
-| Le cloud pour débutants : comprendre, utiliser et protéger (`l-cloud-initiation`) | L | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
+| Le cloud pour débutants : comprendre, utiliser et protéger (`l-cloud-initiation`) | L | 1 · Débutant | 90 min | 8 | 43 | 3 | 3 |
 | Sécurité cloud : responsabilité partagée, IAM et stockage (`l-cloud-iam`) | L | 2 · Intermédiaire | 120 min | 8 | 44 | 3 | 4 |
-| Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 130 min | 7 | 40 | 3 | 4 |
-| DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 8 | 40 | 3 | 4 |
+| Conteneurs et Kubernetes : isolation, images et durcissement (`l-conteneurs-kubernetes`) | L | 3 · Avancé | 130 min | 7 | 43 | 3 | 4 |
+| DevSecOps : sécuriser la chaîne CI/CD et la chaîne d’approvisionnement logicielle (`l-devsecops-pipeline`) | L | 3 · Avancé | 130 min | 8 | 43 | 3 | 4 |
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Architecture cloud sécurisée : zones d’atterrissage, politiques en code, identités et détection (`l-cloud-avance`) | L | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
-| La gouvernance de la sécurité pour débutants : risques, règles et bons réflexes (`m-gouvernance-initiation`) | M | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
+| La gouvernance de la sécurité pour débutants : risques, règles et bons réflexes (`m-gouvernance-initiation`) | M | 1 · Débutant | 90 min | 8 | 43 | 3 | 3 |
 | Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 125 min | 6 | 40 | 3 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 125 min | 7 | 40 | 3 | 5 |
 | EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Gouvernance avancée : quantification des risques, conformité multi-textes, tiers critiques et pilotage par la preuve (`m-gouvernance-avancee`) | M | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | Systèmes industriels et objets connectés pour débutants : comprendre et protéger (`n-ot-iot-initiation`) | N | 1 · Débutant | 90 min | 8 | 44 | 3 | 3 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 7 | 44 | 3 | 4 |
-| Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 4 |
+| Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 7 | 43 | 3 | 4 |
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 5 |
 | Sécurité OT avancée : IEC 62443, architecture, analyse de risques, détection et résilience (`n-ot-securite-avancee`) | N | 4 · Expert | 140 min | 6 | 40 | 3 | 4 |
 | L’identité numérique pour débutants : mots de passe, MFA et droits d’accès (`o-identite-initiation`) | O | 1 · Débutant | 90 min | 8 | 44 | 3 | 3 |
-| Gérer les accès au quotidien : annuaire, authentification, SSO et autorisations (`o-acces-pratique`) | O | 2 · Intermédiaire | 120 min | 8 | 40 | 3 | 3 |
+| Gérer les accès au quotidien : annuaire, authentification, SSO et autorisations (`o-acces-pratique`) | O | 2 · Intermédiaire | 120 min | 8 | 43 | 3 | 3 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
-| Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 8 | 40 | 3 | 4 |
+| Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 8 | 43 | 3 | 4 |
 | Architecture d’identité avancée : Zero Trust, identités de machines et résilience (`o-identite-avancee`) | O | 4 · Expert | 150 min | 6 | 40 | 3 | 3 |
 | Initiation à la recherche en sécurité : méthode, éthique et premiers concepts (`p-recherche-initiation`) | P | 1 · Débutant | 90 min | 5 | 40 | 3 | 3 |
 | Analyser et corriger des vulnérabilités : classes de défauts, outils et rapport (`p-analyse-pratique`) | P | 2 · Intermédiaire | 120 min | 5 | 40 | 3 | 3 |
@@ -122,7 +122,7 @@
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 4 |
 | Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 5 |
 | L’intelligence artificielle et la cybersécurité pour débutants (`q-ia-initiation`) | Q | 1 · Débutant | 90 min | 7 | 44 | 3 | 3 |
-| Utiliser l’IA en sécurité de façon sûre : demandes, assistants, évaluation et politique d’usage (`q-ia-pratique`) | Q | 2 · Intermédiaire | 120 min | 7 | 40 | 3 | 3 |
+| Utiliser l’IA en sécurité de façon sûre : demandes, assistants, évaluation et politique d’usage (`q-ia-pratique`) | Q | 2 · Intermédiaire | 120 min | 7 | 43 | 3 | 3 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 135 min | 7 | 40 | 3 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 6 | 40 | 3 | 4 |
 | Sécurité avancée des systèmes d’IA : chaîne d’approvisionnement, agents, robustesse et risque (`q-securite-ia-avancee`) | Q | 4 · Expert | 150 min | 5 | 40 | 3 | 4 |

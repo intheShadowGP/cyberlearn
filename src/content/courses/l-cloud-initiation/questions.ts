@@ -837,5 +837,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "sigle"
+  },
+  {
+    "id": "cin-q41",
+    "prompt": "Un espace de stockage a été réglé sur « public » par erreur. Quelle est la première action ?",
+    "skills": [
+      "l-ini-erreurs"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Prévenir le fournisseur et ne rien modifier"
+      },
+      {
+        "id": "b",
+        "text": "Attendre de voir si quelqu’un y accède"
+      },
+      {
+        "id": "c",
+        "text": "Retirer l’accès public, puis consulter les journaux d’accès"
+      },
+      {
+        "id": "d",
+        "text": "Supprimer l’espace sans consulter les journaux"
+      }
+    ]
+  },
+  {
+    "id": "cin-q42",
+    "prompt": "Dans un modèle SaaS, qui est responsable de la configuration des accès des utilisateurs ?",
+    "skills": [
+      "l-ini-modeles"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le client, qui gère les comptes et les droits"
+      },
+      {
+        "id": "b",
+        "text": "L’éditeur du navigateur utilisé"
+      },
+      {
+        "id": "c",
+        "text": "Le fournisseur seul, qui gère tout"
+      },
+      {
+        "id": "d",
+        "text": "Personne, c’est automatique"
+      }
+    ]
+  },
+  {
+    "id": "cin-q43",
+    "prompt": "Quelle protection supplémentaire doit-on activer sur le compte propriétaire d’un compte cloud ? (sigle de trois lettres)",
+    "skills": [
+      "l-ini-comptes"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "sigle"
   }
 ];

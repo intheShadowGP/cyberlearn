@@ -381,6 +381,33 @@ export const corrections: CourseCorrections = {
         "pulverisation de mots de passe"
       ],
       "explanation": "Le password spraying répartit les essais sur de nombreux comptes. On le détecte en regardant les échecs par source plutôt que par compte."
+    },
+    "opr-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "On désactive tout de suite pour couper l’accès, et on supprime plus tard après avoir transféré les données utiles. Une suppression brutale peut détruire des éléments nécessaires.",
+      "whyWrong": {
+        "b": "Une suppression immédiate peut détruire des données dont l’entreprise a besoin.",
+        "c": "Un compte actif laisse un accès exploitable pendant un mois.",
+        "d": "Renommer n’empêche pas de se connecter."
+      }
+    },
+    "opr-q42": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Le type 10 correspond à une session interactive à distance (RDP). Une ouverture à une heure et pour un compte inhabituels est un signal à qualifier, par exemple avec la source et les échecs précédents.",
+      "whyWrong": {
+        "a": "Une ouverture locale correspond au type 2.",
+        "d": "Un service correspond au type 5.",
+        "b": "Un accès à un partage correspond au type 3."
+      }
+    },
+    "opr-q43": {
+      "type": "short",
+      "accepted": [
+        "4625"
+      ],
+      "explanation": "L’événement 4625 enregistre un échec d’ouverture de session ; une série de 4625 suivie d’un 4624 évoque une force brute réussie."
     }
   },
 };

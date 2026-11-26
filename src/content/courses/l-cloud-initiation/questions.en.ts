@@ -837,5 +837,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "acronym"
+  },
+  {
+    "id": "cin-q41",
+    "prompt": "A storage space was set to “public” by mistake. What is the first action?",
+    "skills": [
+      "l-ini-erreurs"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Notify the provider and change nothing"
+      },
+      {
+        "id": "b",
+        "text": "Wait to see whether anyone accesses it"
+      },
+      {
+        "id": "c",
+        "text": "Remove public access, then consult the access logs"
+      },
+      {
+        "id": "d",
+        "text": "Delete the space without consulting the logs"
+      }
+    ]
+  },
+  {
+    "id": "cin-q42",
+    "prompt": "In a SaaS model, who is responsible for configuring user access?",
+    "skills": [
+      "l-ini-modeles"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The customer, who manages accounts and rights"
+      },
+      {
+        "id": "b",
+        "text": "The vendor of the browser being used"
+      },
+      {
+        "id": "c",
+        "text": "The provider alone, who manages everything"
+      },
+      {
+        "id": "d",
+        "text": "Nobody, it is automatic"
+      }
+    ]
+  },
+  {
+    "id": "cin-q43",
+    "prompt": "Which extra protection must be enabled on a cloud account’s owner account? (three-letter acronym)",
+    "skills": [
+      "l-ini-comptes"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "acronym"
   }
 ];

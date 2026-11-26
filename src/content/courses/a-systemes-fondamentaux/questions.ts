@@ -811,5 +811,69 @@ export const questions: Question[] = [
     ],
     "difficulty": 2,
     "type": "open"
+  },
+  {
+    "id": "afund-q42",
+    "prompt": "Un fichier commence par les octets `4D 5A`. Que suggère cet en-tête ?",
+    "skills": [
+      "a-data"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Un exécutable Windows, quelle que soit l’extension"
+      },
+      {
+        "id": "b",
+        "text": "Une image au format JPEG compressée"
+      },
+      {
+        "id": "c",
+        "text": "Un document texte brut en caractères ASCII"
+      },
+      {
+        "id": "d",
+        "text": "Une archive ZIP, quelle que soit l’extension"
+      }
+    ]
+  },
+  {
+    "id": "afund-q43",
+    "prompt": "Un document Word lance un interpréteur de commandes. Pourquoi est-ce suspect ?",
+    "skills": [
+      "a-proc"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Les interpréteurs ne s’exécutent jamais sur Windows"
+      },
+      {
+        "id": "b",
+        "text": "Un document lance toujours un interpréteur à l’ouverture"
+      },
+      {
+        "id": "c",
+        "text": "C’est le comportement normal d’un traitement de texte"
+      },
+      {
+        "id": "d",
+        "text": "Un document ne devrait pas démarrer `cmd` ou `powershell`"
+      }
+    ]
+  },
+  {
+    "id": "afund-q44",
+    "prompt": "Combien d’octets représentent deux chiffres hexadécimaux ? (nombre)",
+    "skills": [
+      "a-data"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "nombre"
   }
 ];

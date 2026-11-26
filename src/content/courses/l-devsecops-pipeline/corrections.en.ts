@@ -374,6 +374,34 @@ export const corrections: CourseCorrections = {
         "b": "Insufficient.",
         "c": "Without an explanation, they cannot act."
       }
+    },
+    "dso-q41": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "A version tag can be changed by the action’s owner (or an attacker who compromises them). A commit hash designates exact content that cannot be replaced.",
+      "whyWrong": {
+        "b": "The choice has no effect on speed.",
+        "a": "Tags are allowed; the problem is their mobility.",
+        "c": "The hash identifies the code, it does not encrypt it."
+      }
+    },
+    "dso-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "It reduces the automatic token’s rights: a compromised step cannot modify the repository or publish. It applies least privilege to the pipeline.",
+      "whyWrong": {
+        "d": "The number of runs is set differently.",
+        "c": "Duration is another setting.",
+        "a": "Secrets are managed separately."
+      }
+    },
+    "dso-q43": {
+      "type": "short",
+      "accepted": [
+        "SBOM",
+        "sbom"
+      ],
+      "explanation": "An SBOM (Software Bill of Materials) lists components and their versions, making it quick to tell whether an announced vulnerability concerns the product."
     }
   },
 };

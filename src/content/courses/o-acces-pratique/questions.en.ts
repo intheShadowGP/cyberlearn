@@ -835,5 +835,69 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "two words"
+  },
+  {
+    "id": "opr-q41",
+    "prompt": "When an employee leaves, which sequence is safest for their account?",
+    "skills": [
+      "o-pra-annuaire"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Immediate disabling, then deferred deletion"
+      },
+      {
+        "id": "b",
+        "text": "Immediate deletion of all their data"
+      },
+      {
+        "id": "c",
+        "text": "Leave the account active for a month as a precaution"
+      },
+      {
+        "id": "d",
+        "text": "Only change the account name"
+      }
+    ]
+  },
+  {
+    "id": "opr-q42",
+    "prompt": "A type 10 event 4624 appears at 3 a.m. for an account that never works remotely. What does it suggest?",
+    "skills": [
+      "o-pra-incident"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A normal local logon"
+      },
+      {
+        "id": "b",
+        "text": "Access to a file share"
+      },
+      {
+        "id": "c",
+        "text": "An atypical Remote Desktop connection, to investigate"
+      },
+      {
+        "id": "d",
+        "text": "A service starting under this account"
+      }
+    ]
+  },
+  {
+    "id": "opr-q43",
+    "prompt": "Which Windows event number corresponds to a failed logon? (four digits)",
+    "skills": [
+      "o-pra-incident"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "number"
   }
 ];

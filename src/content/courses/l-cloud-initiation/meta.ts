@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'l-ini-reflexes', label: 'Bons réflexes et signalement', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

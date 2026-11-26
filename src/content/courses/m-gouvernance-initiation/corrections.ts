@@ -374,6 +374,34 @@ export const corrections: CourseCorrections = {
         "le pca"
       ],
       "explanation": "Le plan de continuité d’activité décrit comment maintenir les activités essentielles pendant un incident, souvent en mode dégradé."
+    },
+    "mgi-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Le niveau est le produit des deux notes : 3 × 4 = 12. Il sert à classer les risques et à décider de la réponse (réduire, éviter, transférer, accepter).",
+      "whyWrong": {
+        "d": "7 est la somme des deux notes, pas leur produit.",
+        "a": "16 serait le maximum, avec 4 × 4.",
+        "b": "Le niveau n’est pas 1 : les deux notes sont bien plus élevées."
+      }
+    },
+    "mgi-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Le RGPD prévoit une notification dans les 72 heures après la prise de connaissance de la violation, lorsque celle-ci présente un risque pour les personnes.",
+      "whyWrong": {
+        "a": "Le délai est de 72 heures, et court à partir de la connaissance de la violation.",
+        "d": "Attendre la clôture de l’incident dépasse largement le délai.",
+        "c": "Un délai précis est bien prévu par le règlement."
+      }
+    },
+    "mgi-q43": {
+      "type": "short",
+      "accepted": [
+        "transférer",
+        "transferer"
+      ],
+      "explanation": "Transférer un risque, c’est en déplacer tout ou partie des conséquences vers un tiers (assurance, prestataire) ; la responsabilité d’ensemble reste à l’organisation."
     }
   },
 };
