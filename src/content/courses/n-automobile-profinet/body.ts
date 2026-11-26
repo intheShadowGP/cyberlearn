@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'n-automobile-profinet',
@@ -99,6 +100,49 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: 'Ces règlements sont **orientés objectifs** : ils disent ce qu’il faut démontrer pour obtenir l’homologation, sans imposer une solution technique unique. ISO/SAE 21434 sert de cadre reconnu pour y répondre. Le calendrier d’application dépend des marchés et des types de véhicules ; dans l’UE, ils conditionnent l’homologation des nouveaux véhicules depuis le milieu des années 2020.' },
         ],
       },
+      {
+        id: 'communications',
+        title: 'Communications et accès du véhicule',
+        blocks: [
+          { t: 'p', text: 'Un véhicule dialogue avec son environnement par de nombreux canaux. Chacun doit être **authentifié** et **cloisonné** par rapport aux fonctions critiques.' },
+          {
+            t: 'table',
+            head: ['Canal', 'Usage', 'Risque', 'Mesure'],
+            rows: [
+              ['**Clé sans contact**', 'Ouverture et démarrage', 'Attaque par relais : le signal de la clé est prolongé', 'Mouvement de la clé, mesure de distance, mise en veille'],
+              ['**Prise de diagnostic (OBD-II)**', 'Maintenance en atelier', 'Un outil branché peut envoyer des commandes', 'Authentification de l’outil, filtrage par la passerelle, journalisation'],
+              ['**Télématique cellulaire**', 'Services, mises à jour, localisation', 'Accès distant au véhicule', 'Authentification mutuelle, chiffrement, séparation des domaines'],
+              ['**V2X**', 'Échanges avec l’infrastructure et d’autres véhicules', 'Messages falsifiés', 'Certificats et signature des messages'],
+              ['**Recharge** (véhicule électrique)', 'Communication avec la borne', 'Borne ou câble malveillant', 'Authentification de la borne et du véhicule'],
+            ],
+          },
+          { t: 'def', term: 'Attaque par relais', text: 'Technique par laquelle un attaquant prolonge le signal d’une clé sans contact (pour que le véhicule la croie proche) afin de déverrouiller ou démarrer sans la clé. Les parades limitent la portée ou détectent la distance réelle.' },
+          { t: 'def', term: 'V2X', text: 'Ensemble des communications entre le véhicule et son environnement (autres véhicules, infrastructure, réseau). Les messages doivent être signés et vérifiés pour qu’une information falsifiée ne provoque pas de réaction dangereuse.' },
+          { t: 'callout', kind: 'tip', text: 'Aucun canal externe ne doit communiquer directement avec les domaines critiques : tout passe par la passerelle, qui n’autorise que les messages prévus.' },
+        ],
+      },
+      {
+        id: 'cycle-vie',
+        title: 'Cycle de vie : veille, supervision et données',
+        blocks: [
+          { t: 'p', text: 'Un véhicule circule quinze ans ou plus. La cybersécurité se joue donc **après la vente** : veille sur les vulnérabilités, supervision des événements, correctifs et gestion des données collectées.' },
+          {
+            t: 'table',
+            head: ['Activité', 'Contenu', 'Exigence associée'],
+            rows: [
+              ['**Veille**', 'Suivre les vulnérabilités des composants et des fournisseurs', 'ISO/SAE 21434 (gestion continue)'],
+              ['**Supervision**', 'Un centre de supervision (VSOC) collecte et analyse les événements', 'CSMS (R155)'],
+              ['**Réponse à incident**', 'Qualifier, contenir, corriger, informer', 'CSMS (R155)'],
+              ['**Correctifs**', 'Mises à jour signées, validées, tracées', 'SUMS (R156)'],
+              ['**Données personnelles**', 'Finalité, minimisation, sécurité, conservation limitée', 'RGPD'],
+              ['**Fin de vie**', 'Effacement des données, désappairage des comptes', 'Procédure de revente et de recyclage'],
+            ],
+          },
+          { t: 'def', term: 'VSOC', text: 'Vehicle Security Operations Center : centre de supervision de la sécurité d’un parc de véhicules. Il collecte les alertes, analyse les incidents et déclenche la réponse avec les équipes d’ingénierie.' },
+          { t: 'list', items: ['**Surveiller** les événements de sécurité du parc, pas seulement d’un véhicule.', '**Réagir** vite : qualifier, contenir (par exemple désactiver une fonction à distance), corriger.', '**Informer** les autorités, les clients et les fournisseurs selon les obligations.', '**Protéger les données** : géolocalisation et habitudes de conduite sont des données personnelles.'] },
+          { t: 'callout', kind: 'warn', text: 'Une réponse qui dégrade la sûreté est inacceptable : une mesure de sécurité (désactiver une fonction) ne doit jamais mettre en danger les occupants.' },
+        ],
+      },
     ],
     useCases: [
       'Architecte sécurité chez un équipementier : intégrer la cybersécurité au cycle de développement d’un calculateur selon ISO/SAE 21434.',
@@ -144,25 +188,15 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un constructeur veut homologuer un nouveau modèle connecté et recevant des mises à jour à distance. On vous demande de structurer la démarche de cybersécurité et de conformité.' }],
       steps: ['Indiquer ce que couvre ISO/SAE 21434 dans cette démarche.', 'Expliquer ce que doivent démontrer le CSMS (R155) et le SUMS (R156).', 'Proposer deux activités continues à mettre en place après la mise sur le marché.'],
     },
+    {
+      id: 'incident-vehicule',
+      kind: 'case',
+      title: 'Cas pratique : une faille signalée sur le système d’infodivertissement',
+      context: [{ t: 'p', text: 'Un chercheur signale à un constructeur qu’une faille du Bluetooth de l’infodivertissement permet d’exécuter du code à distance sur 200 000 véhicules en circulation. L’architecture ne cloisonne pas totalement ce domaine : certains messages de commande peuvent encore atteindre la passerelle. Le constructeur dispose d’un VSOC et d’un système de mise à jour à distance, mais le modèle n’a jamais fait l’objet d’une mise à jour de sécurité.' }],
+      steps: ['Décrire la réponse dans les premiers jours (qualification, atténuation, communication).', 'Proposer le correctif, son déploiement et les contrôles de sûreté associés.', 'Définir les actions structurelles pour limiter la récurrence (architecture, processus, conformité).'],
+    },
   ],
-  questions: [
-    { id: 'apf-q1', type: 'single', difficulty: 2, skills: ['n-profinet'], prompt: 'Sur quoi repose principalement la sécurité d’un réseau Profinet ?', options: [{ id: 'a', text: 'La segmentation, la surveillance passive et le contrôle des équipements raccordés' }, { id: 'b', text: 'Le chiffrement de bout en bout imposé par le protocole' }, { id: 'c', text: 'Un mot de passe unique sur chaque capteur' }, { id: 'd', text: 'L’absence totale de réseau' }] },
-    { id: 'apf-q2', type: 'truefalse', difficulty: 2, skills: ['n-profinet'], prompt: 'Comme Modbus, Profinet a été conçu d’abord pour fonctionner sur un réseau de confiance, pas pour résister à un participant hostile.' },
-    { id: 'apf-q3', type: 'single', difficulty: 2, skills: ['n-profinet'], prompt: 'Pourquoi ne peut-on pas ajouter n’importe quel contrôle de sécurité lourd sur un bus industriel temps réel ?', options: [{ id: 'a', text: 'Les contraintes de temps réel imposent un délai borné ; un traitement trop lourd les violerait' }, { id: 'b', text: 'Les automates refusent tout chiffrement' }, { id: 'c', text: 'La loi l’interdit' }, { id: 'd', text: 'Le temps réel n’a aucune incidence' }] },
-    { id: 'apf-q4', type: 'single', difficulty: 2, skills: ['n-auto-archi'], prompt: 'Qu’est-ce que le bus CAN d’un véhicule, du point de vue de la sécurité ?', options: [{ id: 'a', text: 'Un bus reliant les calculateurs, fiable mais sans authentification ni chiffrement natif des messages' }, { id: 'b', text: 'Un pare-feu embarqué' }, { id: 'c', text: 'Le système d’infodivertissement' }, { id: 'd', text: 'Une connexion Internet du véhicule' }] },
-    { id: 'apf-q5', type: 'multi', difficulty: 2, skills: ['n-auto-archi'], prompt: 'Quels éléments font partie de la surface d’attaque d’un véhicule connecté ?', options: [{ id: 'a', text: 'Les interfaces sans fil (Bluetooth, Wi-Fi, cellulaire)' }, { id: 'b', text: 'Le système d’infodivertissement et les ports USB' }, { id: 'c', text: 'La prise de diagnostic OBD-II' }, { id: 'd', text: 'La couleur de la carrosserie' }] },
-    { id: 'apf-q6', type: 'truefalse', difficulty: 2, skills: ['n-auto-archi'], prompt: 'Le risque majeur est qu’un point d’entrée peu critique (infodivertissement) puisse communiquer trop librement avec les fonctions critiques (freinage, direction).' },
-    { id: 'apf-q7', type: 'single', difficulty: 3, skills: ['n-auto-defense'], prompt: 'Quelle mesure protège le mieux les fonctions critiques d’un véhicule des points d’entrée exposés ?', options: [{ id: 'a', text: 'Le cloisonnement par domaines avec une passerelle sécurisée qui filtre les échanges' }, { id: 'b', text: 'Un autocollant d’avertissement' }, { id: 'c', text: 'Débrancher la batterie la nuit' }, { id: 'd', text: 'Augmenter la taille de l’écran d’infodivertissement' }] },
-    { id: 'apf-q8', type: 'single', difficulty: 3, skills: ['n-auto-defense'], prompt: 'Pourquoi, en automobile, sécurité (security) et sûreté de fonctionnement (safety) sont-elles liées ?', options: [{ id: 'a', text: 'Une faille de sécurité peut provoquer une défaillance dangereuse pour les personnes' }, { id: 'b', text: 'Ce sont deux mots pour la même chose' }, { id: 'c', text: 'Elles n’ont aucun lien' }, { id: 'd', text: 'La sûreté remplace la sécurité' }] },
-    { id: 'apf-q9', type: 'multi', difficulty: 3, skills: ['n-auto-defense'], prompt: 'Quelles mesures de défense embarquée sont pertinentes pour un véhicule ?', options: [{ id: 'a', text: 'Segmentation interne par domaines et passerelle sécurisée' }, { id: 'b', text: 'Démarrage et firmware signés sur les calculateurs' }, { id: 'c', text: 'Détection d’intrusion sur le trafic des bus' }, { id: 'd', text: 'Suppression de tous les freins électroniques' }] },
-    { id: 'apf-q10', type: 'open', difficulty: 3, skills: ['n-auto-defense', 'n-auto-archi'], prompt: 'Expliquez pourquoi les mises à jour à distance (OTA) sont à la fois une mesure de sécurité et une surface à protéger, et comment les sécuriser.' },
-    { id: 'apf-q11', type: 'short', difficulty: 2, skills: ['n-auto-normes'], prompt: 'Quelle norme définit l’ingénierie de cybersécurité sur tout le cycle de vie d’un véhicule ? (référence sous la forme ISO/SAE …)', placeholder: 'ISO/SAE …' },
-    { id: 'apf-q12', type: 'short', difficulty: 2, skills: ['n-auto-normes'], prompt: 'Quelle méthode d’analyse des menaces et d’évaluation des risques est propre à l’automobile ? (sigle)', placeholder: 'sigle' },
-    { id: 'apf-q13', type: 'single', difficulty: 2, skills: ['n-auto-normes'], prompt: 'Quelle est la différence entre UNECE R155 et R156 ?', options: [{ id: 'a', text: 'R155 exige un système de management de la cybersécurité (CSMS) ; R156 un système de management des mises à jour logicielles (SUMS)' }, { id: 'b', text: 'R155 concerne les pneus, R156 les freins' }, { id: 'c', text: 'Ce sont deux noms du même règlement' }, { id: 'd', text: 'R156 remplace ISO/SAE 21434' }] },
-    { id: 'apf-q14', type: 'truefalse', difficulty: 2, skills: ['n-auto-normes'], prompt: 'Les règlements UNECE R155 et R156 sont orientés objectifs : ils fixent ce qu’il faut démontrer sans imposer une solution technique unique.' },
-    { id: 'apf-q15', type: 'open', difficulty: 3, skills: ['n-auto-normes'], prompt: 'Un constructeur veut homologuer un véhicule connecté recevant des mises à jour à distance. Expliquez le rôle respectif d’ISO/SAE 21434, du CSMS (R155) et du SUMS (R156).' },
-    { id: 'apf-q16', type: 'truefalse', difficulty: 2, skills: ['n-auto-normes'], prompt: 'ISO/SAE 21434 fournit une liste figée de mesures techniques à cocher, sans démarche de processus.' },
-  ],
+  questions,
   resources: [
     { title: 'ISO/SAE 21434:2021 — Road vehicles — Cybersecurity engineering', source: 'ISO', url: 'https://www.iso.org/standard/70918.html' },
     { title: 'UN Regulation No. 155 (cybersecurity and CSMS)', source: 'UNECE', url: 'https://unece.org/transport/documents/2021/03/standards/un-regulation-no-155-cyber-security-and-cyber-security' },
