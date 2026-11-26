@@ -37,7 +37,7 @@ Guide de contribution : [I18N.md](I18N.md).
 - [x] `index.html` : description (mise à jour dynamique) et message `noscript` bilingues
 - [x] Tests e2e anglais : bascule, persistance, positionnement, cours traduit, labo, épreuve, axe WCAG 2.2 AA (deux thèmes)
 - [x] Balayage e2e de toutes les routes en anglais sans fuite de français (activé : `PHASE5_COMPLETE = true`)
-- [ ] Intégration des nouveaux cours du module A dans les parcours (`paths.ts`), sans reverrouiller de cours existant
+- [x] Intégration des nouveaux cours (modules A à R) dans les parcours (`paths.ts`), sans reverrouiller de cours existant
 - [ ] Qualité de la banque de positionnement (40 questions) : longueurs des options
 - [ ] Documentation utilisateur (README, docs) mise à jour
 

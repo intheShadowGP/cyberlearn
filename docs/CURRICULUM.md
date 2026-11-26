@@ -158,17 +158,17 @@
 
 | Parcours | Cours | Laboratoires |
 | --- | --- | --- |
-| Parcours débutant | 7 | 3 |
-| Administrateur systèmes et réseaux sécurité | 13 | 5 |
-| Analyste SOC | 9 | 4 |
-| Pentesteur | 10 | 5 |
-| Ingénieur cybersécurité | 12 | 3 |
-| Investigation numérique (forensic) | 10 | 4 |
-| Sécurité cloud | 9 | 1 |
-| Gouvernance, risques et conformité (GRC) | 12 | 1 |
-| DevSecOps | 14 | 3 |
-| Sécurité industrielle et IoT | 8 | 3 |
-| Expert en sécurité | 13 | 3 |
+| Parcours débutant | 12 | 3 |
+| Administrateur systèmes et réseaux sécurité | 21 | 5 |
+| Analyste SOC | 13 | 4 |
+| Pentesteur | 18 | 5 |
+| Ingénieur cybersécurité | 16 | 3 |
+| Investigation numérique (forensic) | 14 | 4 |
+| Sécurité cloud | 16 | 1 |
+| Gouvernance, risques et conformité (GRC) | 20 | 1 |
+| DevSecOps | 26 | 3 |
+| Sécurité industrielle et IoT | 10 | 3 |
+| Expert en sécurité | 31 | 3 |
 
 ## Épreuves de démarche
 
