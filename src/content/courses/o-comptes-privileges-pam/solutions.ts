@@ -28,5 +28,22 @@ export const solutions: CourseSolutions = {
         { t: 'list', ordered: true, items: ['Créer les nouveaux comptes et le coffre, adapter l’application pour lire le secret depuis le coffre en gardant temporairement l’ancien mécanisme en secours.', 'Déployer en recette, puis en production ; vérifier.', 'Changer le mot de passe de l’ancien compte, puis le supprimer ; retirer `config.yml` du dépôt et considérer l’ancien secret comme compromis.', 'Configurer la fédération pour le pipeline, tester un déploiement, puis révoquer la clé permanente.', 'Activer la détection de secrets sur le dépôt.'] },
       ],
     },
+    'incident-privileges': {
+      blocks: [
+        {
+          t: 'table',
+          head: ['Heure', 'Événement', 'Lecture'],
+          rows: [
+            ['14:02', 'Connexion d’un compte d’administration du domaine depuis un poste bureautique', 'Violation du modèle en niveaux ; l’administrateur est en congé : **identifiants volés** probables'],
+            ['14:05', 'Ajout d’un compte de service au groupe « Admins du domaine »', '**Élévation de droits** : un compte de service devient administrateur'],
+            ['14:09', 'Création d’un compte « support-temp » administrateur', '**Persistance** : compte caché pour revenir'],
+            ['14:12', 'Arrêt de l’envoi des journaux vers le SIEM', '**Effacement de traces** : l’attaquant coupe la visibilité'],
+            ['14:20', 'Tentative de connexion de « support-temp » depuis une adresse externe via le bastion', '**Accès distant** avec le compte créé'],
+          ],
+        },
+        { t: 'list', ordered: true, items: ['**Désactiver** adm-jmartin, support-temp et le compte de service, révoquer leurs sessions et tickets.', '**Isoler** le poste COMPTA-12 sans l’éteindre, et bloquer l’adresse externe au bastion.', '**Rétablir** l’envoi des journaux et conserver une copie des journaux disponibles.', '**Chercher la persistance** : comptes créés, membres des groupes privilégiés, tâches planifiées, délégations.', '**Faire pivoter** les secrets accessibles (mots de passe d’administration, comptes de service, clé du domaine selon la procédure).', '**Prévenir** la direction et l’équipe de réponse à incident.'] },
+        { t: 'list', items: ['**Prévention** : modèle en niveaux et postes d’administration dédiés, MFA résistante à l’hameçonnage sur les comptes d’administration, comptes de service hors des groupes d’administration, bastion comme seul point d’accès.', '**Détection** : alertes en temps réel sur l’ajout aux groupes privilégiés, la création de comptes d’administration, l’arrêt des journaux et toute connexion d’administration hors poste dédié.'] },
+      ],
+    },
   },
 };

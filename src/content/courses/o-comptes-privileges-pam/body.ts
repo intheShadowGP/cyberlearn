@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'o-comptes-privileges-pam',
@@ -83,6 +84,50 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: 'Testez le compte d’urgence régulièrement : un accès de secours qui ne fonctionne pas le jour de la panne est pire qu’inutile, car il donne une fausse assurance.' },
         ],
       },
+      {
+        id: 'detection',
+        title: 'Détecter les abus de privilèges et y répondre',
+        blocks: [
+          { t: 'p', text: 'Même bien encadrés, les comptes à privilèges restent la cible première des attaquants. La détection repose sur la **surveillance** de ce qui change dans l’annuaire et sur le **contexte** des connexions d’administration.' },
+          {
+            t: 'table',
+            head: ['Signal', 'Pourquoi c’est suspect', 'Source'],
+            rows: [
+              ['Ajout à un groupe d’administration hors processus', 'Élévation de droits ou persistance', 'Journaux de l’annuaire'],
+              ['Connexion d’un compte d’administration depuis un poste ordinaire', 'Violation du modèle en niveaux, vol d’identifiants possible', 'Journaux d’authentification'],
+              ['Création d’un nouveau compte d’administration', 'Compte caché pour persister', 'Journaux de l’annuaire'],
+              ['Désactivation ou modification de la journalisation', 'Effacement de traces', 'Journaux de gestion'],
+              ['Utilisation du compte d’urgence', 'Situation exceptionnelle ou compromission', 'Journaux du coffre, du bastion'],
+              ['Connexion hors plage ou depuis une adresse inconnue', 'Usage frauduleux d’un compte volé', 'Bastion, fournisseur d’identité'],
+            ],
+          },
+          { t: 'def', term: 'Surveillance des groupes privilégiés', text: 'Alerte en temps réel sur toute modification de l’appartenance à un groupe d’administration (événements d’ajout et de retrait), comparée à la liste attendue.' },
+          { t: 'list', ordered: true, items: ['**Désactiver** le compte et **révoquer** ses sessions et jetons.', '**Faire pivoter** les secrets accessibles au compte (mots de passe, clés, comptes de service).', '**Préserver** les journaux et chercher la persistance (comptes créés, droits ajoutés, tâches planifiées).', '**Reconstruire** ce qui est douteux et corriger la cause (poste, hameçonnage, mot de passe).', '**Informer** selon les obligations et tirer les enseignements.'] },
+          { t: 'callout', kind: 'warn', text: 'Les journaux doivent être envoyés vers un système distinct : un attaquant qui contrôle un serveur peut effacer ses journaux locaux.' },
+        ],
+      },
+      {
+        id: 'escalade',
+        title: 'Chemins d’escalade et durcissement de l’annuaire',
+        blocks: [
+          { t: 'p', text: 'Un attaquant ne devient pas administrateur d’un coup : il enchaîne des étapes à partir d’un compte ordinaire. Comprendre ces **chemins d’escalade** permet de les fermer. Cette section présente les points de durcissement, dans une démarche défensive.' },
+          {
+            t: 'table',
+            head: ['Maillon faible', 'Risque', 'Parade'],
+            rows: [
+              ['**Mot de passe d’administrateur local identique** sur les postes', 'Déplacement de poste en poste', 'Mot de passe unique et renouvelé (type LAPS)'],
+              ['**Comptes de service** au mot de passe faible et exposés par un nom de principal de service', 'Mot de passe retrouvé hors ligne', 'Mots de passe très longs ou gMSA, droits minimaux'],
+              ['**Groupes imbriqués**', 'Droits hérités sans que personne ne le sache', 'Revue des imbrications, groupes plats'],
+              ['**Administrateurs connectés sur des postes ordinaires**', 'Vol d’identifiants en mémoire', 'Modèle en niveaux, postes dédiés'],
+              ['**Délégations excessives** sur des objets de l’annuaire', 'Prise de contrôle de comptes', 'Audit régulier des droits délégués'],
+            ],
+          },
+          { t: 'def', term: 'Modèle en niveaux (tiering)', text: 'Séparation des comptes et des machines selon ce qu’ils contrôlent : annuaire et identité, serveurs et applications, postes de travail. Un compte d’un niveau ne s’authentifie jamais sur un niveau inférieur, ce qui coupe la chaîne d’escalade.' },
+          { t: 'def', term: 'LAPS', text: 'Mécanisme qui génère un mot de passe d’administrateur local unique par machine, le renouvelle automatiquement et le stocke de façon contrôlée dans l’annuaire.' },
+          { t: 'list', items: ['**Outils d’analyse des chemins** : cartographier qui peut devenir administrateur et par quels enchaînements, pour corriger ce qui doit l’être.', '**Revue régulière** des droits délégués et des groupes imbriqués.', '**Comptes de service** : gMSA ou mots de passe très longs, interdiction de connexion interactive.'] },
+          { t: 'callout', kind: 'tip', text: 'Corriger un chemin d’escalade supprime souvent plusieurs scénarios d’attaque à la fois : c’est l’une des actions les plus rentables.' },
+        ],
+      },
     ],
     useCases: [
       'Projet de réduction des privilèges dans Active Directory : inventaire des groupes, comptes d’administration séparés, postes dédiés.',
@@ -130,25 +175,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Une application web lit le mot de passe de sa base de données dans un fichier `config.yml` versionné, et son pipeline de déploiement utilise une clé d’accès cloud permanente stockée dans les variables du projet. Le même mot de passe de base est utilisé en recette et en production.' }],
       steps: ['Lister les risques.', 'Proposer l’architecture cible pour la base et pour le pipeline.', 'Décrire la séquence de migration sans interruption de service.'],
     },
+    {
+      id: 'incident-privileges',
+      kind: 'analysis',
+      title: 'Analyse : une élévation de privilèges dans l’annuaire',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure   Source                    Événement\n14:02   poste COMPTA-12          connexion de adm-jmartin (compte d’administration du domaine)\n14:05   contrôleur DC01          ajout de svc-sauvegarde au groupe « Admins du domaine » par adm-jmartin\n14:09   contrôleur DC01          création du compte « support-temp » (membre de « Admins du domaine »)\n14:12   serveur SRV-LOG          arrêt du service d’envoi des journaux vers le SIEM\n14:20   bastion                   tentative de connexion de support-temp depuis une adresse externe\n\nLe poste COMPTA-12 est un poste bureautique. L’administrateur jmartin est en congé depuis 3 jours.' },
+      ],
+      steps: ['Décrire l’enchaînement et ce qu’il révèle.', 'Indiquer la réponse immédiate dans l’ordre.', 'Proposer les mesures de prévention et de détection à ajouter.'],
+    },
   ],
-  questions: [
-    { id: 'pam-q1', type: 'multi', difficulty: 1, skills: ['o-priv-inventaire'], prompt: 'Lesquels de ces éléments sont des comptes ou identités à privilèges à inventorier ?', options: [{ id: 'a', text: 'Les comptes de service des applications' }, { id: 'b', text: 'Les clés d’API et jetons d’intégration continue' }, { id: 'c', text: 'Les comptes intégrés comme `root` ou l’administrateur local' }, { id: 'd', text: 'Le compte invité désactivé d’une imprimante sans droit' }] },
-    { id: 'pam-q2', type: 'single', difficulty: 2, skills: ['o-priv-inventaire'], prompt: 'Pourquoi un administrateur doit-il disposer d’un compte distinct pour l’administration ?', options: [{ id: 'a', text: 'Pour que la messagerie et la navigation, exposées à l’hameçonnage, ne se fassent jamais avec des droits d’administration' }, { id: 'b', text: 'Pour avoir deux boîtes aux lettres' }, { id: 'c', text: 'Pour contourner l’authentification multifacteur' }, { id: 'd', text: 'Parce que l’annuaire limite le nombre de groupes par compte' }] },
-    { id: 'pam-q3', type: 'truefalse', difficulty: 2, skills: ['o-priv-inventaire'], prompt: 'Un compte du niveau d’administration le plus élevé peut ouvrir une session sur un poste bureautique sans risque particulier, s’il utilise la MFA.' },
-    { id: 'pam-q4', type: 'short', difficulty: 2, skills: ['o-priv-inventaire'], prompt: 'Comment appelle-t-on l’attribution de droits d’administration à la demande, pour une durée limitée ? (expression en français)', placeholder: 'accès …' },
-    { id: 'pam-q5', type: 'single', difficulty: 2, skills: ['o-pam-outils'], prompt: 'Quel est le rôle principal d’un bastion d’administration ?', options: [{ id: 'a', text: 'Être le point de passage unique, authentifié et journalisé vers les systèmes à administrer' }, { id: 'b', text: 'Remplacer l’antivirus des serveurs' }, { id: 'c', text: 'Héberger le site web public' }, { id: 'd', text: 'Stocker les sauvegardes' }] },
-    { id: 'pam-q6', type: 'multi', difficulty: 2, skills: ['o-pam-outils'], prompt: 'Quelles fonctions fournit typiquement une solution PAM ?', options: [{ id: 'a', text: 'Coffre des mots de passe privilégiés' }, { id: 'b', text: 'Rotation automatique des mots de passe' }, { id: 'c', text: 'Enregistrement des sessions d’administration' }, { id: 'd', text: 'Compilation du code des applications' }] },
-    { id: 'pam-q7', type: 'truefalse', difficulty: 2, skills: ['o-pam-outils'], prompt: 'Un poste d’administration dédié ne doit pas servir à lire ses courriels ni à naviguer sur Internet.' },
-    { id: 'pam-q8', type: 'open', difficulty: 3, skills: ['o-pam-outils', 'o-priv-gouvernance'], prompt: 'Un infogérant demande un accès à distance permanent avec un compte administrateur partagé par son équipe. Proposez une organisation qui réponde à son besoin tout en limitant le risque.' },
-    { id: 'pam-q9', type: 'single', difficulty: 2, skills: ['o-secrets'], prompt: 'Quelle solution évite de gérer manuellement le mot de passe d’un compte de service Windows ?', options: [{ id: 'a', text: 'Un compte de service géré de groupe (gMSA)' }, { id: 'b', text: 'Un mot de passe court facile à retenir' }, { id: 'c', text: 'Le même mot de passe sur tous les serveurs' }, { id: 'd', text: 'Désactiver l’expiration et noter le mot de passe dans un fichier' }] },
-    { id: 'pam-q10', type: 'multi', difficulty: 3, skills: ['o-secrets'], prompt: 'Un mot de passe de base de données a été commité dans un dépôt Git, puis le commit a été supprimé. Que faut-il faire ?', options: [{ id: 'a', text: 'Considérer le secret comme compromis et le remplacer' }, { id: 'b', text: 'Vérifier les journaux de la base pour détecter un usage suspect' }, { id: 'c', text: 'Mettre en place une détection automatique des secrets dans les dépôts' }, { id: 'd', text: 'Rien, puisque le commit a été supprimé' }] },
-    { id: 'pam-q11', type: 'short', difficulty: 2, skills: ['o-secrets'], prompt: 'Comment appelle-t-on un identifiant créé à la demande par un coffre pour un usage précis, puis révoqué après une courte durée ? (deux mots)', placeholder: 'secret …' },
-    { id: 'pam-q12', type: 'truefalse', difficulty: 2, skills: ['o-secrets'], prompt: 'Utiliser le même compte de service et le même mot de passe en recette et en production est acceptable si le mot de passe est long.' },
-    { id: 'pam-q13', type: 'single', difficulty: 2, skills: ['o-priv-gouvernance'], prompt: 'Qui doit confirmer ou retirer les droits lors d’une revue des accès privilégiés ?', options: [{ id: 'a', text: 'Le responsable de chaque périmètre, sur la base d’une liste extraite des sources techniques' }, { id: 'b', text: 'Chaque utilisateur pour ses propres droits, sans contrôle' }, { id: 'c', text: 'Personne : les droits n’expirent pas' }, { id: 'd', text: 'Le fournisseur du logiciel' }] },
-    { id: 'pam-q14', type: 'multi', difficulty: 2, skills: ['o-priv-gouvernance'], prompt: 'Quelles règles s’appliquent à un compte d’urgence (« bris de glace ») ?', options: [{ id: 'a', text: 'Identifiants conservés hors ligne, sous double contrôle ou en plusieurs parties' }, { id: 'b', text: 'Alerte immédiate à chaque utilisation' }, { id: 'c', text: 'Tests réguliers de bon fonctionnement' }, { id: 'd', text: 'Utilisation quotidienne pour vérifier qu’il marche' }] },
-    { id: 'pam-q15', type: 'open', difficulty: 3, skills: ['o-priv-gouvernance', 'o-priv-inventaire'], prompt: 'Expliquez à une direction pourquoi réduire le nombre d’administrateurs du domaine est prioritaire, et proposez un indicateur de suivi.' },
-    { id: 'pam-q16', type: 'truefalse', difficulty: 1, skills: ['o-priv-gouvernance'], prompt: 'Le compte d’un administrateur qui a quitté l’entreprise doit être désactivé dès son départ.' },
-  ],
+  questions,
   resources: [
     { title: 'Recommandations relatives à l’administration sécurisée des SI', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/recommandations-relatives-ladministration-securisee-des-si' },
     { title: 'Securing privileged access', source: 'Microsoft Learn', url: 'https://learn.microsoft.com/security/privileged-access-workstations/overview' },

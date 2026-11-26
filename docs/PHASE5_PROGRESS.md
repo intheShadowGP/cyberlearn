@@ -66,8 +66,8 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (40 migrés) + 40 cours à créer (27 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 12 cours à créer et 5 cours existants à migrer.
+Total : 45 cours existants (41 migrés) + 40 cours à créer (27 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 12 cours à créer et 4 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -140,3 +140,4 @@ Total : 45 cours existants (40 migrés) + 40 cours à créer (27 créés) = 85 c
 | `n-automobile-profinet` | ✔ 40 | ✔ 40 | ✔ |
 | `n-ot-iot-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `n-ot-securite-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
+| `o-comptes-privileges-pam` | ✔ 40 | ✔ 40 | ✔ |
