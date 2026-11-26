@@ -63,11 +63,11 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | N OT / IoT | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | O Identité | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) |
 | P Recherche | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 |
-| Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
+| Q IA | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (46 migrés) + 40 cours à créer (35 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 4 cours à créer et -1 cours existants à migrer.
+Total : 45 cours existants (46 migrés) + 40 cours à créer (36 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 3 cours à créer et -1 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -154,3 +154,4 @@ Total : 45 cours existants (46 migrés) + 40 cours à créer (35 créés) = 85 c
 | `q-ia-defense-ml` | ✔ 40 | ✔ 40 | ✔ (sections données et exploitation, pratique incident-modele) |
 | `q-ia-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `q-ia-pratique` (nouveau, niveau 2) | ✔ 40 | ✔ 40 | ✔ |
+| `q-securite-ia-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |

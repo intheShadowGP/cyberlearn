@@ -97,6 +97,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'p-verification-avancee': sheet(['KLEE', 'Tamarin Prover', 'seL4 Foundation'], ['Évolutions des outils de preuve (Coq renommé Rocq)', 'Capacités des solveurs SMT']),
   'p-fuzzing-recherche': sheet(['libFuzzer (LLVM)', 'AFL++', 'RFC 9116 (security.txt)'], []),
   'p-materiel-zero-trust-confidentiel': sheet(['NIST SP 800-207 (Zero Trust)', 'NIST IR 8320 (Hardware-Enabled Security)', 'Trusted Computing Group (TPM 2.0)', 'Confidential Computing Consortium', 'NIST PQC'], ['Maturité des enclaves et de l’informatique confidentielle', 'Avancées en cryptographie homomorphe et post-quantique']),
+  'q-securite-ia-avancee': sheet(['MITRE ATLAS', 'OWASP Top 10 for LLM Applications', 'NIST AI RMF et AI 100-2'], ['Nouvelles techniques d’attaque contre les agents et les serveurs d’outils', 'Normes d’application de l’AI Act']),
   'q-ia-pratique': sheet(['ANSSI (IA générative)', 'CNIL (intelligence artificielle)', 'NIST AI RMF'], ['Calendrier d’application de l’AI Act', 'Fonctions des assistants de sécurité selon les éditeurs']),
   'q-ia-initiation': sheet(['ANSSI (IA générative)', 'CNIL (intelligence artificielle)', 'Cybermalveillance.gouv.fr'], ['Conditions d’usage et de conservation des données des fournisseurs d’IA', 'Capacités des outils de contenus falsifiés']),
   'q-securite-llm': sheet(['OWASP Top 10 for LLM Applications', 'MITRE ATLAS', 'Recommandations ANSSI IA générative'], ['Domaine en évolution rapide : techniques d’attaque et de défense, AI Act']),
