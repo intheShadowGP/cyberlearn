@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'o-identite-mfa-oauth',
@@ -76,6 +77,49 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'tip', text: "Zero Trust n'est pas un produit, mais une trajectoire : commencer par l'inventaire des identités et des appareils, la MFA résistante pour les comptes à privilèges, puis l'accès conditionnel application par application." },
         ],
       },
+      {
+        id: 'cycle-vie',
+        title: 'Cycle de vie des identités et gouvernance',
+        blocks: [
+          { t: 'p', text: 'Une authentification forte ne sert à rien si des comptes inutiles restent actifs ou si les droits s’accumulent. La **gouvernance des identités** gère chaque identité depuis son arrivée jusqu’à son départ.' },
+          {
+            t: 'table',
+            head: ['Événement', 'Action', 'Source de vérité'],
+            rows: [
+              ['**Arrivée** (joiner)', 'Création du compte, droits du profil, MFA enrôlée', 'Système RH'],
+              ['**Mobilité** (mover)', 'Ajout des nouveaux droits et retrait des anciens', 'Système RH, responsable'],
+              ['**Départ** (leaver)', 'Désactivation immédiate, révocation des sessions et consentements', 'Système RH'],
+              ['**Inactivité**', 'Désactivation automatique des comptes dormants', 'Journaux d’authentification'],
+              ['**Revue**', 'Certification périodique des droits par les responsables', 'Annuaire, applications'],
+            ],
+          },
+          { t: 'def', term: 'SCIM', text: 'Standard de provisionnement automatique : l’annuaire ou le fournisseur d’identité crée, modifie et supprime les comptes dans les applications, pour que les droits restent cohérents sans intervention manuelle.' },
+          { t: 'def', term: 'IGA', text: 'Gouvernance et administration des identités : processus et outils qui gèrent le cycle de vie, le provisionnement, les revues d’accès et la conformité.' },
+          { t: 'list', items: ['**Automatiser** à partir du système RH, source de vérité.', '**Certifier** régulièrement les droits, notamment privilégiés.', '**Supprimer** les comptes orphelins et dormants.', '**Tracer** chaque décision comme preuve d’audit.'] },
+          { t: 'callout', kind: 'warn', text: 'Un compte de départ non désactivé est l’une des portes d’entrée les plus fréquentes : le provisionnement automatique la ferme.' },
+        ],
+      },
+      {
+        id: 'sessions',
+        title: 'Sessions, jetons et détection du détournement',
+        blocks: [
+          { t: 'p', text: 'Après l’authentification, c’est un **jeton ou un cookie de session** qui prouve l’identité. Le voler suffit à agir sans mot de passe ni MFA. La protection des sessions est donc aussi importante que celle de la connexion.' },
+          {
+            t: 'table',
+            head: ['Mesure', 'Effet'],
+            rows: [
+              ['**Jetons d’accès courts**', 'Limitent la fenêtre d’exploitation d’un vol'],
+              ['**Jetons liés à l’appareil**', 'Le jeton volé est inutilisable sur une autre machine'],
+              ['**Évaluation continue**', 'Révocation de la session si le risque augmente'],
+              ['**Révocation**', 'Invalidation immédiate de sessions, jetons de rafraîchissement et consentements'],
+              ['**Détection**', 'Voyage impossible, nouvel appareil, règle de transfert de courriels, changement d’agent utilisateur'],
+            ],
+          },
+          { t: 'def', term: 'Vol de session', text: 'Détournement d’un cookie ou d’un jeton déjà authentifié, par exemple via un proxy d’hameçonnage ou un logiciel malveillant. L’attaquant se connecte sans connaître le mot de passe et sans être arrêté par la MFA.' },
+          { t: 'list', ordered: true, items: ['**Détecter** : signaux de contexte inhabituel et nouvelles règles de messagerie.', '**Révoquer** les sessions, jetons de rafraîchissement et consentements.', '**Réinitialiser** les facteurs et les mots de passe.', '**Rechercher** les actions faites (messages envoyés, droits ajoutés, applications autorisées).', '**Corriger** : facteurs résistants à l’hameçonnage, jetons liés, durée plus courte.'] },
+          { t: 'callout', kind: 'key', text: 'Changer le mot de passe ne suffit pas : les sessions déjà ouvertes et les jetons de rafraîchissement restent valides tant qu’ils ne sont pas révoqués.' },
+        ],
+      },
     ],
     useCases: [
       'Déployer des clés FIDO2 pour tous les administrateurs et des passkeys pour les utilisateurs.',
@@ -123,25 +167,17 @@ export const body: CourseBody = {
       ],
       steps: ['Relever les problèmes.', 'Proposer la requête corrigée.', 'Proposer la configuration corrigée côté serveur d’autorisation.'],
     },
+    {
+      id: 'vol-session',
+      kind: 'analysis',
+      title: 'Analyse : un détournement de session dans une messagerie',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure   Compte           Événement\n08:55   m.leroy          connexion depuis Lyon (appareil géré, passkey)\n09:40   m.leroy          connexion depuis une adresse d’hébergeur à l’étranger, MFA par code, nouvel appareil\n09:44   m.leroy          création d’une règle de messagerie : transférer les messages contenant « facture » vers une adresse externe\n09:50   m.leroy          autorisation de l’application « Lecteur PDF » (Mail.Read, offline_access)\n10:05   m.leroy          envoi d’un courriel demandant un changement de coordonnées bancaires à la comptabilité' },
+      ],
+      steps: ['Décrire l’enchaînement et ce qu’il révèle.', 'Indiquer, dans l’ordre, la réponse à conduire.', 'Proposer les mesures de prévention et de détection à ajouter.'],
+    },
   ],
-  questions: [
-    { id: 'id-q1', type: 'single', difficulty: 1, skills: ['o-mfa'], prompt: 'Une clé de sécurité physique appartient à quelle catégorie de facteur ?', options: [{ id: 'a', text: 'Ce que je sais' }, { id: 'b', text: 'Ce que je possède' }, { id: 'c', text: 'Ce que je suis' }, { id: 'd', text: 'Où je suis' }] },
-    { id: 'id-q2', type: 'multi', difficulty: 2, skills: ['o-mfa'], prompt: 'Quelles méthodes peuvent être contournées par un proxy d’hameçonnage qui relaie la connexion en temps réel ?', options: [{ id: 'a', text: 'Code par SMS' }, { id: 'b', text: 'Code TOTP d’une application' }, { id: 'c', text: 'Passkey FIDO2' }, { id: 'd', text: 'Mot de passe seul' }] },
-    { id: 'id-q3', type: 'truefalse', difficulty: 2, skills: ['o-mfa'], prompt: 'Avec FIDO2, la signature produite par l’authentificateur est liée au domaine du site, ce qui la rend inutilisable sur un faux site.' },
-    { id: 'id-q4', type: 'short', difficulty: 2, skills: ['o-mfa'], prompt: 'Comment appelle-t-on l’attaque consistant à envoyer des notifications MFA répétées jusqu’à ce que la victime en accepte une ? (deux mots)' },
-    { id: 'id-q5', type: 'single', difficulty: 2, skills: ['o-oauth'], prompt: 'Quel protocole ajoute une couche d’authentification (id_token) au-dessus d’OAuth 2.0 ?', options: [{ id: 'a', text: 'SAML' }, { id: 'b', text: 'OpenID Connect' }, { id: 'c', text: 'Kerberos' }, { id: 'd', text: 'LDAP' }] },
-    { id: 'id-q6', type: 'truefalse', difficulty: 2, skills: ['o-oauth'], prompt: 'Un jeton d’accès OAuth 2.0 valide prouve à l’application cliente l’identité de l’utilisateur.' },
-    { id: 'id-q7', type: 'single', difficulty: 3, skills: ['o-oauth'], prompt: 'Quelle extension empêche un attaquant ayant intercepté le code d’autorisation de l’échanger contre un jeton ?', options: [{ id: 'a', text: 'PKCE' }, { id: 'b', text: 'CORS' }, { id: 'c', text: 'HSTS' }, { id: 'd', text: 'SameSite' }] },
-    { id: 'id-q8', type: 'short', difficulty: 2, skills: ['o-oauth'], prompt: 'Quel paramètre OAuth, aléatoire et vérifié au retour, protège contre le CSRF sur le flux de connexion ?' },
-    { id: 'id-q9', type: 'multi', difficulty: 3, skills: ['o-oauth'], prompt: 'Quels contrôles doivent être vérifiés sur un id_token ?', options: [{ id: 'a', text: 'La signature' }, { id: 'b', text: 'L’émetteur (iss)' }, { id: 'c', text: 'L’audience (aud) égale à son propre client_id' }, { id: 'd', text: 'La couleur du logo de l’IdP' }, { id: 'e', text: 'L’expiration (exp)' }] },
-    { id: 'id-q10', type: 'single', difficulty: 3, skills: ['o-oauth'], prompt: 'Une victime a accepté qu’une application « Lecteur PDF » lise sa messagerie. Le mot de passe est changé, la MFA est active. L’attaquant a-t-il toujours accès ?', options: [{ id: 'a', text: 'Non, le changement de mot de passe suffit' }, { id: 'b', text: 'Oui, tant que le consentement et les jetons (de rafraîchissement) de l’application ne sont pas révoqués' }, { id: 'c', text: 'Non, la MFA bloque tout' }, { id: 'd', text: 'Seulement le week-end' }] },
-    { id: 'id-q11', type: 'single', difficulty: 2, skills: ['o-authz'], prompt: '« Un médecin peut lire un dossier si le patient est dans son service et s’il se connecte depuis un poste géré. » De quel modèle s’agit-il ?', options: [{ id: 'a', text: 'RBAC pur' }, { id: 'b', text: 'ABAC' }, { id: 'c', text: 'DAC' }, { id: 'd', text: 'Aucun' }] },
-    { id: 'id-q12', type: 'truefalse', difficulty: 1, skills: ['o-authz'], prompt: 'Dans une approche Zero Trust, un appareil connecté au réseau interne de l’entreprise bénéficie automatiquement d’un accès de confiance.' },
-    { id: 'id-q13', type: 'multi', difficulty: 2, skills: ['o-authz'], prompt: 'Quels signaux un accès conditionnel peut-il prendre en compte ?', options: [{ id: 'a', text: 'Le niveau de risque de la session' }, { id: 'b', text: 'La conformité de l’appareil' }, { id: 'c', text: 'La méthode d’authentification utilisée' }, { id: 'd', text: 'Le fond d’écran de l’utilisateur' }] },
-    { id: 'id-q14', type: 'open', difficulty: 3, skills: ['o-oauth', 'o-authz'], prompt: 'Relevez les problèmes de la requête `response_type=token` avec les scopes `Mail.ReadWrite Files.ReadWrite.All` pour une application de prise de notes, et proposez la configuration corrigée.' },
-    { id: 'id-q15', type: 'open', difficulty: 3, skills: ['o-mfa', 'o-authz'], prompt: 'Proposez un plan en étapes pour déployer une authentification résistante à l’hameçonnage dans une entreprise de 1 000 personnes, en traitant la récupération de compte.' },
-    { id: 'id-q16', type: 'short', difficulty: 2, skills: ['o-authz', 'o-mfa'], prompt: 'Quelle publication du NIST définit l’architecture Zero Trust ? (SP 800-…)' },
-  ],
+  questions,
   resources: [
     { title: 'NIST SP 800-207 — Zero Trust Architecture', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/207/final' },
     { title: 'RFC 9700 — OAuth 2.0 Security Best Current Practice', source: 'IETF', url: 'https://www.rfc-editor.org/rfc/rfc9700' },
