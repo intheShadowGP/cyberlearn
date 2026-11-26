@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 19 |
+| Laboratoires | 20 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -144,6 +144,7 @@
 | Chasse dans auth.log : force brute SSH (`log-hunt-lab`) | soc | 2 | i-soc-detection |
 | Chronologie multi-sources d’une infection (`timeline-lab`) | forensic | 2 | j-forensique-principes |
 | Évaluateur de politiques IAM (`iam-policy-lab`) | cloud | 2 | l-cloud-iam |
+| Évaluer un assistant d’IA avec un jeu de tests (`assistant-eval-lab`) | ia | 2 | q-ia-pratique, q-securite-llm |
 | Injection SQL sur une page de connexion (simulation) (`sqli-lab`) | web | 2 | f-injections-xss |
 | Mauvaises configurations cloud : repérer et corriger la posture (`cloud-misconfig-lab`) | cloud | 2 | l-cloud-iam, l-multicloud-serverless-hybride |
 | Reconnaissance OSINT d’une entreprise fictive (`osint-lab`) | osint | 2 | h-pentest-methodologie |

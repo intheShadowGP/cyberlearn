@@ -20,6 +20,7 @@ export const CATEGORY_KEYS: Record<LabCategory, MsgKey> = {
   prog: 'labcat.prog',
   forensic: 'labcat.forensic',
   malware: 'labcat.malware',
+  ia: 'labcat.ia',
   soc: 'labcat.soc',
   osint: 'labcat.osint',
   cloud: 'labcat.cloud',

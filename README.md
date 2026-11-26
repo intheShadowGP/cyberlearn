@@ -13,7 +13,7 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 403 |
 | Cours complets (structure obligatoire 4.2 vérifiée au build) | 85, quatre niveaux (Débutant, Intermédiaire, Avancé, Expert) dans chacune des 18 disciplines |
 | Questions de cours (avec correction et explication) | 3493, soit une banque de 40 à 60 questions par cours, dans les deux langues |
-| Laboratoires interactifs | 19, couvrant les catégories de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, analyse de malware, SOC, OSINT, cloud, industriel), du niveau 1 (initiation) au niveau 4 (expert) |
+| Laboratoires interactifs | 20, couvrant les catégories de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, analyse de malware, IA, SOC, OSINT, cloud, industriel), du niveau 1 (initiation) au niveau 4 (expert) |
 | Parcours métiers (avec examen final) | 11 |
 | Épreuves de démarche (dossier d’incident multi-sources, questions ordonnées) | 3 |
 

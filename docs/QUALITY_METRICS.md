@@ -12,7 +12,7 @@
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
 | Cours de moins de 1 500 mots (FR) | 8 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
-| Cours avec au moins un exercice lié à un laboratoire | 13 |
+| Cours avec au moins un exercice lié à un laboratoire | 14 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 94 % |
 | Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 29 |
@@ -98,7 +98,7 @@
 | `p-fuzzing-recherche` | P | 4 | 7 | 1549 | 1413 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `p-materiel-zero-trust-confidentiel` | P | 4 | 7 | 1911 | 1671 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `q-ia-initiation` | Q | 1 | 7 | 1570 | 1378 | 3 | 0 | 3 | 3 | 44 | U23 VF7 C6 M6 O2 | 100 % | 5 |
-| `q-ia-pratique` | Q | 2 | 7 | 1626 | 1453 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 5 |
+| `q-ia-pratique` | Q | 2 | 7 | 1626 | 1453 | 3 | 1 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 5 |
 | `q-ia-defense-ml` | Q | 3 | 7 | 1669 | 1432 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `q-securite-llm` | Q | 3 | 8 | 1785 | 1535 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `q-securite-ia-avancee` | Q | 4 | 5 | 1406 | 1245 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |

@@ -190,6 +190,7 @@ export const body: CourseBody = {
     {
       id: 'jeu-tests',
       kind: 'analysis',
+      labId: 'assistant-eval-lab',
       title: 'Analyse : un jeu de tests suffisant ?',
       context: [
         {

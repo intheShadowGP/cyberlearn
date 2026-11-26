@@ -212,7 +212,7 @@ export interface ModuleDef {
 
 export type LabCategory =
   | 'reseau' | 'linux' | 'windows' | 'ad' | 'web' | 'crypto'
-  | 'prog' | 'forensic' | 'malware' | 'soc' | 'osint' | 'cloud' | 'ics' | 'grc';
+  | 'prog' | 'forensic' | 'malware' | 'ia' | 'soc' | 'osint' | 'cloud' | 'ics' | 'grc';
 
 export interface LabMeta {
   id: string;
