@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'q-llm-donnees', label: 'Données, RAG et confidentialité', level: 3 },
     { id: 'q-llm-gouvernance', label: 'Tests adverses, journalisation et gouvernance de l’IA', level: 3 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

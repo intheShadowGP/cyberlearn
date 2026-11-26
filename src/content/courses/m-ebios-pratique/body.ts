@@ -146,6 +146,44 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Une analyse de risques est un **outil de décision partagé**, pas un document de conformité rangé dans un tiroir.' },
         ],
       },
+      {
+        id: 'exemple-fil-rouge',
+        title: "Fil rouge : une étude EBIOS RM, atelier par atelier",
+        blocks: [
+          { t: 'p', text: "Pour fixer les idées, suivons une PME de logistique fictive qui suit ses livraisons avec une application en ligne. Le tableau montre ce que **produit** chaque atelier, pas seulement ce qu’il demande." },
+          {
+            t: 'table',
+            head: ["Atelier", "Production attendue", "Exemple pour la PME"],
+            rows: [
+              ["1 — Cadrage et socle", "Valeurs métier, biens supports, événements redoutés avec leur gravité, écarts au socle de sécurité", "Valeur métier « suivi des livraisons » ; bien support : application et base de données ; événement redouté : indisponibilité de plus de 24 h, gravité 3 sur 4"],
+              ["2 — Sources de risque", "Couples source de risque / objectif visé, retenus selon leur pertinence", "Cybercriminel / extorsion par chiffrement ; concurrent / vol de données clients"],
+              ["3 — Scénarios stratégiques", "Parties prenantes critiques, chemins d’attaque stratégiques", "Chemin passant par le prestataire d’infogérance, dont l’accès distant est peu contrôlé"],
+              ["4 — Scénarios opérationnels", "Séquences techniques (connaître, rentrer, trouver, exploiter), vraisemblance", "Hameçonnage du prestataire, rebond vers le réseau, chiffrement des serveurs ; vraisemblance 3 sur 4"],
+              ["5 — Traitement", "Mesures, risque résiduel, plan de suivi", "MFA et bastion pour l’accès du prestataire, sauvegarde hors ligne ; risque résiduel accepté par la direction, révisé chaque année"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Chaque atelier **réutilise** le précédent : un événement redouté mal gradué à l’atelier 1 fausse toute la suite. La cohérence de la chaîne compte plus que le détail d’un seul atelier." },
+        ],
+      },
+      {
+        id: 'erreurs-ebios',
+        title: "Erreurs fréquentes dans une analyse EBIOS RM",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Erreur", "Conséquence", "Correction"],
+            rows: [
+              ["Confondre valeur métier et bien support (« le serveur » comme valeur)", "On protège des machines au lieu de protéger ce que l’organisation cherche à préserver", "Partir de ce qui compte pour la mission, puis lister les biens qui le supportent"],
+              ["Échelle de gravité non définie en amont", "Deux participants notent différemment le même événement", "Définir l’échelle avec des critères concrets avant d’évaluer"],
+              ["Scénarios génériques (« un pirate attaque »)", "Aucune mesure ciblée ne peut en découler", "Nommer la source, l’objectif, le chemin et les biens atteints"],
+              ["Ignorer les parties prenantes (prestataires, filiales)", "Un maillon faible de l’écosystème n’est jamais traité", "Évaluer le niveau de menace de chaque partie prenante critique"],
+              ["Plan de traitement sans propriétaire ni échéance", "Les mesures restent sur le papier", "Affecter chaque mesure à un responsable avec une date"],
+              ["Oublier le risque résiduel", "La direction ne sait pas ce qu’elle accepte", "Le consigner, le faire valider, le réviser régulièrement"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Avant de présenter l’analyse à la direction, relisez-la en vous demandant pour chaque scénario : qui attaque, pourquoi, par où, et quelle mesure précise y répond ? Un scénario sans réponse à l’une de ces questions est à reprendre." },
+        ],
+      },
     ],
     useCases: [
       'Conduire l’analyse de risques d’un nouveau service numérique avant sa mise en production.',
@@ -153,6 +191,8 @@ export const body: CourseBody = {
       'Présenter à la direction les risques résiduels majeurs et obtenir leur acceptation formelle.',
     ],
     commonMistakes: [
+      "Dérouler les cinq ateliers comme un formulaire à remplir, sans relier chacun au précédent.",
+      "Présenter une analyse sans y associer un plan de suivi daté.",
       'Coter la gravité seul, sans les métiers.',
       'Oublier les initiés et se concentrer sur des attaquants extérieurs.',
       'Ignorer les parties prenantes à accès privilégié dans l’écosystème.',
@@ -167,6 +207,7 @@ export const body: CourseBody = {
       'Faire accepter formellement les risques résiduels par la direction et suivre le plan.',
     ],
     keyPoints: [
+      "Chaque atelier produit un livrable que le suivant réutilise ; sans risque résiduel assumé, l’analyse est incomplète.",
       'Atelier 1 : valeurs métier, événements redoutés, gravité, socle.',
       'Atelier 2 : sources de risque, objectifs visés, couples pertinents.',
       'Atelier 3 : écosystème, niveau de menace des tiers, chemins d’attaque stratégiques.',

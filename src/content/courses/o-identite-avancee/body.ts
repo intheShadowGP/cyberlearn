@@ -136,6 +136,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Un plan jamais testé est une hypothèse : l’exercice révèle les mots de passe d’urgence introuvables et les dépendances oubliées.' },
         ],
       },
+      {
+        id: 'verifier-jeton',
+        title: "Valider un jeton d’identité : contrôles et exemple",
+        blocks: [
+          { t: 'p', text: "Un jeton d’identité (JWT) se compose d’un en-tête, de revendications (*claims*) et d’une signature. **Décoder** un jeton n’est pas le **valider** : n’importe qui peut lire son contenu, seule la signature prouve qu’il vient de l’émetteur." },
+          { t: 'code', lang: "json", caption: "Revendications d’un jeton d’identité (extrait décodé, valeurs d’exemple)", code: "{\n  \"iss\": \"https://idp.exemple.org\",\n  \"sub\": \"8f2a-91c4\",\n  \"aud\": \"app-web\",\n  \"exp\": 1790000000,\n  \"iat\": 1789996400,\n  \"nonce\": \"n-0S6_WzA2Mj\"\n}" },
+          {
+            t: 'table',
+            head: ["Contrôle", "Ce qui est vérifié", "Risque si omis"],
+            rows: [
+              ["Signature", "Valide avec une clé publique de l’émetteur ; algorithme attendu imposé (jamais « none »)", "Jeton forgé accepté"],
+              ["`iss`", "Correspond exactement à l’émetteur de confiance", "Jeton d’un autre fournisseur accepté"],
+              ["`aud`", "Contient l’identifiant de **cette** application", "Jeton destiné à un autre service rejoué ici"],
+              ["`exp` et `iat`", "Non expiré, avec une tolérance d’horloge faible", "Jeton périmé ou volé utilisable longtemps"],
+              ["`nonce`", "Égal à la valeur envoyée dans la demande", "Rejeu d’un jeton capturé"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "Utilisez une **bibliothèque éprouvée** pour la validation et configurez explicitement l’émetteur, l’audience et les algorithmes acceptés. Écrire sa propre vérification est une source classique de failles." },
+        ],
+      },
+      {
+        id: 'acces-urgence',
+        title: "Comptes d’urgence (« break-glass ») : les règles qui les rendent sûrs",
+        blocks: [
+          { t: 'p', text: "Si le fournisseur d’identité tombe en panne, ou si une règle d’accès se retourne contre ses administrateurs, il faut un moyen d’entrer. Les comptes d’urgence répondent à ce besoin, mais ils sont aussi des cibles parfaites : un compte très puissant, rarement utilisé." },
+          {
+            t: 'table',
+            head: ["Règle", "Raison"],
+            rows: [
+              ["Au moins **deux** comptes, non nominatifs, propres au fournisseur d’identité", "Ne pas dépendre d’un service qui pourrait être en panne, ni d’une personne"],
+              ["Mot de passe très long, conservé **hors ligne**, en deux parties détenues par deux personnes", "Un seul porteur ne peut pas les utiliser seul"],
+              ["Exclusion ciblée de certaines règles d’accès (par exemple l’authentification renforcée dépendant du service en panne)", "Garantir l’entrée le jour de la panne"],
+              ["**Alerte immédiate** à chaque utilisation, vers plusieurs destinataires", "Toute utilisation doit être exceptionnelle et vérifiable"],
+              ["Test périodique documenté, puis changement du secret", "Prouver que la procédure fonctionne et éviter un secret ancien"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Un compte d’urgence **sans alerte d’usage** est un accès administrateur dormant offert à qui le découvre. La surveillance fait partie intégrante de la mesure." },
+        ],
+      },
     ],
     useCases: [
       'Concevoir une politique d’accès conditionnel pour les applications critiques.',
@@ -144,6 +183,8 @@ export const body: CourseBody = {
       'Préparer et tester un plan de reprise après compromission du fournisseur d’identité.',
     ],
     commonMistakes: [
+      "Considérer un jeton comme valide parce qu’il se décode correctement.",
+      "Créer un compte d’urgence sans surveiller son utilisation ni le tester.",
       'Valider un jeton sans vérifier le public visé ni l’émetteur.',
       'Multiplier les rôles au lieu de combiner rôles et attributs.',
       'Stocker les journaux de l’identité uniquement sur le fournisseur lui-même.',
@@ -158,6 +199,7 @@ export const body: CourseBody = {
       'Journaux de l’identité exportés, alertes sur la fédération, exercices annuels.',
     ],
     keyPoints: [
+      "Valider = signature, émetteur, audience, expiration, nonce ; compte d’urgence = double contrôle, alerte, test.",
       'Séparer authentification, décision et application rend l’accès auditable.',
       'Zero Trust : vérifier explicitement, moindre privilège, supposer la compromission.',
       'RBAC et ABAC se combinent ; la recertification traite l’accumulation de droits.',

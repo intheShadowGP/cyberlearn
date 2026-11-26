@@ -127,6 +127,42 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'Un plan jamais testé donne une fausse assurance. Les sauvegardes doivent être **hors ligne ou immuables** et leur restauration éprouvée.' },
         ],
       },
+      {
+        id: 'declaration-applicabilite',
+        title: "La déclaration d’applicabilité : un exemple",
+        blocks: [
+          { t: 'p', text: "Dans ISO 27001, la **déclaration d’applicabilité** (SoA) est le document qui relie l’analyse de risques aux mesures de sécurité. Pour chaque mesure du référentiel (annexe A), elle indique si la mesure est **applicable**, **mise en œuvre** ou non, et **pourquoi**. Un auditeur la lit en premier." },
+          {
+            t: 'table',
+            caption: "Extrait fictif (numérotation de l’édition 2022 de l’annexe A, à confronter à la norme)",
+            head: ["Mesure", "Applicable ?", "État", "Justification"],
+            rows: [
+              ["5.15 Contrôle d’accès", "Oui", "Mise en œuvre", "Réduit le risque d’accès non autorisé aux dossiers clients (risque R3)"],
+              ["8.13 Sauvegarde des informations", "Oui", "Partielle : test de restauration à planifier", "Réduit le risque de perte par rançongiciel (risque R1)"],
+              ["8.15 Journalisation", "Oui", "Mise en œuvre", "Permet l’investigation après incident"],
+              ["Mesure liée à un développement logiciel interne", "Non", "—", "L’organisation n’a aucun développement interne ; exclusion validée par la direction"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Une exclusion doit toujours être **justifiée par le contexte** (« non applicable car… »), pas par l’effort que la mesure demanderait. Chaque ligne renvoie à un risque ou à une exigence." },
+        ],
+      },
+      {
+        id: 'exigence-preuve',
+        title: "De l’exigence à la preuve : tenir une matrice de conformité",
+        blocks: [
+          { t: 'p', text: "La conformité se démontre par des **preuves**, pas par des déclarations. Une matrice simple relie chaque exigence à une mesure, à une preuve vérifiable et à un responsable." },
+          {
+            t: 'table',
+            head: ["Exigence", "Mesure", "Preuve", "Responsable"],
+            rows: [
+              ["Limiter l’accès aux données personnelles", "Droits par rôle, revue semestrielle", "Compte rendu de la dernière revue, export des droits", "Responsable des systèmes"],
+              ["Pouvoir notifier une violation dans les délais", "Procédure d’incident et astreinte", "Procédure datée, exercice de simulation consigné", "Responsable de la sécurité"],
+              ["Sauvegarder et restaurer les données", "Sauvegarde hors ligne, test annuel", "Rapport du dernier test de restauration", "Responsable d’exploitation"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Une organisation peut être **conforme sans être sécurisée** (exigences remplies sur le papier) ou sécurisée sans pouvoir le prouver. La bonne démarche part des risques réels, puis produit les preuves qui montrent leur traitement." },
+        ],
+      },
     ],
     useCases: [
       'RSSI : présenter à la direction une cartographie des risques et obtenir l’arbitrage budgétaire.',
@@ -135,6 +171,8 @@ export const body: CourseBody = {
       'Responsable de la continuité : réaliser le BIA puis tester le PRA.',
     ],
     commonMistakes: [
+      "Exclure une mesure de la déclaration d’applicabilité sans justification liée au contexte.",
+      "Confondre être conforme et être protégé.",
       'Faire accepter les risques résiduels par l’équipe technique au lieu de la direction.',
       'Confondre certification ISO 27001 et absence de risque, ou ignorer le périmètre certifié.',
       'Réaliser une analyse de risques une fois, sans la mettre à jour.',
@@ -149,6 +187,7 @@ export const body: CourseBody = {
       'Cartographier les obligations réglementaires applicables et désigner les responsables.',
     ],
     keyPoints: [
+      "Déclaration d’applicabilité : mesure, applicabilité, état, justification ; conformité = preuves vérifiables.",
       'Risque = vraisemblance × gravité ; traitement : réduire, transférer, éviter, accepter.',
       'ISO 27001 : SMSI certifiable, PDCA, déclaration d’applicabilité.',
       'EBIOS RM : 5 ateliers, des valeurs métier aux scénarios opérationnels.',

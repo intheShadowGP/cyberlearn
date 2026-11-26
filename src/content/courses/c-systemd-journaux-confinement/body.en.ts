@@ -118,6 +118,47 @@ export const body: CourseBody = {
           { t: 'list', ordered: true, items: ['**Preserve**: isolate the machine if possible, copy the logs, record processes and connections, without changing anything.', '**Inventory** the table’s locations read-only and **date** each item (`stat`, `ausearch`, logs) to rebuild the timeline.', '**Remove** each mechanism, rotate the exposed secrets (SSH keys, passwords, tokens) and fix the entry flaw.', '**Verify the eviction**: auditd rules on these locations, SIEM alerts, a new search a few days later; if needed, rebuild from a clean image.'] },
         ],
       },
+      {
+        id: 'unite-durcie',
+        title: "Hardening a service with systemd: an annotated example",
+        blocks: [
+          { t: 'p', text: "systemd lets you restrict a service **without changing its code**, with simple directives in its unit file. It is one of the most cost-effective ways to reduce the impact of a compromise." },
+          { t: 'code', lang: "ini", caption: "/etc/systemd/system/myapp.service (excerpt)", code: "[Service]\nUser=myapp\nExecStart=/usr/local/bin/myapp\nNoNewPrivileges=true\nProtectSystem=strict\nProtectHome=true\nPrivateTmp=true\nReadWritePaths=/var/lib/myapp\nCapabilityBoundingSet=\nRestrictAddressFamilies=AF_INET AF_INET6" },
+          {
+            t: 'table',
+            head: ["Directive", "Effect"],
+            rows: [
+              ["`User=myapp`", "The service does not run as root"],
+              ["`NoNewPrivileges=true`", "The process and its children cannot gain more rights (SUID ineffective)"],
+              ["`ProtectSystem=strict`", "The whole file system is read-only, except the listed paths"],
+              ["`ProtectHome=true`", "Home directories are invisible to the service"],
+              ["`PrivateTmp=true`", "`/tmp` is private to the service, not shared with others"],
+              ["`ReadWritePaths=`", "Only the necessary paths remain writable"],
+              ["`CapabilityBoundingSet=` (empty)", "No privileged Linux capability"],
+              ["`RestrictAddressFamilies=`", "Limits the usable socket types"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Measuring a service’s exposure", code: "systemd-analyze security myapp.service   # flags each missing directive and gives an exposure score" },
+          { t: 'callout', kind: 'tip', text: "Add directives **one by one** and test after each: a restriction that is too strong makes the service fail. The journal (`journalctl -u myapp`) shows what was denied." },
+        ],
+      },
+      {
+        id: 'requetes-journal',
+        title: "Querying logs: journalctl and auditd in practice",
+        blocks: [
+          { t: 'code', lang: "bash", caption: "Common queries", code: "journalctl -u ssh --since \"1 hour ago\"        # one service over a period\njournalctl -p err -b                           # errors since last boot\njournalctl _SYSTEMD_UNIT=ssh.service -o short-iso   # ISO timestamps, useful for timelines\njournalctl -f                                  # follow live\n\n# auditd: watch changes to /etc/passwd\nauditctl -w /etc/passwd -p wa -k identities\nausearch -k identities -ts today" },
+          {
+            t: 'table',
+            head: ["Need", "Tool", "Note"],
+            rows: [
+              ["Know what a service wrote", "`journalctl -u`", "Logs are structured: filter by unit, priority, period"],
+              ["Know who modified a sensitive file", "`auditd` (`-w` rule)", "journald does not say who opened a file: kernel auditing does"],
+              ["Keep logs after reboot", "Persistent journald storage", "By default some systems keep the journal in memory only"],
+              ["Resist erasure by an attacker", "Forwarding to a remote server", "A root attacker can erase local logs"],
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Investigation: identify an unknown process, its binary and its outbound connection before isolating the machine.',
@@ -126,6 +167,8 @@ export const body: CourseBody = {
       'Incident response: inventory the persistence mechanisms of a compromised server before putting it back into service.',
     ],
     commonMistakes: [
+      "Enabling all hardening directives at once without testing, then removing them all when the service fails.",
+      "Keeping logs only locally, where a root attacker can erase them.",
       'Disabling SELinux or AppArmor at the first denial instead of reading the log.',
       'Killing a suspicious process before copying its binary and recording its connections.',
       'Writing an IPv4-only firewall when the server has an IPv6 address.',
@@ -142,6 +185,7 @@ export const body: CourseBody = {
       'After an incident: preserve, inventory and date the persistence mechanisms, then rotate secrets and monitor.',
     ],
     keyPoints: [
+      "Harden a service with systemd directives, then measure with `systemd-analyze security`.",
       '`ss -tulpn` and `/proc/<pid>/exe` reveal what listens and what really runs.',
       'systemd can confine a service without modifying it: read-only, private /tmp, no capabilities.',
       'auditd answers “who modified what”; logs must leave the machine.',

@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'o-adv-idp', label: 'Durcissement et détection du fournisseur d’identité', level: 4 },
     { id: 'o-adv-resilience', label: 'Résilience de l’identité et accès d’urgence', level: 4 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 12,
 };

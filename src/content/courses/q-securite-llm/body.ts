@@ -112,6 +112,38 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'L’AI Act européen impose aux systèmes à haut risque un niveau approprié de robustesse et de cybersécurité : la démonstration passe par des tests documentés.' },
         ],
       },
+      {
+        id: 'owasp-llm',
+        title: "Les dix risques OWASP des applications LLM, avec une parade chacun",
+        blocks: [
+          { t: 'p', text: "L’OWASP publie une liste des dix risques majeurs des applications fondées sur des modèles de langage. Le tableau suit l’édition 2025, que l’on confrontera à la version en vigueur car la liste évolue." },
+          {
+            t: 'table',
+            head: ["Risque", "Exemple", "Parade principale"],
+            rows: [
+              ["Injection de prompt", "Un document analysé ordonne d’ignorer les consignes", "Traiter le contenu comme donnée, moindre privilège des outils"],
+              ["Divulgation d’informations sensibles", "Le modèle restitue des données d’un autre utilisateur", "Cloisonnement des données, filtrage des sorties"],
+              ["Chaîne d’approvisionnement", "Modèle ou extension tiers compromis", "Sources vérifiées, inventaire, intégrité"],
+              ["Empoisonnement des données et du modèle", "Données d’entraînement ou de recherche piégées", "Contrôle de provenance des données"],
+              ["Gestion incorrecte des sorties", "Réponse du modèle passée à un interpréteur", "Valider et encoder la sortie comme toute saisie"],
+              ["Autonomie excessive", "Agent capable de supprimer des données sans validation", "Droits minimaux, confirmation humaine"],
+              ["Fuite des consignes système", "Consignes contenant des secrets, récupérées par l’utilisateur", "Ne jamais placer de secret dans les consignes"],
+              ["Faiblesses des vecteurs et plongements", "Recherche documentaire sans contrôle d’accès", "Contrôle d’accès au niveau des documents indexés"],
+              ["Désinformation", "Réponse fausse et assurée utilisée telle quelle", "Sources citées, vérification humaine"],
+              ["Consommation non bornée", "Requêtes coûteuses en rafale", "Quotas, limites de taille, supervision des coûts"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sortie-liste-blanche',
+        title: "Ne jamais exécuter la sortie d’un modèle : liste blanche d’actions",
+        blocks: [
+          { t: 'p', text: "La sortie d’un modèle est une **entrée non fiable** : elle peut être influencée par un document, un courriel ou un utilisateur malveillant. La passer à un interpréteur, une base de données ou une API sans contrôle ouvre la voie à l’injection." },
+          { t: 'code', lang: "python", caption: "Dangereux, puis prudent", code: "# Dangereux : la réponse du modèle est exécutée telle quelle\nos.system(reponse_modele)\n\n# Prudent : le modèle ne choisit qu’une action parmi une liste fermée\nACTIONS = {\"cloturer_alerte\": cloturer_alerte, \"escalader\": escalader}\nchoix = json.loads(reponse_modele)\naction = ACTIONS.get(choix.get(\"action\"))\nif action is None:\n    raise ValueError(\"action refusée\")\nif action in ACTIONS_SENSIBLES:\n    exiger_confirmation_humaine(choix)\naction(choix.get(\"alerte_id\"))" },
+          { t: 'list', items: ["**Liste fermée** : l’application décide de ce qui est possible, le modèle ne fait que choisir.", "**Validation du format** : la sortie doit respecter un schéma, sinon elle est rejetée.", "**Confirmation humaine** pour les actions sensibles.", "**Journalisation** de la demande, du choix du modèle et de la décision finale."] },
+        ],
+      },
     ],
     useCases: [
       'Concevoir un assistant interne de recherche documentaire qui respecte les droits d’accès existants.',
@@ -119,6 +151,8 @@ export const body: CourseBody = {
       'Rédiger la politique d’usage des outils d’IA générative et de leurs connecteurs dans l’entreprise.',
     ],
     commonMistakes: [
+      "Passer la réponse d’un modèle à un interpréteur ou à une requête SQL sans validation.",
+      "Mettre un secret dans les consignes système en pensant qu’elles restent privées.",
       'Compter sur le prompt système pour garantir la sécurité (« ne révèle jamais… »).',
       'Donner à un agent tous les outils disponibles « au cas où ».',
       'Afficher ou exécuter la sortie du modèle sans validation (Markdown, HTML, code, SQL).',
@@ -133,6 +167,7 @@ export const body: CourseBody = {
       'Journalisation, tests d’intrusion spécifiques (red teaming IA) et suivi des référentiels OWASP et ATLAS.',
     ],
     keyPoints: [
+      "Sortie d’un modèle = entrée non fiable : liste fermée d’actions, schéma, confirmation humaine, journal.",
       'Pour un LLM, données et instructions ne sont pas séparées de façon fiable.',
       'Injection indirecte : l’instruction vient d’un contenu tiers, les droits de la victime.',
       'L’impact dépend des outils : moindre privilège et confirmation humaine.',

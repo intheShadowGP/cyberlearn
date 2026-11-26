@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'm-ebp-traitement', label: 'Atelier 5 : traitement et suivi du risque', level: 3 },
     { id: 'm-ebp-pilotage', label: 'Pilotage d’une analyse EBIOS RM', level: 3 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

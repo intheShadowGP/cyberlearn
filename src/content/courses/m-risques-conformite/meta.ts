@@ -28,7 +28,7 @@ export const meta: CourseMeta = {
     { id: 'm-politique', label: 'Politique, rôles et pilotage du SMSI', level: 2 },
     { id: 'm-continuite', label: 'Continuité d’activité et gestion de crise', level: 2 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

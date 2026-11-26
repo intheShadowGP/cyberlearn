@@ -146,6 +146,44 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'A risk analysis is a **shared decision tool**, not a compliance document put away in a drawer.' },
         ],
       },
+      {
+        id: 'exemple-fil-rouge',
+        title: "Running example: an EBIOS RM study, workshop by workshop",
+        blocks: [
+          { t: 'p', text: "To fix ideas, let us follow a fictional logistics SME that tracks deliveries with an online application. The table shows what each workshop **produces**, not just what it asks for." },
+          {
+            t: 'table',
+            head: ["Workshop", "Expected output", "Example for the SME"],
+            rows: [
+              ["1 — Scope and baseline", "Business values, supporting assets, feared events with their severity, gaps against the security baseline", "Business value “delivery tracking”; supporting asset: application and database; feared event: unavailability beyond 24 h, severity 3 out of 4"],
+              ["2 — Risk sources", "Risk source / targeted objective pairs, kept according to relevance", "Cybercriminal / extortion by encryption; competitor / theft of customer data"],
+              ["3 — Strategic scenarios", "Critical stakeholders, strategic attack paths", "Path through the managed-services provider, whose remote access is poorly controlled"],
+              ["4 — Operational scenarios", "Technical sequences (know, enter, find, exploit), likelihood", "Phishing the provider, pivot to the network, encryption of servers; likelihood 3 out of 4"],
+              ["5 — Treatment", "Measures, residual risk, monitoring plan", "MFA and bastion for provider access, offline backup; residual risk accepted by management, reviewed yearly"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Each workshop **reuses** the previous one: a feared event badly graded in workshop 1 distorts everything after. The coherence of the chain matters more than the detail of any single workshop." },
+        ],
+      },
+      {
+        id: 'erreurs-ebios',
+        title: "Frequent mistakes in an EBIOS RM analysis",
+        blocks: [
+          {
+            t: 'table',
+            head: ["Mistake", "Consequence", "Fix"],
+            rows: [
+              ["Confusing business value and supporting asset (“the server” as a value)", "Machines get protected instead of what the organization seeks to preserve", "Start from what matters to the mission, then list the assets that support it"],
+              ["Severity scale not defined upfront", "Two participants rate the same event differently", "Define the scale with concrete criteria before assessing"],
+              ["Generic scenarios (“a hacker attacks”)", "No targeted measure can follow", "Name the source, objective, path and assets reached"],
+              ["Ignoring stakeholders (providers, subsidiaries)", "A weak link in the ecosystem is never addressed", "Assess the threat level of each critical stakeholder"],
+              ["Treatment plan with no owner or deadline", "Measures stay on paper", "Assign each measure to a manager with a date"],
+              ["Forgetting residual risk", "Management does not know what it is accepting", "Record it, have it approved, review it regularly"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "Before presenting the analysis to management, reread it asking for each scenario: who attacks, why, through where, and which precise measure answers it? A scenario missing an answer to any of these questions must be reworked." },
+        ],
+      },
     ],
     useCases: [
       'Conduct the risk analysis of a new digital service before it goes into production.',
@@ -153,6 +191,8 @@ export const body: CourseBody = {
       'Present major residual risks to management and obtain their formal acceptance.',
     ],
     commonMistakes: [
+      "Running the five workshops like a form to fill in, without linking each to the previous one.",
+      "Presenting an analysis with no dated follow-up plan.",
       'Rating severity alone, without the business.',
       'Forgetting insiders and focusing on outside attackers.',
       'Ignoring stakeholders with privileged access in the ecosystem.',
@@ -167,6 +207,7 @@ export const body: CourseBody = {
       'Have residual risks formally accepted by management and track the plan.',
     ],
     keyPoints: [
+      "Each workshop produces an output the next one reuses; without an owned residual risk, the analysis is incomplete.",
       'Workshop 1: business values, feared events, severity, baseline.',
       'Workshop 2: risk sources, targeted objectives, relevant pairs.',
       'Workshop 3: ecosystem, third-party threat level, strategic attack paths.',

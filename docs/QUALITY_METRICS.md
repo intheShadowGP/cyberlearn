@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1726 |
+| Mots de leçon, médiane (FR) | 1740 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 13 |
+| Cours de moins de 1 500 mots (FR) | 8 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -34,7 +34,7 @@
 | `b-defense-reseau-avancee` | B | 4 | 6 | 2454 | 2152 | 3 | 0 | 5 | 5 | 40 | U18 VF7 C5 M6 O4 | 100 % | 6 |
 | `c-shell-paquets-automatisation` | C | 1 | 6 | 1997 | 1782 | 3 | 0 | 5 | 5 | 40 | U19 C6 VF7 O3 M5 | 100 % | 5 |
 | `c-linux-permissions` | C | 2 | 8 | 1643 | 1491 | 3 | 1 | 4 | 4 | 44 | C7 U21 VF7 M5 O4 | 100 % | 5 |
-| `c-systemd-journaux-confinement` | C | 3 | 6 | 1481 | 1347 | 3 | 0 | 5 | 5 | 40 | U18 VF7 M5 C6 O4 | 100 % | 5 |
+| `c-systemd-journaux-confinement` | C | 3 | 8 | 1756 | 1591 | 3 | 0 | 5 | 5 | 40 | U18 VF7 M5 C6 O4 | 100 % | 5 |
 | `c-linux-securite-avancee` | C | 4 | 6 | 2503 | 2240 | 3 | 1 | 7 | 7 | 40 | U18 C5 VF7 M6 O4 | 100 % | 6 |
 | `d-windows-fondamentaux` | D | 1 | 6 | 1736 | 1547 | 3 | 0 | 5 | 5 | 40 | U18 VF8 C7 M5 O2 | 100 % | 6 |
 | `d-windows-poste-durcissement` | D | 2 | 6 | 2054 | 1809 | 3 | 0 | 7 | 7 | 40 | U17 VF7 C6 M6 O4 | 100 % | 5 |
@@ -78,9 +78,9 @@
 | `l-multicloud-serverless-hybride` | L | 3 | 7 | 1959 | 1700 | 3 | 0 | 5 | 5 | 40 | U20 C5 O2 VF7 M6 | 100 % | 6 |
 | `l-cloud-avance` | L | 4 | 6 | 1645 | 1417 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `m-gouvernance-initiation` | M | 1 | 8 | 1729 | 1527 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
-| `m-risques-conformite` | M | 2 | 6 | 1442 | 1258 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
+| `m-risques-conformite` | M | 2 | 8 | 1749 | 1543 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
 | `m-gouvernance-operationnelle` | M | 2 | 7 | 1675 | 1444 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
-| `m-ebios-pratique` | M | 3 | 6 | 1432 | 1273 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `m-ebios-pratique` | M | 3 | 8 | 1876 | 1674 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `m-gouvernance-avancee` | M | 4 | 6 | 1607 | 1413 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `n-ot-iot-initiation` | N | 1 | 8 | 1605 | 1379 | 3 | 0 | 3 | 3 | 44 | U23 VF7 C6 M6 O2 | 100 % | 6 |
 | `n-ics-modbus` | N | 2 | 7 | 1875 | 1666 | 3 | 1 | 4 | 4 | 44 | U23 VF7 M6 C6 O2 | 100 % | 5 |
@@ -91,7 +91,7 @@
 | `o-acces-pratique` | O | 2 | 8 | 1769 | 1536 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 6 |
 | `o-comptes-privileges-pam` | O | 3 | 7 | 1678 | 1434 | 3 | 0 | 4 | 4 | 40 | M6 U20 VF7 C5 O2 | 100 % | 6 |
 | `o-identite-mfa-oauth` | O | 3 | 8 | 1812 | 1575 | 3 | 0 | 4 | 4 | 43 | U22 M6 VF7 C6 O2 | 100 % | 5 |
-| `o-identite-avancee` | O | 4 | 6 | 1436 | 1260 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
+| `o-identite-avancee` | O | 4 | 8 | 1799 | 1581 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `p-recherche-initiation` | P | 1 | 5 | 1330 | 1182 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-analyse-pratique` | P | 2 | 5 | 1172 | 1040 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-verification-avancee` | P | 3 | 5 | 1307 | 1160 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
@@ -100,7 +100,7 @@
 | `q-ia-initiation` | Q | 1 | 7 | 1570 | 1378 | 3 | 0 | 3 | 3 | 44 | U23 VF7 C6 M6 O2 | 100 % | 5 |
 | `q-ia-pratique` | Q | 2 | 7 | 1626 | 1453 | 3 | 0 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 5 |
 | `q-ia-defense-ml` | Q | 3 | 7 | 1669 | 1432 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `q-securite-llm` | Q | 3 | 6 | 1447 | 1249 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `q-securite-llm` | Q | 3 | 8 | 1785 | 1535 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `q-securite-ia-avancee` | Q | 4 | 5 | 1406 | 1245 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `r-certifications-preparation` | R | 1 | 4 | 1107 | 1007 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 36 % | 4 |
 | `r-preparation-fondamentaux` | R | 2 | 5 | 1149 | 1038 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |

@@ -118,6 +118,47 @@ export const body: CourseBody = {
           { t: 'list', ordered: true, items: ['**Préserver** : isoler la machine si possible, copier les journaux, relever processus et connexions, sans rien modifier.', '**Inventorier** les emplacements du tableau en lecture seule et **dater** chaque élément (`stat`, `ausearch`, journaux) pour reconstituer la chronologie.', '**Retirer** chaque mécanisme, renouveler les secrets exposés (clés SSH, mots de passe, jetons) et corriger la faille d’entrée.', '**Vérifier l’éviction** : règles auditd sur ces emplacements, alertes dans le SIEM, nouvelle recherche quelques jours plus tard ; au besoin, reconstruire à partir d’une image saine.'] },
         ],
       },
+      {
+        id: 'unite-durcie',
+        title: "Durcir un service avec systemd : un exemple commenté",
+        blocks: [
+          { t: 'p', text: "systemd permet de restreindre un service **sans modifier son code**, par de simples directives dans son fichier d’unité. C’est l’un des moyens les plus rentables de réduire l’impact d’une compromission." },
+          { t: 'code', lang: "ini", caption: "/etc/systemd/system/monapp.service (extrait)", code: "[Service]\nUser=monapp\nExecStart=/usr/local/bin/monapp\nNoNewPrivileges=true\nProtectSystem=strict\nProtectHome=true\nPrivateTmp=true\nReadWritePaths=/var/lib/monapp\nCapabilityBoundingSet=\nRestrictAddressFamilies=AF_INET AF_INET6" },
+          {
+            t: 'table',
+            head: ["Directive", "Effet"],
+            rows: [
+              ["`User=monapp`", "Le service ne tourne pas en root"],
+              ["`NoNewPrivileges=true`", "Le processus et ses enfants ne peuvent pas obtenir plus de droits (SUID inopérant)"],
+              ["`ProtectSystem=strict`", "Tout le système de fichiers est en lecture seule, sauf les chemins listés"],
+              ["`ProtectHome=true`", "Les répertoires personnels sont invisibles pour le service"],
+              ["`PrivateTmp=true`", "`/tmp` est propre au service, non partagé avec les autres"],
+              ["`ReadWritePaths=`", "Seuls les chemins nécessaires restent modifiables"],
+              ["`CapabilityBoundingSet=` (vide)", "Aucune capacité Linux privilégiée"],
+              ["`RestrictAddressFamilies=`", "Limite les types de sockets utilisables"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Mesurer l’exposition d’un service", code: "systemd-analyze security monapp.service   # note chaque directive manquante et donne un score d’exposition" },
+          { t: 'callout', kind: 'tip', text: "Ajoutez les directives **une à une** et testez après chacune : une restriction trop forte fait échouer le service. Le journal (`journalctl -u monapp`) indique ce qui a été refusé." },
+        ],
+      },
+      {
+        id: 'requetes-journal',
+        title: "Interroger les journaux : journalctl et auditd en pratique",
+        blocks: [
+          { t: 'code', lang: "bash", caption: "Requêtes courantes", code: "journalctl -u ssh --since \"1 hour ago\"        # un service sur une période\njournalctl -p err -b                           # erreurs depuis le dernier démarrage\njournalctl _SYSTEMD_UNIT=ssh.service -o short-iso   # horodatages ISO, utiles en chronologie\njournalctl -f                                  # suivre en direct\n\n# auditd : surveiller les modifications de /etc/passwd\nauditctl -w /etc/passwd -p wa -k identites\nausearch -k identites -ts today" },
+          {
+            t: 'table',
+            head: ["Besoin", "Outil", "Remarque"],
+            rows: [
+              ["Savoir ce qu’un service a écrit", "`journalctl -u`", "Les journaux sont structurés : on filtre par unité, priorité, période"],
+              ["Savoir qui a modifié un fichier sensible", "`auditd` (règle `-w`)", "journald ne dit pas qui a ouvert un fichier : l’audit noyau le fait"],
+              ["Conserver les journaux après redémarrage", "Stockage persistant de journald", "Par défaut, certains systèmes ne gardent le journal qu’en mémoire"],
+              ["Résister à l’effacement par un attaquant", "Envoi vers un serveur distant", "Un attaquant root peut effacer les journaux locaux"],
+            ],
+          },
+        ],
+      },
     ],
     useCases: [
       'Investigation : identifier un processus inconnu, son binaire et sa connexion sortante avant d’isoler la machine.',
@@ -126,6 +167,8 @@ export const body: CourseBody = {
       'Réponse à incident : inventorier les mécanismes de persistance d’un serveur compromis avant de le remettre en service.',
     ],
     commonMistakes: [
+      "Activer toutes les directives de durcissement d’un coup, sans tester, puis les retirer en bloc quand le service échoue.",
+      "Ne conserver les journaux qu’en local, où un attaquant root peut les effacer.",
       'Désactiver SELinux ou AppArmor dès le premier refus au lieu de lire le journal.',
       'Tuer un processus suspect avant d’avoir copié son binaire et relevé ses connexions.',
       'Écrire un pare-feu IPv4 uniquement alors que le serveur a une adresse IPv6.',
@@ -142,6 +185,7 @@ export const body: CourseBody = {
       'Après un incident : préserver, inventorier et dater les persistances, puis renouveler les secrets et surveiller.',
     ],
     keyPoints: [
+      "Durcir un service par directives systemd, puis mesurer avec `systemd-analyze security`.",
       '`ss -tulpn` et `/proc/<pid>/exe` révèlent ce qui écoute et ce qui tourne réellement.',
       'systemd peut confiner un service sans le modifier : lecture seule, /tmp privé, aucune capacité.',
       'auditd répond à « qui a modifié quoi » ; les journaux doivent quitter la machine.',

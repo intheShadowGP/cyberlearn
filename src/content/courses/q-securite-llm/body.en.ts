@@ -112,6 +112,38 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'The European AI Act requires an appropriate level of robustness and cybersecurity from high-risk systems: demonstration goes through documented tests.' },
         ],
       },
+      {
+        id: 'owasp-llm',
+        title: "The OWASP top ten risks for LLM applications, with one countermeasure each",
+        blocks: [
+          { t: 'p', text: "OWASP publishes a list of the ten major risks of applications built on language models. The table follows the 2025 edition, to be checked against the current version since the list evolves." },
+          {
+            t: 'table',
+            head: ["Risk", "Example", "Main countermeasure"],
+            rows: [
+              ["Prompt injection", "An analyzed document orders to ignore the instructions", "Treat content as data, least privilege for tools"],
+              ["Sensitive information disclosure", "The model returns another user’s data", "Data compartmentalization, output filtering"],
+              ["Supply chain", "Compromised third-party model or plugin", "Verified sources, inventory, integrity"],
+              ["Data and model poisoning", "Booby-trapped training or retrieval data", "Data provenance control"],
+              ["Improper output handling", "Model response passed to an interpreter", "Validate and encode output like any input"],
+              ["Excessive agency", "Agent able to delete data without approval", "Minimal rights, human confirmation"],
+              ["System prompt leakage", "Instructions containing secrets, retrieved by the user", "Never place secrets in instructions"],
+              ["Vector and embedding weaknesses", "Document search with no access control", "Access control at the level of indexed documents"],
+              ["Misinformation", "False, confident answer used as is", "Cited sources, human verification"],
+              ["Unbounded consumption", "Bursts of costly requests", "Quotas, size limits, cost monitoring"],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sortie-liste-blanche',
+        title: "Never execute a model’s output: an action allow-list",
+        blocks: [
+          { t: 'p', text: "A model’s output is **untrusted input**: it can be influenced by a document, an email or a malicious user. Passing it to an interpreter, a database or an API without checks opens the way to injection." },
+          { t: 'code', lang: "python", caption: "Dangerous, then careful", code: "# Dangerous: the model response is executed as is\nos.system(model_response)\n\n# Careful: the model only picks one action from a closed list\nACTIONS = {\"close_alert\": close_alert, \"escalate\": escalate}\nchoice = json.loads(model_response)\naction = ACTIONS.get(choice.get(\"action\"))\nif action is None:\n    raise ValueError(\"action refused\")\nif action in SENSITIVE_ACTIONS:\n    require_human_confirmation(choice)\naction(choice.get(\"alert_id\"))" },
+          { t: 'list', items: ["**Closed list**: the application decides what is possible, the model only chooses.", "**Format validation**: the output must follow a schema, otherwise it is rejected.", "**Human confirmation** for sensitive actions.", "**Logging** of the request, the model’s choice and the final decision."] },
+        ],
+      },
     ],
     useCases: [
       'Design an internal document search assistant that respects existing access rights.',
@@ -119,6 +151,8 @@ export const body: CourseBody = {
       'Write the company policy for generative AI tools and their connectors.',
     ],
     commonMistakes: [
+      "Passing a model’s response to an interpreter or SQL query without validation.",
+      "Putting a secret in the system instructions assuming they stay private.",
       'Counting on the system prompt to guarantee security (“never reveal…”).',
       'Giving an agent every available tool “just in case”.',
       'Displaying or executing model output without validation (Markdown, HTML, code, SQL).',
@@ -133,6 +167,7 @@ export const body: CourseBody = {
       'Logging, AI-specific penetration tests (AI red teaming) and following the OWASP and ATLAS frameworks.',
     ],
     keyPoints: [
+      "Model output = untrusted input: closed action list, schema, human confirmation, log.",
       'For an LLM, data and instructions are not reliably separated.',
       'Indirect injection: the instruction comes from third-party content, the rights from the victim.',
       'Impact depends on the tools: least privilege and human confirmation.',

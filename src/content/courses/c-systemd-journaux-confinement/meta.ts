@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'c-sys-firewall', label: 'Pare-feu nftables', level: 2 },
     { id: 'c-sys-persistance', label: 'Recherche de persistance et chronologie', level: 3 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

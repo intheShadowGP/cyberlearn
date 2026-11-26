@@ -127,6 +127,42 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', text: 'A plan that was never tested gives false assurance. Backups must be **offline or immutable** and their restoration proven.' },
         ],
       },
+      {
+        id: 'declaration-applicabilite',
+        title: "The statement of applicability: an example",
+        blocks: [
+          { t: 'p', text: "In ISO 27001, the **statement of applicability** (SoA) is the document linking the risk assessment to security measures. For each control in the reference list (Annex A), it states whether the control is **applicable**, **implemented** or not, and **why**. An auditor reads it first." },
+          {
+            t: 'table',
+            caption: "Fictional excerpt (numbering of the 2022 edition of Annex A, to check against the standard)",
+            head: ["Control", "Applicable?", "Status", "Justification"],
+            rows: [
+              ["5.15 Access control", "Yes", "Implemented", "Reduces the risk of unauthorized access to customer files (risk R3)"],
+              ["8.13 Information backup", "Yes", "Partial: restore test to schedule", "Reduces the risk of loss through ransomware (risk R1)"],
+              ["8.15 Logging", "Yes", "Implemented", "Enables investigation after an incident"],
+              ["Control related to in-house software development", "No", "—", "The organization has no in-house development; exclusion approved by management"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "An exclusion must always be **justified by the context** (“not applicable because…”), not by the effort the control would require. Each line points back to a risk or a requirement." },
+        ],
+      },
+      {
+        id: 'exigence-preuve',
+        title: "From requirement to evidence: keeping a compliance matrix",
+        blocks: [
+          { t: 'p', text: "Compliance is shown through **evidence**, not statements. A simple matrix links each requirement to a measure, to verifiable evidence and to an owner." },
+          {
+            t: 'table',
+            head: ["Requirement", "Measure", "Evidence", "Owner"],
+            rows: [
+              ["Limit access to personal data", "Role-based rights, six-monthly review", "Minutes of the last review, rights export", "Systems manager"],
+              ["Be able to notify a breach on time", "Incident procedure and on-call", "Dated procedure, recorded simulation exercise", "Security manager"],
+              ["Back up and restore data", "Offline backup, annual test", "Report of the last restore test", "Operations manager"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "An organization can be **compliant without being secure** (requirements met on paper) or secure without being able to prove it. The right approach starts from real risks, then produces the evidence that shows how they are treated." },
+        ],
+      },
     ],
     useCases: [
       'CISO: present a risk map to management and obtain the budget decision.',
@@ -135,6 +171,8 @@ export const body: CourseBody = {
       'Continuity manager: carry out the BIA then test the DRP.',
     ],
     commonMistakes: [
+      "Excluding a control from the statement of applicability without a context-based justification.",
+      "Confusing being compliant with being protected.",
       'Having residual risks accepted by the technical team instead of management.',
       'Confusing ISO 27001 certification with absence of risk, or ignoring the certified scope.',
       'Performing a risk analysis once, without updating it.',
@@ -149,6 +187,7 @@ export const body: CourseBody = {
       'Map the applicable regulatory obligations and appoint those responsible.',
     ],
     keyPoints: [
+      "Statement of applicability: control, applicability, status, justification; compliance = verifiable evidence.",
       'Risk = likelihood × severity; treatment: reduce, transfer, avoid, accept.',
       'ISO 27001: certifiable ISMS, PDCA, statement of applicability.',
       'EBIOS RM: 5 workshops, from business values to operational scenarios.',

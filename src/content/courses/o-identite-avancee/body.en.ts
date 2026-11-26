@@ -136,6 +136,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'A plan that was never tested is a hypothesis: the exercise reveals the emergency passwords nobody can find and the forgotten dependencies.' },
         ],
       },
+      {
+        id: 'verifier-jeton',
+        title: "Validating an identity token: checks and example",
+        blocks: [
+          { t: 'p', text: "An identity token (JWT) has a header, claims and a signature. **Decoding** a token is not **validating** it: anyone can read its content, only the signature proves it comes from the issuer." },
+          { t: 'code', lang: "json", caption: "Claims of an identity token (decoded excerpt, example values)", code: "{\n  \"iss\": \"https://idp.example.org\",\n  \"sub\": \"8f2a-91c4\",\n  \"aud\": \"web-app\",\n  \"exp\": 1790000000,\n  \"iat\": 1789996400,\n  \"nonce\": \"n-0S6_WzA2Mj\"\n}" },
+          {
+            t: 'table',
+            head: ["Check", "What is verified", "Risk if omitted"],
+            rows: [
+              ["Signature", "Valid with a public key of the issuer; expected algorithm enforced (never “none”)", "Forged token accepted"],
+              ["`iss`", "Exactly matches the trusted issuer", "Token from another provider accepted"],
+              ["`aud`", "Contains **this** application’s identifier", "Token meant for another service replayed here"],
+              ["`exp` and `iat`", "Not expired, with a small clock tolerance", "Stale or stolen token usable for a long time"],
+              ["`nonce`", "Equal to the value sent in the request", "Replay of a captured token"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "Use a **proven library** for validation and explicitly configure the issuer, audience and accepted algorithms. Writing your own verification is a classic source of flaws." },
+        ],
+      },
+      {
+        id: 'acces-urgence',
+        title: "Emergency (“break-glass”) accounts: the rules that make them safe",
+        blocks: [
+          { t: 'p', text: "If the identity provider goes down, or an access rule backfires on its administrators, you need a way in. Emergency accounts meet that need, but they are also perfect targets: a very powerful account, rarely used." },
+          {
+            t: 'table',
+            head: ["Rule", "Reason"],
+            rows: [
+              ["At least **two** non-personal accounts, native to the identity provider", "Do not depend on a service that could be down, or on one person"],
+              ["Very long password kept **offline**, in two parts held by two people", "A single holder cannot use them alone"],
+              ["Targeted exclusion from certain access rules (for example strong authentication relying on the failing service)", "Guarantee entry on the day of the outage"],
+              ["**Immediate alert** on every use, to several recipients", "Any use must be exceptional and verifiable"],
+              ["Documented periodic test, then secret rotation", "Prove the procedure works and avoid an old secret"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "An emergency account **without a usage alert** is a dormant administrator access offered to whoever finds it. Monitoring is an integral part of the measure." },
+        ],
+      },
     ],
     useCases: [
       'Design a conditional access policy for critical applications.',
@@ -144,6 +183,8 @@ export const body: CourseBody = {
       'Prepare and test a recovery plan after compromise of the identity provider.',
     ],
     commonMistakes: [
+      "Treating a token as valid because it decodes correctly.",
+      "Creating an emergency account without monitoring its use or testing it.",
       'Validating a token without checking the audience or the issuer.',
       'Multiplying roles instead of combining roles and attributes.',
       'Storing identity logs only on the provider itself.',
@@ -158,6 +199,7 @@ export const body: CourseBody = {
       'Identity logs exported, alerts on the federation, annual exercises.',
     ],
     keyPoints: [
+      "Validate = signature, issuer, audience, expiry, nonce; emergency account = dual control, alert, test.",
       'Separating authentication, decision and enforcement makes access auditable.',
       'Zero Trust: verify explicitly, least privilege, assume breach.',
       'RBAC and ABAC combine; recertification addresses the accumulation of rights.',
