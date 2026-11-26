@@ -65,7 +65,7 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Organisation pédagogique | 12 | 8,0 | 8,0 | 9,3 | — |
 | Accessibilité fonctionnelle | 8 | 8,0 | 8,0 | 9,0 | — |
 | Prise en main et onboarding | 7 | 7,5 | 7,5 | 9,0 | — |
-| Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant ; ancrages du §1 bis non franchis (26 cours sur 85 à 1 800 mots ou plus après le pilote) |
+| Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant ; ancrages du §1 bis non franchis (31 cours sur 85 à 1 800 mots ou plus après les lots d’approfondissement ; l’ancrage « note ≥ 8 » exige 60 % et 80 % à 1 500 mots : non atteint, donc note inchangée) |
 | Profondeur des programmes | 12 | 7,0 | 7,0 | 9,0 | — |
 | Laboratoires pratiques | 12 | 6,0 | 6,0 | 9,0 | — |
 | Fiabilité pédagogique | 8 | 6,5 | 6,5 | 9,0 | Un doublon avéré corrigé et des garde-fous ajoutés, mais aucun critère d’ancrage (§1 bis) n’est franchi : pas de relèvement |
@@ -107,7 +107,7 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Phase | État |
 | --- | --- |
 | 1 — Audit | Audit initial mesuré (§4). Audit UX/UI manuel, SEO et Lighthouse : **non faits** |
-| 2 — Qualité pédagogique | Mesure en place (`npm run metrics`) ; **1 cours approfondi (pilote `n-ics-modbus`)** : 1 115 → 1 875 mots FR, 5 → 7 sections, FR et EN ensemble, identifiants de questions inchangés |
+| 2 — Qualité pédagogique | Mesure en place (`npm run metrics`) ; **25 cours approfondis** (pilote `n-ics-modbus` puis 24 cours, deux sections chacun, FR et EN ensemble, identifiants de questions inchangés) : médiane des leçons 1 584 → 1 726 mots, cours à 1 800 mots ou plus 25 → 31 sur 85, cours sous 1 500 mots 38 → 13. Banques de questions **non revues** après ajout des sections |
 | 3 — Banques de questions | 1 doublon avéré remplacé (`kma-q25` → `kma-q41`) ; relecture qualitative des banques : non faite |
 | 4 — Laboratoires | Non commencée |
 | 5 — Suivi des compétences | Existant et testé (`src/lib/levels.ts` : compétence « acquise » = réussite pondérée ≥ 80 % sur ≥ 3 questions ; recommandations dans `src/lib/recommend.ts`). Rien à reconstruire ; les quatre états « consulté / exercé / évalué / démontré » ne sont pas encore tous distingués dans l’interface |
@@ -124,9 +124,15 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 - Les variantes paramétrées de `b-ipv4-subnetting` sont conservées : en calcul de sous-réseaux, la répétition avec des valeurs différentes est un exercice voulu.
 - Identifiants de questions : un remplacement reçoit un identifiant inédit (`kma-q41`), jamais la réutilisation d’un ancien identifiant, pour ne pas fausser les cartes de révision.
 
+## 7 bis. Cours approfondis (deux sections ajoutées, FR et EN)
+
+Pilote : `n-ics-modbus` (1 115 → 1 875 mots). Lots suivants : `j-forensique-initiation`, `k-malware-initiation`, `q-ia-initiation`, `b-osi-tcpip`, `o-identite-initiation`, `n-ot-iot-initiation`, `i-soc-initiation`, `f-injections-xss`, `c-linux-permissions`, `l-cloud-iam`, `g-code-securise-bases`, `a-systemes-fondamentaux`, `l-conteneurs-kubernetes`, `l-devsecops-pipeline`, `m-gouvernance-initiation`, `o-acces-pratique`, `j-forensique-principes`, `k-malware-analyse`, `l-cloud-initiation`, `o-identite-mfa-oauth`, `b-ipv4-subnetting`, `h-pentest-methodologie`, `n-iot-firmware`, `q-ia-pratique`.
+
+Limites : (1) la durée estimée et les compétences des cours n’ont pas été ajustées ; (2) aucune question n’a été ajoutée pour les nouvelles sections ; (3) les faits sont consignés « non vérifié » dans `docs/FACT-CHECK.md` ; (4) les cours dont toutes les sections étaient déjà lues voient leur leçon redevenir « en cours » (comme à la phase 5) ; (5) cours volontairement laissés de côté : `r-*` (faits de certification périssables), `p-*` et `q-securite-*` (recherche et IA avancée, à relire par un spécialiste).
+
 ## 8. Prochaine action précise
 
-Pilote `n-ics-modbus` réalisé (voir §6). Prochain cours : `j-forensique-initiation`, puis `q-ia-initiation`. Les questions de `n-ics-modbus` n’ont pas été revues par rapport aux nouvelles sections : à faire (ajouter des questions d’analyse de trame et d’erreurs Modbus, sans toucher aux identifiants existants). `r-certifications-preparation` est à éviter en pilote : ses faits (organismes, formats, prix) se périment et exigent une vérification datée.
+Pilote et lots d’approfondissement réalisés (voir §7 bis). Reste 13 cours sous 1 500 mots (surtout `r-*`, `p-*`, `q-securite-*`, `m-ebios-pratique`, `o-identite-avancee`, `n-ot-securite-avancee`). Étape suivante prioritaire : ajouter des questions d’analyse (trame, journal, configuration) pour les nouvelles sections, sans toucher aux identifiants existants, puis relecture par un praticien.
 
 1. Approfondir en priorité les 7 cours restants parmi les plus courts listés au §4.1, un par un, selon la structure du cahier des charges (§6.1) : viser 1 800 à 2 500 mots, des commandes vérifiées, une mise en situation, des erreurs fréquentes concrètes ; puis revoir leur banque (supprimer les questions que la leçon ne prépare pas, sans toucher aux identifiants repris).
 2. Chaque cours approfondi : mettre à jour FR et EN ensemble, `npm run banks`, `npm run metrics`, `npm test`, `npm run build`.
