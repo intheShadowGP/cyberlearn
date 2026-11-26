@@ -35,6 +35,7 @@ Section 11 : les informations évolutives sont listées ici avec leur statut. «
 | CIS Controls : version 8.1 en vigueur (M) | cisecurity.org | Vérifié le 2026-11-15 ; contenu des mesures 1 et 2 (inventaires) et groupes IG1 à IG3 non revérifiés |
 | Cours G (code sûr), O (comptes à privilèges) et Q (IA pour la défense) : comportements des langages, fonctions PAM, typologie des attaques contre les modèles | Documentations citées en ressources (liens vérifiés) | Rédigés d’après la pratique ; aucun fait daté ou chiffré n’a été confronté individuellement à sa source |
 | Plugins Volatility 3 et commandes The Sleuth Kit (J) | Documentations des projets | Non vérifié lors de cette révision (rédigé d’après la pratique) |
+| Plugins `windows.psscan` et `windows.pslist` de Volatility 3 (question `kma-q41`, cours `k-malware-avance`) | Documentation de Volatility 3 (volatility3.readthedocs.io) | Non vérifié lors de cette révision (rédigé d’après la pratique) |
 
 | MITRE ATT&CK T1110 Brute Force → tactique Credential Access (épreuve SOC) | attack.mitre.org/techniques/T1110 | Vérifié le 2026-11-16 |
 | MITRE ATT&CK T1558.003 Kerberoasting (parent T1558) → Credential Access ; demande de TGS, portions chiffrées en RC4 (épreuve SOC) | attack.mitre.org/techniques/T1558/003 | Vérifié le 2026-11-16 |

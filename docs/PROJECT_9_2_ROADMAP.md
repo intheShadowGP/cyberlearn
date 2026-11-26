@@ -23,6 +23,19 @@ La pondération privilégie la qualité pédagogique (cours, profondeur, laborat
 | Laboratoires pratiques | 12 | Laboratoires réalistes couvrant les grandes familles, liés aux cours, avec barème et corrigé |
 | Fiabilité pédagogique | 8 | Faits vérifiés à la source primaire, relecture tierce consignée, banques sans doublon ni ambiguïté |
 
+## 1 bis. Ancrages mesurables (mêmes seuils pour toute nouvelle notation)
+
+Une note de domaine ne peut dépasser le plafond qu’autorisent ces mesures (source : `docs/QUALITY_METRICS.md` et `docs/CURRICULUM.md`, régénérés par script). Au-delà, un relèvement exige une preuve nouvelle consignée au §3.
+
+| Domaine | Note ≥ 8 si | Note ≥ 9 si |
+| --- | --- | --- |
+| Qualité des cours | au moins 60 % des cours à 1 800 mots de leçon ou plus et 80 % des cours à 1 500 mots ou plus | 90 % des cours à 1 800 mots ou plus, relecture tierce consignée pour au moins la moitié des cours |
+| Profondeur des programmes | médiane des leçons ≥ 1 800 mots et aucun cours sous 1 300 mots | médiane ≥ 2 200 mots et chaque cours avec ≥ 3 exercices dont un cas complet |
+| Laboratoires pratiques | au moins un laboratoire dans chacune des 18 disciplines et au moins 2 par niveau | au moins 36 laboratoires, au moins 60 % des cours reliés à un laboratoire |
+| Fiabilité pédagogique | 0 paire de doublons avérés et 100 % des questions à choix avec « pourquoi c’est faux » | tous les faits de `docs/FACT-CHECK.md` vérifiés à la source primaire et relecture tierce consignée |
+
+État au départ (mesuré) : cours à 1 800 mots ou plus : 25 sur 85 (29 %), cours à 1 500 mots ou plus : 47 sur 85 (55 %) ; laboratoires : 13 disciplines sur 18 couvertes ; médiane des leçons 1 584 mots ; relecture tierce : aucune.
+
 ## 2. Notation initiale (avant toute modification de cette branche)
 
 Provisoire : le domaine « Prise en main » n’a pas été audité par parcours utilisateur dans cette session (**N**), sa note est une estimation prudente.
@@ -52,12 +65,12 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | Organisation pédagogique | 12 | 8,0 | 8,0 | 9,3 | — |
 | Accessibilité fonctionnelle | 8 | 8,0 | 8,0 | 9,0 | — |
 | Prise en main et onboarding | 7 | 7,5 | 7,5 | 9,0 | — |
-| Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant |
+| Qualité des cours | 16 | 7,0 | 7,0 | 9,2 | Mesure ajoutée, aucun cours approfondi pour l’instant ; ancrages du §1 bis non franchis (25 cours sur 85 à 1 800 mots ou plus) |
 | Profondeur des programmes | 12 | 7,0 | 7,0 | 9,0 | — |
 | Laboratoires pratiques | 12 | 6,0 | 6,0 | 9,0 | — |
-| Fiabilité pédagogique | 8 | 6,5 | 6,6 | 9,0 | Un doublon avéré de question corrigé et un garde-fou de profondeur ajoutés (+0,1, symbolique) |
+| Fiabilité pédagogique | 8 | 6,5 | 6,5 | 9,0 | Un doublon avéré corrigé et des garde-fous ajoutés, mais aucun critère d’ancrage (§1 bis) n’est franchi : pas de relèvement |
 
-**Note globale actuelle : 7,41 / 10. L’objectif de 9,2 n’est pas atteint et ne peut pas l’être sans travail de fond sur les cours, les laboratoires et une relecture tierce.**
+**Note globale actuelle : 7,40 / 10. L’objectif de 9,2 n’est pas atteint et ne peut pas l’être sans travail de fond sur les cours, les laboratoires et une relecture tierce.**
 
 ## 4. Constats de l’audit initial (priorisés)
 
@@ -65,7 +78,7 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 
 1. **Leçons courtes face aux banques de 40 questions.** 38 cours sur 85 ont moins de 1 500 mots de leçon (médiane 1 584, minimum 1 107, maximum 2 613). Une leçon de 1 100 mots ne peut pas préparer à 40 questions : les questions testent ce que la leçon n’enseigne pas, ou la banque répète les mêmes faits. Plus faibles : `r-certifications-preparation`, `n-ics-modbus`, `q-ia-initiation`, `r-preparation-fondamentaux`, `j-forensique-initiation`, `p-analyse-pratique`, `q-ia-pratique`, `n-ot-iot-initiation`.
 2. **Banques exactement au plancher.** 3 406 questions pour 85 cours (moyenne 40,07) : presque chaque banque est au minimum exigé. Le plancher est devenu la cible ; c’est le risque « quota » que le cahier des charges interdit. À reprendre cours par cours après approfondissement des leçons, pas avant.
-3. **Pratique insuffisante.** 18 laboratoires, 3 épreuves de démarche, 12 cours sur 85 avec un exercice relié à un laboratoire. Les disciplines E, G, M, O, P, Q, R n’ont aucun laboratoire dédié (constat déjà posé dans `PROJECT_AUDIT.md`).
+3. **Pratique insuffisante et mal répartie.** 18 laboratoires, 3 épreuves de démarche, 12 cours sur 85 avec un exercice relié à un laboratoire. Répartition par niveau (inventaire généré, docs/CURRICULUM.md) : 1 laboratoire de niveau 1, 12 de niveau 2, 4 de niveau 3, 1 de niveau 4. Disciplines **sans aucun laboratoire dédié** : A (fondamentaux), K (malware et rétro-ingénierie), P (recherche), Q (IA), R (certifications). La discipline H (pentest) n’a qu’un laboratoire OSINT, aucun laboratoire d’exploitation. Les laboratoires des disciplines E, G, M, O existent (hash, TLS, revue de code, matrice de risques, OAuth, IAM) ; l’affirmation contraire de `PROJECT_AUDIT.md` date de l’époque des 12 laboratoires.
 4. **Doublons entre cours.** 28 paires de questions à forte similarité. Une paire est un vrai doublon (même question sur Volatility dans `j-forensique-principes` et `k-malware-avance`) : corrigée. Les autres sont soit des variantes paramétrées voulues (calculs de masques et d’hôtes dans `b-ipv4-subnetting`), soit des notions partagées entre disciplines (à arbitrer à la main).
 5. **Qualité de l’explication inégale.** Le taux de questions à choix avec « pourquoi c’est faux » varie de 21 % à 100 % selon le cours (`a-isolation-confiance-plateforme` : 21 %, `a-compilation-memoire-execution` : 26 %, `b-osi-tcpip` : 27 %).
 6. **Fiabilité.** Faits à confronter à la source primaire (Volatility, The Sleuth Kit, événement 7045, ISO 27001 annexe A) ; aucune relecture tierce.
@@ -86,7 +99,7 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 | `npm audit` (production et développement) | 0 vulnérabilité (V) |
 | `npx vitest run` avant modifications | 21 fichiers, 200 tests OK (V) |
 | `npx vitest run` après modifications | 22 fichiers, 202 tests OK (V) |
-| `npx playwright test --project=chromium` | 50 tests passés en 2,7 min (V) |
+| `npx playwright test --project=chromium` | 50 tests passés en 2,7 min, exécutés **après** le remplacement de `kma-q41` et après `npm run build` (V). Une première exécution avant ce remplacement avait aussi donné 50/50 |
 | Firefox / WebKit locaux | Firefox non exécutable ; WebKit non rejoué dans cette session (N) |
 
 ## 6. État d’avancement par phase du cahier des charges
@@ -113,8 +126,10 @@ Provisoire : le domaine « Prise en main » n’a pas été audité par parcours
 
 ## 8. Prochaine action précise
 
+Pilote non réalisé dans cette session : le premier cours à approfondir est `n-ics-modbus` (FR et EN ensemble, identifiants de questions conservés), de préférence avant `j-forensique-initiation`. `r-certifications-preparation` est à éviter en pilote : ses faits (organismes, formats, prix) se périment et exigent une vérification datée.
+
 1. Approfondir en priorité les 8 cours les plus courts listés au §4.1, un par un, selon la structure du cahier des charges (§6.1) : viser 1 800 à 2 500 mots, des commandes vérifiées, une mise en situation, des erreurs fréquentes concrètes ; puis revoir leur banque (supprimer les questions que la leçon ne prépare pas, sans toucher aux identifiants repris).
 2. Chaque cours approfondi : mettre à jour FR et EN ensemble, `npm run banks`, `npm run metrics`, `npm test`, `npm run build`.
-3. Ajouter des laboratoires pour les disciplines E, G, M, O, P, Q, R (un par discipline, avec barème et corrigé), en commençant par la journalisation et l’analyse défensive.
+3. Ajouter des laboratoires pour les disciplines sans laboratoire (K, A, P, Q, R) et des laboratoires de niveau 1, 3 et 4 là où il n’y en a pas (un pentest guidé en environnement isolé pour H), chacun avec barème, indices et corrigé ; commencer par K (analyse statique et mémoire) qui complète les enquêtes défensives existantes.
 4. Mesurer Lighthouse (mobile et ordinateur) sur le site déployé et analyser le bundle principal.
 5. Demander une relecture de contenu à un praticien et la consigner dans les fiches de vérification.
