@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 75 |
-| Questions de cours (avec correction) | 2911 |
+| Cours complets | 76 |
+| Questions de cours (avec correction) | 2951 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -36,7 +36,7 @@
 | L. Sécurité Cloud | 6 | 1, 2, 3, 4 | 23 / 23 |
 | M. Gouvernance et conformité | 5 | 1, 2, 3, 4 | 24 / 24 |
 | N. Sécurité industrielle et IoT | 5 | 1, 2, 3, 4 | 21 / 21 |
-| O. Identité et contrôle d’accès | 4 | 1, 2, 3 | 16 / 16 |
+| O. Identité et contrôle d’accès | 5 | 1, 2, 3, 4 | 16 / 16 |
 | P. Sécurité avancée et recherche | 2 | 4 | 18 / 18 |
 | Q. Intelligence artificielle et cybersécurité | 2 | 3 | 16 / 16 |
 | R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
@@ -115,6 +115,7 @@
 | Gérer les accès au quotidien : annuaire, authentification, SSO et autorisations (`o-acces-pratique`) | O | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 3 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 6 | 40 | 3 | 4 |
+| Architecture d’identité avancée : Zero Trust, identités de machines et résilience (`o-identite-avancee`) | O | 4 · Expert | 150 min | 6 | 40 | 3 | 3 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 110 min | 5 | 17 | 2 | 4 |
 | Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 110 min | 5 | 16 | 2 | 5 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 95 min | 5 | 16 | 2 | 4 |

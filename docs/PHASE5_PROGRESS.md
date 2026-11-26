@@ -61,13 +61,13 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | L Cloud | ✔ (nouveau) | ✔ | ✔ ×3 | ✔ (nouveau) |
 | M Gouvernance | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) | ✔ (nouveau) |
 | N OT / IoT | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
-| O Identité | ➕ | ➕ | ✔ ×2 | ➕ |
+| O Identité | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) |
 | P Recherche | ➕ | ➕ | ➕ | ✔ ×2 |
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (42 migrés) + 40 cours à créer (29 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 10 cours à créer et 3 cours existants à migrer.
+Total : 45 cours existants (42 migrés) + 40 cours à créer (30 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 9 cours à créer et 3 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -144,3 +144,4 @@ Total : 45 cours existants (42 migrés) + 40 cours à créer (29 créés) = 85 c
 | `o-identite-mfa-oauth` | ✔ 40 | ✔ 40 | ✔ |
 | `o-identite-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `o-acces-pratique` (nouveau, niveau 2) | ✔ 40 | ✔ 40 | ✔ |
+| `o-identite-avancee` (nouveau, niveau 4) | ✔ 40 | ✔ 40 | ✔ |
