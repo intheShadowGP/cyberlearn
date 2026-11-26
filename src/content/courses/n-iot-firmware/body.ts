@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'n-iot-firmware',
@@ -62,6 +63,48 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'warn', title: 'Notion évolutive', text: "Les dates d'application et les normes harmonisées du Cyber Resilience Act sont en cours de déploiement : vérifier les textes et la Commission européenne avant toute décision de conformité." },
         ],
       },
+      {
+        id: 'reseau',
+        title: 'Communications et réseau des objets connectés',
+        blocks: [
+          { t: 'p', text: 'Un objet est rarement isolé : il parle à un serveur, à une application mobile, à d’autres objets. Chaque lien est une surface d’attaque. Les protocoles de messagerie légers (MQTT, CoAP) ne protègent rien par eux-mêmes : la sécurité vient de **TLS**, de l’**authentification** et du **cloisonnement**.' },
+          {
+            t: 'table',
+            head: ['Lien', 'Risque', 'Mesure'],
+            rows: [
+              ['**Objet vers serveur** (MQTT, HTTPS)', 'Écoute, usurpation du serveur ou de l’objet', 'TLS avec authentification mutuelle, certificat unique par appareil'],
+              ['**Objet vers application mobile** (Bluetooth Low Energy)', 'Écoute, appairage non sécurisé, relais', 'Appairage sécurisé, chiffrement applicatif, limitation de la portée utile'],
+              ['**Réseaux à longue portée** (LoRaWAN, cellulaire)', 'Rejeu, clés partagées', 'Clés par appareil, compteurs anti-rejeu'],
+              ['**Réseau local** (Wi-Fi, Zigbee)', 'Un objet compromis atteint les postes voisins', 'Réseau dédié et filtré, aucun accès entrant depuis Internet'],
+            ],
+          },
+          { t: 'def', term: 'Authentification mutuelle', text: 'Le serveur prouve son identité à l’objet, et l’objet prouve la sienne au serveur, par certificats. Elle évite qu’un faux serveur reçoive des données ou qu’un faux objet envoie des commandes.' },
+          { t: 'list', items: ['**Connexions sortantes** : l’objet initie la connexion vers un service qui l’authentifie, plutôt que d’accepter des connexions entrantes.', '**Segmentation** : réseau des objets séparé des postes, avec des règles de flux précises.', '**Révocation** : pouvoir retirer la confiance d’un appareil compromis sans toucher les autres.'] },
+          { t: 'callout', kind: 'warn', text: 'Un service joignable depuis Internet est balayé en continu par des robots. Exposer l’administration d’un objet est presque toujours évitable.' },
+        ],
+      },
+      {
+        id: 'flotte',
+        title: 'Cycle de vie et exploitation d’une flotte d’objets',
+        blocks: [
+          { t: 'p', text: 'Un objet reste en service pendant des années. La sécurité se joue donc aussi **après la vente** : suivre les composants, publier les correctifs, traiter les signalements de vulnérabilités et informer de la fin de support.' },
+          {
+            t: 'table',
+            head: ['Étape', 'Contenu', 'Preuve'],
+            rows: [
+              ['**Fabrication**', 'Injection de secrets uniques, verrouillage du débogage', 'Procédure et journal de production'],
+              ['**Mise en service**', 'Identifiant unique ou changement imposé, enrôlement', 'Politique des mots de passe par défaut'],
+              ['**Exploitation**', 'Mises à jour signées, supervision, SBOM à jour', 'Journal des versions, tableau de suivi'],
+              ['**Signalements**', 'Canal de divulgation, traitement coordonné', 'Politique publique et délais'],
+              ['**Fin de support**', 'Annonce, options de remplacement', 'Date de fin de support communiquée'],
+            ],
+          },
+          { t: 'def', term: 'Divulgation coordonnée', text: 'Procédé par lequel un chercheur informe le fabricant d’une vulnérabilité, convient d’un délai de correction puis publie les détails. Un canal de signalement public (adresse dédiée, fichier security.txt) la facilite.' },
+          { t: 'def', term: 'SBOM', text: 'Inventaire des composants logiciels de chaque version du firmware. Il permet au fabricant, lorsqu’une vulnérabilité est publiée, d’identifier immédiatement les produits concernés.' },
+          { t: 'list', items: ['**Support annoncé** : durée pendant laquelle des correctifs de sécurité sont fournis.', '**Correctifs** : signés, déployés progressivement, avec retour possible.', '**Information** : clients prévenus des vulnérabilités importantes et de la fin de support.'] },
+          { t: 'callout', kind: 'legal', text: 'Le Cyber Resilience Act exige des fabricants une gestion des vulnérabilités pendant la période de support, avec signalement des vulnérabilités activement exploitées. Vérifier les calendriers d’application.' },
+        ],
+      },
     ],
     useCases: [
       'Évaluer la sécurité d’une gamme de caméras IP avant son achat pour un site sensible.',
@@ -104,25 +147,15 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Un capteur de vibrations sans écran, sur réseau cellulaire, doit être maintenu 10 ans. Une mise à jour ratée ne doit jamais rendre l’appareil inutilisable.' }],
       steps: ['Décrire le format et la vérification d’une mise à jour.', 'Décrire le mécanisme de reprise en cas d’échec.', 'Décrire la gestion des clés de signature côté fabricant.'],
     },
+    {
+      id: 'incident-flotte',
+      kind: 'case',
+      title: 'Cas pratique : une vulnérabilité signalée sur une flotte de caméras',
+      context: [{ t: 'p', text: 'Un chercheur signale par courriel qu’une gamme de 40 000 caméras vendues depuis trois ans accepte une commande non authentifiée sur un service d’administration exposé, et que le firmware contient une clé de signature de mise à jour identique pour toute la gamme. Le fabricant n’a ni politique de divulgation ni SBOM, et le support de la première génération a pris fin il y a un an.' }],
+      steps: ['Décrire la réponse du fabricant dans les 72 premières heures.', 'Proposer le correctif, son déploiement et la gestion des anciennes générations.', 'Définir les mesures structurelles à mettre en place pour la suite.'],
+    },
   ],
-  questions: [
-    { id: 'iot-q1', type: 'single', difficulty: 1, skills: ['n-iot-vulns'], prompt: 'Quelle faiblesse le botnet Mirai exploitait-il principalement ?', options: [{ id: 'a', text: 'Des identifiants par défaut' }, { id: 'b', text: 'Une injection SQL' }, { id: 'c', text: 'Une faille du chiffrement AES' }, { id: 'd', text: 'Une attaque par canal auxiliaire' }] },
-    { id: 'iot-q2', type: 'multi', difficulty: 2, skills: ['n-iot-vulns'], prompt: 'Lesquelles sont des faiblesses typiques des objets connectés ?', options: [{ id: 'a', text: 'Interface UART donnant un shell root' }, { id: 'b', text: 'Clé privée identique sur tous les appareils' }, { id: 'c', text: 'Mises à jour signées avec anti-retour' }, { id: 'd', text: 'Telnet activé au démarrage' }] },
-    { id: 'iot-q3', type: 'truefalse', difficulty: 1, skills: ['n-iot-vulns'], prompt: 'La norme ETSI EN 303 645 interdit les mots de passe universels par défaut sur les objets grand public.' },
-    { id: 'iot-q4', type: 'short', difficulty: 2, skills: ['n-iot-firmware'], prompt: 'Quel outil libre est couramment utilisé pour identifier et extraire les systèmes de fichiers d’une image de firmware ?' },
-    { id: 'iot-q5', type: 'single', difficulty: 2, skills: ['n-iot-firmware'], prompt: 'binwalk ne reconnaît aucune signature dans une grande zone de l’image, dont l’entropie est proche du maximum. Quelle est la suite la plus pertinente ?', options: [{ id: 'a', text: 'Conclure que la zone est vide et l’ignorer' }, { id: 'b', text: 'Supposer un firmware chiffré et rechercher la clé ou la routine de déchiffrement (chargeur d’amorçage, mémoire de l’appareil)' }, { id: 'c', text: 'Ouvrir la zone dans un éditeur de texte pour lire la configuration' }, { id: 'd', text: 'Flasher l’image sur un autre appareil pour voir ce qui se passe' }] },
-    { id: 'iot-q6', type: 'truefalse', difficulty: 2, skills: ['n-iot-firmware'], prompt: 'Une clé privée TLS identique dans le firmware de tous les appareils permet, une fois extraite, d’usurper n’importe quel appareil de la gamme.' },
-    { id: 'iot-q7', type: 'multi', difficulty: 3, skills: ['n-iot-firmware'], prompt: 'Que rechercher en priorité dans un système de fichiers extrait ?', options: [{ id: 'a', text: 'Empreintes de mots de passe et comptes' }, { id: 'b', text: 'Scripts de démarrage et services lancés' }, { id: 'c', text: 'Clés privées et certificats' }, { id: 'd', text: 'La couleur de l’interface web' }] },
-    { id: 'iot-q8', type: 'single', difficulty: 2, skills: ['n-iot-design'], prompt: 'Sur quoi repose la chaîne de confiance d’un démarrage sécurisé ?', options: [{ id: 'a', text: 'Sur un mot de passe saisi par l’utilisateur' }, { id: 'b', text: 'Sur une racine de confiance matérielle qui vérifie la signature de l’étape suivante' }, { id: 'c', text: 'Sur l’antivirus' }, { id: 'd', text: 'Sur le pare-feu' }] },
-    { id: 'iot-q9', type: 'short', difficulty: 2, skills: ['n-iot-design'], prompt: 'Comment appelle-t-on la protection qui refuse l’installation d’une version de firmware plus ancienne que la version courante ? (mot composé, « anti-… »)' },
-    { id: 'iot-q10', type: 'truefalse', difficulty: 2, skills: ['n-iot-design'], prompt: 'Avec des partitions A/B, une mise à jour qui échoue au démarrage peut être annulée automatiquement en revenant à la partition précédente.' },
-    { id: 'iot-q11', type: 'multi', difficulty: 3, skills: ['n-iot-design'], prompt: 'Quelles mesures protègent les secrets d’un appareil ?', options: [{ id: 'a', text: 'Secrets uniques par appareil' }, { id: 'b', text: 'Stockage dans un élément sécurisé ou un TPM' }, { id: 'c', text: 'Secret codé en dur dans le code source' }, { id: 'd', text: 'Interfaces de débogage verrouillées en production' }] },
-    { id: 'iot-q12', type: 'single', difficulty: 2, skills: ['n-iot-design', 'n-iot-vulns'], prompt: 'Quel règlement européen impose aux fabricants des mises à jour de sécurité pendant la période de support de leurs produits numériques ?', options: [{ id: 'a', text: 'Le Cyber Resilience Act' }, { id: 'b', text: 'Le RGPD' }, { id: 'c', text: 'DORA' }, { id: 'd', text: 'eIDAS' }] },
-    { id: 'iot-q13', type: 'short', difficulty: 1, skills: ['n-iot-vulns', 'n-iot-firmware'], prompt: 'Quel port série de débogage, souvent présent sur les cartes électroniques, peut donner accès à une console ? (sigle)' },
-    { id: 'iot-q14', type: 'open', difficulty: 3, skills: ['n-iot-firmware', 'n-iot-vulns'], prompt: 'Analysez les résultats d’extraction (shadow en MD5-crypt, BusyBox de 2012, mise à jour par wget en HTTP sans vérification, clé privée identique entre versions) : gravité, attaque la plus grave, corrections.' },
-    { id: 'iot-q15', type: 'open', difficulty: 3, skills: ['n-iot-design'], prompt: 'Concevez le mécanisme de mise à jour d’un capteur cellulaire maintenu 10 ans, sans jamais le rendre inutilisable.' },
-    { id: 'iot-q16', type: 'single', difficulty: 2, skills: ['n-iot-design', 'n-iot-firmware'], prompt: 'Pourquoi vérifier la signature d’une mise à jour même si elle est téléchargée en HTTPS ?', options: [{ id: 'a', text: 'Ce n’est pas utile' }, { id: 'b', text: 'HTTPS authentifie le serveur, pas l’intégrité de l’image chez l’éditeur ; la signature prouve que l’image vient du fabricant, même si le serveur de distribution est compromis' }, { id: 'c', text: 'Pour accélérer le téléchargement' }, { id: 'd', text: 'Pour compresser l’image' }] },
-  ],
+  questions,
   resources: [
     { title: 'ETSI EN 303 645 — Cyber Security for Consumer IoT', source: 'ETSI', url: 'https://www.etsi.org/technologies/consumer-iot-security' },
     { title: 'Règlement (UE) 2024/2847 — Cyber Resilience Act', source: 'EUR-Lex', url: 'https://eur-lex.europa.eu/eli/reg/2024/2847/oj' },
