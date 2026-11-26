@@ -86,5 +86,6 @@ export const VERIFICATION_EN: Record<string, { versions: string[]; evolving: str
   'q-ia-initiation': { versions: ['ANSSI (generative AI)', 'CNIL (artificial intelligence)', 'Cybermalveillance.gouv.fr'], evolving: ['AI providers’ terms of use and data retention', 'Capabilities of falsified-content tools'] },
   'q-securite-llm': { versions: ['OWASP Top 10 for LLM Applications', 'MITRE ATLAS', 'ANSSI generative AI recommendations'], evolving: ['Fast-moving field: attack and defense techniques, AI Act'] },
   'q-ia-defense-ml': { versions: ['MITRE ATLAS', 'NIST AI RMF 1.0', 'NIST AI 100-2', 'ANSSI generative AI recommendations', 'Regulation (EU) 2024/1689 (AI Act)'], evolving: ['Taxonomy of attacks against AI (NIST AI 100-2)', 'AI Act application timeline'] },
+  'r-preparation-fondamentaux': { versions: ['ISC2 (exam outlines)', 'CompTIA (exam objectives)', 'Cisco (certification paths)'], evolving: ['Exam outline versions and renewal calendars', 'Test formats (simulated hands-on tasks)'] },
   'r-certifications-preparation': { versions: [`Official ISC2 (5-year CISSP requirement checked on ${D}), CompTIA, OffSec sites`], evolving: ['Content and rules of the certification exams'] },
 };

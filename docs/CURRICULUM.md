@@ -11,11 +11,11 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 82 |
-| Questions de cours (avec correction) | 3286 |
+| Cours complets | 83 |
+| Questions de cours (avec correction) | 3326 |
 | Laboratoires | 18 |
 | Parcours | 11 |
-| Évaluations transversales, examens blancs et finaux | 34 |
+| Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
 
 ## Par discipline
@@ -39,7 +39,7 @@
 | O. Identité et contrôle d’accès | 5 | 1, 2, 3, 4 | 16 / 16 |
 | P. Sécurité avancée et recherche | 5 | 1, 2, 3, 4 | 18 / 18 |
 | Q. Intelligence artificielle et cybersécurité | 5 | 1, 2, 3, 4 | 16 / 16 |
-| R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
+| R. Méthodologies et certifications | 2 | 1, 2 | 15 / 15 |
 
 ## Cours
 
@@ -127,6 +127,7 @@
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 6 | 40 | 3 | 4 |
 | Sécurité avancée des systèmes d’IA : chaîne d’approvisionnement, agents, robustesse et risque (`q-securite-ia-avancee`) | Q | 4 · Expert | 150 min | 5 | 40 | 3 | 4 |
 | Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 60 min | 4 | 46 | 2 | 4 |
+| Préparer les certifications fondamentales et défensives : plan d’examen, méthode et intégrité (`r-preparation-fondamentaux`) | R | 2 · Intermédiaire | 100 min | 5 | 40 | 3 | 3 |
 
 ## Laboratoires
 

@@ -102,6 +102,7 @@ export const VERIFICATION: Record<string, VerificationSheet> = {
   'q-ia-initiation': sheet(['ANSSI (IA générative)', 'CNIL (intelligence artificielle)', 'Cybermalveillance.gouv.fr'], ['Conditions d’usage et de conservation des données des fournisseurs d’IA', 'Capacités des outils de contenus falsifiés']),
   'q-securite-llm': sheet(['OWASP Top 10 for LLM Applications', 'MITRE ATLAS', 'Recommandations ANSSI IA générative'], ['Domaine en évolution rapide : techniques d’attaque et de défense, AI Act']),
   'q-ia-defense-ml': sheet(['MITRE ATLAS', 'NIST AI RMF 1.0', 'NIST AI 100-2', 'Recommandations ANSSI IA générative', 'Règlement (UE) 2024/1689 (AI Act)'], ['Taxonomie des attaques contre l’IA (NIST AI 100-2)', 'Calendrier d’application de l’AI Act']),
+  'r-preparation-fondamentaux': sheet(['ISC2 (plans d’examen)', 'CompTIA (objectifs d’examen)', 'Cisco (parcours de certification)'], ['Versions des plans d’examen et calendriers de renouvellement', 'Formats d’épreuves (tâches pratiques simulées)']),
   'r-certifications-preparation': sheet(['Sites officiels ISC2 (exigence CISSP de 5 ans vérifiée le ' + D + '), CompTIA, OffSec'], ['Contenu et modalités des examens de certification']),
 };
 
