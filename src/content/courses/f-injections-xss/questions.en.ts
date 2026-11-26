@@ -822,5 +822,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 3,
     "type": "open"
+  },
+  {
+    "id": "web-q41",
+    "prompt": "Why is dynamic sorting (`ORDER BY`) not protected by a parameterized query?",
+    "skills": [
+      "f-sqli"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A column name is an identifier, not a value"
+      },
+      {
+        "id": "b",
+        "text": "The sort clause runs in the browser"
+      },
+      {
+        "id": "c",
+        "text": "Parameters only serve queries that write data"
+      },
+      {
+        "id": "d",
+        "text": "A sort cannot be hijacked by an attacker"
+      }
+    ]
+  },
+  {
+    "id": "web-q42",
+    "prompt": "What is the safest way to display typed text without it being interpreted as HTML?",
+    "skills": [
+      "f-xss"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Strip the spaces before inserting the text"
+      },
+      {
+        "id": "b",
+        "text": "Use `textContent` rather than `innerHTML`"
+      },
+      {
+        "id": "c",
+        "text": "Hide the element with a CSS display rule"
+      },
+      {
+        "id": "d",
+        "text": "Convert the whole input to lowercase letters"
+      }
+    ]
+  },
+  {
+    "id": "web-q43",
+    "prompt": "For a value inserted in a link’s `href` attribute, which precaution is specific to this context?",
+    "skills": [
+      "f-xss"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Convert the value to uppercase"
+      },
+      {
+        "id": "b",
+        "text": "Double the value’s apostrophes"
+      },
+      {
+        "id": "c",
+        "text": "Encode only the `<` and `>` characters of the value"
+      },
+      {
+        "id": "d",
+        "text": "Accept only the `http:` and `https:` schemes"
+      }
+    ]
+  },
+  {
+    "id": "web-q44",
+    "prompt": "What is the technique called that sends the SQL query and its values separately to the database? (two words)",
+    "skills": [
+      "f-inj-defense"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "two words"
   }
 ];

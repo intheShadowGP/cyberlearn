@@ -839,5 +839,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 2,
     "type": "open"
+  },
+  {
+    "id": "isi-q41",
+    "prompt": "Quel événement de sécurité Windows correspond à une ouverture de session réussie ?",
+    "skills": [
+      "i-ini-journaux"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "4625"
+      },
+      {
+        "id": "b",
+        "text": "4624"
+      },
+      {
+        "id": "c",
+        "text": "4634"
+      },
+      {
+        "id": "d",
+        "text": "4672"
+      }
+    ]
+  },
+  {
+    "id": "isi-q42",
+    "prompt": "Dans un journal SSH, des dizaines d’échecs `Failed password` en quelques secondes sur des comptes inexistants précèdent un `Accepted password` pour un compte réel, depuis la même adresse. Que suggère cette séquence ?",
+    "skills": [
+      "i-ini-alerte"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Une force brute dont la dernière tentative a réussi"
+      },
+      {
+        "id": "b",
+        "text": "Une mise à jour planifiée du service SSH"
+      },
+      {
+        "id": "c",
+        "text": "Un utilisateur qui a oublié son mot de passe"
+      },
+      {
+        "id": "d",
+        "text": "Un faux positif à clôturer sans vérification"
+      }
+    ]
+  },
+  {
+    "id": "isi-q43",
+    "prompt": "Après vérification, une alerte reste ambiguë et l’impact possible est important. Quelle est la bonne décision ?",
+    "skills": [
+      "i-ini-alerte"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Attendre qu’elle se reproduise"
+      },
+      {
+        "id": "b",
+        "text": "La clôturer comme faux positif par prudence"
+      },
+      {
+        "id": "c",
+        "text": "Escalader avec les éléments recueillis"
+      },
+      {
+        "id": "d",
+        "text": "La retirer de la file pour ne pas la compter"
+      }
+    ]
+  },
+  {
+    "id": "isi-q44",
+    "prompt": "Comment appelle-t-on une alerte déclenchée à tort par une activité légitime ? (deux mots)",
+    "skills": [
+      "i-ini-alerte"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "deux mots"
   }
 ];

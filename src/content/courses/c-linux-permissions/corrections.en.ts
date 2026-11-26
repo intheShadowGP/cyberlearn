@@ -368,6 +368,43 @@ export const corrections: CourseCorrections = {
         "a": "A message watches no file.",
         "b": "A banner has legal value but detects no modification."
       }
+    },
+    "lnx-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "A file starts from 666; umask 027 removes 0 from the owner, 2 (write) from the group and 7 (everything) from others, giving 640.",
+      "whyWrong": {
+        "b": "That is the result of a 022 umask, not 027.",
+        "c": "That is the result of a 077 umask.",
+        "d": "An ordinary file does not get the execute bit at creation; 750 is the result for a directory."
+      }
+    },
+    "lnx-q42": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "`-perm -4000` selects files where the SUID bit is set. `-xdev` limits the search to the starting file system. Results are compared against a reference list.",
+      "whyWrong": {
+        "b": "That would be `-perm -0002`.",
+        "a": "That would be `-nouser` or `-nogroup`.",
+        "d": "The SUID bit has nothing to do with execution reserved to the owner."
+      }
+    },
+    "lnx-q43": {
+      "type": "short",
+      "accepted": [
+        "-xdev"
+      ],
+      "explanation": "`-xdev` avoids descending into other mounted file systems (`/proc`, network shares), which speeds up the audit and avoids misleading results."
+    },
+    "lnx-q44": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "With 022, a file created at 666 becomes 644: readable by all. A secrets file must be created with a restrictive umask (for example 077) set explicitly in the script.",
+      "whyWrong": {
+        "b": "An ordinary file is not created executable.",
+        "c": "The system does not encrypt files at creation.",
+        "a": "Umask has no link with deleting files."
+      }
     }
   },
 };

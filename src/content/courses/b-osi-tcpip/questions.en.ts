@@ -859,5 +859,96 @@ export const questions: Question[] = [
         "text": "The DNS server configured on the workstation"
       }
     ]
+  },
+  {
+    "id": "osi-q41",
+    "prompt": "`ping 192.168.1.1` succeeds but `nslookup example.org` fails. What should be suspected first?",
+    "skills": [
+      "b-osi-diag"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Name resolution (DNS)"
+      },
+      {
+        "id": "b",
+        "text": "The IP address assigned to the machine"
+      },
+      {
+        "id": "c",
+        "text": "The machine’s network cable"
+      },
+      {
+        "id": "d",
+        "text": "The network’s default gateway"
+      }
+    ]
+  },
+  {
+    "id": "osi-q42",
+    "prompt": "A client sends a `Flags [S]` packet to port 443 of a server and receives `Flags [R.]`. What can be concluded?",
+    "skills": [
+      "b-osi-transport"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The server ended the session normally"
+      },
+      {
+        "id": "b",
+        "text": "The port is open, the connection is established"
+      },
+      {
+        "id": "c",
+        "text": "A firewall filters the traffic without answering"
+      },
+      {
+        "id": "d",
+        "text": "The port is closed or refuses the connection"
+      }
+    ]
+  },
+  {
+    "id": "osi-q43",
+    "prompt": "The same source sends many `[S]` packets to different ports of a server, never completing a connection. What is it probably?",
+    "skills": [
+      "b-osi-secu"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A renegotiated encrypted session"
+      },
+      {
+        "id": "b",
+        "text": "A port scan"
+      },
+      {
+        "id": "c",
+        "text": "A large file transfer"
+      },
+      {
+        "id": "d",
+        "text": "A burst of DNS resolutions"
+      }
+    ]
+  },
+  {
+    "id": "osi-q44",
+    "prompt": "Which modern Linux command shows TCP connections and listening ports (two-letter name)?",
+    "skills": [
+      "b-osi-diag"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "command"
   }
 ];

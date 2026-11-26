@@ -839,5 +839,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "two words"
+  },
+  {
+    "id": "ics-q41",
+    "prompt": "After the MBAP header, a Modbus TCP response contains the bytes `01 83 02`. What does it mean?",
+    "skills": [
+      "n-modbus"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Successful register write, confirmed by the PLC"
+      },
+      {
+        "id": "b",
+        "text": "Successful read of holding registers with two values"
+      },
+      {
+        "id": "c",
+        "text": "Error on a register read: illegal address"
+      },
+      {
+        "id": "d",
+        "text": "Error on a coil write: function not supported"
+      }
+    ]
+  },
+  {
+    "id": "ics-q42",
+    "prompt": "A manual designates a holding register as `40017` (legacy numbering where 40001 corresponds to address 0). Which address appears in the frame to read it?",
+    "skills": [
+      "n-modbus"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "17"
+      },
+      {
+        "id": "b",
+        "text": "40016"
+      },
+      {
+        "id": "c",
+        "text": "40017"
+      },
+      {
+        "id": "d",
+        "text": "16"
+      }
+    ]
+  },
+  {
+    "id": "ics-q43",
+    "prompt": "An allow-list lets only the supervision write to registers 16 to 19 of a PLC. Which scenario is NOT stopped by this filtering?",
+    "skills": [
+      "n-detection"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A program download from another network"
+      },
+      {
+        "id": "b",
+        "text": "An out-of-range value written by the compromised supervision"
+      },
+      {
+        "id": "c",
+        "text": "A write from an office workstation"
+      },
+      {
+        "id": "d",
+        "text": "A coil write from an unknown host"
+      }
+    ]
+  },
+  {
+    "id": "ics-q44",
+    "prompt": "Which Modbus exception code (two-digit number) signals an illegal data address?",
+    "skills": [
+      "n-modbus"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "number"
   }
 ];

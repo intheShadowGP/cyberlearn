@@ -308,6 +308,43 @@ export const corrections: CourseCorrections = {
         "Mentionne le risque d’un agrégat trop large (annonce ou règle incorrecte)."
       ],
       "explanation": "L’agrégation n’est possible que pour des blocs contigus et alignés ; un agrégat trop large est une erreur de sécurité autant que de routage."
+    },
+    "ipv4-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Un /20 coupe dans le troisième octet avec des blocs de 16 : 37 est dans le bloc 32 à 47. La diffusion est la dernière adresse du bloc, 10.20.47.255.",
+      "whyWrong": {
+        "b": "Ce serait la diffusion d’un /24, pas d’un /20.",
+        "d": "32 est le début du bloc : 10.20.32.255 ne ferme pas le bloc de 16.",
+        "a": "Ce serait la fin d’un bloc de 32 (32 à 63), qui n’est pas celui d’un /20."
+      }
+    },
+    "ipv4-q42": {
+      "type": "short",
+      "accepted": [
+        "62"
+      ],
+      "explanation": "Un /26 laisse 6 bits d’hôtes : 2⁶ = 64 adresses, moins l’adresse réseau et l’adresse de diffusion, soit 62 hôtes utilisables."
+    },
+    "ipv4-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Placer les blocs du plus grand au plus petit les garde alignés sur leur taille et évite de gaspiller ou de chevaucher des adresses.",
+      "whyWrong": {
+        "b": "Placer un petit bloc d’abord désaligne les blocs suivants.",
+        "a": "L’ordre alphabétique n’a aucun lien avec l’alignement.",
+        "c": "Chaque bloc doit commencer à un multiple de sa taille."
+      }
+    },
+    "ipv4-q44": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Un /27 offre 32 adresses, soit 30 hôtes utilisables : c’est le plus petit bloc qui accueille 20 hôtes. Un /28 n’en offre que 14.",
+      "whyWrong": {
+        "d": "Seulement 14 hôtes utilisables : insuffisant.",
+        "c": "Suffisant mais trop grand : il gaspille des adresses.",
+        "a": "Seulement 2 hôtes : insuffisant."
+      }
     }
   },
 };

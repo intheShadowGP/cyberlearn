@@ -380,6 +380,44 @@ export const corrections: CourseCorrections = {
         "La compromission confirmée suppose une preuve de réussite de l’attaquant."
       ],
       "explanation": "Ces trois niveaux ne se confondent pas : l’alerte se qualifie, l’incident se traite, la compromission se prouve."
+    },
+    "isi-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "L’événement 4624 enregistre une ouverture de session réussie. Le 4625 correspond à un échec, le 4634 à une fermeture de session.",
+      "whyWrong": {
+        "a": "4625 est l’événement d’échec d’ouverture de session.",
+        "c": "4634 enregistre la fermeture d’une session.",
+        "d": "4672 signale l’attribution de privilèges spéciaux à une session."
+      }
+    },
+    "isi-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "La cadence, les comptes inexistants et la réussite finale depuis la même adresse décrivent une attaque automatisée dont une tentative a abouti : compromission possible, à traiter en priorité.",
+      "whyWrong": {
+        "c": "Un oubli ne produit pas des dizaines d’essais en secondes sur des comptes qui n’existent pas.",
+        "b": "Une mise à jour n’engendre pas d’échecs d’authentification répétés.",
+        "d": "Clôturer sans vérifier ignorerait un indice sérieux de compromission."
+      }
+    },
+    "isi-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Quand le doute persiste et que l’impact est possible, on passe la main avec le contexte, les sources consultées et les raisons du doute, plutôt que de décider seul.",
+      "whyWrong": {
+        "b": "Clôturer un doute sérieux revient à parier que l’attaque n’existe pas.",
+        "a": "Attendre laisse à un attaquant éventuel le temps d’agir.",
+        "d": "Retirer une alerte supprime la trace et empêche tout suivi."
+      }
+    },
+    "isi-q44": {
+      "type": "short",
+      "accepted": [
+        "faux positif",
+        "faux positifs"
+      ],
+      "explanation": "Un faux positif est une alerte sans menace réelle. On le clôture en consignant la raison, ce qui aide à améliorer les règles de détection."
     }
   },
 };

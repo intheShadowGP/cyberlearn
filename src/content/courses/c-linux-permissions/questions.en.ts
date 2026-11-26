@@ -797,5 +797,96 @@ export const questions: Question[] = [
         "text": "An integrity check (AIDE) or auditd rules on these files"
       }
     ]
+  },
+  {
+    "id": "lnx-q41",
+    "prompt": "With a `027` umask, which permissions does a newly created file get?",
+    "skills": [
+      "c-perm-read"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "640 (rw-r-----)"
+      },
+      {
+        "id": "b",
+        "text": "644 (rw-r--r--)"
+      },
+      {
+        "id": "c",
+        "text": "600 (rw-------)"
+      },
+      {
+        "id": "d",
+        "text": "750 (rwxr-x---)"
+      }
+    ]
+  },
+  {
+    "id": "lnx-q42",
+    "prompt": "What does the command `find / -xdev -type f -perm -4000` look for?",
+    "skills": [
+      "c-perm-special"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Files with no known owner"
+      },
+      {
+        "id": "b",
+        "text": "Files writable by everyone"
+      },
+      {
+        "id": "c",
+        "text": "Files with the SUID bit set"
+      },
+      {
+        "id": "d",
+        "text": "Files executable only by their owner"
+      }
+    ]
+  },
+  {
+    "id": "lnx-q43",
+    "prompt": "Which `find` option limits the search to the starting file system?",
+    "skills": [
+      "c-perm-special"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "option"
+  },
+  {
+    "id": "lnx-q44",
+    "prompt": "A scheduled task creates a key file with a `022` umask. What is the main risk?",
+    "skills": [
+      "c-hardening"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The file is deleted when the session closes"
+      },
+      {
+        "id": "b",
+        "text": "The file becomes executable for everyone"
+      },
+      {
+        "id": "c",
+        "text": "The file is encrypted by the system"
+      },
+      {
+        "id": "d",
+        "text": "The file is readable by all users"
+      }
+    ]
   }
 ];

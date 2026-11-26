@@ -368,6 +368,43 @@ export const corrections: CourseCorrections = {
         "a": "Un message n’observe aucun fichier.",
         "b": "Une bannière a une valeur juridique mais ne détecte aucune modification."
       }
+    },
+    "lnx-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Un fichier part de 666 ; l’umask 027 retire 0 au propriétaire, 2 (écriture) au groupe et 7 (tout) aux autres, ce qui donne 640.",
+      "whyWrong": {
+        "b": "C’est le résultat d’un umask 022, pas 027.",
+        "c": "C’est le résultat d’un umask 077.",
+        "d": "Un fichier ordinaire ne reçoit pas le bit d’exécution à la création ; 750 est le résultat pour un répertoire."
+      }
+    },
+    "lnx-q42": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "`-perm -4000` sélectionne les fichiers où le bit SUID est positionné. `-xdev` limite la recherche au système de fichiers de départ. Les résultats se comparent à une liste de référence.",
+      "whyWrong": {
+        "b": "Ce serait `-perm -0002`.",
+        "a": "Ce serait `-nouser` ou `-nogroup`.",
+        "d": "Le bit SUID n’a rien à voir avec une exécution réservée au propriétaire."
+      }
+    },
+    "lnx-q43": {
+      "type": "short",
+      "accepted": [
+        "-xdev"
+      ],
+      "explanation": "`-xdev` évite de descendre dans les autres systèmes de fichiers montés (`/proc`, partages réseau), ce qui accélère l’audit et évite les faux résultats."
+    },
+    "lnx-q44": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Avec 022, un fichier créé en 666 devient 644 : lisible par tous. Un fichier de secrets doit être créé avec un umask restrictif (par exemple 077) fixé explicitement dans le script.",
+      "whyWrong": {
+        "b": "Un fichier ordinaire n’est pas créé exécutable.",
+        "c": "Le système ne chiffre pas les fichiers à la création.",
+        "a": "L’umask n’a aucun lien avec la suppression de fichiers."
+      }
     }
   },
 };

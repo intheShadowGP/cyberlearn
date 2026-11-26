@@ -837,5 +837,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 3,
     "type": "open"
+  },
+  {
+    "id": "ipv4-q41",
+    "prompt": "What is the broadcast address of the network containing `10.20.37.130/20`?",
+    "skills": [
+      "b-ipv4-calc"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "10.20.63.255"
+      },
+      {
+        "id": "b",
+        "text": "10.20.37.255"
+      },
+      {
+        "id": "c",
+        "text": "10.20.47.255"
+      },
+      {
+        "id": "d",
+        "text": "10.20.32.255"
+      }
+    ]
+  },
+  {
+    "id": "ipv4-q42",
+    "prompt": "How many usable hosts does a /26 network contain? (number)",
+    "skills": [
+      "b-ipv4-calc"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "number"
+  },
+  {
+    "id": "ipv4-q43",
+    "prompt": "In VLSM, in which order are subnets placed in the address block?",
+    "skills": [
+      "b-ipv4-vlsm"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "In alphabetical order of services"
+      },
+      {
+        "id": "b",
+        "text": "From the smallest need to the largest"
+      },
+      {
+        "id": "c",
+        "text": "At random, alignment has no effect"
+      },
+      {
+        "id": "d",
+        "text": "From the largest need to the smallest"
+      }
+    ]
+  },
+  {
+    "id": "ipv4-q44",
+    "prompt": "For a network of 20 hosts, what is the smallest mask that fits?",
+    "skills": [
+      "b-ipv4-vlsm"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "/30 (2 hosts)"
+      },
+      {
+        "id": "b",
+        "text": "/27 (30 hosts)"
+      },
+      {
+        "id": "c",
+        "text": "/26 (62 hosts)"
+      },
+      {
+        "id": "d",
+        "text": "/28 (14 hosts)"
+      }
+    ]
   }
 ];

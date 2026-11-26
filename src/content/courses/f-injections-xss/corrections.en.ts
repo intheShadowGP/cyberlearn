@@ -379,6 +379,46 @@ export const corrections: CourseCorrections = {
         "Prevention measures (least privilege, SAST, regression test) are proposed."
       ],
       "explanation": "Fixing is not enough: you must know whether the flaw was exploited and prevent it from coming back elsewhere."
+    },
+    "web-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "A parameter carries a value; a column or table name is an identifier and cannot be parameterized. The input must be compared with an allow-list of columns and of sort direction.",
+      "whyWrong": {
+        "c": "Parameters apply to reads too; that is their main use.",
+        "b": "Sorting is executed by the database engine, not by the browser.",
+        "d": "A sort clause built by concatenation can be hijacked."
+      }
+    },
+    "web-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "`textContent` inserts plain text: a typed `<img onerror=...>` stays a string of characters. `innerHTML` interprets content as HTML, which allows scripts to run.",
+      "whyWrong": {
+        "a": "Removing spaces does not change how tags are interpreted.",
+        "d": "The case of a tag or attribute does not stop it from working.",
+        "c": "Hiding an element does not stop its content from executing."
+      }
+    },
+    "web-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "In an address, the danger comes from schemes such as `javascript:`, which run code on click. The scheme is therefore validated by allow-list, in addition to suitable encoding.",
+      "whyWrong": {
+        "c": "Angle brackets are not the issue of an `href`: a dangerous scheme contains none.",
+        "b": "Doubling apostrophes belongs to SQL syntax, not to an address.",
+        "a": "Case does not neutralize a scheme such as `javascript:`."
+      }
+    },
+    "web-q44": {
+      "type": "short",
+      "accepted": [
+        "parameterized query",
+        "parameterised query",
+        "prepared statement",
+        "prepared query"
+      ],
+      "explanation": "A parameterized (or prepared) query separates the query structure from the values: the input stays data and can no longer change the query logic."
     }
   },
 };

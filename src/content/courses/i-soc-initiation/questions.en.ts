@@ -839,5 +839,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 2,
     "type": "open"
+  },
+  {
+    "id": "isi-q41",
+    "prompt": "Which Windows security event corresponds to a successful logon?",
+    "skills": [
+      "i-ini-journaux"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "4625"
+      },
+      {
+        "id": "b",
+        "text": "4624"
+      },
+      {
+        "id": "c",
+        "text": "4634"
+      },
+      {
+        "id": "d",
+        "text": "4672"
+      }
+    ]
+  },
+  {
+    "id": "isi-q42",
+    "prompt": "In an SSH log, dozens of `Failed password` entries within seconds on nonexistent accounts precede an `Accepted password` for a real account, from the same address. What does this sequence suggest?",
+    "skills": [
+      "i-ini-alerte"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A brute force whose last attempt succeeded"
+      },
+      {
+        "id": "b",
+        "text": "A scheduled update of the SSH service"
+      },
+      {
+        "id": "c",
+        "text": "A user who forgot their password"
+      },
+      {
+        "id": "d",
+        "text": "A false positive to close without checking"
+      }
+    ]
+  },
+  {
+    "id": "isi-q43",
+    "prompt": "After checking, an alert remains ambiguous and the possible impact is significant. What is the right decision?",
+    "skills": [
+      "i-ini-alerte"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Wait for it to happen again"
+      },
+      {
+        "id": "b",
+        "text": "Close it as a false positive to be safe"
+      },
+      {
+        "id": "c",
+        "text": "Escalate with the gathered elements"
+      },
+      {
+        "id": "d",
+        "text": "Remove it from the queue so it is not counted"
+      }
+    ]
+  },
+  {
+    "id": "isi-q44",
+    "prompt": "What is an alert wrongly triggered by legitimate activity called? (two words)",
+    "skills": [
+      "i-ini-alerte"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "two words"
   }
 ];

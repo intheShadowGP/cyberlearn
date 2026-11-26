@@ -26,6 +26,6 @@ export const meta: CourseMeta = {
     { id: 'c-acces-diag', label: 'Diagnostic d’un refus d’accès', level: 2 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

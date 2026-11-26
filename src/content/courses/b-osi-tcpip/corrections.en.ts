@@ -271,6 +271,46 @@ export const corrections: CourseCorrections = {
         "c": "A faulty cable would also prevent access by IP address.",
         "a": "The gateway works since IP addresses are reached."
       }
+    },
+    "osi-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "The ping to the gateway succeeds: the machine has an address, the cable works and the gateway answers. The failure is about resolving a name, so DNS, the application layer. You climb the layers one by one.",
+      "whyWrong": {
+        "c": "If the cable were at fault, the ping to the gateway would fail too.",
+        "d": "The gateway just answered the ping.",
+        "b": "Without a valid address, the ping would not have succeeded."
+      }
+    },
+    "osi-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "A SYN followed by an RST indicates a refusal: no service listens on that port, or the connection is rejected. An open port would answer `[S.]`, and a filtered port usually answers nothing.",
+      "whyWrong": {
+        "b": "An open port answers with a SYN-ACK (`[S.]`), not an RST.",
+        "c": "Silent filtering produces no answer; here an RST answer is received.",
+        "a": "A normal end uses FIN packets, not an RST in reply to a SYN."
+      }
+    },
+    "osi-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Many open requests to many ports, with no follow-up exchange, correspond to a search for open services. A legitimate transfer uses an established connection on one port.",
+      "whyWrong": {
+        "c": "A transfer uses an established connection, with data packets.",
+        "d": "DNS mostly uses UDP on port 53, with name queries.",
+        "a": "A renegotiation happens inside an already established connection."
+      }
+    },
+    "osi-q44": {
+      "type": "short",
+      "accepted": [
+        "ss",
+        "ss -tn",
+        "ss -tln",
+        "ss -tlnp"
+      ],
+      "explanation": "`ss` is gradually replacing `netstat`: `ss -tln` lists listening TCP ports, `ss -tn` established connections, and `-p` adds the associated process."
     }
   },
 };

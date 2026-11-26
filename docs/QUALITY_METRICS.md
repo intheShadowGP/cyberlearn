@@ -15,7 +15,7 @@
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 94 % |
-| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 27 |
+| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 28 |
 
 ## Par cours
 
@@ -26,14 +26,14 @@
 | `a-virtualisation-conteneurs` | A | 2 | 6 | 1639 | 1514 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 33 % | 5 |
 | `a-compilation-memoire-execution` | A | 3 | 6 | 1584 | 1430 | 2 | 0 | 4 | 4 | 40 | U22 VF7 M5 C3 O3 | 26 % | 5 |
 | `a-isolation-confiance-plateforme` | A | 4 | 6 | 1734 | 1527 | 2 | 0 | 4 | 4 | 40 | U23 M5 VF6 C3 O3 | 21 % | 5 |
-| `b-osi-tcpip` | B | 1 | 7 | 1644 | 1540 | 2 | 0 | 4 | 4 | 40 | U21 C5 VF7 M5 O2 | 27 % | 5 |
-| `b-ipv4-subnetting` | B | 2 | 8 | 1891 | 1740 | 3 | 1 | 4 | 3 | 40 | U21 C6 M4 VF6 O3 | 68 % | 5 |
+| `b-osi-tcpip` | B | 1 | 7 | 1644 | 1540 | 2 | 0 | 4 | 4 | 44 | U24 C6 VF7 M5 O2 | 34 % | 5 |
+| `b-ipv4-subnetting` | B | 2 | 8 | 1891 | 1740 | 3 | 1 | 4 | 3 | 44 | U24 C7 M4 VF6 O3 | 71 % | 5 |
 | `b-commutation-vlan-ipv6` | B | 2 | 5 | 1722 | 1525 | 2 | 0 | 5 | 5 | 40 | U23 VF7 C4 M4 O2 | 37 % | 5 |
 | `b-routage-dns-dhcp-nat` | B | 2 | 6 | 2331 | 2112 | 3 | 0 | 5 | 5 | 40 | U17 C6 VF8 M6 O3 | 100 % | 5 |
 | `b-perimetre-vpn-wifi` | B | 3 | 5 | 2033 | 1826 | 3 | 0 | 5 | 5 | 40 | U17 VF9 M6 C5 O3 | 100 % | 5 |
 | `b-defense-reseau-avancee` | B | 4 | 6 | 2454 | 2152 | 3 | 0 | 5 | 5 | 40 | U18 VF7 C5 M6 O4 | 100 % | 6 |
 | `c-shell-paquets-automatisation` | C | 1 | 6 | 1997 | 1782 | 3 | 0 | 5 | 5 | 40 | U19 C6 VF7 O3 M5 | 100 % | 5 |
-| `c-linux-permissions` | C | 2 | 8 | 1643 | 1491 | 3 | 1 | 4 | 4 | 40 | C6 U18 VF7 M5 O4 | 100 % | 5 |
+| `c-linux-permissions` | C | 2 | 8 | 1643 | 1491 | 3 | 1 | 4 | 4 | 44 | C7 U21 VF7 M5 O4 | 100 % | 5 |
 | `c-systemd-journaux-confinement` | C | 3 | 6 | 1481 | 1347 | 3 | 0 | 5 | 5 | 40 | U18 VF7 M5 C6 O4 | 100 % | 5 |
 | `c-linux-securite-avancee` | C | 4 | 6 | 2503 | 2240 | 3 | 1 | 7 | 7 | 40 | U18 C5 VF7 M6 O4 | 100 % | 6 |
 | `d-windows-fondamentaux` | D | 1 | 6 | 1736 | 1547 | 3 | 0 | 5 | 5 | 40 | U18 VF8 C7 M5 O2 | 100 % | 6 |
@@ -46,7 +46,7 @@
 | `e-chiffrement-tls-pki` | E | 3 | 6 | 2375 | 2138 | 3 | 0 | 7 | 7 | 40 | U16 VF8 M6 C7 O3 | 100 % | 6 |
 | `e-crypto-appliquee-avancee` | E | 4 | 6 | 2613 | 2344 | 3 | 0 | 6 | 6 | 40 | U19 VF7 M5 C6 O3 | 100 % | 6 |
 | `f-web-fondamentaux` | F | 1 | 6 | 1636 | 1470 | 3 | 0 | 5 | 5 | 40 | U20 C5 VF7 M6 O2 | 100 % | 6 |
-| `f-injections-xss` | F | 2 | 8 | 1601 | 1444 | 3 | 1 | 4 | 4 | 40 | U19 VF7 M6 C5 O3 | 100 % | 6 |
+| `f-injections-xss` | F | 2 | 8 | 1601 | 1444 | 3 | 1 | 4 | 4 | 44 | U22 VF7 M6 C6 O3 | 100 % | 6 |
 | `f-acces-sessions-ssrf` | F | 3 | 7 | 1903 | 1656 | 3 | 0 | 6 | 6 | 40 | U16 VF8 M8 O3 C5 | 100 % | 7 |
 | `f-xxe-rfi-clickjacking-race` | F | 3 | 7 | 1818 | 1594 | 3 | 0 | 5 | 5 | 40 | U17 M6 VF8 C6 O3 | 100 % | 6 |
 | `f-web-defense-avancee` | F | 4 | 6 | 1977 | 1771 | 3 | 0 | 7 | 7 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
@@ -58,7 +58,7 @@
 | `h-pentest-methodologie` | H | 2 | 9 | 1904 | 1773 | 3 | 1 | 4 | 4 | 40 | U19 VF7 M5 C6 O3 | 100 % | 6 |
 | `h-execution-outils-equipes` | H | 3 | 7 | 2005 | 1825 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 O3 C4 | 100 % | 6 |
 | `h-pentest-avance` | H | 4 | 6 | 1868 | 1649 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `i-soc-initiation` | I | 1 | 8 | 1694 | 1535 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
+| `i-soc-initiation` | I | 1 | 8 | 1694 | 1535 | 3 | 0 | 4 | 4 | 44 | U24 VF7 C6 M5 O2 | 100 % | 6 |
 | `i-soc-detection` | I | 2 | 6 | 1766 | 1586 | 3 | 1 | 4 | 4 | 40 | U21 M6 C5 VF6 O2 | 100 % | 6 |
 | `i-threat-hunting` | I | 3 | 7 | 1817 | 1584 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `i-detection-avancee` | I | 4 | 6 | 1682 | 1489 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
@@ -83,7 +83,7 @@
 | `m-ebios-pratique` | M | 3 | 6 | 1432 | 1273 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `m-gouvernance-avancee` | M | 4 | 6 | 1607 | 1413 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `n-ot-iot-initiation` | N | 1 | 8 | 1605 | 1379 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `n-ics-modbus` | N | 2 | 7 | 1875 | 1666 | 3 | 1 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 5 |
+| `n-ics-modbus` | N | 2 | 7 | 1875 | 1666 | 3 | 1 | 4 | 4 | 44 | U23 VF7 M6 C6 O2 | 100 % | 5 |
 | `n-iot-firmware` | N | 3 | 7 | 1641 | 1427 | 3 | 0 | 4 | 4 | 40 | U20 M6 VF7 C5 O2 | 100 % | 5 |
 | `n-automobile-profinet` | N | 3 | 7 | 1747 | 1498 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 O2 C5 | 100 % | 6 |
 | `n-ot-securite-avancee` | N | 4 | 6 | 1517 | 1325 | 3 | 0 | 4 | 4 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
@@ -127,6 +127,7 @@
 | 0.54 | `m-gouvernance-initiation/mgi-q38` | `n-ot-iot-initiation/noi-q38` |
 | 0.50 | `a-virtualisation-conteneurs/virt-q32` | `f-web-fondamentaux/fwf-q32` |
 | 0.50 | `b-ipv4-subnetting/ipv4-q4` | `b-ipv4-subnetting/ipv4-q22` |
+| 0.50 | `b-ipv4-subnetting/ipv4-q23` | `b-ipv4-subnetting/ipv4-q41` |
 | 0.50 | `b-perimetre-vpn-wifi/pvw-q12` | `m-risques-conformite/gov-q13` |
 | 0.50 | `d-windows-poste-durcissement/wpo-q11` | `m-risques-conformite/gov-q13` |
 | 0.50 | `f-xxe-rfi-clickjacking-race/xrc-q25` | `h-pentest-initiation/pti-q15` |

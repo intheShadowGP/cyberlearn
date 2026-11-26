@@ -374,6 +374,45 @@ export const corrections: CourseCorrections = {
         "degraded operation"
       ],
       "explanation": "Degraded mode maintains the essentials of production with reduced means (manual control, local supervision) while the incident is dealt with."
+    },
+    "ics-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Function code 0x83 is 0x03 (read holding registers) with the high bit set: it is an error response. Exception code 02 means “illegal data address”: the PLC does not have the requested address.",
+      "whyWrong": {
+        "b": "A success response repeats the function code as is (0x03), without the error bit.",
+        "d": "The function involved is 0x03, a read; and exception 02 designates an address, not a function.",
+        "a": "A write confirmation repeats code 0x06 or 0x10, without the error bit."
+      }
+    },
+    "ics-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "With this convention 40001 corresponds to address 0, so 40017 corresponds to address 16. An off-by-one between the manual and the capture is a classic mistake.",
+      "whyWrong": {
+        "a": "That would be the address if numbering started at 0 for register 40000, which is not the stated convention.",
+        "c": "The frame does not carry the 4xxxx prefix of the legacy numbering.",
+        "b": "That would be the address of register 40016 in the manual, one too many."
+      }
+    },
+    "ics-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Filtering judges the source, the function code and the range, not the plausibility of the value. A dangerous command sent by the supervision itself, an allowed source, goes through: hence the need to check value plausibility and provide independent safety functions.",
+      "whyWrong": {
+        "c": "The source is not the supervision: the allow-list refuses it.",
+        "d": "Unknown host and unauthorized coil: refused by the list.",
+        "a": "This flow is not allowed by the list: it is refused."
+      }
+    },
+    "ics-q44": {
+      "type": "short",
+      "accepted": [
+        "02",
+        "2",
+        "0x02"
+      ],
+      "explanation": "The three basic exception codes are 01 (illegal function), 02 (illegal data address) and 03 (illegal data value)."
     }
   },
 };

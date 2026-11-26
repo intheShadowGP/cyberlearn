@@ -308,6 +308,43 @@ export const corrections: CourseCorrections = {
         "Mentions the risk of too wide an aggregate (wrong announcement or rule)."
       ],
       "explanation": "Aggregation is only possible for contiguous, aligned blocks; an aggregate that is too wide is a security mistake as much as a routing one."
+    },
+    "ipv4-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "A /20 splits in the third octet with blocks of 16: 37 falls in the block 32 to 47. The broadcast is the last address of the block, 10.20.47.255.",
+      "whyWrong": {
+        "b": "That would be the broadcast of a /24, not a /20.",
+        "d": "32 is the start of the block: 10.20.32.255 does not close the block of 16.",
+        "a": "That would be the end of a 32-block (32 to 63), which is not a /20 block."
+      }
+    },
+    "ipv4-q42": {
+      "type": "short",
+      "accepted": [
+        "62"
+      ],
+      "explanation": "A /26 leaves 6 host bits: 2⁶ = 64 addresses, minus the network and broadcast addresses, so 62 usable hosts."
+    },
+    "ipv4-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Placing blocks from largest to smallest keeps them aligned to their size and avoids wasting or overlapping addresses.",
+      "whyWrong": {
+        "b": "Placing a small block first misaligns the following blocks.",
+        "a": "Alphabetical order has no link with alignment.",
+        "c": "Each block must start at a multiple of its size."
+      }
+    },
+    "ipv4-q44": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "A /27 offers 32 addresses, so 30 usable hosts: it is the smallest block that holds 20 hosts. A /28 offers only 14.",
+      "whyWrong": {
+        "d": "Only 14 usable hosts: not enough.",
+        "c": "Sufficient but too large: it wastes addresses.",
+        "a": "Only 2 hosts: not enough."
+      }
     }
   },
 };

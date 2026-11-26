@@ -797,5 +797,96 @@ export const questions: Question[] = [
         "text": "Un contrôle d’intégrité (AIDE) ou des règles auditd sur ces fichiers"
       }
     ]
+  },
+  {
+    "id": "lnx-q41",
+    "prompt": "Avec un umask `027`, quelles permissions reçoit un fichier créé ?",
+    "skills": [
+      "c-perm-read"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "640 (rw-r-----)"
+      },
+      {
+        "id": "b",
+        "text": "644 (rw-r--r--)"
+      },
+      {
+        "id": "c",
+        "text": "600 (rw-------)"
+      },
+      {
+        "id": "d",
+        "text": "750 (rwxr-x---)"
+      }
+    ]
+  },
+  {
+    "id": "lnx-q42",
+    "prompt": "Que recherche la commande `find / -xdev -type f -perm -4000` ?",
+    "skills": [
+      "c-perm-special"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Les fichiers sans propriétaire connu"
+      },
+      {
+        "id": "b",
+        "text": "Les fichiers modifiables par tout le monde"
+      },
+      {
+        "id": "c",
+        "text": "Les fichiers dont le bit SUID est positionné"
+      },
+      {
+        "id": "d",
+        "text": "Les fichiers exécutables par leur seul propriétaire"
+      }
+    ]
+  },
+  {
+    "id": "lnx-q43",
+    "prompt": "Quelle option de `find` limite la recherche au système de fichiers de départ ?",
+    "skills": [
+      "c-perm-special"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "option"
+  },
+  {
+    "id": "lnx-q44",
+    "prompt": "Une tâche planifiée crée un fichier de clés avec un umask `022`. Quel est le risque principal ?",
+    "skills": [
+      "c-hardening"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le fichier est supprimé à la fermeture de session"
+      },
+      {
+        "id": "b",
+        "text": "Le fichier devient exécutable pour tout le monde"
+      },
+      {
+        "id": "c",
+        "text": "Le fichier est chiffré par le système"
+      },
+      {
+        "id": "d",
+        "text": "Le fichier est lisible par tous les utilisateurs"
+      }
+    ]
   }
 ];

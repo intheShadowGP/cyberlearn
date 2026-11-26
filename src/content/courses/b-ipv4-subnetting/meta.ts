@@ -26,6 +26,6 @@ export const meta: CourseMeta = {
     { id: 'b-ipv4-secu', label: 'Adressage et segmentation de sécurité', level: 2 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

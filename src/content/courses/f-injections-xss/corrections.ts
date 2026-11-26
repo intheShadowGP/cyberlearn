@@ -381,6 +381,46 @@ export const corrections: CourseCorrections = {
         "Des mesures de prévention (moindre privilège, SAST, test de non-régression) sont proposées."
       ],
       "explanation": "Corriger ne suffit pas : il faut savoir si la faille a été exploitée et éviter qu’elle ne revienne ailleurs."
+    },
+    "web-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Un paramètre transporte une valeur ; un nom de colonne ou de table est un identifiant et ne se paramètre pas. Il faut comparer l’entrée à une liste blanche de colonnes et du sens de tri.",
+      "whyWrong": {
+        "c": "Les paramètres s’appliquent aussi aux lectures, c’est même leur usage principal.",
+        "b": "Le tri est exécuté par le moteur de base de données, pas par le navigateur.",
+        "d": "Une clause de tri construite par concaténation peut être détournée."
+      }
+    },
+    "web-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "`textContent` insère du texte brut : un `<img onerror=...>` saisi reste une suite de caractères. `innerHTML` interprète le contenu comme du HTML, ce qui permet l’exécution de scripts.",
+      "whyWrong": {
+        "a": "Retirer des espaces ne change pas l’interprétation des balises.",
+        "d": "La casse d’une balise ou d’un attribut ne l’empêche pas de fonctionner.",
+        "c": "Masquer un élément n’empêche pas l’exécution de son contenu."
+      }
+    },
+    "web-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Dans une adresse, le danger vient des schémas comme `javascript:`, qui exécutent du code au clic. On valide donc le schéma par liste blanche, en plus de l’encodage adapté.",
+      "whyWrong": {
+        "c": "Les chevrons ne sont pas le problème d’un attribut `href` : un schéma dangereux n’en contient pas.",
+        "b": "Doubler les apostrophes relève de la syntaxe SQL, pas de celle d’une adresse.",
+        "a": "La casse ne neutralise pas un schéma comme `javascript:`."
+      }
+    },
+    "web-q44": {
+      "type": "short",
+      "accepted": [
+        "requête paramétrée",
+        "requêtes paramétrées",
+        "requête préparée",
+        "requêtes préparées"
+      ],
+      "explanation": "Une requête paramétrée (ou préparée) sépare la structure de la requête des valeurs : la saisie reste une donnée et ne peut plus modifier la logique de la requête."
     }
   },
 };

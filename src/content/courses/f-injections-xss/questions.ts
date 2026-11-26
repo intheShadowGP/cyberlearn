@@ -822,5 +822,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 3,
     "type": "open"
+  },
+  {
+    "id": "web-q41",
+    "prompt": "Pourquoi un tri dynamique (`ORDER BY`) n’est-il pas protégé par une requête paramétrée ?",
+    "skills": [
+      "f-sqli"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Un nom de colonne est un identifiant, pas une valeur"
+      },
+      {
+        "id": "b",
+        "text": "La clause de tri est exécutée côté navigateur"
+      },
+      {
+        "id": "c",
+        "text": "Les paramètres ne servent qu’aux requêtes d’écriture"
+      },
+      {
+        "id": "d",
+        "text": "Un tri ne peut pas être détourné par un attaquant"
+      }
+    ]
+  },
+  {
+    "id": "web-q42",
+    "prompt": "Quel est le moyen le plus sûr d’afficher un texte saisi sans qu’il soit interprété comme du HTML ?",
+    "skills": [
+      "f-xss"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Retirer les espaces avant l’insertion"
+      },
+      {
+        "id": "b",
+        "text": "Utiliser `textContent` plutôt que `innerHTML`"
+      },
+      {
+        "id": "c",
+        "text": "Masquer l’élément avec une règle CSS"
+      },
+      {
+        "id": "d",
+        "text": "Convertir la saisie en minuscules"
+      }
+    ]
+  },
+  {
+    "id": "web-q43",
+    "prompt": "Pour une valeur insérée dans l’attribut `href` d’un lien, quelle précaution est propre à ce contexte ?",
+    "skills": [
+      "f-xss"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Passer la valeur en majuscules"
+      },
+      {
+        "id": "b",
+        "text": "Doubler les apostrophes de la valeur"
+      },
+      {
+        "id": "c",
+        "text": "Encoder seulement les chevrons `<` et `>`"
+      },
+      {
+        "id": "d",
+        "text": "N’accepter que les schémas `http:` et `https:`"
+      }
+    ]
+  },
+  {
+    "id": "web-q44",
+    "prompt": "Comment appelle-t-on la technique qui transmet la requête SQL et ses valeurs séparément à la base ? (deux mots)",
+    "skills": [
+      "f-inj-defense"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "deux mots"
   }
 ];

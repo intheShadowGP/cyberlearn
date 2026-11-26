@@ -859,5 +859,96 @@ export const questions: Question[] = [
         "text": "Le serveur DNS configuré sur le poste"
       }
     ]
+  },
+  {
+    "id": "osi-q41",
+    "prompt": "`ping 192.168.1.1` réussit mais `nslookup exemple.org` échoue. Que faut-il soupçonner en premier ?",
+    "skills": [
+      "b-osi-diag"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La résolution de noms (DNS)"
+      },
+      {
+        "id": "b",
+        "text": "L’adresse IP attribuée à la machine"
+      },
+      {
+        "id": "c",
+        "text": "Le câble réseau de la machine"
+      },
+      {
+        "id": "d",
+        "text": "La passerelle par défaut du réseau"
+      }
+    ]
+  },
+  {
+    "id": "osi-q42",
+    "prompt": "Un client envoie un paquet `Flags [S]` vers le port 443 d’un serveur et reçoit `Flags [R.]`. Que conclure ?",
+    "skills": [
+      "b-osi-transport"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le serveur a terminé normalement la session"
+      },
+      {
+        "id": "b",
+        "text": "Le port est ouvert, la connexion est établie"
+      },
+      {
+        "id": "c",
+        "text": "Un pare-feu filtre le trafic sans répondre"
+      },
+      {
+        "id": "d",
+        "text": "Le port est fermé ou refuse la connexion"
+      }
+    ]
+  },
+  {
+    "id": "osi-q43",
+    "prompt": "Une même source envoie de nombreux paquets `[S]` vers des ports différents d’un serveur, sans jamais finaliser de connexion. De quoi s’agit-il probablement ?",
+    "skills": [
+      "b-osi-secu"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "D’une session chiffrée renégociée"
+      },
+      {
+        "id": "b",
+        "text": "D’un balayage de ports"
+      },
+      {
+        "id": "c",
+        "text": "D’un transfert de fichier volumineux"
+      },
+      {
+        "id": "d",
+        "text": "D’une résolution DNS en rafale"
+      }
+    ]
+  },
+  {
+    "id": "osi-q44",
+    "prompt": "Quelle commande Linux moderne affiche les connexions TCP et les ports en écoute (nom en deux lettres) ?",
+    "skills": [
+      "b-osi-diag"
+    ],
+    "difficulty": 1,
+    "type": "short",
+    "placeholder": "commande"
   }
 ];

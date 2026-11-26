@@ -379,6 +379,45 @@ export const corrections: CourseCorrections = {
         "fonctionnement dégradé"
       ],
       "explanation": "Le mode dégradé maintient l’essentiel de la production avec des moyens réduits (pilotage manuel, supervision locale) pendant que l’on traite l’incident."
+    },
+    "ics-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Le code fonction 0x83 est 0x03 (lecture de registres de maintien) avec le bit de poids fort à 1 : c’est une réponse d’erreur. Le code d’exception 02 signifie « adresse de donnée illégale » : l’automate ne possède pas l’adresse demandée.",
+      "whyWrong": {
+        "b": "Une réponse de succès reprend le code fonction tel quel (0x03), sans le bit d’erreur.",
+        "d": "La fonction concernée est 0x03, une lecture ; et l’exception 02 désigne une adresse, pas une fonction.",
+        "a": "Une confirmation d’écriture reprend le code 0x06 ou 0x10, sans le bit d’erreur."
+      }
+    },
+    "ics-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Avec cette convention, 40001 correspond à l’adresse 0 : 40017 correspond donc à l’adresse 16. Un décalage de un entre la documentation et la capture est une erreur classique.",
+      "whyWrong": {
+        "a": "Ce serait l’adresse si la numérotation commençait à 0 pour le registre 40000, ce qui n’est pas la convention indiquée.",
+        "c": "La trame ne transporte pas le préfixe 4xxxx de la numérotation historique.",
+        "b": "Ce serait l’adresse du registre 40016 dans la documentation, soit un décalage de un en trop."
+      }
+    },
+    "ics-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Le filtrage juge la source, le code fonction et la plage, pas la cohérence de la valeur. Une commande dangereuse émise par la supervision elle-même, source autorisée, passe : d’où le besoin de contrôler la cohérence des valeurs et de prévoir des sécurités indépendantes.",
+      "whyWrong": {
+        "c": "La source n’est pas la supervision : la liste blanche la refuse.",
+        "d": "Hôte inconnu et bobine non autorisée : refusé par la liste.",
+        "a": "Ce flux n’est pas autorisé par la liste : il est refusé."
+      }
+    },
+    "ics-q44": {
+      "type": "short",
+      "accepted": [
+        "02",
+        "2",
+        "0x02"
+      ],
+      "explanation": "Les trois codes d’exception de base sont 01 (fonction illégale), 02 (adresse de donnée illégale) et 03 (valeur de donnée illégale)."
     }
   },
 };

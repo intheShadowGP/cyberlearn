@@ -839,5 +839,96 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "deux mots"
+  },
+  {
+    "id": "ics-q41",
+    "prompt": "Après l’en-tête MBAP, une réponse Modbus TCP contient les octets `01 83 02`. Que signifie-t-elle ?",
+    "skills": [
+      "n-modbus"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Succès d’une écriture de registre, confirmée par l’automate"
+      },
+      {
+        "id": "b",
+        "text": "Succès d’une lecture de registres de maintien avec deux valeurs"
+      },
+      {
+        "id": "c",
+        "text": "Erreur sur une lecture de registres : adresse illégale"
+      },
+      {
+        "id": "d",
+        "text": "Erreur sur une écriture de bobine : fonction non prise en charge"
+      }
+    ]
+  },
+  {
+    "id": "ics-q42",
+    "prompt": "Une documentation désigne un registre de maintien par `40017` (numérotation historique où 40001 correspond à l’adresse 0). Quelle adresse figure dans la trame pour le lire ?",
+    "skills": [
+      "n-modbus"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "17"
+      },
+      {
+        "id": "b",
+        "text": "40016"
+      },
+      {
+        "id": "c",
+        "text": "40017"
+      },
+      {
+        "id": "d",
+        "text": "16"
+      }
+    ]
+  },
+  {
+    "id": "ics-q43",
+    "prompt": "Une liste blanche n’autorise que la supervision à écrire dans les registres 16 à 19 d’un automate. Quel scénario n’est PAS arrêté par ce filtrage ?",
+    "skills": [
+      "n-detection"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Un téléchargement de programme depuis un autre réseau"
+      },
+      {
+        "id": "b",
+        "text": "Une valeur aberrante écrite par la supervision compromise"
+      },
+      {
+        "id": "c",
+        "text": "Une écriture depuis un poste de bureautique"
+      },
+      {
+        "id": "d",
+        "text": "Une écriture de bobine depuis un hôte inconnu"
+      }
+    ]
+  },
+  {
+    "id": "ics-q44",
+    "prompt": "Quel code d’exception Modbus (nombre à deux chiffres) signale une adresse de donnée illégale ?",
+    "skills": [
+      "n-modbus"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "nombre"
   }
 ];

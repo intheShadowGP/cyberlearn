@@ -376,6 +376,44 @@ export const corrections: CourseCorrections = {
         "The confirmed compromise requires proof that the attacker succeeded."
       ],
       "explanation": "These three levels must not be confused: the alert is qualified, the incident is handled, the compromise is proven."
+    },
+    "isi-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Event 4624 records a successful logon. 4625 corresponds to a failure, 4634 to a logoff.",
+      "whyWrong": {
+        "a": "4625 is the failed-logon event.",
+        "c": "4634 records the end of a session.",
+        "d": "4672 signals special privileges being assigned to a session."
+      }
+    },
+    "isi-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "The pace, the nonexistent accounts and the final success from the same address describe an automated attack in which one attempt succeeded: possible compromise, to handle first.",
+      "whyWrong": {
+        "c": "Forgetting a password does not produce dozens of tries in seconds on accounts that do not exist.",
+        "b": "An update does not generate repeated authentication failures.",
+        "d": "Closing without checking would ignore a serious sign of compromise."
+      }
+    },
+    "isi-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "When doubt persists and impact is possible, you hand over with the context, the sources consulted and the reasons for doubt, rather than deciding alone.",
+      "whyWrong": {
+        "b": "Closing a serious doubt amounts to betting the attack does not exist.",
+        "a": "Waiting gives a possible attacker time to act.",
+        "d": "Removing an alert deletes the trace and prevents any follow-up."
+      }
+    },
+    "isi-q44": {
+      "type": "short",
+      "accepted": [
+        "false positive",
+        "false positives"
+      ],
+      "explanation": "A false positive is an alert with no real threat. It is closed with the reason recorded, which helps improve detection rules."
     }
   },
 };

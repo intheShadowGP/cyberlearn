@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
-| Questions de cours (avec correction) | 3406 |
+| Questions de cours (avec correction) | 3430 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
@@ -50,14 +50,14 @@
 | Virtualisation et conteneurs : isoler les charges de travail (`a-virtualisation-conteneurs`) | A | 2 · Intermédiaire | 100 min | 6 | 40 | 2 | 4 |
 | Du code au processus : compilation, binaires, mémoire et exécution (`a-compilation-memoire-execution`) | A | 3 · Avancé | 110 min | 6 | 40 | 2 | 4 |
 | Base de confiance, isolation et architecture de sécurité d’une plateforme (`a-isolation-confiance-plateforme`) | A | 4 · Expert | 120 min | 6 | 40 | 2 | 4 |
-| Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 80 min | 7 | 40 | 2 | 4 |
-| Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 95 min | 8 | 40 | 3 | 4 |
+| Modèles OSI et TCP/IP : comment circulent les données (`b-osi-tcpip`) | B | 1 · Débutant | 80 min | 7 | 44 | 2 | 4 |
+| Adressage IPv4 et découpage en sous-réseaux (`b-ipv4-subnetting`) | B | 2 · Intermédiaire | 95 min | 8 | 44 | 3 | 4 |
 | Commutation, VLAN et IPv6 : la couche 2 et le nouvel adressage (`b-commutation-vlan-ipv6`) | B | 2 · Intermédiaire | 105 min | 5 | 40 | 2 | 5 |
 | Routage, DNS, DHCP et NAT : acheminer les paquets entre réseaux (`b-routage-dns-dhcp-nat`) | B | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 5 |
 | Périmètre réseau : pare-feu, détection, VPN, Wi-Fi et architecture sécurisée (`b-perimetre-vpn-wifi`) | B | 3 · Avancé | 120 min | 5 | 40 | 3 | 5 |
 | Défense réseau avancée : déni de service, plan de contrôle, visibilité et résilience (`b-defense-reseau-avancee`) | B | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Linux au quotidien : architecture, shell Bash, paquets et automatisation (`c-shell-paquets-automatisation`) | C | 1 · Débutant | 110 min | 6 | 40 | 3 | 5 |
-| Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 8 | 40 | 3 | 4 |
+| Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 8 | 44 | 3 | 4 |
 | Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 6 | 40 | 3 | 5 |
 | Linux avancé : durcissement du noyau, intégrité, chaîne d’approvisionnement et investigation (`c-linux-securite-avancee`) | C | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Windows : bien comprendre son poste, ses comptes et ses protections (`d-windows-fondamentaux`) | D | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
@@ -70,7 +70,7 @@
 | Chiffrement, TLS et PKI : protéger les données en transit et au repos (`e-chiffrement-tls-pki`) | E | 3 · Avancé | 140 min | 6 | 40 | 3 | 7 |
 | Cryptographie appliquée avancée : protocoles, implémentation, clés et transition post-quantique (`e-crypto-appliquee-avancee`) | E | 4 · Expert | 150 min | 6 | 40 | 3 | 6 |
 | Sécurité web : comprendre HTTP, les sessions et les grands risques (`f-web-fondamentaux`) | F | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
-| Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 8 | 40 | 3 | 4 |
+| Injections SQL et XSS : comprendre, exploiter en laboratoire, corriger (`f-injections-xss`) | F | 2 · Intermédiaire | 115 min | 8 | 44 | 3 | 4 |
 | Web : contrôle d’accès, sessions, CSRF et SSRF (`f-acces-sessions-ssrf`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 6 |
 | Web : XXE, inclusion de fichiers, clickjacking, race conditions et test méthodique (`f-xxe-rfi-clickjacking-race`) | F | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Sécurité web avancée : modélisation, protocole, navigateur, API et chaîne logicielle (`f-web-defense-avancee`) | F | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
@@ -82,7 +82,7 @@
 | Test d’intrusion : cadre légal, méthodologie et rapport (`h-pentest-methodologie`) | H | 2 · Intermédiaire | 120 min | 9 | 40 | 3 | 4 |
 | Pentest : exécution en laboratoire, outillage et travail en équipe (`h-execution-outils-equipes`) | H | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Exercices adverses avancés : cadrage, émulation d’adversaire, chemins d’attaque et gouvernance (`h-pentest-avance`) | H | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
-| Défense et SOC : initiation aux journaux, aux alertes et aux premiers réflexes (`i-soc-initiation`) | I | 1 · Débutant | 90 min | 8 | 40 | 3 | 4 |
+| Défense et SOC : initiation aux journaux, aux alertes et aux premiers réflexes (`i-soc-initiation`) | I | 1 · Débutant | 90 min | 8 | 44 | 3 | 4 |
 | SOC : détection, triage d’alertes et réponse à incident (`i-soc-detection`) | I | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 4 |
 | Threat hunting et renseignement : chasser ce que les alertes ne voient pas (`i-threat-hunting`) | I | 3 · Avancé | 135 min | 7 | 40 | 3 | 5 |
 | Ingénierie de détection avancée et pilotage d’un SOC (`i-detection-avancee`) | I | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
@@ -107,7 +107,7 @@
 | EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Gouvernance avancée : quantification des risques, conformité multi-textes, tiers critiques et pilotage par la preuve (`m-gouvernance-avancee`) | M | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | Systèmes industriels et objets connectés pour débutants : comprendre et protéger (`n-ot-iot-initiation`) | N | 1 · Débutant | 90 min | 8 | 40 | 3 | 3 |
-| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 7 | 40 | 3 | 4 |
+| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 7 | 44 | 3 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 4 |
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 130 min | 7 | 40 | 3 | 5 |
 | Sécurité OT avancée : IEC 62443, architecture, analyse de risques, détection et résilience (`n-ot-securite-avancee`) | N | 4 · Expert | 140 min | 6 | 40 | 3 | 4 |

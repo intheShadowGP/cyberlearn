@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'i-ini-cadre', label: 'Cadre, confidentialité et éthique', level: 1 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

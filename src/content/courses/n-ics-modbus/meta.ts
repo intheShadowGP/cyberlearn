@@ -27,6 +27,6 @@ export const meta: CourseMeta = {
     { id: 'n-detection', label: 'Détection et réponse en OT', level: 3 },
   ],
   sectionCount: 7,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

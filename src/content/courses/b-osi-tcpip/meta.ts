@@ -26,6 +26,6 @@ export const meta: CourseMeta = {
     { id: 'b-osi-diag', label: 'Diagnostic couche par couche', level: 1 },
   ],
   sectionCount: 7,
-  questionCount: 40,
+  questionCount: 44,
   quizSize: 10,
 };

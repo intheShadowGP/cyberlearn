@@ -271,6 +271,46 @@ export const corrections: CourseCorrections = {
         "c": "Un câble défectueux empêcherait aussi l’accès par adresse IP.",
         "a": "La passerelle fonctionne puisque les adresses IP sont atteintes."
       }
+    },
+    "osi-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Le ping vers la passerelle réussit : la machine a une adresse, le câble fonctionne et la passerelle répond. L’échec porte sur la résolution d’un nom, donc sur le DNS, couche application. On remonte les couches une à une.",
+      "whyWrong": {
+        "c": "Si le câble était en cause, le ping vers la passerelle échouerait aussi.",
+        "d": "La passerelle vient de répondre au ping.",
+        "b": "Sans adresse valide, le ping n’aurait pas abouti."
+      }
+    },
+    "osi-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Un SYN suivi d’un RST indique un refus : aucun service n’écoute sur ce port, ou la connexion est rejetée. Un port ouvert répondrait `[S.]`, et un port filtré ne répondrait généralement rien.",
+      "whyWrong": {
+        "b": "Un port ouvert répond par un SYN-ACK (`[S.]`), pas par un RST.",
+        "c": "Un filtrage silencieux ne produit aucune réponse ; ici une réponse RST est reçue.",
+        "a": "Une fin normale passe par des paquets FIN, pas par un RST en réponse à un SYN."
+      }
+    },
+    "osi-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Beaucoup de demandes d’ouverture vers de nombreux ports, sans suite d’échange, correspondent à une recherche de services ouverts. Un transfert légitime utilise une connexion établie sur un port.",
+      "whyWrong": {
+        "c": "Un transfert utilise une connexion établie, avec des paquets de données.",
+        "d": "Le DNS utilise surtout UDP sur le port 53, avec des requêtes de noms.",
+        "a": "Une renégociation se déroule à l’intérieur d’une connexion déjà établie."
+      }
+    },
+    "osi-q44": {
+      "type": "short",
+      "accepted": [
+        "ss",
+        "ss -tn",
+        "ss -tln",
+        "ss -tlnp"
+      ],
+      "explanation": "`ss` remplace progressivement `netstat` : `ss -tln` liste les ports TCP en écoute, `ss -tn` les connexions établies, et `-p` ajoute le processus associé."
     }
   },
 };

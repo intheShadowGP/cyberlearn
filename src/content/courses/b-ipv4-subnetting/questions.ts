@@ -837,5 +837,96 @@ export const questions: Question[] = [
     ],
     "difficulty": 3,
     "type": "open"
+  },
+  {
+    "id": "ipv4-q41",
+    "prompt": "Quelle est l’adresse de diffusion du réseau contenant `10.20.37.130/20` ?",
+    "skills": [
+      "b-ipv4-calc"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "10.20.63.255"
+      },
+      {
+        "id": "b",
+        "text": "10.20.37.255"
+      },
+      {
+        "id": "c",
+        "text": "10.20.47.255"
+      },
+      {
+        "id": "d",
+        "text": "10.20.32.255"
+      }
+    ]
+  },
+  {
+    "id": "ipv4-q42",
+    "prompt": "Combien d’hôtes utilisables contient un réseau /26 ? (nombre)",
+    "skills": [
+      "b-ipv4-calc"
+    ],
+    "difficulty": 2,
+    "type": "short",
+    "placeholder": "nombre"
+  },
+  {
+    "id": "ipv4-q43",
+    "prompt": "En VLSM, dans quel ordre place-t-on les sous-réseaux dans le bloc d’adresses ?",
+    "skills": [
+      "b-ipv4-vlsm"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Par ordre alphabétique des services"
+      },
+      {
+        "id": "b",
+        "text": "Du plus petit besoin au plus grand"
+      },
+      {
+        "id": "c",
+        "text": "Au hasard, l’alignement est sans effet"
+      },
+      {
+        "id": "d",
+        "text": "Du plus grand besoin au plus petit"
+      }
+    ]
+  },
+  {
+    "id": "ipv4-q44",
+    "prompt": "Pour un réseau de 20 hôtes, quel est le plus petit masque qui convient ?",
+    "skills": [
+      "b-ipv4-vlsm"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "/30 (2 hôtes)"
+      },
+      {
+        "id": "b",
+        "text": "/27 (30 hôtes)"
+      },
+      {
+        "id": "c",
+        "text": "/26 (62 hôtes)"
+      },
+      {
+        "id": "d",
+        "text": "/28 (14 hôtes)"
+      }
+    ]
   }
 ];
