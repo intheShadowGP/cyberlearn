@@ -54,6 +54,22 @@ function jaccard(a: Set<string>, b: Set<string>): number {
   return inter / (a.size + b.size - inter);
 }
 
+/** Explications de mauvaises réponses (FR) : total et part des formules de 5 mots ou moins (« Sans rapport. »). */
+function wrongAnswerExplanations(): { total: number; short: number } {
+  let total = 0;
+  let short = 0;
+  for (const m of Object.values(banksFr)) {
+    for (const q of m.bank) {
+      if (!('o' in q) || !q.w) continue;
+      for (const text of Object.values(q.w)) {
+        total++;
+        if (String(text).trim().split(/\s+/).length <= 5) short++;
+      }
+    }
+  }
+  return { total, short };
+}
+
 const TYPE_CODE: Record<string, string> = { single: 'U', multi: 'M', truefalse: 'VF', short: 'C', open: 'O' };
 
 interface Row {
@@ -127,6 +143,7 @@ function render(): string {
     `| Cours avec au moins un exercice lié à un laboratoire | ${rs.filter((r) => r.labs > 0).length} |`,
     `| Cours sans aucune ressource externe HTTPS | ${rs.filter((r) => r.https === 0).length} |`,
     `| Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | ${pct(rs.reduce((n, r) => n + r.whyWrongRate, 0) / rs.length)} |`,
+    `| Explications de mauvaises réponses de 5 mots ou moins, sur le total (FR) | ${wrongAnswerExplanations().short} sur ${wrongAnswerExplanations().total} |`,
     `| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | ${dups.length} |`,
     '',
     '## Par cours',

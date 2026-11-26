@@ -15,6 +15,7 @@
 | Cours avec au moins un exercice lié à un laboratoire | 36 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 100 % |
+| Explications de mauvaises réponses de 5 mots ou moins, sur le total (FR) | 2271 sur 5800 |
 | Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 29 |
 
 ## Par cours
