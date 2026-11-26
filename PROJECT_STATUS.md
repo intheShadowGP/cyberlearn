@@ -13,6 +13,7 @@ Document de reprise (section 18 du cahier des charges).
 | 5 — Sécurisation (lint de sécurité, dépendances, CSP, imports, flux de données, actions épinglées) | Terminée |
 | 6 — Audit Fable 5.2 (5 axes) | Audit réalisé, constats corrigés ; voir docs/AUDIT.md (audit 5) |
 | 7 — Finalisation (documentation, build, tests finaux, déploiement) | Terminée ; site publié |
+| 8 — Programme d’amélioration 9,2 (V1.6.2) | Cours approfondis, banques enrichies (3 508 questions), 39 laboratoires, faits vérifiés en partie ; note interne 7,40/10 ; voir docs/PROJECT_9_2_ROADMAP.md |
 
 ## Fonctionnalités terminées et testées
 
