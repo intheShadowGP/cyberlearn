@@ -100,6 +100,48 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'demarche',
+        title: "Démarche : de l’alerte au rapport",
+        blocks: [
+          { t: 'p', text: "Une investigation ne consiste pas à « fouiller » un poste : elle suit un enchaînement stable, que l’on retrouve dans les guides de référence (par exemple le guide NIST SP 800-86 : collecte, examen, analyse, restitution). Chaque étape a une raison d’être, et sauter l’une d’elles fragilise les conclusions." },
+          { t: 'list', ordered: true, items: ["**Cadrer** : quelle question précise doit-on trancher, sur quel périmètre, et avec quelle autorisation écrite ?", "**Préserver** : isoler le matériel du réseau si nécessaire, noter l’heure et l’état observé, ne rien modifier sans le consigner.", "**Collecter** : récupérer les données du plus volatil au moins volatil, en les copiant.", "**Examiner** : extraire d’une **copie** les éléments utiles (fichiers, journaux, historiques).", "**Analyser** : relier les faits entre eux, formuler des hypothèses, bâtir la chronologie.", "**Restituer** : produire un rapport factuel qu’un tiers pourrait vérifier et reproduire."] },
+          {
+            t: 'table',
+            caption: "Ordre de volatilité (principe du RFC 3227) : on collecte d’abord ce qui disparaît le plus vite",
+            head: ["Priorité", "Source", "Pourquoi c’est urgent"],
+            rows: [
+              ["1", "Registres du processeur, caches, mémoire vive", "Disparaît à l’extinction"],
+              ["2", "État du réseau, processus en cours, connexions", "Change à chaque seconde"],
+              ["3", "Fichiers et systèmes de fichiers temporaires", "Vidés au redémarrage"],
+              ["4", "Disque dur ou SSD", "Persistant, mais écrasable par l’usage"],
+              ["5", "Journaux distants, supervision, sauvegardes", "Conservés, mais soumis à une rotation"],
+              ["6", "Supports d’archives, documentation de l’architecture", "Stable"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Tenez un **journal de bord** : qui a fait quoi, à quelle heure, avec quel outil et sur quel support. C’est ce journal qui permet de défendre la valeur des conclusions, et de refaire l’analyse à l’identique." },
+        ],
+      },
+      {
+        id: 'situation',
+        title: "Mise en situation : un poste de comptabilité se comporte étrangement",
+        blocks: [
+          { t: 'p', text: "Une comptable signale que son poste est lent et qu’un fichier de facturation a changé de nom. Vous êtes sollicité avant tout intervention du support. Les décisions des premières minutes décident de ce qu’il sera encore possible de prouver." },
+          {
+            t: 'table',
+            head: ["Situation", "Bonne pratique", "Erreur fréquente"],
+            rows: [
+              ["Le poste est allumé", "Le **déconnecter du réseau** (câble, Wi-Fi) en le laissant sous tension, puis noter l’heure et l’écran affiché", "L’éteindre aussitôt : on perd la mémoire vive et les connexions en cours"],
+              ["Un fichier semble modifié", "Le **copier** sans l’ouvrir et calculer son empreinte", "L’ouvrir « pour voir » : l’ouverture modifie les dates d’accès"],
+              ["Il faut analyser le disque", "Travailler sur une **copie** vérifiée par empreinte", "Analyser directement le disque d’origine"],
+              ["Un collègue propose de « nettoyer »", "Refuser tant que la collecte n’est pas terminée", "Lancer un antivirus ou supprimer des fichiers avant de collecter"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Calculer et vérifier l’empreinte SHA-256 d’une copie", code: "# Linux : calculer puis vérifier\nsha256sum copie_disque.img > copie_disque.img.sha256\nsha256sum -c copie_disque.img.sha256\n\n# Windows (PowerShell)\nGet-FileHash .\\copie_disque.img -Algorithm SHA256" },
+          { t: 'p', text: "Si l’empreinte de la copie est identique à celle relevée au moment de la collecte, la copie n’a pas changé : on peut démontrer que l’analyse porte sur les mêmes données. Le résultat « OK » de `sha256sum -c` en est la preuve la plus simple." },
+          { t: 'callout', kind: 'warn', text: "Ne jamais travailler sur l’original, et ne jamais « réparer » avant d’avoir collecté. Une bonne intention (nettoyer, redémarrer) détruit souvent la preuve." },
+        ],
+      },
+      {
         id: 'cadre',
         title: 'Cadre légal, éthique et premiers réflexes',
         blocks: [
@@ -125,6 +167,8 @@ export const body: CourseBody = {
       'Savoir quoi faire (et ne pas faire) quand on découvre un poste suspect.',
     ],
     commonMistakes: [
+      "Éteindre ou « réparer » un poste avant d’avoir noté son état et collecté les données volatiles.",
+      "Mélanger dans un rapport les faits observés et les hypothèses, sans les distinguer.",
       'Travailler directement sur le disque original.',
       'Éteindre une machine allumée sans avoir réfléchi à la mémoire vive.',
       'Mélanger des heures de fuseaux différents sans les convertir.',
@@ -139,6 +183,7 @@ export const body: CourseBody = {
       'Rester dans le cadre autorisé et proportionné.',
     ],
     keyPoints: [
+      "Collecter du plus volatil au moins volatil, sur copie, avec empreinte et journal de bord.",
       'La forensique établit des faits à partir de traces, avec une méthode défendable.',
       'On collecte du plus volatile (mémoire) au plus durable (archives).',
       'Une empreinte et une chaîne de conservation prouvent l’intégrité.',

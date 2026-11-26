@@ -8,9 +8,9 @@
 | Mesure | Valeur |
 | --- | --- |
 | Cours | 85 |
-| Mots de leçon, médiane (FR) | 1607 |
+| Mots de leçon, médiane (FR) | 1636 |
 | Mots de leçon, minimum / maximum (FR) | 1107 / 2613 |
-| Cours de moins de 1 500 mots (FR) | 37 |
+| Cours de moins de 1 500 mots (FR) | 34 |
 | Rapport mots EN / FR, minimum – maximum | 0.84 – 0.94 |
 | Cours avec au moins un exercice lié à un laboratoire | 12 |
 | Cours sans aucune ressource externe HTTPS | 0 |
@@ -62,12 +62,12 @@
 | `i-soc-detection` | I | 2 | 6 | 1766 | 1586 | 3 | 1 | 4 | 4 | 40 | U21 M6 C5 VF6 O2 | 100 % | 6 |
 | `i-threat-hunting` | I | 3 | 7 | 1817 | 1584 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `i-detection-avancee` | I | 4 | 6 | 1682 | 1489 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
-| `j-forensique-initiation` | J | 1 | 6 | 1154 | 1068 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
+| `j-forensique-initiation` | J | 1 | 8 | 1649 | 1503 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
 | `j-forensique-principes` | J | 2 | 7 | 1448 | 1320 | 3 | 1 | 4 | 4 | 40 | U20 VF7 C5 O2 M6 | 100 % | 6 |
 | `j-analyse-maliciels-investigation` | J | 3 | 7 | 1854 | 1683 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `j-memoire-artefacts-linux` | J | 3 | 7 | 1642 | 1460 | 3 | 0 | 5 | 5 | 40 | U20 C5 VF7 M6 O2 | 100 % | 6 |
 | `j-forensique-avancee` | J | 4 | 6 | 1896 | 1690 | 3 | 0 | 5 | 5 | 40 | U21 VF6 C5 M6 O2 | 100 % | 6 |
-| `k-malware-initiation` | K | 1 | 6 | 1199 | 1039 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
+| `k-malware-initiation` | K | 1 | 8 | 1633 | 1416 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C5 M5 O2 | 100 % | 6 |
 | `k-malware-analyse` | K | 2 | 7 | 1378 | 1234 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `k-retro-ingenierie-defensive` | K | 3 | 7 | 1905 | 1695 | 3 | 0 | 5 | 5 | 40 | U20 VF7 M6 C5 O2 | 100 % | 6 |
 | `k-malware-avance` | K | 4 | 6 | 1724 | 1500 | 3 | 0 | 5 | 5 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
@@ -97,7 +97,7 @@
 | `p-verification-avancee` | P | 3 | 5 | 1307 | 1160 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `p-fuzzing-recherche` | P | 4 | 7 | 1549 | 1413 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `p-materiel-zero-trust-confidentiel` | P | 4 | 7 | 1911 | 1671 | 3 | 0 | 5 | 5 | 40 | U20 M6 VF7 C5 O2 | 100 % | 6 |
-| `q-ia-initiation` | Q | 1 | 5 | 1129 | 994 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `q-ia-initiation` | Q | 1 | 7 | 1570 | 1378 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `q-ia-pratique` | Q | 2 | 5 | 1174 | 1048 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
 | `q-ia-defense-ml` | Q | 3 | 7 | 1669 | 1432 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `q-securite-llm` | Q | 3 | 6 | 1447 | 1249 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |

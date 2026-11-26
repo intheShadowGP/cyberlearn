@@ -114,6 +114,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'An impeccable message is no longer a sign of seriousness: you rely on context and procedure, not on form.' },
         ],
       },
+      {
+        id: 'verifier',
+        title: "A method to check an AI answer",
+        blocks: [
+          { t: 'p', text: "An AI assistant produces text that is **plausible**, not text that is **guaranteed accurate**. Faced with a technical answer (command, configuration, explanation of an alert), always apply the same routine before using it." },
+          { t: 'list', ordered: true, items: ["**Reread**: does the answer really address the question asked, with the right product and version?", "**Cross-check**: compare the important points with an official source (vendor documentation, ANSSI, NIST, OWASP).", "**Test safely**: run a command or script first in an isolated environment, never directly in production.", "**Understand**: if you cannot explain what a command does, do not run it.", "**Record**: note what was checked, by whom and when, before sharing the result."] },
+          {
+            t: 'table',
+            caption: "Reasonable uses and precautions",
+            head: ["Task", "Reasonable use", "Essential precaution"],
+            rows: [
+              ["Understand a concept", "Ask for an explanation or an example", "Cross-check definitions with an official source"],
+              ["Summarize a long report", "Get a first summary to review", "Do not upload a confidential document to an unapproved service"],
+              ["Write a command or script", "Get a draft", "Test it in an isolated environment and review it line by line"],
+              ["Interpret an alert", "Form hypotheses", "Never conclude without logs and evidence"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "An AI may cite references, command options or vulnerability numbers **that do not exist**. Check every reference in the original source before reusing it." },
+        ],
+      },
+      {
+        id: 'cadre-usage',
+        title: "Usage framework: rules to know in an organization",
+        blocks: [
+          { t: 'p', text: "Using AI at work is not only a technical matter: it is also about **data**, **accountability** and **internal rules**." },
+          {
+            t: 'table',
+            head: ["Topic", "Question to ask", "Reflex"],
+            rows: [
+              ["Data", "Is what I type personal, confidential or strategic?", "Enter no sensitive data into an unapproved tool; anonymize when possible"],
+              ["Tools", "Is the tool approved by my organization?", "Use validated services; avoid “hidden” use (shadow AI)"],
+              ["Accountability", "Who answers for a mistake caused by an AI answer?", "The person who uses the answer remains responsible: review and validate"],
+              ["Law", "Which rules apply?", "GDPR for personal data; the European AI regulation (Regulation (EU) 2024/1689, applying in phases) for AI systems"],
+              ["Traceability", "Could I explain where this result came from?", "Keep the request, the answer and the verification performed"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "When in doubt about a piece of data, the safest rule is simple: **if you would not post it on a public website, do not type it into an unapproved AI tool**." },
+        ],
+      },
     ],
     useCases: [
       'Use an authorized assistant to summarize a public text, then review the result.',
@@ -121,6 +160,8 @@ export const body: CourseBody = {
       'Remove personal data from a text before submitting it to a validated assistant.',
     ],
     commonMistakes: [
+      "Pasting a log excerpt, a contract or a customer list into a public assistant.",
+      "Running a command suggested by an AI without understanding or testing it.",
       'Copying an AI answer into a report without verifying it.',
       'Entering a password or a confidential document into a public tool.',
       'Believing that an error-free message is necessarily legitimate.',
@@ -135,6 +176,7 @@ export const body: CourseBody = {
       'Confirm any unusual request through a second channel.',
     ],
     keyPoints: [
+      "An AI answer is plausible, not guaranteed: reread, cross-check, test, record.",
       'An AI learns from examples and can be wrong with great confidence.',
       'AI assists analysts; the human decides.',
       'Secrets and confidential data have no place in a public tool.',

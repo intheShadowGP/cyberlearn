@@ -26,7 +26,7 @@ export const meta: CourseMeta = {
     { id: 'q-ini-donnees', label: 'Protection des données avec les outils d’IA', level: 1 },
     { id: 'q-ini-menaces', label: 'Menaces amplifiées par l’IA', level: 1 },
   ],
-  sectionCount: 5,
+  sectionCount: 7,
   questionCount: 40,
   quizSize: 10,
 };

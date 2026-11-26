@@ -27,7 +27,7 @@ export const meta: CourseMeta = {
     { id: 'j-ini-chrono', label: 'Horodatages et chronologie simple', level: 1 },
     { id: 'j-ini-cadre', label: 'Cadre légal, éthique et premiers réflexes', level: 1 },
   ],
-  sectionCount: 6,
+  sectionCount: 8,
   questionCount: 40,
   quizSize: 10,
 };

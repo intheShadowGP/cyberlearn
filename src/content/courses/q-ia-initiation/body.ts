@@ -114,6 +114,45 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'key', text: 'Un message impeccable n’est plus un gage de sérieux : on se fie au contexte et à la procédure, pas à la forme.' },
         ],
       },
+      {
+        id: 'verifier',
+        title: "Une méthode pour vérifier une réponse d’IA",
+        blocks: [
+          { t: 'p', text: "Un assistant d’IA produit un texte **plausible**, pas un texte **garanti exact**. Face à une réponse technique (commande, configuration, explication d’une alerte), appliquez toujours la même routine avant de l’utiliser." },
+          { t: 'list', ordered: true, items: ["**Relire** : la réponse répond-elle bien à la question posée, avec le bon produit et la bonne version ?", "**Recouper** : confronter les points importants à une source officielle (documentation de l’éditeur, ANSSI, NIST, OWASP).", "**Tester sans risque** : exécuter une commande ou un script d’abord dans un environnement isolé, jamais directement en production.", "**Comprendre** : si vous ne savez pas expliquer ce que fait une commande, ne la lancez pas.", "**Consigner** : noter ce qui a été vérifié, par qui et quand, avant de diffuser le résultat."] },
+          {
+            t: 'table',
+            caption: "Usages raisonnables et précautions",
+            head: ["Tâche", "Usage raisonnable", "Précaution indispensable"],
+            rows: [
+              ["Comprendre un concept", "Demander une explication ou un exemple", "Recouper les définitions avec une source officielle"],
+              ["Résumer un long rapport", "Obtenir un premier résumé à relire", "Ne pas déposer de document confidentiel dans un service non approuvé"],
+              ["Écrire une commande ou un script", "Obtenir un brouillon", "Le tester en environnement isolé et le relire ligne par ligne"],
+              ["Interpréter une alerte", "Formuler des hypothèses", "Ne jamais conclure sans les journaux et les preuves"],
+            ],
+          },
+          { t: 'callout', kind: 'warn', text: "Une IA peut citer des références, des options de commande ou des numéros de vulnérabilité **qui n’existent pas**. Vérifiez chaque référence dans la source d’origine avant de la reprendre." },
+        ],
+      },
+      {
+        id: 'cadre-usage',
+        title: "Cadre d’usage : règles à connaître dans une organisation",
+        blocks: [
+          { t: 'p', text: "Utiliser l’IA au travail n’est pas qu’une question de technique : c’est aussi une question de **données**, de **responsabilité** et de **règles internes**." },
+          {
+            t: 'table',
+            head: ["Sujet", "Question à se poser", "Réflexe"],
+            rows: [
+              ["Données", "Ce que je saisis est-il personnel, confidentiel ou stratégique ?", "Ne saisir aucune donnée sensible dans un outil non approuvé ; anonymiser quand c’est possible"],
+              ["Outils", "L’outil est-il approuvé par mon organisation ?", "Utiliser les services validés ; éviter les usages « cachés » (shadow AI)"],
+              ["Responsabilité", "Qui répond d’une erreur commise à cause d’une réponse d’IA ?", "La personne qui utilise la réponse en reste responsable : relire et valider"],
+              ["Droit", "Quelles règles s’appliquent ?", "Le RGPD pour les données personnelles ; le règlement européen sur l’IA (règlement (UE) 2024/1689, en application progressive) pour les systèmes d’IA"],
+              ["Traçabilité", "Pourrai-je expliquer d’où vient ce résultat ?", "Conserver la demande, la réponse et la vérification effectuée"],
+            ],
+          },
+          { t: 'callout', kind: 'tip', text: "En cas de doute sur une donnée, la règle la plus sûre est simple : **si vous ne la publieriez pas sur un site public, ne la saisissez pas dans un outil d’IA non approuvé**." },
+        ],
+      },
     ],
     useCases: [
       'Utiliser un assistant autorisé pour résumer un texte public, puis relire le résultat.',
@@ -121,6 +160,8 @@ export const body: CourseBody = {
       'Retirer les données personnelles d’un texte avant de le soumettre à un assistant validé.',
     ],
     commonMistakes: [
+      "Coller dans un assistant public un extrait de journal, un contrat ou une liste de clients.",
+      "Exécuter une commande proposée par une IA sans la comprendre ni la tester.",
       'Copier une réponse d’IA dans un rapport sans la vérifier.',
       'Saisir un mot de passe ou un document confidentiel dans un outil public.',
       'Croire qu’un message sans faute est forcément légitime.',
@@ -135,6 +176,7 @@ export const body: CourseBody = {
       'Confirmer toute demande inhabituelle par un second canal.',
     ],
     keyPoints: [
+      "Une réponse d’IA est plausible, pas garantie : relire, recouper, tester, consigner.",
       'Une IA apprend à partir d’exemples et peut se tromper avec aplomb.',
       'L’IA assiste les analystes ; l’humain décide.',
       'Les secrets et données confidentielles n’ont pas leur place dans un outil public.',

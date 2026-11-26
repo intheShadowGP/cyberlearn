@@ -100,6 +100,48 @@ export const body: CourseBody = {
         ],
       },
       {
+        id: 'demarche',
+        title: "Method: from alert to report",
+        blocks: [
+          { t: 'p', text: "An investigation is not about “poking around” a machine: it follows a stable sequence found in reference guides (for example NIST SP 800-86: collection, examination, analysis, reporting). Each step has a purpose, and skipping one weakens the conclusions." },
+          { t: 'list', ordered: true, items: ["**Scope**: which precise question must be answered, over which perimeter, and with what written authorization?", "**Preserve**: isolate the equipment from the network if needed, note the time and observed state, change nothing without recording it.", "**Collect**: gather data from the most volatile to the least volatile, by copying it.", "**Examine**: extract the useful items (files, logs, histories) from a **copy**.", "**Analyze**: link the facts together, form hypotheses, build the timeline.", "**Report**: produce a factual report that a third party could verify and reproduce."] },
+          {
+            t: 'table',
+            caption: "Order of volatility (RFC 3227 principle): collect first what disappears fastest",
+            head: ["Priority", "Source", "Why it is urgent"],
+            rows: [
+              ["1", "CPU registers, caches, RAM", "Lost at power-off"],
+              ["2", "Network state, running processes, connections", "Changes every second"],
+              ["3", "Temporary files and file systems", "Cleared at reboot"],
+              ["4", "Hard drive or SSD", "Persistent, but can be overwritten by use"],
+              ["5", "Remote logs, monitoring, backups", "Kept, but subject to rotation"],
+              ["6", "Archive media, architecture documentation", "Stable"],
+            ],
+          },
+          { t: 'callout', kind: 'key', text: "Keep a **logbook**: who did what, at what time, with which tool and on which medium. That logbook is what lets you defend the value of the conclusions and redo the analysis identically." },
+        ],
+      },
+      {
+        id: 'situation',
+        title: "Scenario: an accounting workstation behaves strangely",
+        blocks: [
+          { t: 'p', text: "An accountant reports that her workstation is slow and that a billing file has been renamed. You are called in before any support intervention. The decisions of the first minutes determine what can still be proven." },
+          {
+            t: 'table',
+            head: ["Situation", "Good practice", "Common mistake"],
+            rows: [
+              ["The machine is on", "**Disconnect it from the network** (cable, Wi-Fi) while leaving it powered, then note the time and the screen shown", "Switching it off at once: RAM and live connections are lost"],
+              ["A file seems modified", "**Copy** it without opening it and compute its hash", "Opening it “to see”: opening changes access dates"],
+              ["The disk must be analyzed", "Work on a **copy** verified by hash", "Analyzing the original disk directly"],
+              ["A colleague offers to “clean up”", "Refuse until collection is finished", "Running an antivirus or deleting files before collecting"],
+            ],
+          },
+          { t: 'code', lang: "bash", caption: "Computing and checking the SHA-256 hash of a copy", code: "# Linux: compute then verify\nsha256sum disk_copy.img > disk_copy.img.sha256\nsha256sum -c disk_copy.img.sha256\n\n# Windows (PowerShell)\nGet-FileHash .\\disk_copy.img -Algorithm SHA256" },
+          { t: 'p', text: "If the copy’s hash is identical to the one recorded at collection time, the copy has not changed: you can show that the analysis relies on the same data. The “OK” result of `sha256sum -c` is the simplest proof." },
+          { t: 'callout', kind: 'warn', text: "Never work on the original, and never “repair” before collecting. Good intentions (cleaning, rebooting) often destroy the evidence." },
+        ],
+      },
+      {
         id: 'cadre',
         title: 'Legal framework, ethics and first reflexes',
         blocks: [
@@ -125,6 +167,8 @@ export const body: CourseBody = {
       'Know what to do (and not do) when discovering a suspicious workstation.',
     ],
     commonMistakes: [
+      "Switching off or “repairing” a machine before noting its state and collecting volatile data.",
+      "Mixing observed facts and hypotheses in a report without telling them apart.",
       'Working directly on the original disk.',
       'Powering off a running machine without thinking about RAM.',
       'Mixing times from different time zones without converting them.',
@@ -139,6 +183,7 @@ export const body: CourseBody = {
       'Stay within the authorized and proportionate framework.',
     ],
     keyPoints: [
+      "Collect from most to least volatile, on a copy, with hash and logbook.",
       'Forensics establishes facts from traces, with a defensible method.',
       'We collect from the most volatile (memory) to the most durable (archives).',
       'A hash and a chain of custody prove integrity.',
