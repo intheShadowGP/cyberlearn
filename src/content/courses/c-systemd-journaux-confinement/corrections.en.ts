@@ -370,6 +370,36 @@ export const corrections: CourseCorrections = {
         "c": "`reload` applies the service’s file: it is not a mere check.",
         "d": "`list tables` shows the loaded tables; it does not read the file."
       }
+    },
+    "lsys-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "This option blocks privilege escalation through `execve` (setuid binaries, file capabilities): a compromised service cannot use them to gain rights.",
+      "whyWrong": {
+        "b": "It has no effect on startup speed.",
+        "c": "It does not concern writing to logs.",
+        "d": "It does the opposite: it limits privileges."
+      }
+    },
+    "lsys-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Without persistent storage or with a low size cap, journald loses older entries. Hence the value of persistent storage and a copy to a log server.",
+      "whyWrong": {
+        "b": "Missing traces do not prove that nothing happened.",
+        "c": "journalctl can show much older entries if the data exists.",
+        "a": "Nothing suggests a copy; it is not the default behavior."
+      }
+    },
+    "lsys-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "A recently created unit that launches a program from a writable temporary directory is a classic persistence pattern: you compare dates and trace its origin.",
+      "whyWrong": {
+        "b": "An old, expected service is not an indicator by itself.",
+        "a": "Log rotation is part of the distribution.",
+        "d": "An official package is not abnormal."
+      }
     }
   },
 };

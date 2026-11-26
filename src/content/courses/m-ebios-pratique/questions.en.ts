@@ -837,5 +837,86 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "acronym"
+  },
+  {
+    "id": "ebp-q41",
+    "prompt": "What does workshop 1 of an EBIOS RM analysis set?",
+    "skills": [
+      "m-ebp-cadrage"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The list of technical vulnerabilities of the systems"
+      },
+      {
+        "id": "b",
+        "text": "The organization’s incident response plan"
+      },
+      {
+        "id": "c",
+        "text": "The scope, the feared events and the security baseline"
+      },
+      {
+        "id": "d",
+        "text": "The final security measures to deploy"
+      }
+    ]
+  },
+  {
+    "id": "ebp-q42",
+    "prompt": "Why map the ecosystem (providers, partners) in workshop 3?",
+    "skills": [
+      "m-ebp-strategique"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because providers are always responsible for incidents"
+      },
+      {
+        "id": "b",
+        "text": "Because the ecosystem replaces the analysis of risk sources"
+      },
+      {
+        "id": "c",
+        "text": "Because this step is optional and can be skipped without consequence"
+      },
+      {
+        "id": "d",
+        "text": "Because an attacker may reach the target through a less protected stakeholder"
+      }
+    ]
+  },
+  {
+    "id": "ebp-q43",
+    "prompt": "After treatment, what does residual risk represent?",
+    "skills": [
+      "m-ebp-traitement"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The sum of the costs of the selected security measures"
+      },
+      {
+        "id": "b",
+        "text": "The risk that remains after the measures, to be formally accepted by a decision"
+      },
+      {
+        "id": "c",
+        "text": "A risk permanently removed by the adopted measures"
+      },
+      {
+        "id": "d",
+        "text": "The risk of only the systems that are not connected"
+      }
+    ]
   }
 ];

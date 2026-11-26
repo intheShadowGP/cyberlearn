@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'm-ebp-pilotage', label: 'Pilotage d’une analyse EBIOS RM', level: 3 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'q-llm-gouvernance', label: 'Tests adverses, journalisation et gouvernance de l’IA', level: 3 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

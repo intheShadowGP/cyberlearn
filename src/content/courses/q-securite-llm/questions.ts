@@ -841,5 +841,86 @@ export const questions: Question[] = [
         "text": "Afficher l’URL complète avant ouverture"
       }
     ]
+  },
+  {
+    "id": "ia-q41",
+    "prompt": "Pourquoi ne faut-il jamais exécuter directement la sortie d’un modèle comme une commande ?",
+    "skills": [
+      "q-agents"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parce que les commandes ne peuvent pas être écrites en texte"
+      },
+      {
+        "id": "b",
+        "text": "Parce que les modèles produisent toujours des commandes erronées"
+      },
+      {
+        "id": "c",
+        "text": "Elle peut être influencée par une injection ; on valide plutôt une action parmi une liste blanche"
+      },
+      {
+        "id": "d",
+        "text": "Parce que cela consomme trop de mémoire sur le serveur"
+      }
+    ]
+  },
+  {
+    "id": "ia-q42",
+    "prompt": "Dans un RAG, comment éviter qu’un utilisateur lise un document auquel il n’a pas droit ?",
+    "skills": [
+      "q-llm-donnees"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Filtrer les documents récupérés selon les droits de l’utilisateur, avant de les donner au modèle"
+      },
+      {
+        "id": "b",
+        "text": "Demander au modèle de ne pas répéter les documents confidentiels"
+      },
+      {
+        "id": "c",
+        "text": "Masquer uniquement la liste des sources dans la réponse affichée"
+      },
+      {
+        "id": "d",
+        "text": "Indexer tous les documents dans une seule base partagée"
+      }
+    ]
+  },
+  {
+    "id": "ia-q43",
+    "prompt": "Pourquoi journaliser les échanges d’un assistant interne ?",
+    "skills": [
+      "q-llm-gouvernance"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour publier les conversations à tous les employés"
+      },
+      {
+        "id": "b",
+        "text": "Pour détecter les abus et reconstituer un incident, en protégeant ces journaux et leurs données"
+      },
+      {
+        "id": "c",
+        "text": "Pour éviter de définir une politique d’usage de l’assistant"
+      },
+      {
+        "id": "d",
+        "text": "Pour entraîner le modèle sans demander l’avis des utilisateurs"
+      }
+    ]
   }
 ];

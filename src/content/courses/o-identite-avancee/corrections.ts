@@ -376,6 +376,36 @@ export const corrections: CourseCorrections = {
         "recovery time objective"
       ],
       "explanation": "Le RTO fixe l’objectif de reprise : il dimensionne les sauvegardes, la redondance et les procédures d’urgence."
+    },
+    "oia-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "L’accès conditionnel évalue le contexte (appareil, lieu, risque de la session, sensibilité de la ressource) et adapte l’exigence : autoriser, renforcer le facteur ou refuser.",
+      "whyWrong": {
+        "d": "La longueur d’un nom de compte n’est pas un signal de risque.",
+        "c": "Le thème n’a aucun rapport avec le risque.",
+        "b": "La force du mot de passe ne décrit pas le contexte de la connexion."
+      }
+    },
+    "oia-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Un jeton émis dynamiquement et de courte durée expire vite ; un secret statique reste valable jusqu’à rotation et fuit facilement via le dépôt de code.",
+      "whyWrong": {
+        "c": "Les droits restent à contrôler au moindre privilège.",
+        "a": "La lisibilité n’est pas la raison.",
+        "d": "Partager un compte est une mauvaise pratique."
+      }
+    },
+    "oia-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Le compte d’urgence doit rester utilisable si le fournisseur d’identité ou la MFA tombe, mais sa moindre utilisation doit alerter et être revue.",
+      "whyWrong": {
+        "c": "Un usage quotidien l’expose et brouille la détection.",
+        "b": "Un secret partagé empêche toute imputabilité.",
+        "a": "Sa surveillance est au contraire indispensable."
+      }
     }
   },
 };

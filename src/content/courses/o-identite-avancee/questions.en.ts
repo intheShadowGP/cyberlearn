@@ -836,5 +836,86 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "three letters"
+  },
+  {
+    "id": "oia-q41",
+    "prompt": "In a conditional access policy, which signal may require stronger authentication?",
+    "skills": [
+      "o-adv-zt"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A sign-in from an unmanaged device or an unusual location"
+      },
+      {
+        "id": "b",
+        "text": "The number of letters in the password typed"
+      },
+      {
+        "id": "c",
+        "text": "The color of the theme chosen in the application"
+      },
+      {
+        "id": "d",
+        "text": "The fact that the user has a long account name"
+      }
+    ]
+  },
+  {
+    "id": "oia-q42",
+    "prompt": "Why prefer a workload identity over a static secret in code?",
+    "skills": [
+      "o-adv-machines"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "It makes the code more readable for developers"
+      },
+      {
+        "id": "b",
+        "text": "It issues short-lived credentials, which limits the value of a leak"
+      },
+      {
+        "id": "c",
+        "text": "It removes any need to control permissions"
+      },
+      {
+        "id": "d",
+        "text": "It lets all applications share a single account"
+      }
+    ]
+  },
+  {
+    "id": "oia-q43",
+    "prompt": "Which rule applies to an emergency (“break-glass”) account?",
+    "skills": [
+      "o-adv-resilience"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "It is never monitored in order to avoid false alerts"
+      },
+      {
+        "id": "b",
+        "text": "Its password is freely shared among all administrators"
+      },
+      {
+        "id": "c",
+        "text": "It is used daily for routine administration tasks"
+      },
+      {
+        "id": "d",
+        "text": "It is excluded from blocking policies, heavily protected, and every use triggers an alert"
+      }
+    ]
   }
 ];

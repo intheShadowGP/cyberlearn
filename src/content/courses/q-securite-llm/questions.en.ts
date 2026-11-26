@@ -841,5 +841,86 @@ export const questions: Question[] = [
         "text": "Displaying the full URL before opening"
       }
     ]
+  },
+  {
+    "id": "ia-q41",
+    "prompt": "Why should a model’s output never be executed directly as a command?",
+    "skills": [
+      "q-agents"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Because commands cannot be written as text"
+      },
+      {
+        "id": "b",
+        "text": "Because models always produce wrong commands"
+      },
+      {
+        "id": "c",
+        "text": "It can be influenced by an injection; you validate an action from an allow list instead"
+      },
+      {
+        "id": "d",
+        "text": "Because it uses too much memory on the server"
+      }
+    ]
+  },
+  {
+    "id": "ia-q42",
+    "prompt": "In a RAG system, how do you prevent a user from reading a document they have no right to?",
+    "skills": [
+      "q-llm-donnees"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Filter the retrieved documents by the user’s permissions before giving them to the model"
+      },
+      {
+        "id": "b",
+        "text": "Ask the model not to repeat confidential documents"
+      },
+      {
+        "id": "c",
+        "text": "Hide only the list of sources in the displayed answer"
+      },
+      {
+        "id": "d",
+        "text": "Index all documents in a single shared database"
+      }
+    ]
+  },
+  {
+    "id": "ia-q43",
+    "prompt": "Why log the exchanges of an internal assistant?",
+    "skills": [
+      "q-llm-gouvernance"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To publish the conversations to all employees"
+      },
+      {
+        "id": "b",
+        "text": "To detect abuse and reconstruct an incident, while protecting those logs and their data"
+      },
+      {
+        "id": "c",
+        "text": "To avoid defining a usage policy for the assistant"
+      },
+      {
+        "id": "d",
+        "text": "To train the model without asking the users’ opinion"
+      }
+    ]
   }
 ];

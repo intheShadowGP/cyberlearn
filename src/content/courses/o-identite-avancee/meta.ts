@@ -28,6 +28,6 @@ export const meta: CourseMeta = {
     { id: 'o-adv-resilience', label: 'Résilience de l’identité et accès d’urgence', level: 4 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 12,
 };

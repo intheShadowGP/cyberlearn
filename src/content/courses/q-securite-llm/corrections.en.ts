@@ -373,6 +373,36 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "It makes exfiltration possible."
       }
+    },
+    "ia-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "The output depends on the input, hence on possible hostile content. You have the model choose a planned action, validated server-side with controlled parameters.",
+      "whyWrong": {
+        "b": "They are not always wrong: the risk is their manipulation.",
+        "a": "A command is text; its execution is the problem.",
+        "d": "It is not a memory issue."
+      }
+    },
+    "ia-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Access control must apply at retrieval: what the model does not receive cannot leak. An instruction to the model is not a guarantee.",
+      "whyWrong": {
+        "b": "An instruction can be bypassed by injection.",
+        "d": "A shared database without filtering exposes everything.",
+        "c": "Hiding the sources does not stop the content leaking."
+      }
+    },
+    "ia-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Logs enable detection and investigation, but contain sensitive data: restricted access, limited retention and informing users.",
+      "whyWrong": {
+        "d": "Reusing exchanges requires a clear basis and notice.",
+        "c": "Logging complements the usage policy; it does not replace it.",
+        "a": "Logs are confidential."
+      }
     }
   },
 };

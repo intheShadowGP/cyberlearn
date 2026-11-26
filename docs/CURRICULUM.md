@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
-| Questions de cours (avec correction) | 3493 |
+| Questions de cours (avec correction) | 3508 |
 | Laboratoires | 39 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
@@ -58,7 +58,7 @@
 | Défense réseau avancée : déni de service, plan de contrôle, visibilité et résilience (`b-defense-reseau-avancee`) | B | 4 · Expert | 150 min | 6 | 40 | 3 | 5 |
 | Linux au quotidien : architecture, shell Bash, paquets et automatisation (`c-shell-paquets-automatisation`) | C | 1 · Débutant | 110 min | 6 | 40 | 3 | 5 |
 | Linux : utilisateurs, permissions et durcissement d’un serveur (`c-linux-permissions`) | C | 2 · Intermédiaire | 95 min | 8 | 44 | 3 | 4 |
-| Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 8 | 40 | 3 | 5 |
+| Linux : services, journaux, audit et confinement (`c-systemd-journaux-confinement`) | C | 3 · Avancé | 110 min | 8 | 43 | 3 | 5 |
 | Linux avancé : durcissement du noyau, intégrité, chaîne d’approvisionnement et investigation (`c-linux-securite-avancee`) | C | 4 · Expert | 150 min | 6 | 40 | 3 | 7 |
 | Windows : bien comprendre son poste, ses comptes et ses protections (`d-windows-fondamentaux`) | D | 1 · Débutant | 100 min | 6 | 40 | 3 | 5 |
 | Windows : durcissement du poste de travail et journalisation (`d-windows-poste-durcissement`) | D | 2 · Intermédiaire | 120 min | 6 | 40 | 3 | 7 |
@@ -102,9 +102,9 @@
 | Sécurité multi-cloud : Azure, Google Cloud, réseau, serverless et hybride (`l-multicloud-serverless-hybride`) | L | 3 · Avancé | 125 min | 7 | 40 | 3 | 5 |
 | Architecture cloud sécurisée : zones d’atterrissage, politiques en code, identités et détection (`l-cloud-avance`) | L | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | La gouvernance de la sécurité pour débutants : risques, règles et bons réflexes (`m-gouvernance-initiation`) | M | 1 · Débutant | 90 min | 8 | 43 | 3 | 3 |
-| Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 125 min | 8 | 40 | 3 | 4 |
+| Gouvernance : risques, ISO 27001, EBIOS RM et réglementations (`m-risques-conformite`) | M | 2 · Intermédiaire | 125 min | 8 | 43 | 3 | 4 |
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 125 min | 7 | 40 | 3 | 5 |
-| EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 8 | 40 | 3 | 4 |
+| EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 8 | 43 | 3 | 4 |
 | Gouvernance avancée : quantification des risques, conformité multi-textes, tiers critiques et pilotage par la preuve (`m-gouvernance-avancee`) | M | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
 | Systèmes industriels et objets connectés pour débutants : comprendre et protéger (`n-ot-iot-initiation`) | N | 1 · Débutant | 90 min | 8 | 44 | 3 | 3 |
 | Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 7 | 44 | 3 | 4 |
@@ -115,7 +115,7 @@
 | Gérer les accès au quotidien : annuaire, authentification, SSO et autorisations (`o-acces-pratique`) | O | 2 · Intermédiaire | 120 min | 8 | 43 | 3 | 3 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 125 min | 7 | 40 | 3 | 4 |
 | Identité : MFA, passkeys, OAuth 2.0, OpenID Connect et Zero Trust (`o-identite-mfa-oauth`) | O | 3 · Avancé | 135 min | 8 | 43 | 3 | 4 |
-| Architecture d’identité avancée : Zero Trust, identités de machines et résilience (`o-identite-avancee`) | O | 4 · Expert | 150 min | 8 | 40 | 3 | 3 |
+| Architecture d’identité avancée : Zero Trust, identités de machines et résilience (`o-identite-avancee`) | O | 4 · Expert | 150 min | 8 | 43 | 3 | 3 |
 | Initiation à la recherche en sécurité : méthode, éthique et premiers concepts (`p-recherche-initiation`) | P | 1 · Débutant | 90 min | 5 | 40 | 3 | 3 |
 | Analyser et corriger des vulnérabilités : classes de défauts, outils et rapport (`p-analyse-pratique`) | P | 2 · Intermédiaire | 120 min | 5 | 40 | 3 | 3 |
 | Analyse avancée : exécution symbolique, vérification de protocoles et micrologiciels (`p-verification-avancee`) | P | 3 · Avancé | 130 min | 5 | 40 | 3 | 3 |
@@ -124,7 +124,7 @@
 | L’intelligence artificielle et la cybersécurité pour débutants (`q-ia-initiation`) | Q | 1 · Débutant | 90 min | 7 | 44 | 3 | 3 |
 | Utiliser l’IA en sécurité de façon sûre : demandes, assistants, évaluation et politique d’usage (`q-ia-pratique`) | Q | 2 · Intermédiaire | 120 min | 7 | 43 | 3 | 3 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 135 min | 7 | 40 | 3 | 4 |
-| Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 8 | 40 | 3 | 4 |
+| Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 8 | 43 | 3 | 4 |
 | Sécurité avancée des systèmes d’IA : chaîne d’approvisionnement, agents, robustesse et risque (`q-securite-ia-avancee`) | Q | 4 · Expert | 150 min | 5 | 40 | 3 | 4 |
 | Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 60 min | 4 | 46 | 2 | 4 |
 | Préparer les certifications fondamentales et défensives : plan d’examen, méthode et intégrité (`r-preparation-fondamentaux`) | R | 2 · Intermédiaire | 100 min | 5 | 40 | 3 | 3 |

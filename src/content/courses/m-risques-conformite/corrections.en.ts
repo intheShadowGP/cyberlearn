@@ -375,6 +375,36 @@ export const corrections: CourseCorrections = {
         "recovery point objective"
       ],
       "explanation": "The RPO (Recovery Point Objective) sets the maximum age of restored data, hence the minimum backup frequency."
+    },
+    "gov-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "It states, control by control, whether it applies, its implementation status and the reason for any exclusion: it follows from the risk analysis.",
+      "whyWrong": {
+        "c": "It follows from the risk analysis; it does not replace it.",
+        "a": "It is not an audit communication document.",
+        "d": "Roles are defined in the policy and organization."
+      }
+    },
+    "gov-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "RTO (Recovery Time Objective): target recovery time. RPO (Recovery Point Objective): maximum age of restored data, which drives backup frequency.",
+      "whyWrong": {
+        "c": "It is the other way around.",
+        "a": "Neither is a cost.",
+        "b": "They do not count backups."
+      }
+    },
+    "gov-q43": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "A requirement without evidence (policy, configuration, log, minutes) cannot be demonstrated. The matrix makes gaps visible and prepares the audit.",
+      "whyWrong": {
+        "d": "The matrix serves to apply and to prove.",
+        "b": "Documents do not replace controls.",
+        "c": "Periodic review is still needed."
+      }
     }
   },
 };

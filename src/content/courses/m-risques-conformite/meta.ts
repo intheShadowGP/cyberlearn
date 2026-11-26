@@ -29,6 +29,6 @@ export const meta: CourseMeta = {
     { id: 'm-continuite', label: 'Continuité d’activité et gestion de crise', level: 2 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

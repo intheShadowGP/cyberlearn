@@ -792,5 +792,86 @@ export const questions: Question[] = [
         "text": "`nft list tables`"
       }
     ]
+  },
+  {
+    "id": "lsys-q41",
+    "prompt": "Pourquoi ajouter `NoNewPrivileges=true` à une unité systemd ?",
+    "skills": [
+      "c-sys-services"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour empêcher le service et ses enfants d’obtenir plus de privilèges, par exemple via un binaire setuid"
+      },
+      {
+        "id": "b",
+        "text": "Pour accélérer le démarrage du service au lancement du système"
+      },
+      {
+        "id": "c",
+        "text": "Pour interdire au service toute écriture dans les journaux système"
+      },
+      {
+        "id": "d",
+        "text": "Pour que le service s’exécute avec les droits du compte root"
+      }
+    ]
+  },
+  {
+    "id": "lsys-q42",
+    "prompt": "Une enquête porte sur des connexions de la semaine passée, mais `journalctl` ne remonte qu’à hier. Quelle est la cause la plus probable ?",
+    "skills": [
+      "c-sys-logs"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Les journaux sont automatiquement envoyés à un autre ordinateur"
+      },
+      {
+        "id": "b",
+        "text": "Les connexions de la semaine passée n’ont jamais eu lieu"
+      },
+      {
+        "id": "c",
+        "text": "journalctl n’affiche que les dernières vingt-quatre heures par conception"
+      },
+      {
+        "id": "d",
+        "text": "Le journal est volatil (en mémoire) ou limité en taille, donc les anciennes entrées ont disparu"
+      }
+    ]
+  },
+  {
+    "id": "lsys-q43",
+    "prompt": "Sur un serveur compromis, quelle découverte indique une persistance probable ?",
+    "skills": [
+      "c-sys-persistance"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Une tâche de rotation des journaux fournie avec la distribution"
+      },
+      {
+        "id": "b",
+        "text": "Un service ssh actif depuis plusieurs mois sur le port habituel"
+      },
+      {
+        "id": "c",
+        "text": "Une unité systemd récente dans `/etc/systemd/system` dont la commande pointe vers `/tmp`"
+      },
+      {
+        "id": "d",
+        "text": "Un paquet installé depuis le dépôt officiel de la distribution"
+      }
+    ]
   }
 ];

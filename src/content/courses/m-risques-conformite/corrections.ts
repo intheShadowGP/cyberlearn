@@ -382,6 +382,36 @@ export const corrections: CourseCorrections = {
         "recovery point objective"
       ],
       "explanation": "Le RPO (Recovery Point Objective) fixe l’ancienneté maximale des données restaurées, donc la fréquence minimale de sauvegarde."
+    },
+    "gov-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Elle indique, mesure par mesure, si elle s’applique, son état de mise en œuvre et la raison d’une exclusion : elle découle de l’analyse de risques.",
+      "whyWrong": {
+        "c": "Elle découle de l’analyse de risques, elle ne la remplace pas.",
+        "a": "Ce n’est pas un document de communication d’audit.",
+        "d": "Les rôles se définissent dans la politique et l’organisation."
+      }
+    },
+    "gov-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "RTO (Recovery Time Objective) : délai de reprise visé. RPO (Recovery Point Objective) : ancienneté maximale des données restaurées, qui dicte la fréquence des sauvegardes.",
+      "whyWrong": {
+        "c": "C’est l’inverse.",
+        "a": "Aucun des deux n’est un coût.",
+        "b": "Ils ne comptent pas des sauvegardes."
+      }
+    },
+    "gov-q43": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Une exigence sans preuve (politique, configuration, journal, compte rendu) ne se démontre pas. La matrice rend les écarts visibles et prépare l’audit.",
+      "whyWrong": {
+        "d": "La matrice sert à appliquer et à prouver.",
+        "b": "Les documents ne remplacent pas les contrôles.",
+        "c": "La revue périodique reste nécessaire."
+      }
     }
   },
 };

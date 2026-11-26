@@ -27,6 +27,6 @@ export const meta: CourseMeta = {
     { id: 'c-sys-persistance', label: 'Recherche de persistance et chronologie', level: 3 },
   ],
   sectionCount: 8,
-  questionCount: 40,
+  questionCount: 43,
   quizSize: 10,
 };

@@ -374,6 +374,36 @@ export const corrections: CourseCorrections = {
         "the anssi"
       ],
       "explanation": "EBIOS Risk Manager is published by ANSSI, with the support of the EBIOS Club."
+    },
+    "ebp-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Workshop 1 frames the study: business values, supporting assets, feared events with their severity, and gaps against the security baseline.",
+      "whyWrong": {
+        "d": "Measures are defined in workshop 5.",
+        "b": "Incident response is not the subject of workshop 1.",
+        "a": "Technical vulnerabilities belong rather to workshop 4."
+      }
+    },
+    "ebp-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Attack paths often go through a provider or partner. You assess each stakeholder’s threat level to build realistic strategic scenarios.",
+      "whyWrong": {
+        "a": "Legal responsibility is not the criterion.",
+        "b": "It complements risk sources; it does not replace them.",
+        "c": "The ecosystem is part of the method."
+      }
+    },
+    "ebp-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "No measure cancels risk: what remains must be described, monitored, then accepted by management with an owner and a review date.",
+      "whyWrong": {
+        "c": "A risk is generally not removed at 100%.",
+        "a": "It is not a cost notion.",
+        "d": "It is not tied to connectivity."
+      }
     }
   },
 };

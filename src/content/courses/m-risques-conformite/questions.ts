@@ -842,5 +842,86 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "sigle"
+  },
+  {
+    "id": "gov-q41",
+    "prompt": "À quoi sert la déclaration d’applicabilité d’un SMSI ISO 27001 ?",
+    "skills": [
+      "m-smsi"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "À publier les résultats de l’audit pour les clients de l’organisation"
+      },
+      {
+        "id": "b",
+        "text": "À lister les mesures de l’annexe A retenues ou écartées, avec leur justification"
+      },
+      {
+        "id": "c",
+        "text": "À remplacer l’analyse de risques par un simple tableau de contrôles"
+      },
+      {
+        "id": "d",
+        "text": "À désigner le responsable de la sécurité de l’information"
+      }
+    ]
+  },
+  {
+    "id": "gov-q42",
+    "prompt": "Quelle différence entre RTO et RPO ?",
+    "skills": [
+      "m-continuite"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Les deux désignent le coût maximal d’un incident"
+      },
+      {
+        "id": "b",
+        "text": "Les deux désignent le nombre de sauvegardes à conserver"
+      },
+      {
+        "id": "c",
+        "text": "Le RTO mesure la perte de données, le RPO la durée de reprise"
+      },
+      {
+        "id": "d",
+        "text": "Le RTO est la durée maximale d’interruption acceptable, le RPO la perte de données maximale acceptable"
+      }
+    ]
+  },
+  {
+    "id": "gov-q43",
+    "prompt": "Pourquoi tenir une matrice qui relie chaque exigence à une preuve ?",
+    "skills": [
+      "m-regl"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour pouvoir démontrer la conformité lors d’un audit, au-delà d’une simple affirmation"
+      },
+      {
+        "id": "b",
+        "text": "Pour remplacer les contrôles techniques par des documents"
+      },
+      {
+        "id": "c",
+        "text": "Pour supprimer le besoin d’une revue périodique"
+      },
+      {
+        "id": "d",
+        "text": "Pour éviter de devoir un jour appliquer les mesures décrites"
+      }
+    ]
   }
 ];

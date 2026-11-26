@@ -836,5 +836,86 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "trois lettres"
+  },
+  {
+    "id": "oia-q41",
+    "prompt": "Dans une politique d’accès conditionnel, quel signal peut demander une authentification renforcée ?",
+    "skills": [
+      "o-adv-zt"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Une connexion depuis un appareil non géré ou un lieu inhabituel"
+      },
+      {
+        "id": "b",
+        "text": "Le nombre de lettres du mot de passe saisi"
+      },
+      {
+        "id": "c",
+        "text": "La couleur du thème choisi dans l’application"
+      },
+      {
+        "id": "d",
+        "text": "Le fait que l’utilisateur ait un long nom de compte"
+      }
+    ]
+  },
+  {
+    "id": "oia-q42",
+    "prompt": "Pourquoi préférer une identité de charge de travail à un secret statique dans le code ?",
+    "skills": [
+      "o-adv-machines"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Elle rend le code plus lisible pour les développeurs"
+      },
+      {
+        "id": "b",
+        "text": "Elle délivre des justificatifs de courte durée, ce qui limite l’intérêt d’une fuite"
+      },
+      {
+        "id": "c",
+        "text": "Elle supprime toute nécessité de contrôler les droits"
+      },
+      {
+        "id": "d",
+        "text": "Elle permet de partager un même compte entre toutes les applications"
+      }
+    ]
+  },
+  {
+    "id": "oia-q43",
+    "prompt": "Quelle règle s’applique à un compte d’urgence (« break-glass ») ?",
+    "skills": [
+      "o-adv-resilience"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Il n’est jamais surveillé afin d’éviter les fausses alertes"
+      },
+      {
+        "id": "b",
+        "text": "Son mot de passe est partagé librement entre tous les administrateurs"
+      },
+      {
+        "id": "c",
+        "text": "Il est utilisé au quotidien pour les tâches d’administration courantes"
+      },
+      {
+        "id": "d",
+        "text": "Il est exclu des politiques bloquantes, très protégé, et chaque utilisation déclenche une alerte"
+      }
+    ]
   }
 ];

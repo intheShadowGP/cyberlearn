@@ -842,5 +842,86 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "acronym"
+  },
+  {
+    "id": "gov-q41",
+    "prompt": "What is the statement of applicability of an ISO 27001 ISMS for?",
+    "skills": [
+      "m-smsi"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Publishing the audit results for the organization’s customers"
+      },
+      {
+        "id": "b",
+        "text": "Listing the Annex A controls selected or excluded, with their justification"
+      },
+      {
+        "id": "c",
+        "text": "Replacing the risk analysis with a simple table of controls"
+      },
+      {
+        "id": "d",
+        "text": "Designating the person in charge of information security"
+      }
+    ]
+  },
+  {
+    "id": "gov-q42",
+    "prompt": "What is the difference between RTO and RPO?",
+    "skills": [
+      "m-continuite"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Both designate the maximum cost of an incident"
+      },
+      {
+        "id": "b",
+        "text": "Both designate the number of backups to keep"
+      },
+      {
+        "id": "c",
+        "text": "RTO measures data loss, RPO the recovery time"
+      },
+      {
+        "id": "d",
+        "text": "RTO is the maximum acceptable downtime, RPO the maximum acceptable data loss"
+      }
+    ]
+  },
+  {
+    "id": "gov-q43",
+    "prompt": "Why keep a matrix linking each requirement to evidence?",
+    "skills": [
+      "m-regl"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To be able to demonstrate compliance during an audit, beyond a mere claim"
+      },
+      {
+        "id": "b",
+        "text": "To replace technical controls with documents"
+      },
+      {
+        "id": "c",
+        "text": "To remove the need for periodic review"
+      },
+      {
+        "id": "d",
+        "text": "To avoid ever having to apply the described measures"
+      }
+    ]
   }
 ];

@@ -837,5 +837,86 @@ export const questions: Question[] = [
     "difficulty": 2,
     "type": "short",
     "placeholder": "sigle"
+  },
+  {
+    "id": "ebp-q41",
+    "prompt": "Que fixe l’atelier 1 d’une analyse EBIOS RM ?",
+    "skills": [
+      "m-ebp-cadrage"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La liste des vulnérabilités techniques des systèmes"
+      },
+      {
+        "id": "b",
+        "text": "Le plan de réponse aux incidents de l’organisation"
+      },
+      {
+        "id": "c",
+        "text": "Le périmètre, les événements redoutés et le socle de sécurité"
+      },
+      {
+        "id": "d",
+        "text": "Les mesures de sécurité définitives à déployer"
+      }
+    ]
+  },
+  {
+    "id": "ebp-q42",
+    "prompt": "Pourquoi cartographier l’écosystème (prestataires, partenaires) à l’atelier 3 ?",
+    "skills": [
+      "m-ebp-strategique"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Parce que les prestataires sont toujours responsables des incidents"
+      },
+      {
+        "id": "b",
+        "text": "Parce que l’écosystème remplace l’analyse des sources de risque"
+      },
+      {
+        "id": "c",
+        "text": "Parce que cette étape est facultative et peut être omise sans conséquence"
+      },
+      {
+        "id": "d",
+        "text": "Parce qu’un attaquant peut atteindre la cible en passant par une partie prenante moins protégée"
+      }
+    ]
+  },
+  {
+    "id": "ebp-q43",
+    "prompt": "Après le traitement, que représente le risque résiduel ?",
+    "skills": [
+      "m-ebp-traitement"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "La somme des coûts des mesures de sécurité retenues"
+      },
+      {
+        "id": "b",
+        "text": "Le risque qui subsiste après les mesures, à accepter formellement par une décision"
+      },
+      {
+        "id": "c",
+        "text": "Un risque supprimé définitivement par les mesures adoptées"
+      },
+      {
+        "id": "d",
+        "text": "Le risque des seuls systèmes qui ne sont pas connectés"
+      }
+    ]
   }
 ];

@@ -375,6 +375,36 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Cela rend l’exfiltration possible."
       }
+    },
+    "ia-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "La sortie dépend de l’entrée, donc d’un éventuel contenu hostile. On fait choisir au modèle une action prévue, validée côté serveur avec des paramètres contrôlés.",
+      "whyWrong": {
+        "b": "Elles ne sont pas toujours erronées : le risque est leur manipulation.",
+        "a": "Une commande est du texte ; c’est son exécution qui pose problème.",
+        "d": "Ce n’est pas une question de mémoire."
+      }
+    },
+    "ia-q42": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Le contrôle d’accès doit s’appliquer à la récupération : ce que le modèle ne reçoit pas ne peut pas fuiter. Une consigne au modèle n’est pas une garantie.",
+      "whyWrong": {
+        "b": "Une instruction peut être contournée par injection.",
+        "d": "Une base partagée sans filtre expose tout.",
+        "c": "Cacher les sources n’empêche pas la fuite du contenu."
+      }
+    },
+    "ia-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Les journaux permettent la détection et l’enquête, mais contiennent des données sensibles : accès restreint, durée limitée et information des utilisateurs.",
+      "whyWrong": {
+        "d": "Réutiliser des échanges demande une base claire et une information.",
+        "c": "La journalisation complète la politique d’usage, elle ne la remplace pas.",
+        "a": "Les journaux sont confidentiels."
+      }
     }
   },
 };

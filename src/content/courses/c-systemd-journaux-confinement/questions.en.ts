@@ -792,5 +792,86 @@ export const questions: Question[] = [
         "text": "`nft list tables`"
       }
     ]
+  },
+  {
+    "id": "lsys-q41",
+    "prompt": "Why add `NoNewPrivileges=true` to a systemd unit?",
+    "skills": [
+      "c-sys-services"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To prevent the service and its children from gaining more privileges, for example through a setuid binary"
+      },
+      {
+        "id": "b",
+        "text": "To speed up the start of the service when the system boots"
+      },
+      {
+        "id": "c",
+        "text": "To forbid the service from writing to the system logs at all"
+      },
+      {
+        "id": "d",
+        "text": "To make the service run with the rights of the root account"
+      }
+    ]
+  },
+  {
+    "id": "lsys-q42",
+    "prompt": "An investigation covers logins from last week, but `journalctl` only goes back to yesterday. What is the most likely cause?",
+    "skills": [
+      "c-sys-logs"
+    ],
+    "difficulty": 2,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The logs are automatically sent to another computer"
+      },
+      {
+        "id": "b",
+        "text": "The logins from last week never took place at all"
+      },
+      {
+        "id": "c",
+        "text": "journalctl shows only the last twenty-four hours by design"
+      },
+      {
+        "id": "d",
+        "text": "The journal is volatile (in memory) or size-limited, so older entries have disappeared"
+      }
+    ]
+  },
+  {
+    "id": "lsys-q43",
+    "prompt": "On a compromised server, which finding points to likely persistence?",
+    "skills": [
+      "c-sys-persistance"
+    ],
+    "difficulty": 3,
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "A log rotation task shipped with the distribution"
+      },
+      {
+        "id": "b",
+        "text": "An ssh service running for several months on the usual port"
+      },
+      {
+        "id": "c",
+        "text": "A recent systemd unit in `/etc/systemd/system` whose command points to `/tmp`"
+      },
+      {
+        "id": "d",
+        "text": "A package installed from the distribution’s official repository"
+      }
+    ]
   }
 ];

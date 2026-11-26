@@ -375,6 +375,36 @@ export const corrections: CourseCorrections = {
         "recovery time objective"
       ],
       "explanation": "The RTO sets the recovery objective: it sizes backups, redundancy and emergency procedures."
+    },
+    "oia-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Conditional access evaluates context (device, location, session risk, resource sensitivity) and adapts the requirement: allow, strengthen the factor or deny.",
+      "whyWrong": {
+        "d": "An account name’s length is not a risk signal.",
+        "c": "The theme has nothing to do with risk.",
+        "b": "Password strength does not describe the sign-in context."
+      }
+    },
+    "oia-q42": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "A dynamically issued, short-lived token expires quickly; a static secret stays valid until rotated and leaks easily through the code repository.",
+      "whyWrong": {
+        "c": "Permissions still need least-privilege control.",
+        "a": "Readability is not the reason.",
+        "d": "Sharing an account is a bad practice."
+      }
+    },
+    "oia-q43": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "The emergency account must remain usable if the identity provider or MFA fails, but any use must raise an alert and be reviewed.",
+      "whyWrong": {
+        "c": "Daily use exposes it and blurs detection.",
+        "b": "A shared secret rules out accountability.",
+        "a": "Monitoring it is, on the contrary, essential."
+      }
     }
   },
 };

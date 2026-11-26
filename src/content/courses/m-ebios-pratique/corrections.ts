@@ -378,6 +378,36 @@ export const corrections: CourseCorrections = {
         "l'anssi"
       ],
       "explanation": "EBIOS Risk Manager est publiée par l’ANSSI, avec le soutien du Club EBIOS."
+    },
+    "ebp-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "L’atelier 1 cadre l’étude : valeurs métier, biens supports, événements redoutés avec leur gravité, et écarts par rapport au socle de sécurité.",
+      "whyWrong": {
+        "d": "Les mesures sont définies à l’atelier 5.",
+        "b": "La réponse à incident n’est pas l’objet de l’atelier 1.",
+        "a": "Les vulnérabilités techniques relèvent plutôt de l’atelier 4."
+      }
+    },
+    "ebp-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Les chemins d’attaque passent souvent par un prestataire ou un partenaire. On évalue le niveau de menace de chaque partie prenante pour bâtir des scénarios stratégiques réalistes.",
+      "whyWrong": {
+        "a": "La responsabilité juridique n’est pas le critère.",
+        "b": "Elle complète les sources de risque, elle ne les remplace pas.",
+        "c": "L’écosystème fait partie de la méthode."
+      }
+    },
+    "ebp-q43": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Aucune mesure n’annule le risque : ce qui reste doit être décrit, suivi, puis accepté par la direction avec un responsable et une date de revue.",
+      "whyWrong": {
+        "c": "Un risque n’est généralement pas supprimé à 100 %.",
+        "a": "Ce n’est pas une notion de coût.",
+        "d": "Il n’est pas lié à la connectivité."
+      }
     }
   },
 };

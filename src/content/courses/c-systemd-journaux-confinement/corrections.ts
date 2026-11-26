@@ -370,6 +370,36 @@ export const corrections: CourseCorrections = {
         "c": "`reload` applique le fichier du service : ce n’est pas une simple vérification.",
         "d": "`list tables` affiche les tables chargées, il ne lit pas le fichier."
       }
+    },
+    "lsys-q41": {
+      "type": "single",
+      "correct": "a",
+      "explanation": "Cette option bloque l’élévation de privilèges par `execve` (binaires setuid, capacités de fichier) : un service compromis ne peut pas s’en servir pour monter en droits.",
+      "whyWrong": {
+        "b": "Elle n’a aucun effet sur la vitesse de démarrage.",
+        "c": "Elle ne concerne pas l’écriture dans les journaux.",
+        "d": "Elle fait l’inverse : elle limite les privilèges."
+      }
+    },
+    "lsys-q42": {
+      "type": "single",
+      "correct": "d",
+      "explanation": "Sans stockage persistant ou avec une taille maximale basse, journald perd les anciennes entrées. D’où l’intérêt d’un stockage persistant et d’une copie vers un serveur de journaux.",
+      "whyWrong": {
+        "b": "L’absence de trace ne prouve pas l’absence d’événement.",
+        "c": "journalctl peut afficher bien plus ancien si les données existent.",
+        "a": "Rien n’indique une copie ; ce n’est pas le comportement par défaut."
+      }
+    },
+    "lsys-q43": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Une unité créée récemment qui lance un programme depuis un répertoire temporaire inscriptible est un schéma classique de persistance : on compare avec les dates et on remonte à l’origine.",
+      "whyWrong": {
+        "b": "Un service ancien et attendu n’est pas un indice en soi.",
+        "a": "La rotation des journaux fait partie de la distribution.",
+        "d": "Un paquet officiel n’est pas anormal."
+      }
     }
   },
 };
