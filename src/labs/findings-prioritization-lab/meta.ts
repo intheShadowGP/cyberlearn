@@ -10,9 +10,7 @@ export const meta: LabMeta = {
   "offensive": false,
   "context": "Un test d’intrusion autorisé vient de s’achever et le rapport liste huit constats avec leur note CVSS. La direction ne peut corriger que quelques points ce trimestre. Il vous revient de classer les constats en tenant compte de l’exposition, de la criticité de l’actif et de l’existence d’une exploitation connue, pas de la seule note.",
   "objective": "Contextualiser une note CVSS, expliquer un classement et défendre un plan de correction devant un décideur.",
-  "relatedCourses": [
-    "h-pentest-methodologie"
-  ],
+  "relatedCourses": ["h-pentest-methodologie", "h-pentest-initiation", "h-pentest-avance", "h-execution-outils-equipes"],
   "steps": [
     "Lisez les huit constats et leurs attributs.",
     "Classez-les à l’avance selon votre intuition.",

@@ -10,10 +10,7 @@ export const meta: LabMeta = {
   "offensive": false,
   "context": "Vous venez d'arriver dans l'équipe d'administration. Un collègue vous donne un extrait de `ls -l` d'un serveur et vous demande de repérer les permissions anormales. Un calculateur vous aide à passer de la notation octale à la notation symbolique.",
   "objective": "Lire une ligne de `ls -l`, convertir entre notation octale et symbolique et repérer une permission dangereuse.",
-  "relatedCourses": [
-    "c-linux-permissions",
-    "a-fichiers-programmes-ligne-commande"
-  ],
+  "relatedCourses": ["c-linux-permissions", "a-fichiers-programmes-ligne-commande", "c-linux-securite-avancee"],
   "steps": [
     "Décomposez chaque ligne : type, propriétaire, groupe, autres.",
     "Utilisez le calculateur pour convertir une valeur octale.",

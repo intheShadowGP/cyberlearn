@@ -11,7 +11,7 @@ export const meta: LabMeta = {
   context:
     "Votre SOC envisage de mettre en production un assistant qui trie les alertes. L’équipe a rejoué un jeu de douze cas sur l’assistant et conservé ses réponses. À vous de juger la conformité de chaque réponse et de décider si l’assistant peut être mis en production.",
   objective: 'Mesurer la conformité par catégorie plutôt qu’en moyenne et prendre une décision de mise en production argumentée.',
-  relatedCourses: ['q-ia-pratique', 'q-securite-llm'],
+  relatedCourses: ['q-ia-pratique', 'q-securite-llm', 'q-securite-ia-avancee'],
   steps: [
     'Lisez chaque cas et le comportement attendu pour sa catégorie.',
     'Jugez chaque réponse de l’assistant avant d’afficher les verdicts.',

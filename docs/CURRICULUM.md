@@ -13,7 +13,7 @@
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 85 |
 | Questions de cours (avec correction) | 3493 |
-| Laboratoires | 36 |
+| Laboratoires | 39 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 35 |
 | Épreuves de démarche (scénarios) | 3 |
@@ -135,40 +135,43 @@
 
 | Laboratoire | Catégorie | Niveau | Cours liés |
 | --- | --- | --- | --- |
-| Auditer les en-têtes de sécurité d’une réponse HTTP (`http-headers-lab`) | web | 1 | f-web-fondamentaux, f-injections-xss |
-| Contrôler une chaîne de conservation (`custody-log-lab`) | forensic | 1 | j-forensique-initiation, j-forensique-principes |
-| Lire et calculer les permissions Linux (`permissions-lab`) | linux | 1 | c-linux-permissions, a-fichiers-programmes-ligne-commande |
-| Lire l’hexadécimal : identifier un fichier par son en-tête (`hex-header-lab`) | systeme | 1 | a-systemes-fondamentaux, a-fichiers-programmes-ligne-commande |
-| Lire un balayage de ports : que laisser exposé ? (`exposed-ports-lab`) | reseau | 1 | b-osi-tcpip, b-perimetre-vpn-wifi |
-| Liste noire ou liste blanche ? Valider une entrée (`input-validation-lab`) | prog | 1 | g-code-securise-bases, f-injections-xss |
-| Que peut-on confier à un assistant d’IA ? (`ai-data-sharing-lab`) | ia | 1 | q-ia-initiation, q-ia-pratique |
+| Auditer les en-têtes de sécurité d’une réponse HTTP (`http-headers-lab`) | web | 1 | f-web-fondamentaux, f-injections-xss, f-web-defense-avancee, f-acces-sessions-ssrf |
+| Choisir la bonne primitive cryptographique (`crypto-choice-lab`) | crypto | 1 | e-crypto-fondamentaux, e-crypto-appliquee-avancee |
+| Comparer un poste Windows à une base de sécurité (`windows-baseline-lab`) | windows | 1 | d-windows-fondamentaux, d-windows-poste-durcissement, d-windows-defense-avancee |
+| Contrôler une chaîne de conservation (`custody-log-lab`) | forensic | 1 | j-forensique-initiation, j-forensique-principes, j-forensique-avancee |
+| Lire et calculer les permissions Linux (`permissions-lab`) | linux | 1 | c-linux-permissions, a-fichiers-programmes-ligne-commande, c-linux-securite-avancee |
+| Lire l’hexadécimal : identifier un fichier par son en-tête (`hex-header-lab`) | systeme | 1 | a-systemes-fondamentaux, a-fichiers-programmes-ligne-commande, a-compilation-memoire-execution |
+| Lire un balayage de ports : que laisser exposé ? (`exposed-ports-lab`) | reseau | 1 | b-osi-tcpip, b-perimetre-vpn-wifi, b-defense-reseau-avancee |
+| Liste noire ou liste blanche ? Valider une entrée (`input-validation-lab`) | prog | 1 | g-code-securise-bases, f-injections-xss, g-code-securise-avance, g-code-sur-langages |
+| Que peut-on confier à un assistant d’IA ? (`ai-data-sharing-lab`) | ia | 1 | q-ia-initiation, q-ia-pratique, q-ia-defense-ml |
 | Robustesse des mots de passe et effet du hachage (initiation) (`password-strength-lab`) | crypto | 1 | e-hachage-mots-de-passe |
 | Trier six courriels : légitime ou piégé ? (`phishing-email-lab`) | soc | 1 | i-soc-initiation, k-malware-initiation |
-| Violation de données : notifier, quand et à qui ? (`breach-deadline-lab`) | grc | 1 | m-gouvernance-initiation, m-risques-conformite |
+| Violation de données : notifier, quand et à qui ? (`breach-deadline-lab`) | grc | 1 | m-gouvernance-initiation, m-risques-conformite, m-gouvernance-avancee |
 | Appréciation des risques : matrice et plan de traitement (`risk-matrix-lab`) | grc | 2 | m-risques-conformite, m-gouvernance-operationnelle |
 | Atelier empreintes, HMAC et dérivation de clés (`hash-lab`) | crypto | 2 | e-hachage-mots-de-passe |
 | Atelier sous-réseaux (`subnet-lab`) | reseau | 2 | b-ipv4-subnetting |
 | Audit d’un serveur Linux compromis (`linux-audit-lab`) | linux | 2 | c-linux-permissions |
+| Auditer une zone DNS (`dns-zone-lab`) | reseau | 2 | b-routage-dns-dhcp-nat |
 | Chasse à la persistance sur un poste Windows (Sysmon) (`windows-persistence-lab`) | windows | 2 | a-systemes-fondamentaux, k-malware-analyse |
 | Chasse dans auth.log : force brute SSH (`log-hunt-lab`) | soc | 2 | i-soc-detection |
 | Chronologie multi-sources d’une infection (`timeline-lab`) | forensic | 2 | j-forensique-principes |
-| Construire un plan de révision à partir d’un diagnostic (`revision-plan-lab`) | grc | 2 | r-preparation-fondamentaux, r-preparation-pratique |
+| Construire un plan de révision à partir d’un diagnostic (`revision-plan-lab`) | grc | 2 | r-preparation-fondamentaux, r-preparation-pratique, r-certifications-preparation, r-certifications-expertes |
 | Évaluateur de politiques IAM (`iam-policy-lab`) | cloud | 2 | l-cloud-iam |
-| Évaluer un assistant d’IA avec un jeu de tests (`assistant-eval-lab`) | ia | 2 | q-ia-pratique, q-securite-llm |
+| Évaluer un assistant d’IA avec un jeu de tests (`assistant-eval-lab`) | ia | 2 | q-ia-pratique, q-securite-llm, q-securite-ia-avancee |
 | Injection SQL sur une page de connexion (simulation) (`sqli-lab`) | web | 2 | f-injections-xss |
 | Mauvaises configurations cloud : repérer et corriger la posture (`cloud-misconfig-lab`) | cloud | 2 | l-cloud-iam, l-multicloud-serverless-hybride |
 | Reconnaissance OSINT d’une entreprise fictive (`osint-lab`) | osint | 2 | h-pentest-methodologie |
 | Trames Modbus suspectes dans une station de pompage (`modbus-lab`) | ics | 2 | n-ics-modbus |
-| Triage statique d’un échantillon suspect (`static-triage-lab`) | malware | 2 | k-malware-analyse, k-malware-initiation |
+| Triage statique d’un échantillon suspect (`static-triage-lab`) | malware | 2 | k-malware-analyse, k-malware-initiation, k-malware-avance, j-analyse-maliciels-investigation, k-retro-ingenierie-defensive |
 | Analyse d’une configuration TLS et d’une chaîne de certificats (`tls-inspection-lab`) | crypto | 3 | e-chiffrement-tls-pki |
 | Enquête sur les journaux d’un contrôleur de domaine (`ad-events-lab`) | ad | 3 | d-ad-authentification |
-| Prioriser les constats d’un test d’intrusion (`findings-prioritization-lab`) | web | 3 | h-pentest-methodologie |
-| Revoir un manifeste Kubernetes avant déploiement (`k8s-manifest-lab`) | cloud | 3 | l-conteneurs-kubernetes, l-devsecops-pipeline |
+| Prioriser les constats d’un test d’intrusion (`findings-prioritization-lab`) | web | 3 | h-pentest-methodologie, h-pentest-initiation, h-pentest-avance, h-execution-outils-equipes |
+| Revoir un manifeste Kubernetes avant déploiement (`k8s-manifest-lab`) | cloud | 3 | l-conteneurs-kubernetes, l-devsecops-pipeline, l-cloud-avance, a-virtualisation-conteneurs |
 | Revue de code C : analyseur de paquets (`code-review-lab`) | prog | 3 | g-vulnerabilites-memoire |
 | Sécurité d’un flux OAuth 2.0 : configuration d’un client (`oauth-flow-lab`) | web | 3 | o-identite-mfa-oauth |
-| Trier les plantages d’une campagne de fuzzing (`crash-triage-lab`) | prog | 3 | p-fuzzing-recherche, g-vulnerabilites-memoire |
-| Auditer les conduits d’un site industriel (`ics-conduit-lab`) | ics | 4 | n-ot-securite-avancee, n-ics-modbus |
-| Auditer une politique d’accès Zero Trust (`zero-trust-policy-lab`) | cloud | 4 | o-identite-avancee, o-identite-mfa-oauth |
+| Trier les plantages d’une campagne de fuzzing (`crash-triage-lab`) | prog | 3 | p-fuzzing-recherche, g-vulnerabilites-memoire, p-analyse-pratique |
+| Auditer les conduits d’un site industriel (`ics-conduit-lab`) | ics | 4 | n-ot-securite-avancee, n-ics-modbus, n-ot-iot-initiation |
+| Auditer une politique d’accès Zero Trust (`zero-trust-policy-lab`) | cloud | 4 | o-identite-avancee, o-identite-mfa-oauth, p-materiel-zero-trust-confidentiel |
 | Ingénierie de détection : composer une règle sans faux positifs (expert) (`detection-engineering-lab`) | soc | 4 | i-threat-hunting, i-soc-detection |
 | Trier les vulnérabilités d’un inventaire de composants (SBOM) (`sbom-triage-lab`) | prog | 4 | l-devsecops-pipeline |
 

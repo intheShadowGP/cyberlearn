@@ -10,10 +10,7 @@ export const meta: LabMeta = {
   "offensive": false,
   "context": "Vous êtes le premier interlocuteur de la personne chargée de la protection des données. Quatre incidents touchant des données personnelles ont été signalés cette semaine. Pour chacun, il faut décider s’il doit être notifié à l’autorité de contrôle, s’il faut informer les personnes concernées, et avant quand.",
   "objective": "Appliquer les règles de notification d’une violation de données personnelles : délai de 72 heures, notion de risque, information des personnes.",
-  "relatedCourses": [
-    "m-gouvernance-initiation",
-    "m-risques-conformite"
-  ],
+  "relatedCourses": ["m-gouvernance-initiation", "m-risques-conformite", "m-gouvernance-avancee"],
   "steps": [
     "Lisez chaque incident et évaluez le risque pour les personnes.",
     "Décidez des obligations avant d’afficher les résultats.",

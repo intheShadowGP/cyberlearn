@@ -10,10 +10,7 @@ export const meta: LabMeta = {
   "offensive": false,
   "context": "Vous préparez un examen de cybersécurité et vous disposez de vingt heures de révision. Un test de positionnement vous donne votre score dans sept domaines, et le plan de l’examen indique le poids de chacun. Il s’agit de répartir vos heures là où elles rapportent le plus de points.",
   "objective": "Calculer le gain potentiel par domaine, classer les priorités et répartir un budget d’heures de façon argumentée.",
-  "relatedCourses": [
-    "r-preparation-fondamentaux",
-    "r-preparation-pratique"
-  ],
+  "relatedCourses": ["r-preparation-fondamentaux", "r-preparation-pratique", "r-certifications-preparation", "r-certifications-expertes"],
   "steps": [
     "Lisez le poids et le score de chaque domaine.",
     "Estimez à l’avance où vos heures rapporteront le plus.",

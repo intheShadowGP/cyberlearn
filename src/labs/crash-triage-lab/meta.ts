@@ -11,7 +11,7 @@ export const meta: LabMeta = {
   context:
     "Une campagne de fuzzing de nuit sur l’analyseur de fichiers de votre équipe a produit douze entrées qui le font planter, sous détecteur d’erreurs mémoire. Avant le point du matin, vous devez dédoublonner le lot, classer les défauts et décider par lequel commencer.",
   objective: 'Regrouper des plantages par signature de pile, estimer leur gravité et planifier la suite (minimisation, correction, divulgation).',
-  relatedCourses: ['p-fuzzing-recherche', 'g-vulnerabilites-memoire'],
+  relatedCourses: ['p-fuzzing-recherche', 'g-vulnerabilites-memoire', 'p-analyse-pratique'],
   steps: [
     'Parcourez le lot et repérez les types de plantage et la nature des accès mémoire.',
     'Regroupez les plantages par signature de pile pour obtenir le nombre de défauts distincts.',

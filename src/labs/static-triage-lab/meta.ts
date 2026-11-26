@@ -11,7 +11,7 @@ export const meta: LabMeta = {
   context:
     "Un salarié du service comptable a reçu un courriel avec une pièce jointe « facture_2026.pdf.exe ». Le fichier a été isolé. Vous disposez du rapport de triage produit sur une machine d’analyse sans réseau : métadonnées, sections, imports et chaînes lisibles. Rien n’a été exécuté.",
   objective: 'Relever des indicateurs, repérer les comportements probables sans exécuter l’échantillon et choisir la suite de l’analyse.',
-  relatedCourses: ['k-malware-analyse', 'k-malware-initiation'],
+  relatedCourses: ['k-malware-analyse', 'k-malware-initiation', 'k-malware-avance', 'j-analyse-maliciels-investigation', 'k-retro-ingenierie-defensive'],
   steps: [
     'Examinez les métadonnées et l’entropie des sections.',
     'Parcourez les imports et repérez les combinaisons évocatrices.',

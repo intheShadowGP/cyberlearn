@@ -9,7 +9,7 @@ Document de reprise (section 18 du cahier des charges).
 | 1 — Conception (architecture, modèle de menace, organisation pédagogique) | Terminée |
 | 2 — Socle technique (routing, stockage, PWA, tests) | Terminée |
 | 3 — Plateforme pédagogique (85 cours depuis la phase 5 d’évolution, évaluations, progression) | Terminée |
-| 4 — Fonctionnalités avancées (36 labos, 11 parcours, glossaire, recherche, révisions, examens, statistiques, gamification, profil) | Terminée |
+| 4 — Fonctionnalités avancées (39 labos, 11 parcours, glossaire, recherche, révisions, examens, statistiques, gamification, profil) | Terminée |
 | 5 — Sécurisation (lint de sécurité, dépendances, CSP, imports, flux de données, actions épinglées) | Terminée |
 | 6 — Audit Fable 5.2 (5 axes) | Audit réalisé, constats corrigés ; voir docs/AUDIT.md (audit 5) |
 | 7 — Finalisation (documentation, build, tests finaux, déploiement) | Terminée ; site publié |

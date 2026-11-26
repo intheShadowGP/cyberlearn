@@ -10,10 +10,7 @@ export const meta: LabMeta = {
   "offensive": false,
   "context": "Vous recevez la réponse HTTP d’un site de votre organisation, relevée avec un outil en ligne de commande. Vous devez repérer les protections manquantes, les cookies faibles et les informations inutilement révélées, puis les corriger en modifiant la réponse.",
   "objective": "Lire une réponse HTTP, connaître le rôle des en-têtes de sécurité usuels et des attributs de cookie, et les corriger.",
-  "relatedCourses": [
-    "f-web-fondamentaux",
-    "f-injections-xss"
-  ],
+  "relatedCourses": ["f-web-fondamentaux", "f-injections-xss", "f-web-defense-avancee", "f-acces-sessions-ssrf"],
   "steps": [
     "Lisez la réponse ligne par ligne : état, en-têtes, cookie.",
     "Repérez ce qui manque avant de regarder l’audit.",

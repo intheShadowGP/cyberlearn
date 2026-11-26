@@ -11,7 +11,7 @@ export const meta: LabMeta = {
   context:
     "Quatre fichiers ont été déposés dans un dossier partagé, avec des extensions qui ne correspondent pas toujours à leur contenu. Vous disposez du début de chacun, affiché en hexadécimal, et d’un convertisseur. Votre mission : identifier ce que sont réellement ces fichiers.",
   objective: 'Lire un dump hexadécimal, reconnaître les signatures usuelles et convertir des octets en valeurs lisibles.',
-  relatedCourses: ['a-systemes-fondamentaux', 'a-fichiers-programmes-ligne-commande'],
+  relatedCourses: ['a-systemes-fondamentaux', 'a-fichiers-programmes-ligne-commande', 'a-compilation-memoire-execution'],
   steps: [
     'Repérez les deux ou quatre premiers octets de chaque fichier.',
     'Lisez la colonne de caractères : une signature y est souvent lisible.',
