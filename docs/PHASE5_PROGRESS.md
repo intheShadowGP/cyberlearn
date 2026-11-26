@@ -62,12 +62,12 @@ Légende : ✔ existant · ➕ à créer · banque = nouvelle banque 40–60 que
 | M Gouvernance | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) | ✔ (nouveau) |
 | N OT / IoT | ✔ (nouveau) | ✔ | ✔ ×2 | ✔ (nouveau) |
 | O Identité | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 | ✔ (nouveau) |
-| P Recherche | ➕ | ➕ | ➕ | ✔ ×2 |
+| P Recherche | ✔ (nouveau) | ✔ (nouveau) | ✔ (nouveau) | ✔ ×2 |
 | Q IA | ➕ | ➕ | ✔ ×2 | ➕ |
 | R Certifications | ✔ (pilote terminé) | ➕ | ➕ | ➕ |
 
-Total : 45 cours existants (44 migrés) + 40 cours à créer (32 créés) = 85 cours, soit 85 banques de 40 à 60 questions
-(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 7 cours à créer et 1 cours existants à migrer.
+Total : 45 cours existants (44 migrés) + 40 cours à créer (33 créés) = 85 cours, soit 85 banques de 40 à 60 questions
+(≈ 4 250 questions) et leurs 85 versions anglaises. Reste : 6 cours à créer et 1 cours existants à migrer.
 
 ### Avancement des cours migrés (banque + anglais)
 
@@ -149,3 +149,4 @@ Total : 45 cours existants (44 migrés) + 40 cours à créer (32 créés) = 85 c
 | `p-materiel-zero-trust-confidentiel` | ✔ 40 | ✔ 40 | ✔ (sections attestation et agilité, pratique migration-pqc) |
 | `p-recherche-initiation` (nouveau, niveau 1) | ✔ 40 | ✔ 40 | ✔ |
 | `p-analyse-pratique` (nouveau, niveau 2) | ✔ 40 | ✔ 40 | ✔ |
+| `p-verification-avancee` (nouveau, niveau 3) | ✔ 40 | ✔ 40 | ✔ |
