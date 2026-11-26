@@ -38,7 +38,7 @@ Guide de contribution : [I18N.md](I18N.md).
 - [x] Tests e2e anglais : bascule, persistance, positionnement, cours traduit, labo, épreuve, axe WCAG 2.2 AA (deux thèmes)
 - [x] Balayage e2e de toutes les routes en anglais sans fuite de français (activé : `PHASE5_COMPLETE = true`)
 - [x] Intégration des nouveaux cours (modules A à R) dans les parcours (`paths.ts`), sans reverrouiller de cours existant
-- [ ] Qualité de la banque de positionnement (40 questions) : longueurs des options
+- [x] Qualité de la banque de positionnement (40 questions) : longueurs des options équilibrées (test de non-régression ajouté)
 - [ ] Documentation utilisateur (README, docs) mise à jour
 
 ### Contenu — 18 disciplines × 4 niveaux

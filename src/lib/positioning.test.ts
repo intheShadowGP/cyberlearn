@@ -9,6 +9,7 @@ import {
   type PositioningDomain,
   type PositioningQuestion,
 } from './positioning';
+import { POSITIONING_EN } from './positioning.en';
 
 /** Générateur pseudo-aléatoire déterministe pour des tirages reproductibles. */
 function seeded(seed: number): () => number {
@@ -41,6 +42,32 @@ describe('banque de positionnement', () => {
       expect(q.options.some((opt) => opt.id === q.correct)).toBe(true);
       expect(ids.has(q.id)).toBe(false);
       ids.add(q.id);
+    }
+  });
+
+  it('la longueur des options ne trahit pas la bonne réponse (FR et EN)', () => {
+    const langs: [string, (q: PositioningQuestion) => string[]][] = [
+      ['fr', (q) => q.options.map((opt) => opt.text)],
+      ['en', (q) => [...POSITIONING_EN[q.id]!.options]],
+    ];
+    for (const [lang, get] of langs) {
+      let longest = 0;
+      let shortest = 0;
+      let ratio = 0;
+      for (const q of POSITIONING_BANK) {
+        // La bonne réponse est stockée en première position (id « a »), avant mélange.
+        const texts = get(q);
+        const good = texts[0]!.length;
+        const others = texts.slice(1).map((t) => t.length);
+        if (good > Math.max(...others)) longest++;
+        if (good < Math.min(...others)) shortest++;
+        ratio += good / (others.reduce((a, b) => a + b, 0) / others.length);
+      }
+      const n = POSITIONING_BANK.length;
+      expect(longest / n, lang + ' : bonne réponse la plus longue').toBeLessThanOrEqual(0.4);
+      expect(shortest / n, lang + ' : bonne réponse la plus courte').toBeLessThanOrEqual(0.4);
+      expect(ratio / n, lang + ' : longueur relative moyenne').toBeGreaterThan(0.9);
+      expect(ratio / n, lang + ' : longueur relative moyenne').toBeLessThan(1.15);
     }
   });
 });
