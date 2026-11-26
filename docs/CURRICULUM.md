@@ -11,8 +11,8 @@
 | Disciplines avec au moins un cours | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
-| Cours complets | 79 |
-| Questions de cours (avec correction) | 3166 |
+| Cours complets | 80 |
+| Questions de cours (avec correction) | 3206 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -38,7 +38,7 @@
 | N. Sécurité industrielle et IoT | 5 | 1, 2, 3, 4 | 21 / 21 |
 | O. Identité et contrôle d’accès | 5 | 1, 2, 3, 4 | 16 / 16 |
 | P. Sécurité avancée et recherche | 5 | 1, 2, 3, 4 | 18 / 18 |
-| Q. Intelligence artificielle et cybersécurité | 2 | 3 | 16 / 16 |
+| Q. Intelligence artificielle et cybersécurité | 3 | 1, 3 | 16 / 16 |
 | R. Méthodologies et certifications | 1 | 1 | 15 / 15 |
 
 ## Cours
@@ -121,6 +121,7 @@
 | Analyse avancée : exécution symbolique, vérification de protocoles et micrologiciels (`p-verification-avancee`) | P | 3 · Avancé | 130 min | 5 | 40 | 3 | 3 |
 | Recherche de vulnérabilités : fuzzing guidé, exécution symbolique et vérification formelle (`p-fuzzing-recherche`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 4 |
 | Sécurité matérielle, Zero Trust et informatique confidentielle (`p-materiel-zero-trust-confidentiel`) | P | 4 · Expert | 140 min | 7 | 40 | 3 | 5 |
+| L’intelligence artificielle et la cybersécurité pour débutants (`q-ia-initiation`) | Q | 1 · Débutant | 90 min | 5 | 40 | 3 | 3 |
 | Apprentissage automatique pour la défense : détection, évaluation et robustesse des modèles (`q-ia-defense-ml`) | Q | 3 · Avancé | 135 min | 7 | 40 | 3 | 4 |
 | Sécurité des applications d’IA : injection de prompt, agents et données (`q-securite-llm`) | Q | 3 · Avancé | 125 min | 6 | 40 | 3 | 4 |
 | Certifications en cybersécurité : choisir et se préparer efficacement (`r-certifications-preparation`) | R | 1 · Débutant | 60 min | 4 | 46 | 2 | 4 |
