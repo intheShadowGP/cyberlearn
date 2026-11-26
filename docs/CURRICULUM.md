@@ -12,7 +12,7 @@
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours (déclaratif) | 403 |
 | Cours complets | 71 |
-| Questions de cours (avec correction) | 2631 |
+| Questions de cours (avec correction) | 2655 |
 | Laboratoires | 18 |
 | Parcours | 11 |
 | Évaluations transversales, examens blancs et finaux | 34 |
@@ -106,7 +106,7 @@
 | Gouvernance opérationnelle : actifs, données, vulnérabilités, fournisseurs et audits (`m-gouvernance-operationnelle`) | M | 2 · Intermédiaire | 125 min | 7 | 40 | 3 | 5 |
 | EBIOS Risk Manager en pratique : conduire une analyse de risques de bout en bout (`m-ebios-pratique`) | M | 3 · Avancé | 130 min | 6 | 40 | 3 | 4 |
 | Gouvernance avancée : quantification des risques, conformité multi-textes, tiers critiques et pilotage par la preuve (`m-gouvernance-avancee`) | M | 4 · Expert | 140 min | 6 | 40 | 3 | 5 |
-| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 80 min | 3 | 16 | 2 | 4 |
+| Systèmes industriels : architecture OT, Modbus et segmentation (`n-ics-modbus`) | N | 2 · Intermédiaire | 115 min | 5 | 40 | 3 | 4 |
 | Objets connectés et systèmes embarqués : firmware, démarrage sécurisé, mises à jour (`n-iot-firmware`) | N | 3 · Avancé | 85 min | 3 | 16 | 2 | 4 |
 | Sécurité automobile et Profinet : véhicules connectés et bus industriels temps réel (`n-automobile-profinet`) | N | 3 · Avancé | 90 min | 5 | 16 | 2 | 5 |
 | Comptes à privilèges : PAM, administration sécurisée et gestion des secrets (`o-comptes-privileges-pam`) | O | 3 · Avancé | 85 min | 5 | 16 | 2 | 4 |

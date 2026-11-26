@@ -1,4 +1,5 @@
 import type { CourseBody } from '../../types';
+import { questions } from './questions';
 
 export const body: CourseBody = {
   courseId: 'n-ics-modbus',
@@ -58,6 +59,48 @@ export const body: CourseBody = {
           { t: 'callout', kind: 'legal', text: "En France, la cybersécurité des systèmes industriels des opérateurs d'importance vitale est encadrée par la loi de programmation militaire ; l'ANSSI publie une méthode de classification des systèmes industriels et des mesures détaillées. La directive NIS2 étend les obligations à de nombreux secteurs industriels." },
         ],
       },
+      {
+        id: 'protocoles',
+        title: 'Autres protocoles industriels et filtrage',
+        blocks: [
+          { t: 'p', text: 'Modbus n’est qu’un protocole parmi d’autres. Chaque secteur a les siens, nés à une époque où les réseaux industriels étaient isolés. Beaucoup n’intègrent ni authentification ni chiffrement : la protection repose sur le **cloisonnement** et le **filtrage**.' },
+          {
+            t: 'table',
+            head: ['Protocole', 'Usage typique', 'Sécurité native'],
+            rows: [
+              ['**Modbus TCP / RTU**', 'Petits automates, instrumentation', 'Aucune (version TLS en option)'],
+              ['**DNP3**', 'Énergie, eau, postes électriques', 'Authentification sécurisée (SA) optionnelle'],
+              ['**Profinet**', 'Automatisme d’usine, Siemens', 'Dépend du profil, souvent faible'],
+              ['**EtherNet/IP**', 'Automatisme d’usine, Rockwell', 'Extension CIP Security optionnelle'],
+              ['**OPC UA**', 'Interopérabilité, remontée de données', 'Authentification, signature, chiffrement'],
+            ],
+          },
+          { t: 'def', term: 'Inspection approfondie (DPI)', text: 'Analyse du contenu applicatif d’un protocole (code fonction, plage d’adresses, valeur) par un pare-feu industriel. Elle permet de n’autoriser que les lectures, ou les écritures depuis la seule station de supervision.' },
+          { t: 'list', items: ['**Filtrer par source** : seule la supervision envoie des commandes.', '**Filtrer par code fonction** : bloquer écritures et téléchargements de programme depuis les autres sources.', '**Limiter les plages** : n’autoriser que les registres utiles.', '**Limite** : le filtrage ne juge pas la cohérence de la valeur écrite ; la supervision doit la contrôler.'] },
+          { t: 'callout', kind: 'tip', text: 'Un bus série isolé réduit l’exposition réseau mais n’apporte aucune authentification : un accès local au bus suffit pour émettre des commandes.' },
+        ],
+      },
+      {
+        id: 'detection',
+        title: 'Détection et réponse en environnement industriel',
+        blocks: [
+          { t: 'p', text: 'La détection en OT s’appuie sur l’**écoute passive** du trafic. La réponse se **coordonne avec l’exploitation** : une action de sécurité brutale peut elle-même créer un danger.' },
+          {
+            t: 'table',
+            head: ['Signal', 'Pourquoi c’est suspect', 'Première action'],
+            rows: [
+              ['Écriture Modbus depuis un poste qui n’est pas le SCADA', 'Commande non légitime', 'Alerter l’exploitation, vérifier la valeur écrite'],
+              ['Téléchargement de programme sur un automate', 'Modification de la logique de contrôle', 'Comparer à la dernière sauvegarde de référence'],
+              ['Nouvel équipement sur le réseau de contrôle', 'Machine inconnue ou poste de maintenance non déclaré', 'Identifier et valider ou isoler'],
+              ['Scan ou balayage depuis un poste de gestion', 'Reconnaissance', 'Bloquer le flux au pare-feu'],
+              ['Accès distant hors plage prévue', 'Compromission d’un compte fournisseur', 'Fermer l’accès, vérifier la session enregistrée'],
+            ],
+          },
+          { t: 'list', ordered: true, items: ['**Prévenir** l’exploitation et la sûreté de fonctionnement : état réel du procédé.', '**Qualifier** : source, destination, code fonction, valeur, équipement.', '**Contenir** sans perdre la supervision : filtrer le flux, isoler le poste source.', '**Préserver** : captures, journaux, copie du programme de l’automate.', '**Rétablir** : programme de référence, fonctionnement en mode dégradé si nécessaire.', '**Corriger** la cause : segmentation, accès distants.'] },
+          { t: 'def', term: 'Mode dégradé', text: 'Fonctionnement volontairement réduit d’un procédé (pilotage manuel, supervision locale) maintenu pendant un incident, pour garantir la sûreté et l’essentiel de la production.' },
+          { t: 'callout', kind: 'warn', text: 'Couper le réseau de supervision « pour être sûr » peut aveugler les opérateurs et provoquer un incident. La réponse se décide avec l’exploitation.' },
+        ],
+      },
     ],
     useCases: [
       'Analyste OT : qualifier une alerte de la sonde passive signalant une écriture Modbus depuis un poste inconnu.',
@@ -100,25 +143,17 @@ export const body: CourseBody = {
       context: [{ t: 'p', text: 'Usine agroalimentaire : réseau unique 10.0.0.0/16 regroupant bureautique, serveur SCADA, IHM, 12 automates et un poste de maintenance du fournisseur équipé d’un logiciel de prise en main à distance.' }],
       steps: ['Définir les zones.', 'Définir les conduits et les flux autorisés.', 'Proposer une solution pour la maintenance à distance.'],
     },
+    {
+      id: 'incident-ot',
+      kind: 'analysis',
+      title: 'Analyse : alertes de la sonde passive d’une station de pompage',
+      context: [
+        { t: 'code', lang: 'text', code: 'Heure  Source          Destination     Protocole   Événement\n02:14  10.2.1.15       10.3.0.21       Modbus      lecture registres 0-20 (SCADA)\n02:15  10.2.1.15       10.3.0.21       Modbus      lecture registres 0-20 (SCADA)\n02:41  172.16.8.44     10.3.0.21       Modbus      écriture registre 16 = 0 (fonction 0x06)\n02:42  172.16.8.44     10.3.0.22       Modbus      écriture registre 16 = 0 (fonction 0x06)\n02:44  172.16.8.44     10.3.0.21       S7          téléchargement de programme\n02:50  (nouveau)       10.3.0.0/24     ARP         balayage d’adresses\n\nLa station SCADA est 10.2.1.15. Le réseau 172.16.8.0/24 est celui de la bureautique. La pompe 10.3.0.21 est alimentée en continu.' },
+      ],
+      steps: ['Décrire l’enchaînement et ce qu’il révèle.', 'Indiquer, dans l’ordre, la réponse en tenant compte des contraintes OT.', 'Proposer les mesures de prévention et de détection à ajouter.'],
+    },
   ],
-  questions: [
-    { id: 'ics-q1', type: 'single', difficulty: 1, skills: ['n-ics-arch'], prompt: 'Quel équipement lit des capteurs et commande des actionneurs en temps réel ?', options: [{ id: 'a', text: 'Un automate (PLC)' }, { id: 'b', text: 'Un serveur de messagerie' }, { id: 'c', text: 'Un proxy web' }, { id: 'd', text: 'Un contrôleur de domaine' }] },
-    { id: 'ics-q2', type: 'truefalse', difficulty: 1, skills: ['n-ics-arch'], prompt: 'Dans un système industriel, la sûreté des personnes et la disponibilité sont généralement prioritaires sur la confidentialité.' },
-    { id: 'ics-q3', type: 'multi', difficulty: 2, skills: ['n-ics-arch'], prompt: 'Quelles contraintes sont typiques de l’OT ?', options: [{ id: 'a', text: 'Équipements en service pendant 15 à 30 ans' }, { id: 'b', text: 'Correctifs difficiles à appliquer sans arrêt de production' }, { id: 'c', text: 'Remplacement des automates tous les ans' }, { id: 'd', text: 'Sensibilité de certains équipements aux scans réseau' }] },
-    { id: 'ics-q4', type: 'short', difficulty: 1, skills: ['n-modbus'], prompt: 'Sur quel port TCP écoute Modbus TCP par défaut ? (nombre)' },
-    { id: 'ics-q5', type: 'single', difficulty: 2, skills: ['n-modbus'], prompt: 'Quel code fonction Modbus correspond à l’écriture d’un registre unique ?', options: [{ id: 'a', text: '0x03' }, { id: 'b', text: '0x06' }, { id: 'c', text: '0x01' }, { id: 'd', text: '0x04' }] },
-    { id: 'ics-q6', type: 'truefalse', difficulty: 1, skills: ['n-modbus'], prompt: 'Modbus TCP intègre nativement l’authentification de l’émetteur des commandes.' },
-    { id: 'ics-q7', type: 'single', difficulty: 3, skills: ['n-modbus'], prompt: 'Que fait la trame `00 07 00 00 00 06 02 05 00 03 FF 00` ?', options: [{ id: 'a', text: 'Elle lit trois registres de l’unité 2' }, { id: 'b', text: 'Elle met à 1 (ON) la bobine 3 de l’unité 2' }, { id: 'c', text: 'Elle redémarre l’automate' }, { id: 'd', text: 'Elle écrit la valeur 3 dans le registre 255' }] },
-    { id: 'ics-q8', type: 'multi', difficulty: 2, skills: ['n-modbus'], prompt: 'Quels protocoles ou versions intègrent des mécanismes de sécurité (authentification, chiffrement) ?', options: [{ id: 'a', text: 'OPC UA' }, { id: 'b', text: 'Modbus/TCP Security (sur TLS)' }, { id: 'c', text: 'Modbus RTU sur liaison série' }, { id: 'd', text: 'DNP3 Secure Authentication' }] },
-    { id: 'ics-q9', type: 'short', difficulty: 2, skills: ['n-segment'], prompt: 'Quelle série de normes internationales définit les zones, les conduits et les niveaux de sécurité pour les systèmes industriels ? (ex. ISO 12345)' },
-    { id: 'ics-q10', type: 'single', difficulty: 2, skills: ['n-segment'], prompt: 'Où placer le serveur historique répliqué consulté par les équipes de gestion ?', options: [{ id: 'a', text: 'Dans le réseau des automates' }, { id: 'b', text: 'Dans une DMZ industrielle entre IT et OT' }, { id: 'c', text: 'Directement sur Internet' }, { id: 'd', text: 'Sur le poste de l’opérateur' }] },
-    { id: 'ics-q11', type: 'truefalse', difficulty: 2, skills: ['n-segment', 'n-ics-arch'], prompt: 'Un scan Nmap complet du réseau d’automates en production est la méthode recommandée pour réaliser l’inventaire OT.' },
-    { id: 'ics-q12', type: 'multi', difficulty: 2, skills: ['n-segment'], prompt: 'Quelles mesures sécurisent la maintenance à distance par un fournisseur ?', options: [{ id: 'a', text: 'Bastion dédié avec MFA et enregistrement des sessions' }, { id: 'b', text: 'Ouverture de l’accès à la demande, pour une durée limitée' }, { id: 'c', text: 'Logiciel de prise en main installé en permanence sur l’IHM' }, { id: 'd', text: 'Accès limité aux seuls équipements du fournisseur' }] },
-    { id: 'ics-q13', type: 'open', difficulty: 3, skills: ['n-segment', 'n-modbus'], prompt: 'Votre sonde passive signale une écriture Modbus (code 0x10) vers un automate de dosage chimique, depuis un poste de la bureautique. Décrivez votre réaction, en tenant compte des contraintes OT.' },
-    { id: 'ics-q14', type: 'single', difficulty: 2, skills: ['n-ics-arch'], prompt: 'Quelle attaque de 2017 a visé des systèmes instrumentés de sécurité (SIS) d’un site pétrochimique ?', options: [{ id: 'a', text: 'Triton (Trisis)' }, { id: 'b', text: 'WannaCry' }, { id: 'c', text: 'Heartbleed' }, { id: 'd', text: 'Log4Shell' }] },
-    { id: 'ics-q15', type: 'open', difficulty: 3, skills: ['n-segment', 'n-ics-arch'], prompt: 'Expliquez à un DSI habitué à l’IT pourquoi on ne peut pas appliquer les correctifs Windows des IHM industrielles chaque mois comme sur les postes bureautiques, et quelles mesures compensatoires vous proposez.' },
-    { id: 'ics-q16', type: 'short', difficulty: 2, skills: ['n-modbus', 'n-segment'], prompt: 'Comment appelle-t-on une supervision de sécurité qui écoute le trafic sur un port miroir sans émettre de paquets ? (un adjectif)' },
-  ],
+  questions,
   resources: [
     { title: 'Cybersécurité des systèmes industriels : méthode de classification et mesures', source: 'ANSSI', url: 'https://cyber.gouv.fr/publications/la-cybersecurite-des-systemes-industriels' },
     { title: 'NIST SP 800-82 Rev. 3 — Guide to OT Security', source: 'NIST', url: 'https://csrc.nist.gov/pubs/sp/800/82/r3/final' },
