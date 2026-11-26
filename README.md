@@ -11,8 +11,8 @@ Plateforme d’apprentissage de la cybersécurité, du niveau débutant au nivea
 | Disciplines cartographiées (modules A à R) | 18 |
 | Sujets cartographiés | 403 |
 | Sujets abordés dans au moins un cours publié (déclaratif : un cours peut aborder un sujet en une seule section) | 403 |
-| Cours complets (structure obligatoire 4.2 vérifiée au build) | 77, au moins un par discipline, niveaux 1 à 4 |
-| Questions de cours (avec correction et explication) | 3038 |
+| Cours complets (structure obligatoire 4.2 vérifiée au build) | 78, au moins un par discipline, niveaux 1 à 4 |
+| Questions de cours (avec correction et explication) | 3078 |
 | Laboratoires interactifs | 18, couvrant les catégories de la section 6 (réseau, Linux, Windows, Active Directory, web, cryptographie, programmation, forensique, SOC, OSINT, cloud, industriel), du niveau 1 (initiation) au niveau 4 (expert) |
 | Parcours métiers (avec examen final) | 11 |
 | Épreuves de démarche (dossier d’incident multi-sources, questions ordonnées) | 3 |
