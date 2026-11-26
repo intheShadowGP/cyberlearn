@@ -195,6 +195,7 @@ export const body: CourseBody = {
     {
       id: 'premiers-gestes',
       kind: 'scenario',
+      labId: 'custody-log-lab',
       title: 'Scénario : un poste suspect dans un bureau',
       context: [{ t: 'p', text: 'Une collègue vous prévient : son ordinateur portable ouvre des fenêtres inconnues et un dossier de documents financiers semble avoir été copié. L’ordinateur est allumé et la session est ouverte.' }],
       steps: ['Dire ce que vous lui demandez de faire et de ne pas faire.', 'Lister ce que vous notez à ce stade.', 'Indiquer qui vous prévenez et pourquoi on n’éteint pas la machine tout de suite.'],
@@ -211,6 +212,7 @@ export const body: CourseBody = {
     {
       id: 'mini-chrono',
       kind: 'analysis',
+      labId: 'timeline-lab',
       title: 'Analyse : une mini-chronologie en UTC',
       context: [
         { t: 'code', lang: 'text', code: 'Source        Fuseau                  Heure    Événement\nPare-feu      UTC                     08:14:20 Connexion entrante depuis 203.0.113.50\nServeur       Paris (UTC+1, hiver)    09:15:02 Connexion réussie du compte « compta »\nEDR           UTC                     08:16:45 Lancement d’un programme inconnu\nMessagerie    Paris (UTC+1, hiver)    09:18:30 Règle de transfert créée sur la boîte « compta »' },

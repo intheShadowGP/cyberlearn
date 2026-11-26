@@ -179,6 +179,7 @@ export const body: CourseBody = {
     {
       id: 'evaluer-regle',
       kind: 'analysis',
+      labId: 'detection-engineering-lab',
       title: 'Analyse : comparer deux règles de détection',
       context: [
         { t: 'code', lang: 'text', code: 'Banc de test : 40 techniques d’attaque rejouées en environnement autorisé\n\nRègle A (comportementale) : 200 alertes en un mois, dont 30 justifiées ; détecte 30 des 40 techniques\nRègle B (très spécifique) : 20 alertes en un mois, dont 16 justifiées ; détecte 16 des 40 techniques\n\nCapacité du SOC : environ 60 alertes traitées par jour pour toutes les règles' },

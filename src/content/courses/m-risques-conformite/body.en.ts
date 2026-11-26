@@ -198,6 +198,7 @@ export const body: CourseBody = {
     {
       id: 'matrice',
       kind: 'guided',
+      labId: 'risk-matrix-lab',
       title: 'Build a risk matrix',
       context: [{ t: 'p', text: 'A 120-person logistics SME. Identified scenarios: R1 ransomware via the unpatched VPN; R2 fake transfer fraud by impersonating the CEO; R3 fire in the server room; R4 leak of the customer file by a departing employee.' }],
       steps: ['Rate each scenario in likelihood (1 to 4) and severity (1 to 4) with justification.', 'Place the scenarios in a matrix and define the priorities.', 'Propose a treatment and a main measure for each.'],
@@ -205,6 +206,7 @@ export const body: CourseBody = {
     {
       id: 'nis2-ecart',
       kind: 'case',
+      labId: 'breach-deadline-lab',
       title: 'Case study: first NIS2 gap analysis',
       context: [{ t: 'p', text: 'A 400-employee medical device manufacturer thinks it is covered by NIS2. It has no formalized risk analysis, no incident notification procedure and no inventory of its critical suppliers.' }],
       steps: ['Indicate how to check whether it is covered.', 'List the priority workstreams.', 'Specify the role expected from management.'],

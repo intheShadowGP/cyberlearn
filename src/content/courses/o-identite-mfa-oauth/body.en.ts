@@ -192,6 +192,7 @@ export const body: CourseBody = {
     {
       id: 'revue-oauth',
       kind: 'analysis',
+      labId: 'oauth-flow-lab',
       title: 'Review of an OAuth integration',
       context: [
         { t: 'p', text: 'Authorization request produced by a single-page application:' },

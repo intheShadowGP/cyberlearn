@@ -197,6 +197,7 @@ export const body: CourseBody = {
     {
       id: 'donnees-prompt',
       kind: 'analysis',
+      labId: 'ai-data-sharing-lab',
       title: 'Analyse : que peut-on envoyer à un assistant public ?',
       context: [
         {

@@ -213,6 +213,7 @@ export const body: CourseBody = {
     {
       id: 'verifier-partage',
       kind: 'case',
+      labId: 'cloud-misconfig-lab',
       title: 'Cas pratique : vérifier le partage d’un dossier',
       context: [{ t: 'p', text: 'Un dossier « Contrats clients » est partagé par un lien accessible à toute personne qui le possède, sans date de fin. Trois anciens collaborateurs y ont toujours accès et le dossier est stocké dans le compte personnel d’un employé.' }],
       steps: ['Lister les problèmes de sécurité.', 'Proposer la configuration cible du partage.', 'Indiquer comment vérifier régulièrement que le partage reste correct.'],

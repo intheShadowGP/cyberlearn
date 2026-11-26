@@ -186,6 +186,7 @@ export const body: CourseBody = {
     {
       id: 'priorisation-vulns',
       kind: 'analysis',
+      labId: 'findings-prioritization-lab',
       title: 'Prioritize a list of vulnerabilities',
       context: [
         { t: 'p', text: 'Excerpt from the latest scan report:' },

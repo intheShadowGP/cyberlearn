@@ -212,6 +212,7 @@ export const body: CourseBody = {
     {
       id: 'chasse-persistance',
       kind: 'analysis',
+      labId: 'windows-persistence-lab',
       title: 'Analyzing the startup points of a suspect workstation',
       context: [
         { t: 'p', text: 'Extract of a startup inventory (Autoruns) of a workstation that gets reinfected after cleaning:' },

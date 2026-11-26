@@ -188,6 +188,7 @@ export const body: CourseBody = {
     {
       id: 'choisir-mdp',
       kind: 'guided',
+      labId: 'password-strength-lab',
       title: 'Assess passwords and practices',
       context: [
         { t: 'p', text: 'An employee describes their habits: (a) they use “Marie2024” everywhere; (b) they note their passwords in a file on their desktop; (c) they accept every validation notification they receive; (d) they enabled MFA on their mailbox through a mobile app.' },

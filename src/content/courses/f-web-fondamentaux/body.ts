@@ -182,6 +182,7 @@ export const body: CourseBody = {
     {
       id: 'lire-requete',
       kind: 'analysis',
+      labId: 'http-headers-lab',
       title: 'Lire une requête et une réponse HTTP',
       context: [
         { t: 'code', lang: 'http', code: 'POST /connexion HTTP/1.1\nHost: monespace.exemple\nCookie: pref=sombre\nContent-Type: application/x-www-form-urlencoded\n\nlogin=alice&mdp=Printemps2026\n\nHTTP/1.1 302 Found\nLocation: /accueil\nSet-Cookie: session=7f3a9c1e; Path=/' },

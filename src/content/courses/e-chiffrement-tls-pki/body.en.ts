@@ -178,6 +178,7 @@ export const body: CourseBody = {
     {
       id: 'audit-tls',
       kind: 'case',
+      labId: 'tls-inspection-lab',
       title: 'Case study: hardening a portal’s TLS configuration',
       context: [{ t: 'p', text: 'A scan of the customer portal reveals: TLS 1.0 and 1.1 enabled, suites with static RSA exchange and CBC, valid certificate but incomplete chain, no HSTS header. The portal handles health data that must remain confidential for at least 15 years.' }],
       steps: ['Propose the target configuration.', 'Explain the risk linked to static RSA exchange for data kept for a long time.', 'Propose a post-quantum measure and its timeline.'],

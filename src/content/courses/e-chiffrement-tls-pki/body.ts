@@ -178,6 +178,7 @@ export const body: CourseBody = {
     {
       id: 'audit-tls',
       kind: 'case',
+      labId: 'tls-inspection-lab',
       title: 'Cas pratique : durcir la configuration TLS d’un portail',
       context: [{ t: 'p', text: 'Un scan du portail client révèle : TLS 1.0 et 1.1 activés, suites avec échange RSA statique et CBC, certificat valide mais chaîne incomplète, pas d’en-tête HSTS. Le portail traite des données de santé qui doivent rester confidentielles au moins 15 ans.' }],
       steps: ['Proposer la configuration cible.', 'Expliquer le risque lié à l’échange RSA statique pour des données conservées longtemps.', 'Proposer une mesure post-quantique et son calendrier.'],

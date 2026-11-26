@@ -179,6 +179,7 @@ export const body: CourseBody = {
     {
       id: 'evaluer-regle',
       kind: 'analysis',
+      labId: 'detection-engineering-lab',
       title: 'Analysis: comparing two detection rules',
       context: [
         { t: 'code', lang: 'text', code: 'Test bench: 40 attack techniques replayed in an authorized environment\n\nRule A (behavioral): 200 alerts in a month, 30 of them justified; detects 30 of the 40 techniques\nRule B (very specific): 20 alerts in a month, 16 of them justified; detects 16 of the 40 techniques\n\nSOC capacity: about 60 alerts handled per day for all rules' },

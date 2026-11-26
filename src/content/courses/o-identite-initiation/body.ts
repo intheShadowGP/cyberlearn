@@ -188,6 +188,7 @@ export const body: CourseBody = {
     {
       id: 'choisir-mdp',
       kind: 'guided',
+      labId: 'password-strength-lab',
       title: 'Évaluer des mots de passe et des pratiques',
       context: [
         { t: 'p', text: 'Un collaborateur décrit ses habitudes : (a) il utilise « Marie2024 » partout ; (b) il note ses mots de passe dans un fichier sur son bureau ; (c) il accepte toutes les notifications de validation qu’il reçoit ; (d) il a activé la MFA sur sa messagerie par application mobile.' },

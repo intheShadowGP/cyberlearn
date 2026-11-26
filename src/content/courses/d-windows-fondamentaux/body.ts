@@ -197,6 +197,7 @@ export const body: CourseBody = {
     {
       id: 'poste-neuf',
       kind: 'case',
+      labId: 'windows-baseline-lab',
       title: 'Cas pratique : préparer un portable avant sa remise',
       context: [{ t: 'p', text: 'Une petite structure reçoit un portable Windows 11 qui sera confié à une personne en déplacement. Il contient des documents clients. Vous devez le préparer avant la remise.' }],
       steps: ['Lister les réglages de comptes et de mises à jour à vérifier.', 'Indiquer les protections intégrées à contrôler et leur état attendu.', 'Prévoir la protection des données en cas de perte et de panne.'],

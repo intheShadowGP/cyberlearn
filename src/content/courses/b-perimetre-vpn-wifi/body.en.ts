@@ -204,6 +204,7 @@ export const body: CourseBody = {
     {
       id: 'revue-regles',
       kind: 'analysis',
+      labId: 'exposed-ports-lab',
       title: 'Reviewing a firewall’s rules',
       context: [
         { t: 'p', text: 'Extract of an SME firewall’s rule list, read from top to bottom:' },

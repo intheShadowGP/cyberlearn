@@ -195,6 +195,7 @@ export const body: CourseBody = {
     {
       id: 'premiers-gestes',
       kind: 'scenario',
+      labId: 'custody-log-lab',
       title: 'Scenario: a suspicious workstation in an office',
       context: [{ t: 'p', text: 'A colleague warns you: her laptop opens unknown windows and a folder of financial documents seems to have been copied. The computer is on and the session is open.' }],
       steps: ['Say what you ask her to do and not to do.', 'List what you note at this stage.', 'Indicate whom you warn and why the machine is not powered off right away.'],
@@ -211,6 +212,7 @@ export const body: CourseBody = {
     {
       id: 'mini-chrono',
       kind: 'analysis',
+      labId: 'timeline-lab',
       title: 'Analysis: a mini-timeline in UTC',
       context: [
         { t: 'code', lang: 'text', code: 'Source        Time zone               Time     Event\nFirewall      UTC                     08:14:20 Inbound connection from 203.0.113.50\nServer        Paris (UTC+1, winter)   09:15:02 Successful sign-in of the account "compta"\nEDR           UTC                     08:16:45 Launch of an unknown program\nMail          Paris (UTC+1, winter)   09:18:30 Forwarding rule created on the mailbox "compta"' },

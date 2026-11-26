@@ -197,6 +197,7 @@ export const body: CourseBody = {
     {
       id: 'lire-code',
       kind: 'analysis',
+      labId: 'input-validation-lab',
       title: 'Lire un petit script et repérer les problèmes',
       context: [
         { t: 'code', lang: 'python', code: 'import sqlite3\n\nMOT_DE_PASSE_BD = "Admin2026!"\n\ndef chercher(nom):\n    base = sqlite3.connect("clients.db")\n    requete = "SELECT * FROM clients WHERE nom = \'" + nom + "\'"\n    try:\n        return base.execute(requete).fetchall()\n    except Exception as e:\n        print("Erreur :", e, "- mot de passe :", MOT_DE_PASSE_BD)\n\nresultat = eval(input("Calcul : "))' },
@@ -213,6 +214,7 @@ export const body: CourseBody = {
     {
       id: 'audit-dependances',
       kind: 'analysis',
+      labId: 'sbom-triage-lab',
       title: 'Auditer les dépendances d’un projet',
       context: [
         { t: 'code', lang: 'text', code: 'requests==2.19.0        # dernière publication en 2018\nflask                   # aucune version indiquée\nreqeusts-oauth==1.0     # publié il y a 3 jours, 12 téléchargements\npyyaml==5.1             # une faille d’exécution de code est connue pour cette version\nleft-pad-py             # n’est plus utilisé nulle part dans le projet' },

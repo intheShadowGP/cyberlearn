@@ -213,6 +213,7 @@ export const body: CourseBody = {
     {
       id: 'verifier-partage',
       kind: 'case',
+      labId: 'cloud-misconfig-lab',
       title: 'Case study: check the sharing of a folder',
       context: [{ t: 'p', text: 'A “Customer contracts” folder is shared through a link accessible to anyone who has it, with no end date. Three former employees still have access and the folder is stored in an employee’s personal account.' }],
       steps: ['List the security problems.', 'Propose the target sharing configuration.', 'Indicate how to check regularly that the sharing remains correct.'],

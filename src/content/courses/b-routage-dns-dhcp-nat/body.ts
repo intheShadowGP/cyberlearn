@@ -201,6 +201,7 @@ export const body: CourseBody = {
     {
       id: 'incident-dns-dhcp',
       kind: 'case',
+      labId: 'dns-zone-lab',
       title: 'Cas pratique : trafic détourné sur un réseau local',
       context: [{ t: 'p', text: 'Sur un réseau d’entreprise, des postes se retrouvent avec une passerelle et un serveur DNS inattendus, et certains sites bancaires présentent un certificat invalide. Vous suspectez une interception.' }],
       steps: ['Lister les deux mécanismes réseau que l’attaquant a pu détourner.', 'Indiquer les vérifications à mener sur un poste touché.', 'Proposer les protections côté réseau et côté résolution de noms.'],

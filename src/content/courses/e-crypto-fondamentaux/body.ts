@@ -171,6 +171,7 @@ export const body: CourseBody = {
     {
       id: 'choisir-outil',
       kind: 'case',
+      labId: 'crypto-choice-lab',
       title: 'Cas pratique : quel outil pour quel besoin ?',
       context: [{ t: 'p', text: 'Dans une petite association, on vous pose cinq questions : (a) envoyer à un partenaire un contrat dont il doit pouvoir vérifier l’origine, (b) vérifier qu’un logiciel téléchargé n’a pas été modifié, (c) protéger les sauvegardes stockées sur un disque externe, (d) échanger des messages confidentiels avec un correspondant que l’on n’a jamais rencontré, (e) savoir si on peut faire confiance à un site qui affiche un cadenas.' }],
       steps: ['Pour chaque situation, indiquer le besoin (confidentialité, intégrité, authenticité) et l’outil adapté.', 'Préciser pour (d) comment éviter de transmettre une clé sur un canal non sûr.', 'Expliquer ce que le cadenas garantit et ne garantit pas pour (e).'],

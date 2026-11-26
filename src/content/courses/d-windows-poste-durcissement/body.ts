@@ -212,6 +212,7 @@ export const body: CourseBody = {
     {
       id: 'chasse-persistance',
       kind: 'analysis',
+      labId: 'windows-persistence-lab',
       title: 'Analyser les points de démarrage d’un poste suspect',
       context: [
         { t: 'p', text: 'Extrait d’un inventaire de démarrage (Autoruns) d’un poste qui se recontamine après nettoyage :' },

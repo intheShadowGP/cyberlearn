@@ -204,6 +204,7 @@ export const body: CourseBody = {
     {
       id: 'revue-regles',
       kind: 'analysis',
+      labId: 'exposed-ports-lab',
       title: 'Relire les règles d’un pare-feu',
       context: [
         { t: 'p', text: 'Extrait de la liste de règles du pare-feu d’une PME, lue de haut en bas :' },

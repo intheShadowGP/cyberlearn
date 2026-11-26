@@ -171,6 +171,7 @@ export const body: CourseBody = {
     {
       id: 'choisir-outil',
       kind: 'case',
+      labId: 'crypto-choice-lab',
       title: 'Case study: which tool for which need?',
       context: [{ t: 'p', text: 'In a small association, you are asked five questions: (a) send a partner a contract whose origin they must be able to verify, (b) check that downloaded software has not been modified, (c) protect the backups stored on an external disk, (d) exchange confidential messages with a correspondent you have never met, (e) know whether you can trust a site that displays a padlock.' }],
       steps: ['For each situation, state the need (confidentiality, integrity, authenticity) and the suitable tool.', 'For (d), explain how to avoid sending a key over an unsafe channel.', 'Explain what the padlock does and does not guarantee for (e).'],

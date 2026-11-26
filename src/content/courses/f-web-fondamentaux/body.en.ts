@@ -182,6 +182,7 @@ export const body: CourseBody = {
     {
       id: 'lire-requete',
       kind: 'analysis',
+      labId: 'http-headers-lab',
       title: 'Reading an HTTP request and response',
       context: [
         { t: 'code', lang: 'http', code: 'POST /login HTTP/1.1\nHost: myspace.example\nCookie: pref=dark\nContent-Type: application/x-www-form-urlencoded\n\nlogin=alice&pwd=Spring2026\n\nHTTP/1.1 302 Found\nLocation: /home\nSet-Cookie: session=7f3a9c1e; Path=/' },

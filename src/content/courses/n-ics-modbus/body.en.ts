@@ -205,6 +205,7 @@ export const body: CourseBody = {
     {
       id: 'segmenter',
       kind: 'case',
+      labId: 'ics-conduit-lab',
       title: 'Case study: segment an industrial site',
       context: [{ t: 'p', text: 'Food processing plant: a single 10.0.0.0/16 network grouping office, SCADA server, HMIs, 12 PLCs and a supplier maintenance workstation equipped with remote-control software.' }],
       steps: ['Define the zones.', 'Define the conduits and the permitted flows.', 'Propose a solution for remote maintenance.'],

@@ -197,6 +197,7 @@ export const body: CourseBody = {
     {
       id: 'donnees-prompt',
       kind: 'analysis',
+      labId: 'ai-data-sharing-lab',
       title: 'Analysis: what can be sent to a public assistant?',
       context: [
         {

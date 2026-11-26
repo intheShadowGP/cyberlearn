@@ -197,6 +197,7 @@ export const body: CourseBody = {
     {
       id: 'lire-code',
       kind: 'analysis',
+      labId: 'input-validation-lab',
       title: 'Reading a small script and spotting the problems',
       context: [
         { t: 'code', lang: 'python', code: 'import sqlite3\n\nDB_PASSWORD = "Admin2026!"\n\ndef search(name):\n    db = sqlite3.connect("clients.db")\n    query = "SELECT * FROM clients WHERE name = \'" + name + "\'"\n    try:\n        return db.execute(query).fetchall()\n    except Exception as e:\n        print("Error:", e, "- password:", DB_PASSWORD)\n\nresult = eval(input("Calculation: "))' },
@@ -213,6 +214,7 @@ export const body: CourseBody = {
     {
       id: 'audit-dependances',
       kind: 'analysis',
+      labId: 'sbom-triage-lab',
       title: 'Auditing a project’s dependencies',
       context: [
         { t: 'code', lang: 'text', code: 'requests==2.19.0        # last release in 2018\nflask                   # no version indicated\nreqeusts-oauth==1.0     # published 3 days ago, 12 downloads\npyyaml==5.1             # a code execution flaw is known for this version\nleft-pad-py             # is no longer used anywhere in the project' },

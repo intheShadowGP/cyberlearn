@@ -205,6 +205,7 @@ export const body: CourseBody = {
     {
       id: 'segmenter',
       kind: 'case',
+      labId: 'ics-conduit-lab',
       title: 'Cas pratique : segmenter un site industriel',
       context: [{ t: 'p', text: 'Usine agroalimentaire : réseau unique 10.0.0.0/16 regroupant bureautique, serveur SCADA, IHM, 12 automates et un poste de maintenance du fournisseur équipé d’un logiciel de prise en main à distance.' }],
       steps: ['Définir les zones.', 'Définir les conduits et les flux autorisés.', 'Proposer une solution pour la maintenance à distance.'],

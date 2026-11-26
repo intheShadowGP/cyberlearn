@@ -201,6 +201,7 @@ export const body: CourseBody = {
     {
       id: 'incident-dns-dhcp',
       kind: 'case',
+      labId: 'dns-zone-lab',
       title: 'Case study: traffic diverted on a local network',
       context: [{ t: 'p', text: 'On a company network, hosts end up with an unexpected gateway and DNS server, and some banking sites show an invalid certificate. You suspect an interception.' }],
       steps: ['List the two network mechanisms the attacker may have hijacked.', 'State the checks to carry out on an affected host.', 'Propose the protections on the network side and on the name resolution side.'],

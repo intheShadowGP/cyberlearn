@@ -198,6 +198,7 @@ export const body: CourseBody = {
     {
       id: 'matrice',
       kind: 'guided',
+      labId: 'risk-matrix-lab',
       title: 'Construire une matrice de risques',
       context: [{ t: 'p', text: 'PME de logistique de 120 personnes. Scénarios identifiés : R1 rançongiciel via le VPN non mis à jour ; R2 fraude au faux virement par usurpation du dirigeant ; R3 incendie de la salle serveur ; R4 fuite du fichier clients par un salarié partant.' }],
       steps: ['Coter chaque scénario en vraisemblance (1 à 4) et gravité (1 à 4) en justifiant.', 'Placer les scénarios dans une matrice et définir les priorités.', 'Proposer un traitement et une mesure principale pour chacun.'],
@@ -205,6 +206,7 @@ export const body: CourseBody = {
     {
       id: 'nis2-ecart',
       kind: 'case',
+      labId: 'breach-deadline-lab',
       title: 'Cas pratique : première analyse d’écart NIS2',
       context: [{ t: 'p', text: 'Un fabricant de dispositifs médicaux de 400 salariés pense être concerné par NIS2. Il n’a ni analyse de risques formalisée, ni procédure de notification d’incident, ni inventaire de ses fournisseurs critiques.' }],
       steps: ['Indiquer comment vérifier s’il est concerné.', 'Lister les chantiers prioritaires.', 'Préciser le rôle attendu de la direction.'],

@@ -197,6 +197,7 @@ export const body: CourseBody = {
     {
       id: 'poste-neuf',
       kind: 'case',
+      labId: 'windows-baseline-lab',
       title: 'Case study: preparing a laptop before handing it over',
       context: [{ t: 'p', text: 'A small organization receives a Windows 11 laptop that will be given to a person who travels. It contains client documents. You must prepare it before handover.' }],
       steps: ['List the account and update settings to check.', 'State the built-in protections to check and their expected state.', 'Plan the protection of the data in case of loss and failure.'],
