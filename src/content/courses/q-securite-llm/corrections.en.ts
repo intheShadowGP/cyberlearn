@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Retrieval-Augmented Generation: the application retrieves relevant passages and places them in the model’s context. These passages become an injection surface and a possible source of leakage.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "d": "Unrelated."
+        "b": "RAG is not an audio format: it is a document retrieval technique.",
+        "a": "RAG encrypts nothing: it adds retrieved documents to the context.",
+        "d": "RAG is not a firewall: it feeds the model with documents."
       }
     },
     "ia-q2": {
@@ -68,7 +68,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Human confirmation places a human decision between the model’s possibly manipulated intent and the irreversible action. It must show exactly what will be sent and to whom.",
       "whyWrong": {
-        "d": "Insufficient: it can be bypassed.",
+        "d": "A longer system prompt does not block the sending of a hijacked message.",
         "c": "A better model can still be manipulated.",
         "a": "It does not change the risk."
       }
@@ -145,8 +145,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The malicious text is typed by the user themselves: direct injection. The impact is often disclosure of the system prompt; it must therefore never contain a secret (API key, password).",
       "whyWrong": {
-        "d": "It is not about training.",
-        "c": "It is not an extraction.",
+        "d": "Poisoning targets training data, not a message typed live.",
+        "c": "Model extraction aims at reproducing the model, not displaying the prompt.",
         "a": "No third party is involved."
       }
     },
@@ -155,9 +155,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Depending on the terms of use, the provider may keep, analyze or reuse the data: so we define what may be entered into it.",
       "whyWrong": {
-        "c": "That is not guaranteed.",
+        "c": "Data is not always deleted instantly.",
         "a": "It does leave the organization.",
-        "b": "That is not automatic."
+        "b": "It is not automatically anonymized before processing."
       }
     },
     "ia-q18": {
@@ -165,9 +165,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Poisoning targets training, fine-tuning or a RAG’s document base to steer answers or insert hostile content.",
       "whyWrong": {
-        "b": "That is not the same risk.",
-        "d": "That is not the same risk.",
-        "a": "That is not the same risk."
+        "b": "Denial of service targets availability, not the model’s learned behavior.",
+        "d": "Phishing deceives a user; it does not manipulate a model’s data.",
+        "a": "Network address spoofing does not alter training data."
       }
     },
     "ia-q19": {
@@ -175,9 +175,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Without access rights in the index, the search returns documents the user has no right to read, and the model may return them.",
       "whyWrong": {
-        "b": "That is not its purpose.",
-        "c": "That is not its purpose.",
-        "d": "That is not its purpose."
+        "b": "Keeping permissions does not speed up search: it restricts results.",
+        "c": "Permissions do not encrypt the model’s answers.",
+        "d": "Permissions do not shrink the base: they filter what is retrieved."
       }
     },
     "ia-q20": {
@@ -221,9 +221,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The less data is sent to the model, the less there is to protect and the less serious a leak is.",
       "whyWrong": {
-        "a": "That is not minimization.",
-        "c": "That is not minimization.",
-        "b": "That is not minimization."
+        "a": "Compressing data does not minimize it in the data protection sense.",
+        "c": "Deleting logs is not minimization and hinders investigation.",
+        "b": "Encrypting is not the same as processing only the necessary data."
       }
     },
     "ia-q25": {
@@ -231,9 +231,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "In an authorized framework, testers play the role of an adversary to measure the system’s robustness before and after it goes live.",
       "whyWrong": {
-        "d": "That is not the meaning.",
-        "a": "That is not the meaning.",
-        "b": "That is not the meaning."
+        "d": "Redesigning the interface is not an adversarial test.",
+        "a": "Training users is useful but it is not red teaming.",
+        "b": "Updating the base model is not a test of weaknesses."
       }
     },
     "ia-q26": {
@@ -241,8 +241,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The trace of tool calls and of the context that triggered them makes it possible to understand an unwanted action and find its origin.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "c": "That is not the goal.",
+        "d": "Logging is not meant to slow down the agent.",
+        "c": "Logs do not avoid human confirmation: they complement it.",
         "a": "They remain indispensable."
       }
     },
@@ -251,9 +251,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The regulation requires appropriate accuracy, robustness and cybersecurity, and documentation: demonstration goes through tests and evidence.",
       "whyWrong": {
-        "c": "That is not the requirement.",
-        "b": "That is not the requirement.",
-        "a": "That is not the requirement."
+        "c": "The regulation expects traceability, not a ban on logging.",
+        "b": "It does not require publishing each model’s source code.",
+        "a": "It does not ban high-risk systems: it frames them."
       }
     },
     "ia-q28": {
@@ -261,9 +261,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "You can neither assess risks nor apply a usage policy to tools you do not know about.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "c": "That is not the goal.",
-        "d": "That is not the goal."
+        "b": "The inventory is not meant to reduce accounts.",
+        "c": "Terminating all contracts is not the point of an inventory.",
+        "d": "The inventory serves to frame uses, not to forbid everything."
       }
     },
     "ia-q29": {
@@ -308,8 +308,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Everything given to the model to answer: the developer’s instructions, the conversation, retrieved documents, tool results.",
       "whyWrong": {
         "c": "Too restrictive.",
-        "d": "That is not its content.",
-        "a": "That is not its content."
+        "d": "The context window does not contain the model’s source code.",
+        "a": "It does not contain all users’ passwords."
       }
     },
     "ia-q34": {
@@ -318,7 +318,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The model produces the most plausible continuation of a context that may contain hostile text; it can also be wrong (hallucination).",
       "whyWrong": {
         "a": "That is false.",
-        "b": "Unrelated.",
+        "b": "Outputs are not encrypted by default, and encryption would not make them more reliable.",
         "c": "There is no external validation."
       }
     },
@@ -328,8 +328,8 @@ export const corrections: CourseCorrections = {
       "explanation": "In an indirect injection, the attacker does not talk to the model: they place the instruction in a page, an email or a document that the model will read.",
       "whyWrong": {
         "c": "That is the definition of direct injection.",
-        "a": "That is not the case.",
-        "d": "That is not the case."
+        "a": "An indirect injection does not require modifying the model’s source code.",
+        "d": "Encrypting the instruction does not define an indirect injection."
       }
     },
     "ia-q36": {
@@ -337,9 +337,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Filters reduce the risk but remain bypassable: they are a layer of defense, not a guarantee. Architecture limits the impact.",
       "whyWrong": {
-        "d": "That is not the reason.",
-        "c": "That is not the reason.",
-        "b": "That is not accurate."
+        "d": "Memory is not a filter’s limit: bypassing it is.",
+        "c": "Detection filters are not forbidden by regulation.",
+        "b": "A filter blocking every request would make the service unusable."
       }
     },
     "ia-q37": {
@@ -347,9 +347,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "To decide, the person must see precisely what will go out and to whom: a vague confirmation is validated by reflex.",
       "whyWrong": {
-        "a": "Insufficient.",
-        "d": "Irrelevant to the decision.",
-        "b": "Irrelevant to the decision."
+        "a": "The sending date alone does not let you judge whether the action is right.",
+        "d": "The name of the language model does not let you judge the action’s consequences.",
+        "b": "The number of tokens consumed is a cost indicator, not a check on the email."
       }
     },
     "ia-q38": {

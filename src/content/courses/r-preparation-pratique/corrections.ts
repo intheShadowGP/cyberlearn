@@ -64,46 +64,44 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Les règles d’engagement délimitent ce qui est permis : on ne fait rien en dehors."
     },
-    "rpp-q8": {
-      "type": "multi",
-      "correct": [
-        "a",
-        "c",
-        "d"
-      ],
-      "explanation": "Cadrage, énumération, validation maîtrisée puis compte rendu forment la démarche. Effacer les journaux est hors de propos et nuisible.",
+    "rpp-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "S’obstiner sur une impasse est l’erreur la plus fréquente. Une limite fixée à l’avance impose de consigner l’état, de passer à une autre piste et de revenir plus tard si le temps le permet.",
       "whyWrong": {
-        "b": "C’est nuisible et hors cadre."
+        "d": "La limite est un choix de méthode personnel, pas une obligation du règlement.",
+        "a": "Finir plus tôt n’apporte aucun avantage : le but est de couvrir davantage de pistes.",
+        "c": "Au contraire, on consigne l’état d’une piste avant de l’abandonner."
       }
     },
     "rpp-q9": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Les notes (commande, résultat, horodatage, capture) servent à reproduire une action et à rédiger ensuite le rapport.",
       "whyWrong": {
         "d": "Ce n’est pas le but.",
         "c": "Ce n’est pas le but.",
-        "a": "Elles servent le rapport."
+        "b": "Elles servent le rapport."
       }
     },
     "rpp-q10": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "Ces éléments rendent chaque action traçable et reproductible, et fournissent les preuves du rapport.",
       "whyWrong": {
-        "d": "Insuffisant.",
-        "b": "Insuffisant.",
-        "c": "Insuffisant."
+        "c": "Insuffisant.",
+        "a": "Insuffisant.",
+        "b": "Insuffisant."
       }
     },
     "rpp-q11": {
       "type": "single",
-      "correct": "d",
+      "correct": "c",
       "explanation": "On fixe un temps maximum, puis on passe à autre chose si la piste n’a pas abouti, en notant ce qui reste à essayer.",
       "whyWrong": {
         "b": "Ce n’est pas le principe.",
         "a": "C’est le contraire.",
-        "c": "Les pauses sont utiles."
+        "d": "Les pauses sont utiles."
       }
     },
     "rpp-q12": {
@@ -155,32 +153,32 @@ export const corrections: CourseCorrections = {
     },
     "rpp-q17": {
       "type": "single",
-      "correct": "c",
+      "correct": "d",
       "explanation": "Il s’adresse à la direction : constats principaux, impact sur l’organisation et décisions à prendre.",
       "whyWrong": {
-        "d": "C’est trop technique.",
+        "c": "C’est trop technique.",
         "a": "Il ne faut pas les reproduire.",
         "b": "Ce n’est pas son contenu."
       }
     },
     "rpp-q18": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "Un constat décrit avec contexte, preuve et étapes permet de confirmer la faiblesse puis de vérifier la correction.",
       "whyWrong": {
         "a": "Ce n’est pas le but.",
-        "b": "L’impact doit être décrit.",
-        "c": "La méthode doit être décrite."
+        "c": "L’impact doit être décrit.",
+        "d": "La méthode doit être décrite."
       }
     },
     "rpp-q19": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Le classement par gravité guide la priorité de correction. Le CVSS aide, nuancé par le contexte de l’organisation.",
       "whyWrong": {
         "d": "Ce n’est pas pertinent.",
         "c": "Ce n’est pas pertinent.",
-        "a": "Ce n’est pas pertinent."
+        "b": "Ce n’est pas pertinent."
       }
     },
     "rpp-q20": {
@@ -224,42 +222,42 @@ export const corrections: CourseCorrections = {
     },
     "rpp-q25": {
       "type": "single",
-      "correct": "a",
+      "correct": "c",
       "explanation": "On ne s’entraîne que sur des systèmes que l’on possède ou dont l’usage d’entraînement est expressément autorisé.",
       "whyWrong": {
-        "b": "C’est illégal.",
+        "a": "C’est illégal.",
         "d": "C’est illégal.",
-        "c": "C’est illégal."
+        "b": "C’est illégal."
       }
     },
     "rpp-q26": {
       "type": "single",
-      "correct": "c",
+      "correct": "b",
       "explanation": "Un laboratoire isolé permet de manipuler et de casser sans conséquence en dehors de l’environnement prévu.",
       "whyWrong": {
         "d": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
+        "c": "Ce n’est pas le but.",
         "a": "Ce n’est pas le but."
       }
     },
     "rpp-q27": {
       "type": "single",
-      "correct": "b",
+      "correct": "d",
       "explanation": "Après une manipulation hasardeuse ou un échec, on restaure l’instantané et on recommence.",
       "whyWrong": {
+        "b": "Ce n’est pas leur rôle.",
         "c": "Ce n’est pas leur rôle.",
-        "d": "Ce n’est pas leur rôle.",
         "a": "Ce n’est pas leur rôle."
       }
     },
     "rpp-q28": {
       "type": "single",
-      "correct": "d",
+      "correct": "a",
       "explanation": "L’apprentissage vient de l’effort et de la compréhension : on compare son approche et on la refait sans aide.",
       "whyWrong": {
-        "b": "On perd l’effort d’apprentissage.",
-        "c": "On ne retient rien.",
-        "a": "On ne retient rien."
+        "c": "On perd l’effort d’apprentissage.",
+        "d": "On ne retient rien.",
+        "b": "On ne retient rien."
       }
     },
     "rpp-q29": {
@@ -300,42 +298,42 @@ export const corrections: CourseCorrections = {
     },
     "rpp-q33": {
       "type": "single",
-      "correct": "a",
+      "correct": "c",
       "explanation": "L’autorisation écrite précise le périmètre, la période et les méthodes : elle distingue un test professionnel d’une intrusion.",
       "whyWrong": {
         "d": "Insuffisant.",
-        "c": "Un forum ne peut pas autoriser.",
-        "b": "Une bonne intention ne suffit pas."
+        "b": "Un forum ne peut pas autoriser.",
+        "a": "Une bonne intention ne suffit pas."
       }
     },
     "rpp-q34": {
       "type": "single",
-      "correct": "c",
+      "correct": "b",
       "explanation": "On les protège : le rapport mentionne l’existence et le type de données sans les reproduire, conformément aux règles de la mission.",
       "whyWrong": {
         "a": "Cela expose les données.",
         "d": "Cela expose les données.",
-        "b": "Cela expose les données."
+        "c": "Cela expose les données."
       }
     },
     "rpp-q35": {
       "type": "single",
-      "correct": "b",
+      "correct": "d",
       "explanation": "Les organismes fixent les outils permis, interdisent l’assistance extérieure et exigent la confidentialité du sujet.",
       "whyWrong": {
         "a": "C’est interdit.",
-        "d": "C’est interdit.",
-        "c": "Il y a des limites."
+        "c": "C’est interdit.",
+        "b": "Il y a des limites."
       }
     },
     "rpp-q36": {
       "type": "single",
-      "correct": "d",
+      "correct": "a",
       "explanation": "Un manquement peut invalider le résultat : il faut lire les règles avant l’épreuve et s’y tenir.",
       "whyWrong": {
-        "b": "Elles ont de l’importance.",
-        "a": "Elles s’imposent à tous.",
-        "c": "Elles ne sont jamais levées."
+        "c": "Elles ont de l’importance.",
+        "b": "Elles s’imposent à tous.",
+        "d": "Elles ne sont jamais levées."
       }
     },
     "rpp-q37": {

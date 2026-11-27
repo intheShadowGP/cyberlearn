@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Écrire hors d’un tableau est une erreur mémoire : elle peut corrompre d’autres données, faire planter le programme ou être détournée.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "d": "Sans rapport.",
-        "a": "Sans rapport."
+        "c": "Une mise en forme de texte n’est pas une écriture hors des limites d’un tableau.",
+        "d": "La traduction des messages n’a aucun lien avec l’écriture hors limites.",
+        "a": "Une erreur de saisie de l’utilisateur n’est pas cette classe de défaut du code."
       }
     },
     "pra-q2": {
@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "C’est un autre défaut : la mémoire n’est jamais rendue.",
         "c": "C’est un autre défaut.",
-        "d": "Sans rapport avec la mémoire libérée."
+        "d": "Une collision de noms de variables relève de la portée, pas de l’utilisation après libération."
       }
     },
     "pra-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une injection survient quand une donnée contrôlée par l’utilisateur est interprétée comme une commande ou une requête.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "d": "Ce n’est pas la même famille.",
-        "a": "Ce n’est pas la même famille."
+        "b": "Une panne matérielle n’est pas un défaut causé par une donnée non contrôlée.",
+        "d": "Une fuite de mémoire est un défaut de gestion des ressources, pas d’injection.",
+        "a": "Un débordement de pile se produit sans interprète de requêtes."
       }
     },
     "pra-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un dépassement d’entier peut donner une taille trop petite : la zone allouée est insuffisante et la copie qui suit déborde.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "c": "Sans rapport."
+        "b": "Le processeur ne corrompt pas la mémoire en chauffant : c’est un défaut de calcul.",
+        "a": "Les entiers ne sont pas « stockés en clair » : le problème est le dépassement du calcul.",
+        "c": "Le compilateur ne supprime pas la zone : un mauvais calcul la sous-dimensionne."
       }
     },
     "pra-q5": {
@@ -78,9 +78,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le débogueur permet d’arrêter le programme, d’observer les variables et la pile d’appels et de comprendre ce qui précède l’erreur.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "c": "Un débogueur ne chiffre aucun fichier.",
+        "b": "Il ne sert pas à accélérer une connexion.",
+        "d": "Sauvegarder du code est le rôle d’un gestionnaire de versions."
       }
     },
     "pra-q10": {
@@ -89,7 +89,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le sanitizer ajoute des contrôles à l’exécution : une erreur mémoire ou un comportement indéfini est signalé immédiatement, avec la pile d’appels.",
       "whyWrong": {
         "a": "Il détecte, il ne corrige pas.",
-        "c": "Ce n’est pas son rôle.",
+        "c": "Un sanitizer ne chiffre aucune donnée : il détecte des erreurs.",
         "d": "Il ralentit au contraire."
       }
     },
@@ -98,7 +98,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un plantage reproductible permet de vérifier l’hypothèse, de corriger et de constater que l’entrée d’origine ne plante plus.",
       "whyWrong": {
-        "d": "Ce n’est pas l’objectif.",
+        "d": "Reproduire sert à comprendre un plantage, pas à en accumuler.",
         "a": "Il faut lire le code.",
         "b": "Le test accompagne la correction."
       }
@@ -135,7 +135,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Pile d’appels, entrée et version permettent de reproduire et de localiser le défaut. Le fond d’écran n’a aucun rapport.",
       "whyWrong": {
-        "a": "Sans rapport."
+        "a": "Le fond d’écran du testeur n’apporte rien à l’analyse."
       }
     },
     "pra-q16": {
@@ -155,7 +155,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Cela ralentirait fortement le test.",
         "d": "Cela ralentirait fortement le test.",
-        "b": "Sans rapport."
+        "b": "Choisir le compilateur n’est pas le rôle d’un harnais de fuzzing."
       }
     },
     "pra-q18": {
@@ -165,7 +165,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "C’est l’inverse.",
         "c": "Elle reproduit toujours le plantage.",
-        "d": "Ce n’est pas le but."
+        "d": "Minimiser une entrée ne la chiffre pas."
       }
     },
     "pra-q19": {
@@ -173,9 +173,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Les mots-clés et constantes du format sont difficiles à deviner par mutation : le dictionnaire permet de franchir plus vite les premières comparaisons.",
       "whyWrong": {
-        "d": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "d": "Un dictionnaire n’a pas de fonction de traduction.",
+        "a": "Il ne compresse pas les résultats.",
+        "c": "Il n’enlève aucune entrée : il fournit des éléments du format."
       }
     },
     "pra-q20": {
@@ -183,9 +183,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La couverture montre les blocs atteints et ceux qui ne le sont pas : elle guide l’ajout de graines, de dictionnaires et de harnais.",
       "whyWrong": {
-        "c": "Ce n’est pas ce qu’elle mesure.",
-        "a": "Ce n’est pas ce qu’elle mesure.",
-        "b": "Ce n’est pas ce qu’elle mesure."
+        "c": "La couverture ne mesure pas la vitesse de la machine.",
+        "a": "Elle ne compte pas les développeurs.",
+        "b": "Elle ne vérifie pas l’espace disque."
       }
     },
     "pra-q21": {
@@ -224,7 +224,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un récepteur ne peut pas supposer que l’émetteur est honnête ni que le message est bien formé : il vérifie les longueurs, les champs et la séquence.",
       "whyWrong": {
         "c": "C’est une hypothèse dangereuse.",
-        "a": "Ce n’est pas son objectif.",
+        "a": "La validation ajoute un contrôle : elle n’accélère pas toujours le réseau.",
         "d": "Elle ne remplace pas le chiffrement."
       }
     },
@@ -233,9 +233,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "La signature prouve que la mise à jour vient bien de l’éditeur et n’a pas été modifiée : un fichier altéré est refusé.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
-        "b": "Sans rapport."
+        "a": "La signature ne mesure pas la vitesse de téléchargement.",
+        "d": "Elle ne concerne pas la taille sur disque.",
+        "b": "Elle ne protège pas le nom du fichier affiché."
       }
     },
     "pra-q27": {
@@ -243,9 +243,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Si le récepteur accepte la même commande une seconde fois, un message capté peut être rejoué : on s’en protège par un nonce, un compteur ou un horodatage.",
       "whyWrong": {
-        "c": "Ce n’est pas du rejeu.",
-        "a": "Ce n’est pas du rejeu.",
-        "b": "Ce n’est pas du rejeu."
+        "c": "Rédiger un nouveau message n’est pas un rejeu.",
+        "a": "Supprimer un message avant sa réception est une interception.",
+        "b": "Chiffrer avec une clé neuve n’est pas un rejeu."
       }
     },
     "pra-q28": {
@@ -253,7 +253,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un nonce ou un compteur signé avec le message permet de refuser un message déjà vu ou hors séquence.",
       "whyWrong": {
-        "d": "Sans rapport.",
+        "d": "Une couleur ne distingue pas un message rejoué d’un message neuf.",
         "c": "Ne protège pas du rejeu.",
         "b": "Cela favorise le rejeu."
       }
@@ -307,9 +307,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le test rejoue l’entrée qui provoquait le défaut : si un changement ultérieur le réintroduit, la validation échoue.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
+        "c": "Le test ne supprime pas l’ancien code.",
         "a": "Il complète la revue.",
-        "d": "Sans rapport."
+        "d": "Il ne mesure pas la vitesse du compilateur."
       }
     },
     "pra-q35": {
@@ -327,8 +327,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le score estime une gravité générale. L’exposition à Internet, les droits du processus et la sensibilité des données modifient la priorité réelle.",
       "whyWrong": {
-        "c": "Ce n’est pas exact.",
-        "b": "Ce n’est pas exact.",
+        "c": "Un score n’est pas toujours égal à zéro.",
+        "b": "Le score ne change pas à chaque lecture du rapport.",
         "d": "Il s’applique à tout logiciel."
       }
     },
@@ -358,7 +358,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Exposition, droits obtenus et données concernées déterminent l’impact réel. Le logo n’a aucune influence.",
       "whyWrong": {
-        "a": "Sans rapport."
+        "a": "La couleur du logo n’influence pas la gravité d’une vulnérabilité."
       }
     },
     "pra-q40": {

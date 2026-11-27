@@ -10,8 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un défaut (ou bogue) est une erreur dans le code ou la conception. Il devient une vulnérabilité s’il peut être utilisé contre la sécurité.",
       "whyWrong": {
         "c": "Le correctif supprime le défaut.",
-        "d": "Sans rapport.",
-        "a": "Sans rapport."
+        "d": "Une licence est un contrat d’utilisation, pas une erreur de conception.",
+        "a": "Un journal d’événements enregistre l’activité, il ne désigne pas un défaut."
       }
     },
     "pri-q2": {
@@ -20,8 +20,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une vulnérabilité est un défaut qu’un attaquant peut utiliser pour porter atteinte à la confidentialité, à l’intégrité ou à la disponibilité.",
       "whyWrong": {
         "b": "Une mise à jour corrige.",
-        "a": "Ce n’est pas une vulnérabilité.",
-        "d": "Ce n’est pas une vulnérabilité."
+        "a": "La longueur d’un mot de passe n’est pas une vulnérabilité du logiciel.",
+        "d": "Une ancienne sauvegarde n’est pas un défaut utilisable contre la sécurité."
       }
     },
     "pri-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’exploit est le moyen concret (fichier piégé, requête, séquence d’actions) qui tire parti d’une vulnérabilité. La vulnérabilité existe avant lui.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "c": "Sans rapport."
+        "b": "Un test de performance mesure la vitesse, il n’exploite aucune faille.",
+        "a": "Une règle de pare-feu est une défense, pas un moyen d’exploitation.",
+        "c": "Un rapport de couverture mesure les tests, il n’exploite rien."
       }
     },
     "pri-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un identifiant CVE est un numéro public unique : tout le monde parle de la même faille et peut suivre son correctif.",
       "whyWrong": {
-        "b": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "b": "Un CVE n’est pas un mécanisme de chiffrement : c’est un identifiant public.",
+        "c": "Un CVE ne mesure pas la rapidité d’un correctif.",
+        "d": "Un CVE ne donne pas d’accès : il désigne une vulnérabilité."
       }
     },
     "pri-q5": {
@@ -80,19 +80,19 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le TPM est une puce de sécurité : elle conserve des clés et ne les libère que si le démarrage mesuré est intègre.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "c": "Filtrer le courrier relève d’une passerelle de messagerie, pas du TPM.",
+        "d": "Le TPM n’accélère pas l’affichage : il protège des clés et mesure le démarrage.",
+        "b": "Le TPM ne sauvegarde pas les documents."
       }
     },
-    "pri-q10": {
+    "pri-q41": {
       "type": "single",
       "correct": "c",
-      "explanation": "Secure Boot vérifie la signature du micrologiciel, du chargeur et du noyau : un composant non approuvé n’est pas exécuté.",
+      "explanation": "Une hypothèse testable indique ce que l’on observe et dans quelles conditions : on peut envoyer l’entrée et constater le plantage, ou son absence.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "b": "Aucune observation ne pourrait contredire cette affirmation générale.",
+        "a": "La « qualité » n’est pas définie : aucune mesure ne la confirme ou l’infirme.",
+        "d": "C’est une opinion, sans condition d’observation ni résultat qui l’infirmerait."
       }
     },
     "pri-q11": {
@@ -101,8 +101,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Zero Trust vérifie chaque accès (utilisateur, appareil, contexte) au lieu de faire confiance au réseau interne.",
       "whyWrong": {
         "c": "C’est le modèle que Zero Trust abandonne.",
-        "a": "Ce n’est pas le principe.",
-        "b": "Ce n’est pas le principe."
+        "a": "Zero Trust ne supprime pas les mots de passe : il vérifie chaque accès.",
+        "b": "Ne pas mettre à jour affaiblit la sécurité : c’est contraire à Zero Trust."
       }
     },
     "pri-q12": {
@@ -112,7 +112,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Elle ne remplace pas les correctifs.",
         "c": "Les mots de passe restent utiles.",
-        "a": "Ce n’est pas son rôle."
+        "a": "Le but est la confiance, pas la vitesse de calcul."
       }
     },
     "pri-q13": {
@@ -156,8 +156,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le fuzzing génère automatiquement un très grand nombre d’entrées inhabituelles et surveille les plantages et les erreurs du programme.",
       "whyWrong": {
         "a": "C’est la revue de code.",
-        "d": "Ce n’est pas le principe.",
-        "b": "Ce n’est pas le principe."
+        "d": "Le fuzzing n’a pas pour but de chiffrer : il envoie des entrées inhabituelles.",
+        "b": "Désinstaller des composants est une réduction de surface, pas du fuzzing."
       }
     },
     "pri-q18": {
@@ -166,8 +166,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un plantage ou une erreur mémoire est le signe d’un défaut à analyser : on le reproduit, on le minimise puis on l’évalue.",
       "whyWrong": {
         "c": "Ce n’est pas ce que signale un plantage.",
-        "d": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Une licence expirée ne provoque pas un plantage pendant un fuzzing.",
+        "b": "Une sauvegarde terminée sans erreur ne signale aucun défaut."
       }
     },
     "pri-q19": {
@@ -175,9 +175,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Les graines sont des entrées valides de départ : le fuzzer les modifie pour explorer des cas auxquels personne n’avait pensé.",
       "whyWrong": {
-        "d": "Ce n’est pas leur rôle.",
-        "c": "Ce n’est pas leur rôle.",
-        "a": "Ce n’est pas leur rôle."
+        "d": "Les graines ne chiffrent aucun résultat : ce sont des entrées de départ.",
+        "c": "Elles n’éliminent pas les défauts connus : elles servent à en chercher d’autres.",
+        "a": "Elles n’installent pas le programme testé."
       }
     },
     "pri-q20": {
@@ -186,8 +186,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un débordement survient quand un programme dépasse la zone mémoire réservée : plantage possible, voire détournement du comportement dans les cas graves.",
       "whyWrong": {
         "c": "Ce n’est pas la mémoire du programme.",
-        "a": "Ce n’est pas un défaut mémoire.",
-        "b": "Ce n’est pas un défaut mémoire."
+        "a": "Saturer une connexion réseau est un déni de service, pas un débordement de tampon.",
+        "b": "Dépasser un quota de courriels n’a aucun lien avec la mémoire d’un programme."
       }
     },
     "pri-q21": {
@@ -236,8 +236,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le chercheur prévient en privé, laisse le temps de corriger, puis publie les détails une fois le correctif disponible.",
       "whyWrong": {
         "c": "C’est l’inverse.",
-        "a": "Ce n’est pas la définition.",
-        "b": "Ce n’est pas la définition."
+        "a": "Ne jamais publier prive la communauté de l’information : ce n’est pas la divulgation coordonnée.",
+        "b": "Diffuser en secret à tous n’est ni coordonné ni responsable."
       }
     },
     "pri-q27": {
@@ -300,9 +300,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une machine assez puissante pourrait casser RSA et les courbes elliptiques. C’est pourquoi on développe la cryptographie post-quantique.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "b": "Sans rapport.",
-        "a": "Sans rapport."
+        "d": "Un ordinateur quantique ne ralentit pas Internet : il menace certains algorithmes.",
+        "b": "Il ne supprime pas les mots de passe : il menace la cryptographie à clé publique.",
+        "a": "Il n’efface rien : la menace porte sur le secret des données chiffrées."
       }
     },
     "pri-q34": {
@@ -310,9 +310,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un adversaire peut stocker des échanges chiffrés aujourd’hui et les déchiffrer quand un ordinateur quantique sera disponible.",
       "whyWrong": {
-        "b": "Ce n’est pas la signification.",
-        "d": "Ce n’est pas la signification.",
-        "c": "Ce n’est pas la signification."
+        "b": "Sauvegarder avant une mise à jour est une bonne pratique, pas une menace.",
+        "d": "Chiffrer la nuit n’a aucun rapport avec cette expression.",
+        "c": "Supprimer des données n’est pas collecter pour déchiffrer plus tard."
       }
     },
     "pri-q35": {
@@ -320,9 +320,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le score (de 0 à 10) estime la gravité d’après la facilité d’exploitation et l’impact. Il aide à prioriser mais ne remplace pas l’analyse du contexte.",
       "whyWrong": {
-        "c": "Ce n’est pas ce qu’il mesure.",
-        "a": "Ce n’est pas ce qu’il mesure.",
-        "d": "Ce n’est pas ce qu’il mesure."
+        "c": "Le nombre de victimes n’est pas ce que mesure un score CVSS.",
+        "a": "La durée de développement du correctif n’est pas mesurée par le CVSS.",
+        "d": "Le prix de la faille sur un marché illicite n’est pas son score CVSS."
       }
     },
     "pri-q36": {
@@ -330,9 +330,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "On démontre qu’une affirmation est vraie (« je connais ce secret ») sans rien révéler du secret lui-même.",
       "whyWrong": {
-        "a": "Ce n’est pas son objet.",
-        "c": "Ce n’est pas son objet.",
-        "b": "Ce n’est pas son objet."
+        "a": "La preuve à divulgation nulle ne vise pas la vitesse de chiffrement.",
+        "c": "Elle n’efface aucun journal : elle prouve une connaissance sans la révéler.",
+        "b": "Partager une clé avec tous la révélerait : c’est l’inverse de l’idée."
       }
     },
     "pri-q37": {

@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A model adjusts its parameters from examples to reproduce a decision, rather than applying rules written one by one.",
       "whyWrong": {
         "d": "That is the opposite of learning.",
-        "a": "That is not how it works.",
+        "a": "A model does not copy data without analyzing it: it draws regularities from it.",
         "c": "It assists experts, it does not replace them."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An LLM produces the most plausible continuation of a given text: it writes, summarizes, answers, without “knowing” in the human sense.",
       "whyWrong": {
-        "c": "That is not its role.",
-        "b": "That is not its role.",
-        "d": "That is not its role."
+        "c": "An LLM generates text; it does not encrypt emails.",
+        "b": "An LLM is not a network directory: it produces language.",
+        "d": "A firewall filters traffic; an LLM blocks no site."
       }
     },
     "qii-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "AI covers systems that recognize, classify, predict or write, tasks associated with human intelligence.",
       "whyWrong": {
-        "a": "That is not the definition.",
+        "a": "An AI does not feel emotions: it processes data.",
         "b": "They do make mistakes.",
-        "c": "That is not the definition."
+        "c": "Connecting to the Internet does not make a device intelligent."
       }
     },
     "qii-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Training data are the examples used to adjust the model: their quality determines the model’s quality.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "d": "That is not the definition.",
-        "a": "That is not the definition."
+        "b": "A password serves to authenticate, not to train a model.",
+        "d": "An error message is an output, not training data.",
+        "a": "A workstation backup is not a learning example."
       }
     },
     "qii-q5": {
@@ -90,9 +90,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Spam filters learn to distinguish unwanted messages from legitimate ones from examples.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "c": "Unrelated.",
-        "d": "Unrelated."
+        "a": "A power cord uses no machine learning.",
+        "c": "A wallpaper analyzes no message.",
+        "d": "A screen saver does not sort emails."
       }
     },
     "qii-q11": {
@@ -100,9 +100,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The model learns usual behavior and flags deviations, which an analyst then checks.",
       "whyWrong": {
-        "b": "That is not its goal.",
-        "c": "That is not its goal.",
-        "a": "That is not its goal."
+        "b": "Deleting connections detects nothing: it cuts the service.",
+        "c": "Copying logs identifies no anomaly.",
+        "a": "Measuring throughput is monitoring, not detecting behavior deviations."
       }
     },
     "qii-q12": {
@@ -110,9 +110,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A model error on a high-impact action is costly: human validation catches it before it has an effect.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "c": "That is not accurate.",
-        "d": "That is not accurate."
+        "b": "AI does produce text: that is not the reason.",
+        "c": "Alerts are not always false: they must be qualified.",
+        "d": "The law does not forbid automatic tools; it frames their use."
       }
     },
     "qii-q13": {
@@ -155,9 +155,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An assistant produces plausible text, not necessarily true: facts, figures and references are checked in a reliable source.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "c": "That is not the reason.",
-        "a": "That is not accurate."
+        "b": "The language of the answer is not the problem.",
+        "c": "An answer is not protected by a secret password.",
+        "a": "Figures can be exact or invented: they must be checked."
       }
     },
     "qii-q18": {
@@ -165,9 +165,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "If the data is unbalanced, the model reproduces that imbalance and favors certain cases.",
       "whyWrong": {
-        "a": "That is not a bias.",
-        "c": "That is not a bias.",
-        "d": "That is not a bias."
+        "a": "A hardware failure is not a bias: a bias comes from the data.",
+        "c": "A stored password is a security matter, not bias.",
+        "d": "A firewall rule does not fix data bias."
       }
     },
     "qii-q19": {
@@ -175,9 +175,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Accepting an answer without checking it leads to acting on false information: wrong priority, wrong action, wrong report.",
       "whyWrong": {
-        "b": "That is not a risk.",
-        "c": "That is not a risk.",
-        "d": "That is not a risk."
+        "b": "Saving time is not a risk: the mistake is not checking.",
+        "c": "Energy consumption is not the risk of overconfidence.",
+        "d": "Too few answers is not the problem: it is their errors."
       }
     },
     "qii-q20": {
@@ -234,9 +234,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Depending on the terms of use, the provider may keep, analyze or reuse the data entered.",
       "whyWrong": {
-        "a": "That is not guaranteed.",
+        "a": "Data is not necessarily erased right after the answer.",
         "b": "It does leave the device.",
-        "c": "That is not automatic."
+        "c": "It is not automatically made public, but the provider may keep it."
       }
     },
     "qii-q27": {
@@ -244,9 +244,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Personal data keeps its protection: the organization remains responsible for what it sends to a provider.",
       "whyWrong": {
-        "d": "It is not excluded.",
-        "a": "That is not accurate.",
-        "b": "That is not accurate."
+        "d": "The GDPR does not exclude data once typed: it still applies.",
+        "a": "Personal data does not become freely reusable.",
+        "b": "The GDPR also applies to private services."
       }
     },
     "qii-q28": {
@@ -255,7 +255,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A validated tool has been reviewed (contract, data retention, security): an unvalidated tool exposes the organization.",
       "whyWrong": {
         "c": "That exposes the data.",
-        "b": "Unrelated.",
+        "b": "Disabling updates weakens the workstation’s security.",
         "d": "Never share your credentials."
       }
     },
@@ -300,9 +300,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Generated messages are error-free, personalized and in every language: the quality of the form is no longer a sign of legitimacy.",
       "whyWrong": {
-        "b": "That is not what it brings.",
-        "c": "That is not what it brings.",
-        "a": "That is not what it brings."
+        "b": "AI does not remove the Internet as an attack channel.",
+        "c": "Making emails unreadable would make them useless to the attacker.",
+        "a": "Encrypting messages does not help phishing, which aims to be read."
       }
     },
     "qii-q34": {
@@ -310,9 +310,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A deepfake imitates a person’s voice or face: more and more convincing, it is used for fraud.",
       "whyWrong": {
-        "c": "That is not the definition.",
-        "d": "That is not the definition.",
-        "a": "That is not the definition."
+        "c": "A hardware failure has nothing to do with faking a voice or face.",
+        "d": "A virus that deletes files is malware, not a deepfake.",
+        "a": "A system update is not falsified content."
       }
     },
     "qii-q35": {
@@ -330,9 +330,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Text hidden in a page, an email or a document can push an assistant to do something other than what the user wants.",
       "whyWrong": {
-        "c": "That is not the definition.",
-        "b": "That is not the definition.",
-        "d": "That is not the definition."
+        "c": "A plugged cable is not a text injection.",
+        "b": "A scheduled update does not hijack instructions.",
+        "d": "A history backup does not change the assistant’s behavior."
       }
     },
     "qii-q37": {

@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Context, task, output format and constraints give the assistant what it needs to answer usefully.",
       "whyWrong": {
-        "c": "Insufficient.",
-        "d": "Insufficient.",
+        "c": "The author’s name does not structure a request: the task and context are missing.",
+        "d": "A single word gives no context, format or constraints.",
         "b": "They must never be provided."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Delimiters around the data help the model treat it as content, not as instructions, even if it is not a guarantee.",
       "whyWrong": {
-        "a": "That is not the goal.",
-        "d": "That is not the goal.",
-        "b": "That is not the goal."
+        "a": "Separating is not meant to lengthen the request but to avoid confusion.",
+        "d": "The separation does not prevent an answer: it clarifies what is an instruction.",
+        "b": "The separation encrypts nothing: it delimits instructions and data."
       }
     },
     "qip-q3": {
@@ -30,7 +30,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A secret entered into an online tool is exposed, whether at the start, partly masked or sent separately.",
       "whyWrong": {
         "a": "That exposes them.",
-        "c": "Insufficient.",
+        "c": "Half-masking a secret leaves it partly exposed: it must not appear at all.",
         "d": "That exposes them too."
       }
     },
@@ -39,7 +39,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An answer accompanied by its sources and assumptions is checked faster; it does not become accurate for all that.",
       "whyWrong": {
-        "c": "That is not the goal.",
+        "c": "Citing sources does not prevent challenge: on the contrary, it makes it possible to verify.",
         "b": "It guarantees nothing.",
         "a": "Review remains necessary."
       }
@@ -100,8 +100,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The assistant gathers reputation, history and asset context, which speeds up the analyst’s work.",
       "whyWrong": {
         "c": "The investigation is still necessary.",
-        "d": "That is not its purpose.",
-        "a": "That is not its purpose."
+        "d": "Enrichment is not meant to make the alert confidential for everyone.",
+        "a": "It does not turn an alert into an incident: it helps qualify it."
       }
     },
     "qip-q12": {
@@ -109,9 +109,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Qualification commits the organization and depends on business knowledge the model lacks: the human decides, with the elements provided.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "c": "That is not accurate.",
-        "a": "That is not the reason."
+        "b": "The assistant does not always refuse to answer: the decision stays human.",
+        "c": "Major incidents do have logs: that is what enables the investigation.",
+        "a": "Analysts still need training to own this decision."
       }
     },
     "qip-q13": {
@@ -154,8 +154,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A test set makes it possible to compare answers with expected results, before going live and after every change.",
       "whyWrong": {
         "b": "It measures, it does not fix.",
-        "c": "That is not its role.",
-        "a": "That is not its role."
+        "c": "A test set encrypts nothing: it measures quality.",
+        "a": "A test set does not make the assistant faster."
       }
     },
     "qip-q18": {
@@ -163,9 +163,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "We count the answers that contain false or invented elements (references, figures, facts) on a test set.",
       "whyWrong": {
-        "c": "That is not what it measures.",
-        "d": "That is not what it measures.",
-        "a": "That is not what it measures."
+        "c": "Slow writing is not what this rate measures.",
+        "d": "The number of readers is not a hallucination rate.",
+        "a": "The time answers are sent is not concerned."
       }
     },
     "qip-q19": {
@@ -173,8 +173,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A document containing a hidden instruction shows whether the assistant follows or ignores it: it is the measure of its robustness.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "c": "That is not the goal.",
+        "b": "Adding these cases makes tests more demanding, not easier.",
+        "c": "These cases increase coverage; they do not reduce the tests.",
         "d": "Review is still useful."
       }
     },
@@ -183,9 +183,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A new model or a modified prompt can degrade certain cases: only a new run of the test set reveals it.",
       "whyWrong": {
-        "d": "That is not the reason.",
-        "b": "That is not the reason.",
-        "a": "That is not the reason."
+        "d": "Tests do not erase themselves.",
+        "b": "The reason is technical: a contract is not the cause.",
+        "a": "Old results are kept: the point is to compare."
       }
     },
     "qip-q21": {
@@ -244,9 +244,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Trials (including adversarial tests) are done on staging data and tools, with no consequence on the real systems.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "c": "That is not the goal.",
-        "a": "That is not the goal."
+        "b": "Separating environments is not meant to reduce license cost.",
+        "c": "On the contrary, a test environment lets analysts practice.",
+        "a": "Separation does not speed up requests: it protects production."
       }
     },
     "qip-q28": {
@@ -256,7 +256,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Risk of running hostile content.",
         "c": "Risk of running hostile content.",
-        "d": "That is not validation."
+        "d": "Encrypting an output before reading it does not make it reliable."
       }
     },
     "qip-q29": {
@@ -299,9 +299,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The policy says which tools are validated, which data may be processed in them and who is responsible.",
       "whyWrong": {
-        "d": "That is not its purpose.",
+        "d": "The policy does not state the IT team’s headcount.",
         "c": "Such a list must never be compiled.",
-        "b": "That is not its purpose."
+        "b": "The color of interfaces is not an AI usage policy topic."
       }
     },
     "qip-q34": {
@@ -309,9 +309,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The AI Act classifies systems by level of risk and imposes obligations (robustness, documentation, cybersecurity) on high-risk systems.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "c": "Unrelated.",
-        "b": "Unrelated."
+        "a": "The highway code does not regulate AI systems.",
+        "c": "A packaging directive does not concern AI.",
+        "b": "A taxi regulation does not concern AI."
       }
     },
     "qip-q35": {
@@ -329,9 +329,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Classification (public, internal, confidential, personal) determines which tools can process which data.",
       "whyWrong": {
-        "a": "That is not the goal.",
-        "c": "That is not the goal.",
-        "d": "Unrelated."
+        "a": "Classifying data does not reduce the number of accounts.",
+        "c": "The aim is not to delete older data.",
+        "d": "Interface color is not a data classification criterion."
       }
     },
     "qip-q37": {

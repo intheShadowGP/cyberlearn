@@ -15,8 +15,8 @@
 | Cours avec au moins un exercice lié à un laboratoire | 36 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 100 % |
-| Explications de mauvaises réponses de 5 mots ou moins, sur le total (FR) | 2271 sur 5800 |
-| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 29 |
+| Explications de mauvaises réponses creuses (« Sans rapport. », « Ce n’est pas son rôle. »), sur le total (FR) | 586 sur 5808 |
+| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 25 |
 
 ## Par cours
 
@@ -102,22 +102,18 @@
 | `q-ia-pratique` | Q | 2 | 7 | 1626 | 1453 | 3 | 1 | 3 | 3 | 43 | U22 VF7 C6 M6 O2 | 100 % | 5 |
 | `q-ia-defense-ml` | Q | 3 | 7 | 1669 | 1432 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 6 |
 | `q-securite-llm` | Q | 3 | 8 | 1785 | 1535 | 3 | 0 | 4 | 4 | 43 | U23 VF7 C5 M6 O2 | 100 % | 5 |
-| `q-securite-ia-avancee` | Q | 4 | 7 | 1743 | 1519 | 3 | 0 | 4 | 4 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `q-securite-ia-avancee` | Q | 4 | 7 | 1743 | 1519 | 3 | 0 | 4 | 4 | 40 | U21 VF7 C4 M6 O2 | 100 % | 5 |
 | `r-certifications-preparation` | R | 1 | 7 | 1686 | 1512 | 2 | 0 | 4 | 4 | 46 | U21 VF10 M7 C5 O3 | 100 % | 4 |
 | `r-preparation-fondamentaux` | R | 2 | 8 | 1643 | 1490 | 3 | 1 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `r-preparation-pratique` | R | 3 | 8 | 1758 | 1545 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
-| `r-certifications-expertes` | R | 4 | 8 | 1832 | 1609 | 3 | 0 | 3 | 3 | 40 | U20 VF7 C5 M6 O2 | 100 % | 5 |
+| `r-preparation-pratique` | R | 3 | 8 | 1758 | 1545 | 3 | 0 | 3 | 3 | 40 | U21 VF7 C5 M5 O2 | 100 % | 5 |
+| `r-certifications-expertes` | R | 4 | 8 | 1832 | 1609 | 3 | 0 | 3 | 3 | 40 | U21 VF7 M6 C4 O2 | 100 % | 5 |
 
 ## Questions quasi identiques entre cours (similarité ≥ 0,5)
 
 | Similarité | Question A | Question B |
 | --- | --- | --- |
 | 1.00 | `b-ipv4-subnetting/ipv4-q2` | `b-ipv4-subnetting/ipv4-q18` |
-| 0.83 | `q-ia-defense-ml/aiml-q39` | `q-securite-ia-avancee/qia-q40` |
 | 0.80 | `b-ipv4-subnetting/ipv4-q3` | `b-ipv4-subnetting/ipv4-q19` |
-| 0.80 | `h-pentest-initiation/pti-q20` | `r-preparation-pratique/rpp-q8` |
-| 0.75 | `k-retro-ingenierie-defensive/rid-q39` | `p-recherche-initiation/pri-q10` |
-| 0.75 | `r-certifications-expertes/rce-q7` | `r-certifications-preparation/cert-q18` |
 | 0.67 | `h-pentest-initiation/pti-q25` | `h-pentest-methodologie/pt-q6` |
 | 0.67 | `l-devsecops-pipeline/dso-q43` | `n-ot-securite-avancee/noa-q33` |
 | 0.63 | `a-compilation-memoire-execution/exec-q17` | `g-vulnerabilites-memoire/mem-q1` |

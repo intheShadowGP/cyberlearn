@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La série s’adresse à trois rôles : le propriétaire de l’actif (exploitant), l’intégrateur qui installe le système et le fabricant des composants. Chacun a des exigences propres.",
       "whyWrong": {
-        "d": "Trois rôles sont distingués.",
-        "a": "Trois rôles sont distingués.",
-        "c": "Sans rapport."
+        "d": "La série ne se limite pas au fabricant : elle distingue aussi l’exploitant et l’intégrateur.",
+        "a": "L’exploitant n’est qu’un des trois rôles : il manque l’intégrateur et le fabricant.",
+        "c": "La messagerie ne relève pas des systèmes d’automatisation visés par la série."
       }
     },
     "noa-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le SL-T est le niveau de protection que l’on veut atteindre pour une zone, déterminé par l’analyse de risques. On le compare ensuite au niveau atteint et aux capacités des composants.",
       "whyWrong": {
-        "d": "Ce n’est pas un prix.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Le SL-T est un niveau de protection visé, pas un prix.",
+        "a": "Le nombre d’opérateurs n’intervient pas dans le niveau de sécurité cible.",
+        "b": "La date de mise en service n’a aucun lien avec le niveau de sécurité visé."
       }
     },
     "noa-q3": {
@@ -29,7 +29,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "SL-T est la cible, SL-A le niveau effectivement atteint, SL-C la capacité des composants. L’écart entre SL-T et SL-A guide les mesures complémentaires.",
       "whyWrong": {
-        "d": "Ce sont trois notions distinctes.",
+        "d": "Les trois sigles désignent trois notions distinctes : cible, atteint et capacité.",
         "b": "Ce ne sont pas des protocoles.",
         "c": "Ce ne sont pas des fabricants."
       }
@@ -48,7 +48,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "La série couvre le programme de sécurité (partie 2), le système (partie 3) et les composants (partie 4). Elle ne traite pas d’esthétique.",
       "whyWrong": {
-        "b": "Sans rapport avec la cybersécurité."
+        "b": "La série traite de sécurité, pas d’aménagement ni de couleur des armoires électriques."
       }
     },
     "noa-q6": {
@@ -75,9 +75,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La diode est une barrière physique ou logique qui ne laisse passer l’information que dans un sens, par exemple de l’OT vers l’IT : aucune commande ne peut revenir.",
       "whyWrong": {
-        "a": "C’est l’inverse.",
-        "b": "Ce n’est pas un routeur.",
-        "c": "Ce n’est pas une sauvegarde."
+        "a": "Un pare-feu classique laisse passer les flux dans les deux sens, contrairement à une diode.",
+        "b": "Un routeur sans fil relie des réseaux ; il ne garantit pas un flux à sens unique.",
+        "c": "Une sauvegarde hors ligne protège des données, elle ne contrôle pas un flux réseau."
       }
     },
     "noa-q9": {
@@ -85,9 +85,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Les données de production remontent vers l’IT (historique, indicateurs) sans qu’un attaquant du réseau de gestion puisse envoyer quoi que ce soit vers l’OT.",
       "whyWrong": {
-        "d": "Elle bloque les commandes.",
-        "b": "Elle ne la supprime pas.",
-        "a": "Elle ne chiffre pas."
+        "d": "La passerelle unidirectionnelle ne transmet aucune commande vers l’OT.",
+        "b": "La zone intermédiaire reste utile : la passerelle s’y ajoute, elle ne la supprime pas.",
+        "a": "Elle ne chiffre pas les capteurs : elle impose un sens unique de circulation."
       }
     },
     "noa-q10": {
@@ -95,9 +95,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le serveur de rebond impose un point de passage unique : authentification forte, autorisation à la demande et enregistrement de session avant tout accès à l’OT.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
-        "c": "Il ne remplace rien.",
-        "d": "Au contraire, il protège."
+        "b": "La bande passante n’est pas l’objectif d’un serveur de rebond.",
+        "c": "Le serveur de rebond ne remplace pas les automates, il contrôle les accès.",
+        "d": "C’est l’inverse : il évite d’exposer directement l’OT."
       }
     },
     "noa-q11": {
@@ -105,9 +105,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La micro-segmentation découpe le réseau en petites zones (par ligne de production, par équipement) pour limiter encore plus la propagation d’un incident.",
       "whyWrong": {
-        "d": "Ce n’est pas la définition.",
-        "c": "C’est l’inverse.",
-        "a": "C’est l’inverse."
+        "d": "La micro-segmentation découpe le réseau en zones ; elle ne modifie pas la taille des paquets.",
+        "c": "Fusionner les réseaux est le contraire de la segmentation.",
+        "a": "Elle s’appuie sur des filtrages entre zones : on ne supprime pas les pare-feu."
       }
     },
     "noa-q12": {
@@ -124,7 +124,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Zones, DMZ et accès distant contrôlé forment la base. Un réseau à plat permet à une compromission de se propager librement.",
       "whyWrong": {
-        "c": "Il facilite la propagation."
+        "c": "Un réseau à plat laisse une compromission se propager : il n’est pas défendable."
       }
     },
     "noa-q14": {
@@ -141,9 +141,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "En OT, le risque inclut les atteintes aux personnes, à l’environnement et aux équipements, pas seulement les données. La sûreté oriente la priorisation.",
       "whyWrong": {
-        "a": "La disponibilité est essentielle.",
-        "c": "Elle concerne aussi les procédés.",
-        "b": "Elle concerne tout le système."
+        "a": "En OT, la disponibilité est au contraire centrale pour la production.",
+        "c": "Le risque OT ne se limite pas aux données : il inclut les effets physiques.",
+        "b": "L’analyse de risques ne se limite pas aux pare-feu : elle couvre tout le système."
       }
     },
     "noa-q16": {
@@ -151,9 +151,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’étude de dangers identifie les scénarios d’accident. En la croisant avec les scénarios cyber, on repère les manipulations qui pourraient provoquer un accident.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "Le référencement d’un site web est sans rapport avec la sûreté d’un procédé.",
+        "a": "Une migration de messagerie ne traite pas les scénarios d’accident industriel.",
+        "d": "Un inventaire de licences relève de la gestion, pas de la sûreté du procédé."
       }
     },
     "noa-q17": {
@@ -161,9 +161,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "ATT&CK pour les ICS recense les tactiques et techniques observées contre les systèmes industriels. Elle aide à construire des scénarios et à évaluer la couverture de détection.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "c": "Un annuaire d’entreprise gère des identités, pas des techniques d’attaque.",
+        "a": "Un manuel de comptabilité ne décrit aucune technique d’attaque.",
+        "b": "Un catalogue de mobilier n’a aucun rapport avec les techniques d’attaque."
       }
     },
     "noa-q18": {
@@ -171,9 +171,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une conséquence pouvant causer des blessures ou un accident majeur justifie un niveau de protection élevé même si le scénario est peu probable.",
       "whyWrong": {
-        "c": "Elle la complète.",
-        "b": "Sans rapport.",
-        "d": "Sans rapport."
+        "c": "La conséquence ne remplace pas la vraisemblance : elle s’y ajoute pour prioriser.",
+        "b": "La conséquence se mesure en effets sur la sûreté, pas en débit réseau.",
+        "d": "La conséquence dépend du procédé, pas des licences du fournisseur."
       }
     },
     "noa-q19": {
@@ -190,7 +190,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Scénarios, chemins d’attaque, mesures et risque résiduel forment l’analyse. La couleur des voyants n’y a pas sa place.",
       "whyWrong": {
-        "b": "Sans rapport avec le risque."
+        "b": "La couleur des voyants n’apporte rien à l’analyse des scénarios et des conséquences."
       }
     },
     "noa-q21": {
@@ -198,9 +198,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le trafic industriel est très régulier : mêmes équipements, mêmes cycles, mêmes commandes. Le profil de référence permet de repérer un écart.",
       "whyWrong": {
-        "d": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "d": "Une liste de mots de passe n’est pas un profil de trafic et ne doit pas être conservée ainsi.",
+        "c": "Le plan des locaux ne décrit pas les échanges réseau.",
+        "a": "Un calendrier de maintenance ne décrit pas le trafic habituel."
       }
     },
     "noa-q22": {
@@ -208,9 +208,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La régularité du trafic OT rend les écarts (nouvel équipement, écriture inhabituelle) plus faciles à détecter que sur un réseau de bureau très variable.",
       "whyWrong": {
-        "b": "Il est au contraire régulier.",
-        "a": "Elle est recommandée.",
-        "c": "Elle les complète."
+        "b": "C’est l’inverse : le trafic industriel est très régulier.",
+        "a": "La détection n’est pas interdite en OT ; la sonde passive est recommandée.",
+        "c": "La détection complète les pare-feu, elle ne les remplace pas."
       }
     },
     "noa-q23": {
@@ -218,9 +218,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "La plupart des attaques contre l’OT commencent par l’IT. Corréler les événements des deux mondes permet de suivre la progression de l’attaquant.",
       "whyWrong": {
-        "a": "Ce n’est pas l’objet.",
-        "d": "Ce n’est pas l’objet.",
-        "b": "Ce serait un risque."
+        "a": "Corréler ne supprime pas les alertes : cela les relie entre elles.",
+        "d": "Le but n’est pas de désactiver la supervision mais de l’enrichir.",
+        "b": "Corréler les événements ne fusionne pas les réseaux : ils restent séparés."
       }
     },
     "noa-q24": {
@@ -242,7 +242,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Nouvel équipement, écriture inhabituelle et téléchargement hors maintenance sont des signaux forts. Une lecture périodique est un comportement normal.",
       "whyWrong": {
-        "b": "C’est un fonctionnement normal."
+        "b": "Une lecture périodique habituelle fait partie du profil normal, pas d’une anomalie."
       }
     },
     "noa-q27": {
@@ -261,9 +261,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un fabricant qui conçoit, teste et corrige de manière maîtrisée livre moins de failles et gère mieux celles qui apparaissent.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
-        "c": "Les mises à jour restent nécessaires.",
-        "d": "Il ne les supprime pas."
+        "a": "Le cycle sécurisé vise moins de failles, pas un prix d’achat plus bas.",
+        "c": "Les mises à jour restent nécessaires : un cycle sécurisé aide à les produire et à les livrer.",
+        "d": "Il facilite les audits, il ne les évite pas."
       }
     },
     "noa-q29": {
@@ -271,9 +271,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Quand le correctif n’est pas applicable, un filtrage (pare-feu industriel, système de prévention) bloque la tentative d’exploitation de la faille : c’est une mesure compensatoire.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition."
+        "b": "Un correctif hors ligne reste un vrai correctif ; le correctif virtuel agit sur le réseau.",
+        "d": "Un patch non signé serait un risque, pas un correctif virtuel.",
+        "c": "Une sauvegarde de configuration ne bloque aucune exploitation."
       }
     },
     "noa-q30": {
@@ -281,9 +281,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Chaque intervention doit être autorisée, limitée dans le temps, rattachée à une personne et enregistrée.",
       "whyWrong": {
-        "b": "Aucune traçabilité.",
-        "a": "Aucune traçabilité.",
-        "c": "Risque majeur."
+        "b": "Un compte partagé et permanent empêche d’identifier l’intervenant.",
+        "a": "Un mot de passe commun supprime toute imputabilité.",
+        "c": "L’exploitant doit au contraire garder le contrôle des accès."
       }
     },
     "noa-q31": {
@@ -300,7 +300,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Délai de correction, notification et nomenclature logicielle donnent à l’exploitant de la visibilité. Interdire l’audit supprime tout contrôle.",
       "whyWrong": {
-        "b": "L’exploitant doit pouvoir contrôler."
+        "b": "Interdire l’audit prive l’exploitant de toute vérification."
       }
     },
     "noa-q33": {
@@ -327,9 +327,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une sauvegarde jamais restaurée n’offre aucune assurance : version incompatible, fichier incomplet, procédure inconnue. Le test valide le temps et la méthode.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "b": "Sans rapport.",
-        "d": "Sans rapport."
+        "c": "Tester une restauration n’a aucun effet sur le réseau local.",
+        "b": "Cela ne supprime pas la supervision : cela vérifie la sauvegarde.",
+        "d": "La consommation électrique n’est pas l’objet d’un test de restauration."
       }
     },
     "noa-q36": {
@@ -337,9 +337,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Si la supervision est indisponible, les opérateurs doivent pouvoir piloter le procédé de façon sûre avec des moyens locaux. La procédure est écrite et exercée.",
       "whyWrong": {
-        "b": "Ce n’est pas une panne.",
-        "a": "Ce n’est pas un arrêt.",
-        "d": "Ce n’est pas un test."
+        "b": "Une panne provoquée n’est pas une procédure de fonctionnement.",
+        "a": "Le mode manuel maintient le procédé ; il ne l’arrête pas.",
+        "d": "Un test d’intrusion est une évaluation de sécurité, pas un mode de pilotage."
       }
     },
     "noa-q37": {
@@ -347,9 +347,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "L’exercice révèle les contacts manquants, les décisions floues et les dépendances oubliées, sans risque pour la production.",
       "whyWrong": {
-        "c": "Ce n’est pas l’objet.",
-        "d": "Ce n’est pas l’objet.",
-        "a": "Ce n’est pas l’objet."
+        "c": "Un exercice de crise teste des équipes, pas des câbles.",
+        "d": "La consommation électrique n’est pas l’objet d’un exercice de crise.",
+        "a": "Le choix d’un fournisseur relève des achats, pas d’un exercice."
       }
     },
     "noa-q38": {
@@ -366,7 +366,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Sauvegardes, procédures manuelles et pièces de rechange permettent de reprendre. Une documentation obsolète fait perdre un temps précieux.",
       "whyWrong": {
-        "d": "Elle ralentit la reprise."
+        "d": "Une documentation obsolète ralentit la reprise au lieu de l’accélérer."
       }
     },
     "noa-q40": {

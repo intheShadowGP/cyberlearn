@@ -28,10 +28,7 @@ export const bank: BankItem[] = [
     e: 'Quality is judged by the rigor of the framework, the reliability of the findings and the usefulness of the report, not by how spectacular it is.' },
   { id: 'rpp-q7', t: 'short', d: 2, s: ['r-pp-methodo'], p: 'What is the document that sets the scope, authorized methods and schedule of a test called? (three words)', a: ['rules of engagement', 'the rules of engagement'], ph: 'three words',
     e: 'The rules of engagement delimit what is allowed: nothing is done outside them.' },
-  { id: 'rpp-q8', t: 'multi', d: 3, s: ['r-pp-methodo'], p: 'Which phases are part of a framed penetration test?', k: 3,
-    o: ['Scoping and authorization', 'Enumeration and analysis', 'Controlled validation with minimal proof', 'Deleting the target’s logs'],
-    e: 'Scoping, enumeration, controlled validation then reporting form the approach. Erasing logs is out of the question and harmful.',
-    w: { 3: 'It is harmful and out of scope.' } },
+  { "id":"rpp-q41","t":"single","d":2,"s":["r-pp-notes"],"p":"Why set a time limit per lead during a long practical exam?","o":["To avoid sticking to a dead end and keep time for the other leads","Because the rules force you to change lead at fixed and regular intervals","To finish the exam earlier than the planned duration and earn a bonus","To avoid having to take notes on the leads that you abandon"],"e":"Sticking to a dead end is the most frequent mistake. A limit set in advance forces you to record the state, move to another lead and come back later if time allows.","w":{"1":"The limit is a personal method choice, not a requirement of the rules.","2":"Finishing early brings no advantage: the aim is to cover more leads.","3":"On the contrary, you record the state of a lead before abandoning it."} },
 
   // --- Notes and time ---
   { id: 'rpp-q9', t: 'single', d: 1, s: ['r-pp-notes'], p: 'Why keep notes during a hands-on exercise?',

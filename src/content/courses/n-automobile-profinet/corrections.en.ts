@@ -24,7 +24,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Real time imposes bounded and predictable delays. An overly costly security processing (heavy encryption, deep inspection) risks exceeding these delays and disturbing the process, even safety.",
       "whyWrong": {
-        "d": "That is not systematic.",
+        "d": "PLCs do not refuse all encryption: the added delay is the problem.",
         "a": "No law forbids it.",
         "b": "It has a direct bearing."
       }
@@ -34,9 +34,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A real-time protocol guarantees that a message arrives within a controlled delay. This constraint limits the security processing possible on the data path.",
       "whyWrong": {
-        "b": "That is not the meaning.",
-        "c": "That is not the meaning.",
-        "a": "That is not the meaning."
+        "b": "Real time concerns delay, not encryption.",
+        "c": "Real-time protocols are industrial, not reserved to the Internet.",
+        "a": "A wired protocol can be real time: the cable is not the criterion."
       }
     },
     "apf-q32": {
@@ -45,8 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The passive probe analyzes a copy of the traffic, without transmitting. It detects new devices and abnormal behavior without risking disturbing the process.",
       "whyWrong": {
         "d": "An active scan can disturb the network.",
-        "c": "That is not its role.",
-        "a": "Unrelated."
+        "c": "A firewall that restarts controllers would disrupt production.",
+        "a": "An extra keyboard does not observe network traffic."
       }
     },
     "apf-q33": {
@@ -54,9 +54,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "With no device authentication, a connected element can send frames and disturb PLCs and actuators. Control of connections is essential.",
       "whyWrong": {
-        "b": "That is not its effect.",
-        "c": "That is not its effect.",
-        "d": "That is not its effect."
+        "b": "An unauthorized device does not reduce consumption: it introduces a risk.",
+        "c": "It does not encrypt the workshop’s exchanges.",
+        "d": "It does not improve measurements: it can disturb them."
       }
     },
     "apf-q34": {
@@ -76,9 +76,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The CAN bus links the ECUs; designed for reliability, it neither encrypts nor authenticates messages by default. Access to the bus allows injecting messages, hence the need to compartmentalize domains and control gateways.",
       "whyWrong": {
-        "a": "It is not a firewall.",
-        "c": "It is not that system.",
-        "b": "It is not the Internet."
+        "a": "The CAN bus is not a firewall: it carries messages between ECUs.",
+        "c": "Infotainment is another system: CAN links ECUs.",
+        "b": "CAN is an internal bus, not an Internet connection."
       }
     },
     "apf-q5": {
@@ -103,9 +103,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A modern vehicle contains dozens of ECUs (engine, braking, steering, cabin). They communicate through buses and are as many potential targets.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
-        "b": "Unrelated."
+        "a": "An ECU is not a fuel: it is an embedded computer.",
+        "d": "A trunk control panel is not an ECU.",
+        "b": "A tire with sensors holds a sensor, it is not a dedicated ECU."
       }
     },
     "apf-q36": {
@@ -120,7 +120,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "It protects nothing.",
         "a": "Impractical and ineffective.",
-        "d": "Unrelated."
+        "d": "Enlarging the infotainment screen protects no critical function."
       }
     },
     "apf-q8": {
@@ -160,9 +160,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Authenticating each message adds computation and bytes on buses with constrained bandwidth and delays. It is applied selectively to critical messages.",
       "whyWrong": {
-        "d": "That is not the constraint.",
+        "d": "The bus does not refuse all extra data: the cost is delay and load.",
         "a": "No prohibition.",
-        "b": "Unrelated."
+        "b": "Authentication does not remove the timing constraint: it worsens it."
       }
     },
     "apf-q38": {
@@ -199,9 +199,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "R155 requires a CSMS (cybersecurity management system) covering the whole life cycle; R156 requires a SUMS (software update management system), in particular for remote updates.",
       "whyWrong": {
-        "a": "Nothing to do with tires.",
+        "a": "Regulations R155 and R156 do not concern tires or brakes.",
         "d": "They are two distinct regulations.",
-        "c": "A standard is not replaced by a regulation."
+        "c": "R156 does not replace ISO/SAE 21434: it deals with software updates."
       }
     },
     "apf-q14": {
@@ -229,9 +229,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The World Forum for Harmonization of Vehicle Regulations (WP.29) develops the UNECE regulations, including R155 and R156.",
       "whyWrong": {
-        "d": "That is not its role.",
-        "c": "That is not its role.",
-        "b": "That is not its role."
+        "d": "The G20 is an economic summit; it does not draw up vehicle regulations.",
+        "c": "NATO is a military alliance.",
+        "b": "The IMF deals with international finance."
       }
     },
     "apf-q40": {
@@ -257,9 +257,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The attacker relays the exchanges between the key (far from the vehicle) and the vehicle, which believes the key is nearby. Countermeasures: key motion sensing, distance measurement, key sleep mode.",
       "whyWrong": {
-        "d": "It is not an attack.",
+        "d": "Copying a logo does not open a vehicle.",
         "c": "It is not this type of attack.",
-        "b": "Unrelated."
+        "b": "Changing tires has nothing to do with keyless entry."
       }
     },
     "apf-q19": {
@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "V2X groups the communications between vehicles, infrastructure, pedestrians and network. These exchanges must be authenticated so that falsified messages do not cause a dangerous reaction.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "c": "V2X is not an engine: it is a set of communications.",
+        "a": "It does not designate a road map format.",
+        "b": "A winter tire model is not a communication mode."
       }
     },
     "apf-q20": {
@@ -277,9 +277,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A diagnostic tool can read, but also reprogram ECUs. Access is therefore authenticated, filtered by the gateway and logged.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
-        "b": "That is not its effect."
+        "a": "A diagnostic tool does not consume fuel.",
+        "d": "It does not change the dashboard color.",
+        "b": "It does not permanently block updates."
       }
     },
     "apf-q21": {
@@ -324,9 +324,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "This center collects alerts from vehicles and services, analyzes incidents and triggers the response. It extends the manufacturer’s monitoring after the sale.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "c": "Unrelated.",
-        "a": "Unrelated."
+        "b": "A paint shop provides no security supervision.",
+        "c": "A battery recycling site is not a supervision center.",
+        "a": "An engine test bench does not supervise a fleet’s security."
       }
     },
     "apf-q26": {
@@ -334,9 +334,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A vehicle stays on the road for fifteen years or more. New flaws are discovered in components after the sale: monitoring and updates are indispensable.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "a": "Unrelated.",
-        "d": "That is not the goal."
+        "c": "Monitoring vulnerabilities does not change the body shape.",
+        "a": "Tire wear is not a cybersecurity matter.",
+        "d": "Monitoring is not meant to void the warranty."
       }
     },
     "apf-q27": {

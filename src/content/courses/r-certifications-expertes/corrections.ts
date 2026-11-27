@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Ces certifications exigent en général plusieurs années d’expérience : elles évaluent le jugement et la vision d’ensemble.",
       "whyWrong": {
-        "d": "Ce n’est pas leur cible.",
-        "c": "Ce n’est pas leur cible.",
-        "a": "Ce n’est pas leur cible."
+        "d": "Une certification de management vise des profils expérimentés, pas des débutants.",
+        "c": "Elle suppose un rôle dans la sécurité, pas des utilisateurs sans fonction technique.",
+        "a": "Elle vise des professionnels en activité, pas des étudiants sans expérience."
       }
     },
     "rce-q2": {
@@ -19,8 +19,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les questions décrivent un contexte et demandent la meilleure décision : on évalue le jugement plus que le geste technique.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "b": "Ce n’est pas l’objet principal.",
+        "c": "La vitesse de frappe n’a aucun lien avec le management de la sécurité.",
+        "b": "Mémoriser des lignes de commande relève d’un examen technique, pas de management.",
         "a": "Ces examens sont neutres vis-à-vis des produits."
       }
     },
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’organisme demande une expérience dans des domaines de la sécurité ; sinon un statut intermédiaire est accordé jusqu’à l’acquérir.",
       "whyWrong": {
-        "a": "Sans rapport.",
+        "a": "Aucun diplôme de médecine n’est demandé : c’est une expérience professionnelle.",
         "b": "C’est l’inverse.",
-        "d": "Sans rapport."
+        "d": "Un abonnement vidéo n’est pas une exigence de certification."
       }
     },
     "rce-q4": {
@@ -39,7 +39,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "On pèse impact, coût, obligations et risque, et l’on respecte la gouvernance et la loi : la meilleure réponse est la plus appropriée au contexte.",
       "whyWrong": {
-        "d": "Ce n’est pas toujours la meilleure.",
+        "d": "L’option la plus technique n’est pas toujours la mieux alignée sur les objectifs.",
         "c": "Le coût n’est pas le seul critère.",
         "b": "Elle est à écarter."
       }
@@ -54,15 +54,15 @@ export const corrections: CourseCorrections = {
       "correct": false,
       "explanation": "La meilleure réponse est celle qui répond au contexte, aux risques et aux responsabilités, pas forcément la plus technique."
     },
-    "rce-q7": {
-      "type": "short",
-      "accepted": [
-        "isc2",
-        "(isc)²",
-        "isc²",
-        "isc 2"
-      ],
-      "explanation": "Le CISSP est délivré par ISC2, qui publie aussi un code d’éthique que les titulaires s’engagent à respecter."
+    "rce-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "La direction arbitre entre des options en comparant risque, coût et bénéfice. Elle doit aussi voir ce qui reste exposé après la mesure : le risque résiduel qu’elle accepte par écrit.",
+      "whyWrong": {
+        "b": "Une seule option retire à la direction sa capacité d’arbitrer.",
+        "a": "Le détail technique ne se compare pas en termes d’activité : il ne permet pas de décider.",
+        "d": "Aucune mesure n’annule un risque : promettre zéro est trompeur."
+      }
     },
     "rce-q8": {
       "type": "multi",
@@ -78,42 +78,42 @@ export const corrections: CourseCorrections = {
     },
     "rce-q9": {
       "type": "single",
-      "correct": "c",
+      "correct": "d",
       "explanation": "Elle fixe les exigences d’un SMSI : politiques, processus, responsabilités et amélioration continue.",
       "whyWrong": {
-        "a": "Ce n’est pas son objet.",
-        "b": "Ce n’est pas son objet.",
-        "d": "Ce n’est pas son objet."
+        "a": "Un protocole de chiffrement est autre chose : ISO 27001 décrit un système de management.",
+        "b": "Elle ne définit pas de format de sauvegarde.",
+        "c": "Elle ne décrit pas un produit de pare-feu applicatif."
       }
     },
     "rce-q10": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "Le Lead Implementer construit et fait vivre le SMSI ; le Lead Auditor évalue sa conformité de façon indépendante.",
       "whyWrong": {
-        "a": "Ce n’est pas la différence.",
-        "b": "Ce n’est pas la différence.",
-        "c": "Leurs missions diffèrent."
+        "a": "Les deux titres portent sur les systèmes de management, pas sur l’écriture de code.",
+        "c": "Les deux titres ne concernent pas la formation ou le recrutement des utilisateurs.",
+        "d": "Leurs missions diffèrent."
       }
     },
     "rce-q11": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Elle liste les mesures de la norme, précise celles qui sont appliquées ou non et justifie chaque choix par l’analyse de risque.",
       "whyWrong": {
-        "c": "Ce n’est pas son contenu.",
-        "a": "Ce n’est pas son contenu.",
-        "d": "Ce n’est pas son contenu."
+        "c": "Une liste de mots de passe ne doit jamais figurer dans ce document.",
+        "b": "Le budget n’est pas l’objet de la déclaration d’applicabilité.",
+        "d": "Un planning de vacances n’a aucun lien avec le SMSI."
       }
     },
     "rce-q12": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "Un constat sans preuve est contestable. Documents, enregistrements, entretiens et observations donnent des faits vérifiables.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "c": "Le rapport est un livrable.",
-        "b": "Ce n’est pas le but."
+        "c": "Les preuves servent à établir des faits, pas à allonger l’audit.",
+        "b": "Le rapport est un livrable.",
+        "a": "L’audit n’est pas une opposition : il vise des constats vérifiables."
       }
     },
     "rce-q13": {
@@ -153,42 +153,42 @@ export const corrections: CourseCorrections = {
     },
     "rce-q17": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "Elles attestent d’une compétence technique ciblée (détection, forensique, tests d’intrusion…).",
       "whyWrong": {
         "a": "Elles ne remplacent pas l’expérience.",
-        "c": "Elles ne donnent pas accès à tout.",
-        "b": "Elles demandent souvent une formation."
+        "d": "Elles ne donnent pas accès à tout.",
+        "c": "Elles demandent souvent une formation."
       }
     },
     "rce-q18": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Une spécialité visible auprès d’équipes qui recrutent sur ce domaine renforce le profil.",
       "whyWrong": {
-        "a": "La veille reste nécessaire.",
-        "d": "Ce n’est pas une garantie.",
+        "b": "La veille reste nécessaire.",
+        "d": "Aucune spécialisation ne garantit de ne jamais changer de métier.",
         "c": "La formation continue reste exigée."
       }
     },
     "rce-q19": {
       "type": "single",
-      "correct": "a",
+      "correct": "c",
       "explanation": "Un index relie notions et références de ses supports : il fait gagner du temps, à condition d’avoir compris les notions.",
       "whyWrong": {
-        "c": "Il n’y suffit pas.",
-        "d": "C’est de la fraude.",
-        "b": "Ce n’est pas son effet."
+        "b": "Un index aide à chercher, il ne remplace pas la lecture et la compréhension des supports.",
+        "d": "Obtenir les questions à l’avance serait une fraude.",
+        "a": "Un index n’en réduit pas la durée prévue : il fait gagner du temps de recherche."
       }
     },
     "rce-q20": {
       "type": "single",
-      "correct": "c",
+      "correct": "a",
       "explanation": "Les questions d’application demandent d’interpréter et de choisir : retrouver une page ne suffit pas.",
       "whyWrong": {
-        "d": "Ce n’est pas exact.",
-        "a": "Ce n’est pas exact.",
-        "b": "Ce n’est pas exact."
+        "d": "Les organismes n’interdisent pas tous les index lorsque les documents sont autorisés.",
+        "b": "Un index peut contenir des notions utiles : il ne suffit juste pas.",
+        "c": "Un index bien fait accélère l’accès aux informations."
       }
     },
     "rce-q21": {
@@ -222,32 +222,32 @@ export const corrections: CourseCorrections = {
     },
     "rce-q25": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "Réalisations et expérience prouvent la compétence que le titre atteste.",
       "whyWrong": {
-        "d": "Cela n’apporte rien.",
-        "b": "C’est contre-productif.",
-        "c": "C’est contre-productif."
+        "c": "Cela n’apporte rien.",
+        "a": "C’est contre-productif.",
+        "b": "C’est contre-productif."
       }
     },
     "rce-q26": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "Chaque titre se choisit selon le poste visé : sans cohérence, l’investissement est perdu.",
       "whyWrong": {
-        "b": "Ce n’est pas exact.",
-        "c": "Ce n’est pas exact.",
-        "a": "Ce n’est pas exact."
+        "c": "Les employeurs n’interdisent pas les certifications : ils les jugent selon leur utilité.",
+        "d": "Une certification ne disparaît pas en un jour.",
+        "a": "Elles ne rendent pas les examens impossibles : elles coûtent du temps."
       }
     },
     "rce-q27": {
       "type": "single",
-      "correct": "b",
+      "correct": "c",
       "explanation": "Les organismes exigent des activités de formation sur la période de validité pour conserver le titre.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "a": "La formation continue ne remplace pas l’examen initial.",
+        "d": "Elle ne retire aucune responsabilité au titulaire.",
+        "b": "Elle ne réduit pas la validité : elle la maintient."
       }
     },
     "rce-q28": {
@@ -255,9 +255,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une spécialité solide s’appuie sur des bases saines : c’est ce qui construit une expertise reconnue.",
       "whyWrong": {
-        "b": "Les bases restent nécessaires.",
-        "a": "Ce n’est pas le but.",
-        "d": "La veille reste nécessaire."
+        "b": "La spécialisation s’appuie sur des bases maîtrisées, elle ne les remplace pas.",
+        "a": "Se spécialiser n’empêche pas de travailler en équipe.",
+        "d": "Une spécialité exige au contraire une veille régulière."
       }
     },
     "rce-q29": {
@@ -299,42 +299,42 @@ export const corrections: CourseCorrections = {
     },
     "rce-q33": {
       "type": "single",
-      "correct": "c",
+      "correct": "a",
       "explanation": "La vie et la sécurité des personnes passent avant les biens et l’image.",
       "whyWrong": {
-        "d": "Ce n’est pas la priorité.",
-        "b": "Ce n’est pas la priorité.",
-        "a": "Ce n’est pas la priorité."
+        "d": "Les licences ne sont pas la priorité face à un incident majeur.",
+        "c": "La communication presse vient après la protection des personnes.",
+        "b": "L’organigramme n’est pas une réponse immédiate à un incident."
       }
     },
     "rce-q34": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "Ni excès de contraintes, ni protection insuffisante : la mesure correspond au risque qu’elle réduit.",
       "whyWrong": {
-        "c": "Ce n’est pas le critère.",
-        "d": "Ce serait disproportionné.",
-        "b": "Il faut analyser."
+        "b": "Une mesure proportionnée n’est pas forcément la plus chère.",
+        "c": "Une mesure trop stricte partout est disproportionnée et coûteuse.",
+        "a": "Choisir sans analyse contredit la proportionnalité."
       }
     },
     "rce-q35": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "On compare le risque réduit au coût et aux contraintes avant de décider.",
       "whyWrong": {
-        "b": "Ce n’est pas un critère.",
-        "c": "La décision doit être partagée.",
-        "a": "Ce n’est pas une analyse."
+        "c": "La mode n’est pas un critère de choix d’une mesure.",
+        "d": "Retenir une mesure coûteuse sans en parler empêche toute validation.",
+        "a": "Reporter indéfiniment la décision laisse le risque inchangé."
       }
     },
     "rce-q36": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "L’acceptation est une décision éclairée de la direction, documentée, lorsque le traitement est disproportionné par rapport au risque.",
       "whyWrong": {
-        "a": "On peut le mesurer.",
-        "c": "Quelqu’un doit en répondre.",
-        "d": "Ce n’est pas exact."
+        "b": "Le risque résiduel se mesure ; c’est la base de la décision d’acceptation.",
+        "c": "Au contraire, l’acceptation doit avoir un responsable désigné.",
+        "d": "La loi n’impose pas toujours d’accepter un risque."
       }
     },
     "rce-q37": {
@@ -351,7 +351,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Réduire, transférer, éviter et accepter explicitement sont les options. Ignorer sans documenter n’est pas un traitement.",
       "whyWrong": {
-        "d": "Ce n’est pas un traitement."
+        "d": "Ignorer sans documenter n’est pas une option de traitement du risque."
       }
     },
     "rce-q39": {
@@ -363,7 +363,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Contexte, obligations et coût-impact fondent la décision. Une préférence personnelle n’est pas un critère.",
       "whyWrong": {
-        "b": "Ce n’est pas un critère."
+        "b": "Une préférence personnelle pour un outil ne fonde pas une décision raisonnée."
       }
     },
     "rce-q40": {

@@ -62,46 +62,44 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "The rules of engagement delimit what is allowed: nothing is done outside them."
     },
-    "rpp-q8": {
-      "type": "multi",
-      "correct": [
-        "a",
-        "c",
-        "d"
-      ],
-      "explanation": "Scoping, enumeration, controlled validation then reporting form the approach. Erasing logs is out of the question and harmful.",
+    "rpp-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "Sticking to a dead end is the most frequent mistake. A limit set in advance forces you to record the state, move to another lead and come back later if time allows.",
       "whyWrong": {
-        "b": "It is harmful and out of scope."
+        "d": "The limit is a personal method choice, not a requirement of the rules.",
+        "a": "Finishing early brings no advantage: the aim is to cover more leads.",
+        "c": "On the contrary, you record the state of a lead before abandoning it."
       }
     },
     "rpp-q9": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Notes (command, result, timestamp, capture) are used to reproduce an action and then write the report.",
       "whyWrong": {
         "d": "That is not the goal.",
         "c": "That is not the goal.",
-        "a": "They feed the report."
+        "b": "They feed the report."
       }
     },
     "rpp-q10": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "These elements make each action traceable and reproducible, and provide the report’s evidence.",
       "whyWrong": {
-        "d": "Insufficient.",
-        "b": "Insufficient.",
-        "c": "Insufficient."
+        "c": "Insufficient.",
+        "a": "Insufficient.",
+        "b": "Insufficient."
       }
     },
     "rpp-q11": {
       "type": "single",
-      "correct": "d",
+      "correct": "c",
       "explanation": "We set a maximum time, then move on if the lead has not worked out, noting what remains to try.",
       "whyWrong": {
         "b": "That is not the principle.",
         "a": "That is the opposite.",
-        "c": "Breaks are useful."
+        "d": "Breaks are useful."
       }
     },
     "rpp-q12": {
@@ -152,32 +150,32 @@ export const corrections: CourseCorrections = {
     },
     "rpp-q17": {
       "type": "single",
-      "correct": "c",
+      "correct": "d",
       "explanation": "It addresses management: main findings, impact on the organization and decisions to make.",
       "whyWrong": {
-        "d": "That is too technical.",
+        "c": "That is too technical.",
         "a": "They must not be reproduced.",
         "b": "That is not its content."
       }
     },
     "rpp-q18": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "A finding described with context, proof and steps makes it possible to confirm the weakness and then verify the fix.",
       "whyWrong": {
         "a": "That is not the goal.",
-        "b": "The impact must be described.",
-        "c": "The method must be described."
+        "c": "The impact must be described.",
+        "d": "The method must be described."
       }
     },
     "rpp-q19": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Ranking by severity guides fix priority. CVSS helps, nuanced by the organization’s context.",
       "whyWrong": {
         "d": "That is not relevant.",
         "c": "That is not relevant.",
-        "a": "That is not relevant."
+        "b": "That is not relevant."
       }
     },
     "rpp-q20": {
@@ -221,42 +219,42 @@ export const corrections: CourseCorrections = {
     },
     "rpp-q25": {
       "type": "single",
-      "correct": "a",
+      "correct": "c",
       "explanation": "You only train on systems you own or whose training use is expressly authorized.",
       "whyWrong": {
-        "b": "That is illegal.",
+        "a": "That is illegal.",
         "d": "That is illegal.",
-        "c": "That is illegal."
+        "b": "That is illegal."
       }
     },
     "rpp-q26": {
       "type": "single",
-      "correct": "c",
+      "correct": "b",
       "explanation": "An isolated lab makes it possible to handle and break things with no consequence outside the intended environment.",
       "whyWrong": {
         "d": "That is not the goal.",
-        "b": "That is not the goal.",
+        "c": "That is not the goal.",
         "a": "That is not the goal."
       }
     },
     "rpp-q27": {
       "type": "single",
-      "correct": "b",
+      "correct": "d",
       "explanation": "After a risky manipulation or a failure, you restore the snapshot and start again.",
       "whyWrong": {
+        "b": "That is not their role.",
         "c": "That is not their role.",
-        "d": "That is not their role.",
         "a": "That is not their role."
       }
     },
     "rpp-q28": {
       "type": "single",
-      "correct": "d",
+      "correct": "a",
       "explanation": "Learning comes from effort and understanding: you compare your approach and redo it without help.",
       "whyWrong": {
-        "b": "You lose the learning effort.",
-        "c": "You retain nothing.",
-        "a": "You retain nothing."
+        "c": "You lose the learning effort.",
+        "d": "You retain nothing.",
+        "b": "You retain nothing."
       }
     },
     "rpp-q29": {
@@ -297,42 +295,42 @@ export const corrections: CourseCorrections = {
     },
     "rpp-q33": {
       "type": "single",
-      "correct": "a",
+      "correct": "c",
       "explanation": "Written authorization specifies the scope, period and methods: it distinguishes a professional test from an intrusion.",
       "whyWrong": {
         "d": "Insufficient.",
-        "c": "A forum cannot authorize.",
-        "b": "Good intentions are not enough."
+        "b": "A forum cannot authorize.",
+        "a": "Good intentions are not enough."
       }
     },
     "rpp-q34": {
       "type": "single",
-      "correct": "c",
+      "correct": "b",
       "explanation": "It is protected: the report mentions the existence and type of data without reproducing it, in line with the mission’s rules.",
       "whyWrong": {
         "a": "That exposes the data.",
         "d": "That exposes the data.",
-        "b": "That exposes the data."
+        "c": "That exposes the data."
       }
     },
     "rpp-q35": {
       "type": "single",
-      "correct": "b",
+      "correct": "d",
       "explanation": "Bodies set the permitted tools, forbid outside assistance and require confidentiality of the subject.",
       "whyWrong": {
         "a": "That is forbidden.",
-        "d": "That is forbidden.",
-        "c": "There are limits."
+        "c": "That is forbidden.",
+        "b": "There are limits."
       }
     },
     "rpp-q36": {
       "type": "single",
-      "correct": "d",
+      "correct": "a",
       "explanation": "A breach can invalidate the result: the rules must be read before the test and followed.",
       "whyWrong": {
-        "b": "They do matter.",
-        "a": "They apply to everyone.",
-        "c": "They are never lifted."
+        "c": "They do matter.",
+        "b": "They apply to everyone.",
+        "d": "They are never lifted."
       }
     },
     "rpp-q37": {

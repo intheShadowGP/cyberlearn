@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Inputs are represented by symbols: along each path, we collect the constraints these symbols must satisfy.",
       "whyWrong": {
-        "a": "That is not the principle.",
-        "b": "That is not the principle.",
-        "d": "That is not the principle."
+        "a": "Symbolic execution does not touch comments: it replaces inputs with symbols.",
+        "b": "It does not replace tests with logs: it reasons about paths.",
+        "d": "It does not fix variables: it treats them as unknowns."
       }
     },
     "pva-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "At each branch, the condition becomes a constraint on the symbols: the set describes the inputs that follow that path.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
-        "c": "Unrelated."
+        "a": "It collects no passwords: it accumulates conditions on inputs.",
+        "d": "Network addresses are not constraints on input symbols.",
+        "c": "Developers’ names play no part in path analysis."
       }
     },
     "pva-q3": {
@@ -29,8 +29,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The solver decides whether a path’s constraints are satisfiable and, if so, provides a concrete input that reaches it.",
       "whyWrong": {
-        "b": "That is not its role.",
-        "c": "That is not its role.",
+        "b": "The solver compiles nothing: it solves constraints.",
+        "c": "The solver does not encrypt constraints: it looks for values that satisfy them.",
         "d": "It does not modify the program."
       }
     },
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Each input-dependent branch can double the number of paths: loops and large programs quickly exceed the solver’s capacity.",
       "whyWrong": {
-        "a": "That is not the reason.",
-        "c": "That is not the reason.",
-        "b": "That is not the reason."
+        "a": "Solvers have no problem with the C language itself.",
+        "c": "Symbols can be compared: it is the number of combinations that explodes.",
+        "b": "Compilers do not block the analysis: the number of paths is the problem."
       }
     },
     "pva-q5": {
@@ -79,8 +79,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A proof establishes that a program or model meets a given specification for all inputs, whereas a test only tries a few.",
       "whyWrong": {
         "b": "It is relative to the specification.",
-        "a": "That is not what it proves.",
-        "d": "That is not what it proves."
+        "a": "A formal proof does not measure execution speed.",
+        "d": "It does not cover the quality of the hardware running the program."
       }
     },
     "pva-q10": {
@@ -88,9 +88,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Model checking explores all the states of a finite model and verifies a property; it provides a counterexample if it is violated.",
       "whyWrong": {
-        "d": "That is not its purpose.",
-        "a": "That is not its purpose.",
-        "c": "That is not its purpose."
+        "d": "Measuring response speed is performance testing.",
+        "a": "Replacing a compiler with an interpreter has nothing to do with model checking.",
+        "c": "Model checking explores states; it does not encrypt them."
       }
     },
     "pva-q11": {
@@ -99,8 +99,8 @@ export const corrections: CourseCorrections = {
       "explanation": "If the specification is incomplete or the assumption about the environment is false, vulnerabilities remain outside the proven scope.",
       "whyWrong": {
         "d": "It applies to real code.",
-        "b": "That is not the reason.",
-        "c": "That is not the reason."
+        "b": "A faithful compiler does not undermine the proof: it is an assumption to check.",
+        "c": "The proof does not depend on processor speed."
       }
     },
     "pva-q12": {
@@ -153,9 +153,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "It states the adversary’s capabilities (listen, modify, replay, corrupt a participant). The guarantees proven hold for this model only.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "c": "That is not the definition.",
-        "a": "That is not the definition."
+        "b": "Simulating user traffic is not modeling an adversary.",
+        "c": "A list of authorized clients describes access control, not an attacker.",
+        "a": "A diagram of the internal network describes an architecture, not an adversary’s capabilities."
       }
     },
     "pva-q18": {
@@ -173,9 +173,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "If the negotiation is not authenticated, an intermediary can force the choice of the weakest version: this is a downgrade.",
       "whyWrong": {
-        "b": "That is not the risk.",
-        "a": "There is a consequence.",
-        "d": "It is the opposite."
+        "b": "A permissive negotiation brings no speedup: it allows weak versions.",
+        "a": "Better compatibility here comes with a risk of forced downgrade.",
+        "d": "Permissive negotiation can on the contrary weaken encryption."
       }
     },
     "pva-q20": {
@@ -183,8 +183,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The proof covers a model of the protocol: a code error, a side channel or a badly chosen parameter may remain in the implementation.",
       "whyWrong": {
-        "c": "That is not the reason.",
-        "d": "That is not the reason.",
+        "c": "Proofs are not always wrong: they cover a model.",
+        "d": "Protocols can be implemented: the gap with the model is the problem.",
         "a": "It is on the contrary essential."
       }
     },
@@ -215,7 +215,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Confidentiality, authentication and freshness are the classic properties. The appearance of the interface plays no part.",
       "whyWrong": {
-        "c": "Unrelated."
+        "c": "The color of the interface is not a property of the protocol."
       }
     },
     "pva-q25": {
@@ -223,9 +223,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Each stage (base, loader, system) verifies the signature of the next: an altered component is not run.",
       "whyWrong": {
-        "c": "That is not its role.",
-        "b": "That is not its role.",
-        "d": "That is not its role."
+        "c": "A verified boot does not skip steps: it checks them all.",
+        "b": "It does not encrypt user files: it checks the boot chain.",
+        "d": "Displaying the version is not a security check."
       }
     },
     "pva-q26": {
@@ -233,9 +233,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The root (non-modifiable memory code, key inscribed in the chip) is the starting point of the chain of trust: verification of all stages is anchored there.",
       "whyWrong": {
-        "b": "That is not the root.",
+        "b": "A root of trust is the first element, not the last program loaded.",
         "a": "A clear-text secret would be a defect.",
-        "c": "That is not the root."
+        "c": "An image backup is not a starting point of trust."
       }
     },
     "pva-q27": {
@@ -243,9 +243,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Examination reveals embedded secrets, unnecessary services and old libraries: fixes can then be required or the purchase abandoned.",
       "whyWrong": {
-        "b": "That is not the defensive goal.",
-        "d": "That is not the goal.",
-        "a": "Unrelated."
+        "b": "Examining an image does not authorize modifying it freely.",
+        "d": "Examining an image is not meant to void the warranty.",
+        "a": "Power consumption is not the subject of this examination."
       }
     },
     "pva-q28": {
@@ -297,9 +297,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Consensus lets nodes agree on a common decision despite failures, delays or lost messages.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "a": "That is not the definition.",
-        "c": "That is not the definition."
+        "b": "Sharing the load is load balancing, not consensus.",
+        "a": "A single copy on one node is the opposite of a distributed system.",
+        "c": "Consensus does not rely on encryption by a third party."
       }
     },
     "pva-q34": {
@@ -308,8 +308,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A Byzantine node can send contradictory or malicious information, which is harder to tolerate than a simple stop.",
       "whyWrong": {
         "d": "That is a crash fault.",
-        "b": "That is not the definition.",
-        "a": "That is not the definition."
+        "b": "Holding the most data does not make a node Byzantine.",
+        "a": "A node that is never connected does not influence consensus."
       }
     },
     "pva-q35": {

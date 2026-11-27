@@ -10,8 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A defect (or bug) is an error in the code or the design. It becomes a vulnerability if it can be used against security.",
       "whyWrong": {
         "c": "The fix removes the defect.",
-        "d": "Unrelated.",
-        "a": "Unrelated."
+        "d": "A license is a usage contract, not a design error.",
+        "a": "An event log records activity; it does not designate a defect."
       }
     },
     "pri-q2": {
@@ -20,8 +20,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A vulnerability is a defect that an attacker can use to harm confidentiality, integrity or availability.",
       "whyWrong": {
         "b": "An update fixes things.",
-        "a": "That is not a vulnerability.",
-        "d": "That is not a vulnerability."
+        "a": "A password’s length is not a software vulnerability.",
+        "d": "An old backup is not a defect usable against security."
       }
     },
     "pri-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The exploit is the concrete means (booby-trapped file, request, sequence of actions) that takes advantage of a vulnerability. The vulnerability exists before it.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "c": "Unrelated."
+        "b": "A performance test measures speed; it exploits no flaw.",
+        "a": "A firewall rule is a defense, not a means of exploitation.",
+        "c": "A coverage report measures tests; it exploits nothing."
       }
     },
     "pri-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A CVE identifier is a unique public number: everyone talks about the same flaw and can follow its fix.",
       "whyWrong": {
-        "b": "That is not its role.",
-        "c": "That is not its role.",
-        "d": "That is not its role."
+        "b": "A CVE is not an encryption mechanism: it is a public identifier.",
+        "c": "A CVE does not measure how fast a fix is released.",
+        "d": "A CVE gives no access: it designates a vulnerability."
       }
     },
     "pri-q5": {
@@ -80,19 +80,19 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The TPM is a security chip: it stores keys and only releases them if the measured boot is intact.",
       "whyWrong": {
-        "c": "That is not its role.",
-        "d": "That is not its role.",
-        "b": "That is not its role."
+        "c": "Filtering mail is a mail gateway’s job, not the TPM’s.",
+        "d": "The TPM does not speed up display: it protects keys and measures boot.",
+        "b": "The TPM does not back up documents."
       }
     },
-    "pri-q10": {
+    "pri-q41": {
       "type": "single",
       "correct": "c",
-      "explanation": "Secure Boot verifies the signature of the firmware, the loader and the kernel: an untrusted component is not run.",
+      "explanation": "A testable hypothesis states what you observe and under what conditions: you can send the input and see the crash, or its absence.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "d": "That is not its role.",
-        "b": "That is not its role."
+        "b": "No observation could contradict this general claim.",
+        "a": "“Quality” is not defined: no measurement confirms or refutes it.",
+        "d": "It is an opinion, with no observation condition or result that would refute it."
       }
     },
     "pri-q11": {
@@ -101,8 +101,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Zero Trust verifies every access (user, device, context) instead of trusting the internal network.",
       "whyWrong": {
         "c": "That is the model Zero Trust abandons.",
-        "a": "That is not the principle.",
-        "b": "That is not the principle."
+        "a": "Zero Trust does not remove passwords: it verifies each access.",
+        "b": "Not updating weakens security: it runs against Zero Trust."
       }
     },
     "pri-q12": {
@@ -112,7 +112,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It does not replace fixes.",
         "c": "Passwords remain useful.",
-        "a": "That is not its role."
+        "a": "The goal is trust, not calculation speed."
       }
     },
     "pri-q13": {
@@ -156,8 +156,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Fuzzing automatically generates a very large number of unusual inputs and watches for crashes and program errors.",
       "whyWrong": {
         "a": "That is code review.",
-        "d": "That is not the principle.",
-        "b": "That is not the principle."
+        "d": "Fuzzing does not aim to encrypt: it sends unusual inputs.",
+        "b": "Uninstalling components is attack-surface reduction, not fuzzing."
       }
     },
     "pri-q18": {
@@ -166,8 +166,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A crash or memory error is the sign of a defect to analyze: it is reproduced, minimized and then assessed.",
       "whyWrong": {
         "c": "That is not what a crash signals.",
-        "d": "Unrelated.",
-        "b": "Unrelated."
+        "d": "An expired license does not cause a crash during fuzzing.",
+        "b": "A backup finished without error signals no defect."
       }
     },
     "pri-q19": {
@@ -175,9 +175,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Seeds are valid starting inputs: the fuzzer modifies them to explore cases nobody had thought of.",
       "whyWrong": {
-        "d": "That is not their role.",
-        "c": "That is not their role.",
-        "a": "That is not their role."
+        "d": "Seeds encrypt no result: they are starting inputs.",
+        "c": "They do not eliminate known flaws: they help search for others.",
+        "a": "They do not install the program under test."
       }
     },
     "pri-q20": {
@@ -185,9 +185,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An overflow happens when a program goes beyond the reserved memory area: possible crash, or even hijacking of behavior in serious cases.",
       "whyWrong": {
-        "c": "That is not the program’s memory.",
-        "a": "That is not a memory defect.",
-        "b": "That is not a memory defect."
+        "c": "Filling the disk is not a buffer overflow: no memory area is overrun.",
+        "a": "Saturating a network connection is a denial of service, not a buffer overflow.",
+        "b": "Exceeding an email quota has no link with a program’s memory."
       }
     },
     "pri-q21": {
@@ -236,8 +236,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The researcher warns privately, allows time to fix, then publishes the details once the fix is available.",
       "whyWrong": {
         "c": "That is the opposite.",
-        "a": "That is not the definition.",
-        "b": "That is not the definition."
+        "a": "Never publishing deprives the community of information: it is not coordinated disclosure.",
+        "b": "Secretly sharing with everyone is neither coordinated nor responsible."
       }
     },
     "pri-q27": {
@@ -300,9 +300,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A powerful enough machine could break RSA and elliptic curves. That is why post-quantum cryptography is being developed.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "b": "Unrelated.",
-        "a": "Unrelated."
+        "d": "A quantum computer does not slow the Internet: it threatens certain algorithms.",
+        "b": "It does not remove passwords: it threatens public-key cryptography.",
+        "a": "It erases nothing: the threat concerns the secrecy of encrypted data."
       }
     },
     "pri-q34": {
@@ -310,9 +310,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An adversary can store encrypted exchanges today and decrypt them once a quantum computer is available.",
       "whyWrong": {
-        "b": "That is not the meaning.",
-        "d": "That is not the meaning.",
-        "c": "That is not the meaning."
+        "b": "Backing up before an update is good practice, not a threat.",
+        "d": "Encrypting at night has nothing to do with this expression.",
+        "c": "Deleting data is not collecting to decrypt later."
       }
     },
     "pri-q35": {
@@ -320,9 +320,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The score (from 0 to 10) estimates severity from ease of exploitation and impact. It helps prioritize but does not replace analysis of the context.",
       "whyWrong": {
-        "c": "That is not what it measures.",
-        "a": "That is not what it measures.",
-        "d": "That is not what it measures."
+        "c": "The number of victims is not what a CVSS score measures.",
+        "a": "CVSS does not measure how long a fix takes to develop.",
+        "d": "The price of a flaw on an illicit market is not its CVSS score."
       }
     },
     "pri-q36": {
@@ -330,9 +330,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "You show that a statement is true (“I know this secret”) without revealing anything of the secret itself.",
       "whyWrong": {
-        "a": "That is not its purpose.",
-        "c": "That is not its purpose.",
-        "b": "That is not its purpose."
+        "a": "Zero-knowledge proof does not aim at encryption speed.",
+        "c": "It erases no log: it proves knowledge without revealing it.",
+        "b": "Sharing a key with everyone would reveal it: the opposite of the idea."
       }
     },
     "pri-q37": {

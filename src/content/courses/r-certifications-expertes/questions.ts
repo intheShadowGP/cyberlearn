@@ -130,14 +130,31 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "rce-q7",
-    "prompt": "Quel organisme délivre la certification CISSP ? (sigle)",
+    "id": "rce-q41",
+    "prompt": "Que doit contenir une bonne note de décision sur un risque, destinée à la direction ?",
     "skills": [
-      "r-ce-domaines"
+      "r-ce-raisonnement"
     ],
     "difficulty": 2,
-    "type": "short",
-    "placeholder": "sigle"
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Le détail technique des configurations, sans lien avec l’activité de l’organisation"
+      },
+      {
+        "id": "b",
+        "text": "Une seule solution présentée comme inévitable pour obtenir l’adhésion rapide"
+      },
+      {
+        "id": "c",
+        "text": "Au moins deux options, dont « ne rien faire », avec leur coût et le risque résiduel"
+      },
+      {
+        "id": "d",
+        "text": "La promesse que la mesure proposée ramènera le risque à zéro"
+      }
+    ]
   },
   {
     "id": "rce-q8",
@@ -185,11 +202,11 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Un système de management de la sécurité"
+        "text": "Un modèle de pare-feu applicatif"
       },
       {
         "id": "d",
-        "text": "Un modèle de pare-feu applicatif"
+        "text": "Un système de management de la sécurité"
       }
     ]
   },
@@ -208,15 +225,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "L’un forme les utilisateurs, l’autre les recrute"
+        "text": "L’un met en place un SMSI, l’autre l’audite"
       },
       {
         "id": "c",
-        "text": "Aucune, les deux titres sont identiques"
+        "text": "L’un forme les utilisateurs, l’autre les recrute"
       },
       {
         "id": "d",
-        "text": "L’un met en place un SMSI, l’autre l’audite"
+        "text": "Aucune, les deux titres sont identiques"
       }
     ]
   },
@@ -231,11 +248,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Le budget annuel de l’équipe sécurité"
+        "text": "Les mesures retenues ou écartées"
       },
       {
         "id": "b",
-        "text": "Les mesures retenues ou écartées"
+        "text": "Le budget annuel de l’équipe sécurité"
       },
       {
         "id": "c",
@@ -258,19 +275,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Pour établir des faits vérifiables"
-      },
-      {
-        "id": "b",
         "text": "Pour s’opposer au responsable audité"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Pour éviter de rédiger un rapport"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Pour allonger la durée de l’audit"
+      },
+      {
+        "id": "d",
+        "text": "Pour établir des faits vérifiables"
       }
     ]
   },
@@ -344,15 +361,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "À éviter de suivre la moindre formation"
+        "text": "À valider une compétence ciblée"
       },
       {
         "id": "c",
-        "text": "À accéder sans condition à tous les postes"
+        "text": "À éviter de suivre la moindre formation"
       },
       {
         "id": "d",
-        "text": "À valider une compétence ciblée"
+        "text": "À accéder sans condition à tous les postes"
       }
     ]
   },
@@ -367,11 +384,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Une dispense de toute veille technique"
+        "text": "Une reconnaissance dans un domaine ciblé"
       },
       {
         "id": "b",
-        "text": "Une reconnaissance dans un domaine ciblé"
+        "text": "Une dispense de toute veille technique"
       },
       {
         "id": "c",
@@ -394,15 +411,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Retrouver vite l’information utile"
-      },
-      {
-        "id": "b",
         "text": "Réduire la durée de l’examen à quelques minutes"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Remplacer la lecture complète des supports"
+      },
+      {
+        "id": "c",
+        "text": "Retrouver vite l’information utile"
       },
       {
         "id": "d",
@@ -421,15 +438,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Il ne peut contenir aucune notion utile"
+        "text": "Les questions demandent d’appliquer"
       },
       {
         "id": "b",
-        "text": "Il ralentit toujours l’accès aux informations"
+        "text": "Il ne peut contenir aucune notion utile"
       },
       {
         "id": "c",
-        "text": "Les questions demandent d’appliquer"
+        "text": "Il ralentit toujours l’accès aux informations"
       },
       {
         "id": "d",
@@ -503,19 +520,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "L’expérience et des réalisations"
-      },
-      {
-        "id": "b",
         "text": "L’absence totale de veille technique"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "La confidentialité de ses compétences"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Une collection de titres sans lien"
+      },
+      {
+        "id": "d",
+        "text": "L’expérience et des réalisations"
       }
     ]
   },
@@ -534,15 +551,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Elles sont toujours interdites par les employeurs"
+        "text": "Elles coûtent du temps sans valeur"
       },
       {
         "id": "c",
-        "text": "Elles disparaissent après un seul jour"
+        "text": "Elles sont toujours interdites par les employeurs"
       },
       {
         "id": "d",
-        "text": "Elles coûtent du temps sans valeur"
+        "text": "Elles disparaissent après un seul jour"
       }
     ]
   },
@@ -561,11 +578,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Maintenir le titre et les compétences à jour"
+        "text": "Réduire la validité à une journée"
       },
       {
         "id": "c",
-        "text": "Réduire la validité à une journée"
+        "text": "Maintenir le titre et les compétences à jour"
       },
       {
         "id": "d",
@@ -666,15 +683,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "La modification de l’organigramme"
+        "text": "La sécurité des personnes"
       },
       {
         "id": "b",
-        "text": "La communication auprès de la presse"
+        "text": "La modification de l’organigramme"
       },
       {
         "id": "c",
-        "text": "La sécurité des personnes"
+        "text": "La communication auprès de la presse"
       },
       {
         "id": "d",
@@ -693,19 +710,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Elle est adaptée au risque et à son coût"
-      },
-      {
-        "id": "b",
         "text": "Elle est choisie sans analyse préalable"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Elle est la plus chère du marché"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Elle est la plus stricte possible partout"
+      },
+      {
+        "id": "d",
+        "text": "Elle est adaptée au risque et à son coût"
       }
     ]
   },
@@ -724,15 +741,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "La choisir parce qu’elle est à la mode"
+        "text": "Évaluer le risque qu’elle réduit"
       },
       {
         "id": "c",
-        "text": "La retenir sans en parler à personne"
+        "text": "La choisir parce qu’elle est à la mode"
       },
       {
         "id": "d",
-        "text": "Évaluer le risque qu’elle réduit"
+        "text": "La retenir sans en parler à personne"
       }
     ]
   },
@@ -747,11 +764,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Parce qu’il est impossible de le mesurer"
+        "text": "Le traiter coûterait trop cher"
       },
       {
         "id": "b",
-        "text": "Le traiter coûterait trop cher"
+        "text": "Parce qu’il est impossible de le mesurer"
       },
       {
         "id": "c",

@@ -140,29 +140,29 @@ export const questions: Question[] = [
     "placeholder": "three words"
   },
   {
-    "id": "rpp-q8",
-    "prompt": "Which phases are part of a framed penetration test?",
+    "id": "rpp-q41",
+    "prompt": "Why set a time limit per lead during a long practical exam?",
     "skills": [
-      "r-pp-methodo"
+      "r-pp-notes"
     ],
-    "difficulty": 3,
-    "type": "multi",
+    "difficulty": 2,
+    "type": "single",
     "options": [
       {
         "id": "a",
-        "text": "Controlled validation with minimal proof"
+        "text": "To finish the exam earlier than the planned duration and earn a bonus"
       },
       {
         "id": "b",
-        "text": "Deleting the target’s logs"
+        "text": "To avoid sticking to a dead end and keep time for the other leads"
       },
       {
         "id": "c",
-        "text": "Enumeration and analysis"
+        "text": "To avoid having to take notes on the leads that you abandon"
       },
       {
         "id": "d",
-        "text": "Scoping and authorization"
+        "text": "Because the rules force you to change lead at fixed and regular intervals"
       }
     ]
   },
@@ -177,11 +177,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "To avoid writing a report"
+        "text": "To find and reproduce your actions"
       },
       {
         "id": "b",
-        "text": "To find and reproduce your actions"
+        "text": "To avoid writing a report"
       },
       {
         "id": "c",
@@ -204,19 +204,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Command, result, time and capture"
-      },
-      {
-        "id": "b",
         "text": "Only a judgment on the difficulty"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Only the list of tools installed"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Only the name of the target aimed at"
+      },
+      {
+        "id": "d",
+        "text": "Command, result, time and capture"
       }
     ]
   },
@@ -239,11 +239,11 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Removing any break during the test"
+        "text": "Setting a time limit per lead"
       },
       {
         "id": "d",
-        "text": "Setting a time limit per lead"
+        "text": "Removing any break during the test"
       }
     ]
   },
@@ -348,11 +348,11 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "The key findings, no jargon"
+        "text": "The complete list of commands used"
       },
       {
         "id": "d",
-        "text": "The complete list of commands used"
+        "text": "The key findings, no jargon"
       }
     ]
   },
@@ -371,15 +371,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "To avoid describing the impact"
+        "text": "So the team can verify it"
       },
       {
         "id": "c",
-        "text": "To hide the method used"
+        "text": "To avoid describing the impact"
       },
       {
         "id": "d",
-        "text": "So the team can verify it"
+        "text": "To hide the method used"
       }
     ]
   },
@@ -394,11 +394,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "By number of pages of evidence"
+        "text": "By severity and by impact"
       },
       {
         "id": "b",
-        "text": "By severity and by impact"
+        "text": "By number of pages of evidence"
       },
       {
         "id": "c",
@@ -503,15 +503,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "In a personal isolated lab"
-      },
-      {
-        "id": "b",
         "text": "On the site of a randomly chosen company"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "On any server reachable online"
+      },
+      {
+        "id": "c",
+        "text": "In a personal isolated lab"
       },
       {
         "id": "d",
@@ -534,11 +534,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "To remove the need for snapshots"
+        "text": "To avoid any effect on real systems"
       },
       {
         "id": "c",
-        "text": "To avoid any effect on real systems"
+        "text": "To remove the need for snapshots"
       },
       {
         "id": "d",
@@ -561,15 +561,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Returning to a known state"
-      },
-      {
-        "id": "c",
         "text": "Encrypting the machines’ disks"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Deleting the training logs"
+      },
+      {
+        "id": "d",
+        "text": "Returning to a known state"
       }
     ]
   },
@@ -584,19 +584,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Avoid redoing the challenge afterwards"
+        "text": "After trying, understand then redo alone"
       },
       {
         "id": "b",
-        "text": "Read them before attempting the challenge"
+        "text": "Avoid redoing the challenge afterwards"
       },
       {
         "id": "c",
-        "text": "Copy every command without understanding it"
+        "text": "Read them before attempting the challenge"
       },
       {
         "id": "d",
-        "text": "After trying, understand then redo alone"
+        "text": "Copy every command without understanding it"
       }
     ]
   },
@@ -666,15 +666,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "A written authorization from the owner"
-      },
-      {
-        "id": "b",
         "text": "Nothing, if the intention is good"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "A positive answer from an online forum"
+      },
+      {
+        "id": "c",
+        "text": "A written authorization from the owner"
       },
       {
         "id": "d",
@@ -697,11 +697,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Publish it to alert the public"
+        "text": "Not copy it and report it"
       },
       {
         "id": "c",
-        "text": "Not copy it and report it"
+        "text": "Publish it to alert the public"
       },
       {
         "id": "d",
@@ -724,15 +724,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Respect for the authorized tools"
-      },
-      {
-        "id": "c",
         "text": "Use of any resource without limit"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Sharing the subjects during the test"
+      },
+      {
+        "id": "d",
+        "text": "Respect for the authorized tools"
       }
     ]
   },
@@ -747,19 +747,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "They are optional depending on the candidate"
+        "text": "They are part of the conditions of validity"
       },
       {
         "id": "b",
-        "text": "They have no importance for the score"
+        "text": "They are optional depending on the candidate"
       },
       {
         "id": "c",
-        "text": "They are lifted if you are late"
+        "text": "They have no importance for the score"
       },
       {
         "id": "d",
-        "text": "They are part of the conditions of validity"
+        "text": "They are lifted if you are late"
       }
     ]
   },

@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Les entrées sont représentées par des symboles : le long de chaque chemin, on collecte les contraintes que ces symboles doivent respecter.",
       "whyWrong": {
-        "a": "Ce n’est pas le principe.",
-        "b": "Ce n’est pas le principe.",
-        "d": "Ce n’est pas le principe."
+        "a": "L’exécution symbolique ne touche pas aux commentaires : elle remplace des entrées par des symboles.",
+        "b": "Elle ne remplace pas les tests par des journaux : elle raisonne sur des chemins.",
+        "d": "Elle ne fige pas les variables : elle les traite comme des inconnues."
       }
     },
     "pva-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "À chaque branche, la condition devient une contrainte sur les symboles : l’ensemble décrit les entrées qui suivent ce chemin.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
-        "c": "Sans rapport."
+        "a": "Elle ne collecte aucun mot de passe : elle accumule des conditions sur les entrées.",
+        "d": "Les adresses réseau ne sont pas des contraintes sur les symboles d’entrée.",
+        "c": "Les noms des développeurs n’interviennent pas dans l’analyse des chemins."
       }
     },
     "pva-q3": {
@@ -29,8 +29,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le solveur décide si les contraintes d’un chemin sont satisfiables et, si oui, fournit une entrée concrète qui l’atteint.",
       "whyWrong": {
-        "b": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
+        "b": "Le solveur ne compile rien : il résout des contraintes.",
+        "c": "Le solveur ne chiffre pas les contraintes : il cherche des valeurs qui les satisfont.",
         "d": "Il ne modifie pas le programme."
       }
     },
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Chaque branche dépendant d’une entrée peut doubler le nombre de chemins : boucles et gros programmes dépassent vite les capacités du solveur.",
       "whyWrong": {
-        "a": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison.",
-        "b": "Ce n’est pas la raison."
+        "a": "Les solveurs n’ont pas de problème avec le langage C en soi.",
+        "c": "Les symboles se comparent : c’est leur nombre de combinaisons qui explose.",
+        "b": "Les compilateurs ne bloquent pas l’analyse : c’est le nombre de chemins qui pose problème."
       }
     },
     "pva-q5": {
@@ -79,8 +79,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une preuve établit qu’un programme ou un modèle respecte une spécification donnée pour toutes les entrées, là où un test n’en essaie que quelques-unes.",
       "whyWrong": {
         "b": "Elle est relative à la spécification.",
-        "a": "Ce n’est pas ce qu’elle prouve.",
-        "d": "Ce n’est pas ce qu’elle prouve."
+        "a": "Une preuve formelle ne mesure pas la vitesse d’exécution.",
+        "d": "Elle ne porte pas sur la qualité du matériel qui exécute le programme."
       }
     },
     "pva-q10": {
@@ -88,9 +88,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le model checking explore tous les états d’un modèle fini et vérifie une propriété ; il fournit un contre-exemple si elle est violée.",
       "whyWrong": {
-        "d": "Ce n’est pas son objet.",
-        "a": "Ce n’est pas son objet.",
-        "c": "Ce n’est pas son objet."
+        "d": "Mesurer la vitesse de réponse relève des tests de performance.",
+        "a": "Remplacer un compilateur par un interpréteur n’a rien à voir avec le model checking.",
+        "c": "Le model checking explore des états, il ne les chiffre pas."
       }
     },
     "pva-q11": {
@@ -99,8 +99,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Si la spécification est incomplète ou si l’hypothèse sur l’environnement est fausse, des vulnérabilités subsistent hors du périmètre prouvé.",
       "whyWrong": {
         "d": "Elle s’applique à du code réel.",
-        "b": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison."
+        "b": "Un compilateur fidèle ne remet pas en cause la preuve : c’est une hypothèse à vérifier.",
+        "c": "La preuve ne dépend pas de la vitesse du processeur."
       }
     },
     "pva-q12": {
@@ -153,9 +153,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Il précise les capacités de l’adversaire (écouter, modifier, rejouer, corrompre un participant). Les garanties prouvées valent pour ce modèle seulement.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "b": "Simuler le trafic des utilisateurs n’est pas modéliser un adversaire.",
+        "c": "Une liste de clients autorisés décrit un contrôle d’accès, pas un attaquant.",
+        "a": "Un schéma du réseau interne décrit une architecture, pas les capacités d’un adversaire."
       }
     },
     "pva-q18": {
@@ -173,9 +173,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Si la négociation n’est pas authentifiée, un intermédiaire peut forcer le choix de la version la plus faible : c’est un repli (downgrade).",
       "whyWrong": {
-        "b": "Ce n’est pas le risque.",
-        "a": "Il y a une conséquence.",
-        "d": "C’est l’inverse."
+        "b": "Une négociation permissive ne produit pas d’accélération : elle autorise des versions faibles.",
+        "a": "Une meilleure compatibilité s’accompagne ici d’un risque de repli forcé.",
+        "d": "La négociation permissive peut au contraire affaiblir le chiffrement."
       }
     },
     "pva-q20": {
@@ -183,8 +183,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La preuve porte sur un modèle du protocole : une erreur de code, un canal auxiliaire ou un paramètre mal choisi peut subsister à l’implémentation.",
       "whyWrong": {
-        "c": "Ce n’est pas la raison.",
-        "d": "Ce n’est pas la raison.",
+        "c": "Les preuves ne sont pas toujours fausses : elles portent sur un modèle.",
+        "d": "Les protocoles s’implémentent : c’est l’écart avec le modèle qui pose problème.",
         "a": "Il est au contraire indispensable."
       }
     },
@@ -215,7 +215,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Confidentialité, authentification et fraîcheur sont les propriétés classiques. L’apparence de l’interface n’intervient pas.",
       "whyWrong": {
-        "c": "Sans rapport."
+        "c": "La couleur de l’interface n’est pas une propriété du protocole."
       }
     },
     "pva-q25": {
@@ -223,9 +223,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Chaque étape (base, chargeur, système) vérifie la signature de la suivante : un composant altéré n’est pas exécuté.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "c": "Un démarrage vérifié ne saute pas d’étapes : il les contrôle toutes.",
+        "b": "Il ne chiffre pas les fichiers de l’utilisateur : il contrôle la chaîne de démarrage.",
+        "d": "Afficher la version n’est pas un contrôle de sécurité."
       }
     },
     "pva-q26": {
@@ -233,9 +233,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La racine (code en mémoire non modifiable, clé inscrite dans la puce) est le point de départ de la chaîne de confiance : on y ancre la vérification de toutes les étapes.",
       "whyWrong": {
-        "b": "Ce n’est pas la racine.",
+        "b": "Une racine de confiance est le premier élément, pas le dernier programme chargé.",
         "a": "Un secret en clair serait un défaut.",
-        "c": "Ce n’est pas la racine."
+        "c": "Une sauvegarde d’image n’est pas un point de départ de confiance."
       }
     },
     "pva-q27": {
@@ -243,9 +243,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’examen révèle les secrets embarqués, les services inutiles et les bibliothèques anciennes : on peut alors exiger des correctifs ou renoncer à l’achat.",
       "whyWrong": {
-        "b": "Ce n’est pas l’objectif défensif.",
-        "d": "Ce n’est pas l’objectif.",
-        "a": "Sans rapport."
+        "b": "Examiner une image n’autorise pas à la modifier librement.",
+        "d": "Examiner une image n’a pas pour but d’annuler la garantie.",
+        "a": "La consommation électrique n’est pas l’objet de cet examen."
       }
     },
     "pva-q28": {
@@ -297,9 +297,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le consensus permet à des nœuds de s’accorder sur une décision commune malgré des pannes, des retards ou des messages perdus.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition."
+        "b": "Partager la charge est de l’équilibrage, pas du consensus.",
+        "a": "Une copie unique sur un seul nœud est le contraire d’un système réparti.",
+        "c": "Le consensus ne repose pas sur un chiffrement par un tiers."
       }
     },
     "pva-q34": {
@@ -308,8 +308,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un nœud byzantin peut envoyer des informations contradictoires ou malveillantes, ce qui est plus difficile à tolérer qu’un simple arrêt.",
       "whyWrong": {
         "d": "C’est une faute par arrêt.",
-        "b": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "b": "Détenir le plus de données ne rend pas un nœud byzantin.",
+        "a": "Un nœud jamais connecté n’influence pas le consensus."
       }
     },
     "pva-q35": {

@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Writing outside an array is a memory error: it can corrupt other data, crash the program or be hijacked.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "d": "Unrelated.",
-        "a": "Unrelated."
+        "c": "Text formatting is not a write past the end of an array.",
+        "d": "Message translation has no link with out-of-bounds writes.",
+        "a": "A user input mistake is not this class of code defect."
       }
     },
     "pra-q2": {
@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "That is another defect: memory is never given back.",
         "c": "That is another defect.",
-        "d": "Unrelated to freed memory."
+        "d": "A variable name collision is a scope issue, not use after free."
       }
     },
     "pra-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "An injection occurs when user-controlled data is interpreted as a command or query.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "d": "That is not the same family.",
-        "a": "That is not the same family."
+        "b": "A hardware failure is not a defect caused by unchecked data.",
+        "d": "A memory leak is a resource management defect, not injection.",
+        "a": "A stack overflow occurs without a query interpreter."
       }
     },
     "pra-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An integer overflow can yield a size that is too small: the allocated area is insufficient and the copy that follows overflows.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "c": "Unrelated."
+        "b": "The processor does not corrupt memory by heating: it is a calculation flaw.",
+        "a": "Integers are not “stored in clear”: the problem is the calculation overflowing.",
+        "c": "The compiler does not remove the area: a bad calculation undersizes it."
       }
     },
     "pra-q5": {
@@ -78,9 +78,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The debugger lets you stop the program, observe variables and the call stack and understand what precedes the error.",
       "whyWrong": {
-        "c": "That is not its role.",
-        "b": "That is not its role.",
-        "d": "That is not its role."
+        "c": "A debugger encrypts no file.",
+        "b": "It is not used to speed up a connection.",
+        "d": "Backing up code is the job of a version control system."
       }
     },
     "pra-q10": {
@@ -89,7 +89,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The sanitizer adds runtime checks: a memory error or undefined behavior is reported immediately, with the call stack.",
       "whyWrong": {
         "a": "It detects, it does not fix.",
-        "c": "That is not its role.",
+        "c": "A sanitizer encrypts no data: it detects errors.",
         "d": "On the contrary it slows things down."
       }
     },
@@ -98,7 +98,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A reproducible crash makes it possible to check the hypothesis, fix and see that the original input no longer crashes.",
       "whyWrong": {
-        "d": "That is not the goal.",
+        "d": "Reproducing serves to understand a crash, not to accumulate them.",
         "a": "You must read the code.",
         "b": "The test goes with the fix."
       }
@@ -135,7 +135,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Call stack, input and version make it possible to reproduce and locate the defect. The wallpaper has nothing to do with it.",
       "whyWrong": {
-        "a": "Unrelated."
+        "a": "The tester’s wallpaper adds nothing to the analysis."
       }
     },
     "pra-q16": {
@@ -155,7 +155,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "That would greatly slow down the test.",
         "d": "That would greatly slow down the test.",
-        "b": "Unrelated."
+        "b": "Choosing the compiler is not a fuzzing harness’s job."
       }
     },
     "pra-q18": {
@@ -165,7 +165,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "That is the opposite.",
         "c": "It still reproduces the crash.",
-        "d": "That is not the goal."
+        "d": "Minimizing an input does not encrypt it."
       }
     },
     "pra-q19": {
@@ -173,9 +173,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The format’s keywords and constants are hard to guess by mutation: the dictionary lets the fuzzer get past the first comparisons faster.",
       "whyWrong": {
-        "d": "That is not its role.",
-        "a": "That is not its role.",
-        "c": "That is not its role."
+        "d": "A dictionary has no translation function.",
+        "a": "It does not compress results.",
+        "c": "It removes no input: it supplies elements of the format."
       }
     },
     "pra-q20": {
@@ -183,9 +183,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Coverage shows the blocks reached and those that are not: it guides the addition of seeds, dictionaries and harnesses.",
       "whyWrong": {
-        "c": "That is not what it measures.",
-        "a": "That is not what it measures.",
-        "b": "That is not what it measures."
+        "c": "Coverage does not measure machine speed.",
+        "a": "It does not count developers.",
+        "b": "It does not check disk space."
       }
     },
     "pra-q21": {
@@ -224,7 +224,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A receiver cannot assume the sender is honest or that the message is well formed: it checks lengths, fields and sequence.",
       "whyWrong": {
         "c": "That is a dangerous assumption.",
-        "a": "That is not its goal.",
+        "a": "Validation adds a check: it does not always speed up the network.",
         "d": "It does not replace encryption."
       }
     },
@@ -233,9 +233,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The signature proves that the update really comes from the vendor and has not been modified: an altered file is refused.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
-        "b": "Unrelated."
+        "a": "The signature does not measure download speed.",
+        "d": "It does not concern size on disk.",
+        "b": "It does not protect the displayed file name."
       }
     },
     "pra-q27": {
@@ -243,9 +243,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "If the receiver accepts the same command a second time, a captured message can be replayed: protection is a nonce, a counter or a timestamp.",
       "whyWrong": {
-        "c": "That is not replay.",
-        "a": "That is not replay.",
-        "b": "That is not replay."
+        "c": "Writing a new message is not a replay.",
+        "a": "Deleting a message before it arrives is interception.",
+        "b": "Encrypting with a fresh key is not a replay."
       }
     },
     "pra-q28": {
@@ -253,7 +253,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A nonce or a counter signed with the message makes it possible to refuse a message already seen or out of sequence.",
       "whyWrong": {
-        "d": "Unrelated.",
+        "d": "A color does not distinguish a replayed message from a new one.",
         "c": "Does not protect against replay.",
         "b": "That encourages replay."
       }
@@ -307,9 +307,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The test replays the input that caused the defect: if a later change reintroduces it, the validation fails.",
       "whyWrong": {
-        "c": "That is not its role.",
+        "c": "The test does not delete the old code.",
         "a": "It complements review.",
-        "d": "Unrelated."
+        "d": "It does not measure compiler speed."
       }
     },
     "pra-q35": {
@@ -327,8 +327,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The score estimates a general severity. Internet exposure, process rights and data sensitivity change the real priority.",
       "whyWrong": {
-        "c": "That is not accurate.",
-        "b": "That is not accurate.",
+        "c": "A score is not always zero.",
+        "b": "The score does not change each time the report is read.",
         "d": "It applies to any software."
       }
     },
@@ -358,7 +358,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Exposure, rights obtained and data concerned determine the real impact. The logo has no influence.",
       "whyWrong": {
-        "a": "Unrelated."
+        "a": "The color of the logo does not influence a vulnerability’s severity."
       }
     },
     "pra-q40": {

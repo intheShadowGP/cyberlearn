@@ -827,13 +827,30 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "qia-q40",
-    "prompt": "Quelle technique ajoute du bruit calibré pour limiter les fuites sur les individus ? (deux mots)",
+    "id": "qia-q41",
+    "prompt": "Pourquoi répéter chaque essai d’une évaluation adverse plusieurs fois ?",
     "skills": [
-      "q-adv-confidentialite"
+      "q-adv-risque"
     ],
     "difficulty": 2,
-    "type": "short",
-    "placeholder": "deux mots"
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pour augmenter artificiellement le nombre de constats présentés dans le rapport final"
+      },
+      {
+        "id": "b",
+        "text": "Le comportement varie d’un essai à l’autre : on mesure un taux de réussite, pas un résultat unique"
+      },
+      {
+        "id": "c",
+        "text": "Pour épuiser le quota de requêtes dont dispose l’équipe chargée de la défense"
+      },
+      {
+        "id": "d",
+        "text": "Parce que le modèle devient plus facile à tromper à chaque essai identique répété"
+      }
+    ]
   }
 ];

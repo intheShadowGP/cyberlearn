@@ -24,7 +24,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le temps réel impose des délais bornés et prévisibles. Un traitement de sécurité trop coûteux (chiffrement lourd, inspection profonde) risquerait de dépasser ces délais et de perturber le procédé, voire la sûreté.",
       "whyWrong": {
-        "d": "Ce n’est pas systématique.",
+        "d": "Les automates ne refusent pas tout chiffrement : c’est le délai ajouté qui pose problème.",
         "a": "Aucune loi ne l’interdit.",
         "b": "Il a une incidence directe."
       }
@@ -34,9 +34,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un protocole temps réel garantit qu’un message arrive dans un délai maîtrisé. Cette contrainte limite les traitements de sécurité possibles sur le chemin des données.",
       "whyWrong": {
-        "b": "Ce n’est pas le sens.",
-        "c": "Ce n’est pas le sens.",
-        "a": "Ce n’est pas le sens."
+        "b": "Le temps réel concerne le délai, pas le chiffrement.",
+        "c": "Les protocoles temps réel sont industriels, pas réservés à Internet.",
+        "a": "Un protocole filaire peut être temps réel : le câble n’est pas le critère."
       }
     },
     "apf-q32": {
@@ -45,8 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La sonde passive analyse une copie du trafic, sans émettre. Elle détecte les nouveaux équipements et les comportements anormaux sans risquer de perturber le procédé.",
       "whyWrong": {
         "d": "Un scan actif peut perturber le réseau.",
-        "c": "Ce n’est pas son rôle.",
-        "a": "Sans rapport."
+        "c": "Un pare-feu qui redémarre les automates perturberait la production.",
+        "a": "Un clavier supplémentaire n’observe pas le trafic réseau."
       }
     },
     "apf-q33": {
@@ -54,9 +54,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Faute d’authentification des équipements, un élément raccordé peut émettre des trames et perturber automates et actionneurs. Le contrôle des raccordements est essentiel.",
       "whyWrong": {
-        "b": "Ce n’est pas son effet.",
-        "c": "Ce n’est pas son effet.",
-        "d": "Ce n’est pas son effet."
+        "b": "Un équipement non autorisé ne réduit pas la consommation : il introduit un risque.",
+        "c": "Il ne chiffre pas les échanges de l’atelier.",
+        "d": "Il n’améliore pas les mesures : il peut les perturber."
       }
     },
     "apf-q34": {
@@ -76,9 +76,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le bus CAN relie les calculateurs ; conçu pour la fiabilité, il ne chiffre ni n’authentifie les messages par défaut. Un accès au bus permet d’injecter des messages, d’où la nécessité de cloisonner les domaines et de contrôler les passerelles.",
       "whyWrong": {
-        "a": "Ce n’est pas un pare-feu.",
-        "c": "Ce n’est pas ce système.",
-        "b": "Ce n’est pas Internet."
+        "a": "Le bus CAN n’est pas un pare-feu : il transporte des messages entre calculateurs.",
+        "c": "L’infodivertissement est un autre système : le CAN relie des calculateurs.",
+        "b": "Le CAN est un bus interne, pas une connexion Internet."
       }
     },
     "apf-q5": {
@@ -103,9 +103,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un véhicule moderne contient des dizaines de calculateurs (moteur, freinage, direction, habitacle). Ils communiquent par des bus et constituent autant de cibles potentielles.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
-        "b": "Sans rapport."
+        "a": "Un calculateur n’est pas un carburant : c’est un ordinateur embarqué.",
+        "d": "Un panneau de commande de coffre n’est pas un calculateur.",
+        "b": "Un pneu à capteurs contient un capteur, il n’est pas un calculateur dédié."
       }
     },
     "apf-q36": {
@@ -120,7 +120,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Cela ne protège rien.",
         "a": "Peu réaliste et inefficace.",
-        "d": "Sans rapport."
+        "d": "Agrandir l’écran d’infodivertissement ne protège aucune fonction critique."
       }
     },
     "apf-q8": {
@@ -160,9 +160,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Authentifier chaque message ajoute du calcul et des octets sur des bus à bande passante et délais contraints. On l’applique de manière ciblée aux messages critiques.",
       "whyWrong": {
-        "d": "Ce n’est pas la contrainte.",
+        "d": "Le bus n’interdit pas toute donnée supplémentaire : le coût est le délai et la charge.",
         "a": "Aucune interdiction.",
-        "b": "Sans rapport."
+        "b": "L’authentification ne supprime pas la contrainte de temps : elle l’aggrave."
       }
     },
     "apf-q38": {
@@ -199,9 +199,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "R155 exige un CSMS (système de management de la cybersécurité) couvrant tout le cycle de vie ; R156 exige un SUMS (système de management des mises à jour logicielles), en particulier pour les mises à jour à distance.",
       "whyWrong": {
-        "a": "Aucun rapport avec les pneus.",
+        "a": "Les règlements R155 et R156 ne portent pas sur les pneus ni les freins.",
         "d": "Ce sont deux règlements distincts.",
-        "c": "Une norme n’est pas remplacée par un règlement."
+        "c": "R156 ne remplace pas la norme ISO/SAE 21434 : il traite des mises à jour logicielles."
       }
     },
     "apf-q14": {
@@ -229,9 +229,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le Forum mondial pour l’harmonisation des règlements concernant les véhicules (WP.29) élabore les règlements UNECE, dont R155 et R156.",
       "whyWrong": {
-        "d": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "d": "Le G20 est un sommet économique, il n’élabore pas de règlements automobiles.",
+        "c": "L’OTAN est une alliance militaire.",
+        "b": "Le FMI traite de finance internationale."
       }
     },
     "apf-q40": {
@@ -257,9 +257,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "L’attaquant relaie les échanges entre la clé (loin du véhicule) et le véhicule, qui croit la clé proche. Parades : mouvement de la clé, mesure de distance, mise en veille de la clé.",
       "whyWrong": {
-        "d": "Ce n’est pas une attaque.",
+        "d": "Copier un logo n’ouvre pas un véhicule.",
         "c": "Ce n’est pas une attaque de ce type.",
-        "b": "Sans rapport."
+        "b": "Changer les pneus n’a aucun rapport avec l’ouverture sans clé."
       }
     },
     "apf-q19": {
@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le V2X regroupe les communications entre véhicules, infrastructures, piétons et réseau. Ces échanges doivent être authentifiés pour que des messages falsifiés ne provoquent pas de réaction dangereuse.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "c": "Le V2X n’est pas un moteur : c’est un ensemble de communications.",
+        "a": "Il ne désigne pas un format de carte routière.",
+        "b": "Un modèle de pneu d’hiver n’est pas un mode de communication."
       }
     },
     "apf-q20": {
@@ -277,9 +277,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un outil de diagnostic peut lire, mais aussi reprogrammer des calculateurs. L’accès est donc authentifié, filtré par la passerelle et journalisé.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
-        "b": "Ce n’est pas son effet."
+        "a": "Un outil de diagnostic ne consomme pas de carburant.",
+        "d": "Il ne change pas la couleur du tableau de bord.",
+        "b": "Il ne bloque pas définitivement les mises à jour."
       }
     },
     "apf-q21": {
@@ -324,9 +324,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Ce centre collecte les alertes des véhicules et des services, analyse les incidents et déclenche la réponse. Il prolonge la surveillance du constructeur après la vente.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "c": "Sans rapport.",
-        "a": "Sans rapport."
+        "b": "Un atelier de peinture n’assure pas de supervision de sécurité.",
+        "c": "Un site de recyclage de batteries n’est pas un centre de supervision.",
+        "a": "Un banc d’essai de moteurs ne supervise pas la sécurité d’un parc."
       }
     },
     "apf-q26": {
@@ -334,9 +334,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un véhicule reste en circulation quinze ans ou plus. De nouvelles failles sont découvertes dans les composants après la vente : la veille et les mises à jour sont indispensables.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "a": "Sans rapport.",
-        "d": "Ce n’est pas le but."
+        "c": "Surveiller les vulnérabilités ne change pas la forme de la carrosserie.",
+        "a": "L’usure des pneus n’est pas une question de cybersécurité.",
+        "d": "Le suivi ne vise pas à supprimer la garantie."
       }
     },
     "apf-q27": {

@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The series addresses three roles: the asset owner (operator), the integrator who installs the system and the manufacturer of the components. Each has its own requirements.",
       "whyWrong": {
-        "d": "Three roles are distinguished.",
-        "a": "Three roles are distinguished.",
-        "c": "Unrelated."
+        "d": "The series is not limited to the manufacturer: it also distinguishes the operator and the integrator.",
+        "a": "The operator is only one of the three roles: the integrator and the manufacturer are missing.",
+        "c": "Email is not part of the automation systems covered by the series."
       }
     },
     "noa-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The SL-T is the level of protection you want to reach for a zone, determined by the risk analysis. It is then compared with the level achieved and the components’ capabilities.",
       "whyWrong": {
-        "d": "It is not a price.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "d": "SL-T is a target protection level, not a price.",
+        "a": "The number of operators plays no part in the target security level.",
+        "b": "The commissioning date has no link with the target security level."
       }
     },
     "noa-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "SL-T is the target, SL-A the level actually achieved, SL-C the capability of the components. The gap between SL-T and SL-A guides complementary measures.",
       "whyWrong": {
-        "d": "They are three distinct notions.",
-        "b": "They are not protocols.",
-        "c": "They are not manufacturers."
+        "d": "The three acronyms designate three distinct notions: target, achieved and capability.",
+        "b": "These are notions of the standard, not industrial protocols.",
+        "c": "These are three levels of the same standard, not manufacturers."
       }
     },
     "noa-q4": {
@@ -48,7 +48,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "The series covers the security program (part 2), the system (part 3) and the components (part 4). It does not deal with aesthetics.",
       "whyWrong": {
-        "b": "Unrelated to cybersecurity."
+        "b": "The series deals with security, not layout or the color of electrical cabinets."
       }
     },
     "noa-q6": {
@@ -75,9 +75,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The diode is a physical or logical barrier that lets information pass in one direction only, for example from OT to IT: no command can come back.",
       "whyWrong": {
-        "a": "It is the opposite.",
-        "b": "It is not a router.",
-        "c": "It is not a backup."
+        "a": "A traditional firewall lets flows through in both directions, unlike a diode.",
+        "b": "A wireless router links networks; it does not guarantee a one-way flow.",
+        "c": "An offline backup protects data; it does not control a network flow."
       }
     },
     "noa-q9": {
@@ -85,9 +85,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Production data goes up to IT (historian, indicators) without an attacker on the management network being able to send anything toward OT.",
       "whyWrong": {
-        "d": "It blocks commands.",
-        "b": "It does not remove it.",
-        "a": "It does not encrypt."
+        "d": "The unidirectional gateway sends no command toward the OT.",
+        "b": "The intermediate zone remains useful: the gateway is added to it, not instead of it.",
+        "a": "It does not encrypt sensors: it enforces a one-way flow."
       }
     },
     "noa-q10": {
@@ -95,9 +95,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The jump server imposes a single passage point: strong authentication, on-demand authorization and session recording before any access to OT.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "c": "It replaces nothing.",
-        "d": "On the contrary, it protects."
+        "b": "Bandwidth is not the goal of a jump server.",
+        "c": "The jump server does not replace the controllers; it controls access.",
+        "d": "It is the opposite: it avoids exposing the OT directly."
       }
     },
     "noa-q11": {
@@ -105,9 +105,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Micro-segmentation splits the network into small zones (per production line, per device) to limit even more the spread of an incident.",
       "whyWrong": {
-        "d": "That is not the definition.",
-        "c": "It is the opposite.",
-        "a": "It is the opposite."
+        "d": "Micro-segmentation splits the network into zones; it does not change packet size.",
+        "c": "Merging networks is the opposite of segmentation.",
+        "a": "It relies on filtering between zones: firewalls are not removed."
       }
     },
     "noa-q12": {
@@ -124,7 +124,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Zones, DMZ and controlled remote access form the base. A flat network lets a compromise spread freely.",
       "whyWrong": {
-        "c": "It facilitates propagation."
+        "c": "A flat network lets a compromise spread: it is not defensible."
       }
     },
     "noa-q14": {
@@ -141,9 +141,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "In OT, risk includes harm to people, the environment and equipment, not just data. Safety guides prioritization.",
       "whyWrong": {
-        "a": "Availability is essential.",
-        "c": "It also concerns processes.",
-        "b": "It concerns the whole system."
+        "a": "In OT, availability is on the contrary central to production.",
+        "c": "OT risk is not limited to data: it includes physical effects.",
+        "b": "Risk analysis is not limited to firewalls: it covers the whole system."
       }
     },
     "noa-q16": {
@@ -151,9 +151,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The hazard study identifies accident scenarios. By crossing it with cyber scenarios, you spot the manipulations that could cause an accident.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "d": "Unrelated."
+        "b": "Website ranking has nothing to do with the safety of a process.",
+        "a": "An email migration does not address industrial accident scenarios.",
+        "d": "A license inventory is management, not process safety."
       }
     },
     "noa-q17": {
@@ -161,9 +161,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "ATT&CK for ICS lists the tactics and techniques observed against industrial systems. It helps build scenarios and assess detection coverage.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "c": "A corporate directory manages identities, not attack techniques.",
+        "a": "An accounting manual describes no attack technique.",
+        "b": "A furniture catalog has nothing to do with attack techniques."
       }
     },
     "noa-q18": {
@@ -171,9 +171,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A consequence that could cause injuries or a major accident justifies a high level of protection even if the scenario is unlikely.",
       "whyWrong": {
-        "c": "It complements it.",
-        "b": "Unrelated.",
-        "d": "Unrelated."
+        "c": "The consequence does not replace likelihood: it complements it for prioritization.",
+        "b": "The consequence is measured by safety effects, not network throughput.",
+        "d": "The consequence depends on the process, not the vendor’s licenses."
       }
     },
     "noa-q19": {
@@ -190,7 +190,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Scenarios, attack paths, measures and residual risk make up the analysis. The color of indicator lights has no place in it.",
       "whyWrong": {
-        "b": "Unrelated to risk."
+        "b": "The color of indicator lights adds nothing to the analysis of scenarios and consequences."
       }
     },
     "noa-q21": {
@@ -198,9 +198,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Industrial traffic is very regular: same devices, same cycles, same commands. The reference profile makes it possible to spot a deviation.",
       "whyWrong": {
-        "d": "That is not the definition.",
-        "c": "That is not the definition.",
-        "a": "That is not the definition."
+        "d": "A list of passwords is not a traffic profile and should not be kept that way.",
+        "c": "The plant floor plan does not describe network exchanges.",
+        "a": "A maintenance calendar does not describe usual traffic."
       }
     },
     "noa-q22": {
@@ -208,9 +208,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The regularity of OT traffic makes deviations (new device, unusual write) easier to spot than on a very varied office network.",
       "whyWrong": {
-        "b": "It is on the contrary regular.",
-        "a": "It is recommended.",
-        "c": "It complements them."
+        "b": "It is the opposite: industrial traffic is very regular.",
+        "a": "Detection is not forbidden in OT; the passive sensor is recommended.",
+        "c": "Detection complements firewalls; it does not replace them."
       }
     },
     "noa-q23": {
@@ -218,9 +218,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Most attacks against OT begin in IT. Correlating events from both worlds makes it possible to follow the attacker’s progression.",
       "whyWrong": {
-        "a": "That is not the purpose.",
-        "d": "That is not the purpose.",
-        "b": "It would be a risk."
+        "a": "Correlating does not delete alerts: it links them together.",
+        "d": "The aim is not to disable monitoring but to enrich it.",
+        "b": "Correlating events does not merge the networks: they stay separate."
       }
     },
     "noa-q24": {
@@ -242,7 +242,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "A new device, an unusual write and a download outside maintenance are strong signals. A periodic read is normal behavior.",
       "whyWrong": {
-        "b": "It is normal operation."
+        "b": "A usual periodic read is part of the normal profile, not an anomaly."
       }
     },
     "noa-q27": {
@@ -258,9 +258,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A manufacturer that designs, tests and fixes in a controlled way delivers fewer flaws and handles better those that appear.",
       "whyWrong": {
-        "a": "That is not the goal.",
-        "c": "Updates remain necessary.",
-        "d": "It does not remove them."
+        "a": "A secure lifecycle aims at fewer flaws, not a lower purchase price.",
+        "c": "Updates remain necessary: a secure lifecycle helps produce and deliver them.",
+        "d": "It facilitates audits; it does not avoid them."
       }
     },
     "noa-q29": {
@@ -268,9 +268,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "When the fix is not applicable, filtering (industrial firewall, prevention system) blocks the exploitation attempt of the flaw: it is a compensating measure.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "d": "That is not the definition.",
-        "c": "That is not the definition."
+        "b": "An offline patch is still a real patch; a virtual patch acts on the network.",
+        "d": "An unsigned patch would be a risk, not a virtual patch.",
+        "c": "A configuration backup blocks no exploitation."
       }
     },
     "noa-q30": {
@@ -278,9 +278,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Each intervention must be authorized, time-limited, tied to a person and recorded.",
       "whyWrong": {
-        "b": "No traceability.",
-        "a": "No traceability.",
-        "c": "Major risk."
+        "b": "A shared, permanent account prevents identifying the person.",
+        "a": "A common password removes any accountability.",
+        "c": "The operator must on the contrary keep control of access."
       }
     },
     "noa-q31": {
@@ -297,7 +297,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Fix deadline, notification and software bill of materials give the operator visibility. Banning audits removes all control.",
       "whyWrong": {
-        "b": "The operator must be able to check."
+        "b": "Forbidding audits deprives the operator of any verification."
       }
     },
     "noa-q33": {
@@ -324,9 +324,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A backup that has never been restored offers no assurance: incompatible version, incomplete file, unknown procedure. The test validates the time and the method.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "b": "Unrelated.",
-        "d": "Unrelated."
+        "c": "Testing a restore has no effect on the local network.",
+        "b": "It does not remove monitoring: it checks the backup.",
+        "d": "Power consumption is not the subject of a restore test."
       }
     },
     "noa-q36": {
@@ -334,9 +334,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "If supervision is unavailable, operators must be able to run the process safely with local means. The procedure is written and exercised.",
       "whyWrong": {
-        "b": "It is not a failure.",
-        "a": "It is not a stop.",
-        "d": "It is not a test."
+        "b": "A deliberately caused failure is not an operating procedure.",
+        "a": "Manual mode keeps the process running; it does not stop it.",
+        "d": "A penetration test is a security assessment, not a control mode."
       }
     },
     "noa-q37": {
@@ -344,9 +344,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The exercise reveals missing contacts, unclear decisions and forgotten dependencies, with no risk for production.",
       "whyWrong": {
-        "c": "That is not the purpose.",
-        "d": "That is not the purpose.",
-        "a": "That is not the purpose."
+        "c": "A crisis exercise tests teams, not cables.",
+        "d": "Power consumption is not the subject of a crisis exercise.",
+        "a": "Choosing a vendor is procurement, not an exercise."
       }
     },
     "noa-q38": {
@@ -363,7 +363,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Backups, manual procedures and spare parts allow recovery. Obsolete documentation wastes precious time.",
       "whyWrong": {
-        "d": "It slows down recovery."
+        "d": "Outdated documentation slows recovery instead of speeding it."
       }
     },
     "noa-q40": {

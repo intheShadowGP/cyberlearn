@@ -140,29 +140,29 @@ export const questions: Question[] = [
     "placeholder": "deux mots"
   },
   {
-    "id": "rpp-q8",
-    "prompt": "Quelles phases font partie d’un test d’intrusion encadré ?",
+    "id": "rpp-q41",
+    "prompt": "Pourquoi fixer une limite de temps par piste lors d’une épreuve pratique longue ?",
     "skills": [
-      "r-pp-methodo"
+      "r-pp-notes"
     ],
-    "difficulty": 3,
-    "type": "multi",
+    "difficulty": 2,
+    "type": "single",
     "options": [
       {
         "id": "a",
-        "text": "La validation maîtrisée avec preuve minimale"
+        "text": "Pour terminer l’épreuve plus tôt que la durée prévue et gagner un bonus"
       },
       {
         "id": "b",
-        "text": "La suppression des journaux de la cible"
+        "text": "Éviter de s’obstiner sur une impasse et garder du temps pour les autres pistes"
       },
       {
         "id": "c",
-        "text": "L’énumération et l’analyse"
+        "text": "Pour se dispenser de prendre des notes sur les pistes que l’on abandonne"
       },
       {
         "id": "d",
-        "text": "Le cadrage et l’autorisation"
+        "text": "Parce que le règlement oblige à changer de piste à intervalles fixes et réguliers"
       }
     ]
   },
@@ -177,11 +177,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Pour éviter de rédiger un rapport"
+        "text": "Pour retrouver et reproduire ses actions"
       },
       {
         "id": "b",
-        "text": "Pour retrouver et reproduire ses actions"
+        "text": "Pour éviter de rédiger un rapport"
       },
       {
         "id": "c",
@@ -204,19 +204,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Commande, résultat, heure, capture"
-      },
-      {
-        "id": "b",
         "text": "Uniquement un jugement sur la difficulté"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Uniquement la liste des outils installés"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Uniquement le nom de la cible visée"
+      },
+      {
+        "id": "d",
+        "text": "Commande, résultat, heure, capture"
       }
     ]
   },
@@ -239,11 +239,11 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Supprimer toute pause pendant l’épreuve"
+        "text": "Limiter à l’avance le temps par piste"
       },
       {
         "id": "d",
-        "text": "Limiter à l’avance le temps par piste"
+        "text": "Supprimer toute pause pendant l’épreuve"
       }
     ]
   },
@@ -348,11 +348,11 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "Les constats essentiels, sans jargon"
+        "text": "La liste complète des commandes utilisées"
       },
       {
         "id": "d",
-        "text": "La liste complète des commandes utilisées"
+        "text": "Les constats essentiels, sans jargon"
       }
     ]
   },
@@ -371,15 +371,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Pour éviter de décrire l’impact"
+        "text": "Pour que l’équipe puisse le vérifier"
       },
       {
         "id": "c",
-        "text": "Pour cacher la méthode employée"
+        "text": "Pour éviter de décrire l’impact"
       },
       {
         "id": "d",
-        "text": "Pour que l’équipe puisse le vérifier"
+        "text": "Pour cacher la méthode employée"
       }
     ]
   },
@@ -394,11 +394,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Par nombre de pages de preuve"
+        "text": "Par gravité et par impact"
       },
       {
         "id": "b",
-        "text": "Par gravité et par impact"
+        "text": "Par nombre de pages de preuve"
       },
       {
         "id": "c",
@@ -503,15 +503,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Dans un laboratoire personnel isolé"
-      },
-      {
-        "id": "b",
         "text": "Sur le site d’une entreprise choisie au hasard"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Sur n’importe quel serveur accessible en ligne"
+      },
+      {
+        "id": "c",
+        "text": "Dans un laboratoire personnel isolé"
       },
       {
         "id": "d",
@@ -534,11 +534,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Supprimer le besoin d’instantanés"
+        "text": "Éviter tout effet sur des systèmes réels"
       },
       {
         "id": "c",
-        "text": "Éviter tout effet sur des systèmes réels"
+        "text": "Supprimer le besoin d’instantanés"
       },
       {
         "id": "d",
@@ -561,15 +561,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "À revenir rapidement à un état connu"
-      },
-      {
-        "id": "c",
         "text": "À chiffrer les disques des machines"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "À supprimer les journaux d’entraînement"
+      },
+      {
+        "id": "d",
+        "text": "À revenir rapidement à un état connu"
       }
     ]
   },
@@ -584,19 +584,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Éviter de refaire le défi ensuite"
+        "text": "Essayer, comprendre, refaire seul"
       },
       {
         "id": "b",
-        "text": "Les lire avant d’avoir essayé le défi"
+        "text": "Éviter de refaire le défi ensuite"
       },
       {
         "id": "c",
-        "text": "Recopier chaque commande sans les comprendre"
+        "text": "Les lire avant d’avoir essayé le défi"
       },
       {
         "id": "d",
-        "text": "Essayer, comprendre, refaire seul"
+        "text": "Recopier chaque commande sans les comprendre"
       }
     ]
   },
@@ -666,15 +666,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Une autorisation écrite du propriétaire"
-      },
-      {
-        "id": "b",
         "text": "Rien, si l’intention est bonne"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Une réponse positive d’un forum en ligne"
+      },
+      {
+        "id": "c",
+        "text": "Une autorisation écrite du propriétaire"
       },
       {
         "id": "d",
@@ -697,11 +697,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Les publier pour alerter le public"
+        "text": "Ne pas les copier et le signaler"
       },
       {
         "id": "c",
-        "text": "Ne pas les copier et le signaler"
+        "text": "Les publier pour alerter le public"
       },
       {
         "id": "d",
@@ -724,15 +724,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Le respect des outils autorisés"
-      },
-      {
-        "id": "c",
         "text": "L’usage de toute ressource sans limite"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "Le partage des sujets pendant l’épreuve"
+      },
+      {
+        "id": "d",
+        "text": "Le respect des outils autorisés"
       }
     ]
   },
@@ -747,19 +747,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Elles sont facultatives selon les candidats"
+        "text": "Elles conditionnent la validité"
       },
       {
         "id": "b",
-        "text": "Elles n’ont aucune importance pour la note"
+        "text": "Elles sont facultatives selon les candidats"
       },
       {
         "id": "c",
-        "text": "Elles sont levées si l’on est en retard"
+        "text": "Elles n’ont aucune importance pour la note"
       },
       {
         "id": "d",
-        "text": "Elles conditionnent la validité"
+        "text": "Elles sont levées si l’on est en retard"
       }
     ]
   },

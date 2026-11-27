@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Retrieval-Augmented Generation : l’application récupère des passages pertinents et les place dans le contexte du modèle. Ces passages deviennent une surface d’injection et une source possible de fuite.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "Le RAG n’est pas un format audio : c’est une technique de récupération de documents.",
+        "a": "Le RAG ne chiffre rien : il ajoute au contexte des documents retrouvés.",
+        "d": "Le RAG n’est pas un pare-feu : il alimente le modèle en documents."
       }
     },
     "ia-q2": {
@@ -69,7 +69,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La confirmation humaine place une décision humaine entre l’intention éventuellement manipulée du modèle et l’action irréversible. Elle doit montrer précisément ce qui sera envoyé et à qui.",
       "whyWrong": {
-        "d": "Insuffisant : contournable.",
+        "d": "Un prompt système plus long ne bloque pas l’envoi d’un message détourné.",
         "c": "Un meilleur modèle reste manipulable.",
         "a": "Ne change pas le risque."
       }
@@ -146,8 +146,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le texte malveillant est saisi par l’utilisateur lui-même : injection directe. L’impact est souvent la divulgation du prompt système ; celui-ci ne doit donc jamais contenir de secret (clé d’API, mot de passe).",
       "whyWrong": {
-        "d": "Ce n’est pas l’entraînement.",
-        "c": "Ce n’est pas une extraction.",
+        "d": "L’empoisonnement vise les données d’entraînement, pas le message saisi en direct.",
+        "c": "L’extraction de modèle cherche à reproduire le modèle, pas à faire afficher le prompt.",
         "a": "Aucun tiers n’intervient."
       }
     },
@@ -156,9 +156,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Selon les conditions d’usage, le fournisseur peut conserver, analyser ou réutiliser les données : on définit donc ce que l’on a le droit d’y saisir.",
       "whyWrong": {
-        "c": "Ce n’est pas garanti.",
+        "c": "Les données ne sont pas toujours supprimées instantanément.",
         "a": "Elles quittent l’organisation.",
-        "b": "Ce n’est pas automatique."
+        "b": "Elles ne sont pas automatiquement anonymisées avant traitement."
       }
     },
     "ia-q18": {
@@ -166,9 +166,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’empoisonnement vise l’entraînement, l’affinage ou la base documentaire d’un RAG pour orienter les réponses ou y insérer des contenus hostiles.",
       "whyWrong": {
-        "b": "Ce n’est pas le même risque.",
-        "d": "Ce n’est pas le même risque.",
-        "a": "Ce n’est pas le même risque."
+        "b": "Le déni de service vise la disponibilité, pas le comportement appris du modèle.",
+        "d": "Le hameçonnage trompe un utilisateur, il ne manipule pas les données d’un modèle.",
+        "a": "L’usurpation d’adresse réseau n’altère pas les données d’entraînement."
       }
     },
     "ia-q19": {
@@ -176,9 +176,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Sans les droits d’accès dans l’index, la recherche renvoie des documents que l’utilisateur n’a pas le droit de lire, et le modèle peut les restituer.",
       "whyWrong": {
-        "b": "Ce n’est pas son objet.",
-        "c": "Ce n’est pas son objet.",
-        "d": "Ce n’est pas son objet."
+        "b": "Conserver les droits n’accélère pas la recherche : il restreint les résultats.",
+        "c": "Les droits ne chiffrent pas les réponses du modèle.",
+        "d": "Les droits n’allègent pas la base : ils filtrent ce qui est récupéré."
       }
     },
     "ia-q20": {
@@ -222,9 +222,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Moins on envoie de données au modèle, moins il y a à protéger et moins la fuite est grave.",
       "whyWrong": {
-        "a": "Ce n’est pas la minimisation.",
-        "c": "Ce n’est pas la minimisation.",
-        "b": "Ce n’est pas la minimisation."
+        "a": "Compresser les données ne les minimise pas au sens de la protection des données.",
+        "c": "Supprimer les journaux n’est pas de la minimisation et gêne l’enquête.",
+        "b": "Chiffrer n’équivaut pas à ne traiter que les données nécessaires."
       }
     },
     "ia-q25": {
@@ -232,9 +232,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Dans un cadre autorisé, des testeurs jouent le rôle d’un adversaire pour mesurer la robustesse du système avant et après sa mise en service.",
       "whyWrong": {
-        "d": "Ce n’est pas le sens.",
-        "a": "Ce n’est pas le sens.",
-        "b": "Ce n’est pas le sens."
+        "d": "Refondre l’interface n’est pas un test adverse.",
+        "a": "Former les utilisateurs est utile mais ce n’est pas du red teaming.",
+        "b": "Mettre à jour le modèle de base n’est pas un test de faiblesses."
       }
     },
     "ia-q26": {
@@ -242,8 +242,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La trace des appels d’outils et du contexte qui les a déclenchés permet de comprendre une action indésirable et d’en retrouver l’origine.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but.",
+        "d": "Journaliser n’a pas pour but de ralentir l’agent.",
+        "c": "Les journaux n’évitent pas la confirmation humaine : ils la complètent.",
         "a": "Ils restent indispensables."
       }
     },
@@ -252,9 +252,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le règlement exige exactitude, robustesse et cybersécurité adaptées, et documentation : la démonstration passe par des tests et des preuves.",
       "whyWrong": {
-        "c": "Ce n’est pas l’exigence.",
-        "b": "Ce n’est pas l’exigence.",
-        "a": "Ce n’est pas l’exigence."
+        "c": "Le règlement attend de la traçabilité, pas l’interdiction de journaliser.",
+        "b": "Il n’impose pas la publication du code source de chaque modèle.",
+        "a": "Il n’interdit pas les systèmes à haut risque : il les encadre."
       }
     },
     "ia-q28": {
@@ -262,9 +262,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "On ne peut ni évaluer les risques ni appliquer une politique d’usage sur des outils que l’on ne connaît pas.",
       "whyWrong": {
-        "b": "Ce n’est pas l’objectif.",
-        "c": "Ce n’est pas l’objectif.",
-        "d": "Ce n’est pas l’objectif."
+        "b": "L’inventaire n’a pas pour but de réduire les comptes.",
+        "c": "Résilier tous les contrats n’est pas l’objet d’un inventaire.",
+        "d": "L’inventaire sert à encadrer les usages, pas à tout interdire."
       }
     },
     "ia-q29": {
@@ -310,8 +310,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Tout ce qui est fourni au modèle pour répondre : consignes du développeur, conversation, documents récupérés, résultats d’outils.",
       "whyWrong": {
         "c": "Trop restrictif.",
-        "d": "Ce n’est pas son contenu.",
-        "a": "Ce n’est pas son contenu."
+        "d": "La fenêtre de contexte ne contient pas le code source du modèle.",
+        "a": "Elle ne contient pas les mots de passe de tous les utilisateurs."
       }
     },
     "ia-q34": {
@@ -320,7 +320,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le modèle produit la suite la plus plausible d’un contexte qui peut contenir du texte hostile ; il peut aussi se tromper (hallucination).",
       "whyWrong": {
         "a": "C’est faux.",
-        "b": "Sans rapport.",
+        "b": "Les sorties ne sont pas chiffrées par défaut, et le chiffrement ne les rendrait pas plus fiables.",
         "c": "Il n’y a pas de validation externe."
       }
     },
@@ -330,8 +330,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Dans l’injection indirecte, l’attaquant ne parle pas au modèle : il dépose l’instruction dans une page, un courriel ou un document que le modèle lira.",
       "whyWrong": {
         "c": "C’est la définition de l’injection directe.",
-        "a": "Ce n’est pas le cas.",
-        "d": "Ce n’est pas le cas."
+        "a": "L’injection indirecte n’exige pas de modifier le code source du modèle.",
+        "d": "Le chiffrement de l’instruction ne définit pas une injection indirecte."
       }
     },
     "ia-q36": {
@@ -339,9 +339,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les filtres réduisent le risque mais restent contournables : ils sont une couche de défense, pas une garantie. L’architecture limite l’impact.",
       "whyWrong": {
-        "d": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison.",
-        "b": "Ce n’est pas exact."
+        "d": "La mémoire n’est pas la limite d’un filtre : c’est son contournement.",
+        "c": "Les filtres de détection ne sont pas interdits par la réglementation.",
+        "b": "Un filtre qui bloquerait toutes les requêtes rendrait le service inutilisable."
       }
     },
     "ia-q37": {
@@ -349,7 +349,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Pour décider, la personne doit voir précisément ce qui partira et à qui : une confirmation vague se valide par réflexe.",
       "whyWrong": {
-        "a": "Insuffisant.",
+        "a": "La date d’envoi seule ne permet pas de juger si l’action est correcte.",
         "d": "Sans intérêt pour la décision.",
         "b": "Sans intérêt pour la décision."
       }

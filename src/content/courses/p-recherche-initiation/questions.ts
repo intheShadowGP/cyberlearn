@@ -194,29 +194,29 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "pri-q10",
-    "prompt": "Que vérifie Secure Boot au démarrage d’un poste ?",
+    "id": "pri-q41",
+    "prompt": "Laquelle de ces formulations est une hypothèse de recherche testable ?",
     "skills": [
-      "p-ini-confiance"
+      "p-ini-panorama"
     ],
     "difficulty": 2,
     "type": "single",
     "options": [
       {
         "id": "a",
-        "text": "La vitesse de la connexion à Internet du site"
+        "text": "Ce logiciel est de meilleure qualité que ses concurrents directs"
       },
       {
         "id": "b",
-        "text": "Le nombre d’utilisateurs déjà connectés"
+        "text": "Ce protocole est sécurisé dans toutes les situations possibles"
       },
       {
         "id": "c",
-        "text": "La signature de chaque étape du démarrage"
+        "text": "Le programme plante si le champ de nom dépasse 256 octets"
       },
       {
         "id": "d",
-        "text": "La date de dernière sauvegarde du poste"
+        "text": "Les attaquants auront toujours une longueur d’avance sur la défense"
       }
     ]
   },

@@ -29,10 +29,7 @@ export const bank: BankItem[] = [
     e: 'La qualité se juge à la rigueur du cadre, à la fiabilité des constats et à l’utilité du rapport, pas au spectaculaire.' },
   { id: 'rpp-q7', t: 'short', d: 2, s: ['r-pp-methodo'], p: 'Comment appelle-t-on le document qui fixe le périmètre, les méthodes autorisées et le calendrier d’un test ? (deux mots)', a: ['règles d’engagement', 'regles d’engagement', 'rules of engagement', 'règles d’engagement écrites'], ph: 'deux mots',
     e: 'Les règles d’engagement délimitent ce qui est permis : on ne fait rien en dehors.' },
-  { id: 'rpp-q8', t: 'multi', d: 3, s: ['r-pp-methodo'], p: 'Quelles phases font partie d’un test d’intrusion encadré ?', k: 3,
-    o: ['Le cadrage et l’autorisation', 'L’énumération et l’analyse', 'La validation maîtrisée avec preuve minimale', 'La suppression des journaux de la cible'],
-    e: 'Cadrage, énumération, validation maîtrisée puis compte rendu forment la démarche. Effacer les journaux est hors de propos et nuisible.',
-    w: { 3: 'C’est nuisible et hors cadre.' } },
+  { "id":"rpp-q41","t":"single","d":2,"s":["r-pp-notes"],"p":"Pourquoi fixer une limite de temps par piste lors d’une épreuve pratique longue ?","o":["Éviter de s’obstiner sur une impasse et garder du temps pour les autres pistes","Parce que le règlement oblige à changer de piste à intervalles fixes et réguliers","Pour terminer l’épreuve plus tôt que la durée prévue et gagner un bonus","Pour se dispenser de prendre des notes sur les pistes que l’on abandonne"],"e":"S’obstiner sur une impasse est l’erreur la plus fréquente. Une limite fixée à l’avance impose de consigner l’état, de passer à une autre piste et de revenir plus tard si le temps le permet.","w":{"1":"La limite est un choix de méthode personnel, pas une obligation du règlement.","2":"Finir plus tôt n’apporte aucun avantage : le but est de couvrir davantage de pistes.","3":"Au contraire, on consigne l’état d’une piste avant de l’abandonner."} },
 
   // --- Notes et temps ---
   { id: 'rpp-q9', t: 'single', d: 1, s: ['r-pp-notes'], p: 'Pourquoi tenir des notes pendant un exercice pratique ?',

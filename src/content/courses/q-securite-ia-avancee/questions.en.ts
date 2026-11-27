@@ -827,13 +827,30 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "qia-q40",
-    "prompt": "Which technique adds calibrated noise to limit leaks about individuals? (two words)",
+    "id": "qia-q41",
+    "prompt": "Why repeat each trial of an adversarial evaluation several times?",
     "skills": [
-      "q-adv-confidentialite"
+      "q-adv-risque"
     ],
     "difficulty": 2,
-    "type": "short",
-    "placeholder": "two words"
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "To artificially increase the number of findings presented in the final report"
+      },
+      {
+        "id": "b",
+        "text": "Behavior varies from one trial to the next: you measure a success rate, not a single result"
+      },
+      {
+        "id": "c",
+        "text": "To exhaust the request quota available to the team in charge of the defense"
+      },
+      {
+        "id": "d",
+        "text": "Because the model becomes easier to fool with each identical trial that is repeated"
+      }
+    ]
   }
 ];

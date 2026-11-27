@@ -54,7 +54,11 @@ function jaccard(a: Set<string>, b: Set<string>): number {
   return inter / (a.size + b.size - inter);
 }
 
-/** Explications de mauvaises réponses (FR) : total et part des formules de 5 mots ou moins (« Sans rapport. »). */
+/** Formules creuses : explication courte qui se contente de dire « sans rapport » ou « ce n’est pas son rôle ». */
+const GENERIC_WHY = /^(sans rapport|ce n[’']est pas|hors sujet|insuffisant|inexact|incorrect|aucun rapport|faux\b|non\b)/i;
+const isGenericWhy = (t: string): boolean => t.trim().split(/\s+/).length <= 6 && GENERIC_WHY.test(t.trim());
+
+/** Explications de mauvaises réponses (FR) : total et part des formules creuses. */
 function wrongAnswerExplanations(): { total: number; short: number } {
   let total = 0;
   let short = 0;
@@ -63,7 +67,7 @@ function wrongAnswerExplanations(): { total: number; short: number } {
       if (!('o' in q) || !q.w) continue;
       for (const text of Object.values(q.w)) {
         total++;
-        if (String(text).trim().split(/\s+/).length <= 5) short++;
+        if (isGenericWhy(String(text))) short++;
       }
     }
   }
@@ -143,7 +147,7 @@ function render(): string {
     `| Cours avec au moins un exercice lié à un laboratoire | ${rs.filter((r) => r.labs > 0).length} |`,
     `| Cours sans aucune ressource externe HTTPS | ${rs.filter((r) => r.https === 0).length} |`,
     `| Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | ${pct(rs.reduce((n, r) => n + r.whyWrongRate, 0) / rs.length)} |`,
-    `| Explications de mauvaises réponses de 5 mots ou moins, sur le total (FR) | ${wrongAnswerExplanations().short} sur ${wrongAnswerExplanations().total} |`,
+    `| Explications de mauvaises réponses creuses (« Sans rapport. », « Ce n’est pas son rôle. »), sur le total (FR) | ${wrongAnswerExplanations().short} sur ${wrongAnswerExplanations().total} |`,
     `| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | ${dups.length} |`,
     '',
     '## Par cours',

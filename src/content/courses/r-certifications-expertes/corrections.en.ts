@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "These certifications generally require several years of experience: they assess judgment and the overall view.",
       "whyWrong": {
-        "d": "That is not their target.",
-        "c": "That is not their target.",
-        "a": "That is not their target."
+        "d": "A management certification targets experienced profiles, not beginners.",
+        "c": "It assumes a security role, not users with no technical function.",
+        "a": "It targets working professionals, not students with no experience."
       }
     },
     "rce-q2": {
@@ -19,8 +19,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The questions describe a context and ask for the best decision: judgment is assessed more than technical action.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "b": "That is not the main purpose.",
+        "c": "Typing speed has nothing to do with security management.",
+        "b": "Memorizing command lines belongs to a technical exam, not a management one.",
         "a": "These exams are vendor-neutral."
       }
     },
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The body asks for experience in security domains; otherwise an intermediate status is granted until it is acquired.",
       "whyWrong": {
-        "a": "Unrelated.",
+        "a": "No medical degree is required: it is professional experience.",
         "b": "That is the opposite.",
-        "d": "Unrelated."
+        "d": "A video subscription is not a certification requirement."
       }
     },
     "rce-q4": {
@@ -39,7 +39,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "You weigh impact, cost, obligations and risk, and you respect governance and the law: the best answer is the most appropriate to the context.",
       "whyWrong": {
-        "d": "It is not always the best.",
+        "d": "The most technical option is not always the best aligned with objectives.",
         "c": "Cost is not the only criterion.",
         "b": "It is to be rejected."
       }
@@ -54,15 +54,15 @@ export const corrections: CourseCorrections = {
       "correct": false,
       "explanation": "The best answer is the one that fits the context, the risks and the responsibilities, not necessarily the most technical."
     },
-    "rce-q7": {
-      "type": "short",
-      "accepted": [
-        "isc2",
-        "(isc)²",
-        "isc²",
-        "isc 2"
-      ],
-      "explanation": "The CISSP is awarded by ISC2, which also publishes a code of ethics that holders commit to respect."
+    "rce-q41": {
+      "type": "single",
+      "correct": "c",
+      "explanation": "Management arbitrates between options by comparing risk, cost and benefit. It must also see what remains exposed after the measure: the residual risk it accepts in writing.",
+      "whyWrong": {
+        "b": "A single option removes management’s ability to arbitrate.",
+        "a": "Technical detail cannot be compared in business terms: it does not allow a decision.",
+        "d": "No measure cancels a risk: promising zero is misleading."
+      }
     },
     "rce-q8": {
       "type": "multi",
@@ -78,42 +78,42 @@ export const corrections: CourseCorrections = {
     },
     "rce-q9": {
       "type": "single",
-      "correct": "c",
+      "correct": "d",
       "explanation": "It sets the requirements of an ISMS: policies, processes, responsibilities and continuous improvement.",
       "whyWrong": {
-        "a": "That is not its purpose.",
-        "b": "That is not its purpose.",
-        "d": "That is not its purpose."
+        "a": "An encryption protocol is something else: ISO 27001 describes a management system.",
+        "b": "It does not define a backup format.",
+        "c": "It does not describe a web application firewall product."
       }
     },
     "rce-q10": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "The Lead Implementer builds and keeps the ISMS alive; the Lead Auditor assesses its conformity independently.",
       "whyWrong": {
-        "a": "That is not the difference.",
-        "b": "That is not the difference.",
-        "c": "Their missions differ."
+        "a": "Both titles concern management systems, not writing code.",
+        "c": "Neither title concerns training or recruiting users.",
+        "d": "Their missions differ."
       }
     },
     "rce-q11": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "It lists the standard’s measures, specifies which are applied or not and justifies each choice from the risk analysis.",
       "whyWrong": {
-        "c": "That is not its content.",
-        "a": "That is not its content.",
-        "d": "That is not its content."
+        "c": "A list of passwords must never appear in this document.",
+        "b": "The budget is not the subject of the statement of applicability.",
+        "d": "A vacation schedule has no link with the ISMS."
       }
     },
     "rce-q12": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "A finding without evidence can be contested. Documents, records, interviews and observations give verifiable facts.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "c": "The report is a deliverable.",
-        "b": "That is not the goal."
+        "c": "Evidence serves to establish facts, not to lengthen the audit.",
+        "b": "The report is a deliverable.",
+        "a": "The audit is not an opposition: it aims at verifiable findings."
       }
     },
     "rce-q13": {
@@ -153,42 +153,42 @@ export const corrections: CourseCorrections = {
     },
     "rce-q17": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "They attest a targeted technical skill (detection, forensics, penetration testing…).",
       "whyWrong": {
         "a": "They do not replace experience.",
-        "c": "They do not give access to everything.",
-        "b": "They often require training."
+        "d": "They do not give access to everything.",
+        "c": "They often require training."
       }
     },
     "rce-q18": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "A specialty visible to teams recruiting in that domain strengthens the profile.",
       "whyWrong": {
-        "a": "Watch remains necessary.",
-        "d": "It is not a guarantee.",
+        "b": "Watch remains necessary.",
+        "d": "No specialization guarantees you will never change careers.",
         "c": "Continuing education remains required."
       }
     },
     "rce-q19": {
       "type": "single",
-      "correct": "a",
+      "correct": "c",
       "explanation": "An index links notions to references in your materials: it saves time, provided you understood the notions.",
       "whyWrong": {
-        "c": "It is not enough.",
-        "d": "That is fraud.",
-        "b": "That is not its effect."
+        "b": "An index helps search; it does not replace reading and understanding the materials.",
+        "d": "Getting the questions in advance would be cheating.",
+        "a": "An index does not shorten the planned duration: it saves search time."
       }
     },
     "rce-q20": {
       "type": "single",
-      "correct": "c",
+      "correct": "a",
       "explanation": "Application questions ask you to interpret and choose: finding a page is not enough.",
       "whyWrong": {
-        "d": "That is not accurate.",
-        "a": "That is not accurate.",
-        "b": "That is not accurate."
+        "d": "Not all bodies forbid indexes when documents are allowed.",
+        "b": "An index can contain useful notions: it just is not enough.",
+        "c": "A well-made index speeds up access to information."
       }
     },
     "rce-q21": {
@@ -222,32 +222,32 @@ export const corrections: CourseCorrections = {
     },
     "rce-q25": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "Achievements and experience prove the skill the title attests.",
       "whyWrong": {
-        "d": "That brings nothing.",
-        "b": "That is counterproductive.",
-        "c": "That is counterproductive."
+        "c": "That brings nothing.",
+        "a": "That is counterproductive.",
+        "b": "That is counterproductive."
       }
     },
     "rce-q26": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "Each title is chosen for the target position: without coherence, the investment is lost.",
       "whyWrong": {
-        "b": "That is not accurate.",
-        "c": "That is not accurate.",
-        "a": "That is not accurate."
+        "c": "Employers do not forbid certifications: they judge them by usefulness.",
+        "d": "A certification does not disappear in a day.",
+        "a": "They do not make exams impossible: they cost time."
       }
     },
     "rce-q27": {
       "type": "single",
-      "correct": "b",
+      "correct": "c",
       "explanation": "Bodies require training activities over the validity period to keep the title.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "d": "That is not its role.",
-        "c": "That is not its role."
+        "a": "Continuing education does not replace the initial exam.",
+        "d": "It does not remove any responsibility from the holder.",
+        "b": "It does not reduce validity: it maintains it."
       }
     },
     "rce-q28": {
@@ -255,9 +255,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A solid specialty rests on sound basics: that is what builds a recognized expertise.",
       "whyWrong": {
-        "b": "The basics remain necessary.",
-        "a": "That is not the goal.",
-        "d": "Watch remains necessary."
+        "b": "Specialization builds on mastered basics; it does not replace them.",
+        "a": "Specializing does not prevent working in a team.",
+        "d": "A specialty requires, on the contrary, regular watch."
       }
     },
     "rce-q29": {
@@ -297,42 +297,42 @@ export const corrections: CourseCorrections = {
     },
     "rce-q33": {
       "type": "single",
-      "correct": "c",
+      "correct": "a",
       "explanation": "The life and safety of people come before property and image.",
       "whyWrong": {
-        "d": "That is not the priority.",
-        "b": "That is not the priority.",
-        "a": "That is not the priority."
+        "d": "Licenses are not the priority in a major incident.",
+        "c": "Press communication comes after protecting people.",
+        "b": "The org chart is not an immediate answer to an incident."
       }
     },
     "rce-q34": {
       "type": "single",
-      "correct": "a",
+      "correct": "d",
       "explanation": "Neither excess constraints nor insufficient protection: the measure matches the risk it reduces.",
       "whyWrong": {
-        "c": "That is not the criterion.",
-        "d": "That would be disproportionate.",
-        "b": "You must analyze."
+        "b": "A proportionate measure is not necessarily the most expensive.",
+        "c": "A measure that is too strict everywhere is disproportionate and costly.",
+        "a": "Choosing without analysis contradicts proportionality."
       }
     },
     "rce-q35": {
       "type": "single",
-      "correct": "d",
+      "correct": "b",
       "explanation": "You compare the risk reduced with the cost and constraints before deciding.",
       "whyWrong": {
-        "b": "That is not a criterion.",
-        "c": "The decision must be shared.",
-        "a": "That is not an analysis."
+        "c": "Fashion is not a criterion for choosing a measure.",
+        "d": "Adopting a costly measure without telling anyone prevents any validation.",
+        "a": "Postponing the decision indefinitely leaves the risk unchanged."
       }
     },
     "rce-q36": {
       "type": "single",
-      "correct": "b",
+      "correct": "a",
       "explanation": "Acceptance is an informed, documented decision by management when treatment is disproportionate to the risk.",
       "whyWrong": {
-        "a": "It can be measured.",
-        "c": "Someone must answer for it.",
-        "d": "That is not accurate."
+        "b": "Residual risk can be measured; it is the basis of the acceptance decision.",
+        "c": "On the contrary, acceptance must have a designated owner.",
+        "d": "The law does not always require accepting a risk."
       }
     },
     "rce-q37": {
@@ -349,7 +349,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Reduce, transfer, avoid and explicitly accept are the options. Ignoring without documenting is not a treatment.",
       "whyWrong": {
-        "d": "It is not a treatment."
+        "d": "Ignoring without documenting is not a risk treatment option."
       }
     },
     "rce-q39": {
@@ -361,7 +361,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Context, obligations and cost-impact underpin the decision. A personal preference is not a criterion.",
       "whyWrong": {
-        "b": "It is not a criterion."
+        "b": "A personal preference for a tool does not support a reasoned decision."
       }
     },
     "rce-q40": {

@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Contexte, tâche, format de sortie et contraintes donnent à l’assistant ce dont il a besoin pour répondre utilement.",
       "whyWrong": {
-        "c": "Insuffisant.",
-        "d": "Insuffisant.",
+        "c": "Le nom de l’auteur ne structure pas une demande : il manque la tâche et le contexte.",
+        "d": "Un mot unique ne donne ni contexte, ni format, ni contraintes.",
         "b": "Il ne faut jamais en fournir."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Des délimiteurs autour des données aident le modèle à les traiter comme du contenu, pas comme des instructions, même si ce n’est pas une garantie.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but."
+        "a": "Séparer ne vise pas à allonger la demande, mais à éviter les confusions.",
+        "d": "La séparation n’empêche pas la réponse : elle clarifie ce qui est une consigne.",
+        "b": "La séparation ne chiffre rien : elle délimite consignes et données."
       }
     },
     "qip-q3": {
@@ -30,7 +30,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un secret saisi dans un outil en ligne est exposé, qu’il soit au début, masqué partiellement ou envoyé à part.",
       "whyWrong": {
         "a": "Cela les expose.",
-        "c": "Insuffisant.",
+        "c": "Masquer à moitié un secret le laisse en partie exposé : il ne doit pas figurer du tout.",
         "d": "Cela les expose aussi."
       }
     },
@@ -39,7 +39,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Une réponse accompagnée de ses sources et hypothèses se contrôle plus vite ; elle ne devient pas exacte pour autant.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
+        "c": "Citer des sources n’empêche pas la contestation : au contraire, il permet de la vérifier.",
         "b": "Cela ne garantit rien.",
         "a": "La relecture reste nécessaire."
       }
@@ -102,8 +102,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’assistant regroupe réputation, historique et contexte de l’actif, ce qui accélère le travail de l’analyste.",
       "whyWrong": {
         "c": "L’enquête reste nécessaire.",
-        "d": "Ce n’est pas son objet.",
-        "a": "Ce n’est pas son objet."
+        "d": "L’enrichissement n’a pas pour but de rendre l’alerte confidentielle pour tous.",
+        "a": "Il ne transforme pas une alerte en incident : il aide à la qualifier."
       }
     },
     "qip-q12": {
@@ -111,9 +111,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La qualification engage l’organisation et dépend de connaissances métier que le modèle n’a pas : l’humain décide, avec les éléments fournis.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas exact.",
-        "a": "Ce n’est pas la raison."
+        "b": "L’assistant ne refuse pas toujours de répondre : la décision reste humaine.",
+        "c": "Les incidents majeurs ont des journaux : c’est ce qui permet l’enquête.",
+        "a": "Les analystes ont toujours besoin d’être formés pour assumer cette décision."
       }
     },
     "qip-q13": {
@@ -158,8 +158,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un jeu de tests permet de comparer les réponses à des résultats attendus, avant la mise en service et après chaque changement.",
       "whyWrong": {
         "b": "Il mesure, il ne corrige pas.",
-        "c": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle."
+        "c": "Un jeu de tests ne chiffre rien : il mesure la qualité.",
+        "a": "Un jeu de tests ne rend pas l’assistant plus rapide."
       }
     },
     "qip-q18": {
@@ -167,9 +167,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "On compte les réponses qui contiennent des éléments faux ou inventés (références, chiffres, faits) sur un jeu de tests.",
       "whyWrong": {
-        "c": "Ce n’est pas ce qu’il mesure.",
-        "d": "Ce n’est pas ce qu’il mesure.",
-        "a": "Ce n’est pas ce qu’il mesure."
+        "c": "La lenteur d’écriture n’est pas ce que mesure ce taux.",
+        "d": "Le nombre de lecteurs n’est pas un taux d’hallucination.",
+        "a": "Le moment d’envoi des réponses n’est pas concerné."
       }
     },
     "qip-q19": {
@@ -177,8 +177,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un document contenant une instruction cachée montre si l’assistant la suit ou l’ignore : c’est la mesure de sa robustesse.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but.",
+        "b": "Ajouter ces cas rend les tests plus exigeants, pas plus faciles.",
+        "c": "Ces cas augmentent la couverture, ils ne réduisent pas les tests.",
         "d": "La relecture reste utile."
       }
     },
@@ -187,9 +187,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un nouveau modèle ou un prompt modifié peut dégrader certains cas : seul un nouveau passage du jeu de tests le révèle.",
       "whyWrong": {
-        "d": "Ce n’est pas la raison.",
-        "b": "Ce n’est pas la raison.",
-        "a": "Ce n’est pas la raison."
+        "d": "Les tests ne s’effacent pas d’eux-mêmes.",
+        "b": "Le motif est technique : un contrat n’est pas la raison.",
+        "a": "Les anciens résultats sont conservés : l’intérêt est de comparer."
       }
     },
     "qip-q21": {
@@ -248,9 +248,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les essais (dont les tests adverses) se font sur des données et des outils de recette, sans conséquence sur les systèmes réels.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "b": "Séparer les environnements ne vise pas à réduire le coût de licence.",
+        "c": "Au contraire, un environnement de test permet aux analystes de s’exercer.",
+        "a": "Séparer n’accélère pas les requêtes : cela protège la production."
       }
     },
     "qip-q28": {
@@ -260,7 +260,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Risque d’exécution de contenu hostile.",
         "c": "Risque d’exécution de contenu hostile.",
-        "d": "Ce n’est pas une validation."
+        "d": "Chiffrer une sortie avant de la lire ne la rend pas fiable."
       }
     },
     "qip-q29": {
@@ -305,9 +305,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La politique dit quels outils sont validés, quelles données peuvent y être traitées et qui est responsable.",
       "whyWrong": {
-        "d": "Ce n’est pas son objet.",
+        "d": "La politique ne précise pas l’effectif du service informatique.",
         "c": "Il ne faut jamais en dresser la liste.",
-        "b": "Ce n’est pas son objet."
+        "b": "La couleur des interfaces n’est pas un sujet de politique d’usage de l’IA."
       }
     },
     "qip-q34": {
@@ -315,9 +315,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’AI Act classe les systèmes par niveau de risque et impose des obligations (robustesse, documentation, cybersécurité) aux systèmes à haut risque.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "c": "Sans rapport.",
-        "b": "Sans rapport."
+        "a": "Le code de la route ne régule pas les systèmes d’IA.",
+        "c": "Une directive sur les emballages ne concerne pas l’IA.",
+        "b": "Un règlement sur les taxis ne concerne pas l’IA."
       }
     },
     "qip-q35": {
@@ -335,9 +335,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La classification (public, interne, confidentiel, personnel) détermine quels outils peuvent traiter quelles données.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but.",
-        "d": "Sans rapport."
+        "a": "Classer les données ne réduit pas le nombre de comptes.",
+        "c": "Le but n’est pas de supprimer les données anciennes.",
+        "d": "La couleur de l’interface n’est pas un critère de classification des données."
       }
     },
     "qip-q37": {

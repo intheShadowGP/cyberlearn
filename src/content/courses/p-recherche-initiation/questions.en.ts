@@ -194,29 +194,29 @@ export const questions: Question[] = [
     ]
   },
   {
-    "id": "pri-q10",
-    "prompt": "What does Secure Boot verify when a workstation starts?",
+    "id": "pri-q41",
+    "prompt": "Which of these statements is a testable research hypothesis?",
     "skills": [
-      "p-ini-confiance"
+      "p-ini-panorama"
     ],
     "difficulty": 2,
     "type": "single",
     "options": [
       {
         "id": "a",
-        "text": "The speed of the Internet connection"
+        "text": "This software is of better quality than its direct competitors"
       },
       {
         "id": "b",
-        "text": "The number of users already signed in"
+        "text": "This protocol is secure in every possible situation"
       },
       {
         "id": "c",
-        "text": "The signature of each boot stage"
+        "text": "The program crashes if the name field exceeds 256 bytes"
       },
       {
         "id": "d",
-        "text": "The date of the workstation’s last backup"
+        "text": "Attackers will always stay a step ahead of the defense"
       }
     ]
   },

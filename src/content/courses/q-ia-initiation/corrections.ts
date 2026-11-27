@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un modèle ajuste ses paramètres à partir d’exemples pour reproduire une décision, plutôt que d’appliquer des règles écrites une à une.",
       "whyWrong": {
         "d": "C’est l’inverse de l’apprentissage.",
-        "a": "Ce n’est pas son fonctionnement.",
+        "a": "Un modèle ne copie pas les données sans les analyser : il en tire des régularités.",
         "c": "Il assiste les experts, il ne les remplace pas."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un LLM produit la suite la plus plausible d’un texte donné : il rédige, résume, répond, sans « savoir » au sens humain.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "c": "Un LLM génère du texte ; il ne chiffre pas les courriels.",
+        "b": "Un LLM n’est pas un annuaire réseau : il produit du langage.",
+        "d": "Un pare-feu filtre le trafic ; un LLM ne bloque aucun site."
       }
     },
     "qii-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’IA regroupe des systèmes qui reconnaissent, classent, prédisent ou écrivent, tâches que l’on associe à l’intelligence humaine.",
       "whyWrong": {
-        "a": "Ce n’est pas la définition.",
+        "a": "Une IA ne ressent pas d’émotions : elle traite des données.",
         "b": "Ils se trompent.",
-        "c": "Ce n’est pas la définition."
+        "c": "Se connecter à Internet ne rend pas un appareil intelligent."
       }
     },
     "qii-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Les données d’entraînement sont les exemples qui servent à ajuster le modèle : leur qualité détermine celle du modèle.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "b": "Un mot de passe sert à s’authentifier, pas à entraîner un modèle.",
+        "d": "Un message d’erreur est une sortie, pas une donnée d’entraînement.",
+        "a": "Une sauvegarde de poste n’est pas un exemple d’apprentissage."
       }
     },
     "qii-q5": {
@@ -90,9 +90,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Les filtres anti-spam apprennent à distinguer les messages indésirables des messages légitimes à partir d’exemples.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "c": "Sans rapport.",
-        "d": "Sans rapport."
+        "a": "Un cordon d’alimentation n’utilise aucun apprentissage automatique.",
+        "c": "Un fond d’écran n’analyse aucun message.",
+        "d": "Un écran de veille ne trie pas les courriels."
       }
     },
     "qii-q11": {
@@ -100,9 +100,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le modèle apprend le comportement habituel et signale les écarts, qu’un analyste vérifie ensuite.",
       "whyWrong": {
-        "b": "Ce n’est pas son but.",
-        "c": "Ce n’est pas son but.",
-        "a": "Ce n’est pas son but."
+        "b": "Supprimer les connexions ne détecte rien : cela coupe le service.",
+        "c": "Copier des journaux n’identifie aucune anomalie.",
+        "a": "Mesurer le débit est une supervision, pas une détection d’écarts de comportement."
       }
     },
     "qii-q12": {
@@ -110,9 +110,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une erreur du modèle sur une action à fort impact coûte cher : la validation humaine la rattrape avant qu’elle ait un effet.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas exact.",
-        "d": "Ce n’est pas exact."
+        "b": "L’IA produit bien du texte : ce n’est pas la raison.",
+        "c": "Les alertes ne sont pas toujours fausses : il faut les qualifier.",
+        "d": "La loi n’interdit pas les outils automatiques ; elle encadre leur usage."
       }
     },
     "qii-q13": {
@@ -155,9 +155,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un assistant produit du texte plausible, pas forcément vrai : faits, chiffres et références se contrôlent dans une source fiable.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison.",
-        "a": "Ce n’est pas exact."
+        "b": "La langue de la réponse n’est pas le problème.",
+        "c": "Une réponse n’est pas protégée par un mot de passe secret.",
+        "a": "Les chiffres peuvent être exacts ou inventés : il faut les vérifier."
       }
     },
     "qii-q18": {
@@ -165,9 +165,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Si les données sont déséquilibrées, le modèle reproduit ce déséquilibre et favorise certains cas.",
       "whyWrong": {
-        "a": "Ce n’est pas un biais.",
-        "c": "Ce n’est pas un biais.",
-        "d": "Ce n’est pas un biais."
+        "a": "Une panne matérielle n’est pas un biais : un biais vient des données.",
+        "c": "Un mot de passe stocké relève de la sécurité, pas du biais.",
+        "d": "Une règle de pare-feu ne corrige pas un biais de données."
       }
     },
     "qii-q19": {
@@ -175,9 +175,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Accepter une réponse sans la contrôler conduit à agir sur des informations fausses : mauvaise priorité, mauvaise action, rapport erroné.",
       "whyWrong": {
-        "b": "Ce n’est pas un risque.",
-        "c": "Ce n’est pas un risque.",
-        "d": "Ce n’est pas un risque."
+        "b": "Gagner du temps n’est pas un risque : l’erreur est de ne pas vérifier.",
+        "c": "La consommation d’énergie n’est pas le risque d’une confiance excessive.",
+        "d": "Trop peu de réponses n’est pas le problème : ce sont leurs erreurs."
       }
     },
     "qii-q20": {
@@ -236,9 +236,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Selon les conditions d’usage, le fournisseur peut conserver, analyser ou réutiliser les données saisies.",
       "whyWrong": {
-        "a": "Ce n’est pas garanti.",
+        "a": "Les données ne sont pas forcément effacées dès la réponse.",
         "b": "Elles quittent l’appareil.",
-        "c": "Ce n’est pas automatique."
+        "c": "Elles ne sont pas automatiquement rendues publiques, mais le fournisseur peut les conserver."
       }
     },
     "qii-q27": {
@@ -247,8 +247,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Les données personnelles gardent leur protection : l’organisation reste responsable de ce qu’elle transmet à un prestataire.",
       "whyWrong": {
         "d": "Elles ne sont pas exclues.",
-        "a": "Ce n’est pas exact.",
-        "b": "Ce n’est pas exact."
+        "a": "Les données personnelles ne deviennent pas librement réutilisables.",
+        "b": "Le RGPD s’applique aussi aux services privés."
       }
     },
     "qii-q28": {
@@ -257,7 +257,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un outil validé a fait l’objet d’un examen (contrat, conservation des données, sécurité) : un outil non validé expose l’organisation.",
       "whyWrong": {
         "c": "Cela expose les données.",
-        "b": "Sans rapport.",
+        "b": "Désactiver les mises à jour affaiblit la sécurité du poste.",
         "d": "Ne jamais partager ses identifiants."
       }
     },
@@ -301,9 +301,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les messages générés sont sans faute, personnalisés et dans toutes les langues : la qualité de la forme n’est plus un indice de légitimité.",
       "whyWrong": {
-        "b": "Ce n’est pas ce qu’elle apporte.",
-        "c": "Ce n’est pas ce qu’elle apporte.",
-        "a": "Ce n’est pas ce qu’elle apporte."
+        "b": "L’IA ne supprime pas Internet comme canal d’attaque.",
+        "c": "Rendre les courriels illisibles les rendrait inutiles à l’attaquant.",
+        "a": "Chiffrer les messages n’aide pas l’hameçonnage, qui vise à être lu."
       }
     },
     "qii-q34": {
@@ -311,9 +311,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "L’hypertrucage imite la voix ou le visage d’une personne : de plus en plus convaincant, il sert à des fraudes.",
       "whyWrong": {
-        "c": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "c": "Une panne matérielle n’a aucun rapport avec une falsification de voix ou de visage.",
+        "d": "Un virus qui efface des fichiers est un maliciel, pas un hypertrucage.",
+        "a": "Une mise à jour système n’est pas un contenu falsifié."
       }
     },
     "qii-q35": {
@@ -331,9 +331,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un texte caché dans une page, un courriel ou un document peut pousser un assistant à faire autre chose que ce que veut l’utilisateur.",
       "whyWrong": {
-        "c": "Ce n’est pas la définition.",
-        "b": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition."
+        "c": "Un câble branché n’est pas une injection de texte.",
+        "b": "Une mise à jour programmée ne détourne pas de consignes.",
+        "d": "Une sauvegarde d’historique ne modifie pas le comportement de l’assistant."
       }
     },
     "qii-q37": {

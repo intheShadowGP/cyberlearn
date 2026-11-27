@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An external model is a dependency like any other: its origin and integrity are verified before adoption.",
       "whyWrong": {
-        "c": "That is not the reason.",
-        "b": "That is not the reason.",
-        "d": "That is not guaranteed."
+        "c": "Speed is not the point: the risk is that a model has been altered.",
+        "b": "A model is not tied to a single piece of hardware: provenance concerns its integrity.",
+        "d": "The repository does not automatically encrypt models, and encryption does not prove provenance."
       }
     },
     "qia-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A format that only contains numeric values (safetensors) cannot execute instructions on opening, unlike pickle.",
       "whyWrong": {
-        "b": "That is the risk to avoid.",
-        "a": "That prevents any verification.",
-        "d": "That gives no guarantee."
+        "b": "A format that runs code on load lets a trojanized model execute.",
+        "a": "An undocumented format prevents verification: it is not preferable.",
+        "d": "A compressed format with no verification guarantees nothing about its content."
       }
     },
     "qia-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "It inventories components and versions: if a model or a library is compromised, you know which systems are affected.",
       "whyWrong": {
-        "b": "That is not its content.",
-        "c": "That is not its content.",
-        "a": "That is not its content."
+        "b": "A bill of materials inventories components, not secrets.",
+        "c": "The budget is project management, not the AI bill of materials.",
+        "a": "Users are not AI components."
       }
     },
     "qia-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "With no network or secret access, a model that ran malicious code would have nothing to steal or contact.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "a": "That is not the goal.",
-        "c": "That is not the goal."
+        "d": "Isolation limits damage; it does not reduce energy consumption.",
+        "a": "An isolated environment does not affect the model’s accuracy.",
+        "c": "Isolating the model is not meant to make it easier to copy."
       }
     },
     "qia-q5": {
@@ -70,7 +70,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Provenance, format and evaluation on your own cases give confidence. Deploying without checks exposes production.",
       "whyWrong": {
-        "c": "It exposes production."
+        "c": "Deploying an external model straight to production skips any verification."
       }
     },
     "qia-q9": {
@@ -78,9 +78,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "If the agent reads hostile content, accesses private data and can send outside, a hidden instruction is enough to get data out.",
       "whyWrong": {
-        "d": "Barely exposed.",
-        "b": "Barely exposed.",
-        "c": "No exposure."
+        "d": "A read-only tool with no data offers nothing to exfiltrate.",
+        "b": "With no context or tool, there is neither data to steal nor an output channel.",
+        "c": "With no data and no tool, the agent has nothing to exfiltrate."
       }
     },
     "qia-q10": {
@@ -89,8 +89,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Closing the output channel, removing access to private data or isolating untrusted content interrupts the exfiltration chain.",
       "whyWrong": {
         "b": "It does not change the structure of the risk.",
-        "a": "It can be bypassed.",
-        "c": "Unrelated."
+        "a": "Lengthening the prompt removes none of the three elements of the risk.",
+        "c": "Temperature sets response variability, not rights or channels."
       }
     },
     "qia-q11": {
@@ -98,9 +98,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A dedicated account is easy to trace, limit and revoke, without confusing its actions with those of a human.",
       "whyWrong": {
-        "c": "That is the opposite.",
-        "a": "That extends the rights.",
-        "d": "That extends the rights."
+        "c": "A dedicated identity serves, on the contrary, to log its actions.",
+        "a": "Acting on behalf of everyone contradicts the principle of limited rights.",
+        "d": "Administrator access by default is the opposite of limited rights."
       }
     },
     "qia-q12": {
@@ -108,9 +108,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The execution component checks each proposed action (authorized tool, recipient, cap) before running it.",
       "whyWrong": {
-        "a": "That is not the goal.",
-        "b": "Logging is still necessary.",
-        "d": "That is not the goal."
+        "a": "The separation adds a check; it does not double speed.",
+        "b": "The separation comes with logs: it does not remove them.",
+        "d": "The planner is still a language model: the separation does not avoid it."
       }
     },
     "qia-q13": {
@@ -134,7 +134,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Fine-grained authorizations, caps and confirmations bound what an agent can do. Administrator access by default extends rights.",
       "whyWrong": {
-        "b": "It extends the rights."
+        "b": "Administrator access by default removes the limits the other measures set."
       }
     },
     "qia-q16": {
@@ -153,9 +153,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The model behaves normally until a trigger chosen by the attacker produces a specific response.",
       "whyWrong": {
-        "d": "That is not the definition.",
-        "c": "That is not the definition.",
-        "b": "That is not the definition."
+        "d": "A hardware failure is not a hidden model behavior.",
+        "c": "An automatic backup is a legitimate function, not a backdoor.",
+        "b": "A configuration interface is an intended function, not a hidden behavior."
       }
     },
     "qia-q18": {
@@ -163,9 +163,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The model sees during learning inputs designed to fool it: it learns to resist them, with no complete guarantee.",
       "whyWrong": {
-        "a": "That is not the definition.",
-        "c": "That is not the definition.",
-        "d": "That is not the definition."
+        "a": "Adversarial training adds modified examples; it does not remove the original data.",
+        "c": "It does not speed up training: it makes it heavier.",
+        "d": "It is not limited to public data: it concerns the nature of the examples."
       }
     },
     "qia-q19": {
@@ -173,9 +173,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A defense tested only against generic attacks can fall to an adversary who has studied it.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "a": "That is not the reason.",
-        "d": "That is not the reason."
+        "b": "Ease of automation is not the reason for this choice.",
+        "a": "Cost is not the criterion: it is the realism of the threat.",
+        "d": "They often give worse scores: that is precisely their value."
       }
     },
     "qia-q20": {
@@ -183,9 +183,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Detectors with different weaknesses force the attacker to bypass several defenses at once.",
       "whyWrong": {
-        "a": "A single point of failure.",
+        "a": "A single detector, however precise, leaves a single point of failure.",
         "b": "Security through obscurity is not enough.",
-        "c": "The traces would be lost."
+        "c": "Disabling alert logging prevents spotting bypasses."
       }
     },
     "qia-q21": {
@@ -214,7 +214,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Provenance, outlier detection and version comparison limit poisoning. Accepting with no control opens the door to it.",
       "whyWrong": {
-        "a": "It opens the door to it."
+        "a": "Accepting all contributions without checks makes poisoning easier."
       }
     },
     "qia-q25": {
@@ -222,9 +222,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "ATLAS provides a vocabulary of tactics and techniques to build realistic threat scenarios.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "d": "That is not its role.",
-        "b": "That is not its role."
+        "a": "ATLAS does not price projects: it describes attack techniques against AI.",
+        "d": "ATLAS encrypts no model: it is a knowledge base.",
+        "b": "ATLAS does not measure speed: it lists tactics and techniques."
       }
     },
     "qia-q26": {
@@ -232,9 +232,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "This ranking helps check an architecture and prepare tests: injection, information leaks, excessive agents, etc.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "c": "Unrelated.",
-        "a": "Unrelated."
+        "d": "A cabling standard concerns physical infrastructure, not LLM application risks.",
+        "c": "A backup calendar is not a risk reference.",
+        "a": "A salary grid has nothing to do with application risks."
       }
     },
     "qia-q27": {
@@ -242,9 +242,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "We identify what must be protected and the data flows before describing threat scenarios.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "c": "Interface colors are not assets to protect.",
+        "a": "Team schedules are not assets to protect.",
+        "b": "Computer brands are not the AI system’s assets."
       }
     },
     "qia-q28": {
@@ -252,9 +252,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The same booby-trapped text is harmless to an agent with no tools and serious for one that can send, delete or pay.",
       "whyWrong": {
-        "d": "That is not the reason.",
-        "c": "That is the opposite.",
-        "b": "They have a great influence."
+        "d": "Tools do not change verbosity: they change what the agent can do.",
+        "c": "On the contrary, powerful tools increase the possible severity.",
+        "b": "Tools strongly influence risk: they define the possible actions."
       }
     },
     "qia-q29": {
@@ -299,9 +299,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "An attacker who massively queries an API can rebuild an equivalent model and steal its value.",
       "whyWrong": {
-        "a": "That is not the definition.",
-        "b": "That is not the definition.",
-        "d": "That is not the definition."
+        "a": "Deleting a model is an administration operation, not an extraction.",
+        "b": "Compressing a model is an optimization, not an attack.",
+        "d": "Translating a model into another language is porting, not extraction."
       }
     },
     "qia-q34": {
@@ -309,9 +309,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Knowing that a person was in the training data can reveal sensitive information (for example a medical record).",
       "whyWrong": {
-        "a": "That is not the definition.",
-        "d": "That is not the definition.",
-        "c": "That is not the definition."
+        "a": "Reproducing the model’s code is extraction, not membership inference.",
+        "d": "Response speed is not what this attack measures.",
+        "c": "Ranking users by rights is access control."
       }
     },
     "qia-q35": {
@@ -319,9 +319,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A model can retain specific examples (personal data, secrets) and return them for a well-chosen request.",
       "whyWrong": {
-        "d": "That is not the risk.",
-        "c": "That is not the risk.",
-        "b": "That is not the risk."
+        "d": "Memorization does not slow requests: it exposes data.",
+        "c": "A model that memorizes does not refuse new data for that reason.",
+        "b": "The model does not delete its weights: it may reproduce data from them."
       }
     },
     "qia-q36": {
@@ -329,9 +329,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Limiting and monitoring requests, and reducing the information returned, makes extraction more costly and more visible.",
       "whyWrong": {
-        "b": "That helps extraction.",
-        "a": "That helps extraction.",
-        "c": "The traces would be lost."
+        "b": "Very detailed scores help the attacker reproduce the model.",
+        "a": "Public access without authentication makes extraction easier.",
+        "c": "Deleting logging prevents detecting extractions."
       }
     },
     "qia-q37": {
@@ -348,7 +348,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Calibrated noise, filtering and access control limit leaks. Publishing the training data exposes it.",
       "whyWrong": {
-        "d": "It exposes it."
+        "d": "Publishing the training data destroys the confidentiality being protected."
       }
     },
     "qia-q39": {
@@ -363,12 +363,15 @@ export const corrections: CourseCorrections = {
         "b": "It is not a test and it exposes the system."
       }
     },
-    "qia-q40": {
-      "type": "short",
-      "accepted": [
-        "differential privacy"
-      ],
-      "explanation": "Differential privacy makes a person’s presence in the data nearly undetectable, at the price of a slight loss of accuracy."
+    "qia-q41": {
+      "type": "single",
+      "correct": "b",
+      "explanation": "An AI system does not always answer the same way to the same input. Repeating trials estimates how often an attack succeeds and lets you compare before and after a fix.",
+      "whyWrong": {
+        "a": "Inflating the number of findings would hurt the report’s credibility.",
+        "d": "Repeating a trial does not make the model more vulnerable.",
+        "c": "The aim is not to hinder the defense team but to measure."
+      }
     }
   },
 };

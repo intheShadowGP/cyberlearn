@@ -130,14 +130,31 @@ export const questions: Question[] = [
     "type": "truefalse"
   },
   {
-    "id": "rce-q7",
-    "prompt": "Which body awards the CISSP certification? (acronym)",
+    "id": "rce-q41",
+    "prompt": "What should a good risk decision note for management contain?",
     "skills": [
-      "r-ce-domaines"
+      "r-ce-raisonnement"
     ],
     "difficulty": 2,
-    "type": "short",
-    "placeholder": "acronym"
+    "type": "single",
+    "options": [
+      {
+        "id": "a",
+        "text": "The technical detail of the configurations, unrelated to the organization’s business"
+      },
+      {
+        "id": "b",
+        "text": "A single solution presented as unavoidable to obtain quick buy-in"
+      },
+      {
+        "id": "c",
+        "text": "At least two options, including “do nothing”, with their cost and the residual risk"
+      },
+      {
+        "id": "d",
+        "text": "The promise that the proposed measure will bring the risk down to zero"
+      }
+    ]
   },
   {
     "id": "rce-q8",
@@ -185,11 +202,11 @@ export const questions: Question[] = [
       },
       {
         "id": "c",
-        "text": "A security management system"
+        "text": "An application firewall model"
       },
       {
         "id": "d",
-        "text": "An application firewall model"
+        "text": "A security management system"
       }
     ]
   },
@@ -208,15 +225,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "One trains users, the other recruits them"
+        "text": "One sets up an ISMS, the other audits it"
       },
       {
         "id": "c",
-        "text": "None, the two titles are identical"
+        "text": "One trains users, the other recruits them"
       },
       {
         "id": "d",
-        "text": "One sets up an ISMS, the other audits it"
+        "text": "None, the two titles are identical"
       }
     ]
   },
@@ -231,11 +248,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The annual budget of the security team"
+        "text": "The measures retained or set aside"
       },
       {
         "id": "b",
-        "text": "The measures retained or set aside"
+        "text": "The annual budget of the security team"
       },
       {
         "id": "c",
@@ -258,19 +275,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "To establish verifiable facts"
-      },
-      {
-        "id": "b",
         "text": "To oppose the audited manager"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "To avoid writing a report"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "To lengthen the audit"
+      },
+      {
+        "id": "d",
+        "text": "To establish verifiable facts"
       }
     ]
   },
@@ -344,15 +361,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Avoiding any training"
+        "text": "Validating skills in a precise domain"
       },
       {
         "id": "c",
-        "text": "Unconditionally accessing every position"
+        "text": "Avoiding any training"
       },
       {
         "id": "d",
-        "text": "Validating skills in a precise domain"
+        "text": "Unconditionally accessing every position"
       }
     ]
   },
@@ -367,11 +384,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "An exemption from any technical watch"
+        "text": "Recognition in a targeted domain"
       },
       {
         "id": "b",
-        "text": "Recognition in a targeted domain"
+        "text": "An exemption from any technical watch"
       },
       {
         "id": "c",
@@ -394,15 +411,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "To quickly find useful information"
-      },
-      {
-        "id": "b",
         "text": "To reduce the exam duration to a few minutes"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "To replace reading the whole materials"
+      },
+      {
+        "id": "c",
+        "text": "To quickly find useful information"
       },
       {
         "id": "d",
@@ -421,15 +438,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "It can contain no useful notion"
+        "text": "Questions ask you to apply"
       },
       {
         "id": "b",
-        "text": "It always slows down access to information"
+        "text": "It can contain no useful notion"
       },
       {
         "id": "c",
-        "text": "Questions ask you to apply"
+        "text": "It always slows down access to information"
       },
       {
         "id": "d",
@@ -503,19 +520,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Experience and achievements"
-      },
-      {
-        "id": "b",
         "text": "A complete lack of technical watch"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "Keeping your skills confidential"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "A collection of unrelated titles"
+      },
+      {
+        "id": "d",
+        "text": "Experience and achievements"
       }
     ]
   },
@@ -534,15 +551,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "They are always forbidden by employers"
+        "text": "They cost time with no added value"
       },
       {
         "id": "c",
-        "text": "They disappear after a single day"
+        "text": "They are always forbidden by employers"
       },
       {
         "id": "d",
-        "text": "They cost time with no added value"
+        "text": "They disappear after a single day"
       }
     ]
   },
@@ -561,11 +578,11 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Keeping the title and skills up to date"
+        "text": "Reducing the validity to one day"
       },
       {
         "id": "c",
-        "text": "Reducing the validity to one day"
+        "text": "Keeping the title and skills up to date"
       },
       {
         "id": "d",
@@ -666,15 +683,15 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Changing the organization chart"
+        "text": "The safety of people"
       },
       {
         "id": "b",
-        "text": "Communication with the press"
+        "text": "Changing the organization chart"
       },
       {
         "id": "c",
-        "text": "The safety of people"
+        "text": "Communication with the press"
       },
       {
         "id": "d",
@@ -693,19 +710,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "It is suited to the risk and its cost"
-      },
-      {
-        "id": "b",
         "text": "It is chosen with no prior analysis"
       },
       {
-        "id": "c",
+        "id": "b",
         "text": "It is the most expensive on the market"
       },
       {
-        "id": "d",
+        "id": "c",
         "text": "It is as strict as possible everywhere"
+      },
+      {
+        "id": "d",
+        "text": "It is suited to the risk and its cost"
       }
     ]
   },
@@ -724,15 +741,15 @@ export const questions: Question[] = [
       },
       {
         "id": "b",
-        "text": "Choose it because it is fashionable"
+        "text": "Assess the risk it reduces"
       },
       {
         "id": "c",
-        "text": "Retain it without telling anyone"
+        "text": "Choose it because it is fashionable"
       },
       {
         "id": "d",
-        "text": "Assess the risk it reduces"
+        "text": "Retain it without telling anyone"
       }
     ]
   },
@@ -747,11 +764,11 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Because it is impossible to measure"
+        "text": "Treating it costs too much"
       },
       {
         "id": "b",
-        "text": "Treating it costs too much"
+        "text": "Because it is impossible to measure"
       },
       {
         "id": "c",
