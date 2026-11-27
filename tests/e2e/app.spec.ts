@@ -488,10 +488,10 @@ test('positionnement échoué : non validé, pas de mode libre', async ({ page }
   await expect(pos).toContainText('Mode libre : désactivé');
 });
 
-test('version de publication V1.6.2 affichée (pied de page et À propos)', async ({ page }) => {
+test('version de publication V1.6.3 affichée (pied de page et À propos)', async ({ page }) => {
   await page.goto('./#/a-propos');
-  await expect(page.getByTestId('app-version')).toHaveText('CyberAcadémie V1.6.2');
-  await expect(page.getByText('version V1.6.2')).toBeVisible();
+  await expect(page.getByTestId('app-version')).toHaveText('CyberAcadémie V1.6.3');
+  await expect(page.getByText('version V1.6.3')).toBeVisible();
 });
 
 test('nouveau logo : image chargée dans l’en-tête, favicons et manifeste à jour', async ({ page, request }) => {

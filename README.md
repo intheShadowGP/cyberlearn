@@ -1,4 +1,4 @@
-# CyberAcadémie — V1.6.2
+# CyberAcadémie — V1.6.3
 
 Plateforme d’apprentissage de la cybersécurité, du niveau débutant au niveau expert : cours structurés, laboratoires interactifs exécutés dans le navigateur, évaluations corrigées et expliquées, parcours métiers. Site **statique** (GitHub Pages), **hors ligne** (PWA), **sans compte ni traçage** : la progression reste dans le navigateur. Disponible en **français et en anglais**.
 

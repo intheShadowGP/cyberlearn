@@ -27,7 +27,7 @@
 
 **CyberAcadémie** : plateforme d'apprentissage de la cybersécurité, **statique, hors ligne, sans compte**, en français (et désormais en anglais), publiée sur GitHub Pages : `https://intheshadowgp.github.io/cyberlearn/`. ✅ (README, `PROJECT_STATUS.md`)
 
-- Version affichée : **V1.6.2** (`package.json`, README). ✅
+- Version affichée : **V1.6.3** (`package.json`, README). ✅
 - Contenu : 18 disciplines (modules A à R), 403 sujets cartographiés, **48 cours avant la Phase 5 → 49 cours actuellement** (README/CURRICULUM : « 49 »), 18 laboratoires, 11 parcours, glossaire, recherche, révisions espacées, examens, gamification dérivée, profil, sauvegarde/restauration. ✅
 - Licences : MIT (code), CC BY-SA 4.0 (contenus). ✅ (`PROJECT_STATUS.md`)
 - Les phases 1 à 4 (conception, socle, plateforme pédagogique, fonctionnalités avancées) et la sécurisation sont **terminées et publiées** (`docs/PHASE4_FINAL_REPORT.md`). ✅
@@ -365,7 +365,7 @@ Tous les commits sont au nom du propriétaire (`intheShadowGP`, adresse noreply 
 3. **Priorité absolue** : aucune régression, aucune perte de données, aucune dégradation de la qualité pédagogique ou de la sécurité.
 4. Pour Cloudflare : **cf CLI**, sauf si le projet contient un fichier de configuration Wrangler (§9).
 5. L'e-mail de l'utilisateur est **privé** : ne jamais l'inclure dans une requête vers un service externe, ni dans un fichier suivi.
-6. La version affichée est **V1.6.2** (demandée par l’utilisateur) ; la changer uniquement sur demande.
+6. La version affichée est **V1.6.3** (demandée par l’utilisateur) ; la changer uniquement sur demande.
 7. Ne fusionner/pousser `phase-5` vers `main` **que sur demande explicite** (déjà fait une fois pour le module A, `35d4f6d`).
 
 ### Façon de travailler établie pendant la session ✅
