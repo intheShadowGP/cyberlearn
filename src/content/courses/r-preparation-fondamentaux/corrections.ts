@@ -10,8 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le plan (ou guide des objectifs) décrit ce que l’examen évalue : domaines, poids relatifs et compétences attendues.",
       "whyWrong": {
         "a": "Ces questions sont confidentielles.",
-        "b": "Ce n’est pas son contenu.",
-        "d": "Ce n’est pas son contenu."
+        "b": "Les notes des candidats précédents ne figurent pas dans le plan officiel.",
+        "d": "Les adresses personnelles d’anciens candidats ne sont pas publiées dans un plan d’examen."
       }
     },
     "rpf-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Elle guide la répartition du temps de révision : un domaine très pondéré mérite plus d’attention, sans dispenser de couvrir les autres.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "c": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Le prix de l’examen ne dépend pas de la pondération des domaines.",
+        "c": "La date de session n’est pas fixée par la pondération.",
+        "b": "La pondération ne désigne pas le centre d’examen."
       }
     },
     "rpf-q3": {
@@ -29,8 +29,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les organismes mettent à jour leurs examens : réviser un programme dépassé fait perdre du temps.",
       "whyWrong": {
-        "a": "Ce n’est pas exact.",
-        "b": "Ce n’est pas exact.",
+        "a": "Le plan ne change pas à chaque lecture : il évolue par versions.",
+        "b": "Un plan reste valable pendant une période, pas un seul jour.",
         "c": "Chaque organisme publie le sien."
       }
     },
@@ -39,8 +39,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "On liste les objectifs et on s’auto-évalue sur chacun : c’est le diagnostic qui fonde le plan d’étude.",
       "whyWrong": {
-        "d": "Ce n’est pas son usage.",
-        "a": "Ce n’est pas son usage.",
+        "d": "Apprendre les réponses par cœur n’est pas l’usage du plan.",
+        "a": "Choisir un centre d’examen ne relève pas du plan.",
         "c": "La pratique reste essentielle."
       }
     },
@@ -156,9 +156,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Sans diagnostic, on révise ce que l’on connaît déjà : mesurer permet de prioriser ce qui manque.",
       "whyWrong": {
-        "c": "Ce n’est pas la première étape.",
+        "c": "Acheter de nombreux livres avant tout diagnostic disperse l’effort.",
         "d": "C’est prématuré.",
-        "b": "Insuffisant."
+        "b": "Une lecture rapide ne remplace pas un diagnostic par domaine."
       }
     },
     "rpf-q18": {
@@ -166,7 +166,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Revoir une notion juste avant de l’oublier, à intervalles de plus en plus espacés, fixe la mémoire plus durablement.",
       "whyWrong": {
-        "c": "Ce n’est pas son effet.",
+        "c": "La répétition espacée s’étale dans le temps : elle ne se fait pas en une nuit.",
         "a": "La pratique reste nécessaire.",
         "d": "La révision reste nécessaire."
       }
@@ -176,9 +176,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Noter la notion, la cause de l’erreur et la correction transforme chaque faute en point de progression.",
       "whyWrong": {
-        "c": "Ce n’est pas son objet.",
+        "c": "Le journal d’erreurs ne sert pas à compter les heures d’étude.",
         "b": "Il les complète.",
-        "a": "Ce n’est pas son objet."
+        "a": "Recopier les réponses du manuel n’est pas l’objet du journal."
       }
     },
     "rpf-q20": {
@@ -229,8 +229,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Marquer et revenir évite de perdre du temps et permet de traiter d’abord les questions accessibles.",
       "whyWrong": {
         "b": "Cela sacrifie les autres questions.",
-        "a": "Ce n’est pas raisonnable.",
-        "c": "Ce n’est pas raisonnable."
+        "a": "Laisser le reste vide fait perdre des points faciles.",
+        "c": "Répondre au hasard à tout ne remplace pas un raisonnement."
       }
     },
     "rpf-q26": {
@@ -238,9 +238,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Plusieurs options sont plausibles : on les classe par priorité et on choisit celle que le contexte rend la plus appropriée.",
       "whyWrong": {
-        "b": "Ce n’est pas le cas.",
-        "a": "Ce n’est pas le cas.",
-        "d": "Ce n’est pas une règle."
+        "b": "Ces mots signalent qu’une option prime sur les autres, pas qu’elles sont égales.",
+        "a": "Ces mots changent le sens de la question : elle n’est pas sans importance.",
+        "d": "Ils ne rendent pas la réponse triviale : il faut hiérarchiser."
       }
     },
     "rpf-q27": {
@@ -248,9 +248,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le scénario décrit un incident ou une architecture : il s’agit de raisonner et de choisir l’action la plus appropriée.",
       "whyWrong": {
-        "c": "Ce n’est pas ce format.",
-        "a": "Ce n’est pas ce format.",
-        "d": "Ce n’est pas ce format."
+        "c": "Recopier une définition n’est pas une mise en situation.",
+        "a": "Une mise en situation fournit un contexte, pas un calcul sans contexte.",
+        "d": "Une question sans réponse possible n’existe pas à l’examen."
       }
     },
     "rpf-q28": {
@@ -258,9 +258,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "L’élimination réduit le champ et aide à voir ce qui distingue les deux dernières options.",
       "whyWrong": {
-        "c": "Ce n’est pas son but.",
+        "c": "Éliminer des options ne modifie pas le plan officiel.",
         "d": "Il faut lire l’énoncé.",
-        "b": "Ce n’est pas son but."
+        "b": "L’élimination n’évite pas de relire : elle aide à choisir."
       }
     },
     "rpf-q29": {
@@ -304,9 +304,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Les dumps sont des questions de véritables sessions qui circulent en violation de l’accord de confidentialité.",
       "whyWrong": {
-        "d": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition."
+        "d": "Les plans d’étude publiés par l’organisme ne sont pas des dumps.",
+        "a": "Les examens blancs officiels et gratuits ne sont pas des dumps.",
+        "c": "Les exercices de laboratoire ne sont pas des questions réelles diffusées."
       }
     },
     "rpf-q34": {
@@ -314,9 +314,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Utiliser des questions réelles diffusées illégalement est une fraude : le résultat peut être annulé et le candidat sanctionné.",
       "whyWrong": {
-        "a": "Ce n’est pas la raison.",
-        "d": "Ce n’est pas la raison.",
-        "b": "Ce n’est pas exact."
+        "a": "Les dumps ne sont pas évités pour leur facilité de lecture.",
+        "d": "Leur coût n’est pas la raison de les éviter.",
+        "b": "Les dumps contiennent des réponses : c’est leur provenance qui est illégale."
       }
     },
     "rpf-q35": {
@@ -325,8 +325,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Son intérêt pour un employeur tient à la confiance qu’il peut placer dans les compétences que le titre atteste.",
       "whyWrong": {
         "d": "Ce serait de la fraude.",
-        "b": "Ce n’est pas ce qu’elle valide.",
-        "c": "Ce n’est pas ce qu’elle valide."
+        "b": "Une certification ne valide pas l’appartenance à un groupe.",
+        "c": "Elle ne garantit pas la réussite aux examens futurs."
       }
     },
     "rpf-q36": {

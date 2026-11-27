@@ -9,7 +9,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un compte est une frontière d’isolation forte. Séparer les environnements limite ce qu’un attaquant ou une erreur peut atteindre : le rayon d’explosion.",
       "whyWrong": {
-        "b": "Ce n’est pas l’objectif.",
+        "b": "Le but n’est pas de multiplier les factures : c’est de cloisonner.",
         "a": "La supervision se centralise justement.",
         "c": "Les identités augmentent plutôt."
       }
@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "C’est un contrôle détectif.",
         "b": "C’est un contrôle détectif périodique.",
-        "a": "Ce n’est pas un garde-fou."
+        "a": "Une sauvegarde de configuration ne bloque aucune action avant son exécution."
       }
     },
     "cav-q3": {
@@ -77,9 +77,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La politique en code exprime les règles (par exemple « aucun stockage public ») dans des fichiers versionnés, relus, testés et appliqués automatiquement dans le pipeline et l’environnement.",
       "whyWrong": {
-        "d": "Ce n’est pas du code exécutable.",
+        "d": "Une politique imprimée n’est ni versionnée ni testée automatiquement.",
         "c": "Un tableur n’est pas appliqué automatiquement.",
-        "a": "Ce n’est pas reproductible."
+        "a": "Une approbation orale n’est ni traçable ni vérifiable automatiquement."
       }
     },
     "cav-q9": {
@@ -98,8 +98,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une modification manuelle dans la console crée une dérive : l’infrastructure ne correspond plus au code. On la détecte par comparaison régulière et on la corrige dans le code.",
       "whyWrong": {
         "a": "Ce n’est pas un problème de performance.",
-        "b": "Sans rapport avec la migration.",
-        "c": "Sans rapport avec l’alimentation."
+        "b": "Changer de fournisseur n’est pas une dérive de configuration.",
+        "c": "Une panne d’alimentation est un incident, pas une dérive."
       }
     },
     "cav-q11": {
@@ -112,9 +112,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Une dérogation sans échéance se transforme en trou permanent. Elle porte un propriétaire, une justification, une mesure compensatoire et une date de revue.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
+        "c": "Une date d’expiration n’accélère pas l’analyse des règles.",
         "d": "Elle appelle au contraire une revue.",
-        "a": "Sans rapport."
+        "a": "Elle ne réduit pas la taille des fichiers de règles."
       }
     },
     "cav-q13": {
@@ -142,9 +142,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Qui peut associer un rôle puissant à une ressource qu’il contrôle peut exécuter du code avec ce rôle : c’est un chemin classique d’escalade de privilèges.",
       "whyWrong": {
-        "d": "Ce n’est pas son effet.",
-        "b": "Ce n’est pas son effet.",
-        "c": "Ce n’est pas son effet."
+        "d": "Passer un rôle ne supprime pas de journaux.",
+        "b": "Il ne chiffre pas les données du compte.",
+        "c": "Il ne crée pas de réseau privé virtuel."
       }
     },
     "cav-q16": {
@@ -154,7 +154,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Ce n’est pas un droit de lecture.",
         "b": "Il peut modifier des politiques.",
-        "a": "Sans rapport."
+        "a": "Créer des versions de politiques ne se limite pas à des sauvegardes : cela modifie les droits."
       }
     },
     "cav-q17": {
@@ -163,8 +163,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La limite de permissions définit le maximum de droits effectifs d’une identité, quelles que soient les politiques qui lui sont attachées. Elle permet de déléguer la création de rôles sans risque d’escalade.",
       "whyWrong": {
         "b": "Elle limite, elle n’accorde pas.",
-        "a": "Ce n’est pas du chiffrement.",
-        "c": "Ce n’est pas un journal."
+        "a": "Une limite de permissions ne chiffre pas les politiques.",
+        "c": "Elle n’est pas un journal de connexions : elle plafonne les droits."
       }
     },
     "cav-q18": {
@@ -177,9 +177,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Sans identifiant externe unique dans la condition de confiance, un tiers peut être trompé et utiliser son accès à votre compte pour le compte d’un autre client. L’identifiant externe supprime ce risque.",
       "whyWrong": {
-        "d": "Ce n’est pas le risque.",
-        "c": "Ce n’est pas le risque.",
-        "a": "Ce n’est pas le risque."
+        "d": "Le risque n’est pas que le rôle soit illisible : c’est qu’un autre client l’utilise.",
+        "c": "Le tiers ne perd pas l’accès à son compte.",
+        "a": "Le rôle n’expire pas chaque minute : le risque vient d’un tiers partagé."
       }
     },
     "cav-q20": {
@@ -199,9 +199,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les données sont chiffrées avec une clé de données, elle-même chiffrée par une clé maîtresse conservée dans un service de clés. Les clés de données peuvent être nombreuses sans exposer la clé maîtresse.",
       "whyWrong": {
-        "c": "Ce n’est pas du courrier.",
-        "b": "Ce n’est pas ce principe.",
-        "d": "Ce n’est pas de la compression."
+        "c": "Le chiffrement en enveloppe n’a rien à voir avec un envoi postal.",
+        "b": "Il n’utilise pas un mot de passe répété : il emploie des clés de données et une clé maîtresse.",
+        "d": "Il ne s’agit pas de compression."
       }
     },
     "cav-q22": {
@@ -220,7 +220,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Celui qui gère la clé ne doit pas pouvoir l’utiliser pour lire les données, et inversement : c’est la séparation des tâches, qui limite les abus internes.",
       "whyWrong": {
         "c": "Ce n’est pas une question de vitesse.",
-        "b": "Sans rapport.",
+        "b": "La séparation des rôles de clés ne réduit pas le nombre de régions.",
         "a": "La rotation reste nécessaire."
       }
     },
@@ -260,9 +260,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "ATT&CK décrit les techniques observées. On y rattache ses détections pour repérer ce qui est couvert et ce qui ne l’est pas.",
       "whyWrong": {
-        "b": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "b": "ATT&CK ne chiffre pas de journaux : c’est une base de connaissances.",
+        "c": "ATT&CK ne facture rien.",
+        "d": "ATT&CK ne configure pas de sous-réseaux."
       }
     },
     "cav-q29": {
@@ -280,7 +280,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un test contrôlé (exercice, scénario rejoué) montre si l’alerte se produit réellement. Il se fait dans un périmètre autorisé et documenté, sans risque pour la production.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
+        "d": "Tester dans un environnement dédié évite de casser la production.",
         "a": "Ce serait un abus.",
         "b": "La documentation est essentielle."
       }
@@ -330,9 +330,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un attaquant ou un rançongiciel qui prend le compte principal cherche aussi les sauvegardes. Une copie immuable dans un compte isolé résiste à ce scénario.",
       "whyWrong": {
-        "c": "Ce n’est pas la raison.",
+        "c": "La vitesse de restauration n’est pas l’intérêt d’une sauvegarde immuable séparée.",
         "d": "Un test reste nécessaire.",
-        "b": "Sans rapport."
+        "b": "Une sauvegarde ne remplace pas la journalisation du compte."
       }
     },
     "cav-q36": {

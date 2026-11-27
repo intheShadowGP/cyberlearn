@@ -10,8 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Supervised learning adjusts the model from examples whose right answer is known. Unsupervised learning works without labels, grouping or spotting deviations.",
       "whyWrong": {
         "c": "It works without labels.",
-        "a": "Unrelated.",
-        "d": "Unrelated."
+        "a": "Symmetric encryption protects data; it is not a type of learning.",
+        "d": "Compression does not describe a type of learning."
       }
     },
     "aiml-q2": {
@@ -45,8 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Precision relates true positives to the total number of alerts. Recall relates true positives to the total of malicious events.",
       "whyWrong": {
         "c": "That is recall.",
-        "b": "Unrelated.",
-        "d": "Unrelated."
+        "b": "Execution speed does not measure precision.",
+        "d": "The number of parameters describes the model’s size, not its precision."
       }
     },
     "aiml-q6": {
@@ -108,7 +108,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Evasion targets an already trained model.",
         "a": "That is another attack.",
-        "d": "Unrelated."
+        "d": "Phishing deceives users: it does not alter training data."
       }
     },
     "aiml-q13": {
@@ -153,7 +153,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "It learns them too.",
         "d": "It does not fix them.",
-        "a": "That is not accurate."
+        "a": "The model also uses recent data: their quality matters."
       }
     },
     "aiml-q18": {
@@ -161,9 +161,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "If all the malicious examples come from one source or period, the model learns to recognize that source rather than maliciousness.",
       "whyWrong": {
-        "a": "That is not a data bias.",
-        "d": "That is not a data bias.",
-        "c": "That is not a data bias."
+        "a": "A syntax error is a coding bug, not a bias in the data.",
+        "d": "Weak encryption is a security flaw, not a representation bias.",
+        "c": "A hardware failure is not a bias in the dataset."
       }
     },
     "aiml-q19": {
@@ -171,9 +171,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "In production, the model sees data later than its training: a chronological test gives a more realistic estimate than a random draw from the same batch.",
       "whyWrong": {
-        "c": "That is not the goal.",
-        "b": "That is not the goal.",
-        "a": "That is not the goal."
+        "c": "Splitting by date does not speed up training.",
+        "b": "It does not increase the number of examples.",
+        "a": "It does not remove duplicates: it avoids testing on already-seen future data."
       }
     },
     "aiml-q20": {
@@ -181,9 +181,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The fields or events that weighed in the decision let the analyst quickly confirm it or spot a model error.",
       "whyWrong": {
-        "c": "That is not its role.",
+        "c": "Explainability does not raise a score: it clarifies the decision.",
         "d": "It does not replace the analyst.",
-        "b": "That is not its role."
+        "b": "It does not encrypt any data before sending."
       }
     },
     "aiml-q21": {
@@ -215,9 +215,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "If test examples were used for training, the model seems better than it is: the figures will not be reproduced in production.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
-        "c": "Unrelated."
+        "a": "A data leak does not make the model faster.",
+        "d": "It does not shrink the dataset.",
+        "c": "It strengthens no encryption: it distorts measurements."
       }
     },
     "aiml-q25": {
@@ -225,9 +225,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Performance on confirmed cases and the distribution of the data reveal a degradation or an attack.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "c": "Unrelated.",
-        "b": "Unrelated."
+        "d": "The interface color is not a detection indicator.",
+        "c": "The number of lines of code does not indicate production quality.",
+        "b": "Server room temperature is not a model indicator."
       }
     },
     "aiml-q26": {
@@ -245,9 +245,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A previous version, validated, signed and kept, makes it possible to restore detection while the cause is analyzed.",
       "whyWrong": {
-        "a": "That is not the goal.",
+        "a": "Keeping a previous version uses storage; it does not save it.",
         "b": "The history must be kept.",
-        "c": "That is not the goal."
+        "c": "Rolling back does not avoid retraining: it lets you react meanwhile."
       }
     },
     "aiml-q28": {
@@ -265,9 +265,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The signature guarantees that the deployed model is the one that was validated and that it has not been replaced or altered.",
       "whyWrong": {
-        "a": "That is not its purpose.",
-        "d": "That is not its purpose.",
-        "c": "That is not its purpose."
+        "a": "Signing does not reduce a file’s size.",
+        "d": "It does not increase compute speed.",
+        "c": "It does not hide the model’s existence."
       }
     },
     "aiml-q30": {
@@ -300,8 +300,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Unsupervised learning spots structures or deviations with no known answer: groupings, unusual behavior.",
       "whyWrong": {
         "a": "It requires labels.",
-        "b": "Unrelated.",
-        "d": "Unrelated."
+        "b": "Asymmetric encryption is not a type of learning.",
+        "d": "An incremental backup is not a type of learning."
       }
     },
     "aiml-q34": {
@@ -310,8 +310,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Recall relates true positives to the total of really malicious events: it measures what the detector lets through.",
       "whyWrong": {
         "c": "That is precision.",
-        "b": "Unrelated.",
-        "d": "Unrelated."
+        "b": "Processing speed does not measure recall.",
+        "d": "The number of analysts mobilized is not recall."
       }
     },
     "aiml-q35": {
@@ -319,9 +319,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Even a low false positive rate, applied to millions of legitimate events, produces thousands of false alerts.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "d": "Faster hardware does not generate false alerts.",
+        "a": "The dashboard color does not explain false alerts.",
+        "b": "The number of on-call analysts does not create false alerts."
       }
     },
     "aiml-q36": {
@@ -331,7 +331,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "That would remove supervision.",
         "b": "Useless for the decision.",
-        "d": "Not useful information."
+        "d": "A list of passwords has no place in an alert."
       }
     },
     "aiml-q37": {
@@ -341,7 +341,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "It targets training.",
         "a": "It targets the training data.",
-        "d": "It is not a classification attack."
+        "d": "A distributed denial of service targets availability, not a model’s classification."
       }
     },
     "aiml-q38": {
@@ -354,9 +354,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Calibrated noise makes the presence or absence of a person in the data change the result very little, at the price of a slight loss of accuracy.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "c": "Lossless compression does not protect individuals.",
+        "a": "A port redirection adds no calibrated noise.",
+        "b": "Caching has no effect on individuals’ privacy."
       }
     },
     "aiml-q40": {

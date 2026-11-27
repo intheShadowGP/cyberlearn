@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’authentification vérifie qu’une personne est bien celle qu’elle prétend être, par exemple avec un mot de passe, un code ou une clé de sécurité.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "c": "Sans rapport.",
-        "b": "Sans rapport."
+        "a": "Le fond d’écran n’a aucun lien avec la vérification d’une identité.",
+        "c": "Installer un logiciel n’authentifie personne.",
+        "b": "Éteindre l’ordinateur n’est pas une authentification."
       }
     },
     "oii-q2": {
@@ -20,8 +20,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une fois la personne identifiée, l’autorisation décide à quoi elle a accès et ce qu’elle peut faire (lire, modifier, supprimer).",
       "whyWrong": {
         "b": "C’est l’authentification.",
-        "d": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "d": "Sauvegarder des fichiers relève de la continuité, pas des droits d’accès.",
+        "c": "Chiffrer le disque protège des données, il ne définit pas ce qu’une personne peut faire."
       }
     },
     "oii-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’identifiant (nom d’utilisateur, adresse de messagerie) désigne le compte. Il n’est pas secret : le secret est le mot de passe ou le facteur.",
       "whyWrong": {
-        "d": "Ce n’est pas un identifiant.",
-        "a": "Ce n’est pas un identifiant.",
-        "b": "Ce n’est pas un identifiant."
+        "d": "Un fond d’écran ne désigne pas un compte de façon unique.",
+        "a": "Une adresse postale de service est commune à plusieurs personnes.",
+        "b": "Un logo d’entreprise est le même pour tous les comptes."
       }
     },
     "oii-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un compte nominatif permet de tracer les actions, de retirer l’accès d’une seule personne et d’ajuster ses droits.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but."
+        "c": "Le but n’est pas d’acheter des licences, mais de pouvoir tracer les actions.",
+        "a": "Un compte nominatif ne ralentit pas les connexions.",
+        "d": "La fréquence de changement des mots de passe n’est pas la raison du compte individuel."
       }
     },
     "oii-q5": {
@@ -85,9 +85,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Quand un service est piraté, les attaquants essaient les mêmes identifiants ailleurs. Un mot de passe unique par service limite les dégâts.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison.",
-        "a": "Ce n’est pas la raison."
+        "b": "La mémoire du poste n’est pas concernée.",
+        "c": "Réutiliser un mot de passe ne ralentit pas Internet.",
+        "a": "Tous les services ne l’interdisent pas : c’est une règle de bonne pratique."
       }
     },
     "oii-q10": {
@@ -95,9 +95,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Il génère des mots de passe longs et différents pour chaque service et les remplit à votre place. Vous ne retenez qu’un seul mot de passe principal.",
       "whyWrong": {
-        "d": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "d": "Un gestionnaire de mots de passe n’accélère pas la connexion Internet.",
+        "a": "Il ne désinstalle aucun logiciel.",
+        "c": "Il ne sauvegarde pas de photos : il stocke des secrets."
       }
     },
     "oii-q11": {
@@ -142,9 +142,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "La MFA combine au moins deux preuves de catégories différentes (ce que l’on sait, possède, est) : un mot de passe volé ne suffit plus.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition."
+        "b": "MFA ne désigne pas un mot de passe fort : c’est l’usage de plusieurs facteurs.",
+        "a": "MFA n’est pas une messagerie.",
+        "d": "MFA ne désigne pas une mise à jour forcée."
       }
     },
     "oii-q16": {
@@ -219,9 +219,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Sans retrait, les droits s’accumulent au fil des postes : la personne finit par accéder à des données qui n’ont plus de rapport avec son travail.",
       "whyWrong": {
-        "a": "Ce n’est pas une sanction.",
-        "b": "Sans rapport.",
-        "c": "Sans rapport."
+        "a": "Retirer des droits n’est pas une sanction : c’est une mesure de moindre privilège.",
+        "b": "La mémoire du serveur n’est pas concernée par la gestion des droits.",
+        "c": "Le retrait des droits ne change pas l’identifiant de connexion."
       }
     },
     "oii-q24": {
@@ -229,9 +229,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un compte partagé empêche d’attribuer une action à une personne et survit au départ des utilisateurs : on évite cette pratique.",
       "whyWrong": {
-        "c": "Ce n’est pas le risque.",
-        "d": "Il est moins sûr.",
-        "b": "Il y a un risque réel."
+        "c": "Un compte partagé n’accélère pas la connexion.",
+        "d": "Un compte partagé est moins sûr, pas plus sûr.",
+        "b": "Le risque est réel : on ne peut plus attribuer les actions."
       }
     },
     "oii-q25": {
@@ -269,9 +269,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "On s’authentifie une fois auprès d’un fournisseur d’identité, qui atteste l’identité auprès des applications. La MFA se règle au même endroit.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "a": "Ce n’est pas le principe.",
-        "d": "Sans rapport."
+        "c": "Le SSO ne limite pas l’usage à un seul ordinateur.",
+        "a": "Il ne couvre pas tout Internet : seulement les applications rattachées.",
+        "d": "Il ne supprime pas les comptes : il simplifie la connexion."
       }
     },
     "oii-q30": {
@@ -289,9 +289,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une application malveillante peut demander la lecture de votre messagerie. Les droits demandés doivent correspondre à son usage réel.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "d": "Insuffisant.",
-        "a": "Insuffisant."
+        "b": "La couleur dominante n’indique rien sur les droits demandés.",
+        "d": "Le prix affiché ne dit rien des accès demandés.",
+        "a": "La date de création seule ne permet pas de juger les droits demandés."
       }
     },
     "oii-q32": {
@@ -347,9 +347,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "L’alerte vous prévient quand une connexion vient d’un lieu ou d’un appareil inhabituel, ce qui permet de réagir vite.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle."
+        "c": "Une alerte n’accélère pas les connexions.",
+        "d": "Elle ne supprime pas le mot de passe.",
+        "a": "Elle ne change pas l’identifiant : elle signale un usage inhabituel."
       }
     },
     "oii-q38": {

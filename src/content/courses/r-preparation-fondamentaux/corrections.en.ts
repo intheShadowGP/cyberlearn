@@ -10,8 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The outline (or objectives guide) describes what the exam assesses: domains, relative weights and expected skills.",
       "whyWrong": {
         "a": "Those questions are confidential.",
-        "b": "That is not its content.",
-        "d": "That is not its content."
+        "b": "Previous candidates’ scores are not in the official outline.",
+        "d": "Former candidates’ home addresses are not published in an exam outline."
       }
     },
     "rpf-q2": {
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "It guides how revision time is distributed: a heavily weighted domain deserves more attention, without excusing coverage of the others.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "c": "Unrelated.",
-        "b": "Unrelated."
+        "d": "The exam price does not depend on domain weighting.",
+        "c": "The session date is not set by the weighting.",
+        "b": "The weighting does not designate the exam center."
       }
     },
     "rpf-q3": {
@@ -29,8 +29,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Bodies update their exams: revising an outdated syllabus wastes time.",
       "whyWrong": {
-        "a": "That is not accurate.",
-        "b": "That is not accurate.",
+        "a": "The outline does not change at each reading: it evolves by versions.",
+        "b": "An outline stays valid for a period, not a single day.",
         "c": "Each body publishes its own."
       }
     },
@@ -39,8 +39,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "We list the objectives and self-assess on each: this diagnosis underlies the study plan.",
       "whyWrong": {
-        "d": "That is not its use.",
-        "a": "That is not its use.",
+        "d": "Memorizing answers is not the use of the outline.",
+        "a": "Choosing an exam center is not part of the outline.",
         "c": "Practice remains essential."
       }
     },
@@ -154,9 +154,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Without a diagnosis, you revise what you already know: measuring makes it possible to prioritize what is missing.",
       "whyWrong": {
-        "c": "That is not the first step.",
+        "c": "Buying many books before any diagnosis scatters effort.",
         "d": "That is premature.",
-        "b": "Insufficient."
+        "b": "A quick reading does not replace a diagnosis by domain."
       }
     },
     "rpf-q18": {
@@ -164,7 +164,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Reviewing a notion just before it is forgotten, at increasingly spaced intervals, fixes memory more durably.",
       "whyWrong": {
-        "c": "That is not its effect.",
+        "c": "Spaced repetition spreads over time: it is not done in one night.",
         "a": "Practice remains necessary.",
         "d": "Revision remains necessary."
       }
@@ -174,9 +174,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Noting the notion, the cause of the error and the correction turns each mistake into a point of progress.",
       "whyWrong": {
-        "c": "That is not its purpose.",
+        "c": "The error log is not for counting study hours.",
         "b": "It complements them.",
-        "a": "That is not its purpose."
+        "a": "Copying the manual’s answers is not the point of the log."
       }
     },
     "rpf-q20": {
@@ -225,8 +225,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Flagging and coming back avoids wasting time and lets you handle the accessible questions first.",
       "whyWrong": {
         "b": "That sacrifices the other questions.",
-        "a": "That is not reasonable.",
-        "c": "That is not reasonable."
+        "a": "Leaving the rest blank loses easy points.",
+        "c": "Answering everything at random does not replace reasoning."
       }
     },
     "rpf-q26": {
@@ -234,9 +234,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Several options are plausible: they are ranked by priority and you choose the one the context makes most appropriate.",
       "whyWrong": {
-        "b": "That is not the case.",
-        "a": "That is not the case.",
-        "d": "That is not a rule."
+        "b": "These words signal that one option outweighs the others, not that they are equal.",
+        "a": "These words change the question’s meaning: it is not unimportant.",
+        "d": "They do not make the answer trivial: you must rank."
       }
     },
     "rpf-q27": {
@@ -244,9 +244,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The scenario describes an incident or an architecture: you must reason and choose the most appropriate action.",
       "whyWrong": {
-        "c": "That is not this format.",
-        "a": "That is not this format.",
-        "d": "That is not this format."
+        "c": "Copying a definition is not a scenario question.",
+        "a": "A scenario provides context, not a calculation without context.",
+        "d": "A question with no possible answer does not exist in the exam."
       }
     },
     "rpf-q28": {
@@ -254,9 +254,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Elimination narrows the field and helps see what distinguishes the last two options.",
       "whyWrong": {
-        "c": "That is not its goal.",
+        "c": "Eliminating options does not change the official outline.",
         "d": "You must read the question.",
-        "b": "That is not its goal."
+        "b": "Elimination does not avoid rereading: it helps choose."
       }
     },
     "rpf-q29": {
@@ -300,9 +300,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Dumps are questions from real sessions circulating in breach of the confidentiality agreement.",
       "whyWrong": {
-        "d": "That is not the definition.",
-        "a": "That is not the definition.",
-        "c": "That is not the definition."
+        "d": "Study outlines published by the body are not dumps.",
+        "a": "Official free mock exams are not dumps.",
+        "c": "Lab exercises are not leaked real questions."
       }
     },
     "rpf-q34": {
@@ -310,9 +310,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Using real questions circulated illegally is fraud: the result can be cancelled and the candidate sanctioned.",
       "whyWrong": {
-        "a": "That is not the reason.",
-        "d": "That is not the reason.",
-        "b": "That is not accurate."
+        "a": "Dumps are not avoided because they are easy to read.",
+        "d": "Their cost is not the reason to avoid them.",
+        "b": "Dumps do contain answers: it is their origin that is illegal."
       }
     },
     "rpf-q35": {
@@ -321,8 +321,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Its value for an employer lies in the trust that can be placed in the skills the title attests.",
       "whyWrong": {
         "d": "That would be fraud.",
-        "b": "That is not what it validates.",
-        "c": "That is not what it validates."
+        "b": "A certification does not validate membership in a group.",
+        "c": "It does not guarantee passing future exams."
       }
     },
     "rpf-q36": {

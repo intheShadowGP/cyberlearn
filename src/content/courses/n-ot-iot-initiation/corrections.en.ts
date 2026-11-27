@@ -11,7 +11,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "It serves workstations.",
         "b": "It runs no machine.",
-        "d": "Unrelated."
+        "d": "Online video games do not drive machines or physical processes."
       }
     },
     "noi-q2": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The supervision system collects measurements from the PLCs, displays them to operators and allows sending setpoints remotely.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "d": "That is not its role.",
-        "c": "That is not its role."
+        "a": "Sending emails is messaging, not supervision.",
+        "d": "Retouching images is graphics software.",
+        "c": "Backing up photos is not a supervision system’s role."
       }
     },
     "noi-q4": {
@@ -87,7 +87,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "They do publish some.",
         "c": "No law forbids it.",
-        "b": "That is not the case."
+        "b": "Controllers do not update themselves: it is a planned operation."
       }
     },
     "noi-q10": {
@@ -140,9 +140,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Segmentation limits spread: a compromise of the office network must not reach the PLCs.",
       "whyWrong": {
-        "c": "That is not the goal.",
-        "a": "Unrelated.",
-        "d": "Unrelated."
+        "c": "Saving cables is not the reason for the separation.",
+        "a": "The separation does not speed up email delivery.",
+        "d": "The separation limits risks; it does not remove them all."
       }
     },
     "noi-q16": {
@@ -150,9 +150,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Modbus is a protocol born in 1979, very widespread in industry. It includes neither authentication nor encryption.",
       "whyWrong": {
-        "d": "It is not a browser.",
-        "b": "It is not an antivirus.",
-        "c": "It is not a search engine."
+        "d": "Modbus is not a browser: it is an industrial communication protocol.",
+        "b": "Modbus is not an antivirus: it carries control data.",
+        "c": "Modbus is not a search engine: it is an industrial communication protocol."
       }
     },
     "noi-q17": {
@@ -162,7 +162,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "It does not encrypt.",
         "b": "It works over Ethernet.",
-        "a": "Unrelated."
+        "a": "Modbus TCP is not reserved to phones: it runs on industrial networks."
       }
     },
     "noi-q18": {
@@ -170,9 +170,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The intermediate zone receives a copy of production data that the office network consults, without ever directly linking the two networks.",
       "whyWrong": {
-        "d": "That is not its role.",
-        "c": "No effect on speed.",
-        "a": "It complements them."
+        "d": "The intermediate zone does not store staff passwords.",
+        "c": "It does not speed up the controllers.",
+        "a": "It does not replace firewalls: it complements them."
       }
     },
     "noi-q19": {
@@ -206,9 +206,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Camera, thermostat, sensor, lock: a connected object embeds a small computer and communicates through a network. It is rarely updated.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "d": "That is not the definition.",
-        "a": "That is not the definition."
+        "b": "A connected object is not defined by the absence of a screen.",
+        "d": "A mere cable is not a connected object.",
+        "a": "Office software is not a connected object."
       }
     },
     "noi-q23": {
@@ -216,9 +216,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "This is what the Mirai botnet exploited in 2016: a short list of default passwords was enough to enroll hundreds of thousands of devices.",
       "whyWrong": {
-        "c": "That is not the problem.",
-        "b": "Unrelated.",
-        "d": "Unrelated."
+        "c": "Length is not the problem: it is being identical everywhere.",
+        "b": "An identical password does not slow the network.",
+        "d": "It does not void the warranty: it exposes all devices."
       }
     },
     "noi-q24": {
@@ -226,9 +226,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Flaws are discovered after the sale. An object with no updates remains vulnerable throughout its life.",
       "whyWrong": {
-        "c": "That is not the goal.",
-        "b": "That is not the goal.",
-        "a": "That is not the goal."
+        "c": "An update is not meant to change the color.",
+        "b": "An update does not increase the physical size.",
+        "a": "It is not meant to consume more energy."
       }
     },
     "noi-q25": {
@@ -276,9 +276,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Without an inventory, forgotten equipment remains exposed and unpatched. A precise inventory is the basis of all protection.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "a": "That is not the goal.",
-        "b": "That is not the goal."
+        "d": "The inventory is not meant to print labels.",
+        "a": "It does not reduce the network’s size.",
+        "b": "It is not used to remove software."
       }
     },
     "noi-q31": {
@@ -286,9 +286,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A saved and tested program makes it possible to restore an altered or replaced PLC. It also serves as a reference to detect a modification.",
       "whyWrong": {
-        "b": "That is not its purpose.",
-        "a": "That is not its purpose.",
-        "d": "That is not its purpose."
+        "b": "The backup does not speed up production.",
+        "a": "It does not replace the firewall.",
+        "d": "It does not encrypt the local network."
       }
     },
     "noi-q32": {
@@ -344,9 +344,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "They know the process and what is safe or dangerous: they validate any containment action.",
       "whyWrong": {
-        "d": "That is not their role.",
-        "c": "That is not their role.",
-        "b": "That is not their role."
+        "d": "The security policy belongs to governance, not operations during an incident.",
+        "c": "Buying licenses is not part of handling an incident.",
+        "b": "Payroll has nothing to do with handling an industrial incident."
       }
     },
     "noi-q38": {

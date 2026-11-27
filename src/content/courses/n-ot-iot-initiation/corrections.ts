@@ -11,7 +11,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Elle sert aux postes de travail.",
         "b": "Elle ne pilote aucune machine.",
-        "d": "Sans rapport."
+        "d": "Les jeux vidéo en réseau ne pilotent pas de machines ni de procédés physiques."
       }
     },
     "noi-q2": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le système de supervision collecte les mesures des automates, les affiche aux opérateurs et permet d’envoyer des consignes à distance.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "a": "L’envoi de courriels relève de la messagerie, pas de la supervision.",
+        "d": "Retoucher des images relève de la bureautique graphique.",
+        "c": "Sauvegarder des photos n’est pas le rôle d’un système de supervision."
       }
     },
     "noi-q4": {
@@ -87,7 +87,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Ils en publient.",
         "c": "Aucune loi ne l’interdit.",
-        "b": "Ce n’est pas le cas."
+        "b": "Les automates ne se mettent pas à jour seuls : c’est une opération planifiée."
       }
     },
     "noi-q10": {
@@ -141,9 +141,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La segmentation limite la propagation : une compromission du réseau de bureau ne doit pas atteindre les automates.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
-        "a": "Sans rapport.",
-        "d": "Sans rapport."
+        "c": "Économiser des câbles n’est pas la raison de la séparation.",
+        "a": "La séparation n’accélère pas l’envoi des courriels.",
+        "d": "La séparation limite les risques, elle ne les supprime pas tous."
       }
     },
     "noi-q16": {
@@ -151,8 +151,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Modbus est un protocole né en 1979, très répandu en industrie. Il n’intègre ni authentification ni chiffrement.",
       "whyWrong": {
-        "d": "Ce n’est pas un navigateur.",
-        "b": "Ce n’est pas un antivirus.",
+        "d": "Modbus n’est pas un navigateur : c’est un protocole de communication industriel.",
+        "b": "Modbus n’est pas un antivirus : il transporte des données de commande.",
         "c": "Ce n’est pas un moteur de recherche."
       }
     },
@@ -163,7 +163,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Il ne chiffre pas.",
         "b": "Il fonctionne sur Ethernet.",
-        "a": "Sans rapport."
+        "a": "Modbus TCP n’est pas réservé aux téléphones : il circule sur les réseaux industriels."
       }
     },
     "noi-q18": {
@@ -171,9 +171,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La zone intermédiaire reçoit une copie des données de production que la bureautique consulte, sans jamais relier directement les deux réseaux.",
       "whyWrong": {
-        "d": "Ce n’est pas son rôle.",
-        "c": "Sans effet sur la vitesse.",
-        "a": "Elle les complète."
+        "d": "La zone intermédiaire ne stocke pas les mots de passe du personnel.",
+        "c": "Elle n’accélère pas les automates.",
+        "a": "Elle ne remplace pas les pare-feu : elle les complète."
       }
     },
     "noi-q19": {
@@ -207,9 +207,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Caméra, thermostat, capteur, serrure : un objet connecté embarque un petit ordinateur et communique par un réseau. Il est rarement mis à jour.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "b": "Un objet connecté n’est pas défini par l’absence d’écran.",
+        "d": "Un simple câble n’est pas un objet connecté.",
+        "a": "Un logiciel de bureautique n’est pas un objet connecté."
       }
     },
     "noi-q23": {
@@ -217,9 +217,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "C’est ce qu’a exploité le botnet Mirai en 2016 : une courte liste de mots de passe par défaut a suffi à enrôler des centaines de milliers d’appareils.",
       "whyWrong": {
-        "c": "Ce n’est pas le problème.",
-        "b": "Sans rapport.",
-        "d": "Sans rapport."
+        "c": "La longueur n’est pas le problème : c’est le caractère identique partout.",
+        "b": "Un mot de passe identique ne ralentit pas le réseau.",
+        "d": "Il ne supprime pas la garantie : il expose tous les appareils."
       }
     },
     "noi-q24": {
@@ -227,9 +227,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Des failles sont découvertes après la vente. Un objet sans mises à jour reste vulnérable pendant toute sa vie.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "c": "Une mise à jour ne vise pas à changer la couleur.",
+        "b": "Une mise à jour n’augmente pas la taille physique.",
+        "a": "Elle ne vise pas à consommer plus d’énergie."
       }
     },
     "noi-q25": {
@@ -277,9 +277,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Sans inventaire, des équipements oubliés restent exposés et non corrigés. L’inventaire précis est la base de toute protection.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but."
+        "d": "L’inventaire n’a pas pour but d’imprimer des étiquettes.",
+        "a": "Il ne réduit pas la taille du réseau.",
+        "b": "Il ne sert pas à supprimer des logiciels."
       }
     },
     "noi-q31": {
@@ -287,9 +287,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un programme sauvegardé et testé permet de restaurer un automate altéré ou remplacé. Elle sert aussi de référence pour détecter une modification.",
       "whyWrong": {
-        "b": "Ce n’est pas son but.",
-        "a": "Ce n’est pas son but.",
-        "d": "Ce n’est pas son but."
+        "b": "La sauvegarde n’accélère pas la production.",
+        "a": "Elle ne remplace pas le pare-feu.",
+        "d": "Elle ne chiffre pas le réseau local."
       }
     },
     "noi-q32": {
@@ -345,9 +345,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Elles connaissent le procédé et savent ce qui est sûr ou dangereux : elles valident toute action de confinement.",
       "whyWrong": {
-        "d": "Ce n’est pas leur rôle.",
-        "c": "Ce n’est pas leur rôle.",
-        "b": "Ce n’est pas leur rôle."
+        "d": "La politique de sécurité relève de la gouvernance, pas de l’exploitation en incident.",
+        "c": "Acheter des licences ne relève pas de la gestion d’un incident.",
+        "b": "La paie est sans rapport avec la gestion d’un incident industriel."
       }
     },
     "noi-q38": {

@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un bien support est un élément du système sur lequel repose une valeur métier : serveur, application, réseau, local, personnel.",
       "whyWrong": {
-        "b": "Ce n’est pas une règle.",
-        "d": "Ce n’est pas un attaquant.",
-        "c": "Ce n’est pas une sauvegarde."
+        "b": "Une règle de sécurité n’est pas un bien support : c’est une mesure.",
+        "d": "Un attaquant est une source de risque, pas un bien support.",
+        "c": "Une sauvegarde est une mesure de protection, pas un bien qui porte une valeur métier."
       }
     },
     "ebp-q4": {
@@ -41,7 +41,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "On parle ensuite des menaces.",
         "a": "Ils sont étudiés à l’atelier 2.",
-        "d": "Ce n’est pas le but."
+        "d": "La gravité ne sert pas à supprimer des valeurs métier : elle mesure l’impact."
       }
     },
     "ebp-q5": {
@@ -76,8 +76,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Une source de risque est une personne ou un groupe susceptible de porter atteinte à l’organisation : groupe cybercriminel, acteur étatique, concurrent, initié.",
       "whyWrong": {
         "c": "C’est une vulnérabilité.",
-        "d": "Ce n’est pas un acteur.",
-        "a": "Ce n’est pas un acteur."
+        "d": "Un fichier de configuration est un bien support, pas un acteur malveillant.",
+        "a": "Une sauvegarde hors ligne est une mesure, pas une source de risque."
       }
     },
     "ebp-q9": {
@@ -86,8 +86,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’objectif visé est ce que cherche la source de risque : extorsion, espionnage, sabotage, vol de données, atteinte à l’image.",
       "whyWrong": {
         "c": "C’est une mesure.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "a": "Le budget n’est pas ce que vise la source de risque.",
+        "b": "La durée du projet n’est pas l’objectif visé."
       }
     },
     "ebp-q10": {
@@ -95,9 +95,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "On retient les couples les plus pertinents au regard de la motivation de la source, de ses ressources et de son activité, pour concentrer l’effort sur les scénarios plausibles.",
       "whyWrong": {
-        "c": "Aucun rapport.",
-        "d": "Insuffisant.",
-        "b": "Aucun rapport."
+        "c": "L’ordre alphabétique n’a aucune valeur de sélection.",
+        "d": "La date d’apparition du groupe n’est pas un critère de pertinence.",
+        "b": "La taille du rapport n’a aucun lien avec la sélection."
       }
     },
     "ebp-q11": {
@@ -143,9 +143,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Les parties prenantes sont les clients, fournisseurs, prestataires, filiales ou partenaires en relation avec l’organisation. Elles peuvent constituer des chemins d’attaque.",
       "whyWrong": {
-        "d": "Ce n’est pas un attaquant.",
-        "b": "Ce n’est pas un équipement.",
-        "a": "Ce n’est pas un indicateur."
+        "d": "Un attaquant est une source de risque, pas une partie prenante.",
+        "b": "Un équipement interne est un bien support, pas une partie prenante.",
+        "a": "Un indicateur est un outil de suivi, pas un tiers en relation."
       }
     },
     "ebp-q16": {
@@ -155,7 +155,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Une maturité élevée réduit la menace.",
         "c": "Une confiance justifiée la réduit.",
-        "b": "Ce n’est pas un critère."
+        "b": "L’éloignement géographique n’entre pas dans le niveau de menace d’une partie prenante."
       }
     },
     "ebp-q17": {
@@ -164,7 +164,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un chemin d’attaque stratégique décrit comment une source de risque atteint la valeur métier en passant par une ou plusieurs parties prenantes, par exemple un prestataire ayant un accès permanent.",
       "whyWrong": {
         "a": "C’est un parcours au niveau opérationnel.",
-        "d": "Sans rapport.",
+        "d": "Un plan d’évacuation relève de la sécurité des personnes, pas d’un chemin d’attaque.",
         "c": "C’est une mesure technique."
       }
     },
@@ -174,7 +174,7 @@ export const corrections: CourseCorrections = {
       "explanation": "L’atelier 3 définit des mesures qui réduisent la menace venant des tiers : exigences contractuelles, limitation et surveillance des accès, audits, redondance.",
       "whyWrong": {
         "a": "Trop étroit.",
-        "c": "Sans rapport.",
+        "c": "La couleur des câbles n’est pas un sujet des mesures complémentaires.",
         "b": "Trop étroit."
       }
     },
@@ -210,9 +210,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un scénario opérationnel détaille, étape par étape, comment un chemin d’attaque stratégique peut être réalisé techniquement, et en estime la vraisemblance.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "Le budget n’est pas un scénario opérationnel.",
+        "a": "Une charte informatique n’est pas un mode opératoire d’attaque.",
+        "d": "Un plan de communication de crise relève de la gestion de crise."
       }
     },
     "ebp-q23": {
@@ -231,8 +231,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La vraisemblance exprime la probabilité que le scénario aboutisse, au vu des ressources de la source de risque, des vulnérabilités et des mesures existantes.",
       "whyWrong": {
         "b": "C’est la gravité qui mesure l’impact.",
-        "a": "Ce n’est pas son objet.",
-        "d": "Ce n’est pas son objet."
+        "a": "Compter les vulnérabilités ne mesure pas la vraisemblance d’un scénario.",
+        "d": "Classer des salariés par risque n’est pas l’usage de l’échelle de vraisemblance."
       }
     },
     "ebp-q25": {
@@ -240,9 +240,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "MITRE ATT&CK recense les tactiques et techniques observées. Elle aide à décrire des modes opératoires réalistes et à vérifier la couverture des détections.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "c": "Sans rapport."
+        "b": "Un annuaire téléphonique n’inspire pas de mode opératoire d’attaque.",
+        "a": "Le règlement intérieur n’est pas une base de techniques d’attaque.",
+        "c": "Une grille de salaires est sans rapport avec les modes opératoires."
       }
     },
     "ebp-q26": {
@@ -275,9 +275,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "L’atelier 5 synthétise les scénarios de risque, choisit la stratégie de traitement, établit le plan de mesures, évalue les risques résiduels et définit le cadre de suivi.",
       "whyWrong": {
-        "a": "Sans rapport.",
+        "a": "La liste des salariés n’est pas un livrable de l’atelier 5.",
         "d": "C’est l’objet de l’atelier 1.",
-        "c": "Ce n’est pas son objet."
+        "c": "Un audit de certification est une autre démarche."
       }
     },
     "ebp-q30": {
@@ -338,9 +338,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Une analyse figée devient obsolète : nouveaux services, nouvelles menaces, nouveaux tiers. Elle est revue périodiquement et à chaque changement majeur.",
       "whyWrong": {
-        "d": "Ce n’est pas la raison.",
-        "a": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison."
+        "d": "La méthode n’interdit rien : elle recommande au contraire de la tenir à jour.",
+        "a": "La couleur du rapport n’est pas une raison de mise à jour.",
+        "c": "Une mise à jour ne supprime pas les mesures décidées : elle les réexamine."
       }
     },
     "ebp-q37": {

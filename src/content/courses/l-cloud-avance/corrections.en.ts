@@ -9,7 +9,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "An account is a strong isolation boundary. Separating environments limits what an attacker or a mistake can reach: the blast radius.",
       "whyWrong": {
-        "b": "That is not the goal.",
+        "b": "The goal is not to multiply invoices: it is to compartmentalize.",
         "a": "Supervision is precisely centralized.",
         "c": "Identities increase rather."
       }
@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It is a detective control.",
         "b": "It is a periodic detective control.",
-        "a": "It is not a guardrail."
+        "a": "A configuration backup blocks no action before it runs."
       }
     },
     "cav-q3": {
@@ -75,9 +75,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Policy as code expresses the rules (for example “no public storage”) in versioned, reviewed, tested files applied automatically in the pipeline and the environment.",
       "whyWrong": {
-        "d": "It is not executable code.",
+        "d": "A printed policy is neither versioned nor automatically tested.",
         "c": "A spreadsheet is not applied automatically.",
-        "a": "It is not reproducible."
+        "a": "An oral approval is neither traceable nor automatically verifiable."
       }
     },
     "cav-q9": {
@@ -96,8 +96,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A manual change in the console creates drift: the infrastructure no longer matches the code. It is detected by regular comparison and corrected in the code.",
       "whyWrong": {
         "a": "It is not a performance issue.",
-        "b": "Unrelated to migration.",
-        "c": "Unrelated to power."
+        "b": "Changing provider is not configuration drift.",
+        "c": "A power failure is an incident, not drift."
       }
     },
     "cav-q11": {
@@ -110,9 +110,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "An exception with no deadline turns into a permanent hole. It carries an owner, a justification, a compensating measure and a review date.",
       "whyWrong": {
-        "c": "That is not the goal.",
+        "c": "An expiry date does not speed up rule analysis.",
         "d": "It calls for a review on the contrary.",
-        "a": "Unrelated."
+        "a": "It does not reduce the size of rule files."
       }
     },
     "cav-q13": {
@@ -140,9 +140,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Whoever can attach a powerful role to a resource they control can run code with that role: it is a classic privilege escalation path.",
       "whyWrong": {
-        "d": "That is not its effect.",
-        "b": "That is not its effect.",
-        "c": "That is not its effect."
+        "d": "Passing a role deletes no logs.",
+        "b": "It does not encrypt the account’s data.",
+        "c": "It does not create a virtual private network."
       }
     },
     "cav-q16": {
@@ -152,7 +152,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It is not a read right.",
         "b": "It can modify policies.",
-        "a": "Unrelated."
+        "a": "Creating policy versions is not limited to backups: it changes rights."
       }
     },
     "cav-q17": {
@@ -161,8 +161,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The permission boundary defines the maximum effective rights of an identity, whatever the policies attached to it. It allows delegating the creation of roles without risk of escalation.",
       "whyWrong": {
         "b": "It limits, it does not grant.",
-        "a": "It is not encryption.",
-        "c": "It is not a log."
+        "a": "A permission boundary does not encrypt policies.",
+        "c": "It is not a sign-in log: it caps rights."
       }
     },
     "cav-q18": {
@@ -175,9 +175,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Without a unique external ID in the trust condition, a third party can be tricked into using its access to your account on behalf of another customer. The external ID removes this risk.",
       "whyWrong": {
-        "d": "That is not the risk.",
-        "c": "That is not the risk.",
-        "a": "That is not the risk."
+        "d": "The risk is not that the role is unreadable: it is that another customer uses it.",
+        "c": "The third party does not lose access to its account.",
+        "a": "The role does not expire every minute: the risk comes from a shared third party."
       }
     },
     "cav-q20": {
@@ -197,9 +197,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The data is encrypted with a data key, itself encrypted by a master key kept in a key service. Many data keys can exist without exposing the master key.",
       "whyWrong": {
-        "c": "It is not mail.",
-        "b": "It is not this principle.",
-        "d": "It is not compression."
+        "c": "Envelope encryption has nothing to do with postal sending.",
+        "b": "It does not use a repeated password: it uses data keys and a master key.",
+        "d": "It is not about compression."
       }
     },
     "cav-q22": {
@@ -218,7 +218,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Whoever manages the key must not be able to use it to read the data, and vice versa: this is separation of duties, which limits internal abuse.",
       "whyWrong": {
         "c": "It is not a matter of speed.",
-        "b": "Unrelated.",
+        "b": "Separating key roles does not reduce the number of regions.",
         "a": "Rotation remains necessary."
       }
     },
@@ -258,9 +258,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "ATT&CK describes the observed techniques. Detections are linked to it to see what is covered and what is not.",
       "whyWrong": {
-        "b": "That is not its role.",
-        "c": "That is not its role.",
-        "d": "That is not its role."
+        "b": "ATT&CK does not encrypt logs: it is a knowledge base.",
+        "c": "ATT&CK bills nothing.",
+        "d": "ATT&CK does not configure subnets."
       }
     },
     "cav-q29": {
@@ -278,7 +278,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A controlled test (exercise, replayed scenario) shows whether the alert really triggers. It is done in an authorized, documented scope, without risk for production.",
       "whyWrong": {
-        "d": "That is not the goal.",
+        "d": "Testing in a dedicated environment avoids breaking production.",
         "a": "That would be an abuse.",
         "b": "Documentation is essential."
       }
@@ -327,9 +327,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An attacker or ransomware that takes the main account also looks for the backups. An immutable copy in an isolated account withstands this scenario.",
       "whyWrong": {
-        "c": "That is not the reason.",
+        "c": "Restore speed is not the point of a separate immutable backup.",
         "d": "A test remains necessary.",
-        "b": "Unrelated."
+        "b": "A backup does not replace the account’s logging."
       }
     },
     "cav-q36": {

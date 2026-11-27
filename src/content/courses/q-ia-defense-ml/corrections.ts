@@ -10,8 +10,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’apprentissage supervisé ajuste le modèle à partir d’exemples dont la bonne réponse est connue. Le non supervisé travaille sans étiquettes, en regroupant ou en repérant les écarts.",
       "whyWrong": {
         "c": "Il travaille sans étiquettes.",
-        "a": "Sans rapport.",
-        "d": "Sans rapport."
+        "a": "Le chiffrement symétrique protège des données, il n’est pas un type d’apprentissage.",
+        "d": "La compression ne décrit pas un type d’apprentissage."
       }
     },
     "aiml-q2": {
@@ -45,8 +45,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La précision rapporte les vrais positifs au total des alertes. Le rappel rapporte les vrais positifs au total des événements malveillants.",
       "whyWrong": {
         "c": "C’est le rappel.",
-        "b": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "La vitesse d’exécution ne mesure pas la précision.",
+        "d": "Le nombre de paramètres décrit la taille du modèle, pas sa précision."
       }
     },
     "aiml-q6": {
@@ -108,7 +108,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "L’évasion vise un modèle déjà entraîné.",
         "a": "C’est une autre attaque.",
-        "d": "Sans rapport."
+        "d": "Le hameçonnage trompe des utilisateurs : il ne modifie pas les données d’entraînement."
       }
     },
     "aiml-q13": {
@@ -153,7 +153,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Il les apprend aussi.",
         "d": "Il ne les corrige pas.",
-        "a": "Ce n’est pas exact."
+        "a": "Le modèle utilise aussi les données récentes : leur qualité compte."
       }
     },
     "aiml-q18": {
@@ -171,9 +171,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "En production, le modèle voit des données postérieures à celles de son entraînement : un test chronologique donne une estimation plus réaliste qu’un tirage aléatoire du même lot.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "c": "Le découpage par date n’accélère pas l’entraînement.",
+        "b": "Il n’augmente pas le nombre d’exemples.",
+        "a": "Il ne supprime pas les doublons : il évite de tester sur le futur déjà vu."
       }
     },
     "aiml-q20": {
@@ -181,9 +181,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les champs ou événements qui ont pesé dans la décision permettent à l’analyste de la confirmer rapidement ou de repérer une erreur du modèle.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
+        "c": "L’explicabilité n’augmente pas un score : elle éclaire la décision.",
         "d": "Elle ne remplace pas l’analyste.",
-        "b": "Ce n’est pas son rôle."
+        "b": "Elle ne chiffre aucune donnée avant envoi."
       }
     },
     "aiml-q21": {
@@ -217,9 +217,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Si des exemples du test ont servi à l’entraînement, le modèle semble meilleur qu’il ne l’est : les chiffres ne se reproduiront pas en production.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
-        "c": "Sans rapport."
+        "a": "Une fuite de données ne rend pas le modèle plus rapide.",
+        "d": "Elle ne réduit pas la taille du jeu de données.",
+        "c": "Elle ne renforce aucun chiffrement : elle fausse les mesures."
       }
     },
     "aiml-q25": {
@@ -227,9 +227,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les performances sur des cas confirmés et la distribution des données révèlent une dégradation ou une attaque.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "c": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "La couleur de l’interface n’est pas un indicateur de détection.",
+        "c": "Le nombre de lignes de code n’indique pas la qualité en production.",
+        "b": "La température de la salle n’est pas un indicateur du modèle."
       }
     },
     "aiml-q26": {
@@ -247,9 +247,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Une version précédente validée, signée et conservée permet de rétablir la détection pendant que l’on analyse la cause.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
+        "a": "Garder une version précédente consomme du stockage, il ne l’économise pas.",
         "b": "Il faut conserver l’historique.",
-        "c": "Ce n’est pas le but."
+        "c": "Le retour arrière n’évite pas un réentraînement : il permet de réagir en attendant."
       }
     },
     "aiml-q28": {
@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La signature garantit que le modèle déployé est bien celui qui a été validé et qu’il n’a pas été remplacé ou altéré.",
       "whyWrong": {
-        "a": "Ce n’est pas son but.",
-        "d": "Ce n’est pas son but.",
-        "c": "Ce n’est pas son but."
+        "a": "La signature ne réduit pas la taille d’un fichier.",
+        "d": "Elle n’augmente pas la vitesse de calcul.",
+        "c": "Elle ne cache pas l’existence du modèle."
       }
     },
     "aiml-q30": {
@@ -304,8 +304,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le non supervisé repère des structures ou des écarts sans réponse connue : regroupements, comportements inhabituels.",
       "whyWrong": {
         "a": "Il demande des étiquettes.",
-        "b": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "Le chiffrement asymétrique n’est pas un type d’apprentissage.",
+        "d": "Une sauvegarde incrémentale n’est pas un type d’apprentissage."
       }
     },
     "aiml-q34": {
@@ -314,8 +314,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le rappel rapporte les vrais positifs au total des événements réellement malveillants : il mesure ce que le détecteur laisse passer.",
       "whyWrong": {
         "c": "C’est la précision.",
-        "b": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "La rapidité de traitement ne mesure pas le rappel.",
+        "d": "Le nombre d’analystes mobilisés n’est pas un rappel."
       }
     },
     "aiml-q35": {
@@ -323,9 +323,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Même un faible taux de faux positifs, appliqué à des millions d’événements légitimes, produit des milliers de fausses alertes.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Un matériel plus rapide ne génère pas de fausses alertes.",
+        "a": "La couleur du tableau de bord n’explique pas les fausses alertes.",
+        "b": "Le nombre d’analystes de garde ne crée pas de fausses alertes."
       }
     },
     "aiml-q36": {
@@ -335,7 +335,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Cela supprimerait la supervision.",
         "b": "Inutile pour la décision.",
-        "d": "Ce n’est pas une information utile."
+        "d": "Une liste de mots de passe n’a rien à faire dans une alerte."
       }
     },
     "aiml-q37": {
@@ -358,9 +358,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le bruit calibré fait que la présence ou l’absence d’une personne dans les données change très peu le résultat, au prix d’une légère perte de précision.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "c": "La compression sans perte ne protège pas les individus.",
+        "a": "Une redirection de port n’ajoute aucun bruit calibré.",
+        "b": "La mise en cache n’a aucun effet sur la confidentialité des individus."
       }
     },
     "aiml-q40": {

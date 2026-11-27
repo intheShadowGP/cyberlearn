@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Authentication verifies that a person really is who they claim to be, for example with a password, a code or a security key.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "c": "Unrelated.",
-        "b": "Unrelated."
+        "a": "The wallpaper has no link with verifying an identity.",
+        "c": "Installing software authenticates no one.",
+        "b": "Turning off the computer is not authentication."
       }
     },
     "oii-q2": {
@@ -20,8 +20,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Once the person is identified, authorization decides what they can access and what they can do (read, modify, delete).",
       "whyWrong": {
         "b": "That is authentication.",
-        "d": "That is not its role.",
-        "c": "That is not its role."
+        "d": "Backing up files is continuity, not access rights.",
+        "c": "Encrypting the disk protects data; it does not define what a person can do."
       }
     },
     "oii-q3": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The identifier (username, email address) designates the account. It is not secret: the secret is the password or the factor.",
       "whyWrong": {
-        "d": "That is not an identifier.",
-        "a": "That is not an identifier.",
-        "b": "That is not an identifier."
+        "d": "A wallpaper does not designate an account uniquely.",
+        "a": "A department’s postal address is shared by several people.",
+        "b": "A company logo is the same for all accounts."
       }
     },
     "oii-q4": {
@@ -39,9 +39,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A named account makes it possible to trace actions, remove the access of a single person and adjust their rights.",
       "whyWrong": {
-        "c": "That is not the goal.",
-        "a": "That is not the goal.",
-        "d": "That is not the goal."
+        "c": "The goal is not to buy licenses but to be able to trace actions.",
+        "a": "A personal account does not slow connections.",
+        "d": "How often passwords change is not the reason for individual accounts."
       }
     },
     "oii-q5": {
@@ -67,7 +67,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Identifier, rights and sign-in history characterize the account. The favorite color plays no role.",
       "whyWrong": {
-        "d": "Unrelated to access."
+        "d": "A favorite color is not part of a professional digital identity."
       }
     },
     "oii-q8": {
@@ -85,9 +85,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "When a service is hacked, attackers try the same credentials elsewhere. A unique password per service limits the damage.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "c": "That is not the reason.",
-        "a": "That is not the reason."
+        "b": "The workstation’s memory is not concerned.",
+        "c": "Reusing a password does not slow the Internet.",
+        "a": "Not all services forbid it: it is a good-practice rule."
       }
     },
     "oii-q10": {
@@ -95,9 +95,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "It generates long and different passwords for each service and fills them in for you. You only remember one main password.",
       "whyWrong": {
-        "d": "That is not its role.",
-        "a": "That is not its role.",
-        "c": "That is not its role."
+        "d": "A password manager does not speed up the Internet connection.",
+        "a": "It uninstalls no software.",
+        "c": "It does not back up photos: it stores secrets."
       }
     },
     "oii-q11": {
@@ -143,9 +143,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "MFA combines at least two proofs of different categories (what you know, have, are): a stolen password is no longer enough.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "a": "That is not the definition.",
-        "d": "That is not the definition."
+        "b": "MFA does not mean a strong password: it means using several factors.",
+        "a": "MFA is not a messaging system.",
+        "d": "MFA does not mean a forced update."
       }
     },
     "oii-q16": {
@@ -163,9 +163,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Without the second factor (phone, key), the password alone does not allow signing in.",
       "whyWrong": {
-        "d": "That is not what happens.",
-        "a": "That is not what happens.",
-        "b": "That is not what happens."
+        "d": "MFA does not lengthen the password: it adds a second factor.",
+        "a": "The account is not deleted: it stays protected by the second factor.",
+        "b": "MFA adds a step: it does not make sign-in faster."
       }
     },
     "oii-q18": {
@@ -210,9 +210,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The more limited the rights, the fewer consequences a mistake or a compromise has.",
       "whyWrong": {
-        "d": "That is not a security principle.",
-        "c": "That is not a security principle.",
-        "b": "That is not a security principle."
+        "d": "There is no “universal right” principle: rights are limited to the task.",
+        "c": "Total trust is the opposite of limiting rights.",
+        "b": "Self-service for everything would grant rights beyond what is needed."
       }
     },
     "oii-q23": {
@@ -220,9 +220,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Without removal, rights pile up over the positions held: the person ends up accessing data unrelated to their work.",
       "whyWrong": {
-        "a": "It is not a punishment.",
-        "b": "Unrelated.",
-        "c": "Unrelated."
+        "a": "Removing rights is not a punishment: it is a least-privilege measure.",
+        "b": "The server’s memory is not concerned by rights management.",
+        "c": "Removing rights does not change the login identifier."
       }
     },
     "oii-q24": {
@@ -230,9 +230,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A shared account prevents attributing an action to a person and outlives the departure of users: the practice is avoided.",
       "whyWrong": {
-        "c": "That is not the risk.",
-        "d": "It is less safe.",
-        "b": "There is a real risk."
+        "c": "A shared account does not speed up login.",
+        "d": "A shared account is less secure, not more.",
+        "b": "The risk is real: actions can no longer be attributed."
       }
     },
     "oii-q25": {
@@ -270,9 +270,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "You authenticate once with an identity provider, which attests the identity to the applications. MFA is set up in the same place.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "a": "That is not the principle.",
-        "d": "Unrelated."
+        "c": "SSO does not limit use to a single computer.",
+        "a": "It does not cover the whole Internet: only the linked applications.",
+        "d": "It does not delete accounts: it simplifies login."
       }
     },
     "oii-q30": {
@@ -281,8 +281,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The site delegates authentication to a provider (mailbox, social network, company directory). It does not receive your password.",
       "whyWrong": {
         "a": "It does not receive it.",
-        "b": "That is not what happens.",
-        "d": "That is not what happens."
+        "b": "The site does not create an account without telling you: the provider attests your identity.",
+        "d": "Third-party sign-in does not delete your account."
       }
     },
     "oii-q31": {
@@ -290,9 +290,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A malicious application can ask to read your mailbox. The rights requested must match its real use.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "d": "Insufficient.",
-        "a": "Insufficient."
+        "b": "The dominant color says nothing about the permissions requested.",
+        "d": "The displayed price says nothing about the access requested.",
+        "a": "The creation date alone does not let you judge the permissions requested."
       }
     },
     "oii-q32": {
@@ -348,9 +348,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The alert warns you when a sign-in comes from an unusual place or device, which lets you react quickly.",
       "whyWrong": {
-        "c": "That is not its role.",
-        "d": "That is not its role.",
-        "a": "That is not its role."
+        "c": "An alert does not speed up logins.",
+        "d": "It does not remove the password.",
+        "a": "It does not change the identifier: it flags unusual use."
       }
     },
     "oii-q38": {

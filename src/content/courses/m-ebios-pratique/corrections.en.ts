@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A supporting asset is an element of the system on which a business value rests: server, application, network, premises, staff.",
       "whyWrong": {
-        "b": "It is not a rule.",
-        "d": "It is not an attacker.",
-        "c": "It is not a backup."
+        "b": "A security rule is not a supporting asset: it is a measure.",
+        "d": "An attacker is a risk source, not a supporting asset.",
+        "c": "A backup is a protection measure, not an asset carrying business value."
       }
     },
     "ebp-q4": {
@@ -41,7 +41,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Threats are discussed afterwards.",
         "a": "They are studied in workshop 2.",
-        "d": "That is not the goal."
+        "d": "Severity is not used to remove business values: it measures impact."
       }
     },
     "ebp-q5": {
@@ -75,8 +75,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A risk source is a person or group likely to harm the organization: cybercriminal group, state actor, competitor, insider.",
       "whyWrong": {
         "c": "That is a vulnerability.",
-        "d": "It is not an actor.",
-        "a": "It is not an actor."
+        "d": "A configuration file is a supporting asset, not a malicious actor.",
+        "a": "An offline backup is a measure, not a risk source."
       }
     },
     "ebp-q9": {
@@ -85,8 +85,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The targeted objective is what the risk source seeks: extortion, espionage, sabotage, data theft, damage to image.",
       "whyWrong": {
         "c": "That is a measure.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "a": "The budget is not what the risk source aims at.",
+        "b": "The project duration is not the targeted objective."
       }
     },
     "ebp-q10": {
@@ -94,9 +94,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The most relevant pairs are retained in light of the source’s motivation, resources and activity, to focus effort on plausible scenarios.",
       "whyWrong": {
-        "c": "No relation.",
-        "d": "Insufficient.",
-        "b": "No relation."
+        "c": "Alphabetical order has no selection value.",
+        "d": "The date a group appeared is not a relevance criterion.",
+        "b": "The length of the report has no link with selection."
       }
     },
     "ebp-q11": {
@@ -142,9 +142,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Stakeholders are the customers, suppliers, providers, subsidiaries or partners in relation with the organization. They can constitute attack paths.",
       "whyWrong": {
-        "d": "It is not an attacker.",
-        "b": "It is not equipment.",
-        "a": "It is not an indicator."
+        "d": "An attacker is a risk source, not a stakeholder.",
+        "b": "An internal device is a supporting asset, not a stakeholder.",
+        "a": "An indicator is a tracking tool, not a third party in relationship."
       }
     },
     "ebp-q16": {
@@ -154,7 +154,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "High maturity reduces the threat.",
         "c": "Justified trust reduces it.",
-        "b": "It is not a criterion."
+        "b": "Geographic distance is not part of a stakeholder’s threat level."
       }
     },
     "ebp-q17": {
@@ -163,7 +163,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A strategic attack path describes how a risk source reaches a business value by going through one or more stakeholders, for example a provider with permanent access.",
       "whyWrong": {
         "a": "That is a route at operational level.",
-        "d": "Unrelated.",
+        "d": "An evacuation plan concerns people’s safety, not an attack path.",
         "c": "That is a technical measure."
       }
     },
@@ -173,7 +173,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Workshop 3 defines measures that reduce the threat coming from third parties: contractual requirements, limitation and monitoring of access, audits, redundancy.",
       "whyWrong": {
         "a": "Too narrow.",
-        "c": "Unrelated.",
+        "c": "Cable color is not a subject of complementary measures.",
         "b": "Too narrow."
       }
     },
@@ -207,9 +207,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "An operational scenario details, step by step, how a strategic attack path can be carried out technically, and estimates its likelihood.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "d": "Unrelated."
+        "b": "The budget is not an operational scenario.",
+        "a": "An IT charter is not an attack procedure.",
+        "d": "A crisis communication plan belongs to crisis management."
       }
     },
     "ebp-q23": {
@@ -228,8 +228,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Likelihood expresses the probability that the scenario succeeds, in light of the risk source’s resources, the vulnerabilities and the existing measures.",
       "whyWrong": {
         "b": "Severity measures impact.",
-        "a": "That is not its purpose.",
-        "d": "That is not its purpose."
+        "a": "Counting vulnerabilities does not measure a scenario’s likelihood.",
+        "d": "Ranking employees by risk is not the use of the likelihood scale."
       }
     },
     "ebp-q25": {
@@ -237,9 +237,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "MITRE ATT&CK lists the observed tactics and techniques. It helps describe realistic modus operandi and check detection coverage.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "c": "Unrelated."
+        "b": "A phone directory inspires no attack procedure.",
+        "a": "The internal rules are not a knowledge base of attack techniques.",
+        "c": "A salary grid has nothing to do with attack procedures."
       }
     },
     "ebp-q26": {
@@ -256,7 +256,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Exploitable flaws, the attacker’s resources and measures in place determine how easily it succeeds. The slogan has no link.",
       "whyWrong": {
-        "c": "No link with security."
+        "c": "A commercial slogan has no influence on how easily an attack succeeds."
       }
     },
     "ebp-q28": {
@@ -272,9 +272,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Workshop 5 summarizes the risk scenarios, chooses the treatment strategy, establishes the plan of measures, assesses the residual risks and defines the monitoring framework.",
       "whyWrong": {
-        "a": "Unrelated.",
+        "a": "The list of employees is not a deliverable of workshop 5.",
         "d": "That is the purpose of workshop 1.",
-        "c": "That is not its purpose."
+        "c": "A certification audit is another process."
       }
     },
     "ebp-q30": {
@@ -335,9 +335,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A frozen analysis becomes obsolete: new services, new threats, new third parties. It is reviewed periodically and at each major change.",
       "whyWrong": {
-        "d": "That is not the reason.",
-        "a": "That is not the reason.",
-        "c": "That is not the reason."
+        "d": "The method forbids nothing: it recommends keeping it up to date.",
+        "a": "The report’s color is not a reason to update.",
+        "c": "An update does not remove the decided measures: it reviews them."
       }
     },
     "ebp-q37": {
