@@ -11,7 +11,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Les outils ne suffisent pas sans décisions.",
         "d": "Elle concerne toute l’organisation.",
-        "c": "Ce n’est pas un objectif."
+        "c": "Interdire Internet n’est pas gouverner : c’est une restriction sans pilotage."
       }
     },
     "mgi-q2": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un service que l’on ne peut plus utiliser met en cause la disponibilité, même si les données restent intactes et secrètes.",
       "whyWrong": {
-        "b": "Rien n’a été divulgué.",
-        "a": "Rien n’a été modifié.",
-        "d": "Ce n’est pas l’objectif touché."
+        "b": "La confidentialité concerne l’accès non autorisé, pas l’indisponibilité.",
+        "a": "L’intégrité concerne l’exactitude des données, pas leur accessibilité.",
+        "d": "La traçabilité concerne la conservation des preuves, pas la disponibilité."
       }
     },
     "mgi-q4": {
@@ -75,9 +75,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un risque est la possibilité qu’un événement survienne et cause un dommage. Il se décrit par sa vraisemblance et sa gravité.",
       "whyWrong": {
-        "a": "Un virus installé est déjà un incident.",
-        "d": "C’est une gêne, pas un risque en soi.",
-        "c": "Sans rapport."
+        "a": "Un virus installé est un incident, pas la définition d’un risque.",
+        "d": "Un mot de passe oublié est un événement, pas la notion de risque.",
+        "c": "Un coût d’achat n’est pas un risque de sécurité."
       }
     },
     "mgi-q9": {
@@ -143,7 +143,7 @@ export const corrections: CourseCorrections = {
       "explanation": "La charte informe chacun de ce qui est permis, interdit et attendu : usage des moyens, mots de passe, signalement des incidents.",
       "whyWrong": {
         "c": "Elle ne remplace aucun outil.",
-        "d": "Sans rapport.",
+        "d": "Le calcul des salaires est sans rapport avec la charte.",
         "b": "Elle ne chiffre rien."
       }
     },
@@ -162,9 +162,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une règle trop compliquée ou irréaliste est contournée. Elle doit être claire, justifiée et réalisable dans le travail quotidien.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "d": "Une règle de sécurité n’a pas pour but d’occuper les équipes.",
+        "b": "Réduire les effectifs n’est pas la finalité d’une règle de sécurité.",
+        "a": "Une règle ne vise pas à éviter les vérifications : elle les facilite."
       }
     },
     "mgi-q18": {
@@ -172,9 +172,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Elle définit et fait appliquer la politique, suit les risques et rend compte à la direction. Elle s’appuie sur les équipes techniques sans les remplacer.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "a": "Réparer les imprimantes relève du support, pas de la sécurité de l’information.",
+        "d": "Le recrutement relève des ressources humaines.",
+        "c": "La paie ne relève pas de la sécurité de l’information."
       }
     },
     "mgi-q19": {
@@ -207,9 +207,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Toutes les données n’ont pas la même valeur ni les mêmes risques. La classification relie chaque niveau à des règles : accès, stockage, chiffrement, destruction.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but."
+        "b": "Le tri alphabétique ne protège pas les données.",
+        "d": "Classer les données n’a pas pour but de les supprimer.",
+        "c": "Classer ne revient pas à tout rendre public."
       }
     },
     "mgi-q23": {
@@ -227,9 +227,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le règlement général sur la protection des données encadre la collecte et l’usage des données personnelles et impose des mesures de sécurité adaptées au risque.",
       "whyWrong": {
-        "a": "Ce n’est pas son objet.",
+        "a": "Le RGPD ne protège pas que les secrets industriels.",
         "c": "Il couvre toutes les données personnelles.",
-        "b": "Ce n’est pas son objet."
+        "b": "Il ne protège pas les logiciels contre la copie."
       }
     },
     "mgi-q25": {
@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "L’hameçonnage exploite la confiance et l’urgence pour pousser à cliquer, ouvrir un fichier ou donner un mot de passe. Les personnes sont la cible, d’où l’importance de la sensibilisation.",
       "whyWrong": {
-        "b": "Ce n’est pas une attaque.",
-        "c": "Ce n’est pas une attaque.",
-        "d": "Ce n’est pas une attaque."
+        "b": "Un câble sectionné est une panne, pas un point d’entrée d’attaque.",
+        "c": "Une panne de courant est un incident de disponibilité.",
+        "d": "Un écran mal réglé n’est pas un point d’entrée."
       }
     },
     "mgi-q30": {
@@ -287,9 +287,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les méthodes des attaquants changent et les bons réflexes s’oublient. Des formats courts et réguliers maintiennent la vigilance.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
-        "d": "La loi n’interdit pas d’oublier.",
-        "b": "Elle complète les outils sans les remplacer."
+        "c": "La sensibilisation ne sert pas à remplir des agendas.",
+        "d": "Aucune loi n’interdit « d’oublier » : l’enjeu est l’évolution des menaces.",
+        "b": "Elle ne remplace pas les outils de sécurité : elle les complète."
       }
     },
     "mgi-q32": {
@@ -335,9 +335,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Une copie déconnectée ne peut pas être chiffrée ou supprimée par un rançongiciel qui a atteint le réseau : elle permet de reprendre sans payer.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "c": "Sans rapport.",
-        "a": "Sans rapport."
+        "d": "Une sauvegarde n’accélère pas la connexion Internet.",
+        "c": "Elle ne remplace pas les mots de passe.",
+        "a": "Elle ne chiffre pas le courrier."
       }
     },
     "mgi-q37": {
@@ -345,9 +345,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Journaux, messages et copies permettent d’identifier la cause, l’étendue et les données touchées, et d’en tirer des enseignements.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but."
+        "a": "Remplir l’espace disque n’est pas un objectif.",
+        "b": "Les traces ne servent pas à punir mais à comprendre.",
+        "d": "Conserver des traces ne retarde pas la reprise : il l’éclaire."
       }
     },
     "mgi-q38": {

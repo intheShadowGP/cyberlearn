@@ -43,9 +43,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Bots continuously test Internet addresses looking for known services and default credentials. An exposed device is found within minutes.",
       "whyWrong": {
-        "d": "Unrelated.",
+        "d": "Storms have nothing to do with attacks on the Internet.",
         "c": "Attackers target objects too.",
-        "a": "That is not the motive."
+        "a": "The bandwidth consumed does not explain attackers’ interest."
       }
     },
     "iot-q32": {
@@ -53,9 +53,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A UART or JTAG console lets you read memory, extract the firmware or obtain a root shell. In production, they are disabled or protected.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "d": "Unrelated.",
-        "c": "Unrelated."
+        "b": "Power consumption is not the reason for locking them.",
+        "d": "These interfaces do not slow the local network.",
+        "c": "The HTTP protocol forbids nothing about debug interfaces."
       }
     },
     "iot-q33": {
@@ -123,9 +123,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Emulation lets you run and observe a service in a controlled environment, without blocking a physical device, and test edge cases.",
       "whyWrong": {
-        "c": "That is not its role.",
-        "a": "That is not its role.",
-        "b": "That is not its role."
+        "c": "Emulation does not compress the binary.",
+        "a": "It does not encrypt the binary.",
+        "b": "Publishing a binary is not a goal of emulation."
       }
     },
     "iot-q36": {
@@ -133,9 +133,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An old version of a common component (BusyBox, OpenSSL, kernel) is matched against published vulnerabilities: this is the principle of a composition analysis.",
       "whyWrong": {
-        "c": "Unrelated to security.",
-        "b": "Insufficient.",
-        "d": "Unrelated to security."
+        "c": "The color of the web interface says nothing about the component’s flaws.",
+        "b": "The device manufacturer’s name says nothing about the BusyBox version’s flaws.",
+        "d": "The size of the extracted source file does not indicate its vulnerabilities."
       }
     },
     "iot-q8": {
@@ -201,8 +201,8 @@ export const corrections: CourseCorrections = {
       "explanation": "HTTPS protects transport and authenticates the server; if the distribution server is compromised, it serves a malicious image over valid HTTPS. The manufacturer’s signature, verified by the device, guarantees the origin of the image itself.",
       "whyWrong": {
         "b": "HTTPS does not guarantee the image’s origin.",
-        "c": "That is not the goal.",
-        "a": "That is not the goal."
+        "c": "Verifying the signature does not speed up the download.",
+        "a": "The signature does not compress the image."
       }
     },
     "iot-q37": {
@@ -210,9 +210,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A hardware root of trust (ROM, public key in fuses) cannot be modified by software: it anchors the whole verification chain.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "a": "Unrelated.",
-        "c": "Unrelated."
+        "d": "A root of trust does not speed up wireless connection.",
+        "a": "It does not replace the user’s password.",
+        "c": "It does not store the device’s photographs."
       }
     },
     "iot-q38": {
@@ -220,9 +220,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Over ten years, a signing key can be compromised or expire. Backup keys planned from the design allow replacing it without making devices unusable.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "b": "They do not remove it.",
-        "a": "Signing remains necessary."
+        "d": "Backup keys do not double update speed.",
+        "b": "They do not remove anti-rollback: they replace a compromised key.",
+        "a": "They do not remove the need to sign images."
       }
     },
     "iot-q39": {
@@ -257,8 +257,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A certificate per device makes it possible to revoke a single compromised device and to identify it precisely, without changing the whole fleet.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "b": "That is not the goal.",
+        "d": "A unique certificate does not speed up the connection.",
+        "b": "It does not reduce the firmware size.",
         "c": "On the contrary, it enables encryption."
       }
     },
@@ -277,9 +277,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A service reachable from the Internet is spotted by continuous scans. It is better to have outbound connections initiated by the object to a service that authenticates it.",
       "whyWrong": {
-        "b": "It is not a consequence.",
-        "d": "It is not automatic.",
-        "a": "It is not a consequence."
+        "b": "Accepting inbound connections does not reduce consumption.",
+        "d": "It does not automatically encrypt its data.",
+        "a": "Exposure does not prevent updates: it increases the attack surface."
       }
     },
     "iot-q21": {
@@ -324,8 +324,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The SBOM lists the components of each version. When a vulnerability is published, the manufacturer immediately spots the products concerned.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "c": "That is not its role.",
+        "a": "The SBOM does not encrypt the firmware.",
+        "c": "It does not speed up boot.",
         "d": "It does not replace them."
       }
     },
@@ -334,8 +334,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The researcher informs the manufacturer, agrees on a fix deadline then publishes the details. The aim is to protect users while informing the public.",
       "whyWrong": {
-        "d": "It is not coordinated.",
-        "b": "It is not coordinated disclosure.",
+        "d": "Publishing everything at once exposes users before a fix.",
+        "b": "Selling the flaw to the highest bidder is not coordinated disclosure.",
         "c": "It must eventually be handled."
       }
     },
@@ -346,7 +346,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Users must be informed.",
         "a": "It harms users.",
-        "b": "It is not realistic."
+        "b": "Maintaining all services indefinitely is not sustainable without support."
       }
     },
     "iot-q28": {

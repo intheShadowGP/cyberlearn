@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The directory (Active Directory, Entra ID, LDAP) groups accounts, groups and their attributes: it is the basis of all access controls.",
       "whyWrong": {
-        "b": "That is not its role.",
-        "d": "That is not its role.",
-        "a": "Unrelated to identities."
+        "b": "A directory does not store workstation backups.",
+        "d": "Filtering mail is the role of a mail gateway.",
+        "a": "Monitoring temperature belongs to server room operations."
       }
     },
     "opr-q2": {
@@ -39,7 +39,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Disabling cuts access at once. Deletion is deferred to preserve logs and allow a possible investigation or data recovery.",
       "whyWrong": {
-        "d": "That is not the main reason.",
+        "d": "Freeing licenses is not the reason to disable first.",
         "c": "That is the opposite of the goal.",
         "a": "The manager must be informed."
       }
@@ -86,7 +86,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Email is used to reset other accounts and administration accounts have wide rights: protecting them first reduces risk the most.",
       "whyWrong": {
-        "b": "That is not the criterion.",
+        "b": "These accounts are, on the contrary, heavily used.",
         "d": "They are in fact heavily targeted.",
         "c": "Every account has an identifier."
       }
@@ -96,9 +96,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Entering the number shown on the sign-in screen forces you to look at the request: you can no longer approve at random a notification triggered by an attacker.",
       "whyWrong": {
-        "c": "That is not its purpose.",
-        "d": "That is not its purpose.",
-        "a": "That is not its purpose."
+        "c": "Number matching does not protect against physical phone theft.",
+        "d": "It does not address mobile network outages.",
+        "a": "It does not address forgetting the password."
       }
     },
     "opr-q11": {
@@ -145,8 +145,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The identity provider authenticates the user and then issues an assertion or a token to the federated applications.",
       "whyWrong": {
         "a": "It does not manage identities.",
-        "d": "Unrelated.",
-        "b": "Unrelated."
+        "d": "A print server attests no identity.",
+        "b": "A backup manager attests no identity."
       }
     },
     "opr-q16": {
@@ -164,9 +164,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "SCIM propagates the creation, change and deletion of accounts from the directory to the applications: no more accounts forgotten after a departure.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "b": "That is not its role.",
-        "d": "That is not its role."
+        "a": "SCIM does not encrypt browser exchanges.",
+        "b": "It does not measure bandwidth.",
+        "d": "It does not generate random passwords."
       }
     },
     "opr-q18": {
@@ -211,9 +211,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "With RBAC, rights are attached to roles or groups, then people receive the roles matching their function.",
       "whyWrong": {
-        "c": "That is not the definition.",
-        "b": "That is not the definition.",
-        "a": "That is not the definition."
+        "c": "RBAC is not end-to-end backup encryption.",
+        "b": "RBAC is not a local network.",
+        "a": "RBAC is not email redirection."
       }
     },
     "opr-q23": {
@@ -231,8 +231,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The person who requests a sensitive action (a payment, an extended right) is not the one who approves it, which limits fraud and errors.",
       "whyWrong": {
-        "d": "That is not the principle.",
-        "c": "That is not the principle.",
+        "d": "Each person must not administer everything: that is the opposite of separation.",
+        "c": "Tasks are not split at random but according to rules.",
         "b": "That is the opposite."
       }
     },
@@ -271,7 +271,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The daily account reads emails and browses: it is exposed. Separating administration prevents a malicious click from handing over high rights.",
       "whyWrong": {
-        "a": "That is not the goal.",
+        "a": "Separating accounts costs a little time but protects high rights.",
         "d": "Passwords must be distinct.",
         "b": "MFA is still required."
       }
@@ -292,7 +292,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The emergency account is excluded from the usual mechanisms to regain access if SSO or MFA is unavailable. Its use triggers an alert and a review.",
       "whyWrong": {
         "b": "It is reserved for emergencies.",
-        "c": "That is not its role.",
+        "c": "An emergency account is not permanent access for contractors.",
         "d": "It does not replace MFA elsewhere."
       }
     },
@@ -368,7 +368,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Attackers often install persistence: rules, authorized applications, MFA methods. The interface theme has nothing to do with it.",
       "whyWrong": {
-        "c": "Unrelated."
+        "c": "The theme’s color has no relevance in this check."
       }
     },
     "opr-q40": {

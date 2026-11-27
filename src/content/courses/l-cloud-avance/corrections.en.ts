@@ -95,7 +95,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A manual change in the console creates drift: the infrastructure no longer matches the code. It is detected by regular comparison and corrected in the code.",
       "whyWrong": {
-        "a": "It is not a performance issue.",
+        "a": "A server’s performance loss is a capacity issue, not drift from the code.",
         "b": "Changing provider is not configuration drift.",
         "c": "A power failure is an incident, not drift."
       }
@@ -150,7 +150,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Modifying a policy you hold amounts to choosing your own rights. Policy management permissions are therefore treated as administration rights.",
       "whyWrong": {
-        "d": "It is not a read right.",
+        "d": "Creating policy versions is not limited to consulting logs: it changes rights.",
         "b": "It can modify policies.",
         "a": "Creating policy versions is not limited to backups: it changes rights."
       }
@@ -199,7 +199,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Envelope encryption has nothing to do with postal sending.",
         "b": "It does not use a repeated password: it uses data keys and a master key.",
-        "d": "It is not about compression."
+        "d": "Envelope encryption is not compression: it protects data keys under a master key."
       }
     },
     "cav-q22": {
@@ -270,7 +270,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "It is normal usage.",
         "d": "It is a planned operation.",
-        "a": "Unrelated."
+        "a": "Reading the documentation is a normal activity, not a sign of fraudulent key use."
       }
     },
     "cav-q30": {
@@ -347,8 +347,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Compute resources created in unused regions are a classic sign of compromise (cryptocurrency mining). A budget alert and a region restriction reveal or prevent it.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "b": "Unrelated.",
+        "a": "A time zone change does not create costly machines in several regions.",
+        "b": "A browser update creates no cloud machines.",
         "c": "It does not create machines."
       }
     },

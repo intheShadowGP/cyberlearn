@@ -9,9 +9,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’annuaire (Active Directory, Entra ID, LDAP) regroupe les comptes, les groupes et leurs attributs : il sert de base à tous les contrôles d’accès.",
       "whyWrong": {
-        "b": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "a": "Sans rapport avec les identités."
+        "b": "Un annuaire ne stocke pas les sauvegardes des postes.",
+        "d": "Filtrer le courrier est le rôle d’une passerelle de messagerie.",
+        "a": "Superviser la température relève de l’exploitation des salles serveurs."
       }
     },
     "opr-q2": {
@@ -39,7 +39,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La désactivation coupe l’accès tout de suite. La suppression est différée pour conserver les journaux et permettre une éventuelle enquête ou récupération de données.",
       "whyWrong": {
-        "d": "Ce n’est pas le motif principal.",
+        "d": "Libérer les licences n’est pas la raison de désactiver d’abord.",
         "c": "C’est l’inverse de l’objectif.",
         "a": "Le responsable doit être informé."
       }
@@ -86,7 +86,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La messagerie sert à réinitialiser d’autres comptes et les comptes d’administration ont de larges droits : les protéger en premier réduit le plus le risque.",
       "whyWrong": {
-        "b": "Ce n’est pas le critère.",
+        "b": "Ces comptes sont au contraire très utilisés.",
         "d": "Ils sont au contraire très visés.",
         "c": "Tout compte a un identifiant."
       }
@@ -96,9 +96,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Saisir le nombre affiché à l’écran de connexion oblige à regarder la demande : on ne peut plus accepter au hasard une notification déclenchée par un attaquant.",
       "whyWrong": {
-        "c": "Ce n’est pas son objet.",
-        "d": "Ce n’est pas son objet.",
-        "a": "Ce n’est pas son objet."
+        "c": "Le number matching ne protège pas du vol physique du téléphone.",
+        "d": "Il ne traite pas les coupures du réseau mobile.",
+        "a": "Il ne traite pas l’oubli du mot de passe."
       }
     },
     "opr-q11": {
@@ -145,8 +145,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le fournisseur d’identité authentifie l’utilisateur puis délivre une assertion ou un jeton aux applications fédérées.",
       "whyWrong": {
         "a": "Il ne gère pas les identités.",
-        "d": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Un serveur d’impression n’atteste aucune identité.",
+        "b": "Un gestionnaire de sauvegardes n’atteste aucune identité."
       }
     },
     "opr-q16": {
@@ -164,9 +164,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "SCIM propage la création, la modification et la suppression des comptes de l’annuaire vers les applications : plus de comptes oubliés après un départ.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "a": "SCIM ne chiffre pas les échanges des navigateurs.",
+        "b": "Il ne mesure pas la bande passante.",
+        "d": "Il ne génère pas de mots de passe aléatoires."
       }
     },
     "opr-q18": {
@@ -212,9 +212,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Avec le RBAC, les droits sont rattachés à des rôles ou groupes, puis les personnes reçoivent les rôles correspondant à leur fonction.",
       "whyWrong": {
-        "c": "Ce n’est pas la définition.",
-        "b": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "c": "RBAC n’est pas un chiffrement de sauvegardes.",
+        "b": "RBAC n’est pas un réseau local.",
+        "a": "RBAC n’est pas une redirection de courriels."
       }
     },
     "opr-q23": {
@@ -232,8 +232,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La personne qui demande une action sensible (un paiement, un droit étendu) n’est pas celle qui l’approuve, ce qui limite la fraude et les erreurs.",
       "whyWrong": {
-        "d": "Ce n’est pas le principe.",
-        "c": "Ce n’est pas le principe.",
+        "d": "Chaque personne ne doit pas tout administrer : c’est l’inverse de la séparation.",
+        "c": "La répartition ne se fait pas au hasard, mais selon des règles.",
         "b": "C’est l’inverse."
       }
     },
@@ -272,7 +272,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le compte quotidien lit les courriels et navigue : il est exposé. Séparer l’administration évite qu’un clic malveillant donne des droits élevés.",
       "whyWrong": {
-        "a": "Ce n’est pas l’objectif.",
+        "a": "Séparer les comptes fait perdre un peu de temps, mais protège les droits élevés.",
         "d": "Il faut des mots de passe distincts.",
         "b": "La MFA reste exigée."
       }
@@ -293,7 +293,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le compte d’urgence est exclu des dispositifs habituels pour retrouver l’accès si le SSO ou la MFA est indisponible. Son usage déclenche une alerte et une revue.",
       "whyWrong": {
         "b": "Il est réservé aux urgences.",
-        "c": "Ce n’est pas son rôle.",
+        "c": "Un compte d’urgence n’est pas un accès permanent pour des prestataires.",
         "d": "Il ne remplace pas la MFA ailleurs."
       }
     },
@@ -369,7 +369,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "L’attaquant installe souvent des moyens de persistance : règles, applications autorisées, méthodes MFA. Le thème de l’interface n’a aucun rapport.",
       "whyWrong": {
-        "c": "Sans rapport."
+        "c": "La couleur du thème n’a aucun intérêt dans cette vérification."
       }
     },
     "opr-q40": {

@@ -21,9 +21,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La messagerie et la navigation sont les principaux vecteurs d’attaque. Si elles s’exécutent avec un compte d’administration, un seul clic peut donner à l’attaquant ces privilèges.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but.",
-        "c": "Ce n’est pas la raison."
+        "b": "Le but n’est pas d’avoir deux boîtes aux lettres.",
+        "d": "Un compte distinct ne contourne pas l’authentification multifacteur.",
+        "c": "L’annuaire n’impose pas par défaut un compte distinct : c’est une bonne pratique."
       }
     },
     "pam-q3": {
@@ -59,9 +59,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un compte intégré, souvent au même mot de passe sur plusieurs machines, permet de se déplacer d’un poste à l’autre. Il doit avoir un mot de passe unique et être surveillé.",
       "whyWrong": {
-        "a": "Ce n’est pas la raison.",
-        "d": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison."
+        "a": "Le compte local ne ralentit pas le réseau.",
+        "d": "Il ne consomme pas de licence.",
+        "c": "Sa visibilité à l’écran n’est pas la raison de le surveiller."
       }
     },
     "pam-q32": {
@@ -70,8 +70,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’inventaire se construit à partir des sources techniques : membres des groupes privilégiés, rôles des consoles cloud, comptes locaux, comptes de service.",
       "whyWrong": {
         "a": "Incomplètes et inexactes.",
-        "c": "Sans rapport.",
-        "b": "Sans rapport."
+        "c": "Les annonces de recrutement ne listent pas les comptes réels.",
+        "b": "Les plaquettes commerciales ne reflètent pas les comptes en place."
       }
     },
     "pam-q5": {
@@ -79,9 +79,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le bastion centralise les accès d’administration : authentification forte, contrôle de qui accède à quoi, journalisation et souvent enregistrement des sessions. Les systèmes administrés n’acceptent les connexions que depuis lui.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "a": "Un bastion ne remplace pas l’antivirus.",
+        "d": "Il n’héberge pas le site public de l’entreprise.",
+        "b": "Il ne stocke pas les sauvegardes."
       }
     },
     "pam-q6": {
@@ -119,7 +119,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Ce serait une faute grave.",
         "c": "Ce serait une faute grave.",
-        "d": "Ce n’est pas son rôle."
+        "d": "Le coffre ne supprime pas les comptes : il protège les secrets."
       }
     },
     "pam-q34": {
@@ -127,9 +127,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le bastion concentre les accès : s’il est compromis, l’attaquant atteint tout ce qu’il administre. Il est donc administré depuis le niveau le plus élevé, avec MFA et surveillance.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Il ne doit pas l’être.",
-        "b": "Il journalise."
+        "a": "La consommation électrique n’est pas la raison de le protéger.",
+        "d": "Un bastion ne doit pas être accessible au grand public.",
+        "b": "Un bastion journalise : c’est un de ses rôles."
       }
     },
     "pam-q9": {
@@ -231,7 +231,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Un auditeur s’appuie sur des preuves datées, vérifiables et produites au fil de l’eau : liste extraite, décisions du responsable, retraits tracés.",
       "whyWrong": {
         "c": "Une capture ne prouve qu’un état.",
-        "d": "Non vérifiable.",
+        "d": "Une déclaration orale n’est pas une preuve vérifiable.",
         "a": "Aucune preuve."
       }
     },
@@ -273,9 +273,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un attaquant qui prend le contrôle d’un serveur peut effacer ses journaux locaux. Une copie centralisée permet de détecter et de reconstituer l’incident.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "b": "Centraliser les journaux ne réduit pas le nombre d’utilisateurs.",
+        "d": "Cela ne supprime pas les mots de passe.",
+        "a": "Cela n’accélère pas l’annuaire."
       }
     },
     "pam-q20": {
@@ -318,9 +318,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le modèle sépare les comptes et machines selon leur niveau de contrôle (annuaire, serveurs, postes) pour qu’un vol d’identifiants sur un niveau ne donne pas accès au niveau supérieur.",
       "whyWrong": {
-        "d": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition."
+        "d": "Le tiering ne classe pas les employés par ancienneté.",
+        "c": "Il ne répartit pas le budget.",
+        "a": "Il ne trie pas les mots de passe par longueur."
       }
     },
     "pam-q25": {
@@ -329,8 +329,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Un mot de passe local commun permet à un attaquant de se déplacer de poste en poste. Un mot de passe unique par machine, renouvelé automatiquement, limite ce déplacement.",
       "whyWrong": {
         "c": "C’est la faiblesse à éviter.",
-        "d": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but."
+        "d": "LAPS ne désactive pas les comptes locaux : il renouvelle leur mot de passe.",
+        "b": "LAPS ne supprime pas l’annuaire."
       }
     },
     "pam-q26": {
@@ -338,9 +338,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Tout utilisateur de l’annuaire peut demander un ticket de service pour ce compte et tenter de casser son mot de passe hors ligne. La défense : mots de passe très longs ou gMSA.",
       "whyWrong": {
-        "a": "Ce n’est pas ce risque.",
-        "d": "Ce n’est pas ce risque.",
-        "b": "Ce n’est pas ce risque."
+        "a": "Un compte de service ne chiffre pas les disques.",
+        "d": "Il n’éteint pas le contrôleur de domaine.",
+        "b": "Il ne modifie pas l’horloge du réseau."
       }
     },
     "pam-q27": {

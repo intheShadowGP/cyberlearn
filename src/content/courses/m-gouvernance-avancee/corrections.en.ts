@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "That is a budget, not a loss.",
         "b": "That is the maximum loss, not the expected one.",
-        "d": "Unrelated."
+        "d": "The cost of compliance audits is not an annual loss expectancy."
       }
     },
     "mga-q3": {
@@ -106,8 +106,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The six-function framework (govern, identify, protect, detect, respond, recover) gives a shared vocabulary and maturity levels understandable by non-specialists.",
       "whyWrong": {
         "a": "It is not certifiable.",
-        "c": "That is not its format.",
-        "d": "That is not its purpose."
+        "c": "A catalog of 114 detailed measures is more technical, not a language for talking with management.",
+        "d": "The NIST CSF is not an encryption method."
       }
     },
     "mga-q12": {
@@ -140,9 +140,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "If a single provider carries several critical services, its failure paralyzes the organization. These dependencies are identified and alternatives are planned.",
       "whyWrong": {
-        "b": "That is not the definition.",
-        "c": "That is not the definition.",
-        "d": "That is not the definition."
+        "b": "Concentration risk comes from dependence, not from many suppliers.",
+        "c": "Paying the same invoice several times is a management error, not concentration risk.",
+        "d": "Using a local supplier is not in itself a concentration risk."
       }
     },
     "mga-q16": {
@@ -150,9 +150,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Incidents spread through the chain: a supplier’s subcontractor may hold data or access. The contract must frame subcontracting and notification.",
       "whyWrong": {
-        "c": "That is not their role.",
-        "a": "They replace no audit.",
-        "b": "They may have access."
+        "c": "Tier-2 subcontractors do not sign contracts in place of the supplier.",
+        "a": "They do not replace auditing the supplier.",
+        "b": "Subcontractors can access our data: that is why they are mapped."
       }
     },
     "mga-q17": {
@@ -160,9 +160,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The exit strategy describes how to continue the activity if the provider fails or if you terminate the contract: reversibility, data, transition, delays.",
       "whyWrong": {
-        "c": "It is not a plan.",
-        "d": "That is not its purpose.",
-        "a": "Unrelated."
+        "c": "The contract ending at expiry is not an exit plan.",
+        "d": "A non-compete clause does not describe how to change provider.",
+        "a": "An exit-from-territory audit is not an exit strategy."
       }
     },
     "mga-q18": {
@@ -170,9 +170,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "DORA requires keeping a register of information on contractual agreements with ICT providers, so that the entity and the authorities can monitor dependencies.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "a": "Unrelated.",
-        "b": "Unrelated."
+        "d": "A patent register is not required by DORA for ICT providers.",
+        "a": "A visitor register is not concerned.",
+        "b": "A register of employees on leave is not concerned."
       }
     },
     "mga-q19": {
@@ -198,8 +198,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Automatic measures (share of patched workstations, accounts without a second factor) feed dashboards and provide regular evidence, rather than a one-off check.",
       "whyWrong": {
         "b": "It is a one-off check.",
-        "d": "That is not its purpose.",
-        "c": "That is not its purpose."
+        "d": "Continuous control monitoring is not meant to monitor employees.",
+        "c": "Archiving on paper is not continuous monitoring."
       }
     },
     "mga-q22": {
@@ -219,7 +219,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It is a minor remark.",
         "b": "It is an observation.",
-        "a": "It is not an audit finding."
+        "a": "A supplier’s delivery delay is not an audit finding on the system."
       }
     },
     "mga-q24": {
@@ -270,9 +270,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A threshold linked to the risk appetite turns a measure into a signal: beyond it, management must decide (accept, treat, arbitrate).",
       "whyWrong": {
-        "b": "That is not its purpose.",
-        "a": "It requires measuring.",
-        "c": "It does not replace them."
+        "b": "An indicator tied to appetite does not automatically raise the budget.",
+        "a": "It aims, on the contrary, to measure.",
+        "c": "It does not replace compliance audits."
       }
     },
     "mga-q30": {
@@ -281,8 +281,8 @@ export const corrections: CourseCorrections = {
       "explanation": "NIS2 reinforces the responsibility of management bodies: approval of measures, oversight, training, and possible sanctions depending on national transpositions.",
       "whyWrong": {
         "a": "It engages management.",
-        "c": "It is not a provided consequence.",
-        "b": "Insufficient."
+        "c": "NIS2 does not provide for automatic removal of the CISO.",
+        "b": "A serious breach does not lead to a mere oral remark with no follow-up."
       }
     },
     "mga-q31": {
@@ -337,9 +337,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A recovery plan that depends on elements located on the disaster site (directory, documentation, access) fails on the day. The test reveals these hidden dependencies.",
       "whyWrong": {
-        "c": "That is not the goal.",
-        "d": "Backups remain necessary.",
-        "a": "It validates it."
+        "c": "Testing recovery is not meant to save licenses.",
+        "d": "It does not avoid making backups.",
+        "a": "It does not remove the recovery plan: it validates it."
       }
     },
     "mga-q37": {
@@ -347,9 +347,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Impact tolerance sets how far a critical activity can be disrupted before unacceptable harm to the organization or its customers. It guides plans and tests.",
       "whyWrong": {
-        "d": "That is another subject.",
-        "b": "That is not the definition.",
-        "c": "That is not the definition."
+        "d": "The insurance amount is not the impact tolerance.",
+        "b": "The number of customers does not define impact tolerance.",
+        "c": "The cost of recovery is not the impact tolerance."
       }
     },
     "mga-q38": {

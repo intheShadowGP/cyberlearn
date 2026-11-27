@@ -55,9 +55,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Secure Boot vérifie la signature de chaque étape du démarrage (micrologiciel, chargeur, noyau) et empêche l’exécution d’un composant non approuvé, fondant la chaîne de confiance.",
       "whyWrong": {
-        "d": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "d": "Secure Boot ne chiffre pas le trafic réseau.",
+        "a": "Il ne rend pas le démarrage plus rapide : il ajoute des vérifications.",
+        "b": "Il n’attribue pas d’adresses IP : c’est le rôle du DHCP."
       }
     },
     "mzt-q7": {
@@ -67,7 +67,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "C’est le chiffrement du stockage.",
         "b": "C’est le rôle de TLS.",
-        "a": "Sans rapport."
+        "a": "L’informatique confidentielle ne protège pas contre les coupures physiques de câbles."
       }
     },
     "mzt-q8": {
@@ -125,8 +125,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La tolérance aux fautes byzantines permet à un système distribué de rester correct même si certains participants sont défaillants ou malveillants et diffusent des informations contradictoires.",
       "whyWrong": {
         "b": "Trop restrictif.",
-        "c": "Sans rapport.",
-        "a": "Sans rapport."
+        "c": "Le chiffrement des disques ne traite pas les participants malveillants.",
+        "a": "La tolérance byzantine n’accélère pas le réseau : elle garantit un accord malgré des fautes."
       }
     },
     "mzt-q14": {
@@ -134,9 +134,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le chiffrement homomorphe permet d’effectuer des calculs directement sur des données chiffrées, sans les déchiffrer : le résultat, une fois déchiffré, est correct. Utile pour traiter des données sensibles sans les exposer.",
       "whyWrong": {
-        "b": "Ce n’est pas son objet.",
+        "b": "Le chiffrement homomorphe est plutôt plus lent, pas plus rapide.",
         "a": "Les clés restent nécessaires.",
-        "d": "Ce n’est pas son objet."
+        "d": "Il ne compresse pas les données."
       }
     },
     "mzt-q15": {
@@ -166,8 +166,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La machine envoie des mesures signées de son démarrage : le vérificateur ne lui confie des secrets que si son état correspond à une valeur de référence connue.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
+        "a": "L’attestation ne sauvegarde aucun fichier.",
+        "c": "Elle n’accélère pas les échanges : elle prouve l’état de la machine.",
         "d": "Elle ne remplace pas les mises à jour."
       }
     },
@@ -176,8 +176,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le vérificateur reçoit les mesures signées, les compare aux valeurs de référence et décide de libérer ou non l’accès aux secrets.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "c": "Sans rapport.",
+        "b": "Une imprimante réseau ne compare pas des mesures d’attestation.",
+        "c": "Le serveur de messagerie n’est pas le vérificateur.",
         "a": "Il est la partie attestée."
       }
     },
@@ -186,7 +186,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Sans protection anti-retour, un attaquant installerait une ancienne version dont les défauts sont connus. Un compteur de version non réinitialisable l’interdit.",
       "whyWrong": {
-        "d": "Sans rapport.",
+        "d": "La protection contre le retour en arrière ne réduit pas la taille du fichier.",
         "a": "C’est précisément ce qu’on évite.",
         "c": "La signature reste indispensable."
       }
@@ -222,8 +222,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Par défaut, un état inconnu est refusé : on ne confie aucun secret et on investigue (mise à jour légitime non référencée, ou altération).",
       "whyWrong": {
         "b": "Cela viderait la protection de son sens.",
-        "c": "Sans rapport avec la vérification.",
-        "d": "Sans rapport avec la vérification."
+        "c": "Effacer ses références ne règle rien : cela empêche toute vérification.",
+        "d": "Redémarrer le serveur de messagerie n’a aucun lien avec l’attestation."
       }
     },
     "mzt-q24": {
@@ -233,7 +233,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Il n’empêche rien.",
         "d": "Un attaquant pourrait le modifier.",
-        "b": "Ce n’est pas un contrôle d’intégrité."
+        "b": "Une sauvegarde manuelle n’empêche pas l’installation d’une version antérieure."
       }
     },
     "mzt-q25": {
@@ -241,8 +241,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un adversaire peut copier aujourd’hui des échanges chiffrés avec des algorithmes asymétriques actuels et les déchiffrer quand un ordinateur quantique sera disponible : « collecter maintenant, déchiffrer plus tard ».",
       "whyWrong": {
-        "c": "Ce n’est pas le problème.",
-        "d": "Sans rapport.",
+        "c": "Les ordinateurs quantiques ne ralentissent pas tous les chiffrements : ils menacent surtout la clé publique.",
+        "d": "Les mots de passe ne seront pas supprimés par la menace quantique.",
         "a": "Il reste sûr avec des clés assez longues."
       }
     },
@@ -251,8 +251,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "On ne migre que ce que l’on connaît : un inventaire des algorithmes, longueurs de clés, protocoles et durées de confidentialité est le point de départ.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "a": "Sans rapport.",
+        "d": "Les fournitures de bureau n’ont aucun lien avec la migration cryptographique.",
+        "a": "Les anciens journaux ne décrivent pas les algorithmes en place.",
         "b": "Il ne faut jamais en dresser la liste."
       }
     },
@@ -311,7 +311,7 @@ export const corrections: CourseCorrections = {
       "explanation": "La décision prend en compte l’identité, l’état de l’appareil, le lieu et le risque au moment de la demande, et peut changer pendant la session.",
       "whyWrong": {
         "d": "C’est une règle statique.",
-        "a": "Sans rapport.",
+        "a": "Une liste de mots de passe n’est pas une politique d’accès dynamique.",
         "b": "Cela ne tient pas compte du contexte."
       }
     },
@@ -331,7 +331,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le TPM est lié à une machine (mesures de démarrage, clés locales). Le HSM est un module dédié qui génère et garde les clés d’un service et réalise les opérations sans les exposer.",
       "whyWrong": {
         "c": "Les deux sont du matériel.",
-        "a": "Ce n’est pas leur rôle.",
+        "a": "Le TPM n’attribue pas d’adresses et le HSM ne chiffre pas le réseau.",
         "b": "Leurs rôles diffèrent."
       }
     },
@@ -347,7 +347,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Cela révélerait justement les secrets valides.",
         "c": "C’est la source de la fuite.",
-        "d": "Sans rapport."
+        "d": "Le chiffrement du disque n’influe pas sur la durée d’une comparaison de secret."
       }
     },
     "mzt-q38": {

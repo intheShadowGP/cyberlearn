@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "On définit d’abord ce qui peut être testé, comment et avec quel accord : rien ne commence sans cadre écrit.",
       "whyWrong": {
-        "a": "Ce n’est pas la première phase.",
-        "c": "Ce n’est pas la première phase.",
+        "a": "Exploiter immédiatement sans cadre dépasse l’autorisation donnée.",
+        "c": "Le rapport final est la dernière phase, pas la première.",
         "b": "Ce serait inacceptable."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une surface bien connue (machines, services, versions) évite les essais aléatoires et fait gagner du temps.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
+        "d": "Énumérer ne dispense pas de rapport : cela prépare les pistes.",
         "c": "Il faut rester dans le périmètre.",
-        "b": "Ce n’est pas le but."
+        "b": "L’énumération n’a pas pour but de réduire la durée à quelques minutes."
       }
     },
     "rpp-q3": {
@@ -79,8 +79,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les notes (commande, résultat, horodatage, capture) servent à reproduire une action et à rédiger ensuite le rapport.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but.",
+        "d": "Les notes ne servent pas à ralentir l’exercice.",
+        "c": "Elles ne remplacent pas la préparation préalable.",
         "b": "Elles servent le rapport."
       }
     },
@@ -89,9 +89,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Ces éléments rendent chaque action traçable et reproductible, et fournissent les preuves du rapport.",
       "whyWrong": {
-        "c": "Insuffisant.",
-        "a": "Insuffisant.",
-        "b": "Insuffisant."
+        "c": "Le nom de la cible seul ne permet pas de reproduire une action.",
+        "a": "Un jugement sur la difficulté n’est pas une trace exploitable.",
+        "b": "La liste des outils installés ne documente pas ce qui a été fait."
       }
     },
     "rpp-q11": {
@@ -99,7 +99,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "On fixe un temps maximum, puis on passe à autre chose si la piste n’a pas abouti, en notant ce qui reste à essayer.",
       "whyWrong": {
-        "b": "Ce n’est pas le principe.",
+        "b": "Le timeboxing ne consiste pas à tester toutes les pistes en même temps.",
         "a": "C’est le contraire.",
         "d": "Les pauses sont utiles."
       }
@@ -109,9 +109,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une piste qui consomme trop de temps coûte les autres : on y revient avec les idées nouvelles si le temps le permet.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "a": "Ce n’est pas la raison.",
-        "d": "Ce n’est pas la raison."
+        "b": "Changer de piste n’a pas pour but de prouver que la première était fausse.",
+        "a": "L’ordre alphabétique des cibles n’est pas un critère de choix.",
+        "d": "Changer de piste ne réduit pas les notes à rédiger : on consigne l’état de chaque piste."
       }
     },
     "rpp-q13": {
@@ -158,7 +158,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "C’est trop technique.",
         "a": "Il ne faut pas les reproduire.",
-        "b": "Ce n’est pas son contenu."
+        "b": "Le code source des outils n’a pas sa place dans un résumé exécutif."
       }
     },
     "rpp-q18": {
@@ -166,7 +166,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un constat décrit avec contexte, preuve et étapes permet de confirmer la faiblesse puis de vérifier la correction.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
+        "a": "La reproductibilité ne vise pas la longueur du rapport.",
         "c": "L’impact doit être décrit.",
         "d": "La méthode doit être décrite."
       }
@@ -176,9 +176,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le classement par gravité guide la priorité de correction. Le CVSS aide, nuancé par le contexte de l’organisation.",
       "whyWrong": {
-        "d": "Ce n’est pas pertinent.",
-        "c": "Ce n’est pas pertinent.",
-        "b": "Ce n’est pas pertinent."
+        "d": "L’ordre alphabétique ne reflète pas l’urgence des corrections.",
+        "c": "La date de découverte seule ne hiérarchise pas les risques.",
+        "b": "Le nombre de pages de preuve ne mesure pas la gravité."
       }
     },
     "rpp-q20": {
@@ -187,8 +187,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Elle précise quoi faire (paramétrage, mise à jour, restriction d’accès), par qui et dans quel ordre.",
       "whyWrong": {
         "d": "Inexploitable.",
-        "b": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle."
+        "b": "Critiquer les personnes ne produit pas une action de correction.",
+        "c": "Une liste de produits à acheter n’est pas une recommandation priorisée."
       }
     },
     "rpp-q21": {
@@ -235,9 +235,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un laboratoire isolé permet de manipuler et de casser sans conséquence en dehors de l’environnement prévu.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "c": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "d": "Isoler un laboratoire n’accélère pas les connexions Internet.",
+        "c": "L’isolation ne supprime pas le besoin d’instantanés.",
+        "a": "Isoler un laboratoire ne rend pas les machines invisibles à l’utilisateur."
       }
     },
     "rpp-q27": {
@@ -245,9 +245,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Après une manipulation hasardeuse ou un échec, on restaure l’instantané et on recommence.",
       "whyWrong": {
-        "b": "Ce n’est pas leur rôle.",
-        "c": "Ce n’est pas leur rôle.",
-        "a": "Ce n’est pas leur rôle."
+        "b": "Un instantané ne chiffre pas les disques.",
+        "c": "Il ne sert pas à supprimer les journaux.",
+        "a": "Il n’accélère pas le démarrage du système."
       }
     },
     "rpp-q28": {
@@ -301,7 +301,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’autorisation écrite précise le périmètre, la période et les méthodes : elle distingue un test professionnel d’une intrusion.",
       "whyWrong": {
-        "d": "Insuffisant.",
+        "d": "Un accord oral n’est pas une autorisation écrite et traçable.",
         "b": "Un forum ne peut pas autoriser.",
         "a": "Une bonne intention ne suffit pas."
       }

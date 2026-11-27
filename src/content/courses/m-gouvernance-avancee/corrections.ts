@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "C’est un budget, pas une perte.",
         "b": "C’est la perte maximale, non espérée.",
-        "d": "Sans rapport."
+        "d": "Le coût des audits de conformité n’est pas une espérance de perte annuelle."
       }
     },
     "mga-q3": {
@@ -110,8 +110,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Le cadre en six fonctions (gouverner, identifier, protéger, détecter, répondre, rétablir) donne un vocabulaire partagé et des niveaux de maturité compréhensibles par des non-spécialistes.",
       "whyWrong": {
         "a": "Il n’est pas certifiable.",
-        "c": "Ce n’est pas son format.",
-        "d": "Ce n’est pas son objet."
+        "c": "Un catalogue de 114 mesures détaillées est plus technique, pas un langage de dialogue avec la direction.",
+        "d": "Le NIST CSF n’est pas une méthode de chiffrement."
       }
     },
     "mga-q12": {
@@ -144,9 +144,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Si un seul prestataire porte plusieurs services critiques, sa défaillance paralyse l’organisation. On identifie ces dépendances et on prévoit des alternatives.",
       "whyWrong": {
-        "b": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition."
+        "b": "Le risque de concentration vient de la dépendance, pas du grand nombre de fournisseurs.",
+        "c": "Payer plusieurs fois une facture est une erreur de gestion, pas un risque de concentration.",
+        "d": "Utiliser un fournisseur local n’est pas en soi un risque de concentration."
       }
     },
     "mga-q16": {
@@ -154,9 +154,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les incidents se propagent par la chaîne : un sous-traitant du fournisseur peut détenir des données ou des accès. Le contrat doit encadrer la sous-traitance et la notification.",
       "whyWrong": {
-        "c": "Ce n’est pas leur rôle.",
-        "a": "Ils ne remplacent aucun audit.",
-        "b": "Ils peuvent y avoir accès."
+        "c": "Les sous-traitants de rang 2 ne signent pas les contrats à la place du fournisseur.",
+        "a": "Ils ne remplacent pas l’audit du fournisseur.",
+        "b": "Les sous-traitants peuvent avoir accès à nos données : c’est la raison de les cartographier."
       }
     },
     "mga-q17": {
@@ -164,9 +164,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La stratégie de sortie décrit comment poursuivre l’activité si le prestataire défaille ou si l’on rompt le contrat : réversibilité, données, transition, délais.",
       "whyWrong": {
-        "c": "Ce n’est pas un plan.",
-        "d": "Ce n’est pas son objet.",
-        "a": "Sans rapport."
+        "c": "La fin du contrat à l’échéance ne constitue pas un plan de sortie.",
+        "d": "Une clause de non-concurrence ne décrit pas comment changer de prestataire.",
+        "a": "Un audit de sortie de territoire n’est pas une stratégie de sortie."
       }
     },
     "mga-q18": {
@@ -174,9 +174,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "DORA impose de tenir un registre d’informations sur les accords contractuels avec les prestataires TIC, pour permettre à l’entité et aux autorités de suivre les dépendances.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "a": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Un registre de brevets n’est pas exigé par DORA pour les prestataires TIC.",
+        "a": "Un registre de visiteurs n’est pas concerné.",
+        "b": "Un registre de salariés en congé n’est pas concerné."
       }
     },
     "mga-q19": {
@@ -202,8 +202,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Des mesures automatiques (taux de postes corrigés, comptes sans second facteur) alimentent des tableaux de bord et fournissent des preuves régulières, plutôt qu’un contrôle ponctuel.",
       "whyWrong": {
         "b": "C’est un contrôle ponctuel.",
-        "d": "Ce n’est pas son objet.",
-        "c": "Ce n’est pas son objet."
+        "d": "La surveillance continue des contrôles ne vise pas à surveiller les salariés.",
+        "c": "Archiver sur papier n’est pas une surveillance continue."
       }
     },
     "mga-q22": {
@@ -223,7 +223,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "C’est une remarque mineure.",
         "b": "C’est une observation.",
-        "a": "Ce n’est pas un écart d’audit."
+        "a": "Un retard de livraison d’un fournisseur n’est pas un écart d’audit sur le système."
       }
     },
     "mga-q24": {
@@ -274,9 +274,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un seuil lié à l’appétit pour le risque transforme une mesure en signal : au-delà, la direction doit décider (accepter, traiter, arbitrer).",
       "whyWrong": {
-        "b": "Ce n’est pas son objet.",
-        "a": "Il suppose de mesurer.",
-        "c": "Il ne les remplace pas."
+        "b": "Un indicateur lié à l’appétit n’augmente pas automatiquement le budget.",
+        "a": "Il vise au contraire à mesurer.",
+        "c": "Il ne remplace pas les audits de conformité."
       }
     },
     "mga-q30": {
@@ -285,8 +285,8 @@ export const corrections: CourseCorrections = {
       "explanation": "NIS2 renforce la responsabilité des organes de direction : approbation des mesures, supervision, formation, et sanctions possibles selon les transpositions nationales.",
       "whyWrong": {
         "a": "Elle engage la direction.",
-        "c": "Ce n’est pas une conséquence prévue.",
-        "b": "Insuffisant."
+        "c": "NIS2 ne prévoit pas la suppression automatique du poste de RSSI.",
+        "b": "Un manquement grave n’entraîne pas une simple remarque orale sans suite."
       }
     },
     "mga-q31": {
@@ -341,9 +341,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un plan de reprise qui dépend d’éléments situés sur le site sinistré (annuaire, documentation, accès) échoue le jour J. Le test révèle ces dépendances cachées.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
-        "d": "Les sauvegardes restent nécessaires.",
-        "a": "Il le valide."
+        "c": "Tester la reprise ne vise pas à économiser des licences.",
+        "d": "Cela n’évite pas de faire des sauvegardes.",
+        "a": "Cela ne supprime pas le plan de reprise : cela le valide."
       }
     },
     "mga-q37": {
@@ -351,9 +351,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "La tolérance à l’impact fixe jusqu’où une activité critique peut être perturbée avant un préjudice inacceptable pour l’organisation ou ses clients. Elle guide les plans et les tests.",
       "whyWrong": {
-        "d": "C’est un autre sujet.",
-        "b": "Ce n’est pas la définition.",
-        "c": "Ce n’est pas la définition."
+        "d": "Le montant de l’assurance n’est pas la tolérance à l’impact.",
+        "b": "Le nombre de clients ne définit pas la tolérance à l’impact.",
+        "c": "Le coût de la reprise n’est pas la tolérance à l’impact."
       }
     },
     "mga-q38": {

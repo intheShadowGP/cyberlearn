@@ -11,7 +11,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "That is a password or code.",
         "c": "That is biometrics.",
-        "b": "That is not a factor category."
+        "b": "Location is a context signal, not one of the three classic categories of factor."
       }
     },
     "id-q2": {
@@ -59,7 +59,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "That is a password.",
         "d": "That is an object.",
-        "b": "That is not a factor category."
+        "b": "Location is a context signal, not a factor category like inherence."
       }
     },
     "id-q32": {
@@ -67,9 +67,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "If support can reset a factor on a simple call, an attacker uses it to take the account. The procedure must verify identity and use a temporary access.",
       "whyWrong": {
-        "a": "That is not the problem.",
-        "c": "That is not its effect.",
-        "b": "That is not its effect."
+        "a": "Account recovery is a problem not by its speed but by what it bypasses.",
+        "c": "It does not encrypt the account: it allows resetting a factor.",
+        "b": "It does not remove the password: it resets factors."
       }
     },
     "id-q33": {
@@ -131,7 +131,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "The token remains valid.",
         "b": "MFA no longer comes into play.",
-        "c": "Unrelated."
+        "c": "Consent does not depend on the day of the week."
       }
     },
     "id-q14": {
@@ -150,9 +150,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The authorization server sends the code back to this address. It must be registered in advance and compared exactly, otherwise the code can be diverted.",
       "whyWrong": {
-        "b": "That is not its role.",
-        "a": "That is not its role.",
-        "d": "That is not its role."
+        "b": "The redirect_uri parameter does not carry a password.",
+        "a": "The language is not set by this parameter.",
+        "d": "The token lifetime is not set by this parameter."
       }
     },
     "id-q35": {
@@ -162,7 +162,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "It is the opposite.",
         "a": "It does not impose it.",
-        "c": "Unrelated."
+        "c": "The implicit flow does not encrypt cookies."
       }
     },
     "id-q36": {
@@ -229,9 +229,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Over time, a role is created for each particular case. Roles become numerous and overlap: auditing rights becomes difficult.",
       "whyWrong": {
-        "d": "That is not the limit.",
-        "c": "Unrelated.",
-        "b": "Unrelated."
+        "d": "Many roles do not remove rights: they make them confusing.",
+        "c": "Encryption is not affected by the number of roles.",
+        "b": "Local Wi-Fi has nothing to do with roles."
       }
     },
     "id-q39": {
@@ -239,9 +239,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The decision point evaluates identity, device and context then instructs the enforcement point to allow or refuse the session.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "a": "Unrelated.",
-        "c": "Unrelated."
+        "b": "A wallpaper decides no access.",
+        "a": "A network cable carries data; it decides nothing.",
+        "c": "A printer decides no access."
       }
     },
     "id-q40": {
@@ -254,8 +254,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Arrival (joiner), move (mover) and departure (leaver) trigger the creation, adjustment and removal of rights.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
+        "a": "These words do not designate identity lifecycle events.",
+        "d": "Days of the week are not lifecycle events.",
         "b": "Those are applications."
       }
     },
@@ -274,9 +274,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An unused account is monitored by no one: an attacker who takes it goes unnoticed. Automatic disabling after inactivity reduces this risk.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "d": "That is not the reason.",
-        "c": "That is not the reason."
+        "b": "Electricity consumption is not the reason to remove them.",
+        "d": "A dormant account does not slow passwords.",
+        "c": "The law does not forbid keeping them: it is a risk matter."
       }
     },
     "id-q20": {
@@ -329,9 +329,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A short token expires quickly: if stolen, the window of exploitation is brief. A refresh token allows renewing it under control.",
       "whyWrong": {
-        "b": "That is not the goal.",
+        "b": "Limiting lifetime does not save bandwidth.",
         "d": "It does not remove MFA.",
-        "c": "That is not the goal."
+        "c": "A short token does not speed up authentication."
       }
     },
     "id-q26": {
@@ -339,9 +339,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Access is not judged just once at sign-in: a change of context (risky device, compromised account) can revoke the session in progress.",
       "whyWrong": {
-        "c": "That is not its purpose.",
-        "b": "That is not its purpose.",
-        "a": "That is not its purpose."
+        "c": "Continuous evaluation does not delete logging.",
+        "b": "It does not lengthen token lifetimes: it allows revoking them.",
+        "a": "It does not disable MFA."
       }
     },
     "id-q27": {

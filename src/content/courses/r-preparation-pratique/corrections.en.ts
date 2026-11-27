@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "We first define what may be tested, how and with whose agreement: nothing starts without a written framework.",
       "whyWrong": {
-        "a": "That is not the first phase.",
-        "c": "That is not the first phase.",
+        "a": "Exploiting immediately without a framework exceeds the authorization given.",
+        "c": "The final report is the last phase, not the first.",
         "b": "That would be unacceptable."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A well-known surface (machines, services, versions) avoids random attempts and saves time.",
       "whyWrong": {
-        "d": "That is not the goal.",
+        "d": "Enumerating does not remove the need for a report: it prepares leads.",
         "c": "You must stay in scope.",
-        "b": "That is not the goal."
+        "b": "Enumeration is not meant to cut the duration to a few minutes."
       }
     },
     "rpp-q3": {
@@ -77,8 +77,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Notes (command, result, timestamp, capture) are used to reproduce an action and then write the report.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "c": "That is not the goal.",
+        "d": "Notes are not meant to slow the exercise down.",
+        "c": "They do not replace prior preparation.",
         "b": "They feed the report."
       }
     },
@@ -87,9 +87,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "These elements make each action traceable and reproducible, and provide the report’s evidence.",
       "whyWrong": {
-        "c": "Insufficient.",
-        "a": "Insufficient.",
-        "b": "Insufficient."
+        "c": "The target’s name alone does not let you reproduce an action.",
+        "a": "A judgment about difficulty is not a usable trace.",
+        "b": "The list of installed tools does not document what was done."
       }
     },
     "rpp-q11": {
@@ -97,7 +97,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "We set a maximum time, then move on if the lead has not worked out, noting what remains to try.",
       "whyWrong": {
-        "b": "That is not the principle.",
+        "b": "Timeboxing does not mean testing all leads at the same time.",
         "a": "That is the opposite.",
         "d": "Breaks are useful."
       }
@@ -107,9 +107,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A lead that consumes too much time costs the others: you return to it with new ideas if time permits.",
       "whyWrong": {
-        "b": "That is not the reason.",
-        "a": "That is not the reason.",
-        "d": "That is not the reason."
+        "b": "Switching leads is not meant to prove the first was wrong.",
+        "a": "Alphabetical order of targets is not a selection criterion.",
+        "d": "Switching leads does not reduce notes: you record each lead’s state."
       }
     },
     "rpp-q13": {
@@ -155,7 +155,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "That is too technical.",
         "a": "They must not be reproduced.",
-        "b": "That is not its content."
+        "b": "The tools’ source code has no place in an executive summary."
       }
     },
     "rpp-q18": {
@@ -163,7 +163,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A finding described with context, proof and steps makes it possible to confirm the weakness and then verify the fix.",
       "whyWrong": {
-        "a": "That is not the goal.",
+        "a": "Reproducibility is not about the report’s length.",
         "c": "The impact must be described.",
         "d": "The method must be described."
       }
@@ -173,9 +173,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Ranking by severity guides fix priority. CVSS helps, nuanced by the organization’s context.",
       "whyWrong": {
-        "d": "That is not relevant.",
-        "c": "That is not relevant.",
-        "b": "That is not relevant."
+        "d": "Alphabetical order does not reflect how urgent fixes are.",
+        "c": "Discovery date alone does not rank risks.",
+        "b": "The number of pages of evidence does not measure severity."
       }
     },
     "rpp-q20": {
@@ -184,8 +184,8 @@ export const corrections: CourseCorrections = {
       "explanation": "It specifies what to do (setting, update, access restriction), by whom and in what order.",
       "whyWrong": {
         "d": "Unusable.",
-        "b": "That is not its role.",
-        "c": "That is not its role."
+        "b": "Criticizing people does not produce a corrective action.",
+        "c": "A list of products to buy is not a prioritized recommendation."
       }
     },
     "rpp-q21": {
@@ -232,9 +232,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "An isolated lab makes it possible to handle and break things with no consequence outside the intended environment.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "c": "That is not the goal.",
-        "a": "That is not the goal."
+        "d": "Isolating a lab does not speed up Internet connections.",
+        "c": "Isolation does not remove the need for snapshots.",
+        "a": "Isolating a lab does not make machines invisible to the user."
       }
     },
     "rpp-q27": {
@@ -242,9 +242,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "After a risky manipulation or a failure, you restore the snapshot and start again.",
       "whyWrong": {
-        "b": "That is not their role.",
-        "c": "That is not their role.",
-        "a": "That is not their role."
+        "b": "A snapshot does not encrypt disks.",
+        "c": "It is not used to delete logs.",
+        "a": "It does not speed up system startup."
       }
     },
     "rpp-q28": {
@@ -298,7 +298,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Written authorization specifies the scope, period and methods: it distinguishes a professional test from an intrusion.",
       "whyWrong": {
-        "d": "Insufficient.",
+        "d": "An oral agreement is not a written, traceable authorization.",
         "b": "A forum cannot authorize.",
         "a": "Good intentions are not enough."
       }
@@ -347,7 +347,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Prosecution, loss of reputation and exclusion are possible. An unauthorized test is never rewarded as of right.",
       "whyWrong": {
-        "a": "It is not rewarded."
+        "a": "An unauthorized test earns no reward: it exposes you to sanctions."
       }
     },
     "rpp-q39": {

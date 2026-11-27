@@ -43,9 +43,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Des robots testent en continu les adresses d’Internet à la recherche de services connus et d’identifiants par défaut. Un appareil exposé est trouvé en quelques minutes.",
       "whyWrong": {
-        "d": "Sans rapport.",
+        "d": "Les orages n’ont aucun lien avec les attaques sur Internet.",
         "c": "Les attaquants ciblent aussi les objets.",
-        "a": "Ce n’est pas le motif."
+        "a": "La bande passante consommée n’explique pas l’intérêt des attaquants."
       }
     },
     "iot-q32": {
@@ -53,9 +53,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une console UART ou JTAG permet de lire la mémoire, d’extraire le firmware ou d’obtenir un shell root. En production, on les désactive ou on les protège.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "d": "Sans rapport.",
-        "c": "Sans rapport."
+        "b": "La consommation d’énergie n’est pas la raison du verrouillage.",
+        "d": "Ces interfaces ne ralentissent pas le réseau local.",
+        "c": "Le protocole HTTP n’interdit rien sur les interfaces de débogage."
       }
     },
     "iot-q33": {
@@ -123,9 +123,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’émulation permet d’exécuter et d’observer un service dans un environnement contrôlé, sans bloquer un appareil physique, et de tester des cas limites.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "c": "L’émulation ne compresse pas le binaire.",
+        "a": "Elle ne chiffre pas le binaire.",
+        "b": "Publier un binaire n’est pas un objectif de l’émulation."
       }
     },
     "iot-q36": {
@@ -134,7 +134,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Une version ancienne d’un composant courant (BusyBox, OpenSSL, noyau) est rapprochée des vulnérabilités publiées : c’est le principe d’une analyse de composition.",
       "whyWrong": {
         "c": "Sans lien avec la sécurité.",
-        "b": "Insuffisant.",
+        "b": "Le fabricant de l’appareil ne dit rien des failles de la version de BusyBox.",
         "d": "Sans lien avec la sécurité."
       }
     },
@@ -204,8 +204,8 @@ export const corrections: CourseCorrections = {
       "explanation": "HTTPS protège le transport et authentifie le serveur ; si le serveur de distribution est compromis, il sert une image malveillante via HTTPS valide. La signature du fabricant, vérifiée par l’appareil, garantit l’origine de l’image elle-même.",
       "whyWrong": {
         "b": "HTTPS ne garantit pas l’origine de l’image.",
-        "c": "Ce n’est pas le but.",
-        "a": "Ce n’est pas le but."
+        "c": "Vérifier la signature n’accélère pas le téléchargement.",
+        "a": "La signature ne compresse pas l’image."
       }
     },
     "iot-q37": {
@@ -213,9 +213,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Une racine de confiance matérielle (ROM, clé publique en fusibles) ne peut pas être modifiée par un logiciel : elle ancre toute la chaîne de vérification.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "a": "Sans rapport.",
-        "c": "Sans rapport."
+        "d": "Une racine de confiance n’accélère pas la connexion sans fil.",
+        "a": "Elle ne remplace pas le mot de passe de l’utilisateur.",
+        "c": "Elle ne stocke pas les photographies de l’appareil."
       }
     },
     "iot-q38": {
@@ -223,9 +223,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Sur dix ans, une clé de signature peut être compromise ou expirer. Des clés de secours prévues dès la conception permettent de la remplacer sans rendre les appareils inutilisables.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "b": "Elles ne le suppriment pas.",
-        "a": "La signature reste nécessaire."
+        "d": "Des clés de secours ne doublent pas la vitesse de mise à jour.",
+        "b": "Elles n’enlèvent pas l’anti-retour : elles remplacent une clé compromise.",
+        "a": "Elles ne dispensent pas de signer les images."
       }
     },
     "iot-q39": {
@@ -260,8 +260,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un certificat par appareil permet de révoquer un seul équipement compromis et de l’identifier précisément, sans changer la flotte entière.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
+        "d": "Un certificat unique n’accélère pas la connexion.",
+        "b": "Il ne réduit pas la taille du firmware.",
         "c": "Au contraire, il permet le chiffrement."
       }
     },
@@ -280,9 +280,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un service joignable depuis Internet est détecté par des balayages continus. Mieux vaut des connexions sortantes initiées par l’objet vers un service qui l’authentifie.",
       "whyWrong": {
-        "b": "Ce n’est pas une conséquence.",
-        "d": "Ce n’est pas automatique.",
-        "a": "Ce n’est pas une conséquence."
+        "b": "Accepter des connexions entrantes ne réduit pas la consommation.",
+        "d": "Il ne chiffre pas automatiquement ses données.",
+        "a": "Une exposition n’empêche pas les mises à jour : elle augmente la surface d’attaque."
       }
     },
     "iot-q21": {
@@ -327,8 +327,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le SBOM liste les composants de chaque version. Lorsqu’une vulnérabilité est publiée, le fabricant repère tout de suite les produits concernés.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
+        "a": "Le SBOM ne chiffre pas le firmware.",
+        "c": "Il n’accélère pas le démarrage.",
         "d": "Il ne les remplace pas."
       }
     },
@@ -337,8 +337,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le chercheur informe le fabricant, convient d’un délai de correction puis publie les détails. Le but est de protéger les utilisateurs tout en informant le public.",
       "whyWrong": {
-        "d": "Ce n’est pas coordonné.",
-        "b": "Ce n’est pas une divulgation coordonnée.",
+        "d": "Tout publier immédiatement expose les utilisateurs avant le correctif.",
+        "b": "Vendre la faille au plus offrant n’est pas une divulgation coordonnée.",
         "c": "Elle doit finir par être traitée."
       }
     },
@@ -349,7 +349,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Les utilisateurs doivent être informés.",
         "a": "Cela nuit aux utilisateurs.",
-        "b": "Ce n’est pas réaliste."
+        "b": "Maintenir tous les services sans limite n’est pas tenable sans support."
       }
     },
     "iot-q28": {

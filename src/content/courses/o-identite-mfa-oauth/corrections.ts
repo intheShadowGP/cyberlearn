@@ -68,9 +68,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Si le support peut réinitialiser un facteur sur un simple appel, un attaquant s’en sert pour prendre le compte. La procédure doit vérifier l’identité et utiliser un accès temporaire.",
       "whyWrong": {
-        "a": "Ce n’est pas le problème.",
-        "c": "Ce n’est pas son effet.",
-        "b": "Ce n’est pas son effet."
+        "a": "La récupération de compte n’est pas gênante par sa vitesse mais par ce qu’elle contourne.",
+        "c": "Elle ne chiffre pas le compte : elle permet de réinitialiser un facteur.",
+        "b": "Elle ne supprime pas le mot de passe : elle réinitialise des facteurs."
       }
     },
     "id-q33": {
@@ -133,7 +133,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Le jeton reste valide.",
         "b": "La MFA n’intervient plus.",
-        "c": "Sans rapport."
+        "c": "Le consentement ne dépend pas du jour de la semaine."
       }
     },
     "id-q14": {
@@ -152,9 +152,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le serveur d’autorisation renvoie le code à cette adresse. Elle doit être enregistrée à l’avance et comparée exactement, sinon le code peut être détourné.",
       "whyWrong": {
-        "b": "Ce n’est pas son rôle.",
-        "a": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "b": "Le paramètre redirect_uri ne transporte pas de mot de passe.",
+        "a": "La langue n’est pas fixée par ce paramètre.",
+        "d": "La durée du jeton n’est pas fixée par ce paramètre."
       }
     },
     "id-q35": {
@@ -164,7 +164,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "C’est l’inverse.",
         "a": "Il ne l’impose pas.",
-        "c": "Sans rapport."
+        "c": "Le flux implicite ne chiffre pas les cookies."
       }
     },
     "id-q36": {
@@ -231,9 +231,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Avec le temps, on crée un rôle par cas particulier. Les rôles deviennent nombreux et se recoupent : l’audit des droits devient difficile.",
       "whyWrong": {
-        "d": "Ce n’est pas la limite.",
-        "c": "Sans rapport.",
-        "b": "Sans rapport."
+        "d": "Les rôles nombreux ne suppriment pas les droits : ils les rendent confus.",
+        "c": "Le chiffrement n’est pas concerné par le nombre de rôles.",
+        "b": "Le Wi-Fi local n’a aucun lien avec les rôles."
       }
     },
     "id-q39": {
@@ -241,9 +241,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le point de décision évalue l’identité, l’appareil et le contexte puis ordonne au point d’application d’autoriser ou de refuser la session.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "a": "Sans rapport.",
-        "c": "Sans rapport."
+        "b": "Un fond d’écran ne décide d’aucun accès.",
+        "a": "Un câble réseau transporte des données, il ne décide rien.",
+        "c": "Une imprimante ne décide d’aucun accès."
       }
     },
     "id-q40": {
@@ -256,8 +256,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’arrivée (joiner), la mobilité (mover) et le départ (leaver) déclenchent la création, l’ajustement et le retrait des droits.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
+        "a": "Ces mots ne désignent pas des événements du cycle de vie d’une identité.",
+        "d": "Les jours de la semaine ne sont pas des événements de cycle de vie.",
         "b": "Ce sont des applications."
       }
     },
@@ -276,9 +276,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un compte inutilisé n’est surveillé par personne : un attaquant qui le prend n’est pas remarqué. La désactivation automatique après inactivité réduit ce risque.",
       "whyWrong": {
-        "b": "Ce n’est pas la raison.",
-        "d": "Ce n’est pas la raison.",
-        "c": "Ce n’est pas la raison."
+        "b": "La consommation électrique n’est pas la raison de les supprimer.",
+        "d": "Un compte dormant ne ralentit pas les mots de passe.",
+        "c": "La loi n’interdit pas de les conserver : c’est une question de risque."
       }
     },
     "id-q20": {
@@ -332,9 +332,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un jeton court expire vite : s’il est volé, la fenêtre d’exploitation est brève. Un jeton de rafraîchissement permet de le renouveler sous contrôle.",
       "whyWrong": {
-        "b": "Ce n’est pas le but.",
+        "b": "Limiter la durée n’économise pas de bande passante.",
         "d": "Il ne supprime pas la MFA.",
-        "c": "Ce n’est pas le but."
+        "c": "Un jeton court n’accélère pas l’authentification."
       }
     },
     "id-q26": {
@@ -342,9 +342,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’accès n’est pas jugé une seule fois à la connexion : un changement de contexte (appareil à risque, compte compromis) peut révoquer la session en cours.",
       "whyWrong": {
-        "c": "Ce n’est pas son but.",
-        "b": "Ce n’est pas son but.",
-        "a": "Ce n’est pas son but."
+        "c": "L’évaluation continue ne supprime pas la journalisation.",
+        "b": "Elle n’allonge pas la durée des jetons : elle permet de les révoquer.",
+        "a": "Elle ne désactive pas la MFA."
       }
     },
     "id-q27": {

@@ -21,9 +21,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Email and browsing are the main attack vectors. If they run with an administration account, a single click can give the attacker these privileges.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "d": "That is not the goal.",
-        "c": "That is not the reason."
+        "b": "The goal is not to have two mailboxes.",
+        "d": "A separate account does not bypass multifactor authentication.",
+        "c": "The directory does not require a separate account by default: it is good practice."
       }
     },
     "pam-q3": {
@@ -56,9 +56,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A built-in account, often with the same password on several machines, allows moving from one workstation to another. It must have a unique password and be monitored.",
       "whyWrong": {
-        "a": "That is not the reason.",
-        "d": "That is not the reason.",
-        "c": "That is not the reason."
+        "a": "The local account does not slow the network.",
+        "d": "It does not consume a license.",
+        "c": "Its visibility on screen is not why it is monitored."
       }
     },
     "pam-q32": {
@@ -67,8 +67,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The inventory is built from technical sources: members of privileged groups, cloud console roles, local accounts, service accounts.",
       "whyWrong": {
         "a": "Incomplete and inaccurate.",
-        "c": "Unrelated.",
-        "b": "Unrelated."
+        "c": "Job postings do not list real accounts.",
+        "b": "Sales brochures do not reflect the accounts in place."
       }
     },
     "pam-q5": {
@@ -76,9 +76,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The bastion centralizes administration access: strong authentication, control of who accesses what, logging and often session recording. Administered systems accept connections only from it.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "d": "That is not its role.",
-        "b": "That is not its role."
+        "a": "A bastion does not replace the antivirus.",
+        "d": "It does not host the company’s public website.",
+        "b": "It does not store backups."
       }
     },
     "pam-q6": {
@@ -116,7 +116,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "That would be a serious mistake.",
         "c": "That would be a serious mistake.",
-        "d": "That is not its role."
+        "d": "The vault does not delete accounts: it protects secrets."
       }
     },
     "pam-q34": {
@@ -124,9 +124,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The bastion concentrates access: if compromised, the attacker reaches everything it administers. It is therefore administered from the highest tier, with MFA and monitoring.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "It must not be.",
-        "b": "It does log."
+        "a": "Electricity consumption is not the reason to protect it.",
+        "d": "A bastion must not be accessible to the general public.",
+        "b": "A bastion logs: that is one of its roles."
       }
     },
     "pam-q9": {
@@ -227,7 +227,7 @@ export const corrections: CourseCorrections = {
       "explanation": "An auditor relies on dated, verifiable evidence produced as you go: extracted list, manager’s decisions, traced removals.",
       "whyWrong": {
         "c": "A capture only proves a state.",
-        "d": "Not verifiable.",
+        "d": "An oral statement is not verifiable evidence.",
         "a": "No evidence."
       }
     },
@@ -269,9 +269,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "An attacker who takes control of a server can erase its local logs. A centralized copy makes it possible to detect and reconstruct the incident.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "d": "That is not the goal.",
-        "a": "That is not the goal."
+        "b": "Centralizing logs does not reduce the number of users.",
+        "d": "It does not remove passwords.",
+        "a": "It does not speed up the directory."
       }
     },
     "pam-q20": {
@@ -314,9 +314,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The model separates accounts and machines by their level of control (directory, servers, workstations) so that a theft of credentials on one tier does not give access to the higher tier.",
       "whyWrong": {
-        "d": "That is not the definition.",
-        "c": "That is not the definition.",
-        "a": "That is not the definition."
+        "d": "Tiering does not rank employees by seniority.",
+        "c": "It does not split the budget.",
+        "a": "It does not sort passwords by length."
       }
     },
     "pam-q25": {
@@ -325,8 +325,8 @@ export const corrections: CourseCorrections = {
       "explanation": "A common local password lets an attacker move from workstation to workstation. A unique password per machine, renewed automatically, limits this movement.",
       "whyWrong": {
         "c": "That is the weakness to avoid.",
-        "d": "That is not the goal.",
-        "b": "That is not the goal."
+        "d": "LAPS does not disable local accounts: it rotates their password.",
+        "b": "LAPS does not delete the directory."
       }
     },
     "pam-q26": {
@@ -334,9 +334,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Any directory user can request a service ticket for this account and try to crack its password offline. The defense: very long passwords or gMSA.",
       "whyWrong": {
-        "a": "That is not this risk.",
-        "d": "That is not this risk.",
-        "b": "That is not this risk."
+        "a": "A service account does not encrypt disks.",
+        "d": "It does not shut down the domain controller.",
+        "b": "It does not change the network’s clock."
       }
     },
     "pam-q27": {

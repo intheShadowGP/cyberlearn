@@ -11,7 +11,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Tools are not enough without decisions.",
         "d": "It concerns the whole organization.",
-        "c": "That is not an objective."
+        "c": "Banning the Internet is not governing: it is a restriction without steering."
       }
     },
     "mgi-q2": {
@@ -29,9 +29,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A service that can no longer be used puts availability at stake, even if the data remains intact and secret.",
       "whyWrong": {
-        "b": "Nothing was disclosed.",
-        "a": "Nothing was modified.",
-        "d": "It is not the objective affected."
+        "b": "Confidentiality concerns unauthorized access, not unavailability.",
+        "a": "Integrity concerns the accuracy of data, not its accessibility.",
+        "d": "Traceability concerns keeping evidence, not availability."
       }
     },
     "mgi-q4": {
@@ -41,7 +41,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "The document remains accessible.",
         "c": "Nothing was disclosed.",
-        "a": "It is not a security objective."
+        "a": "Archiving concerns keeping information, not protecting it from unauthorized changes."
       }
     },
     "mgi-q5": {
@@ -74,9 +74,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A risk is the possibility that an event occurs and causes damage. It is described by its likelihood and severity.",
       "whyWrong": {
-        "a": "An installed virus is already an incident.",
-        "d": "It is a nuisance, not a risk in itself.",
-        "c": "Unrelated."
+        "a": "An installed virus is an incident, not the definition of a risk.",
+        "d": "A forgotten password is an event, not the notion of risk.",
+        "c": "A purchase cost is not a security risk."
       }
     },
     "mgi-q9": {
@@ -142,7 +142,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The charter informs everyone of what is allowed, forbidden and expected: use of resources, passwords, incident reporting.",
       "whyWrong": {
         "c": "It replaces no tool.",
-        "d": "Unrelated.",
+        "d": "Calculating salaries has nothing to do with the charter.",
         "b": "It encrypts nothing."
       }
     },
@@ -161,9 +161,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A rule that is too complicated or unrealistic gets bypassed. It must be clear, justified and feasible in day-to-day work.",
       "whyWrong": {
-        "d": "That is not the goal.",
-        "b": "That is not the goal.",
-        "a": "That is not the goal."
+        "d": "A security rule is not meant to keep teams busy.",
+        "b": "Reducing headcount is not the purpose of a security rule.",
+        "a": "A rule is not meant to avoid checks: it makes them easier."
       }
     },
     "mgi-q18": {
@@ -171,9 +171,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "They define and enforce the policy, track risks and report to management. They rely on the technical teams without replacing them.",
       "whyWrong": {
-        "a": "That is not their role.",
-        "d": "That is not their role.",
-        "c": "That is not their role."
+        "a": "Repairing printers is support, not information security.",
+        "d": "Recruiting is human resources.",
+        "c": "Payroll is not part of information security."
       }
     },
     "mgi-q19": {
@@ -206,9 +206,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Not all data has the same value or risks. Classification links each level to rules: access, storage, encryption, destruction.",
       "whyWrong": {
-        "b": "That is not the goal.",
-        "d": "That is not the goal.",
-        "c": "That is not the goal."
+        "b": "Alphabetical sorting does not protect data.",
+        "d": "Classifying data is not meant to delete it.",
+        "c": "Classifying does not mean making everything public."
       }
     },
     "mgi-q23": {
@@ -226,9 +226,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The General Data Protection Regulation frames the collection and use of personal data and requires security measures adapted to the risk.",
       "whyWrong": {
-        "a": "That is not its subject.",
+        "a": "The GDPR does not protect only industrial secrets.",
         "c": "It covers all personal data.",
-        "b": "That is not its subject."
+        "b": "It does not protect software against copying."
       }
     },
     "mgi-q25": {
@@ -266,9 +266,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Phishing exploits trust and urgency to push you to click, open a file or give a password. People are the target, hence the importance of awareness.",
       "whyWrong": {
-        "b": "It is not an attack.",
-        "c": "It is not an attack.",
-        "d": "It is not an attack."
+        "b": "A cut cable is a failure, not an attack entry point.",
+        "c": "A power cut is an availability incident.",
+        "d": "A badly adjusted screen is not an entry point."
       }
     },
     "mgi-q30": {
@@ -286,9 +286,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Attackers’ methods change and good reflexes fade. Short, regular formats maintain vigilance.",
       "whyWrong": {
-        "c": "That is not the goal.",
-        "d": "The law does not forbid forgetting.",
-        "b": "It complements the tools without replacing them."
+        "c": "Awareness is not meant to fill calendars.",
+        "d": "No law forbids “forgetting”: the point is that threats evolve.",
+        "b": "It does not replace security tools: it complements them."
       }
     },
     "mgi-q32": {
@@ -334,9 +334,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A disconnected copy cannot be encrypted or deleted by ransomware that has reached the network: it allows recovery without paying.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "c": "Unrelated.",
-        "a": "Unrelated."
+        "d": "A backup does not speed up the Internet connection.",
+        "c": "It does not replace passwords.",
+        "a": "It does not encrypt email."
       }
     },
     "mgi-q37": {
@@ -344,9 +344,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Logs, messages and copies make it possible to identify the cause, the extent and the data affected, and to learn lessons.",
       "whyWrong": {
-        "a": "That is not the goal.",
-        "b": "That is not the goal.",
-        "d": "That is not the goal."
+        "a": "Filling disk space is not a goal.",
+        "b": "Traces are not meant to punish but to understand.",
+        "d": "Keeping traces does not delay recovery: it informs it."
       }
     },
     "mgi-q38": {

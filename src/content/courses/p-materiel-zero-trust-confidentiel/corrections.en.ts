@@ -11,7 +11,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "That is the perimeter model Zero Trust abandons.",
         "c": "That is the opposite of the goal.",
-        "d": "Insufficient and unrelated to the principle."
+        "d": "Encrypting only data at rest leaves access unverified; Zero Trust verifies every access."
       }
     },
     "mzt-q2": {
@@ -55,9 +55,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Secure Boot verifies the signature of each boot stage (firmware, loader, kernel) and prevents an untrusted component from running, founding the chain of trust.",
       "whyWrong": {
-        "d": "That is not its role.",
-        "a": "That is not its role.",
-        "b": "That is not its role."
+        "d": "Secure Boot does not encrypt network traffic.",
+        "a": "It does not make boot faster: it adds checks.",
+        "b": "It does not assign IP addresses: that is DHCP’s role."
       }
     },
     "mzt-q7": {
@@ -67,7 +67,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "That is storage encryption.",
         "b": "That is the role of TLS.",
-        "a": "Unrelated."
+        "a": "Confidential computing does not protect against physical cable cuts."
       }
     },
     "mzt-q8": {
@@ -125,8 +125,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Byzantine fault tolerance lets a distributed system stay correct even if some participants are faulty or malicious and broadcast contradictory information.",
       "whyWrong": {
         "b": "Too restrictive.",
-        "c": "Unrelated.",
-        "a": "Unrelated."
+        "c": "Disk encryption does not handle malicious participants.",
+        "a": "Byzantine tolerance does not speed up the network: it guarantees agreement despite faults."
       }
     },
     "mzt-q14": {
@@ -134,9 +134,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Homomorphic encryption makes it possible to perform computations directly on encrypted data, without decrypting it: the result, once decrypted, is correct. Useful to process sensitive data without exposing it.",
       "whyWrong": {
-        "b": "That is not its purpose.",
+        "b": "Homomorphic encryption is rather slower, not faster.",
         "a": "Keys are still needed.",
-        "d": "That is not its purpose."
+        "d": "It does not compress data."
       }
     },
     "mzt-q15": {
@@ -166,8 +166,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The machine sends signed measurements of its boot: the verifier only entrusts it with secrets if its state matches a known reference value.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "c": "That is not its role.",
+        "a": "Attestation backs up no files.",
+        "c": "It does not speed up exchanges: it proves the machine’s state.",
         "d": "It does not replace updates."
       }
     },
@@ -176,8 +176,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The verifier receives the signed measurements, compares them to the reference values and decides whether or not to release access to secrets.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "c": "Unrelated.",
+        "b": "A network printer does not compare attestation measurements.",
+        "c": "The mail server is not the verifier.",
         "a": "It is the attested party."
       }
     },
@@ -186,7 +186,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Without rollback protection, an attacker would install an old version whose defects are known. A non-resettable version counter forbids it.",
       "whyWrong": {
-        "d": "Unrelated.",
+        "d": "Rollback protection does not reduce the file’s size.",
         "a": "That is precisely what is being avoided.",
         "c": "The signature remains essential."
       }
@@ -222,8 +222,8 @@ export const corrections: CourseCorrections = {
       "explanation": "By default, an unknown state is refused: no secret is entrusted and an investigation follows (legitimate update not referenced, or tampering).",
       "whyWrong": {
         "b": "That would void the protection.",
-        "c": "Unrelated to verification.",
-        "d": "Unrelated to verification."
+        "c": "Erasing its references solves nothing: it prevents any verification.",
+        "d": "Restarting the mail server has no link with attestation."
       }
     },
     "mzt-q24": {
@@ -233,7 +233,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "It prevents nothing.",
         "d": "An attacker could modify it.",
-        "b": "It is not an integrity control."
+        "b": "A manual backup does not prevent installing an older version."
       }
     },
     "mzt-q25": {
@@ -241,8 +241,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "An adversary can copy encrypted exchanges today, protected with current asymmetric algorithms, and decrypt them once a quantum computer is available: “harvest now, decrypt later”.",
       "whyWrong": {
-        "c": "That is not the problem.",
-        "d": "Unrelated.",
+        "c": "Quantum computers do not slow all encryption: they mainly threaten public-key cryptography.",
+        "d": "Passwords will not be deleted by the quantum threat.",
         "a": "It stays safe with long enough keys."
       }
     },
@@ -251,8 +251,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "You can only migrate what you know: an inventory of algorithms, key lengths, protocols and confidentiality lifetimes is the starting point.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "a": "Unrelated.",
+        "d": "Office supplies have no link with cryptographic migration.",
+        "a": "Old log files do not describe the algorithms in place.",
         "b": "Such a list must never be compiled."
       }
     },
@@ -262,7 +262,7 @@ export const corrections: CourseCorrections = {
       "explanation": "An agile system negotiates or configures its algorithms: it can move to a post-quantum algorithm or drop a weakened one without a major redesign.",
       "whyWrong": {
         "b": "Security never relies on the secrecy of the algorithm.",
-        "d": "That is not a security principle.",
+        "d": "Encrypting twice with the same key adds no agility: agility is being able to change algorithms.",
         "c": "That is the opposite."
       }
     },
@@ -311,7 +311,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The decision takes into account identity, device state, place and risk at the time of the request, and can change during the session.",
       "whyWrong": {
         "d": "That is a static rule.",
-        "a": "Unrelated.",
+        "a": "A list of passwords is not a dynamic access policy.",
         "b": "It ignores context."
       }
     },
@@ -331,7 +331,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The TPM is tied to a machine (boot measurements, local keys). The HSM is a dedicated module that generates and keeps a service’s keys and performs operations without exposing them.",
       "whyWrong": {
         "c": "Both are hardware.",
-        "a": "That is not their role.",
+        "a": "The TPM does not assign addresses and the HSM does not encrypt the network.",
         "b": "Their roles differ."
       }
     },
@@ -347,7 +347,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "That would reveal valid secrets.",
         "c": "That is the source of the leak.",
-        "d": "Unrelated."
+        "d": "Disk encryption does not affect the duration of a secret comparison."
       }
     },
     "mzt-q38": {
