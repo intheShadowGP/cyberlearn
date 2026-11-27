@@ -149,8 +149,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Offense and defense work together: each technique is replayed within an authorized framework, the detection result is noted and the gaps become work items.",
       "whyWrong": {
         "b": "An exercise always takes place with authorization.",
-        "d": "It is not a financial audit.",
-        "a": "It is not an office-software training."
+        "d": "A financial audit is not a Purple Team exercise.",
+        "a": "Office software training is not a Purple Team exercise."
       }
     },
     "ida-q16": {
@@ -337,9 +337,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A high MTTD indicates attacks seen late: we invest in sources, rules and hunting. An indicator only has value if it informs a decision.",
       "whyWrong": {
-        "c": "Unrelated to the decision.",
-        "b": "Unrelated to detection.",
-        "d": "Unrelated to detection."
+        "c": "The dashboard color is not guided by MTTD.",
+        "b": "The price of office licenses is not guided by MTTD.",
+        "d": "The number of meeting rooms has no link with MTTD."
       }
     },
     "ida-q36": {

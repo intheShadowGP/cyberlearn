@@ -77,8 +77,8 @@ export const questions: Question[] = [
     "placeholder": "sigle"
   },
   {
-    "id": "hunt-q5",
-    "prompt": "Selon la pyramide de la douleur, quel type d’indicateur est le plus coûteux à changer pour l’attaquant ?",
+    "id": "hunt-q41",
+    "prompt": "Pourquoi une empreinte de fichier est-elle un indicateur fragile pour la chasse ?",
     "skills": [
       "i-hunt-method"
     ],
@@ -87,19 +87,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Les TTP des attaquants"
+        "text": "Il suffit à l’attaquant de modifier le fichier pour changer son empreinte"
       },
       {
         "id": "b",
-        "text": "Les empreintes de fichiers"
+        "text": "Elle ne peut jamais être comparée à une base de renseignement sur les menaces"
       },
       {
         "id": "c",
-        "text": "Les noms de domaine"
+        "text": "Elle est modifiée automatiquement par l’antivirus de chaque poste du parc"
       },
       {
         "id": "d",
-        "text": "Les adresses IP"
+        "text": "Elle ne s’applique qu’aux fichiers de plus d’un gigaoctet de taille"
       }
     ]
   },

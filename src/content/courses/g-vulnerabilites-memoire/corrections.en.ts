@@ -4,14 +4,14 @@ import type { CourseCorrections } from '../../types';
 export const corrections: CourseCorrections = {
   courseId: "g-vulnerabilites-memoire",
   questions: {
-    "mem-q1": {
+    "mem-q41": {
       "type": "single",
       "correct": "c",
-      "explanation": "Local (non-static) variables live in the function’s stack frame, created at the call and destroyed at the return. The heap receives dynamic allocations.",
+      "explanation": "The return address sits on the stack, right after the local variables: by overwriting it, the attacker chooses where the program resumes execution.",
       "whyWrong": {
-        "b": "The heap receives dynamic allocations (malloc).",
-        "a": "The code segment contains the instructions.",
-        "d": "The instruction register holds the address of the current instruction."
+        "a": "An overflow deletes no file by itself.",
+        "d": "It does not disable the system: it acts on the program’s memory.",
+        "b": "It is not limited to memory consumption: it corrupts neighboring data."
       }
     },
     "mem-q2": {
@@ -282,9 +282,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The attacker triggers many allocations containing their data so that a use-after-free or an overflow lands on controlled content, despite address randomization.",
       "whyWrong": {
-        "c": "It is not a mass freeing.",
-        "a": "It is not load balancing.",
-        "d": "It is not about encryption."
+        "c": "Heap spraying does not free memory: it fills the heap with chosen objects.",
+        "a": "It does not balance load across heaps: it places controlled data at predictable addresses.",
+        "d": "It does not encrypt blocks: it floods the heap with attacker-controlled content."
       }
     },
     "mem-q32": {

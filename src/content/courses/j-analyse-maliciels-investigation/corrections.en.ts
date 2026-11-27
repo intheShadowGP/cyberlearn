@@ -28,7 +28,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "The analysis sheds light on the impact, the extent of the compromise and the means to contain the spread.",
       "whyWrong": {
-        "d": "Unrelated distractor."
+        "d": "The weather has nothing to do with analyzing a sample."
       }
     },
     "ami-q31": {
@@ -137,7 +137,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "No administrator password is in a sample.",
         "d": "Strings describe the file, not the analyst.",
-        "a": "This is not usable data."
+        "a": "The author’s birth date does not appear in an executable’s strings."
       }
     },
     "ami-q36": {
@@ -220,9 +220,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "We record the files created or modified, the persistence installed (registry, tasks, services) and the network communications, to draw indicators from them.",
       "whyWrong": {
-        "c": "Unrelated to behavior.",
-        "b": "Unrelated to the analysis.",
-        "a": "Unrelated to the malware’s behavior."
+        "c": "The screen’s color is not a behavior of the sample.",
+        "b": "The weather has no link with the sample’s execution.",
+        "a": "The number of pages printed is not a behavior of the sample."
       }
     },
     "ami-q39": {

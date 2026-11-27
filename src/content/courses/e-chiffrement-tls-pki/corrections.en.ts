@@ -255,7 +255,7 @@ export const corrections: CourseCorrections = {
       "explanation": "With mTLS, the client also presents a certificate that the server verifies: it is used between services, for sensitive APIs or remote access, so that only identified clients can connect. The management of client certificates (issuance, revocation) must be automated.",
       "whyWrong": {
         "d": "It is not a double session key.",
-        "a": "It is not certificate sharing.",
+        "a": "Sharing one certificate across servers is not mutual TLS: mTLS authenticates both sides.",
         "c": "It is not a coexistence of versions."
       }
     },
@@ -355,7 +355,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Algorithms age (MD5, SHA-1, RSA soon): an agile system identifies them by parameters, isolates them behind a library and keeps an inventory, so that a migration (for example to post-quantum) is a planned operation rather than a rewrite.",
       "whyWrong": {
-        "b": "It is not about performance.",
+        "b": "Speed of encryption is not agility: agility is being able to swap algorithms.",
         "a": "It is not about encrypting several times.",
         "c": "Key rotation is another practice."
       }

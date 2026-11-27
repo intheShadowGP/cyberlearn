@@ -21,10 +21,7 @@ export const bank: BankItem[] = [
     e: 'STIX (Structured Threat Information Expression) describes intelligence objects; TAXII (Trusted Automated Exchange of Intelligence Information) carries them between platforms.' },
 
   // --- Hunting method ---
-  { id: 'hunt-q5', t: 'single', d: 2, s: ['i-hunt-method'], p: 'According to the pyramid of pain, which type of indicator is the most costly for the attacker to change?',
-    o: ['The attackers’ TTPs', 'File hashes', 'IP addresses', 'Domain names'],
-    e: 'Changing a hash, an address or a domain costs the attacker little. Changing their techniques forces them to relearn, develop other tools and take risks: it is the top of the pyramid.',
-    w: { 1: 'A hash changes as soon as one byte of the file is modified.', 2: 'An IP address is easily replaced.', 3: 'A domain is simply replaced.' } },
+  { "id":"hunt-q41","t":"single","d":2,"s":["i-hunt-method"],"p":"Why is a file hash a fragile indicator for hunting?","o":["The attacker only needs to modify the file to change its hash","It can never be compared with a threat intelligence base","It applies only to files larger than one gigabyte in size","It is automatically modified by the antivirus on every workstation"],"e":"Changing a single byte changes the hash: the attacker renews it effortlessly. Behaviors and techniques are costlier to change, hence more durable for detection.","w":{"1":"A hash is easily compared with an intelligence base; its fragility lies elsewhere.","2":"File size has nothing to do with the indicator’s fragility.","3":"The antivirus does not modify hashes: it uses them."} },
   { id: 'hunt-q6', t: 'multi', d: 2, s: ['i-hunt-method'], p: 'Which elements characterize a good hunting hypothesis?', k: 3,
     o: ['It can be verified with available data', 'It relies on a precise technique or intelligence', 'It produces a documented result even if nothing is found', 'It is vague enough to cover every attack'],
     e: 'A good hypothesis is precise, tied to a technique or intelligence, verifiable with the available data, and its verification is documented whatever the result.',
@@ -142,7 +139,7 @@ export const bank: BankItem[] = [
   { id: 'hunt-q36', t: 'single', d: 2, s: ['i-hunt-programme'], p: 'What does “dwell time” refer to?',
     o: ['The attacker’s presence before detection', 'The retention period of the logs', 'The processing time of a ticket', 'The duration of a user session'],
     e: 'Dwell time measures how long an attacker stays in the system before being detected. Hunting and better detection aim to reduce it, therefore limiting the impact.',
-    w: { 1: 'It is a logging parameter.', 2: 'It is a ticket-management indicator.', 3: 'It is not a security indicator.' } },
+    w: { 1: 'It is a logging parameter.', 2: 'It is a ticket-management indicator.', 3: 'The duration of a user session is not dwell time.' } },
   { id: 'hunt-q37', t: 'short', d: 2, s: ['i-hunt-programme'], p: 'Which free MITRE tool lets you visualize the ATT&CK coverage of your detections?', a: ['attack navigator', 'att&ck navigator', 'navigator', 'mitre attack navigator', 'mitre att&ck navigator'], ph: 'tool name',
     e: 'ATT&CK Navigator colors techniques according to detection coverage: weak zones are spotted to choose the next hunt or the next rule.' },
   { id: 'hunt-q38', t: 'multi', d: 3, s: ['i-hunt-programme'], p: 'Which indicators measure the value of a hunting program?', k: 3,

@@ -332,7 +332,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "A proof must on the contrary be verifiable.",
         "c": "The goal is not to make the message unreadable.",
-        "a": "It is not about password storage."
+        "a": "A zero-knowledge proof does not replace the password with a hash kept on the server."
       }
     },
     "cea-q37": {

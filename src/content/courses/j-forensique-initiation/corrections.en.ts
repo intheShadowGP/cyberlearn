@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "A digital investigation reconstructs the facts from traces: what, when, how and sometimes who. It relies on a method that guarantees the value of the evidence.",
       "whyWrong": {
         "d": "Hardware price says nothing about an incident.",
-        "a": "Unrelated to establishing the facts.",
+        "a": "The color of cables does not interest a digital investigation.",
         "b": "Headcount is not the subject of the investigation."
       }
     },
@@ -19,7 +19,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "It is used to understand an intrusion, a data leak, a fraud or a dispute, that is, whenever facts must be established from digital traces.",
       "whyWrong": {
-        "d": "Unrelated to an incident.",
+        "d": "Choosing a wallpaper has nothing to do with forensics.",
         "a": "Buying hardware requires no investigation.",
         "c": "A meeting is not an investigation."
       }
@@ -58,7 +58,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "It establishes the facts, their date and their mechanism. It does not concern financial forecasts.",
       "whyWrong": {
-        "c": "Unrelated to the investigation."
+        "c": "A digital investigation does not predict the stock market."
       }
     },
     "jfi-q7": {
@@ -239,8 +239,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Creation and modification dates, author, device: this data describes the file and helps trace its history.",
       "whyWrong": {
         "a": "Metadata describes the content without reproducing it.",
-        "d": "It is not malware.",
-        "c": "It is not a copy."
+        "d": "Metadata is not a virus: it is information about the file.",
+        "c": "Metadata is not a security backup."
       }
     },
     "jfi-q26": {
@@ -248,7 +248,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Prefetch files keep the trace of a program’s execution, with the number of executions and the last dates.",
       "whyWrong": {
-        "c": "Unrelated to execution.",
+        "c": "The wallpaper keeps no trace of execution.",
         "a": "An empty recycle bin is not an execution trace.",
         "b": "A screensaver does not record executions."
       }

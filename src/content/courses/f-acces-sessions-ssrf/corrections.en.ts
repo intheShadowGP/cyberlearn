@@ -119,7 +119,7 @@ export const corrections: CourseCorrections = {
       "explanation": "169.254.169.254 is the address of the metadata service of the major cloud providers; it is reachable from the instance. It can deliver the temporary credentials of the instance’s role, hence compromises of entire cloud accounts.",
       "whyWrong": {
         "b": "The slowdown is a minor effect, unrelated to the danger.",
-        "d": "This is not a display problem.",
+        "d": "A style-sheet display error has nothing to do with a metadata request.",
         "a": "It is not routable on the Internet, but it is from the server, which is precisely the problem."
       }
     },

@@ -16,7 +16,7 @@ export const bank: BankItem[] = [
   { id: 'exec-q3', t: 'single', d: 2, s: ['a-comp'], p: 'Qu’est-ce que le langage assembleur ?',
     o: ['Une écriture lisible des instructions machine du processeur', 'Un langage de haut niveau indépendant du matériel', 'Un format de compression de fichiers exécutables', 'Un protocole d’échange entre un client et un serveur de fichiers distant'],
     e: 'L’assembleur écrit chaque instruction machine sous forme de mnémonique (`mov`, `add`, `call`…). Il dépend de l’architecture du processeur, d’où ses variantes (x86-64, ARM).',
-    w: { 1: 'L’assembleur est de bas niveau et dépend du processeur.', 2: 'Ce n’est pas un format de compression.', 3: 'Ce n’est pas un protocole réseau.' } },
+    w: { 1: 'L’assembleur est de bas niveau et dépend du processeur.', 2: 'Ce n’est pas un format de compression.', 3: 'Un protocole d’échange est tout autre chose que le langage assembleur.' } },
   { id: 'exec-q4', t: 'truefalse', d: 2, s: ['a-comp'], p: 'Un exécutable compilé contient toujours le code source original, ce qui permet de le relire à volonté.', v: false,
     e: 'La compilation produit des instructions machine ; le code source n’y figure pas. On peut seulement le reconstituer approximativement par désassemblage ou décompilation, en perdant noms et commentaires.' },
   { id: 'exec-q5', t: 'single', d: 2, s: ['a-comp'], p: 'Quelle différence existe-t-il entre l’édition de liens statique et dynamique ?',

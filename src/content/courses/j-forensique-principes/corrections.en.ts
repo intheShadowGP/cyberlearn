@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An office application launching a command interpreter is a classic pattern of execution through a booby-trapped document. The parent-child relationship is a strong clue, to be confirmed with the command line and context.",
       "whyWrong": {
-        "c": "This is not usual behavior.",
-        "b": "Parentage is, on the contrary, very informative.",
-        "d": "An application can have child processes."
+        "c": "Word does not always launch PowerShell: such a chain is abnormal.",
+        "b": "The parent matters a great deal when judging a process.",
+        "d": "A Word process can have children: it is their nature that is suspicious."
       }
     },
     "for-q20": {

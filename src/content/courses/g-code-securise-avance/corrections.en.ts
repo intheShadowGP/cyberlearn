@@ -107,9 +107,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The harness links the fuzzer to the targeted API: it receives a byte array and calls the parsing function, with no state shared between calls.",
       "whyWrong": {
-        "c": "It is not hardware.",
+        "c": "A harness is code, not a piece of hardware.",
         "a": "The report is the result, not the harness.",
-        "b": "It is not a compilation option."
+        "b": "A compiler configuration file is not a fuzzing harness."
       }
     },
     "gca-q13": {
@@ -328,9 +328,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The Secure Software Development Framework describes practices to build into the development cycle (prepare, protect, produce well-secured code, respond to vulnerabilities).",
       "whyWrong": {
-        "c": "It is not a tool.",
-        "d": "It is not a format.",
-        "b": "It is not an encryption standard."
+        "c": "The SSDF is a framework of practices, not a static analysis tool.",
+        "d": "The SSDF is not a format for exchanging test results.",
+        "b": "The SSDF is not a file-encryption standard."
       }
     },
     "gca-q36": {

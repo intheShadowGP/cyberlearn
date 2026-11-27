@@ -92,7 +92,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "It is not a matter of cost.",
         "c": "This limit does not exist.",
-        "a": "Unrelated to speed."
+        "a": "Limiting global administrators does not speed up sign-ins."
       }
     },
     "mch-q33": {
@@ -101,7 +101,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Conditional access policies evaluate the sign-in context (user, location, device, risk) and require MFA, a compliant device or block access.",
       "whyWrong": {
         "b": "Disk encryption is another function.",
-        "c": "It is not conditional access’s remit.",
+        "c": "Billing by usage is unrelated to conditional access.",
         "d": "The network falls under other services."
       }
     },
@@ -282,7 +282,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "An attacker who gains high rights tries to erase their traces. Logs written to a separate, write-only account remain usable.",
       "whyWrong": {
-        "a": "That is not the purpose.",
+        "a": "Centralizing logs is not meant to reduce the storage bill.",
         "b": "Alerts remain necessary.",
         "d": "Access control remains necessary."
       }
@@ -320,9 +320,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Key management services (KMS, Key Vault, Cloud KMS) create and hold keys, control who can use them and log each use.",
       "whyWrong": {
-        "b": "That is not their function.",
+        "b": "A messaging service does not manage encryption keys.",
         "c": "It distributes traffic.",
-        "d": "Unrelated."
+        "d": "A print service does not manage encryption keys."
       }
     },
     "mch-q25": {
@@ -340,7 +340,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Without the key, the encryption can no longer be undone. Key destruction is therefore protected (deletion delay, separate rights) and its backup planned.",
       "whyWrong": {
-        "d": "It is not stored in clear.",
+        "d": "Without the key the data stays encrypted: it cannot be read in clear.",
         "b": "It does not hold your key.",
         "a": "Backups encrypted with this key are affected too."
       }

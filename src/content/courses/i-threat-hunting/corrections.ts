@@ -39,14 +39,14 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "STIX (Structured Threat Information Expression) décrit les objets de renseignement ; TAXII (Trusted Automated Exchange of Intelligence Information) les transporte entre plateformes."
     },
-    "hunt-q5": {
+    "hunt-q41": {
       "type": "single",
       "correct": "a",
-      "explanation": "Changer une empreinte, une adresse ou un domaine coûte peu à l’attaquant. Changer ses techniques l’oblige à réapprendre, à développer d’autres outils et à prendre des risques : c’est le sommet de la pyramide.",
+      "explanation": "Changer un seul octet change l’empreinte : l’attaquant la renouvelle sans effort. Les comportements et les techniques sont plus coûteux à modifier, donc plus durables pour la détection.",
       "whyWrong": {
-        "b": "Une empreinte change dès qu’on modifie un octet du fichier.",
-        "d": "Une adresse IP se remplace facilement.",
-        "c": "Un domaine se remplace simplement."
+        "b": "Une empreinte se compare facilement à une base de renseignement ; sa fragilité vient d’ailleurs.",
+        "d": "La taille du fichier n’a aucun rapport avec la fragilité de l’indicateur.",
+        "c": "L’antivirus ne modifie pas les empreintes : il les utilise."
       }
     },
     "hunt-q6": {

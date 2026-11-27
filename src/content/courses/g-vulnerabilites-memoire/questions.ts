@@ -4,8 +4,8 @@ import type { Question } from '../../types';
 
 export const questions: Question[] = [
   {
-    "id": "mem-q1",
-    "prompt": "Où sont stockées les variables locales d’une fonction C ?",
+    "id": "mem-q41",
+    "prompt": "Pourquoi un débordement de tampon sur la pile peut-il aller au-delà d’un simple plantage ?",
     "skills": [
       "g-mem-layout"
     ],
@@ -14,19 +14,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "Dans le segment de code du programme"
+        "text": "Il efface automatiquement tous les fichiers du disque dur de la machine"
       },
       {
         "id": "b",
-        "text": "Sur le tas, parmi les allocations dynamiques"
+        "text": "Il augmente seulement la consommation de mémoire du programme concerné"
       },
       {
         "id": "c",
-        "text": "Sur la pile, dans le cadre de la fonction"
+        "text": "Il peut écraser l’adresse de retour et détourner l’exécution du programme"
       },
       {
         "id": "d",
-        "text": "Dans le registre d’instruction du processeur"
+        "text": "Il désactive le système d’exploitation de la machine pendant une heure"
       }
     ]
   },

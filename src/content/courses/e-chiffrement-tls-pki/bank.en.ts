@@ -105,7 +105,7 @@ export const bank: BankItem[] = [
   { id: 'crypt-q28', t: 'single', d: 3, s: ['e-tls-config'], p: 'What is mutual TLS (mTLS)?',
     o: ['The server and the client each authenticate by a certificate', 'The encryption of traffic with two successive session keys within the connection', 'The sharing of a single certificate between several servers of the same domain', 'The use of two TLS versions on the same port to ensure compatibility'],
     e: 'With mTLS, the client also presents a certificate that the server verifies: it is used between services, for sensitive APIs or remote access, so that only identified clients can connect. The management of client certificates (issuance, revocation) must be automated.',
-    w: { 1: 'It is not a double session key.', 2: 'It is not certificate sharing.', 3: 'It is not a coexistence of versions.' } },
+    w: { 1: 'It is not a double session key.', 2: 'Sharing one certificate across servers is not mutual TLS: mTLS authenticates both sides.', 3: 'It is not a coexistence of versions.' } },
   { id: 'crypt-q29', t: 'short', d: 2, s: ['e-tls-config'], p: 'Which OpenSSL subcommand opens a TLS connection to a server and displays its certificate chain?', a: ['s_client', 'openssl s_client'], ph: 'subcommand',
     e: '`openssl s_client -connect host:443 -servername host -showcerts` opens the connection, displays the chain, the negotiated TLS version and the verification code. It is the basic tool for diagnosing a certificate error.' },
   { id: 'crypt-q30', t: 'truefalse', d: 3, s: ['e-tls-config'], p: 'TLS 1.3’s 0-RTT mode protects session resumption data against replay.', v: false,
@@ -145,7 +145,7 @@ export const bank: BankItem[] = [
   { id: 'crypt-q39', t: 'single', d: 3, s: ['e-secrets-pq'], p: 'What does cryptographic agility designate?',
     o: ['The ability to replace an algorithm without rewriting the application', 'The speed with which an algorithm encrypts large quantities of data', 'The ability of a system to encrypt with several algorithms at the same time', 'The daily rotation of the encryption keys used by the services'],
     e: 'Algorithms age (MD5, SHA-1, RSA soon): an agile system identifies them by parameters, isolates them behind a library and keeps an inventory, so that a migration (for example to post-quantum) is a planned operation rather than a rewrite.',
-    w: { 1: 'It is not about performance.', 2: 'It is not about encrypting several times.', 3: 'Key rotation is another practice.' } },
+    w: { 1: 'Speed of encryption is not agility: agility is being able to swap algorithms.', 2: 'It is not about encrypting several times.', 3: 'Key rotation is another practice.' } },
   { id: 'crypt-q40', t: 'short', d: 3, s: ['e-secrets-pq'], p: 'Which lattice-based post-quantum signature algorithm did NIST standardize in FIPS 204?', a: ['ML-DSA', 'MLDSA', 'ML DSA', 'Dilithium', 'CRYSTALS-Dilithium'], ph: 'acronym',
     e: 'FIPS 204 standardizes ML-DSA (derived from CRYSTALS-Dilithium) for signatures; FIPS 205 standardizes SLH-DSA, based on hash functions. Post-quantum signatures follow the key exchange in the migration, since they are not retroactively exposed.' },
 ];

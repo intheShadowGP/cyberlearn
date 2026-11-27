@@ -39,14 +39,14 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "STIX (Structured Threat Information Expression) describes intelligence objects; TAXII (Trusted Automated Exchange of Intelligence Information) carries them between platforms."
     },
-    "hunt-q5": {
+    "hunt-q41": {
       "type": "single",
       "correct": "a",
-      "explanation": "Changing a hash, an address or a domain costs the attacker little. Changing their techniques forces them to relearn, develop other tools and take risks: it is the top of the pyramid.",
+      "explanation": "Changing a single byte changes the hash: the attacker renews it effortlessly. Behaviors and techniques are costlier to change, hence more durable for detection.",
       "whyWrong": {
-        "b": "A hash changes as soon as one byte of the file is modified.",
-        "d": "An IP address is easily replaced.",
-        "c": "A domain is simply replaced."
+        "b": "A hash is easily compared with an intelligence base; its fragility lies elsewhere.",
+        "d": "File size has nothing to do with the indicator’s fragility.",
+        "c": "The antivirus does not modify hashes: it uses them."
       }
     },
     "hunt-q6": {
@@ -337,7 +337,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It is a logging parameter.",
         "b": "It is a ticket-management indicator.",
-        "a": "It is not a security indicator."
+        "a": "The duration of a user session is not dwell time."
       }
     },
     "hunt-q37": {

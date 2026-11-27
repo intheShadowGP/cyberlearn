@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une application bureautique qui lance un interpréteur de commandes est un schéma classique d’exécution via un document piégé. La relation parent-enfant est un indice fort, à confirmer par la ligne de commande et le contexte.",
       "whyWrong": {
-        "c": "Ce n’est pas un comportement habituel.",
-        "b": "La parenté est au contraire très informative.",
-        "d": "Une application peut avoir des processus enfants."
+        "c": "Word ne lance pas toujours PowerShell : un tel enchaînement est anormal.",
+        "b": "Le parent a au contraire une grande importance pour juger un processus.",
+        "d": "Un processus Word peut avoir des enfants : c’est leur nature qui est suspecte."
       }
     },
     "for-q20": {

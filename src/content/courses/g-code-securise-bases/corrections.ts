@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Le coût ne tient pas à la gratuité d’outils.",
         "d": "Une faille ne disparaît pas d’elle-même.",
-        "b": "Ce n’est pas une question d’acceptation."
+        "b": "L’acceptation des utilisateurs n’est pas la raison du moindre coût d’une correction précoce."
       }
     },
     "cbs-q3": {
@@ -256,7 +256,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un attaquant publie un paquet au nom voisin d’un paquet connu en espérant une faute de frappe : l’installation exécute alors son code. On vérifie le nom exact et l’éditeur.",
       "whyWrong": {
-        "b": "Ce n’est pas la même bibliothèque.",
+        "b": "Une faute de frappe dans le nom ne donne pas une version plus récente de la bibliothèque.",
         "c": "Les autres bibliothèques ne sont pas supprimées.",
         "d": "Python ne corrige pas les noms de paquets."
       }
@@ -321,7 +321,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un algorithme maison n’a pas été examiné et se casse presque toujours. On utilise des bibliothèques reconnues (AES, ChaCha20, bibliothèques standards).",
       "whyWrong": {
-        "a": "Ce n’est pas une interdiction légale.",
+        "a": "Les algorithmes personnels ne sont pas interdits par la loi : ils sont simplement peu sûrs.",
         "c": "La vitesse n’est pas la raison principale.",
         "d": "Les langages n’empêchent rien de tel."
       }

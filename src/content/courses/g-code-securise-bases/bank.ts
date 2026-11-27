@@ -14,7 +14,7 @@ export const bank: BankItem[] = [
   { id: 'cbs-q2', t: 'single', d: 1, s: ['g-base-pourquoi'], p: 'Pourquoi corriger une faille tôt dans le développement coûte-t-il moins cher ?',
     o: ['Il y a moins de code à modifier et aucune donnée exposée', 'Les outils de correction sont gratuits pendant la conception', 'Les failles se corrigent toutes seules avec le temps qui passe', 'Les utilisateurs acceptent mieux les failles corrigées tard'],
     e: 'Une erreur repérée à la conception ou à l’écriture se corrige en quelques minutes. En production, il faut corriger, tester, déployer et parfois informer des utilisateurs dont les données ont été exposées.',
-    w: { 1: 'Le coût ne tient pas à la gratuité d’outils.', 2: 'Une faille ne disparaît pas d’elle-même.', 3: 'Ce n’est pas une question d’acceptation.' } },
+    w: { 1: 'Le coût ne tient pas à la gratuité d’outils.', 2: 'Une faille ne disparaît pas d’elle-même.', 3: 'L’acceptation des utilisateurs n’est pas la raison du moindre coût d’une correction précoce.' } },
   { id: 'cbs-q3', t: 'truefalse', d: 1, s: ['g-base-pourquoi'], p: 'Intégrer la sécurité dès la conception est plus efficace que de l’ajouter à la fin du projet.', v: true,
     e: 'Les décisions de conception (données manipulées, droits, séparation des composants) sont difficiles à changer plus tard. Penser à la sécurité dès le départ évite des corrections coûteuses.' },
   { id: 'cbs-q4', t: 'short', d: 2, s: ['g-base-pourquoi'], p: 'Comment appelle-t-on l’idée de déplacer les contrôles de sécurité vers les premières étapes du développement ? (deux mots)', a: ['shift left', 'shift-left', 'décaler à gauche', 'decaler a gauche'], ph: 'deux mots',
@@ -106,7 +106,7 @@ export const bank: BankItem[] = [
   { id: 'cbs-q28', t: 'single', d: 2, s: ['g-base-dependances'], p: 'Que risque-t-on en installant `reqeusts` à la place de `requests` ?',
     o: ['Installer un paquet malveillant au nom presque identique', 'Obtenir une version plus récente de la même bibliothèque', 'Perdre toutes les autres bibliothèques déjà installées', 'Rien, car Python corrige automatiquement les fautes'],
     e: 'Un attaquant publie un paquet au nom voisin d’un paquet connu en espérant une faute de frappe : l’installation exécute alors son code. On vérifie le nom exact et l’éditeur.',
-    w: { 1: 'Ce n’est pas la même bibliothèque.', 2: 'Les autres bibliothèques ne sont pas supprimées.', 3: 'Python ne corrige pas les noms de paquets.' } },
+    w: { 1: 'Une faute de frappe dans le nom ne donne pas une version plus récente de la bibliothèque.', 2: 'Les autres bibliothèques ne sont pas supprimées.', 3: 'Python ne corrige pas les noms de paquets.' } },
 
   // --- Revue, tests, analyse ---
   { id: 'cbs-q29', t: 'single', d: 1, s: ['g-base-revue'], p: 'À quoi sert une revue de code ?',
@@ -134,7 +134,7 @@ export const bank: BankItem[] = [
   { id: 'cbs-q35', t: 'single', d: 1, s: ['g-base-habitudes'], p: 'Pourquoi ne faut-il pas inventer son propre algorithme de chiffrement ?',
     o: ['Les algorithmes éprouvés ont été attaqués des années', 'Les algorithmes personnels sont interdits par la loi dans tous les pays', 'Les algorithmes éprouvés sont toujours plus rapides qu’un algorithme maison', 'Les langages de programmation refusent les algorithmes personnels'],
     e: 'Un algorithme maison n’a pas été examiné et se casse presque toujours. On utilise des bibliothèques reconnues (AES, ChaCha20, bibliothèques standards).',
-    w: { 1: 'Ce n’est pas une interdiction légale.', 2: 'La vitesse n’est pas la raison principale.', 3: 'Les langages n’empêchent rien de tel.' } },
+    w: { 1: 'Les algorithmes personnels ne sont pas interdits par la loi : ils sont simplement peu sûrs.', 2: 'La vitesse n’est pas la raison principale.', 3: 'Les langages n’empêchent rien de tel.' } },
   { id: 'cbs-q36', t: 'truefalse', d: 2, s: ['g-base-habitudes'], p: 'Un code simple est plus facile à relire et à sécuriser qu’un code compliqué.', v: true,
     e: 'Moins de cas particuliers et de chemins d’exécution laissent moins de place aux erreurs et rendent la revue plus efficace. La simplicité est une qualité de sécurité.' },
   { id: 'cbs-q37', t: 'single', d: 2, s: ['g-base-habitudes'], p: 'Où se renseigner sur les erreurs de sécurité les plus courantes en développement ?',

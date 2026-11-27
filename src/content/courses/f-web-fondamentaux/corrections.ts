@@ -149,8 +149,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’application colle la saisie dans le texte de la requête : l’attaquant y glisse du SQL qui change la structure de la requête (contourner une connexion, lire d’autres tables).",
       "whyWrong": {
         "b": "Ce n’est pas une réplication de données.",
-        "d": "Ce n’est pas un chiffrement.",
-        "c": "Ce n’est pas une sauvegarde."
+        "d": "Une injection SQL ne chiffre pas les données : elle altère la requête.",
+        "c": "Une sauvegarde automatique n’est pas une injection SQL."
       }
     },
     "fwf-q18": {
@@ -266,9 +266,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’OWASP est une fondation qui publie des ressources libres. Son Top 10 est un document de sensibilisation : il classe les grandes familles de risques, sans prétendre être exhaustif.",
       "whyWrong": {
-        "c": "Ce n’est pas un logiciel.",
+        "c": "Le Top 10 n’est pas un logiciel : c’est une liste de catégories de risques.",
         "a": "Il ne classe pas des sites.",
-        "b": "Ce n’est pas une norme contraignante."
+        "b": "Le Top 10 n’est pas une norme imposant dix mesures."
       }
     },
     "fwf-q30": {

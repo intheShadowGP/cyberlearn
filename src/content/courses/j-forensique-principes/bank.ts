@@ -112,7 +112,7 @@ export const bank: BankItem[] = [
   { id: 'for-q19', t: 'single', d: 2, s: ['j-memoire', 'j-artefacts'], p: 'Dans l’arbre des processus d’une image mémoire, `winword.exe` est le parent de `powershell.exe`. Que faut-il en penser ?',
     o: ['Suspect : un document ne lance pas d’interpréteur', 'Normal : Word lance toujours PowerShell', 'Sans intérêt : le parent n’a pas d’importance', 'Impossible : Word n’a pas de processus enfant'],
     e: 'Une application bureautique qui lance un interpréteur de commandes est un schéma classique d’exécution via un document piégé. La relation parent-enfant est un indice fort, à confirmer par la ligne de commande et le contexte.',
-    w: { 1: 'Ce n’est pas un comportement habituel.', 2: 'La parenté est au contraire très informative.', 3: 'Une application peut avoir des processus enfants.' } },
+    w: { 1: 'Word ne lance pas toujours PowerShell : un tel enchaînement est anormal.', 2: 'Le parent a au contraire une grande importance pour juger un processus.', 3: 'Un processus Word peut avoir des enfants : c’est leur nature qui est suspecte.' } },
   { id: 'for-q20', t: 'truefalse', d: 2, s: ['j-memoire'], p: 'Un outil d’acquisition de la mémoire n’a aucun impact sur le système examiné.', v: false,
     e: 'Lancer un outil modifie la mémoire (chargement, allocation) et laisse des traces. On le documente, on utilise un outil reconnu, lancé depuis un support externe, et on en tient compte dans l’analyse.' },
   { id: 'for-q21', t: 'multi', d: 3, s: ['j-memoire'], p: 'Que peut-on extraire d’une image de mémoire vive ?', k: 3,

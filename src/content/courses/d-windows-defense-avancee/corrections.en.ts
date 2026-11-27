@@ -19,7 +19,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "ATT&CK catalogs the tactics and techniques observed in adversaries. It serves as a common language to describe an attack, map detection rules, spot uncovered techniques and plan exercises. It does not say which techniques are the most likely in one’s own environment.",
       "whyWrong": {
-        "b": "It is not a protection tool.",
+        "b": "ATT&CK does not replace the antivirus: it is a knowledge base of techniques.",
         "d": "It does not define a patching calendar.",
         "c": "It does not issue a compliance grade."
       }
@@ -201,7 +201,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It is not a copy of the database.",
         "c": "It is not a log duplication service.",
-        "a": "It is not a backup."
+        "a": "A system state backup is not what DCShadow is: it injects changes through a fake controller."
       }
     },
     "dwd-q23": {
@@ -247,7 +247,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "It is not a password stored in the registry.",
         "d": "Automatic rotation is a good practice, not an attack.",
-        "a": "It is not a root certificate."
+        "a": "Root certificates installed without the user’s knowledge are another attack."
       }
     },
     "dwd-q28": {

@@ -401,8 +401,8 @@ export const corrections: CourseCorrections = {
       "explanation": "No measure cancels risk: what remains must be described, monitored, then accepted by management with an owner and a review date.",
       "whyWrong": {
         "c": "A risk is generally not removed at 100%.",
-        "a": "It is not a cost notion.",
-        "d": "It is not tied to connectivity."
+        "a": "Residual risk is not a cost: it is the exposure that remains after the measures.",
+        "d": "Residual risk does not depend on connectivity: it remains for any system after treatment."
       }
     }
   },

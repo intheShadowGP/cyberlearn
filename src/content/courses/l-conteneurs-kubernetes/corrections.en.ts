@@ -136,7 +136,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The build stage contains compilers and sources; the final image keeps only the result. It is smaller and exposes fewer components.",
       "whyWrong": {
-        "a": "That is not the goal.",
+        "a": "A multi-stage build does not slow startup: it lightens the image.",
         "b": "An image always has layers.",
         "d": "Visibility is independent."
       }
@@ -210,9 +210,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "It checks at creation the constraints (non-root, no privileges, dropped capabilities) according to the privileged, baseline or restricted profiles, and refuses or warns.",
       "whyWrong": {
-        "a": "That is not its role.",
-        "c": "That is not its role.",
-        "b": "That is not its role."
+        "a": "Pod Security Admission does not encrypt the network.",
+        "c": "It does not back up the cluster.",
+        "b": "It does not update nodes."
       }
     },
     "k8s-q38": {
@@ -221,7 +221,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Name resolution goes through the cluster’s DNS service. Forgetting it is the most frequent mistake when setting up a default deny.",
       "whyWrong": {
         "d": "That would open all egress.",
-        "c": "Unrelated to DNS.",
+        "c": "Port 22 to the nodes is not needed for name resolution.",
         "b": "Dangerous and unrelated."
       }
     },
@@ -249,7 +249,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "It contains no code.",
         "c": "It stores no passwords.",
-        "a": "Unrelated."
+        "a": "Node temperature is not in the audit log."
       }
     },
     "k8s-q18": {
@@ -349,7 +349,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "It validates (or modifies) a request to the API before it is stored: a non-compliant pod is refused.",
       "whyWrong": {
-        "c": "That is not its role.",
+        "c": "An admission controller does not back up pods.",
         "a": "It does not encrypt.",
         "d": "It complements RBAC."
       }

@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "We tend to look for what confirms the starting hypothesis. Posing several scenarios and looking for what tells them apart protects against this bias.",
       "whyWrong": {
-        "a": "Unrelated to the method.",
-        "d": "This is not a cognitive risk.",
+        "a": "Eye strain is not a cognitive risk reduced by competing hypotheses.",
+        "d": "License cost is not a cognitive risk.",
         "c": "Log size is a technical issue."
       }
     },
@@ -74,9 +74,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Logs that are not enabled or are kept too briefly cannot be reconstructed. Logging and retention are decided in advance.",
       "whyWrong": {
-        "a": "Unrelated to evidence.",
+        "a": "The interface color allows no investigation.",
         "c": "Names are not enough to investigate.",
-        "d": "Unrelated to the investigation."
+        "d": "The team’s lunch hour has no link with investigation."
       }
     },
     "jfa-q9": {
@@ -131,7 +131,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The applicable law (personal data, access by authorities, transfers outside the territory) depends on the location and the contracts. It influences what can be requested and transferred.",
       "whyWrong": {
-        "c": "Unrelated.",
+        "c": "The storage location does not change the color of logs.",
         "a": "It may, on the contrary, slow down collection.",
         "b": "The customer remains responsible for its data."
       }
@@ -323,7 +323,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A faulty script may disrupt production or produce false results everywhere. It is tested on a known set, then on a small scope.",
       "whyWrong": {
-        "c": "That is not the goal.",
+        "c": "Validating a script is not meant to lengthen it.",
         "a": "Documentation remains mandatory.",
         "d": "Validation is part of acceptance."
       }
@@ -361,7 +361,7 @@ export const corrections: CourseCorrections = {
       "explanation": "If the same inputs with the same version produce the same result, a third party can verify it. A result that cannot be redone cannot be defended.",
       "whyWrong": {
         "b": "Speed proves nothing.",
-        "d": "Unrelated to reliability.",
+        "d": "A color display does not make a result defensible.",
         "a": "Code size is not a criterion."
       }
     },

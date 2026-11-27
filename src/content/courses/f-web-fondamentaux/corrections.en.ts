@@ -148,9 +148,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The application pastes the input into the query text: the attacker slips SQL into it that changes the structure of the query (bypassing a login, reading other tables).",
       "whyWrong": {
-        "b": "It is not a data replication.",
-        "d": "It is not an encryption.",
-        "c": "It is not a backup."
+        "b": "Copying a database to another server is exfiltration, not an injection.",
+        "d": "An SQL injection does not encrypt data: it alters the query.",
+        "c": "An automatic backup is not an SQL injection."
       }
     },
     "fwf-q18": {
@@ -265,9 +265,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "OWASP is a foundation that publishes free resources. Its Top 10 is an awareness document: it ranks the main families of risks, without claiming to be exhaustive.",
       "whyWrong": {
-        "c": "It is not software.",
+        "c": "The Top 10 is not software: it is a list of risk categories.",
         "a": "It does not rank sites.",
-        "b": "It is not a binding standard."
+        "b": "The Top 10 is not a standard imposing ten measures."
       }
     },
     "fwf-q30": {

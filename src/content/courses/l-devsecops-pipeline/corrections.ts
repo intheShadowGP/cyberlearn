@@ -67,7 +67,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Plus un défaut est détecté tôt (poste, revue, CI), moins il coûte à corriger. Les contrôles automatiques de sécurité se placent donc au plus près du code.",
       "whyWrong": {
-        "c": "Ce n’est pas le sens.",
+        "c": "Reporter les déploiements n’est pas « décaler à gauche » : c’est l’inverse de détecter tôt.",
         "b": "Au contraire, on ajoute des contrôles.",
         "a": "C’est l’inverse."
       }
@@ -134,9 +134,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Vous n’en déclarez pas la plupart : elles sont apportées par vos dépendances directes. La SCA doit les inventorier, car une vulnérabilité s’y cache souvent.",
       "whyWrong": {
-        "c": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition.",
-        "b": "Ce n’est pas la définition."
+        "c": "Une dépendance utilisée seulement pour les tests est une dépendance de développement, pas transitive.",
+        "a": "Une dépendance supprimée du projet n’est plus transitive.",
+        "b": "Une dépendance interne n’est pas transitive par définition."
       }
     },
     "dso-q35": {
@@ -144,9 +144,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le fichier de verrouillage contient les empreintes : un paquet substitué ou modifié sur le registre est refusé à l’installation.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
-        "b": "Ce n’est pas le but.",
-        "d": "Ce n’est pas le but."
+        "a": "Vérifier l’empreinte n’accélère pas le téléchargement.",
+        "b": "Elle ne réduit pas la taille du paquet.",
+        "d": "Elle ne supprime pas les dépendances inutiles."
       }
     },
     "dso-q14": {
@@ -204,7 +204,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les secrets de production ne sont disponibles que pour les jobs rattachés à cet environnement, après approbation et depuis des branches autorisées.",
       "whyWrong": {
-        "a": "Ce n’est pas son but.",
+        "a": "Un environnement protégé n’accélère pas les tests.",
         "c": "Il ne touche pas aux journaux.",
         "b": "Il ne rend rien public."
       }
@@ -303,7 +303,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un composant vulnérable n’est pas toujours atteignable. Un VEX précise « affecté », « non affecté » ou « corrigé », ce qui évite des alertes inutiles et des corrections inutiles.",
       "whyWrong": {
-        "d": "Ce n’est pas un chiffrement.",
+        "d": "Une déclaration VEX ne chiffre pas le SBOM.",
         "b": "Elle complète la SCA, sans la remplacer.",
         "c": "Elle ne publie pas le code."
       }
@@ -350,7 +350,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "En cas d’incident, ils permettent d’identifier les artefacts potentiellement touchés, leur source et leur chaîne de construction.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
+        "d": "Conserver les journaux n’a pas pour but d’augmenter la taille du dépôt.",
         "b": "Ils ne suppriment rien.",
         "a": "Sans effet sur la vitesse."
       }
@@ -373,7 +373,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Les clients ont besoin des versions concernées, d’indicateurs vérifiables (empreintes) et des mesures à prendre, ainsi que d’un artefact corrigé et signé.",
       "whyWrong": {
         "a": "Cela les exposerait.",
-        "b": "Insuffisant.",
+        "b": "Le nom du pipeline seul ne permet pas aux clients d’agir.",
         "c": "Sans explication, ils ne peuvent pas agir."
       }
     },

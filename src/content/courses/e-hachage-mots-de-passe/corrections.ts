@@ -276,7 +276,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Des millions d’identifiants issus d’anciennes fuites sont testés sur d’autres services : la réutilisation des mots de passe suffit à compromettre des comptes. Parades : mots de passe uniques, MFA, limitation de débit, détection et vérification contre les mots de passe compromis.",
       "whyWrong": {
         "d": "C’est la pulvérisation de mots de passe (password spraying).",
-        "a": "Ce n’est pas un bourrage d’identifiants.",
+        "a": "Créer des comptes factices pour saturer un site est un autre abus, pas le bourrage d’identifiants.",
         "b": "C’est le cassage hors ligne d’une base volée."
       }
     },

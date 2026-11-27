@@ -301,9 +301,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une SBOM (CycloneDX, SPDX) permet, dès l’annonce d’une vulnérabilité dans un composant, de savoir en quelques minutes quelles applications l’embarquent et dans quelles versions.",
       "whyWrong": {
-        "d": "Ce n’est pas un contrôle d’accès.",
-        "b": "Ce n’est pas un journal d’attaques.",
-        "a": "Ce n’est pas une sauvegarde."
+        "d": "Un SBOM ne liste pas les utilisateurs autorisés à modifier le code.",
+        "b": "Un SBOM n’est pas un journal d’attaques.",
+        "a": "Un SBOM n’est pas une sauvegarde du code source."
       }
     },
     "fwa-q34": {

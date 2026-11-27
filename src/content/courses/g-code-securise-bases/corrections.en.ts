@@ -21,7 +21,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "The cost is not about free tools.",
         "d": "A flaw does not disappear by itself.",
-        "b": "It is not a question of acceptance."
+        "b": "User acceptance is not the reason an early fix costs less."
       }
     },
     "cbs-q3": {
@@ -255,7 +255,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "An attacker publishes a package named close to a known one hoping for a typo: installing it then runs their code. The exact name and the publisher are checked.",
       "whyWrong": {
-        "b": "It is not the same library.",
+        "b": "A typo in the name does not give a newer version of the library.",
         "c": "The other libraries are not removed.",
         "d": "Python does not correct package names."
       }
@@ -265,7 +265,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A fresh eye finds what the author no longer sees: logic error, unchecked input, forgotten secret. It complements tests and tools.",
       "whyWrong": {
-        "c": "It is not a productivity measure.",
+        "c": "A code review does not measure lines written per developer.",
         "a": "A review does not delete automatically.",
         "b": "It does not translate the code."
       }
@@ -320,7 +320,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A home-made algorithm has not been examined and almost always breaks. Recognized libraries are used (AES, ChaCha20, standard libraries).",
       "whyWrong": {
-        "a": "It is not a legal prohibition.",
+        "a": "Home-made algorithms are not forbidden by law: they are simply unsafe.",
         "c": "Speed is not the main reason.",
         "d": "Languages prevent nothing of the kind."
       }

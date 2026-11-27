@@ -107,7 +107,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le harnais fait le lien entre le fuzzeur et l’API visée : il reçoit un tableau d’octets et appelle la fonction d’analyse, sans état partagé entre les appels.",
       "whyWrong": {
-        "c": "Ce n’est pas du matériel.",
+        "c": "Un harnais est du code, pas un équipement matériel.",
         "a": "Le rapport est le résultat, pas le harnais.",
         "b": "Ce n’est pas une option de compilation."
       }
@@ -328,8 +328,8 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le Secure Software Development Framework décrit des pratiques à intégrer au cycle de développement (préparer, protéger, produire du code bien sécurisé, répondre aux vulnérabilités).",
       "whyWrong": {
-        "c": "Ce n’est pas un outil.",
-        "d": "Ce n’est pas un format.",
+        "c": "Le SSDF est un cadre de pratiques, pas un outil d’analyse statique.",
+        "d": "Le SSDF n’est pas un format d’échange de résultats de tests.",
         "b": "Ce n’est pas une norme de chiffrement."
       }
     },

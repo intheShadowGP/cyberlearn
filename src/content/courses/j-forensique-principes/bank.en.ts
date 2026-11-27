@@ -112,7 +112,7 @@ export const bank: BankItem[] = [
   { id: 'for-q19', t: 'single', d: 2, s: ['j-memoire', 'j-artefacts'], p: 'In the process tree of a memory image, `winword.exe` is the parent of `powershell.exe`. What should be made of this?',
     o: ['Suspect: a document does not launch an interpreter', 'Normal: Word always launches PowerShell', 'Irrelevant: the parent does not matter', 'Impossible: Word has no child process'],
     e: 'An office application launching a command interpreter is a classic pattern of execution through a booby-trapped document. The parent-child relationship is a strong clue, to be confirmed with the command line and context.',
-    w: { 1: 'This is not usual behavior.', 2: 'Parentage is, on the contrary, very informative.', 3: 'An application can have child processes.' } },
+    w: { 1: 'Word does not always launch PowerShell: such a chain is abnormal.', 2: 'The parent matters a great deal when judging a process.', 3: 'A Word process can have children: it is their nature that is suspicious.' } },
   { id: 'for-q20', t: 'truefalse', d: 2, s: ['j-memoire'], p: 'A memory acquisition tool has no impact on the examined system.', v: false,
     e: 'Launching a tool modifies memory (loading, allocation) and leaves traces. We document it, use a recognized tool, launched from an external medium, and take it into account in the analysis.' },
   { id: 'for-q21', t: 'multi', d: 3, s: ['j-memoire'], p: 'What can be extracted from a RAM image?', k: 3,

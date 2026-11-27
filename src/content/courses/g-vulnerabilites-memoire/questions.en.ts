@@ -4,8 +4,8 @@ import type { Question } from '../../types';
 
 export const questions: Question[] = [
   {
-    "id": "mem-q1",
-    "prompt": "Where are the local variables of a C function stored?",
+    "id": "mem-q41",
+    "prompt": "Why can a stack buffer overflow go beyond a simple crash?",
     "skills": [
       "g-mem-layout"
     ],
@@ -14,19 +14,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "In the program’s code segment"
+        "text": "It automatically erases all the files on the machine’s hard disk"
       },
       {
         "id": "b",
-        "text": "On the heap, among the dynamic allocations"
+        "text": "It only increases the memory consumption of the program concerned"
       },
       {
         "id": "c",
-        "text": "On the stack, in the function’s frame"
+        "text": "It can overwrite the return address and hijack the program’s execution"
       },
       {
         "id": "d",
-        "text": "In the processor’s instruction register"
+        "text": "It disables the machine’s operating system for an hour"
       }
     ]
   },

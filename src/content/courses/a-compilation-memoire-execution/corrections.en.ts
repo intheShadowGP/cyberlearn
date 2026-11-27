@@ -30,8 +30,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Assembly writes each machine instruction as a mnemonic (`mov`, `add`, `call`…). It depends on the processor architecture, hence its variants (x86-64, ARM).",
       "whyWrong": {
         "b": "Assembly is low level and depends on the processor.",
-        "a": "It is not a compression format.",
-        "d": "It is not a network protocol."
+        "a": "Assembly is not a compression format.",
+        "d": "An exchange protocol is something else than assembly language."
       }
     },
     "exec-q4": {

@@ -20,7 +20,7 @@ export const corrections: CourseCorrections = {
       "explanation": "L1 reads alerts, qualifies them, closes them with justification or escalates them to the next level for deeper investigation.",
       "whyWrong": {
         "d": "Network architecture belongs to other roles.",
-        "b": "It is not their role.",
+        "b": "Negotiating with vendors is not a level 1 analyst’s role.",
         "c": "Level 3 provides expertise that L1 does not replace."
       }
     },
@@ -44,7 +44,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The earlier the intrusion is detected, the less time the attacker has to extend access and do harm. The SOC exists to reduce this delay.",
       "whyWrong": {
         "d": "Backup frequency matters for recovery, not for detection.",
-        "a": "Unrelated to security.",
+        "a": "The time between two logo updates does not affect an intrusion’s damage.",
         "b": "Meetings do not measure detection."
       }
     },
@@ -142,7 +142,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The SIEM centralizes, normalizes, stores and correlates logs, then produces alerts according to rules.",
       "whyWrong": {
         "b": "A router forwards traffic; it does not correlate logs.",
-        "a": "Unrelated to detection.",
+        "a": "A word processor collects no logs.",
         "d": "A mail reader does not produce security alerts."
       }
     },
@@ -184,9 +184,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The SOAR chains actions on other tools: enriching an alert, opening a ticket, blocking an address. It frees analysis time without replacing the analysts.",
       "whyWrong": {
-        "c": "It is not a password vault.",
+        "c": "A SOAR does not store users’ passwords.",
         "d": "High-impact decisions remain human.",
-        "b": "It is not an encryption tool."
+        "b": "A SOAR does not encrypt logs on workstations."
       }
     },
     "isi-q21": {

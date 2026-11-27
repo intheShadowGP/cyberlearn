@@ -125,7 +125,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A static key copied into a repository, a workstation or an image remains usable until revoked. Temporary identities expire by themselves.",
       "whyWrong": {
-        "b": "That is not the problem.",
+        "b": "A long-lived key is not a speed problem.",
         "d": "They are not encrypted by nature.",
         "c": "Calls can be logged."
       }
@@ -163,7 +163,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Each modification creates a new version: a malicious or accidental deletion or overwrite remains recoverable. It is combined with deletion protection.",
       "whyWrong": {
         "d": "No performance effect.",
-        "b": "Unrelated to public access.",
+        "b": "Versioning does not make the bucket public.",
         "a": "It does not touch logs."
       }
     },
@@ -187,7 +187,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A CSPM continuously compares the real configuration (public storage, MFA, logs, open networks) with frameworks and alerts on deviations, or even fixes them automatically.",
       "whyWrong": {
-        "a": "It is not an encryption tool.",
+        "a": "A CSPM tool audits configurations: it does not encrypt data.",
         "b": "It does not filter traffic.",
         "c": "It does not manage billing."
       }
@@ -251,7 +251,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "That is precisely what must be avoided.",
         "a": "MFA is strengthened with SSO.",
-        "d": "Unrelated to exposure."
+        "d": "SSO does not make a service public."
       }
     },
     "cl-q18": {
@@ -315,7 +315,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "An attacker who compromises an account seeks to erase their traces. Logs sent elsewhere, write-only, remain usable.",
       "whyWrong": {
-        "d": "That is not the goal.",
+        "d": "Separating logs is not meant to reduce their size.",
         "a": "Alerts stay active.",
         "c": "Logs must not be public."
       }
@@ -374,7 +374,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "The configuration is the customer’s responsibility.",
         "b": "The deadline is 72 hours.",
-        "c": "That is not an obligation."
+        "c": "Deleting the provider account does not meet a notification obligation."
       }
     },
     "cl-q41": {

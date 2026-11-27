@@ -15,8 +15,8 @@
 | Cours avec au moins un exercice lié à un laboratoire | 36 |
 | Cours sans aucune ressource externe HTTPS | 0 |
 | Questions à choix avec « pourquoi c’est faux » (moyenne des cours) | 100 % |
-| Explications de mauvaises réponses creuses (« Sans rapport. », « Ce n’est pas son rôle. »), sur le total (FR) | 87 sur 5808 |
-| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 25 |
+| Explications de mauvaises réponses creuses (« Sans rapport. », « Ce n’est pas son rôle. »), sur le total (FR) | 0 sur 5808 |
+| Paires de questions quasi identiques entre cours (similarité ≥ 0,5) | 23 |
 
 ## Par cours
 
@@ -116,10 +116,8 @@
 | 0.80 | `b-ipv4-subnetting/ipv4-q3` | `b-ipv4-subnetting/ipv4-q19` |
 | 0.67 | `h-pentest-initiation/pti-q25` | `h-pentest-methodologie/pt-q6` |
 | 0.67 | `l-devsecops-pipeline/dso-q43` | `n-ot-securite-avancee/noa-q33` |
-| 0.63 | `a-compilation-memoire-execution/exec-q17` | `g-vulnerabilites-memoire/mem-q1` |
 | 0.60 | `i-soc-detection/soc-q31` | `i-soc-initiation/isi-q7` |
 | 0.60 | `l-conteneurs-kubernetes/k8s-q40` | `n-iot-firmware/iot-q11` |
-| 0.58 | `i-soc-detection/soc-q7` | `i-threat-hunting/hunt-q5` |
 | 0.57 | `k-malware-avance/kma-q18` | `k-retro-ingenierie-defensive/rid-q14` |
 | 0.57 | `k-retro-ingenierie-defensive/rid-q14` | `n-ot-iot-initiation/noi-q33` |
 | 0.54 | `m-gouvernance-initiation/mgi-q38` | `n-ot-iot-initiation/noi-q38` |

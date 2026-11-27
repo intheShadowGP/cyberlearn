@@ -67,7 +67,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The earlier a flaw is detected (workstation, review, CI), the less it costs to fix. Automated security controls are therefore placed as close to the code as possible.",
       "whyWrong": {
-        "c": "That is not the meaning.",
+        "c": "Postponing deployments is not “shifting left”: it is the opposite of detecting early.",
         "b": "On the contrary, controls are added.",
         "a": "It is the opposite."
       }
@@ -134,9 +134,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "You do not declare most of them: they are brought in by your direct dependencies. SCA must inventory them, since a vulnerability often hides there.",
       "whyWrong": {
-        "c": "That is not the definition.",
-        "a": "That is not the definition.",
-        "b": "That is not the definition."
+        "c": "A dependency used only for tests is a development dependency, not a transitive one.",
+        "a": "A dependency removed from the project is no longer transitive.",
+        "b": "An internal dependency is not transitive by definition."
       }
     },
     "dso-q35": {
@@ -144,9 +144,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The lock file contains the hashes: a package substituted or modified on the registry is refused at installation.",
       "whyWrong": {
-        "a": "That is not the purpose.",
-        "b": "That is not the purpose.",
-        "d": "That is not the purpose."
+        "a": "Verifying the hash does not speed up the download.",
+        "b": "It does not reduce the package size.",
+        "d": "It does not remove unnecessary dependencies."
       }
     },
     "dso-q14": {
@@ -204,7 +204,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Production secrets are only available to jobs attached to this environment, after approval and from allowed branches.",
       "whyWrong": {
-        "a": "That is not its purpose.",
+        "a": "A protected environment does not speed up tests.",
         "c": "It does not touch the logs.",
         "b": "It does not make anything public."
       }
@@ -303,7 +303,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A vulnerable component is not always reachable. A VEX specifies “affected”, “not affected” or “fixed”, which avoids useless alerts and useless fixes.",
       "whyWrong": {
-        "d": "It is not encryption.",
+        "d": "A VEX statement does not encrypt the SBOM.",
         "b": "It complements SCA, without replacing it.",
         "c": "It does not publish the code."
       }
@@ -350,7 +350,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "In an incident, they identify the potentially affected artifacts, their source and their build chain.",
       "whyWrong": {
-        "d": "That is not the purpose.",
+        "d": "Keeping logs is not meant to grow the repository.",
         "b": "They delete nothing.",
         "a": "No effect on speed."
       }
@@ -371,7 +371,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Customers need the affected versions, verifiable indicators (hashes) and the measures to take, along with a fixed and signed artifact.",
       "whyWrong": {
         "a": "That would expose them.",
-        "b": "Insufficient.",
+        "b": "The pipeline’s name alone does not let customers act.",
         "c": "Without an explanation, they cannot act."
       }
     },

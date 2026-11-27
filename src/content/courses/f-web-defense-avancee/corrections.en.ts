@@ -71,7 +71,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "TLS encryption is not involved.",
         "b": "Style sheets have nothing to do with it.",
-        "c": "It is not an authentication problem."
+        "c": "A reused password has nothing to do with request smuggling."
       }
     },
     "fwa-q9": {
@@ -116,7 +116,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "That is XSS or poisoning, not cache deception.",
         "b": "It is not bypassing authentication by cookie.",
-        "a": "It is not certificate interception."
+        "a": "Hijacking a certificate is another attack, not web cache deception."
       }
     },
     "fwa-q14": {
@@ -146,7 +146,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Certificates are a matter for TLS, not Trusted Types.",
         "c": "Cookies are not concerned.",
-        "d": "It is not about identifying users."
+        "d": "Trusted Types do not identify users by email: they restrict strings reaching the DOM."
       }
     },
     "fwa-q17": {
@@ -301,9 +301,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "An SBOM (CycloneDX, SPDX) lets you, as soon as a vulnerability is announced in a component, know within minutes which applications embed it and in which versions.",
       "whyWrong": {
-        "d": "It is not an access control.",
-        "b": "It is not a log of attacks.",
-        "a": "It is not a backup."
+        "d": "An SBOM does not list the users allowed to change the code.",
+        "b": "An SBOM is not an attack log.",
+        "a": "An SBOM is not a backup of the source code."
       }
     },
     "fwa-q34": {
@@ -333,7 +333,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "The code is not modified by the rule.",
         "c": "Virtual patching installs no update.",
-        "a": "It is not about encryption."
+        "a": "Virtual patching does not encrypt exchanges: it blocks a known exploitation with a rule."
       }
     },
     "fwa-q37": {

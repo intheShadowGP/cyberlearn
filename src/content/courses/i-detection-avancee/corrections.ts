@@ -149,8 +149,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Offensive et défense travaillent ensemble : chaque technique est rejouée dans un cadre autorisé, le résultat de détection est noté et les lacunes deviennent des chantiers.",
       "whyWrong": {
         "b": "Un exercice se fait toujours avec autorisation.",
-        "d": "Ce n’est pas un audit financier.",
-        "a": "Ce n’est pas une formation bureautique."
+        "d": "Un audit financier n’est pas un exercice Purple Team.",
+        "a": "Une formation à la bureautique n’est pas un exercice Purple Team."
       }
     },
     "ida-q16": {
@@ -343,9 +343,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Un MTTD élevé indique des attaques vues tard : on investit dans les sources, les règles et la chasse. Un indicateur n’a de valeur que s’il éclaire une décision.",
       "whyWrong": {
-        "c": "Sans rapport avec la décision.",
-        "b": "Sans rapport avec la détection.",
-        "d": "Sans rapport avec la détection."
+        "c": "La couleur du tableau de bord n’est pas guidée par le MTTD.",
+        "b": "Le prix des licences de bureautique n’est pas guidé par le MTTD.",
+        "d": "Le nombre de salles de réunion n’a aucun rapport avec le MTTD."
       }
     },
     "ida-q36": {

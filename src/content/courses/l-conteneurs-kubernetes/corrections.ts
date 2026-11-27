@@ -136,7 +136,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’étape de construction contient compilateurs et sources ; l’image finale ne reprend que le résultat. Elle est plus petite et expose moins de composants.",
       "whyWrong": {
-        "a": "Ce n’est pas l’objectif.",
+        "a": "Une construction multi-étapes ne ralentit pas le démarrage : elle allège l’image.",
         "b": "Une image a toujours des couches.",
         "d": "La visibilité est indépendante."
       }
@@ -210,9 +210,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Il vérifie à la création les contraintes (non root, pas de privilèges, capacités supprimées) selon les profils privileged, baseline ou restricted, et refuse ou avertit.",
       "whyWrong": {
-        "a": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
-        "b": "Ce n’est pas son rôle."
+        "a": "Pod Security Admission ne chiffre pas le réseau.",
+        "c": "Il ne sauvegarde pas le cluster.",
+        "b": "Il ne met pas à jour les nœuds."
       }
     },
     "k8s-q38": {
@@ -221,7 +221,7 @@ export const corrections: CourseCorrections = {
       "explanation": "La résolution de noms passe par le service DNS du cluster. L’oublier est l’erreur la plus fréquente lors de la mise en place d’un refus par défaut.",
       "whyWrong": {
         "d": "Ce serait ouvrir toute la sortie.",
-        "c": "Sans rapport avec DNS.",
+        "c": "Le port 22 vers les nœuds n’est pas nécessaire à la résolution de noms.",
         "b": "Dangereux et sans rapport."
       }
     },
@@ -249,7 +249,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Il ne contient pas de code.",
         "c": "Il ne stocke pas de mots de passe.",
-        "a": "Sans rapport."
+        "a": "La température des nœuds n’est pas dans le journal d’audit."
       }
     },
     "k8s-q18": {
@@ -349,7 +349,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Il valide (ou modifie) une requête à l’API avant qu’elle ne soit enregistrée : un pod non conforme est refusé.",
       "whyWrong": {
-        "c": "Ce n’est pas son rôle.",
+        "c": "Un contrôleur d’admission ne sauvegarde pas les pods.",
         "a": "Il ne chiffre pas.",
         "d": "Il complète le RBAC."
       }

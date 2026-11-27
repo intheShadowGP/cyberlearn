@@ -108,7 +108,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "The danger comes not from slowness but from the variable duration.",
         "a": "`==` does not modify the values compared.",
-        "d": "Non-constant comparison is a real risk."
+        "d": "It can be dangerous in many languages: a naive comparison leaks timing."
       }
     },
     "hash-q13": {
@@ -275,7 +275,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Millions of credentials from old leaks are tested on other services: password reuse is enough to compromise accounts. Countermeasures: unique passwords, MFA, rate limiting, detection and checking against compromised passwords.",
       "whyWrong": {
         "d": "That is password spraying.",
-        "a": "That is not credential stuffing.",
+        "a": "Creating fake accounts to saturate a site is another abuse, not credential stuffing.",
         "b": "That is offline cracking of a stolen database."
       }
     },

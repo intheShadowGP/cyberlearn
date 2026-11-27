@@ -47,7 +47,7 @@ export const bank: BankItem[] = [
   { id: 'acc-q13', t: 'single', d: 2, s: ['f-ssrf'], p: 'A “link preview” feature returns the content of `http://169.254.169.254/latest/meta-data/`. What is the main risk?',
     o: ['Theft of cloud credentials via the metadata service', 'A slowdown of the site while previews are generated', 'A display error in the page’s style sheet', 'None: this address is not routable on the Internet'],
     e: '169.254.169.254 is the address of the metadata service of the major cloud providers; it is reachable from the instance. It can deliver the temporary credentials of the instance’s role, hence compromises of entire cloud accounts.',
-    w: { 1: 'The slowdown is a minor effect, unrelated to the danger.', 2: 'This is not a display problem.', 3: 'It is not routable on the Internet, but it is from the server, which is precisely the problem.' } },
+    w: { 1: 'The slowdown is a minor effect, unrelated to the danger.', 2: 'A style-sheet display error has nothing to do with a metadata request.', 3: 'It is not routable on the Internet, but it is from the server, which is precisely the problem.' } },
   { id: 'acc-q14', t: 'multi', d: 3, s: ['f-ssrf'], p: 'Which defenses are effective against SSRF?', k: 3,
     o: ['Allowlist of domains and of the `https` scheme', 'Checking the resolved IP address, then connecting to that same address', 'Outbound network filtering from the server', 'Refusing only the string “127.0.0.1” in the URL'],
     e: 'Allowlist, verification of the address actually used (against DNS rebinding) and outbound network filtering form a defense in depth.',

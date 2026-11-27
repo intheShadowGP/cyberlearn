@@ -16,7 +16,7 @@ export const bank: BankItem[] = [
   { id: 'exec-q3', t: 'single', d: 2, s: ['a-comp'], p: 'What is assembly language?',
     o: ['A readable notation of the processor’s machine instructions', 'A high-level language independent of the hardware', 'A compression format for executable files', 'An exchange protocol between a client and a remote file server over a network'],
     e: 'Assembly writes each machine instruction as a mnemonic (`mov`, `add`, `call`…). It depends on the processor architecture, hence its variants (x86-64, ARM).',
-    w: { 1: 'Assembly is low level and depends on the processor.', 2: 'It is not a compression format.', 3: 'It is not a network protocol.' } },
+    w: { 1: 'Assembly is low level and depends on the processor.', 2: 'Assembly is not a compression format.', 3: 'An exchange protocol is something else than assembly language.' } },
   { id: 'exec-q4', t: 'truefalse', d: 2, s: ['a-comp'], p: 'A compiled executable always contains the original source code, which allows reading it freely.', v: false,
     e: 'Compilation produces machine instructions; the source code is not in it. It can only be approximately reconstructed by disassembly or decompilation, losing names and comments.' },
   { id: 'exec-q5', t: 'single', d: 2, s: ['a-comp'], p: 'What is the difference between static and dynamic linking?',

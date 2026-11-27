@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "On a tendance à chercher ce qui confirme l’hypothèse de départ. Poser plusieurs scénarios et chercher ce qui les départage protège contre ce biais.",
       "whyWrong": {
-        "a": "Sans rapport avec la méthode.",
-        "d": "Ce n’est pas un risque cognitif.",
+        "a": "La fatigue des yeux n’est pas un risque cognitif réduit par les hypothèses concurrentes.",
+        "d": "Le coût des licences n’est pas un risque cognitif.",
         "c": "La taille des journaux est un enjeu technique."
       }
     },
@@ -76,9 +76,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Les journaux non activés ou conservés trop peu de temps ne peuvent pas être reconstitués. Journalisation et rétention se décident à l’avance.",
       "whyWrong": {
-        "a": "Sans rapport avec la preuve.",
+        "a": "La couleur de l’interface ne permet aucune investigation.",
         "c": "Les noms ne suffisent pas à investiguer.",
-        "d": "Sans rapport avec l’enquête."
+        "d": "L’heure du déjeuner n’a aucun lien avec l’investigation."
       }
     },
     "jfa-q9": {
@@ -133,7 +133,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le droit applicable (données personnelles, accès des autorités, transferts hors du territoire) dépend du lieu et des contrats. Il influe sur ce qu’on peut demander et transférer.",
       "whyWrong": {
-        "c": "Sans rapport.",
+        "c": "Le lieu de stockage ne change pas la couleur des journaux.",
         "a": "Il peut au contraire ralentir la collecte.",
         "b": "Le client reste responsable de ses données."
       }
@@ -327,7 +327,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un script défectueux peut perturber la production ou produire de faux résultats partout. Il se teste sur un jeu connu, puis sur un petit périmètre.",
       "whyWrong": {
-        "c": "Ce n’est pas le but.",
+        "c": "Valider un script n’a pas pour but de l’allonger.",
         "a": "La documentation reste obligatoire.",
         "d": "La validation fait partie de la recette."
       }
@@ -365,7 +365,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Si les mêmes entrées avec la même version produisent le même résultat, un tiers peut le vérifier. Un résultat qu’on ne peut pas refaire ne se défend pas.",
       "whyWrong": {
         "b": "La vitesse ne prouve rien.",
-        "d": "Sans rapport avec la fiabilité.",
+        "d": "Un affichage en couleurs ne rend pas un résultat défendable.",
         "a": "La taille du code n’est pas un critère."
       }
     },

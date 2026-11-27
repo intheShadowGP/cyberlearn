@@ -77,8 +77,8 @@ export const questions: Question[] = [
     "placeholder": "acronym"
   },
   {
-    "id": "hunt-q5",
-    "prompt": "According to the pyramid of pain, which type of indicator is the most costly for the attacker to change?",
+    "id": "hunt-q41",
+    "prompt": "Why is a file hash a fragile indicator for hunting?",
     "skills": [
       "i-hunt-method"
     ],
@@ -87,19 +87,19 @@ export const questions: Question[] = [
     "options": [
       {
         "id": "a",
-        "text": "The attackers’ TTPs"
+        "text": "The attacker only needs to modify the file to change its hash"
       },
       {
         "id": "b",
-        "text": "File hashes"
+        "text": "It can never be compared with a threat intelligence base"
       },
       {
         "id": "c",
-        "text": "Domain names"
+        "text": "It is automatically modified by the antivirus on every workstation"
       },
       {
         "id": "d",
-        "text": "IP addresses"
+        "text": "It applies only to files larger than one gigabyte in size"
       }
     ]
   },

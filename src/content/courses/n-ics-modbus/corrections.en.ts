@@ -46,9 +46,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Operational technology (OT) groups the systems that run physical processes: PLCs, supervision, sensors, actuators.",
       "whyWrong": {
-        "a": "Unrelated.",
-        "d": "Unrelated.",
-        "b": "Unrelated."
+        "a": "OT does not designate remote-work tools.",
+        "d": "OT does not designate tariff operations.",
+        "b": "OT does not designate file-transfer optimization."
       }
     },
     "ics-q32": {
@@ -56,9 +56,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A continuous process (furnace, water network, chemistry) does not stop without consequences. Restarts and patches are planned during technical shutdowns.",
       "whyWrong": {
-        "c": "That is not the reason.",
-        "d": "That is not the reason.",
-        "a": "That is not systematic."
+        "c": "Controllers have their own power supply: that is not the reason.",
+        "d": "A restart is not forbidden by the system: it can interrupt a process.",
+        "a": "A restart does not systematically erase the program."
       }
     },
     "ics-q33": {
@@ -234,8 +234,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The standard defines security levels SL 1 to 4, according to the resistance expected against increasingly capable attackers.",
       "whyWrong": {
-        "a": "That is not the scale.",
-        "b": "That is not the scale.",
+        "a": "Security levels do not run from A to Z.",
+        "b": "Security levels do not run from 1 to 100.",
         "c": "It does define some."
       }
     },
@@ -271,7 +271,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "The firewall does not encrypt.",
         "d": "No effect on PLCs.",
-        "a": "That is not the goal."
+        "a": "Filtering function codes does not remove authentication."
       }
     },
     "ics-q20": {
@@ -345,8 +345,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Without supervision, operators no longer see the process: the cut can itself cause an incident. The response is coordinated with operations.",
       "whyWrong": {
         "b": "It can on the contrary create a danger.",
-        "d": "Unrelated.",
-        "c": "Unrelated."
+        "d": "Cutting supervision does not speed up the process.",
+        "c": "Cutting the network does not encrypt any data."
       }
     },
     "ics-q28": {

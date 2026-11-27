@@ -124,7 +124,7 @@ export const bank: BankItem[] = [
   { id: 'fwa-q33', t: 'single', d: 3, s: ['f-exp-chaine'], p: 'Que fournit une nomenclature logicielle (SBOM) ?',
     o: ['La liste des composants et versions, pour évaluer l’exposition à une faille', 'La liste des utilisateurs autorisés à modifier le code de l’application', 'Le journal des attaques détectées sur le site au cours du mois', 'La sauvegarde chiffrée de tout le code source de l’application'],
     e: 'Une SBOM (CycloneDX, SPDX) permet, dès l’annonce d’une vulnérabilité dans un composant, de savoir en quelques minutes quelles applications l’embarquent et dans quelles versions.',
-    w: { 1: 'Ce n’est pas un contrôle d’accès.', 2: 'Ce n’est pas un journal d’attaques.', 3: 'Ce n’est pas une sauvegarde.' } },
+    w: { 1: 'Un SBOM ne liste pas les utilisateurs autorisés à modifier le code.', 2: 'Un SBOM n’est pas un journal d’attaques.', 3: 'Un SBOM n’est pas une sauvegarde du code source.' } },
   { id: 'fwa-q34', t: 'single', d: 2, s: ['f-exp-chaine'], p: 'Où ne faut-il jamais placer la clé secrète d’une API ?',
     o: ['Dans le code JavaScript envoyé au navigateur', 'Dans un coffre de secrets utilisé par le serveur', 'Dans une variable d’environnement du service d’arrière-plan', 'Dans un gestionnaire de secrets de l’outil de déploiement'],
     e: 'Tout ce qui est envoyé au navigateur est lisible par le visiteur : une clé secrète placée dans le JavaScript est publique. Les secrets restent côté serveur, dans un coffre.',

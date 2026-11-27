@@ -58,7 +58,7 @@ export const bank: BankItem[] = [
   { id: 'gop-q9', t: 'single', d: 2, s: ['m-tiers'], p: 'A company entrusts the processing of its customer data to a provider. What becomes of its responsibility?',
     o: ['It remains responsible and frames the provider', 'It is entirely transferred to the provider', 'It disappears if the provider is certified', 'It only concerns data on paper'],
     e: 'The organization remains responsible toward its customers and the authorities. It must choose a provider offering guarantees, frame the processing by contract and check its compliance.',
-    w: { 1: 'It is not transferred like that.', 2: 'A certification is an assessment element, not a transfer of responsibility.', 3: 'It concerns all data.' } },
+    w: { 1: 'Entrusting processing to a provider does not transfer responsibility: the company stays responsible.', 2: 'A certification is an assessment element, not a transfer of responsibility.', 3: 'It concerns all data.' } },
   { id: 'gop-q10', t: 'multi', d: 2, s: ['m-tiers'], p: 'Which clauses are relevant in a contract with a managed-services provider?', k: 3,
     o: ['Notification of security incidents within a set deadline', 'Right to audit', 'Framing of subcontracting and reversibility', 'Ban on the customer asking for security evidence'],
     e: 'Incident notification, right to audit, framing of subcontracting and reversibility are basic clauses for a provider with access to systems or data.',

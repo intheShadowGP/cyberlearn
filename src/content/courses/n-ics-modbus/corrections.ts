@@ -46,9 +46,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Les technologies opérationnelles (OT) regroupent les systèmes qui pilotent des procédés physiques : automates, supervision, capteurs, actionneurs.",
       "whyWrong": {
-        "a": "Sans rapport.",
-        "d": "Sans rapport.",
-        "b": "Sans rapport."
+        "a": "OT ne désigne pas les outils de télétravail.",
+        "d": "OT ne désigne pas des opérations tarifaires.",
+        "b": "OT ne désigne pas l’optimisation de transferts de fichiers."
       }
     },
     "ics-q32": {
@@ -56,9 +56,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un procédé continu (four, réseau d’eau, chimie) ne s’arrête pas sans conséquence. Les redémarrages et correctifs se planifient lors des arrêts techniques.",
       "whyWrong": {
-        "c": "Ce n’est pas la raison.",
-        "d": "Ce n’est pas la raison.",
-        "a": "Ce n’est pas systématique."
+        "c": "Les automates ont leur propre alimentation : ce n’est pas la raison.",
+        "d": "Un redémarrage n’est pas interdit par le système : il peut interrompre un procédé.",
+        "a": "Un redémarrage n’efface pas systématiquement le programme."
       }
     },
     "ics-q33": {
@@ -236,8 +236,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "La norme définit des niveaux de sécurité SL 1 à 4, selon la capacité de résistance attendue face à des attaquants de plus en plus capables.",
       "whyWrong": {
-        "a": "Ce n’est pas l’échelle.",
-        "b": "Ce n’est pas l’échelle.",
+        "a": "Les niveaux de sécurité ne vont pas de A à Z.",
+        "b": "Les niveaux de sécurité ne vont pas de 1 à 100.",
         "c": "Elle en définit."
       }
     },
@@ -273,7 +273,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Le pare-feu ne chiffre pas.",
         "d": "Sans effet sur les automates.",
-        "a": "Ce n’est pas le but."
+        "a": "Filtrer les codes fonction ne supprime pas l’authentification."
       }
     },
     "ics-q20": {
@@ -349,8 +349,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Sans supervision, les opérateurs ne voient plus le procédé : la coupure peut elle-même provoquer un incident. La réponse se coordonne avec l’exploitation.",
       "whyWrong": {
         "b": "Elle peut au contraire créer un danger.",
-        "d": "Sans rapport.",
-        "c": "Sans rapport."
+        "d": "Couper la supervision n’accélère pas le procédé.",
+        "c": "Couper le réseau ne chiffre aucune donnée."
       }
     },
     "ics-q28": {

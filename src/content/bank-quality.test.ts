@@ -46,6 +46,22 @@ describe.each([['fr'], ['en']] as const)('banques de questions (%s)', (lang) => 
     expect(stale, stale.join('\n')).toEqual([]);
   });
 
+  it('aucune explication de mauvaise réponse n’est une formule creuse (« Sans rapport. »)', () => {
+    const generic = lang === 'fr'
+      ? /^(sans rapport|ce n[\u2019']est pas|hors sujet|insuffisant|inexact|incorrect|aucun rapport|faux\b|non\b)/i
+      : /^(unrelated|not related|that is not|it is not|this is not|not its|irrelevant|insufficient|wrong|no link|not exact)/i;
+    const errors: string[] = [];
+    for (const [id, bank] of list) {
+      for (const q of bank) {
+        if (!('o' in q) || !q.w) continue;
+        for (const [k, text] of Object.entries(q.w)) {
+          const t = String(text).trim();
+          if (t.split(/\s+/).length <= 6 && generic.test(t)) errors.push(`${id}/${q.id} [${k}] : « ${t} »`);
+        }
+      }
+    }
+    expect(errors, errors.slice(0, 20).join('\n')).toEqual([]);
+  });
   it('chaque banque respecte la taille, la variété et l’absence d’indices', () => {
     const errors: string[] = [];
     for (const [id, bank] of list) {

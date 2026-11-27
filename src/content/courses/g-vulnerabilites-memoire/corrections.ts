@@ -4,14 +4,14 @@ import type { CourseCorrections } from '../../types';
 export const corrections: CourseCorrections = {
   courseId: "g-vulnerabilites-memoire",
   questions: {
-    "mem-q1": {
+    "mem-q41": {
       "type": "single",
       "correct": "c",
-      "explanation": "Les variables locales (non statiques) résident dans le cadre de pile de la fonction, créé à l’appel et détruit au retour. Le tas reçoit les allocations dynamiques.",
+      "explanation": "L’adresse de retour se trouve sur la pile, juste après les variables locales : en l’écrasant, l’attaquant choisit où le programme reprendra son exécution.",
       "whyWrong": {
-        "b": "Le tas reçoit les allocations dynamiques (malloc).",
-        "a": "Le segment de code contient les instructions.",
-        "d": "Le registre d’instruction contient l’adresse de l’instruction en cours."
+        "a": "Un débordement ne supprime aucun fichier par lui-même.",
+        "d": "Il ne désactive pas le système : il agit sur la mémoire du programme.",
+        "b": "Il ne se limite pas à la consommation de mémoire : il corrompt des données voisines."
       }
     },
     "mem-q2": {

@@ -31,7 +31,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "L’assembleur est de bas niveau et dépend du processeur.",
         "a": "Ce n’est pas un format de compression.",
-        "d": "Ce n’est pas un protocole réseau."
+        "d": "Un protocole d’échange est tout autre chose que le langage assembleur."
       }
     },
     "exec-q4": {

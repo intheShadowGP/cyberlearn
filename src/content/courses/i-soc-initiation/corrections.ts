@@ -20,7 +20,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le N1 lit les alertes, les qualifie, les clôt avec justification ou les escalade au niveau supérieur pour une investigation plus poussée.",
       "whyWrong": {
         "d": "L’architecture du réseau relève d’autres métiers.",
-        "b": "Ce n’est pas son rôle.",
+        "b": "Négocier avec les éditeurs n’est pas le rôle d’un analyste de niveau 1.",
         "c": "Le niveau 3 apporte une expertise que le N1 n’a pas à remplacer."
       }
     },
@@ -48,7 +48,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Plus l’intrusion est détectée tôt, moins l’attaquant a le temps d’étendre son accès et de nuire. Le SOC existe pour réduire ce délai.",
       "whyWrong": {
         "d": "La fréquence des sauvegardes compte pour la reprise, pas pour la détection.",
-        "a": "Sans rapport avec la sécurité.",
+        "a": "Le délai entre deux mises à jour du logo n’influence pas les dégâts d’une intrusion.",
         "b": "Les réunions ne mesurent pas la détection."
       }
     },
@@ -146,7 +146,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le SIEM centralise, normalise, conserve et corrèle les journaux, puis produit des alertes selon des règles.",
       "whyWrong": {
         "b": "Un routeur transmet du trafic ; il ne corrèle pas des journaux.",
-        "a": "Sans rapport avec la détection.",
+        "a": "Un traitement de texte ne collecte pas de journaux.",
         "d": "Un lecteur de courrier ne produit pas d’alertes de sécurité."
       }
     },

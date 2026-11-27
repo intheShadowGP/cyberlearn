@@ -136,7 +136,7 @@ export const bank: BankItem[] = [
   { id: 'cea-q36', t: 'single', d: 2, s: ['e-exp-avancees'], p: 'What does a zero-knowledge proof allow?',
     o: ['Proving a statement is true without revealing anything else', 'Making a signature impossible to verify by an outside person', 'Encrypting a message so that nobody can ever read it', 'Replacing the password with a hash kept on the server'],
     e: 'The prover convinces the verifier (for example that they are an adult or know a secret) without revealing anything else. The proof is sound, complete and zero-knowledge.',
-    w: { 1: 'A proof must on the contrary be verifiable.', 2: 'The goal is not to make the message unreadable.', 3: 'It is not about password storage.' } },
+    w: { 1: 'A proof must on the contrary be verifiable.', 2: 'The goal is not to make the message unreadable.', 3: 'A zero-knowledge proof does not replace the password with a hash kept on the server.' } },
   { id: 'cea-q37', t: 'short', d: 3, s: ['e-exp-avancees'], p: 'Which acronym designates the computation in which several parties jointly evaluate a function without revealing their respective inputs?', a: ['MPC', 'SMPC', 'multi-party computation', 'secure multi-party computation'], ph: 'acronym',
     e: 'Secure multi-party computation (MPC) lets organizations compute a joint statistic without sharing their data.' },
   { id: 'cea-q38', t: 'single', d: 3, s: ['e-exp-avancees'], p: 'Why is order-preserving encryption discouraged for sensitive data?',

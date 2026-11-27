@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "L’investigation numérique reconstitue les faits à partir de traces : quoi, quand, comment et parfois qui. Elle s’appuie sur une méthode qui garantit la valeur des preuves.",
       "whyWrong": {
         "d": "Le prix du matériel ne dit rien sur un incident.",
-        "a": "Sans rapport avec l’établissement des faits.",
+        "a": "La couleur des câbles n’intéresse pas une investigation numérique.",
         "b": "L’effectif n’est pas l’objet de l’enquête."
       }
     },
@@ -19,7 +19,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "On l’utilise pour comprendre une intrusion, une fuite de données, une fraude ou un litige, c’est-à-dire chaque fois qu’il faut établir des faits à partir de traces numériques.",
       "whyWrong": {
-        "d": "Sans rapport avec un incident.",
+        "d": "Choisir un fond d’écran n’a aucun rapport avec la forensique.",
         "a": "L’achat de matériel n’exige pas d’investigation.",
         "c": "Une réunion n’est pas une investigation."
       }
@@ -59,7 +59,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Elle établit les faits, leur date et leur mécanisme. Elle ne porte pas sur des prévisions financières.",
       "whyWrong": {
-        "c": "Sans rapport avec l’investigation."
+        "c": "Une investigation numérique ne prédit pas le cours de la bourse."
       }
     },
     "jfi-q7": {
@@ -240,8 +240,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Dates de création et de modification, auteur, appareil : ces données décrivent le fichier et aident à retracer son histoire.",
       "whyWrong": {
         "a": "Les métadonnées décrivent le contenu sans le reproduire.",
-        "d": "Ce n’est pas un logiciel malveillant.",
-        "c": "Ce n’est pas une copie."
+        "d": "Les métadonnées ne sont pas un virus : ce sont des informations sur le fichier.",
+        "c": "Les métadonnées ne sont pas une sauvegarde de sécurité."
       }
     },
     "jfi-q26": {
@@ -249,7 +249,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Les fichiers Prefetch gardent la trace de l’exécution d’un programme, avec le nombre d’exécutions et les dernières dates.",
       "whyWrong": {
-        "c": "Sans rapport avec l’exécution.",
+        "c": "Le papier peint ne garde aucune trace d’exécution.",
         "a": "Une corbeille vide n’est pas une trace d’exécution.",
         "b": "L’écran de veille n’enregistre pas d’exécution."
       }

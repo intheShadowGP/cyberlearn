@@ -138,7 +138,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Aucun mot de passe d’administrateur ne figure dans un échantillon.",
         "d": "Les chaînes décrivent le fichier, pas l’analyste.",
-        "a": "Ce n’est pas une donnée exploitable."
+        "a": "La date de naissance de l’auteur n’apparaît pas dans les chaînes d’un exécutable."
       }
     },
     "ami-q36": {
@@ -221,8 +221,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "On enregistre les fichiers créés ou modifiés, la persistance installée (registre, tâches, services) et les communications réseau, pour en tirer des indicateurs.",
       "whyWrong": {
-        "c": "Sans rapport avec le comportement.",
-        "b": "Sans rapport avec l’analyse.",
+        "c": "La couleur de l’écran n’est pas un comportement de l’échantillon.",
+        "b": "La météo n’a aucun lien avec l’exécution de l’échantillon.",
         "a": "Sans rapport avec le comportement du maliciel."
       }
     },

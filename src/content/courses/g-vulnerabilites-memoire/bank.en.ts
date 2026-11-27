@@ -6,10 +6,7 @@ import type { BankItem } from '../../bank';
  * The identifiers mem-q1 to mem-q16 reuse the course’s historical questions.
  */
 export const bank: BankItem[] = [
-  { id: 'mem-q1', t: 'single', d: 1, s: ['g-mem-layout'], p: 'Where are the local variables of a C function stored?',
-    o: ['On the stack, in the function’s frame', 'On the heap, among the dynamic allocations', 'In the program’s code segment', 'In the processor’s instruction register'],
-    e: 'Local (non-static) variables live in the function’s stack frame, created at the call and destroyed at the return. The heap receives dynamic allocations.',
-    w: { 1: 'The heap receives dynamic allocations (malloc).', 2: 'The code segment contains the instructions.', 3: 'The instruction register holds the address of the current instruction.' } },
+  { "id":"mem-q41","t":"single","d":1,"s":["g-mem-layout"],"p":"Why can a stack buffer overflow go beyond a simple crash?","o":["It can overwrite the return address and hijack the program’s execution","It automatically erases all the files on the machine’s hard disk","It disables the machine’s operating system for an hour","It only increases the memory consumption of the program concerned"],"e":"The return address sits on the stack, right after the local variables: by overwriting it, the attacker chooses where the program resumes execution.","w":{"1":"An overflow deletes no file by itself.","2":"It does not disable the system: it acts on the program’s memory.","3":"It is not limited to memory consumption: it corrupts neighboring data."} },
   { id: 'mem-q2', t: 'truefalse', d: 1, s: ['g-mem-layout'], p: 'Memory allocated by malloc must be explicitly freed by the programmer.', v: true,
     e: 'In C, the heap has no garbage collector: each malloc must match exactly one free. Forgetting a free creates a leak; doing two creates a double free; using after free creates a use-after-free.' },
   { id: 'mem-q3', t: 'short', d: 2, s: ['g-mem-layout', 'g-mem-vulns'], p: 'Which stack data does a buffer overflow typically seek to overwrite to hijack execution? (two words)', a: ['return address', 'the return address', 'saved return address'], ph: 'two words',
@@ -117,7 +114,7 @@ export const bank: BankItem[] = [
   { id: 'mem-q31', t: 'single', d: 3, s: ['g-mem-tas'], p: 'What does heap spraying consist in?',
     o: ['Filling the heap with objects to place controlled data', 'Deleting all the allocated blocks at once to free memory', 'Spreading allocations over several heaps to balance the load', 'Encrypting the heap’s blocks with a different key for each'],
     e: 'The attacker triggers many allocations containing their data so that a use-after-free or an overflow lands on controlled content, despite address randomization.',
-    w: { 1: 'It is not a mass freeing.', 2: 'It is not load balancing.', 3: 'It is not about encryption.' } },
+    w: { 1: 'Heap spraying does not free memory: it fills the heap with chosen objects.', 2: 'It does not balance load across heaps: it places controlled data at predictable addresses.', 3: 'It does not encrypt blocks: it floods the heap with attacker-controlled content.' } },
   { id: 'mem-q32', t: 'multi', d: 3, s: ['g-mem-tas'], p: 'Which practices reduce heap management errors?', k: 3,
     o: ['A clear ownership rule for each allocation', 'Setting the pointer to NULL after freeing it', 'Using a hardened allocator when possible', 'Freeing the same area from several functions without coordination'],
     e: 'A single owner, pointers reset to NULL and a hardened allocator limit double free and use-after-free. Freeing without coordination is the typical cause of these errors.',

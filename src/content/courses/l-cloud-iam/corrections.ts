@@ -125,7 +125,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Une clé statique copiée dans un dépôt, un poste ou une image reste utilisable tant qu’elle n’est pas révoquée. Les identités temporaires expirent d’elles-mêmes.",
       "whyWrong": {
-        "b": "Ce n’est pas le problème.",
+        "b": "Une clé de longue durée n’est pas un problème de rapidité.",
         "d": "Elles ne sont pas chiffrées par nature.",
         "c": "Les appels peuvent être journalisés."
       }
@@ -163,7 +163,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Chaque modification crée une nouvelle version : une suppression ou un écrasement malveillant ou accidentel reste récupérable. On l’associe à une protection contre la suppression.",
       "whyWrong": {
         "d": "Sans effet de performance.",
-        "b": "Sans rapport avec l’accès public.",
+        "b": "Le versionnement ne rend pas le compartiment public.",
         "a": "Elle ne touche pas aux journaux."
       }
     },
@@ -251,7 +251,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "C’est précisément ce qu’il faut éviter.",
         "a": "La MFA se renforce avec le SSO.",
-        "d": "Sans rapport avec l’exposition."
+        "d": "Le SSO ne rend pas un service public."
       }
     },
     "cl-q18": {
@@ -315,7 +315,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un attaquant qui compromet un compte cherche à effacer ses traces. Des journaux envoyés ailleurs, en écriture seule, restent exploitables.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
+        "d": "Séparer les journaux n’a pas pour but de réduire leur taille.",
         "a": "Les alertes restent actives.",
         "c": "Les journaux ne doivent pas être publics."
       }

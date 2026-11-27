@@ -381,7 +381,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "They are not always wrong: the risk is their manipulation.",
         "a": "A command is text; its execution is the problem.",
-        "d": "It is not a memory issue."
+        "d": "Memory use is not the reason: the issue is that the output may be manipulated."
       }
     },
     "ia-q42": {

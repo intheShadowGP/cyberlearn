@@ -250,7 +250,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Il ne s’agit pas d’un mot de passe stocké dans le registre.",
         "d": "La rotation automatique est une bonne pratique, pas une attaque.",
-        "a": "Ce n’est pas un certificat racine."
+        "a": "Des certificats racines installés à l’insu de l’utilisateur sont une autre attaque."
       }
     },
     "dwd-q28": {

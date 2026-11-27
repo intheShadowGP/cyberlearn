@@ -92,7 +92,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "Ce n’est pas une question de coût.",
         "c": "Cette limite n’existe pas.",
-        "a": "Sans rapport avec la vitesse."
+        "a": "Limiter les administrateurs généraux n’accélère pas les connexions."
       }
     },
     "mch-q33": {
@@ -283,7 +283,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Un attaquant qui obtient des droits élevés cherche à effacer ses traces. Des journaux écrits dans un compte séparé, en écriture seule, restent exploitables.",
       "whyWrong": {
-        "a": "Ce n’est pas le but.",
+        "a": "Centraliser les journaux n’a pas pour but de réduire la facture de stockage.",
         "b": "Les alertes restent nécessaires.",
         "d": "Le contrôle d’accès reste nécessaire."
       }
@@ -321,9 +321,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Les services de gestion de clés (KMS, Key Vault, Cloud KMS) créent et conservent les clés, contrôlent qui peut les utiliser et journalisent chaque usage.",
       "whyWrong": {
-        "b": "Ce n’est pas leur fonction.",
+        "b": "Un service de messagerie ne gère pas les clés de chiffrement.",
         "c": "Il répartit le trafic.",
-        "d": "Sans rapport."
+        "d": "Un service d’impression ne gère pas les clés de chiffrement."
       }
     },
     "mch-q25": {

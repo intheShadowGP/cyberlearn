@@ -134,7 +134,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The organization remains responsible toward its customers and the authorities. It must choose a provider offering guarantees, frame the processing by contract and check its compliance.",
       "whyWrong": {
-        "d": "It is not transferred like that.",
+        "d": "Entrusting processing to a provider does not transfer responsibility: the company stays responsible.",
         "c": "A certification is an assessment element, not a transfer of responsibility.",
         "b": "It concerns all data."
       }
