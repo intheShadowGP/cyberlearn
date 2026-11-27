@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Les correctifs, la surveillance, la sauvegarde et le contrôle d’accès supposent de connaître les actifs. Un serveur absent de l’inventaire n’est ni corrigé ni surveillé : c’est souvent par lui qu’arrive l’incident.",
       "whyWrong": {
         "c": "Il ne remplace aucun outil.",
-        "d": "Ce n’est pas la raison.",
+        "d": "Les assureurs n’imposent pas tous cet inventaire : la raison est de protéger ce que l’on connaît.",
         "b": "Il ne chiffre rien."
       }
     },
@@ -227,7 +227,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Le clic dépend beaucoup de la difficulté du scénario. Le signalement mesure ce que l’on veut obtenir : des personnes qui alertent le SOC.",
       "whyWrong": {
-        "d": "Ce n’est pas la raison.",
+        "d": "Le taux de signalement n’est pas toujours plus bas que le taux de clic.",
         "b": "La formation reste nécessaire.",
         "a": "Aucune loi ne l’exige."
       }
@@ -239,7 +239,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Une déclaration n’est pas une preuve.",
         "a": "Peu convaincant.",
-        "c": "Non vérifiable."
+        "c": "Un courriel sans date ni signataire n’est pas une preuve vérifiable."
       }
     },
     "gop-q17": {
@@ -258,8 +258,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La revue des accès confronte les droits réels aux besoins de chaque personne, fait valider les listes par les responsables et retire ce qui n’est plus justifié.",
       "whyWrong": {
         "b": "Ce serait une faute.",
-        "c": "Ce n’est pas son objet.",
-        "a": "Ce n’est pas son objet."
+        "c": "L’état du matériel relève de la maintenance, pas de la revue des accès.",
+        "a": "Le paiement des licences n’est pas l’objet de la revue des accès."
       }
     },
     "gop-q19": {
@@ -267,7 +267,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un compte d’administration compromis donne accès à de nombreux systèmes. On limite leur nombre, on exige une authentification renforcée et on journalise leurs actions.",
       "whyWrong": {
-        "a": "Ce n’est pas la raison.",
+        "a": "Le suivi renforcé n’est pas lié aux licences.",
         "d": "Ils n’affectent pas le réseau.",
         "c": "Ils ne sont pas interdits."
       }
@@ -277,9 +277,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Au fil des mutations, une personne conserve les droits de ses postes successifs et finit par cumuler des accès qu’aucun poste ne justifie. La revue lors des mutations l’évite.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "c": "Sans rapport.",
-        "d": "Sans rapport."
+        "b": "Une hausse de salaire n’est pas une accumulation de droits d’accès.",
+        "c": "Le renouvellement d’une licence n’est pas une accumulation de droits.",
+        "d": "Une mise à jour système n’est pas une accumulation de droits."
       }
     },
     "gop-q21": {
@@ -326,7 +326,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Le cycle de gestion des incidents comprend la préparation, la détection et l’analyse, le confinement, l’éradication et le rétablissement, puis le retour d’expérience.",
       "whyWrong": {
         "c": "Ce sont des étapes d’achat.",
-        "b": "Ce n’est pas le cycle.",
+        "b": "Ces étapes relèvent de la gestion de projet, pas de la gestion d’incident.",
         "a": "Ce sont des opérations sur les données."
       }
     },
@@ -335,9 +335,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le retour d’expérience identifie les causes profondes et les défauts de détection ou de réponse, puis déclenche des actions d’amélioration, sans chercher de coupable.",
       "whyWrong": {
-        "c": "Ce n’est pas son but.",
+        "c": "Le retour d’expérience ne vise pas à désigner un coupable.",
         "a": "On les conserve.",
-        "d": "Ce n’est pas son but."
+        "d": "Il ne retarde pas la remise en service : il en tire des améliorations."
       }
     },
     "gop-q27": {

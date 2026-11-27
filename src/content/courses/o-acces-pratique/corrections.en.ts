@@ -19,7 +19,7 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Joining, moving and leaving are the three moments when rights must be created, adjusted and then removed.",
       "whyWrong": {
-        "d": "That is not an account lifecycle.",
+        "d": "Creation, printing and archiving describe documents, not account lifecycle events.",
         "b": "That concerns software.",
         "c": "That concerns hardware."
       }
@@ -68,7 +68,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Groups, department attributes and account state feed the access rules. The brand of the personal computer plays no role.",
       "whyWrong": {
-        "b": "Unrelated to rights."
+        "b": "The brand of the computer is not a directory attribute used to decide access."
       }
     },
     "opr-q8": {

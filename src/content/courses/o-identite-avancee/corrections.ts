@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Le point de décision (PDP) évalue la demande à l’aide des politiques ; le point d’application (PEP) exécute ensuite la décision devant la ressource.",
       "whyWrong": {
-        "b": "Sans rapport avec les décisions.",
-        "c": "Sans rapport avec les décisions.",
+        "b": "Un serveur d’impression n’évalue aucune politique d’accès.",
+        "c": "Un routeur d’accès à Internet n’évalue pas des politiques d’accès aux applications.",
         "a": "Il n’est pas fiable pour décider."
       }
     },
@@ -30,7 +30,7 @@ export const corrections: CourseCorrections = {
       "explanation": "OAuth 2.0 est un cadre de délégation d’accès à des ressources. OpenID Connect s’y ajoute pour fournir l’identité authentifiée de l’utilisateur.",
       "whyWrong": {
         "a": "Les rôles sont inversés.",
-        "c": "Sans rapport avec le chiffrement.",
+        "c": "OpenID Connect et OAuth 2.0 ne chiffrent pas de disques.",
         "d": "Ils fonctionnent sur Internet."
       }
     },
@@ -84,9 +84,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "L’appareil (géré, chiffré, à jour), la localisation, le risque et la sensibilité de l’action entrent dans la décision, en plus de l’identité.",
       "whyWrong": {
-        "b": "Sans rapport avec le risque.",
-        "a": "Sans rapport avec le risque.",
-        "d": "Sans rapport avec le risque."
+        "b": "Le fond d’écran n’est pas un signal de risque.",
+        "a": "Le nombre de fichiers n’est pas un signal d’accès.",
+        "d": "La marque du clavier n’est pas un signal de risque."
       }
     },
     "oia-q10": {
@@ -142,7 +142,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "Cela supprime toute décision.",
         "c": "Une liste fixe ne tient pas compte du contexte.",
-        "a": "Ce n’est pas un contrôle."
+        "a": "Un accès ouvert à tous les salariés ignore la sensibilité de la ressource."
       }
     },
     "oia-q16": {
@@ -150,9 +150,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Trop de rôles rend le modèle illisible : on ne sait plus qui a quoi, et on accorde des rôles trop larges. On combine rôles et attributs pour garder un modèle lisible.",
       "whyWrong": {
-        "b": "Sans rapport.",
-        "d": "Sans rapport.",
-        "c": "Sans rapport."
+        "b": "Le nombre de rôles n’influence pas la bande passante.",
+        "d": "Il ne supprime pas les comptes.",
+        "c": "Il ne renforce pas le chiffrement."
       }
     },
     "oia-q17": {
@@ -194,7 +194,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Demandeur, ressource, action, politique et résultat permettent de rejouer et d’expliquer la décision. Le thème de l’interface n’a aucun intérêt.",
       "whyWrong": {
-        "d": "Sans rapport avec l’audit."
+        "d": "La couleur du thème n’a aucun intérêt pour auditer une décision."
       }
     },
     "oia-q22": {
@@ -202,9 +202,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Un secret durable copié dans un dépôt ou une image reste utile à qui l’obtient. Des identités de courte durée réduisent cet intérêt.",
       "whyWrong": {
-        "c": "Ce n’est pas son effet.",
-        "a": "Ce n’est pas son effet.",
-        "b": "Ce n’est pas son effet."
+        "c": "Un secret statique n’accélère pas les échanges.",
+        "a": "Il ne supprime pas le besoin de journalisation.",
+        "b": "Il n’empêche pas les attaques : il les facilite."
       }
     },
     "oia-q23": {
@@ -269,9 +269,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Toutes les applications fédérées lui font confiance : un attaquant qui le contrôle peut se faire passer pour n’importe quel utilisateur.",
       "whyWrong": {
-        "a": "Ce n’est pas ce qu’il stocke.",
-        "d": "Il est relié à toutes les applications fédérées.",
-        "b": "Il journalise les connexions."
+        "a": "Le fournisseur d’identité stocke des identités, pas des images publiques.",
+        "d": "Il est relié à de nombreuses applications fédérées.",
+        "b": "Il journalise les connexions : c’est justement ce qui rend son suivi utile."
       }
     },
     "oia-q30": {
@@ -328,8 +328,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Si le fournisseur principal tombe, ces comptes permettent de restaurer l’accès. Ils sont rares, scellés et leur usage déclenche une alerte.",
       "whyWrong": {
         "c": "Ils ne dispensent pas de protection.",
-        "d": "Ce n’est pas leur rôle.",
-        "a": "Ce n’est pas leur rôle."
+        "d": "Les comptes d’urgence ne remplacent pas définitivement les comptes nominatifs.",
+        "a": "Ils ne donnent pas d’accès permanent à chaque administrateur."
       }
     },
     "oia-q36": {
@@ -338,7 +338,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Avec les clés de signature, un attaquant fabrique des jetons valides. Il faut les remplacer et rendre invalides les jetons émis avec les anciennes clés.",
       "whyWrong": {
         "d": "L’attente laisse l’attaquant agir.",
-        "b": "Insuffisant.",
+        "b": "Informer seulement les utilisateurs ne règle pas la compromission des clés.",
         "a": "On perdrait les preuves."
       }
     },
@@ -347,9 +347,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "L’exercice valide que les comptes d’urgence, les sauvegardes et la procédure de restauration fonctionnent réellement et révèle les dépendances oubliées.",
       "whyWrong": {
-        "a": "Sans rapport.",
+        "a": "La vitesse de frappe n’a aucun lien avec la résilience.",
         "b": "Trop partiel.",
-        "c": "Sans rapport."
+        "c": "La couleur de l’interface n’a aucun lien avec la résilience."
       }
     },
     "oia-q38": {

@@ -9,8 +9,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The decision point (PDP) evaluates the request using policies; the enforcement point (PEP) then carries out the decision in front of the resource.",
       "whyWrong": {
-        "b": "Unrelated to decisions.",
-        "c": "Unrelated to decisions.",
+        "b": "A print server evaluates no access policy.",
+        "c": "An Internet access router does not evaluate access policies for applications.",
         "a": "It cannot be trusted to decide."
       }
     },
@@ -30,7 +30,7 @@ export const corrections: CourseCorrections = {
       "explanation": "OAuth 2.0 is a framework for delegating access to resources. OpenID Connect is added on top to provide the authenticated identity of the user.",
       "whyWrong": {
         "a": "The roles are swapped.",
-        "c": "Unrelated to encryption.",
+        "c": "OpenID Connect and OAuth 2.0 do not encrypt disks.",
         "d": "They work over the Internet."
       }
     },
@@ -66,7 +66,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Signature, issuer, audience and expiry guarantee that the token is authentic, meant for this service and still valid. Its length proves nothing.",
       "whyWrong": {
-        "c": "That is not a validity criterion."
+        "c": "The length of the token in characters proves nothing about its authenticity."
       }
     },
     "oia-q8": {
@@ -84,9 +84,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The device (managed, encrypted, up to date), location, risk and sensitivity of the action enter the decision, in addition to identity.",
       "whyWrong": {
-        "b": "Unrelated to risk.",
-        "a": "Unrelated to risk.",
-        "d": "Unrelated to risk."
+        "b": "The wallpaper is not a risk signal.",
+        "a": "The number of files is not an access signal.",
+        "d": "The keyboard brand is not a risk signal."
       }
     },
     "oia-q10": {
@@ -141,7 +141,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "That removes any decision.",
         "c": "A fixed list ignores context.",
-        "a": "That is not a control."
+        "a": "Open access for all employees ignores the resource’s sensitivity."
       }
     },
     "oia-q16": {
@@ -149,9 +149,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Too many roles make the model unreadable: nobody knows who has what, and overly broad roles get granted. Roles and attributes are combined to keep the model readable.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "d": "Unrelated.",
-        "c": "Unrelated."
+        "b": "The number of roles does not affect bandwidth.",
+        "d": "It does not delete accounts.",
+        "c": "It does not strengthen encryption."
       }
     },
     "oia-q17": {
@@ -192,7 +192,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Requester, resource, action, policy and result make it possible to replay and explain the decision. The interface theme is of no interest.",
       "whyWrong": {
-        "d": "Unrelated to auditing."
+        "d": "The theme’s color has no value for auditing a decision."
       }
     },
     "oia-q22": {
@@ -200,9 +200,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A long-lived secret copied into a repository or an image remains useful to whoever obtains it. Short-lived identities reduce that value.",
       "whyWrong": {
-        "c": "That is not its effect.",
-        "a": "That is not its effect.",
-        "b": "That is not its effect."
+        "c": "A static secret does not speed up exchanges.",
+        "a": "It does not remove the need for logging.",
+        "b": "It does not prevent attacks: it makes them easier."
       }
     },
     "oia-q23": {
@@ -268,9 +268,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "All federated applications trust it: an attacker who controls it can impersonate any user.",
       "whyWrong": {
-        "a": "That is not what it stores.",
-        "d": "It is connected to all federated applications.",
-        "b": "It logs sign-ins."
+        "a": "The identity provider stores identities, not public images.",
+        "d": "It is linked to many federated applications.",
+        "b": "It logs sign-ins: that is exactly what makes monitoring it useful."
       }
     },
     "oia-q30": {
@@ -327,8 +327,8 @@ export const corrections: CourseCorrections = {
       "explanation": "If the main provider goes down, these accounts make it possible to restore access. They are rare, sealed and their use triggers an alert.",
       "whyWrong": {
         "c": "They do not exempt from protection.",
-        "d": "That is not their role.",
-        "a": "That is not their role."
+        "d": "Emergency accounts do not permanently replace named accounts.",
+        "a": "They do not give permanent access to each administrator."
       }
     },
     "oia-q36": {
@@ -337,7 +337,7 @@ export const corrections: CourseCorrections = {
       "explanation": "With the signing keys, an attacker forges valid tokens. They must be replaced and the tokens issued with the old keys made invalid.",
       "whyWrong": {
         "d": "Waiting lets the attacker act.",
-        "b": "Insufficient.",
+        "b": "Informing only end users does not solve the key compromise.",
         "a": "You would lose the evidence."
       }
     },
@@ -346,9 +346,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "The exercise validates that emergency accounts, backups and the restoration procedure really work, and reveals forgotten dependencies.",
       "whyWrong": {
-        "a": "Unrelated.",
+        "a": "Typing speed has no link with resilience.",
         "b": "Too partial.",
-        "c": "Unrelated."
+        "c": "The sign-in interface color has no link with resilience."
       }
     },
     "oia-q38": {

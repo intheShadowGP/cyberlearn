@@ -44,8 +44,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Un dictionnaire de jetons (en-têtes, mots-clés, constantes magiques) permet au fuzzer de franchir rapidement les comparaisons qui protègent les parties profondes de l’analyseur.",
       "whyWrong": {
-        "d": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
+        "d": "Un dictionnaire n’a pas de fonction de traduction.",
+        "c": "Il ne chiffre pas le corpus : il fournit des éléments du format.",
         "a": "C’est l’inverse de l’objectif."
       }
     },
@@ -89,9 +89,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Chaque branche dépendant d’une entrée double potentiellement le nombre de chemins : les boucles et les gros programmes deviennent intraitables. D’où les approches hybrides qui n’utilisent le solveur que pour franchir des conditions précises.",
       "whyWrong": {
-        "c": "Sans rapport avec la méthode.",
-        "b": "Sans rapport avec la méthode.",
-        "d": "Sans rapport avec la méthode."
+        "c": "L’obstacle n’est pas l’absence de compilateur : c’est le nombre de chemins.",
+        "b": "Le chiffrement des binaires n’est pas systématique.",
+        "d": "La taille de l’écran n’a aucun rapport."
       }
     },
     "fz-q11": {
@@ -178,7 +178,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Rejouer à chaque changement les entrées déjà utiles et les anciens plantages corrigés garantit qu’un défaut corrigé ne revient pas, pour un coût de quelques secondes.",
       "whyWrong": {
         "c": "Il inclut aussi les entrées déjà corrigées.",
-        "a": "Sans rapport avec le corpus.",
+        "a": "Un corpus de régression ne contient pas de mots de passe.",
         "d": "Il ne s’agit pas du code source."
       }
     },
@@ -235,7 +235,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Il ne dit rien des zones non atteintes.",
         "c": "Il ne mesure pas l’exploration.",
-        "b": "Sans rapport avec l’exploration."
+        "b": "La taille du binaire n’indique pas les zones non explorées."
       }
     },
     "fz-q26": {
@@ -245,7 +245,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Ce n’est pas une limite du format.",
         "d": "Ils sont analysés par les programmes.",
-        "c": "Sans rapport avec la détection."
+        "c": "Les mutations d’octets ne sont pas toutes inefficaces : elles échouent sur les contrôles de structure."
       }
     },
     "fz-q27": {
@@ -253,9 +253,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "La même entrée est fournie à plusieurs implémentations d’une spécification : toute divergence est signalée, même sans plantage.",
       "whyWrong": {
-        "c": "Ce n’est pas la définition.",
-        "a": "Ce n’est pas la définition.",
-        "d": "Ce n’est pas la définition."
+        "c": "Comparer le poids de deux binaires n’est pas du fuzzing différentiel.",
+        "a": "Le fuzzing différentiel ne se limite pas aux différences de version.",
+        "d": "Il ne remplace pas les sanitizers par des tests manuels."
       }
     },
     "fz-q28": {
@@ -263,8 +263,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Il met en évidence des validations trop permissives et des ambiguïtés d’interprétation qui ne provoquent aucun plantage, mais qu’un attaquant peut exploiter.",
       "whyWrong": {
-        "a": "Ce n’est pas son domaine.",
-        "b": "Ce n’est pas son domaine.",
+        "a": "Le fuzzing ne détecte pas les erreurs de compilation du projet.",
+        "b": "Il ne détecte pas les défauts de mise en page.",
         "d": "Le fuzzing classique suffit pour ceux-là."
       }
     },
@@ -321,8 +321,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Les approches hybrides laissent le fuzzing explorer vite et ne sollicitent le solveur que pour franchir des conditions précises : on limite l’explosion des chemins.",
       "whyWrong": {
         "d": "Ne mélange pas deux méthodes.",
-        "b": "Sans rapport avec l’analyse.",
-        "a": "Sans rapport avec l’analyse."
+        "b": "Obfusquer le harnais n’associe pas fuzzing et exécution symbolique.",
+        "a": "Réécrire le compilateur n’est pas une approche hybride."
       }
     },
     "fz-q35": {
@@ -350,9 +350,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "ASan et UBSan insèrent des contrôles qui signalent immédiatement les accès mémoire invalides et les comportements indéfinis.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "a": "Sans rapport.",
-        "c": "Sans rapport."
+        "d": "Un sanitizer n’évalue pas la documentation.",
+        "a": "Il ne compte pas les développeurs.",
+        "c": "Il ne mesure pas la vitesse du réseau local."
       }
     },
     "fz-q39": {

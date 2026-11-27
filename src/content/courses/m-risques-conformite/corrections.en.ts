@@ -88,7 +88,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "Guide to controls, not certifiable.",
         "c": "Risk management guide.",
-        "b": "Non-certifiable framework."
+        "b": "NIST CSF is a voluntary framework, not a certifiable standard."
       }
     },
     "gov-q6": {
@@ -142,8 +142,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The internal audit is required by the standard: it checks that the system is compliant and effective, and prepares the certification audit by revealing the gaps to correct.",
       "whyWrong": {
         "c": "It does not replace it.",
-        "d": "That is not its purpose.",
-        "a": "That is not its purpose."
+        "d": "Choosing tools is not the subject of the internal audit.",
+        "a": "Training employees is not the role of the internal audit."
       }
     },
     "gov-q9": {
@@ -260,9 +260,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "The CISO defines and enforces the policy, tracks risks and indicators, and reports to management. They replace neither the technical teams nor the legal department.",
       "whyWrong": {
-        "b": "That is not their role.",
-        "c": "That is not their role.",
-        "d": "That is not their role."
+        "b": "The CISO does not administer all the servers alone.",
+        "c": "They do not replace the legal department.",
+        "d": "Buying equipment is not their main role."
       }
     },
     "gov-q19": {
@@ -270,9 +270,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "A frozen policy becomes unsuitable: new services, new threats, new obligations. It is reviewed at least annually and at each major change.",
       "whyWrong": {
-        "d": "That is not the goal.",
+        "d": "The review is not meant to change the layout.",
         "a": "It does not expire that way.",
-        "b": "That is not the goal."
+        "b": "It is not meant to remove all measures."
       }
     },
     "gov-q20": {
@@ -281,8 +281,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Management examines indicators, audits, incidents and risks, then decides on resources and improvements: it is the “check / act” of the PDCA cycle.",
       "whyWrong": {
         "b": "It does not replace it.",
-        "c": "That is not its purpose.",
-        "a": "That is not its purpose."
+        "c": "Choosing equipment brands is not the subject of the management review.",
+        "a": "Fixing technical vulnerabilities is not its role."
       }
     },
     "gov-q21": {
@@ -316,9 +316,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The business continuity plan describes how to maintain essential activities during an incident, often in degraded mode.",
       "whyWrong": {
-        "d": "That is not its meaning.",
-        "c": "That is not its meaning.",
-        "a": "That is not its meaning."
+        "d": "BCP is not an access control plan.",
+        "c": "BCP is not an encryption procedure.",
+        "a": "BCP is not an asset mapping."
       }
     },
     "gov-q25": {
@@ -336,7 +336,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The BCP aims to continue essential activities during the incident; the DRP describes how to restore systems after a disaster. The two complement each other.",
       "whyWrong": {
-        "d": "No link with size.",
+        "d": "A BCP is not reserved for small companies: any organization needs one.",
         "a": "They complement each other.",
         "b": "They are distinct."
       }
@@ -348,7 +348,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "It does not choose any.",
         "b": "It complements it.",
-        "a": "That is not its purpose."
+        "a": "The BIA does not measure customer satisfaction."
       }
     },
     "gov-q28": {

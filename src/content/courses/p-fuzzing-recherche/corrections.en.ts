@@ -44,8 +44,8 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A dictionary of tokens (headers, keywords, magic constants) lets the fuzzer quickly pass the comparisons that guard the deep parts of the parser.",
       "whyWrong": {
-        "d": "That is not its role.",
-        "c": "That is not its role.",
+        "d": "A dictionary has no translation function.",
+        "c": "It does not encrypt the corpus: it supplies format elements.",
         "a": "That is the opposite of the goal."
       }
     },
@@ -89,9 +89,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Each branch depending on an input potentially doubles the number of paths: loops and large programs become intractable. Hence the hybrid approaches that only use the solver to get past precise conditions.",
       "whyWrong": {
-        "c": "Unrelated to the method.",
-        "b": "Unrelated to the method.",
-        "d": "Unrelated to the method."
+        "c": "The obstacle is not the lack of a compiler: it is the number of paths.",
+        "b": "Binary encryption is not systematic.",
+        "d": "The screen size has no relevance."
       }
     },
     "fz-q11": {
@@ -178,8 +178,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Replaying at every change the inputs that were already useful and the old fixed crashes guarantees that a fixed defect does not come back, at a cost of a few seconds.",
       "whyWrong": {
         "c": "It also includes inputs already fixed.",
-        "a": "Unrelated to the corpus.",
-        "d": "It is not the source code."
+        "a": "A regression corpus contains no passwords.",
+        "d": "The complete source code is not a corpus of inputs."
       }
     },
     "fz-q20": {
@@ -235,7 +235,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "It says nothing about zones not reached.",
         "c": "It does not measure exploration.",
-        "b": "Unrelated to exploration."
+        "b": "The binary’s size does not indicate unexplored areas."
       }
     },
     "fz-q26": {
@@ -245,7 +245,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "a": "That is not a limit of the format.",
         "d": "They are parsed by programs.",
-        "c": "Unrelated to detection."
+        "c": "Byte mutations are not all ineffective: they fail on structure checks."
       }
     },
     "fz-q27": {
@@ -253,9 +253,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The same input is given to several implementations of a specification: any divergence is reported, even without a crash.",
       "whyWrong": {
-        "c": "That is not the definition.",
-        "a": "That is not the definition.",
-        "d": "That is not the definition."
+        "c": "Comparing the weight of two binaries is not differential fuzzing.",
+        "a": "Differential fuzzing is not limited to version differences.",
+        "d": "It does not replace sanitizers with manual tests."
       }
     },
     "fz-q28": {
@@ -263,8 +263,8 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "It highlights over-permissive validations and interpretation ambiguities that cause no crash, but that an attacker can exploit.",
       "whyWrong": {
-        "a": "That is not its domain.",
-        "b": "That is not its domain.",
+        "a": "Fuzzing does not detect project build errors.",
+        "b": "It does not detect layout defects.",
         "d": "Classic fuzzing is enough for those."
       }
     },
@@ -321,8 +321,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Hybrid approaches let fuzzing explore quickly and only call on the solver to get past precise conditions: path explosion is limited.",
       "whyWrong": {
         "d": "It does not mix two methods.",
-        "b": "Unrelated to the analysis.",
-        "a": "Unrelated to the analysis."
+        "b": "Obfuscating the harness does not combine fuzzing and symbolic execution.",
+        "a": "Rewriting the compiler is not a hybrid approach."
       }
     },
     "fz-q35": {
@@ -350,9 +350,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "ASan and UBSan insert checks that immediately report invalid memory accesses and undefined behavior.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "a": "Unrelated.",
-        "c": "Unrelated."
+        "d": "A sanitizer does not assess documentation.",
+        "a": "It does not count developers.",
+        "c": "It does not measure local network speed."
       }
     },
     "fz-q39": {

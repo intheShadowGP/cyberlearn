@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Patching, monitoring, backup and access control all assume knowing the assets. A server missing from the inventory is neither patched nor monitored: the incident often arrives through it.",
       "whyWrong": {
         "c": "It replaces no tool.",
-        "d": "That is not the reason.",
+        "d": "Not all insurers require this inventory: the reason is to protect what you know.",
         "b": "It encrypts nothing."
       }
     },
@@ -226,7 +226,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Clicking depends a lot on the difficulty of the scenario. Reporting measures what you want to obtain: people who alert the SOC.",
       "whyWrong": {
-        "d": "That is not the reason.",
+        "d": "The reporting rate is not always lower than the click rate.",
         "b": "Training remains necessary.",
         "a": "No law requires it."
       }
@@ -238,7 +238,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "d": "A statement is not evidence.",
         "a": "Not very convincing.",
-        "c": "Not verifiable."
+        "c": "An email with no date or signatory is not verifiable evidence."
       }
     },
     "gop-q17": {
@@ -257,8 +257,8 @@ export const corrections: CourseCorrections = {
       "explanation": "The access review compares real rights with each person’s needs, has the lists validated by managers and removes what is no longer justified.",
       "whyWrong": {
         "b": "That would be a fault.",
-        "c": "That is not its purpose.",
-        "a": "That is not its purpose."
+        "c": "Hardware condition is maintenance, not access review.",
+        "a": "Paying licenses is not the subject of the access review."
       }
     },
     "gop-q19": {
@@ -266,7 +266,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "A compromised administration account gives access to many systems. Their number is limited, strong authentication is required and their actions are logged.",
       "whyWrong": {
-        "a": "That is not the reason.",
+        "a": "Enhanced monitoring is not tied to licenses.",
         "d": "They do not affect the network.",
         "c": "They are not banned."
       }
@@ -276,9 +276,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Over successive transfers, a person keeps the rights of their successive positions and ends up with access that no position justifies. Review at transfers prevents it.",
       "whyWrong": {
-        "b": "Unrelated.",
-        "c": "Unrelated.",
-        "d": "Unrelated."
+        "b": "A pay rise is not an accumulation of access rights.",
+        "c": "Renewing a license is not an accumulation of rights.",
+        "d": "A system update is not an accumulation of rights."
       }
     },
     "gop-q21": {
@@ -323,7 +323,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The incident handling cycle includes preparation, detection and analysis, containment, eradication and recovery, then lessons learned.",
       "whyWrong": {
         "c": "Those are purchasing steps.",
-        "b": "That is not the cycle.",
+        "b": "These steps belong to project management, not incident handling.",
         "a": "Those are data operations."
       }
     },
@@ -332,9 +332,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The review identifies root causes and detection or response flaws, then triggers improvement actions, without looking for someone to blame.",
       "whyWrong": {
-        "c": "That is not its purpose.",
+        "c": "The lessons-learned review is not meant to name a culprit.",
         "a": "They are kept.",
-        "d": "That is not its purpose."
+        "d": "It does not delay return to service: it draws improvements from it."
       }
     },
     "gop-q27": {

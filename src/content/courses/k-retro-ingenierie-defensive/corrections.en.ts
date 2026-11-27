@@ -184,7 +184,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Secure Boot and measured boot (TPM) verify the integrity of the boot chain before the code takes over: an unsigned or modified component is detected or blocked.",
       "whyWrong": {
         "d": "A password does not protect the boot chain.",
-        "a": "Unrelated.",
+        "a": "A bigger screen has no effect on a bootkit.",
         "c": "Disabling the firewall increases the risk."
       }
     },
@@ -231,8 +231,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Secure Boot lets only boot components signed by a trusted authority run. An unsigned bootkit is thus blocked before it takes over.",
       "whyWrong": {
-        "c": "Unrelated.",
-        "b": "Unrelated.",
+        "c": "Disk speed is not checked by Secure Boot.",
+        "b": "Battery life is not checked by Secure Boot.",
         "a": "It does not check user files."
       }
     },
@@ -252,8 +252,8 @@ export const corrections: CourseCorrections = {
       "explanation": "Obfuscation scrambles the code (encrypted strings, complicated control flow, unreadable names) to hinder analysis. It is legitimate for protecting software, but also used by malware.",
       "whyWrong": {
         "b": "It does not aim at performance.",
-        "a": "It is not a backup.",
-        "c": "It is not a signature."
+        "a": "Backing up a program is not obfuscating it.",
+        "c": "Signing a program is not obfuscating it."
       }
     },
     "rid-q18": {
@@ -309,9 +309,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Once the code is decrypted in memory, a copy of the region allows analyzing it statically with a disassembler, even if the file on disk stays packed.",
       "whyWrong": {
-        "d": "That is not the goal.",
+        "d": "A snapshot does not speed up the malware.",
         "a": "We copy memory; we do not erase it.",
-        "c": "It is not a signature."
+        "c": "A snapshot does not sign the code."
       }
     },
     "rid-q24": {
@@ -319,9 +319,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "It indicates where it connects, how it encrypts and how it distinguishes itself (mutex, identifier). Extracted in an isolated environment, it provides durable indicators.",
       "whyWrong": {
-        "d": "Unrelated.",
-        "c": "Unrelated.",
-        "b": "It is not its content."
+        "d": "The interface color is not part of the configuration.",
+        "c": "The software’s price is not part of a malware configuration.",
+        "b": "The list of backups is not part of it."
       }
     },
     "rid-q25": {
@@ -375,7 +375,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Strings change with each campaign; the decryption routine or the configuration structure often persists across variants. The rule becomes more robust.",
       "whyWrong": {
-        "c": "That is not the criterion.",
+        "c": "A decryption routine is not always readable: its stability is its value.",
         "a": "Length is not the criterion.",
         "d": "Every rule is tested."
       }

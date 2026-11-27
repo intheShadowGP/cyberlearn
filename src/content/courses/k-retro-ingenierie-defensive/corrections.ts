@@ -186,7 +186,7 @@ export const corrections: CourseCorrections = {
       "explanation": "Secure Boot et le démarrage mesuré (TPM) vérifient l’intégrité de la chaîne de démarrage avant que le code ne prenne la main : un composant non signé ou modifié est détecté ou bloqué.",
       "whyWrong": {
         "d": "Un mot de passe ne protège pas la chaîne de démarrage.",
-        "a": "Sans rapport.",
+        "a": "Un écran plus grand n’a aucun effet sur un bootkit.",
         "c": "Désactiver le pare-feu augmente le risque."
       }
     },
@@ -233,8 +233,8 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "Secure Boot ne laisse s’exécuter que les composants de démarrage signés par une autorité de confiance. Un bootkit non signé est ainsi bloqué avant d’avoir pris la main.",
       "whyWrong": {
-        "c": "Sans rapport.",
-        "b": "Sans rapport.",
+        "c": "La vitesse du disque n’est pas vérifiée par Secure Boot.",
+        "b": "La durée de la batterie n’est pas vérifiée par Secure Boot.",
         "a": "Il ne contrôle pas les fichiers utilisateur."
       }
     },
@@ -254,8 +254,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’obfuscation brouille le code (chaînes chiffrées, flot de contrôle compliqué, noms illisibles) pour gêner l’analyse. Elle est légitime pour protéger des logiciels, mais aussi utilisée par les malwares.",
       "whyWrong": {
         "b": "Elle ne vise pas la performance.",
-        "a": "Ce n’est pas une sauvegarde.",
-        "c": "Ce n’est pas une signature."
+        "a": "Sauvegarder un programme n’est pas l’obfusquer.",
+        "c": "Signer un programme n’est pas l’obfusquer."
       }
     },
     "rid-q18": {
@@ -313,9 +313,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Une fois le code déchiffré en mémoire, une copie de la région permet de l’analyser statiquement avec un désassembleur, même si le fichier sur disque reste empaqueté.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
+        "d": "Un instantané n’accélère pas le maliciel.",
         "a": "On copie la mémoire, on ne l’efface pas.",
-        "c": "Ce n’est pas une signature."
+        "c": "Un instantané ne signe pas le code."
       }
     },
     "rid-q24": {
@@ -323,9 +323,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Elle indique où il se connecte, comment il chiffre et comment il se distingue (mutex, identifiant). Extraite en environnement isolé, elle fournit des indicateurs durables.",
       "whyWrong": {
-        "d": "Sans rapport.",
-        "c": "Sans rapport.",
-        "b": "Ce n’est pas son contenu."
+        "d": "La couleur de l’interface n’est pas dans la configuration.",
+        "c": "Le prix du logiciel n’est pas dans la configuration d’un malware.",
+        "b": "La liste des sauvegardes n’en fait pas partie."
       }
     },
     "rid-q25": {
@@ -379,7 +379,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Les chaînes changent à chaque campagne ; la routine de déchiffrement ou la structure de configuration persiste souvent entre variantes. La règle devient plus robuste.",
       "whyWrong": {
-        "c": "Ce n’est pas le critère.",
+        "c": "Une routine de déchiffrement n’est pas toujours lisible : sa stabilité fait son intérêt.",
         "a": "La longueur n’est pas le critère.",
         "d": "Toute règle se teste."
       }

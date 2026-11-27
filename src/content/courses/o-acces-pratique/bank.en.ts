@@ -13,7 +13,7 @@ export const bank: BankItem[] = [
   { id: 'opr-q2', t: 'single', d: 1, s: ['o-pra-annuaire'], p: 'Which lifecycle events of an account must an organization manage?',
     o: ['Joining, changing position and leaving', 'Creation, printing and paper archiving', 'Installation, update and removal of software', 'Purchase, rental and resale of hardware'],
     e: 'Joining, moving and leaving are the three moments when rights must be created, adjusted and then removed.',
-    w: { 1: 'That is not an account lifecycle.', 2: 'That concerns software.', 3: 'That concerns hardware.' } },
+    w: { 1: 'Creation, printing and archiving describe documents, not account lifecycle events.', 2: 'That concerns software.', 3: 'That concerns hardware.' } },
   { id: 'opr-q3', t: 'single', d: 2, s: ['o-pra-annuaire'], p: 'Which source should trigger the creation and disabling of an employee account?',
     o: ['The human resources system', 'A verbal request made to a colleague', 'The free choice of each manager', 'A spreadsheet kept by hand by support'],
     e: 'The HR system knows about arrivals and departures. Using it as the source of truth avoids forgotten accounts and delays.',
@@ -29,7 +29,7 @@ export const bank: BankItem[] = [
   { id: 'opr-q7', t: 'multi', d: 2, s: ['o-pra-annuaire'], p: 'Which elements of a directory are used to decide access?', k: 3,
     o: ['Membership groups', 'The department and role', 'The active or disabled state of the account', 'The brand of the personal computer'],
     e: 'Groups, department attributes and account state feed the access rules. The brand of the personal computer plays no role.',
-    w: { 3: 'Unrelated to rights.' } },
+    w: { 3: 'The brand of the computer is not a directory attribute used to decide access.' } },
 
   // --- Authentication ---
   { id: 'opr-q8', t: 'single', d: 2, s: ['o-pra-authent'], p: 'What does a password policy aligned with current recommendations favor?',

@@ -85,7 +85,7 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "The mapping shows overlaps, but NIS2 adds specific requirements (notification, management, supply chain) and a scope distinct from the certificate.",
       "whyWrong": {
-        "d": "It is not forbidden.",
+        "d": "ISO 27001 is not forbidden by NIS2: it can help but does not prove compliance.",
         "b": "It is legal.",
         "a": "It contains some."
       }
@@ -105,7 +105,7 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "The six-function framework (govern, identify, protect, detect, respond, recover) gives a shared vocabulary and maturity levels understandable by non-specialists.",
       "whyWrong": {
-        "a": "It is not certifiable.",
+        "a": "The CSF is a voluntary framework, not a mandatory certification.",
         "c": "A catalog of 114 detailed measures is more technical, not a language for talking with management.",
         "d": "The NIST CSF is not an encryption method."
       }
@@ -241,7 +241,7 @@ export const corrections: CourseCorrections = {
       ],
       "explanation": "Evidence that is dated, from the source system and traceable can be re-verified. An oral statement leaves no trace.",
       "whyWrong": {
-        "b": "It is not verifiable."
+        "b": "A verbal statement is not reliable audit evidence: it cannot be re-verified."
       }
     },
     "mga-q27": {

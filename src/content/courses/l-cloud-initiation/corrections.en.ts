@@ -10,7 +10,7 @@ export const corrections: CourseCorrections = {
       "explanation": "The cloud (cloud computing) means using, over the Internet, resources — computing, storage, software — hosted by a provider and billed according to use.",
       "whyWrong": {
         "d": "That would be a local installation.",
-        "a": "It is not a cable.",
+        "a": "A network cable is not what the cloud designates.",
         "c": "A USB stick is a local medium."
       }
     },
@@ -19,9 +19,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Elasticity makes it possible to increase or reduce resources (power, storage) within minutes, and to pay only for what is used.",
       "whyWrong": {
-        "d": "It is not compression.",
+        "d": "Elasticity does not reduce file size.",
         "b": "Encryption has to be configured.",
-        "a": "Unrelated to elasticity."
+        "a": "It does not replace passwords with keys."
       }
     },
     "cin-q3": {
@@ -34,7 +34,7 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A public cloud shares the infrastructure among many customers; a private cloud is reserved for a single organization. The level of security depends mainly on the configuration, not on the name.",
       "whyWrong": {
-        "b": "That is not systematic.",
+        "b": "A private cloud is not always less secure: it depends on its implementation.",
         "a": "An account is needed in both cases.",
         "c": "A private cloud uses a network."
       }
@@ -65,9 +65,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Several regions make it possible to place services near users, to respect legal location constraints and to keep working if a region is unavailable.",
       "whyWrong": {
-        "b": "That is not the purpose.",
+        "b": "Regions do not multiply passwords.",
         "c": "Backups remain possible.",
-        "d": "That is not a criterion."
+        "d": "Regions are not meant to limit the number of customers."
       }
     },
     "cin-q8": {
@@ -144,7 +144,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "It has no rights to protect.",
         "a": "Its rights are limited.",
-        "d": "It is not the main account."
+        "d": "A shared printer is not the account to protect first."
       }
     },
     "cin-q16": {
@@ -154,7 +154,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "b": "It adds a step.",
         "a": "The login name remains necessary.",
-        "c": "That is not its role."
+        "c": "A second sign-in step does not encrypt the workstation’s files."
       }
     },
     "cin-q17": {
@@ -207,9 +207,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "A bucket is an object storage space (files) identified by a name. Its access rights must be set carefully, because a mistake can expose it publicly.",
       "whyWrong": {
-        "c": "It is not a machine.",
-        "d": "It is not a secret.",
-        "b": "Unrelated to the network."
+        "c": "A bucket is not a virtual machine.",
+        "d": "A bucket is not a password.",
+        "b": "A bucket is not a network cable."
       }
     },
     "cin-q23": {
@@ -222,9 +222,9 @@ export const corrections: CourseCorrections = {
       "correct": "d",
       "explanation": "A public link requires no identification: it can be forwarded, indexed or guessed. A named share with a limited duration is preferred.",
       "whyWrong": {
-        "a": "That is not automatic.",
+        "a": "A public link does not expire immediately.",
         "b": "The file remains readable.",
-        "c": "It is not deleted."
+        "c": "The provider does not delete a shared file at once: the problem is open access."
       }
     },
     "cin-q25": {
@@ -336,9 +336,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Shadow IT designates the tools and services used without validation (personal storage, messaging). The organization’s data escapes all control there.",
       "whyWrong": {
-        "d": "It is not a backup.",
-        "c": "It is not encryption.",
-        "b": "It is not a security tool."
+        "d": "A nightly internal backup is a validated use, not shadow IT.",
+        "c": "Encrypting a disk is a security measure, not shadow IT.",
+        "b": "A next-generation firewall is an approved security tool, not shadow IT."
       }
     },
     "cin-q37": {

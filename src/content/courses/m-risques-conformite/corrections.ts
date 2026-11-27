@@ -149,8 +149,8 @@ export const corrections: CourseCorrections = {
       "explanation": "L’audit interne est exigé par la norme : il vérifie que le système est conforme et efficace, et prépare l’audit de certification en révélant les écarts à corriger.",
       "whyWrong": {
         "c": "Il ne la remplace pas.",
-        "d": "Ce n’est pas son objet.",
-        "a": "Ce n’est pas son objet."
+        "d": "Le choix des outils n’est pas l’objet de l’audit interne.",
+        "a": "Former les salariés n’est pas le rôle de l’audit interne."
       }
     },
     "gov-q9": {
@@ -267,9 +267,9 @@ export const corrections: CourseCorrections = {
       "correct": "a",
       "explanation": "Le RSSI définit et fait appliquer la politique, suit les risques et les indicateurs, et rend compte à la direction. Il ne remplace ni les équipes techniques ni le juridique.",
       "whyWrong": {
-        "b": "Ce n’est pas son rôle.",
-        "c": "Ce n’est pas son rôle.",
-        "d": "Ce n’est pas son rôle."
+        "b": "Le RSSI n’administre pas seul tous les serveurs.",
+        "c": "Il ne remplace pas le service juridique.",
+        "d": "Acheter les équipements n’est pas son rôle principal."
       }
     },
     "gov-q19": {
@@ -277,9 +277,9 @@ export const corrections: CourseCorrections = {
       "correct": "c",
       "explanation": "Une politique figée devient inadaptée : nouveaux services, nouvelles menaces, nouvelles obligations. Elle est revue au moins annuellement et à chaque changement majeur.",
       "whyWrong": {
-        "d": "Ce n’est pas le but.",
+        "d": "La revue ne vise pas à changer la mise en page.",
         "a": "Elle n’expire pas ainsi.",
-        "b": "Ce n’est pas le but."
+        "b": "Elle ne vise pas à supprimer toutes les mesures."
       }
     },
     "gov-q20": {
@@ -288,8 +288,8 @@ export const corrections: CourseCorrections = {
       "explanation": "La direction examine les indicateurs, les audits, les incidents et les risques, puis décide des ressources et des améliorations : c’est le « contrôler / améliorer » du cycle PDCA.",
       "whyWrong": {
         "b": "Elle ne le remplace pas.",
-        "c": "Ce n’est pas son objet.",
-        "a": "Ce n’est pas son objet."
+        "c": "Choisir les marques d’équipements n’est pas l’objet de la revue de direction.",
+        "a": "Corriger les vulnérabilités techniques n’est pas son rôle."
       }
     },
     "gov-q21": {
@@ -323,9 +323,9 @@ export const corrections: CourseCorrections = {
       "correct": "b",
       "explanation": "Le plan de continuité d’activité décrit comment maintenir les activités essentielles pendant un incident, souvent en mode dégradé.",
       "whyWrong": {
-        "d": "Ce n’est pas son sens.",
-        "c": "Ce n’est pas son sens.",
-        "a": "Ce n’est pas son sens."
+        "d": "PCA n’est pas un plan de contrôle des accès.",
+        "c": "PCA n’est pas une procédure de chiffrement.",
+        "a": "PCA n’est pas une cartographie des actifs."
       }
     },
     "gov-q25": {
@@ -355,7 +355,7 @@ export const corrections: CourseCorrections = {
       "whyWrong": {
         "c": "Il n’en choisit pas.",
         "b": "Il la complète.",
-        "a": "Ce n’est pas son objet."
+        "a": "Le BIA ne mesure pas la satisfaction des clients."
       }
     },
     "gov-q28": {
